@@ -18,7 +18,7 @@ export default class Header extends PureComponent {
 
     this.toggle = this.toggle.bind(this)
     this.state = {
-      isOpen: false
+      isOpen: true
     }
   }
   toggle() {
@@ -35,13 +35,12 @@ export default class Header extends PureComponent {
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
               <NavItem>
-                <Link to="/login">Login</Link>
+                <Link to="/login"><i className="icon-login" /> Login</Link>
               </NavItem>
               <NavItem>
-                <Link to="/dashboard">List Menu</Link>
-                <NavLink href="https://github.com/reactstrap/reactstrap">
-                  Github
-                </NavLink>
+                <Link to="/dashboard">
+                  <i className="icon-list" /> Dashboard
+                </Link>
               </NavItem>
             </Nav>
           </Collapse>
