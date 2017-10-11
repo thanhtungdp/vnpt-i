@@ -1,13 +1,13 @@
 import Icon from './icon'
 import Input from './input'
 import InputLabel from './input-label'
-import createInputValidate from './redux-form-validate'
+import {createValidateComponent} from './redux-form-validate'
 
-export { Icon, Input, InputLabel, createInputValidate }
+export { Icon, Input, InputLabel, createValidateComponent }
 
 export default {
   Icon,
   Input,
   InputLabel,
-  createInputValidate
+	createValidateComponent
 }

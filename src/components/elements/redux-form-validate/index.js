@@ -37,23 +37,26 @@ export function createValidateComponent(Component) {
 
 export default function ReduxFormValidate({
   input,
-  meta: { touched, error, warning },
+  meta,
   componentChildren,
   ...otherProps
 }) {
   const Input = componentChildren
   return (
-    <View isError={touched && error} isWarning={touched && warning}>
+    <View
+      isError={meta.touched && meta.error}
+      isWarning={meta.touched && meta.warning}
+    >
       <Input {...input} {...otherProps} />
-      {touched &&
-        error &&
+      {meta.touched &&
+        meta.error &&
         <FormFeedback>
-          {error}
+          {meta.error}
         </FormFeedback>}
-      {touched &&
-        warning &&
+      {meta.touched &&
+        meta.warning &&
         <FormFeedback>
-          {warning}
+          {meta.warning}
         </FormFeedback>}
     </View>
   )
