@@ -39,7 +39,7 @@ export default class Header extends PureComponent {
               </NavItem>
               <NavItem>
                 <Link to="/dashboard">
-                  <i className="icon-list" /> Dashboard
+                  <i className="icon-list" /> Dashboard 2
                 </Link>
               </NavItem>
             </Nav>
