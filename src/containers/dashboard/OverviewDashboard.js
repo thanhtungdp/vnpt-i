@@ -7,7 +7,6 @@ import { connect } from 'react-redux'
 const OverviewDashboardContainer = styled.div``
 
 class OverviewDashboard extends PureComponent {
-  static propTypes = {}
   render() {
     return (
       <OverviewDashboardContainer>

@@ -34,15 +34,6 @@ const Clearfix = styled.div`
 `
 
 class Login extends PureComponent {
-  static propTypes = {
-    userLogin: PropTypes.func,
-    isAuthenticated: PropTypes.bool,
-    userInfo: PropTypes.shape({
-      username: PropTypes.string,
-      fullname: PropTypes.string
-    })
-  }
-
   async handleLogin(values) {
     if (values.email) {
       const user = await this.props.userLogin()
@@ -85,6 +76,14 @@ class Login extends PureComponent {
       </Container>
     )
   }
+}
+Login.propTypes = {
+	userLogin: PropTypes.func,
+	isAuthenticated: PropTypes.bool,
+	userInfo: PropTypes.shape({
+		username: PropTypes.string,
+		fullname: PropTypes.string
+	})
 }
 
 const formConnect = reduxForm({
