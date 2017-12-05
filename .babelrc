@@ -2,21 +2,10 @@
   "presets": ["react-app","stage-0","stage-1"],
   "env": {
     "development": {
-      "plugins": ["transform-runtime","transform-decorators-legacy","transform-class-properties","syntax-async-functions", "transform-regenerator",
-        ["react-transform", {
-          "transforms": [{
-            "transform": "react-transform-hmr",
-            // if you use React Native, pass "react-native" instead:
-            "imports": ["react"],
-            // this is important for Webpack HMR:
-            "locals": ["module"]
-          }]
-          // note: you can put more transforms into array
-          // this is just one of them!
-        }]]
+      "plugins": ["transform-decorators-legacy"]
     },
     "production": {
-      "plugins": ["syntax-async-functions", "transform-regenerator", "transform-runtime","transform-decorators-legacy","transform-class-properties"]
+      "plugins": ["transform-decorators-legacy"]
     }
   }
 }

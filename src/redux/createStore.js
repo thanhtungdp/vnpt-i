@@ -3,7 +3,7 @@ import thunkMiddleware from 'redux-thunk'
 import { middleware as awaitMiddleware } from 'redux-await'
 import rootReducers from './reducers'
 
-export default function create (
+export default function create(
   initialState = {},
   { reducers = {}, middlewares = [] } = {}
 ) {
@@ -11,7 +11,7 @@ export default function create (
   if (typeof window !== 'undefined') {
     devTool = window.devToolsExtension ? window.devToolsExtension() : f => f
   }
-  return createStore(
+  const store = createStore(
     combineReducers({
       ...rootReducers,
       ...reducers
@@ -22,4 +22,12 @@ export default function create (
       devTool
     )
   )
+  if (process.env.NODE_ENV !== 'production') {
+    if (module.hot) {
+      module.hot.accept('./reducers', () => {
+        store.replaceReducer(...rootReducers, ...reducers)
+      })
+    }
+  }
+  return store
 }

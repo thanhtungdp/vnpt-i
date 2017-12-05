@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 import styled from 'styled-components'
-import { Link } from 'react-router'
+import { Link } from 'react-router-dom'
 import {
   Collapse,
   Navbar,

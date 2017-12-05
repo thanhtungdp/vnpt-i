@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import { Provider } from 'react-redux'
-import { browserHistory, Router } from 'react-router'
+import { BrowserRouter } from 'react-router-dom'
+import browserHistory from 'history/createBrowserHistory'
 
 import configureStore from './redux/createStore'
-import AppRoutes from './routes'
+import AppRoutes from './navigation/routes'
 
 const getStoreDefault = () => {
   if (typeof window !== 'undefined')
@@ -12,16 +13,16 @@ const getStoreDefault = () => {
 }
 
 const store = configureStore(getStoreDefault(), {
-  routerHistory: browserHistory
+  routerHistory: browserHistory()
 })
 
 export default class App extends Component {
   render() {
     return (
-      <Provider store={store}>
-        <Router history={browserHistory}>
-          {AppRoutes()}
-        </Router>
+      <Provider store={this.props.store}>
+        <BrowserRouter>
+          <AppRoutes />
+        </BrowserRouter>
       </Provider>
     )
   }
