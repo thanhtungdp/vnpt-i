@@ -1,7 +1,7 @@
 import React from 'react'
 import { Switch, Route } from 'react-router-dom'
 import LoginContainer from '../containers/auth/Login'
-import { autobind } from 'core-deocrators'
+import { autobind } from 'core-decorators'
 import OverviewDashboard from '../containers/dashboard/OverviewDashboard'
 import PageSidebarLayout from '../layout/default-sidebar-layout'
 
