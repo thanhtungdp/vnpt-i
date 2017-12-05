@@ -1,24 +1,12 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import styled from 'styled-components'
-import { connect } from 'react-redux'
-import Page, { Grid, GridColumn } from '@atlaskit/page'
-import PageHeader from '@atlaskit/page-header'
+import PageContainer from 'layout/default-sidebar-layout/PageContainer'
 
-class OverviewDashboard extends Component {
+export default class OverviewDashboard extends Component {
   render() {
     return (
-      <Page>
-        <Grid>
-          <GridColumn>
-            <PageHeader>Welcome to dashboard login</PageHeader>
-          </GridColumn>
-        </Grid>
-      </Page>
+      <PageContainer title="Welcome to dashboard login">
+        <p>Description for admin</p>
+      </PageContainer>
     )
   }
 }
-
-export default connect(state => ({
-  isAuthenticated: state.auth.isAuthenticated
-}))(OverviewDashboard)

@@ -15,9 +15,13 @@ export function createChildListMenuItem(rootComponent, childComponent = []) {
     ),
     childMenu: childComponent.map(child => {
       const akItem = <AkNavigationItem icon={child.icon} text={child.text} />
-      const component = child.url
-        ? <Link to={child.url} text={child.text}>{akItem}</Link>
-        : akItem
+      const component = child.url ? (
+        <Link to={child.url} text={child.text}>
+          {akItem}
+        </Link>
+      ) : (
+        akItem
+      )
       return { component }
     })
   }

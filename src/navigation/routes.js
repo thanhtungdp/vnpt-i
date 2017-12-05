@@ -1,9 +1,8 @@
 import React from 'react'
-import { Switch, Route } from 'react-router-dom'
-import LoginContainer from '../containers/auth/Login'
+import { Route } from 'react-router-dom'
 import { autobind } from 'core-decorators'
-import OverviewDashboard from '../containers/dashboard/OverviewDashboard'
-import PageSidebarLayout from '../layout/default-sidebar-layout'
+import OverviewDashboard from 'containers/dashboard/OverviewDashboard'
+import PageSidebarLayout from 'layout/default-sidebar-layout'
 
 @autobind
 export default class RouteDefautl extends React.Component {
