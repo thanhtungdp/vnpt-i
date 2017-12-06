@@ -12,7 +12,8 @@ export default class PageContainer extends React.PureComponent {
       <Page>
         <Grid>
           <GridColumn>
-            {this.props.title && <PageHeader>{this.props.title}</PageHeader>}
+            {this.props.title &&
+              <PageHeader>{this.props.icon}{this.props.title}</PageHeader>}
             {this.props.children}
           </GridColumn>
         </Grid>

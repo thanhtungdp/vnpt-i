@@ -31,11 +31,7 @@ const View = styled.div`
   ${props => getChildrenColor(props)};
 `
 
-export function createValidateComponent(Component) {
-  return props => <ReduxFormValidate componentChildren={Component} {...props} />
-}
-
-export default function ReduxFormValidate({
+function ReduxFormValidate({
   input,
   meta,
   componentChildren,
@@ -60,4 +56,8 @@ export default function ReduxFormValidate({
         </FormFeedback>}
     </View>
   )
+}
+
+export default function createValidateComponent(Component) {
+	return props => <ReduxFormValidate componentChildren={Component} {...props} />
 }

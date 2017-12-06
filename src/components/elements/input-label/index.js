@@ -6,9 +6,9 @@ import Input from '../input'
 const View = styled.div``
 
 const Label = styled.label`
-  color: rgba(0, 0, 0, .5);
+  color: rgba(0, 0, 0, .8);
   font-weight: 600;
-  font-size: 13px;
+  font-size: 14px;
 `
 
 export default function InputLabel ({ label, ...props }) {

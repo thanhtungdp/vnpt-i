@@ -14,9 +14,15 @@ import Navigation, {
 } from '@atlaskit/navigation'
 import Logo from './Logo'
 import Color from '../../themes/color'
+import styled from 'styled-components'
 
 import navigationRouterStack
   from '../../navigation/sidebarNavigation/mainNavigationRouter'
+
+const WrapperTitle = styled.div`
+  margin-left: -8px;
+  margin-right: -8px;
+`
 
 const globalTheme = createGlobalTheme('#ffffff', Color.PRIMARY)
 
@@ -47,12 +53,14 @@ export default class BasicNestedNavigation extends PureComponent {
         position="right"
         content="Hệ thống quản lý chất thải rắn"
       >
-        <AkContainerTitle
-          href="#foo"
-          icon={<MediaServicesBlurIcon label="" size="large" />}
-          text="SCM Manager"
-          subText="Hệ thống quản lý chất thải rắn"
-        />
+        <WrapperTitle>
+          <AkContainerTitle
+            href="#foo"
+            icon={<MediaServicesBlurIcon label="" size="large" />}
+            text="SCM Manager"
+            subText="Quản lý chất thải rắn"
+          />
+        </WrapperTitle>
       </Tooltip>,
       backButton
     ]
@@ -97,13 +105,7 @@ export default class BasicNestedNavigation extends PureComponent {
         containerHeaderComponent={() => this.getContainerHeaderComponent()}
         globalCreateIcon={<AddItem label="Create" />}
       >
-        <AkContainerNavigationNested
-          onAnimationEnd={({ traversalDirection }) =>
-            console.log(
-              `Transition animation completed: '${traversalDirection}'`
-            )}
-          stack={this.renderStack()}
-        />
+        <AkContainerNavigationNested stack={this.renderStack()} />
       </Navigation>
     )
   }
