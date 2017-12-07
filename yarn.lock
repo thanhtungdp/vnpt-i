@@ -31,7 +31,7 @@
     babel-runtime "^6.11.6"
     styled-components "^1.4.6"
 
-"@atlaskit/button@^5.4.13", "@atlaskit/button@^5.4.5", "@atlaskit/button@^5.4.8":
+"@atlaskit/button@^5.4.13", "@atlaskit/button@^5.4.14", "@atlaskit/button@^5.4.5", "@atlaskit/button@^5.4.8":
   version "5.4.14"
   resolved "https://registry.yarnpkg.com/@atlaskit/button/-/button-5.4.14.tgz#600975141fd356ccbf712885a00f63a1367dd28d"
   dependencies:

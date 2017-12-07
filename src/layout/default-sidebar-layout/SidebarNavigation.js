@@ -5,6 +5,7 @@ import AddItem from '@atlaskit/icon/glyph/editor/add'
 import ArrowLeftIcon from '@atlaskit/icon/glyph/arrow-left'
 import Tooltip from '@atlaskit/tooltip'
 import MediaServicesBlurIcon from '@atlaskit/icon/glyph/media-services/blur'
+import { withRouter } from 'react-router-dom'
 
 import Navigation, {
   AkContainerTitle,
@@ -18,22 +19,46 @@ import styled from 'styled-components'
 
 import navigationRouterStack
   from '../../navigation/sidebarNavigation/mainNavigationRouter'
+import { getIndexLocationWithNavigationRouter } from 'utils/sidebarNavigation'
 
 const WrapperTitle = styled.div`
   margin-left: -8px;
   margin-right: -8px;
 `
 
-const globalTheme = createGlobalTheme('#ffffff', Color.PRIMARY)
+// const globalTheme = createGlobalTheme('#ffffff', Color.PRIMARY)
 
-export default class BasicNestedNavigation extends PureComponent {
+@withRouter
+export default class BasicNestedNavigation extends React.Component {
   static propTypes = {
     withtootips: PropTypes.bool
   }
 
-  state = {
-    stack: [navigationRouterStack],
-    isHeaderInlineDialogOpen: false
+  constructor(props) {
+    super(props)
+    this.state = {
+      stack: props.location.pathname
+        ? this.getStackInitial(props)
+        : [navigationRouterStack]
+    }
+  }
+
+  getStackInitial(props) {
+    const navigationIndex = getIndexLocationWithNavigationRouter(
+      props.location,
+      navigationRouterStack
+    )
+    return [
+      navigationRouterStack,
+      navigationRouterStack[navigationIndex].childMenu
+    ]
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    return (
+      this.props.location.pathname !== nextProps.location.pathname ||
+      this.state.stack.length !== nextState.stack.length
+    )
   }
 
   getContainerHeaderComponent = () => {
@@ -67,12 +92,12 @@ export default class BasicNestedNavigation extends PureComponent {
     /* eslint-enable jsx-a11y/no-static-element-interactions */
   }
 
-  stackPush = newPage => {
+  stackPush(newPage) {
     const stack = [...this.state.stack, newPage]
     this.setState({ stack })
   }
 
-  stackPop = () => {
+  stackPop() {
     if (this.state.stack.length <= 1) {
       return false
     }
@@ -81,26 +106,33 @@ export default class BasicNestedNavigation extends PureComponent {
     return this.setState({ stack })
   }
 
-  renderItem = item => {
+  renderItem(item) {
+    const navigationIndex = getIndexLocationWithNavigationRouter(
+      this.props.location,
+      navigationRouterStack
+    )
     const onClick = item.childMenu
       ? () => this.stackPush(item.childMenu)
       : () => console.log(`Link item clicked: '${item.component.props.text}'`)
-    const key = item.component.props.text
-    return !this.props.withtootips
-      ? React.cloneElement(item.component, { key, onClick })
-      : <Tooltip content={key} position="right">
-          {React.cloneElement(item.component, { key, onClick })}
-        </Tooltip>
+    const text = item.component.props.text
+    return React.cloneElement(item.component, {
+      key: text,
+      onClick,
+      isSelected: item.url === this.props.location.pathname ||
+        // check navigation parent index
+        (navigationIndex > -1
+          ? navigationRouterStack[navigationIndex].component.props.text === text
+          : false)
+    })
   }
 
-  renderStack = () => {
+  renderStack() {
     return this.state.stack.map(page => page.map(item => this.renderItem(item)))
   }
 
   render() {
     return (
       <Navigation
-        globalTheme={globalTheme}
         globalPrimaryIcon={<Logo />}
         containerHeaderComponent={() => this.getContainerHeaderComponent()}
         globalCreateIcon={<AddItem label="Create" />}

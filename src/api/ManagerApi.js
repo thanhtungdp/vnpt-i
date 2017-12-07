@@ -1,30 +1,24 @@
-export function getLandfill() {
-	return new Promise((resolve) => {
-		resolve([
-			{
-				_id: 1,
-				name: 'Tung',
-				code: '123456',
-				description: 'Good'
-			},
-			{
-				_id: 1,
-				name: 'Tung',
-				code: '1234567',
-				description: 'Good'
-			},
-			{
-				_id: 1,
-				name: 'Tung',
-				code: '1234568',
-				description: 'Good'
-			},
-			{
-				_id: 1,
-				name: 'Tung2',
-				code: '123456',
-				description: 'Good'
-			}
-		])
-	})
+import stationBurialsData from 'fake-data/stationsBurial'
+import { getFetch } from 'utils/fetch'
+import { MANAGER_API } from 'config'
+
+function getUrl(path) {
+  return MANAGER_API + '/' + path
 }
+
+export function getStationBurials({ itemPerPage = 10, page = 1 }) {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      resolve({
+        data: stationBurialsData(itemPerPage),
+        pagination: {
+          page: page,
+          itemPerPage: itemPerPage,
+          totalItem: 30
+        }
+      })
+    }, 300)
+  })
+}
+
+export default { getStationBurials }

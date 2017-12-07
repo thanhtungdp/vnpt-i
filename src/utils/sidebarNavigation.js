@@ -1,6 +1,22 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import Link from 'components/elements/link'
 import { AkNavigationItem } from '@atlaskit/navigation'
+
+class WrapperLinkComponent extends React.PureComponent {
+  render() {
+    const props = this.props
+    return (
+      <Link
+        to={props.href}
+        className={props.className}
+        title={props.title}
+        style={props.style}
+      >
+        {props.children}
+      </Link>
+    )
+  }
+}
 
 /**
  *
@@ -14,15 +30,29 @@ export function createChildListMenuItem(rootComponent, childComponent = []) {
       <AkNavigationItem icon={rootComponent.icon} text={rootComponent.text} />
     ),
     childMenu: childComponent.map(child => {
-      const akItem = <AkNavigationItem icon={child.icon} text={child.text} />
-      const component = child.url ? (
-        <Link to={child.url} text={child.text}>
-          {akItem}
-        </Link>
-      ) : (
-        akItem
+      const akItem = (
+        <AkNavigationItem
+          href={child.url}
+          linkComponent={WrapperLinkComponent}
+          icon={child.icon}
+          text={child.text}
+        />
       )
-      return { component }
+      return { component: akItem, url: child.url }
     })
   }
+}
+
+export function getIndexLocationWithNavigationRouter(
+  { pathname },
+  navigationRouter = []
+) {
+  const navigationIndex = navigationRouter.findIndex(router => {
+    if (!router.childMenu) return false
+    const menuChildIndex = router.childMenu.findIndex(
+      child => child.url === pathname
+    )
+    return menuChildIndex > -1 ? true : false
+  })
+  return navigationIndex
 }
