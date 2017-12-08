@@ -5,5 +5,5 @@ export const MANAGER_API = 'http://localhost:1234'
 export default {
   AUTH_API,
   MENU_API,
-	MANAGER_API
+  MANAGER_API
 }

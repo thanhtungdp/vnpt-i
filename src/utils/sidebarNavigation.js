@@ -2,7 +2,7 @@ import React from 'react'
 import Link from 'components/elements/link'
 import { AkNavigationItem } from '@atlaskit/navigation'
 
-class WrapperLinkComponent extends React.PureComponent {
+export class WrapperLinkComponent extends React.PureComponent {
   render() {
     const props = this.props
     return (
@@ -48,6 +48,7 @@ export function getIndexLocationWithNavigationRouter(
   navigationRouter = []
 ) {
   const navigationIndex = navigationRouter.findIndex(router => {
+    if (router.component.props.href === pathname) return true
     if (!router.childMenu) return false
     const menuChildIndex = router.childMenu.findIndex(
       child => child.url === pathname

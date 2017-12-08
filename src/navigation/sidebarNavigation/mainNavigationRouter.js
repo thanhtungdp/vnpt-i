@@ -2,7 +2,10 @@ import React from 'react'
 import { AkNavigationItemGroup, AkNavigationItem } from '@atlaskit/navigation'
 import styled from 'styled-components'
 
-import { createChildListMenuItem } from '../../utils/sidebarNavigation'
+import {
+  createChildListMenuItem,
+  WrapperLinkComponent
+} from '../../utils/sidebarNavigation'
 import slug from '../../constants/slug'
 import Icon from '../../themes/icon'
 
@@ -20,8 +23,13 @@ const groupManagerComponent = {
 
 const mapManagerComponent = {
   component: (
-    <AkNavigationItemGroup text="Bản đồ" title="Bản đồ">
-      <AkNavigationItem icon={Icon.map} text="Bản đồ vị trí" />
+    <AkNavigationItemGroup href={slug.map.base} text="Bản đồ" title="Bản đồ">
+      <AkNavigationItem
+        linkComponent={WrapperLinkComponent}
+        href={slug.map.base}
+        icon={Icon.map}
+        text="Bản đồ vị trí"
+      />
     </AkNavigationItemGroup>
   )
 }

@@ -48,10 +48,16 @@ export default class BasicNestedNavigation extends React.Component {
       props.location,
       navigationRouterStack
     )
-    return [
-      navigationRouterStack,
+    if (
+      navigationIndex > -1 &&
       navigationRouterStack[navigationIndex].childMenu
-    ]
+    ) {
+      return [
+        navigationRouterStack,
+        navigationRouterStack[navigationIndex].childMenu
+      ]
+    }
+    return [navigationRouterStack]
   }
 
   shouldComponentUpdate(nextProps, nextState) {

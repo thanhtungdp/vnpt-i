@@ -14,5 +14,8 @@ export default {
     base: '/appointment',
     list: '/appointment',
     create: '/appointment/create'
+  },
+  map: {
+    base: '/map'
   }
 }
