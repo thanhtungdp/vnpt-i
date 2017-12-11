@@ -12,9 +12,7 @@ const {
   MarkerWithLabel
 } = require('react-google-maps/lib/components/addons/MarkerWithLabel')
 
-const MapDefaultContainer = styled.div`
-    
-`
+const MapDefaultContainer = styled.div``
 
 @withScriptjs
 @withGoogleMap
@@ -22,31 +20,6 @@ class CustomGoogleMap extends PureComponent {
   render() {
     return (
       <GoogleMap defaultZoom={8} defaultCenter={{ lat: -34.397, lng: 150.644 }}>
-	      <InfoBox
-		      defaultPosition={new google.maps.LatLng(props.center.lat, props.center.lng)}
-		      options={{ closeBoxURL: ``, enableEventPropagation: true }}
-	      >
-		      <div style={{ backgroundColor: `yellow`, opacity: 0.75, padding: `12px` }}>
-			      <div style={{ fontSize: `16px`, fontColor: `#08233B` }}>
-				      Hello, Taipei!
-			      </div>
-		      </div>
-	      </InfoBox>
-	      <Marker
-		      position={{ lat: 22.6273, lng: 120.3014 }}
-		      onClick={props.onToggleOpen}
-	      >
-		      {props.isOpen && <InfoBox
-			      onCloseClick={props.onToggleOpen}
-			      options={{ closeBoxURL: ``, enableEventPropagation: true }}
-		      >
-			      <div style={{ backgroundColor: `yellow`, opacity: 0.75, padding: `12px` }}>
-				      <div style={{ fontSize: `16px`, fontColor: `#08233B` }}>
-					      Hello, Kaohsiung!
-				      </div>
-			      </div>
-		      </InfoBox>}
-	      </Marker>
         {this.props.isMarkerShown &&
           <MarkerWithLabel
             position={{ lat: -34.397, lng: 150.644 }}
