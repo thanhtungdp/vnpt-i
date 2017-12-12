@@ -13,7 +13,7 @@ import Icon from 'themes/icon';
 import Slug from 'constants/slug';
 
 @createManagerListHoc({
-	apiCall: ManagerApi.getStationTransitsx,
+	apiCall: ManagerApi.getStationTransits,
 	itemPerPage: 10,
 })
 @autobind
