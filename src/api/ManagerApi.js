@@ -21,4 +21,13 @@ export function getStationBurials({ itemPerPage = 10, page = 1 }) {
   })
 }
 
-export default { getStationBurials }
+export function getStationTransits({ itemPerPage = 10, page = 1 }) {
+  return getFetch(
+    'http://localhost:1234/stations-transit/?itemPerPage=' +
+      itemPerPage +
+      '&page=' +
+      page
+  )
+}
+
+export default { getStationBurials, getStationTransits }
