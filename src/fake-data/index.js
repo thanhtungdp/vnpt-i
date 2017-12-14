@@ -2,7 +2,8 @@ import React, { PureComponent } from 'react'
 import { autobind } from 'core-decorators'
 
 const createManagerListHoc = ({ apiCall, itemPerPage = 10 }) => Component => {
-  @autobind class ManagerListHoc extends PureComponent {
+  @autobind
+  class ManagerListHoc extends PureComponent {
     state = {
       data: [],
       pagination: {
