@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react'
-import PropTypes from 'prop-types'
 import PageContainer from 'layout/default-sidebar-layout/PageContainer'
 import LandfillForm from '../landfill-form'
 import Icon from 'themes/icon'

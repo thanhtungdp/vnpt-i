@@ -20,3 +20,17 @@ export default function createData(length = 10) {
   }
   return landfillLists
 }
+export const burialStationList = [
+  {
+    id: 1,
+    name: 'Tây Bắc Củ Chi',
+    mapLocation: { lat: 10.794259, lng: 106.763286 },
+    district: 'Quận Củ Chi'
+  },
+  {
+    id: 2,
+    name: 'Đa Phước',
+    mapLocation: { lat: 10.723955, lng: 106.717533 },
+    district: 'Quận Củ Chi'
+  }
+]

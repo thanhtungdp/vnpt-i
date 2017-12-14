@@ -9,7 +9,7 @@ Thư mục chứa các điều hướng, trong thư mục này có 2 loại đi�
 
 ```
 | routes // file cấu hành route
-| --| main.js //
+| --| index.js //
 | --| transit.js
 | sidebarNavigation
 | --| mainNavigationRouter.js // mặc định navigation

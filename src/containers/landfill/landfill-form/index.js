@@ -1,14 +1,11 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { reduxForm, Field } from 'redux-form'
-import styled from 'styled-components'
 import createValidateComponent from 'components/elements/redux-form-validate'
 import InputLabel from 'components/elements/input-label'
 import Clearfix from 'components/elements/clearfix'
 
 const FInputLabel = createValidateComponent(InputLabel)
-
-const LandfillFormContainer = styled.div``
 
 @reduxForm({
   form: 'landfillForm'

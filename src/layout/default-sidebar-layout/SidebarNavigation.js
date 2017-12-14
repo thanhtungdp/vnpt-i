@@ -1,35 +1,15 @@
 import PropTypes from 'prop-types'
-import React, { PureComponent } from 'react'
-
-import AddItem from '@atlaskit/icon/glyph/editor/add'
-import ArrowLeftIcon from '@atlaskit/icon/glyph/arrow-left'
-import Tooltip from '@atlaskit/tooltip'
-import MediaServicesBlurIcon from '@atlaskit/icon/glyph/media-services/blur'
+import React from 'react'
 import { withRouter } from 'react-router-dom'
-
-import Navigation, {
-  AkContainerTitle,
-  AkNavigationItem,
-  AkContainerNavigationNested,
-  createGlobalTheme
-} from '@atlaskit/navigation'
-import Logo from './Logo'
-import Color from '../../themes/color'
-import styled from 'styled-components'
-
-import navigationRouterStack
-  from '../../navigation/sidebarNavigation/mainNavigationRouter'
+import { autobind } from 'core-decorators'
+import { AkContainerNavigationNested } from '@atlaskit/navigation'
 import { getIndexLocationWithNavigationRouter } from 'utils/sidebarNavigation'
-
-const WrapperTitle = styled.div`
-  margin-left: -8px;
-  margin-right: -8px;
-`
-
-// const globalTheme = createGlobalTheme('#ffffff', Color.PRIMARY)
+import navigationRouterStack from 'navigation/sidebarNavigation/mainNavigationRouter'
+import NavigationLayout from '../navigation-layout'
 
 @withRouter
-export default class BasicNestedNavigation extends React.Component {
+@autobind
+export default class DefaultSidebarNavigation extends React.Component {
   static propTypes = {
     withtootips: PropTypes.bool
   }
@@ -67,37 +47,6 @@ export default class BasicNestedNavigation extends React.Component {
     )
   }
 
-  getContainerHeaderComponent = () => {
-    const backButton = this.state.stack.length > 1
-      ? <AkNavigationItem
-          icon={<ArrowLeftIcon label="Back" />}
-          onClick={() => this.stackPop()}
-          text="Back"
-          key="2"
-        />
-      : null
-
-    /* eslint-disable jsx-a11y/no-static-element-interactions */
-    return [
-      <Tooltip
-        key="1"
-        position="right"
-        content="Hệ thống quản lý chất thải rắn"
-      >
-        <WrapperTitle>
-          <AkContainerTitle
-            href="#foo"
-            icon={<MediaServicesBlurIcon label="" size="large" />}
-            text="SCM Manager"
-            subText="Quản lý chất thải rắn"
-          />
-        </WrapperTitle>
-      </Tooltip>,
-      backButton
-    ]
-    /* eslint-enable jsx-a11y/no-static-element-interactions */
-  }
-
   stackPush(newPage) {
     const stack = [...this.state.stack, newPage]
     this.setState({ stack })
@@ -124,7 +73,8 @@ export default class BasicNestedNavigation extends React.Component {
     return React.cloneElement(item.component, {
       key: text,
       onClick,
-      isSelected: item.url === this.props.location.pathname ||
+      isSelected:
+        item.url === this.props.location.pathname ||
         // check navigation parent index
         (navigationIndex > -1
           ? navigationRouterStack[navigationIndex].component.props.text === text
@@ -138,13 +88,12 @@ export default class BasicNestedNavigation extends React.Component {
 
   render() {
     return (
-      <Navigation
-        globalPrimaryIcon={<Logo />}
-        containerHeaderComponent={() => this.getContainerHeaderComponent()}
-        globalCreateIcon={<AddItem label="Create" />}
+      <NavigationLayout
+        isShowBack={this.state.stack.length > 1}
+        onBack={this.stackPop}
       >
         <AkContainerNavigationNested stack={this.renderStack()} />
-      </Navigation>
+      </NavigationLayout>
     )
   }
 }
