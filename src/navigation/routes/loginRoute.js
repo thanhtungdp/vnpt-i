@@ -5,7 +5,7 @@ import { autobind } from 'core-decorators'
 import LoginContainer from 'containers/auth/Login'
 
 @autobind
-export default class MapRoute extends React.Component {
+export default class LoginRoute extends React.Component {
   render() {
     return <div>
       <Route extract path="/" component={LoginContainer} />

@@ -48,8 +48,7 @@ class Login extends PureComponent {
         swal({
           title: 'Chào mừng ' + user.data.fullname
         }).then(() => {
-          debugger
-          context.props.router.push('/')
+          context.props.history.push('/')
         })
       }
     }
@@ -58,7 +57,6 @@ class Login extends PureComponent {
   render() {
     return (
       <Container>
-        <Header />
         <Logo src="/logo.png" />
         <Form onSubmit={this.props.handleSubmit(this.handleLogin.bind(this))}>
           <Field
