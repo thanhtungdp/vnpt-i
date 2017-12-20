@@ -1,5 +1,6 @@
 export default {
   dashboard: '/dashboard',
+  login: '/login',
   landFill: {
     base: '/landfill',
     list: '/landfill',

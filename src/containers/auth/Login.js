@@ -36,13 +36,22 @@ const Clearfix = styled.div`
 class Login extends PureComponent {
   async handleLogin(values) {
     if (values.email) {
-      const user = await this.props.userLogin()
+      const user = await this.props.userLogin(values)
       const context = this
-      swal({
-        title: 'Chào mừng ' + user.fullname
-      }).then(() => {
-        context.props.router.push('/dashboard')
-      })
+      debugger
+      if(user.error)
+      {
+        swal({
+          title: user.message
+        })
+      }else{
+        swal({
+          title: 'Chào mừng ' + user.data.fullname
+        }).then(() => {
+          debugger
+          context.props.router.push('/')
+        })
+      }
     }
   }
 

@@ -5,6 +5,7 @@ import slug from 'constants/slug'
 
 import ManagerRoute from './managerRoute'
 import MapRoute from './mapRoute'
+import LoginRoute from './loginRoute'
 
 @autobind
 export default class RouteDefault extends React.Component {
@@ -13,6 +14,7 @@ export default class RouteDefault extends React.Component {
       <div>
         <Route path="/" extract component={ManagerRoute} />
         <Route path={slug.map.base} component={MapRoute} />
+        <Route path={slug.login} component={LoginRoute} />
       </div>
     )
   }
