@@ -18,5 +18,10 @@ export default {
   },
   map: {
     base: '/map'
-  }
+  },
+  organization: {
+    base: '/organization',
+    list: '/organization',
+    create: '/organization/create'
+  },
 }
