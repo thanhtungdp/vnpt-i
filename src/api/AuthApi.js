@@ -1,10 +1,15 @@
 import { AUTH_API } from '../config'
-import { postFetch } from '../utils/fetch'
+import { getFetch, postFetch } from '../utils/fetch'
 
-export function loginUser(resData) {
-  return postFetch(AUTH_API, resData)
+export function loginUser(data = {}) {
+  return postFetch(AUTH_API + '/auth/login', data)
+}
+
+export function getMe() {
+  return getFetch(AUTH_API + '/auth/me')
 }
 
 export default {
-  loginUser
+  loginUser,
+  getMe
 }

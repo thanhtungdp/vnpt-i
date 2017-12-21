@@ -1,13 +1,42 @@
 import AuthApi from '../../api/AuthApi'
+import { setAuthToken, getAuthToken} from 'utils/auth'
+
 export const UPDATE_USER_INFO = 'AUTH/update-user-info'
+export const FETCH_PENDING_USER = 'AUTH/fetch-pending-user'
+export const FETCH_SUCCESS_USER = 'AUTH/fetch-success-user'
+export const FETCH_FAIL_USER = 'AUTH/fetch-success-user'
+
+export function fetchUserMe() {
+  return async dispatch => {
+    dispatch({
+      type: FETCH_PENDING_USER
+    })
+    const auth = await AuthApi.getMe()
+    if (auth.error) {
+      dispatch({
+        type: FETCH_FAIL_USER
+      })
+    } else {
+      dispatch({
+        type: FETCH_SUCCESS_USER,
+        token: getAuthToken(),
+        auth: auth.data
+      })
+    }
+    return auth
+  }
+}
 
 export function userLogin(resData) {
   return async dispatch => {
     const auth = await AuthApi.loginUser(resData)
-    dispatch({
-      type: UPDATE_USER_INFO,
-      auth
-    })
-	  return auth;
+    if (auth.success) {
+      setAuthToken(auth.token)
+      dispatch({
+        type: UPDATE_USER_INFO,
+        auth
+      })
+    }
+    return auth
   }
 }

@@ -7,9 +7,8 @@ import { reduxForm, Field } from 'redux-form'
 import { Container, Button } from 'reactstrap'
 import swal from 'sweetalert2'
 import { withRouter } from 'react-router'
-import { InputLabel, createValidateComponent } from '../../components/elements'
-import Header from '../../components/layouts/Header'
-import { userLogin } from '../../redux/actions/authAction'
+import { InputLabel, createValidateComponent } from 'components/elements'
+import { userLogin } from 'redux/actions/authAction'
 
 const FInput = createValidateComponent(InputLabel)
 
@@ -38,15 +37,13 @@ class Login extends PureComponent {
     if (values.email) {
       const user = await this.props.userLogin(values)
       const context = this
-      debugger
-      if(user.error)
-      {
+      if (user.error) {
         swal({
           title: user.message
         })
-      }else{
+      } else {
         swal({
-          title: 'Chào mừng ' + user.data.fullname
+          title: 'Chào mừng ' + user.data.email
         }).then(() => {
           context.props.history.push('/')
         })
@@ -85,12 +82,12 @@ class Login extends PureComponent {
   }
 }
 Login.propTypes = {
-	userLogin: PropTypes.func,
-	isAuthenticated: PropTypes.bool,
-	userInfo: PropTypes.shape({
-		username: PropTypes.string,
-		fullname: PropTypes.string
-	})
+  userLogin: PropTypes.func,
+  isAuthenticated: PropTypes.bool,
+  userInfo: PropTypes.shape({
+    username: PropTypes.string,
+    fullname: PropTypes.string
+  })
 }
 
 const formConnect = reduxForm({

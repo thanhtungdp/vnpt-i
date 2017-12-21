@@ -8,8 +8,8 @@ const getHeaders = () => {
   if (typeof localStorage !== 'undefined') {
     if (getAuthToken()) {
       headers = {
-        ...headers
-        // Authorization: getAuthToken(true)
+        ...headers,
+        Authorization: getAuthToken(true)
       }
     }
   }

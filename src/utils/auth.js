@@ -8,13 +8,13 @@ export function resetAuthToken() {
   localStorage.removeItem(AUTH_TOKEN)
 }
 
-export function getAuthToken(hasJWTString = false) {
+export function getAuthToken() {
   if (
     localStorage.getItem(AUTH_TOKEN) === 'null' ||
     !localStorage.getItem(AUTH_TOKEN)
   )
     return null
-  return (hasJWTString ? 'JWT ' : '') + localStorage.getItem(AUTH_TOKEN)
+  return localStorage.getItem(AUTH_TOKEN)
 }
 
 export default {
