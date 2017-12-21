@@ -2,7 +2,8 @@ import {
   UPDATE_USER_INFO,
   FETCH_SUCCESS_USER,
   FETCH_PENDING_USER,
-  FETCH_FAIL_USER
+  FETCH_FAIL_USER,
+  USER_LOGOUT
 } from '../actions/authAction'
 import update from 'react-addons-update'
 
@@ -27,9 +28,19 @@ export default function createReducer(state = initialState, action) {
       return fetchFailUser(state)
     case FETCH_PENDING_USER:
       return fetchPendingUser(state, action)
+    case USER_LOGOUT:
+      return userLogout(state)
     default:
       return state
   }
+}
+
+export function userLogout(state){
+  return update(state, {
+    isAuthenticated: {
+      $set: false,
+    }
+  })
 }
 
 export function fetchPendingUser(state) {

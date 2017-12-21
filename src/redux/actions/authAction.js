@@ -1,10 +1,11 @@
 import AuthApi from '../../api/AuthApi'
-import { setAuthToken, getAuthToken} from 'utils/auth'
+import { setAuthToken, getAuthToken, resetAuthToken } from 'utils/auth'
 
 export const UPDATE_USER_INFO = 'AUTH/update-user-info'
 export const FETCH_PENDING_USER = 'AUTH/fetch-pending-user'
-export const FETCH_SUCCESS_USER = 'AUTH/fetch-success-user'
+export const FETCH_SUCCESS_USER = 'AUTH/fetch-fail-user'
 export const FETCH_FAIL_USER = 'AUTH/fetch-success-user'
+export const USER_LOGOUT = 'AUTH/user-lgoout'
 
 export function fetchUserMe() {
   return async dispatch => {
@@ -24,6 +25,13 @@ export function fetchUserMe() {
       })
     }
     return auth
+  }
+}
+
+export function logout() {
+  resetAuthToken()
+  return {
+    type: USER_LOGOUT
   }
 }
 

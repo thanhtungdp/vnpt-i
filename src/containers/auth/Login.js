@@ -36,7 +36,7 @@ class Login extends PureComponent {
   async handleLogin(values) {
     if (values.email) {
       const user = await this.props.userLogin(values)
-      const context = this
+      this.props.history.push('/')
       if (user.error) {
         swal({
           title: user.message
@@ -44,9 +44,7 @@ class Login extends PureComponent {
       } else {
         swal({
           title: 'Chào mừng ' + user.data.email
-        }).then(() => {
-          context.props.history.push('/')
-        })
+        }).then(() => {})
       }
     }
   }

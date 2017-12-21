@@ -16,9 +16,9 @@ export default class RouteDefault extends React.Component {
   render() {
     return (
       <div>
-        <Route path="/" component={ManagerRouteProtected} />
         <Route path={slug.login} exact component={LoginRoute} />
         <Route path={slug.map.base} exact component={MapRoute} />
+        <Route path="/" component={ManagerRouteProtected} />
       </div>
     )
   }

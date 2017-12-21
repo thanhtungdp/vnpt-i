@@ -40,12 +40,15 @@ export default function createProtectedAuth(Component) {
       if (this.props.isAuthenticated && !this.props.isPending) {
         return <Component {...this.props} />
       }
-      return (
-        <StyledLoading>
-          <Spinner size="medium" />
-        </StyledLoading>
-      )
+      if (this.props.isPending)
+        return (
+          <StyledLoading>
+            <Spinner size="medium" />
+          </StyledLoading>
+        )
+      return null
     }
   }
+
   return ProtectedAuth
 }

@@ -82,7 +82,7 @@
     react-markings "^1.1.7"
     styled-components "^1.4.6"
 
-"@atlaskit/dropdown-menu@^3.0.1", "@atlaskit/dropdown-menu@^3.8.0":
+"@atlaskit/dropdown-menu@^3.0.1", "@atlaskit/dropdown-menu@^3.11.4", "@atlaskit/dropdown-menu@^3.8.0":
   version "3.11.4"
   resolved "https://registry.yarnpkg.com/@atlaskit/dropdown-menu/-/dropdown-menu-3.11.4.tgz#519950eda6c902fa6c4e64c6a698cf4e0295f72a"
   dependencies:
