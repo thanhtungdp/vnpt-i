@@ -22,6 +22,8 @@ export default {
   organization: {
     base: '/organization',
     list: '/organization',
-    create: '/organization/create'
-  },
+    create: '/organization/create',
+    edit: '/organization/edit/:_id',
+    editWithId: '/organization/edit/'
+  }
 }

@@ -8,6 +8,9 @@ import PageSidebarLayout from 'layout/default-sidebar-layout'
 import LandfillList from 'containers/landfill/landfill-list'
 import LandfillCreate from 'containers/landfill/landfill-create'
 import TransitStationList from 'containers/transitstation/transitstation-list'
+import OrganizationList from 'containers/organization/organization-list'
+import OrganizationCreate from 'containers/organization/organization-create'
+import OrganizationEdit from 'containers/organization/organization-edit'
 
 @autobind
 export default class ManagerRoute extends React.Component {
@@ -18,6 +21,9 @@ export default class ManagerRoute extends React.Component {
         <Route exact path={slug.landFill.list} component={LandfillList} />
         <Route exact path={slug.landFill.create} component={LandfillCreate} />
         <Route exact path={slug.transitStation.list} component={TransitStationList} />
+        <Route exact path={slug.organization.list} component={OrganizationList} />
+        <Route exact path={slug.organization.create} component={OrganizationCreate} />
+        <Route exact path={slug.organization.edit} component={OrganizationEdit} />
       </PageSidebarLayout>
     )
   }

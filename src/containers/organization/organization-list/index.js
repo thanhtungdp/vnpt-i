@@ -2,18 +2,19 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { autobind } from 'core-decorators'
 import Button from '@atlaskit/button'
+import {Link} from 'react-router-dom'
 
-import ManagerApi from 'api/ManagerApi'
+import OrganizationApi from 'api/OrganizationApi'
 import DynamicTable from 'components/elements/dynamic-table'
 import Clearfix from 'components/elements/clearfix'
-import Link from 'components/elements/link'
+import LinkA from 'components/elements/link'
 import PageContainer from 'layout/default-sidebar-layout/PageContainer'
 import createManagerListHoc from 'shared/hoc/manager-list'
 import Icon from 'themes/icon'
 import Slug from 'constants/slug'
 
 @createManagerListHoc({
-  apiCall: ManagerApi.getStationBurials,
+  apiCall: OrganizationApi.getOrganizations,
   itemPerPage: 10
 })
 @autobind
@@ -26,11 +27,16 @@ export default class OrganizationlList extends PureComponent {
     getIndexByPagination: PropTypes.func
   }
 
+  deleteItem(_id){
+    console.log(_id)
+  }
+
   getHead() {
     return [
       { content: 'Id', width: 10 },
       { content: 'Name' },
-      { content: 'District' }
+      { content: 'Description' },
+      { content: 'Director' }
     ]
   }
 
@@ -47,14 +53,34 @@ export default class OrganizationlList extends PureComponent {
         content: (
           <div>
             <strong>{row.name}</strong><br />
-            <span>{row.address}</span>
           </div>
         )
       },
       {
         content: (
           <div>
-            <span>{row.district}</span>
+            <span>{row.description}</span>
+          </div>
+        )
+      },
+      {
+        content: (
+          <div>
+            <span>{row.director}</span>
+          </div>
+        )
+      },
+      {
+        content: (
+          <div>
+            <Link to={Slug.organization.editWithId+`${row._id}`}>Chinh sua</Link>
+          </div>
+        )
+      },
+      {
+        content: (
+          <div>
+            <Button appearance="danger" onClick={this.deleteItem(row._id)}>Xoa</Button>
           </div>
         )
       }
@@ -64,13 +90,13 @@ export default class OrganizationlList extends PureComponent {
   render() {
     return (
       <PageContainer
-        title="Danh sách bãi"
+        title="Danh sách Doanh Nghiệp"
         right={
-          <Link to={Slug.landFill.create}>
-            <Button appearance="primary" iconBefore={Icon.landFill}>
-              Tạo mới bãi
+          <LinkA to={Slug.organization.create}>
+            <Button appearance="primary" iconBefore={Icon.direction}>
+              Tạo mới doanh nghiệp
             </Button>
-          </Link>
+          </LinkA>
         }
       >
         <DynamicTable

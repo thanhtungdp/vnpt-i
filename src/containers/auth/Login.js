@@ -38,7 +38,7 @@ class Login extends PureComponent {
     if (values.email) {
       const user = await this.props.userLogin(values)
       const context = this
-      debugger
+      
       if(user.error)
       {
         swal({
