@@ -17,8 +17,7 @@ import Logo from './Logo'
 import Color from '../../themes/color'
 import styled from 'styled-components'
 
-import navigationRouterStack
-  from '../../navigation/sidebarNavigation/mainNavigationRouter'
+import navigationRouterStack from '../../navigation/sidebarNavigation/mainNavigationRouter'
 import { getIndexLocationWithNavigationRouter } from 'utils/sidebarNavigation'
 
 const WrapperTitle = styled.div`
@@ -68,14 +67,15 @@ export default class BasicNestedNavigation extends React.Component {
   }
 
   getContainerHeaderComponent = () => {
-    const backButton = this.state.stack.length > 1
-      ? <AkNavigationItem
+    const backButton =
+      this.state.stack.length > 1 ? (
+        <AkNavigationItem
           icon={<ArrowLeftIcon label="Back" />}
           onClick={() => this.stackPop()}
           text="Back"
           key="2"
         />
-      : null
+      ) : null
 
     /* eslint-disable jsx-a11y/no-static-element-interactions */
     return [
@@ -124,7 +124,8 @@ export default class BasicNestedNavigation extends React.Component {
     return React.cloneElement(item.component, {
       key: text,
       onClick,
-      isSelected: item.url === this.props.location.pathname ||
+      isSelected:
+        item.url === this.props.location.pathname ||
         // check navigation parent index
         (navigationIndex > -1
           ? navigationRouterStack[navigationIndex].component.props.text === text

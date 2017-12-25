@@ -12,4 +12,3 @@ export function getStationBurials({ page = 1, itemPerPage = 20 }) {
     }
   }
 }
-

@@ -8,6 +8,6 @@ export function userLogin(resData) {
       type: UPDATE_USER_INFO,
       auth
     })
-	  return auth;
+    return auth
   }
 }

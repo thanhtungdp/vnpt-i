@@ -13,9 +13,7 @@ export default class PageWrapper extends Component {
         navigationWidth={this.state.navigationWidth}
         navigation={<SidebarNavigation />}
       >
-        <div>
-          {this.props.children}
-        </div>
+        <div>{this.props.children}</div>
       </Page>
     )
   }

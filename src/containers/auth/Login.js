@@ -78,12 +78,12 @@ class Login extends PureComponent {
   }
 }
 Login.propTypes = {
-	userLogin: PropTypes.func,
-	isAuthenticated: PropTypes.bool,
-	userInfo: PropTypes.shape({
-		username: PropTypes.string,
-		fullname: PropTypes.string
-	})
+  userLogin: PropTypes.func,
+  isAuthenticated: PropTypes.bool,
+  userInfo: PropTypes.shape({
+    username: PropTypes.string,
+    fullname: PropTypes.string
+  })
 }
 
 const formConnect = reduxForm({

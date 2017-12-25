@@ -21,11 +21,15 @@ export default class PageContainer extends React.PureComponent {
       <Page>
         <Grid>
           <GridColumn>
-            {this.props.title &&
+            {this.props.title && (
               <HeaderFlex>
-                <PageHeader>{this.props.icon}{this.props.title}</PageHeader>
+                <PageHeader>
+                  {this.props.icon}
+                  {this.props.title}
+                </PageHeader>
                 {this.props.right}
-              </HeaderFlex>}
+              </HeaderFlex>
+            )}
             {this.props.children}
           </GridColumn>
         </Grid>
