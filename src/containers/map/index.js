@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Page from '@atlaskit/page'
-import {autobind} from 'core-decorators'
+import { autobind } from 'core-decorators'
 import SidebarNavigation from './map-navigation'
 import MapDefault from './map-default'
 
@@ -11,18 +11,21 @@ export default class MapContainer extends Component {
     markerFilter: {}
   }
 
-  handleChangeMarkerFilter(markerFilter){
-    this.setState({markerFilter})
+  handleChangeMarkerFilter(markerFilter) {
+    this.setState({ markerFilter })
   }
 
   render() {
-    console.log(this.state.markerFilter)
     return (
       <Page
         navigationWidth={this.state.navigationWidth}
-        navigation={<SidebarNavigation onChangeMarkerFilter={this.handleChangeMarkerFilter}/>}
+        navigation={
+          <SidebarNavigation
+            onChangeMarkerFilter={this.handleChangeMarkerFilter}
+          />
+        }
       >
-        <MapDefault markerFilter={this.state.markerFilter}/>
+        <MapDefault markerFilter={this.state.markerFilter} />
       </Page>
     )
   }

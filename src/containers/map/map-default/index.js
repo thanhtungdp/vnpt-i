@@ -19,6 +19,10 @@ class CustomGoogleMap extends PureComponent {
     markerFilter: PropTypes.object
   }
 
+  static defaultProps = {
+    markerFilter: {}
+  }
+
   render() {
     const markerFilter = this.props.markerFilter
     return (

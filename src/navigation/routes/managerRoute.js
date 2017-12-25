@@ -7,7 +7,8 @@ import PageSidebarLayout from 'layout/default-sidebar-layout'
 
 import LandfillList from 'containers/landfill/landfill-list'
 import LandfillCreate from 'containers/landfill/landfill-create'
-import TransitStationList from 'containers/transitstation/transitstation-list'
+import TransitStationList from 'containers/transit-station/transit-station-list'
+import MapDefault from 'containers/map/map-default'
 
 @autobind
 export default class ManagerRoute extends React.Component {
@@ -17,7 +18,12 @@ export default class ManagerRoute extends React.Component {
         <Route exact path="/" component={OverviewDashboard} />
         <Route exact path={slug.landFill.list} component={LandfillList} />
         <Route exact path={slug.landFill.create} component={LandfillCreate} />
-        <Route exact path={slug.transitStation.list} component={TransitStationList} />
+        <Route
+          exact
+          path={slug.transitStation.list}
+          component={TransitStationList}
+        />
+        <Route exact path={slug.map.base} component={MapDefault} />
       </PageSidebarLayout>
     )
   }

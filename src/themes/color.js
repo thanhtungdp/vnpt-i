@@ -1,4 +1,5 @@
 const PRIMARY = '#18a406'
+
 export const SHAPE = {
   RED: '#EB5C55',
   ORANGE: '#F6A623',

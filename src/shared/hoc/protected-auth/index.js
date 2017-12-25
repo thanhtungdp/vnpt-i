@@ -2,8 +2,8 @@ import React from 'react'
 import styled from 'styled-components'
 import { connectAutoDispatch } from 'redux/connect'
 import { fetchUserMe } from 'redux/actions/authAction'
+import LoaderCircle from 'components/elements/loader-circle'
 import { withRouter } from 'react-router-dom'
-import Spinner from '@atlaskit/spinner'
 
 const StyledLoading = styled.div`
   position: fixed;
@@ -43,7 +43,7 @@ export default function createProtectedAuth(Component) {
       if (this.props.isPending)
         return (
           <StyledLoading>
-            <Spinner size="medium" />
+            <LoaderCircle/> &nbsp; Loading ...
           </StyledLoading>
         )
       return null

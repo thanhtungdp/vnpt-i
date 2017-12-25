@@ -1,13 +1,13 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
+import { connectAutoDispatch } from 'redux/connect'
 import { reduxForm, Field } from 'redux-form'
-import { Container, Button } from 'reactstrap'
+import { Container } from 'reactstrap'
 import swal from 'sweetalert2'
 import { withRouter } from 'react-router'
 import { InputLabel, createValidateComponent } from 'components/elements'
+import Button from 'components/elements/button'
 import { userLogin } from 'redux/actions/authAction'
 
 const FInput = createValidateComponent(InputLabel)
@@ -32,7 +32,24 @@ const Clearfix = styled.div`
   height: 24px;
 `
 
-class Login extends PureComponent {
+@withRouter
+@reduxForm({
+  form: 'LoginForm'
+})
+@connectAutoDispatch(
+  state => ({
+    isAuthenticated: state.auth.isAuthenticated,
+    userInfo: state.auth.userInfo
+  }),
+  { userLogin }
+)
+export default class Login extends PureComponent {
+  static propTypes = {
+    submitting: PropTypes.bool,
+    handleSubmit: PropTypes.func,
+    userLogin: PropTypes.func
+  }
+
   async handleLogin(values) {
     if (values.email) {
       const user = await this.props.userLogin(values)
@@ -71,7 +88,12 @@ class Login extends PureComponent {
             size="lg"
           />
           <Clearfix />
-          <Button size="lg" block color="primary">
+          <Button
+            isLoading={this.props.submitting}
+            size="lg"
+            block
+            color="primary"
+          >
             Đăng nhập
           </Button>
         </Form>
@@ -79,25 +101,3 @@ class Login extends PureComponent {
     )
   }
 }
-Login.propTypes = {
-  userLogin: PropTypes.func,
-  isAuthenticated: PropTypes.bool,
-  userInfo: PropTypes.shape({
-    username: PropTypes.string,
-    fullname: PropTypes.string
-  })
-}
-
-const formConnect = reduxForm({
-  form: 'LoginForm'
-})(Login)
-
-export default withRouter(
-  connect(
-    state => ({
-      isAuthenticated: state.auth.isAuthenticated,
-      userInfo: state.auth.userInfo
-    }),
-    dispatch => bindActionCreators({ userLogin }, dispatch)
-  )(formConnect)
-)

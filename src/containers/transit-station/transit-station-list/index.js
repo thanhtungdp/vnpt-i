@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { autobind } from 'core-decorators';
 import Button from '@atlaskit/button';
 
-import ManagerApi from 'api/ManagerApi';
+import StationApi from 'api/StationApi';
 import DynamicTable from 'components/elements/dynamic-table';
 import Clearfix from 'components/elements/clearfix';
 import Link from 'components/elements/link';
@@ -13,7 +13,7 @@ import Icon from 'themes/icon';
 import Slug from 'constants/slug';
 
 @createManagerListHoc({
-	apiCall: ManagerApi.getStationTransits,
+	apiCall: StationApi.getStationTransits,
 	itemPerPage: 10,
 })
 @autobind

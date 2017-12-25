@@ -35,7 +35,9 @@ export default class Header extends PureComponent {
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
               <NavItem>
-                <Link to="/login"><i className="icon-login" /> Login</Link>
+                <Link to="/login">
+                  <i className="icon-login" /> Login
+                </Link>
               </NavItem>
               <NavItem>
                 <Link to="/dashboard">
