@@ -9,7 +9,8 @@ import slug from 'constants/slug'
 export default class OrganizationCreate extends PureComponent {
   state = {
     loaded: false,
-    submitting: false
+    submitting: false,
+    formValues: {}
   }
   static propTypes = {}
 
@@ -18,10 +19,7 @@ export default class OrganizationCreate extends PureComponent {
     const organization = await getOneOrganizations({ _id })
     this.setState({
       loaded: true,
-      name: organization.name,
-      description: organization.description,
-      address: organization.address,
-      director: organization.director
+      formValues: organization,
     })
   }
 
@@ -53,12 +51,7 @@ export default class OrganizationCreate extends PureComponent {
       <PageContainer icon={Icon.create} title="Chỉnh sửa doanh nghiệp">
         {this.state.loaded &&
           <OrganizationForm
-            initialValues={{
-              name: this.state.name,
-              address: this.state.address,
-              description: this.state.description,
-              director: this.state.director
-            }}
+            initialValues={this.state.formValues}
             onSubmit={this.onSubmit}
             submitting={this.state.submitting}
           />

@@ -13,19 +13,12 @@ export default class SelectBoxOrganization extends PureComponent {
   };
   async componentDidMount() {
     let query = {}
-    if (this.props.query != undefined)
-      query = this.props.query
-    const organizationList = await OrganizationApi.getOrganizationsFilter(query)
-    let organizationItems = [{ items: [] }]
-    organizationList.data.forEach(element => {
-      organizationItems[0].items.push({
-        content: element.name,
-        value: element._id
-      })
-    });
-    this.setState({
-      selectItems: organizationItems
-    })
+    const orginazationRes = await OrganizationApi.getOrganizationsFilter(query)
+    const orginazationItems = orginazationRes.data.map(or => ({
+      content: or.name,
+      value: or.name
+    }));
+    this.setState({ selectItems: [{ items: orginazationItems }] })
   }
 
 

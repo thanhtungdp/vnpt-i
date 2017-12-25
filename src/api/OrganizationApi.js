@@ -1,13 +1,14 @@
+import { ORGANIZATION_API } from '../config'
 import { getFetch, postFetch, putFetch } from 'utils/fetch'
 import { debug } from 'util'
 
 const MAX_VALUE = 99999
 export function getOrganizations({ itemPerPage = 10, page = 1 }) {
   return getFetch(
-    'http://localhost:1103/organization/?itemPerPage=' +
-      itemPerPage +
-      '&page=' +
-      page
+    ORGANIZATION_API + '?itemPerPage=' +
+    itemPerPage +
+    '&page=' +
+    page
   )
 }
 
@@ -17,7 +18,7 @@ export function getOrganizationsFilter({
   director,
   description
 }) {
-  let url = 'http://localhost:1103/organization/?itemPerPage=' + MAX_VALUE + '&'
+  let url = ORGANIZATION_API + '?itemPerPage=' + MAX_VALUE + '&'
   if (name) url += 'name=' + name + '&'
   if (address) url += 'address=' + address + '&'
   if (director) url += 'director=' + director + '&'
@@ -26,11 +27,11 @@ export function getOrganizationsFilter({
 }
 
 export function getOneOrganizations({ _id }) {
-  return getFetch('http://localhost:1103/organization/getOne?_id=' + _id)
+  return getFetch(ORGANIZATION_API + _id)
 }
 
 export function createOrganizations({ name, address, description, director }) {
-  return postFetch('http://localhost:1103/organization/', {
+  return postFetch(ORGANIZATION_API, {
     name,
     address,
     description,
@@ -45,7 +46,7 @@ export function updateOrganizations({
   description,
   director
 }) {
-  return putFetch('http://localhost:1103/organization/' + _id, {
+  return putFetch(ORGANIZATION_API + _id, {
     name,
     address,
     description,

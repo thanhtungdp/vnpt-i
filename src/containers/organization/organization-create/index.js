@@ -13,7 +13,7 @@ export default class OrganizationCreate extends PureComponent {
   }
 
   async onSubmit(values) {
-    this.state.submitting = true
+    this.setState({ submitting: true })
     const organization = await createOrganizations({
       name: values.name,
       address: values.address,
@@ -31,14 +31,14 @@ export default class OrganizationCreate extends PureComponent {
       this.props.history.push(slug.organization.base)
     }
 
-    this.state.submitting = false;
+    this.setState({ submitting: false })
   }
 
   render() {
     return (
       <PageContainer icon={Icon.create} title="Tạo mới doanh nghiệp">
-        <OrganizationForm onSubmit={this.onSubmit} 
-        submitting = {this.state.submitting}
+        <OrganizationForm onSubmit={this.onSubmit}
+          submitting={this.state.submitting}
         />
       </PageContainer>
     )
