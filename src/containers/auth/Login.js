@@ -56,12 +56,14 @@ export default class Login extends PureComponent {
       this.props.history.push('/')
       if (user.error) {
         swal({
-          title: user.message
+          title: user.message,
+          type: 'error'
         })
       } else {
         swal({
-          title: 'Chào mừng ' + user.data.email
-        }).then(() => {})
+          type: 'success',
+          text: 'Chào mừng ' + user.data.email
+        })
       }
     }
   }

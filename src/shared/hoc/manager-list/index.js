@@ -21,7 +21,8 @@ const createManagerListHoc = ({ apiCall, itemPerPage = 10 }) => Component => {
       this.setState({
         data: res.data,
         pagination: res.pagination,
-        isLoading: false
+        isLoading: false,
+        pageLogs: [...this.state.pageLogs, 1]
       })
     }
 

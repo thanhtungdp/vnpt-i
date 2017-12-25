@@ -1,4 +1,4 @@
-import { SHAPE } from 'themes/color'
+import { SHAPE, TEXT } from 'themes/color'
 
 export function getColorFromText(text, charCodeAt = 1) {
   var colors = [
@@ -24,6 +24,43 @@ export function getColorFromText(text, charCodeAt = 1) {
     number = number % 100
   }
   return colors[number]
+}
+
+export function getColorFromString (color) {
+  switch (color) {
+    case 'red':
+      return SHAPE.RED
+    case 'yellow':
+      return SHAPE.YELLOW
+    case 'green':
+      return SHAPE.GREEN
+    case 'primary':
+      return SHAPE.PRIMARY
+    case 'primaryBold':
+      return SHAPE.PRIMARYBOLD
+    case 'orange':
+      return SHAPE.ORANGE
+    case 'purple':
+      return SHAPE.PURPLE
+    case 'pink':
+      return SHAPE.PINK
+    case 'black':
+      return SHAPE.BLACK
+    case 'graylight':
+      return SHAPE.GRAYLIGHT
+    case 'graymedium':
+      return SHAPE.GRAYMEDIUM
+    case 'graybold':
+      return SHAPE.GRAYBOLD
+    case 'graytext':
+      return SHAPE.GRAYTEXT
+    case 'gray':
+      return TEXT.GRAY
+    case 'white':
+      return '#ffffff'
+    default:
+      return SHAPE.PRIMARYBOLD
+  }
 }
 
 export function getColorByNumber(number) {
