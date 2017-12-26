@@ -6,6 +6,7 @@ import EmojiFrequentIcon from '@atlaskit/icon/glyph/emoji/frequent'
 import MapLocation from '@atlaskit/icon/glyph/location'
 import DecisionIcon from '@atlaskit/icon/glyph/decision'
 import PdfIcon from '@atlaskit/icon/glyph/pdf'
+import PageIcon from '@atlaskit/icon/glyph/page'
 
 export default {
   map: <MapLocation label="" />,
@@ -13,6 +14,7 @@ export default {
   transport: <PdfIcon label="" />,
   appointment: <EmojiFrequentIcon label="" />,
   direction: <DecisionIcon label="" />,
+  categories: <PageIcon label="" />,
   list: <EditorAlignLeftIcon label="" />,
   create: <EditorAddIcon label="" />
 }

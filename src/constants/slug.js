@@ -15,6 +15,13 @@ export default {
     list: '/appointment',
     create: '/appointment/create'
   },
+  categories: {
+    base: '/categories',
+    list: '/categories',
+    create: '/categories/create',
+    edit: '/categories/edit/:code',
+    editWithCode: '/categories/edit/'
+  },
   map: {
     base: '/map'
   }

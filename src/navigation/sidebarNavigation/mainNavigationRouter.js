@@ -110,8 +110,28 @@ const directionMenu = createChildListMenuItem(
   ]
 )
 
+const categories = createChildListMenuItem(
+    {
+        icon: Icon.categories,
+        text: 'Chuyên mục'
+    },
+    [
+        {
+            url: slug.categories.list,
+            icon: Icon.list,
+            text: 'Danh sách chuyên mục'
+        },
+        {
+            url: slug.categories.create,
+            icon: Icon.create,
+            text: 'Tạo chuyên mục'
+        }
+    ]
+)
+
 export default [
   groupManagerComponent,
+  categories,
   landFillMenu,
   transportMenu,
   appointmentMenu,
