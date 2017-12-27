@@ -8,7 +8,7 @@ import Loader from '../loader-circle'
 
 import { SHAPE } from 'themes/color'
 
-function getBackgroundColor (props) {
+function getBackgroundColor(props) {
   let backgroundColor = ''
   let colorText = '#fff'
   switch (props.customColor) {
@@ -52,14 +52,23 @@ function getBackgroundColor (props) {
 }
 
 const ButtonStyle = styled(
-  createComponentDisableProps(Button, ['shadowButton', 'customColor', 'borderRadius', 'block'])
+  createComponentDisableProps(Button, [
+    'shadowButton',
+    'customColor',
+    'borderRadius',
+    'block'
+  ])
 )`
   font-size: ${props => props.fontSize}px;
   font-family: Open Sans;
   border: 0px;
-  border-radius: ${props => (props.borderRadius ? props.borderRadius : 3)}px !important;
-  ${props => (props.block ? 'width: 100%;' : '')}
-  ${props => (props.shadowButton ? `
+  padding: 12px 16px;
+  font-weight: 600;
+  border-radius: ${props =>
+    props.borderRadius ? props.borderRadius : 3}px !important;
+  ${props => (props.block ? 'width: 100%;' : '')} ${props =>
+      props.shadowButton
+        ? `
    background-color: linear-gradient(180deg,#fffffe,#fbfeff);
    border: 1px solid rgba(94,176,240,.98);
    color: #389bff;
@@ -72,8 +81,8 @@ const ButtonStyle = styled(
    &:focus{
      outline: none;
    }
- ` : '')}
- ${props => getBackgroundColor(props)}
+ `
+        : ''} ${props => getBackgroundColor(props)};
 `
 ButtonStyle.defaultProps = {
   fontSize: 14,
@@ -81,10 +90,10 @@ ButtonStyle.defaultProps = {
   customColor: ''
 }
 
-export default function ButtonCustom ({ isLoading, ...props }) {
+export default function ButtonCustom({ isLoading, ...props }) {
   return (
     <ButtonStyle {...props}>
-      {isLoading && <Loader isCenter size={20} color='#fff' />}
+      {isLoading && <Loader isCenter size={20} color="#fff" />}
       {!isLoading ? props.children : null}
     </ButtonStyle>
   )

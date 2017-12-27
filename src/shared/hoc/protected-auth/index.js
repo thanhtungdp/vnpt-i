@@ -43,7 +43,7 @@ export default function createProtectedAuth(Component) {
       if (this.props.isPending)
         return (
           <StyledLoading>
-            <LoaderCircle/> &nbsp; Loading ...
+            <LoaderCircle /> &nbsp; Loading ...
           </StyledLoading>
         )
       return null

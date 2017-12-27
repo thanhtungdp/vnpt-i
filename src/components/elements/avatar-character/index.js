@@ -21,12 +21,10 @@ const Span = styled.span`
   font-weight: 600;
 `
 
-export default function AvatarCharacter ({ size = 30, username }) {
+export default function AvatarCharacter({ size = 30, username }) {
   return (
     <View size={size} backgroundColor={getColorFromText(username)}>
-      <Span size={size / 2}>
-        {username[0].toUpperCase()}
-      </Span>
+      <Span size={size / 2}>{username[0].toUpperCase()}</Span>
     </View>
   )
 }

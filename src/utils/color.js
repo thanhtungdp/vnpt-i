@@ -26,7 +26,7 @@ export function getColorFromText(text, charCodeAt = 1) {
   return colors[number]
 }
 
-export function getColorFromString (color) {
+export function getColorFromString(color) {
   switch (color) {
     case 'red':
       return SHAPE.RED

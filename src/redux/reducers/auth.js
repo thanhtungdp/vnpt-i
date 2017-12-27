@@ -35,10 +35,10 @@ export default function createReducer(state = initialState, action) {
   }
 }
 
-export function userLogout(state){
+export function userLogout(state) {
   return update(state, {
     isAuthenticated: {
-      $set: false,
+      $set: false
     }
   })
 }

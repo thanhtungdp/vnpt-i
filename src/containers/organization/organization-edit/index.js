@@ -1,8 +1,8 @@
 import React, { PureComponent } from 'react'
 import PageContainer from 'layout/default-sidebar-layout/PageContainer'
-import OrganizationForm from '../organization-form'
-import { getOneOrganizations, updateOrganizations } from 'api/OrganizationApi'
+import { getOrganization, updateOrganization } from 'api/OrganizationApi'
 import swal from 'sweetalert2'
+import OrganizationForm from '../organization-form'
 
 export default class OrganizationCreate extends PureComponent {
   state = {
@@ -10,26 +10,21 @@ export default class OrganizationCreate extends PureComponent {
     submitting: false,
     formValues: {}
   }
-  static propTypes = {}
 
   async componentDidMount() {
     const _id = this.props.match.params._id
-    const organization = await getOneOrganizations({ _id })
+    const organization = await getOrganization(_id)
     this.setState({
       loaded: true,
       formValues: organization
     })
   }
 
-  async onSubmit(values) {
-    console.log(values)
-    const organization = await updateOrganizations({
-      _id: this.props.match.params._id,
-      name: values.name,
-      address: values.address,
-      description: values.description,
-      director: values.director
-    })
+  async onSubmit(data) {
+    const organization = await updateOrganization(
+      this.props.match.params._id,
+      data
+    )
     if (!organization) {
       swal({
         title: organization.message,

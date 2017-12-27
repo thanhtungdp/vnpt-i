@@ -32,14 +32,14 @@ const View = styled.div`
   }
 `
 
-export default function LoaderCircle ({
+export default function LoaderCircle({
   size = 25,
   color = SHAPE.PRIMARY,
   isCenter
 }) {
   return (
     <View size={size} color={color} isCenter={isCenter}>
-      <div className='loader' />
+      <div className="loader" />
     </View>
   )
 }

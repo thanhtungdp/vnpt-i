@@ -1,5 +1,6 @@
 import { ORGANIZATION_API } from '../config'
 import { getFetch, postFetch, putFetch } from 'utils/fetch'
+import { deleteFetch } from '../utils/fetch'
 
 const MAX_VALUE = 99999
 
@@ -27,37 +28,27 @@ export function getOrganizationsFilter({
   return getFetch(getUrl('?' + query.join('&')))
 }
 
-export function getOneOrganizations({ _id }) {
+export function getOrganization(_id) {
   return getFetch(getUrl(_id))
 }
 
-export function createOrganizations({ name, address, description, director }) {
-  return postFetch(getUrl(), {
-    name,
-    address,
-    description,
-    director
-  })
+export function createOrganization(data = {}) {
+  return postFetch(getUrl(), data)
 }
 
-export function updateOrganizations({
-  _id,
-  name,
-  address,
-  description,
-  director
-}) {
-  return putFetch(getUrl(_id), {
-    name,
-    address,
-    description,
-    director
-  })
+export function updateOrganization(_id, data = {}) {
+  return putFetch(getUrl(_id), data)
+}
+
+export function deleteOrganization(_id, data = {}) {
+  return deleteFetch(getUrl(_id), data)
 }
 
 export default {
   getOrganizations,
-  createOrganizations,
-  updateOrganizations,
+  getOrganization,
+  createOrganization,
+  updateOrganization,
+  deleteOrganization,
   getOrganizationsFilter
 }

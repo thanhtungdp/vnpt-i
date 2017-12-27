@@ -15,8 +15,16 @@ const NavigationWrapper = styled.div`
 
 const groupManagerComponent = {
   component: (
-    <NavigationWrapper text="Quản lý nhóm">
-      <AkNavigationItemGroup title="Quản lý nhóm" />
+    <NavigationWrapper text="Quản lý trạm">
+      <AkNavigationItemGroup title="Quản lý trạm" />
+    </NavigationWrapper>
+  )
+}
+
+const groupConfigManagerComponent = {
+  component: (
+    <NavigationWrapper text="Quản lý cấu hình">
+      <AkNavigationItemGroup title="Quản lý cấu hình" />
     </NavigationWrapper>
   )
 }
@@ -109,6 +117,7 @@ const directionMenu = createChildListMenuItem(
     }
   ]
 )
+
 const organizationMenu = createChildListMenuItem(
   {
     icon: Icon.organization,
@@ -127,13 +136,34 @@ const organizationMenu = createChildListMenuItem(
     }
   ]
 )
+
+const categoriesMenu = createChildListMenuItem(
+  {
+    icon: Icon.category,
+    text: 'Chuyên mục'
+  },
+  [
+    {
+      url: slug.category.list,
+      icon: Icon.list,
+      text: 'Danh sách chuyên mục'
+    },
+    {
+      url: slug.category.create,
+      icon: Icon.create,
+      text: 'Tạo chuyên mục'
+    }
+  ]
+)
+
 export default [
   groupManagerComponent,
   landFillMenu,
   transportMenu,
   appointmentMenu,
   directionMenu,
+  groupConfigManagerComponent,
+  categoriesMenu,
   organizationMenu,
   mapManagerComponent
-  
 ]

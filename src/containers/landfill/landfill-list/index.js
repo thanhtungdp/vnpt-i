@@ -37,16 +37,13 @@ export default class LandfillList extends PureComponent {
   getRows() {
     return this.props.data.map((row, index) => [
       {
-        content: (
-          <strong>
-            {index + 1}
-          </strong>
-        )
+        content: <strong>{index + 1}</strong>
       },
       {
         content: (
           <div>
-            <strong>{row.name}</strong><br />
+            <strong>{row.name}</strong>
+            <br />
             <span>{row.address}</span>
           </div>
         )
