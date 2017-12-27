@@ -1,4 +1,3 @@
-import React from 'react'
 import slug from 'constants/slug'
 import createBreadcrumb from 'shared/breadcrumb/hoc'
 

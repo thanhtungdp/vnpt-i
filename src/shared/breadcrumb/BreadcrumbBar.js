@@ -2,7 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { SHAPE, TEXT } from 'themes/color'
-import { Link } from 'react-router-dom'
+import { autobind } from 'core-decorators'
+import { withRouter } from 'react-router-dom'
 import injectBreadcrumb from './injectBreadcrumb'
 
 const BreadcrumbBarStyle = styled.div`
@@ -10,7 +11,7 @@ const BreadcrumbBarStyle = styled.div`
   flex-direction: row;
 `
 
-const BreadCrumbItem = styled(Link)`
+const BreadCrumbItem = styled.a`
   font-size: ${props => (props.last ? 22 : 18)}px;
   display: flex;
   align-items: center;
@@ -48,19 +49,27 @@ const BreadCrumbItem = styled(Link)`
         : null};
 `
 
-function BreadcrumbItem({ icon, index, last, name, href }) {
-  const breadcrumb = (
-    <BreadCrumbItem
-      className="fadeIn animated"
-      to={href}
-      first={index === 0}
-      last={last}
-    >
-      {icon && <i className={icon} />}
-      {name}
-    </BreadCrumbItem>
-  )
-  return breadcrumb
+@withRouter
+@autobind
+class BreadcrumbItem extends React.PureComponent {
+  handleClick(e) {
+    e.preventDefault()
+    this.props.history.push(this.props.href)
+  }
+
+  render() {
+    return (
+      <BreadCrumbItem
+        onClick={this.handleClick}
+        href={this.props.href}
+        first={this.props.index === 0}
+        last={this.props.last}
+      >
+        {this.props.icon && <i className={this.props.icon} />}
+        {this.props.name}
+      </BreadCrumbItem>
+    )
+  }
 }
 
 function BreadcrumbBar({ breadcrumbs }) {
@@ -82,7 +91,7 @@ BreadcrumbBar.propTypes = {
     PropTypes.shape({
       icon: PropTypes.string,
       name: PropTypes.string,
-      href: PropTypes.object
+      href: PropTypes.string
     })
   )
 }

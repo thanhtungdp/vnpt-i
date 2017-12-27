@@ -12,7 +12,7 @@ export default class Breadcrumb extends PureComponent {
   static propTypes = {
     icon: PropTypes.string,
     name: PropTypes.string,
-    href: PropTypes.object,
+    href: PropTypes.string,
     autoDestroy: PropTypes.bool
   }
 
