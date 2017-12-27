@@ -7,28 +7,25 @@ export default function createBreadCrumbHoc(config) {
     static propTypes = {
       items: PropTypes.arrayOf(PropTypes.string)
     }
-    renderBreadcrumb(item, index) {
+    renderBreadcrumb(item) {
+      let itemObject = item
       if (typeof item === 'string') {
-        return (
-          <Breadcrumb
-            key={config[item].id}
-            id={config[item].id}
-            name={config[item].name}
-            href={config[item].href}
-          />
-        )
-      } else {
-        return <Breadcrumb id={item.id} key={item.id} name={item.name} href={item.href} />
+        itemObject = config[item]
       }
+      return (
+        <Breadcrumb
+          icon={itemObject.icon}
+          id={itemObject.id}
+          key={itemObject.id}
+          name={itemObject.name}
+          href={itemObject.href}
+        />
+      )
     }
 
     render() {
       return (
-        <span>
-          {this.props.items.map((item, index) =>
-            this.renderBreadcrumb(item, index)
-          )}
-        </span>
+        <span>{this.props.items.map(item => this.renderBreadcrumb(item))}</span>
       )
     }
   }

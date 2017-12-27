@@ -6,6 +6,7 @@ import { withRouter } from 'react-router-dom'
 import { autobind } from 'core-decorators'
 import slug from 'constants/slug'
 import CategoriesForm from '../category-form'
+import Breadcrumb from '../breadcrumb'
 
 @withRouter
 @autobind
@@ -34,6 +35,7 @@ export default class CategoriesCreate extends PureComponent {
   render() {
     return (
       <PageContainer title="Tạo chuyên mục">
+        <Breadcrumb items={['list', 'create']} />
         <CategoriesForm onSubmit={this.handleSubmit} />
       </PageContainer>
     )

@@ -11,6 +11,8 @@ import Button from '@atlaskit/button'
 import PageContainer from 'layout/default-sidebar-layout/PageContainer'
 import createManagerListHoc from 'shared/hoc/manager-list'
 import slug from 'constants/slug'
+import Icon from 'themes/icon'
+import Breadcrumb from '../breadcrumb'
 
 @createManagerListHoc({
   apiCall: CategoryApi.getCategories,
@@ -99,10 +101,13 @@ export default class CategoriesList extends PureComponent {
         title="Danh sách chuyên mục"
         right={
           <LinkA to={slug.category.create}>
-            <Button customColor="primary">Tạo mới</Button>
+            <Button iconBefore={Icon.create} customColor="primary">
+              Tạo mới
+            </Button>
           </LinkA>
         }
       >
+        <Breadcrumb items={['list']} />
         <DynamicTable
           isFixedSize
           head={this.getHead()}

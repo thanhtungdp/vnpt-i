@@ -148,24 +148,16 @@ const organizationMenu = {
   )
 }
 
-const categoriesMenu = createChildListMenuItem(
-  {
-    icon: Icon.category,
-    text: 'Chuyên mục'
-  },
-  [
-    {
-      url: slug.category.list,
-      icon: Icon.list,
-      text: 'Danh sách chuyên mục'
-    },
-    {
-      url: slug.category.create,
-      icon: Icon.create,
-      text: 'Tạo chuyên mục'
-    }
-  ]
-)
+const categoryMenu = {
+  component: (
+    <AkNavigationItem
+      linkComponent={WrapperLinkComponent}
+      href={slug.category.base}
+      icon={Icon.category}
+      text="Chuyên mục"
+    />
+  )
+}
 
 export default [
   groupManagerComponent,
@@ -174,7 +166,7 @@ export default [
   appointmentMenu,
   directionMenu,
   groupConfigManagerComponent,
-  categoriesMenu,
+  categoryMenu,
   organizationMenu,
   mapManagerComponent
 ]

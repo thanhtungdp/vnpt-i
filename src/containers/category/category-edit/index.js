@@ -4,6 +4,7 @@ import Icon from 'themes/icon'
 import { getCategory, updateCategory } from 'api/CategoryApi'
 import swal from 'sweetalert2'
 import CategoryForm from '../category-form'
+import Breadcrumb from '../breadcrumb'
 
 export default class CategoriesEdit extends PureComponent {
   static propTypes = {}
@@ -44,6 +45,16 @@ export default class CategoriesEdit extends PureComponent {
         icon={Icon.edit}
         title={this.state.dataEdit.name ? this.state.dataEdit.name : ''}
       >
+        <Breadcrumb
+          items={[
+            'list',
+            {
+              id: 'edit',
+              href: '/',
+              name: this.state.dataEdit.name
+            }
+          ]}
+        />
         {this.state.loaded && (
           <CategoryForm
             isEdit

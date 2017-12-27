@@ -55,7 +55,7 @@ export default class OrganizationForm extends PureComponent {
         <Clearfix height={16} />
         <Field
           name="address"
-          label="Đại chỉ"
+          label="Địa chỉ"
           placeholder="Địa chỉ"
           component={FInputLabel}
         />

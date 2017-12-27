@@ -1,21 +1,21 @@
 import slug from 'constants/slug'
 import createBreadcrumb from 'shared/breadcrumb/hoc'
-import Icon from "themes/icon"
+import Icon from 'themes/icon'
 
 export default createBreadcrumb({
   list: {
     id: "list",
-    icon: Icon.organization,
-    href: slug.organization.base,
-    name: 'Danh sách tổ chức'
+    href: slug.category.base,
+    name: 'Danh sách chuyên mục',
+    icon: Icon.category
   },
   create: {
     id: "create",
-    href: slug.organization.create,
+    href: slug.category.create,
     name: 'Tạo mới'
   },
   edit: {
-    href: slug.organization.edit,
+    href: slug.category.edit,
     name: 'Chỉnh sửa'
   }
 })

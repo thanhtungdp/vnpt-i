@@ -8,7 +8,7 @@ import SwitcherIcon from '@atlaskit/icon/glyph/switcher'
 import DecisionIcon from '@atlaskit/icon/glyph/decision'
 import PdfIcon from '@atlaskit/icon/glyph/pdf'
 import EditFilledIcon from '@atlaskit/icon/glyph/edit-filled'
-import PageIcon from '@atlaskit/icon/glyph/page'
+// import PageIcon from '@atlaskit/icon/glyph/page'
 
 export default {
   map: <MapLocation label="" />,
@@ -17,7 +17,7 @@ export default {
   appointment: <EmojiFrequentIcon label="" />,
   direction: <DecisionIcon label="" />,
   organization: <PdfIcon label="" />,
-  category: <PageIcon label="" />,
+  category: <EditorAlignLeftIcon label="" />,
   list: <EditorAlignLeftIcon label="" />,
   create: <EditorAddIcon label="" />,
   edit: <EditFilledIcon label="" />

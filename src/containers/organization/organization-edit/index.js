@@ -2,9 +2,11 @@ import React, { PureComponent } from 'react'
 import PageContainer from 'layout/default-sidebar-layout/PageContainer'
 import { getOrganization, updateOrganization } from 'api/OrganizationApi'
 import swal from 'sweetalert2'
+import { autobind } from 'core-decorators'
 import OrganizationForm from '../organization-form'
 import Breadcrumb from '../breadcrumb'
 
+@autobind
 export default class OrganizationCreate extends PureComponent {
   state = {
     loaded: false,
@@ -33,7 +35,7 @@ export default class OrganizationCreate extends PureComponent {
       })
     } else {
       swal({
-        title: 'Update Organization Successfull',
+        title: 'Cập nhật tổ chức thành công',
         type: 'success'
       })
     }
@@ -52,8 +54,8 @@ export default class OrganizationCreate extends PureComponent {
           items={[
             'list',
             {
-              id: 132,
-              href: '/edit/ab',
+              id: 'edit',
+              href: '',
               name: this.state.formValues.name
             }
           ]}

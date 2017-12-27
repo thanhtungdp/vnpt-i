@@ -49,12 +49,19 @@ const BreadCrumbItem = styled.a`
         : null};
 `
 
+const SpanIcon = styled.span`
+  position: relative;
+  top: 2px;
+`
+
 @withRouter
 @autobind
 class BreadcrumbItem extends React.PureComponent {
   handleClick(e) {
     e.preventDefault()
-    this.props.history.push(this.props.href)
+    if (!this.props.last) {
+      this.props.history.push(this.props.href)
+    }
   }
 
   render() {
@@ -65,7 +72,7 @@ class BreadcrumbItem extends React.PureComponent {
         first={this.props.index === 0}
         last={this.props.last}
       >
-        {this.props.icon && <i className={this.props.icon} />}
+        {this.props.icon ? <SpanIcon>{this.props.icon} &nbsp;</SpanIcon> : null}
         {this.props.name}
       </BreadCrumbItem>
     )
