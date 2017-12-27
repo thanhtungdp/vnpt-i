@@ -7,8 +7,10 @@ import MapContainer from 'containers/map'
 @autobind
 export default class MapRoute extends React.Component {
   render() {
-    return <div>
-      <Route extract path="/" component={MapContainer} />
-    </div>
+    return (
+      <div>
+        <Route extract path="/" component={MapContainer} />
+      </div>
+    )
   }
 }

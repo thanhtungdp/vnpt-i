@@ -22,7 +22,9 @@ export function getStationBurials({ itemPerPage = 10, page = 1 }) {
 }
 
 export function getStationTransits({ itemPerPage = 10, page = 1 }) {
-  return getFetch(getUrl(`stations-transit?itemPerPage=${itemPerPage}&page=${page}`))
+  return getFetch(
+    getUrl(`stations-transit?itemPerPage=${itemPerPage}&page=${page}`)
+  )
 }
 
 export default { getStationBurials, getStationTransits }

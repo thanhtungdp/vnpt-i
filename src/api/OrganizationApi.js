@@ -25,7 +25,7 @@ export function getOrganizationsFilter({
   if (address) query.address = address
   if (director) query.director = director
   if (description) query.description = description
-  return getFetch(getUrl('?' + queryString.stringify(query,'&')))
+  return getFetch(getUrl('?' + queryString.stringify(query, '&')))
 }
 
 export function getOneOrganizations({ _id }) {

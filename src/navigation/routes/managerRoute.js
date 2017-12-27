@@ -43,21 +43,9 @@ export default class ManagerRoute extends React.Component {
           path={slug.organization.edit}
           component={OrganizationEdit}
         />
-        <Route
-          exact
-          path={slug.car.list}
-          component={CarList}
-        />
-        <Route
-          exact
-          path={slug.car.create}
-          component={CarCreate}
-        />
-        <Route
-          exact
-          path={slug.car.edit}
-          component={CarEdit}
-        />
+        <Route exact path={slug.car.list} component={CarList} />
+        <Route exact path={slug.car.create} component={CarCreate} />
+        <Route exact path={slug.car.edit} component={CarEdit} />
         <Route exact path={slug.map.base} component={MapDefault} />
       </PageSidebarLayout>
     )

@@ -1,6 +1,6 @@
 import React from 'react'
 
-export function cleanProps (cleanKeyProps, props) {
+export function cleanProps(cleanKeyProps, props) {
   let newProps = { ...props }
   cleanKeyProps.map(key => {
     delete newProps[key]
@@ -9,9 +9,8 @@ export function cleanProps (cleanKeyProps, props) {
   return newProps
 }
 
-export function createComponentDisableProps (Component, propsDisable = []) {
-  return ({ children, ...props }) =>
-    <Component {...cleanProps(propsDisable, props)}>
-      {children}
-    </Component>
+export function createComponentDisableProps(Component, propsDisable = []) {
+  return ({ children, ...props }) => (
+    <Component {...cleanProps(propsDisable, props)}>{children}</Component>
+  )
 }

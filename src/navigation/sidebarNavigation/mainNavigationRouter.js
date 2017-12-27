@@ -156,5 +156,4 @@ export default [
   organizationMenu,
   carMenu,
   mapManagerComponent
-  
 ]
