@@ -3,6 +3,7 @@ import PageContainer from 'layout/default-sidebar-layout/PageContainer'
 import { getOrganization, updateOrganization } from 'api/OrganizationApi'
 import swal from 'sweetalert2'
 import OrganizationForm from '../organization-form'
+import Breadcrumb from '../breadcrumb'
 
 export default class OrganizationCreate extends PureComponent {
   state = {
@@ -47,6 +48,16 @@ export default class OrganizationCreate extends PureComponent {
             : 'loading ...'
         }
       >
+        <Breadcrumb
+          items={[
+            'list',
+            {
+              id: 132,
+              href: '/edit/ab',
+              name: this.state.formValues.name
+            }
+          ]}
+        />
         {this.state.loaded && (
           <OrganizationForm
             isEdit

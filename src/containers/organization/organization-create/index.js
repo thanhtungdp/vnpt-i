@@ -1,10 +1,10 @@
 import React, { PureComponent } from 'react'
 import PageContainer from 'layout/default-sidebar-layout/PageContainer'
 import OrganizationForm from '../organization-form'
-import Icon from 'themes/icon'
 import swal from 'sweetalert2'
 import { createOrganization } from 'api/OrganizationApi'
 import slug from 'constants/slug'
+import Breadcrumb from '../breadcrumb'
 
 export default class OrganizationCreate extends PureComponent {
   async onSubmit(data) {
@@ -15,7 +15,7 @@ export default class OrganizationCreate extends PureComponent {
       })
     } else {
       swal({
-        title: 'Khởi tạo công ty ' + organization.name + ' thành côgn'
+        title: 'Khởi tạo công ty ' + organization.name + ' thành công'
       })
       this.props.history.push(slug.organization.base)
     }
@@ -23,7 +23,8 @@ export default class OrganizationCreate extends PureComponent {
 
   render() {
     return (
-      <PageContainer icon={Icon.create} title="Tạo mới doanh nghiệp">
+      <PageContainer>
+        <Breadcrumb items={['list', 'create']} />
         <OrganizationForm onSubmit={this.onSubmit} />
       </PageContainer>
     )

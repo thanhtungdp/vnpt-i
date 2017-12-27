@@ -118,24 +118,35 @@ const directionMenu = createChildListMenuItem(
   ]
 )
 
-const organizationMenu = createChildListMenuItem(
-  {
-    icon: Icon.organization,
-    text: 'Doanh Nghiệp'
-  },
-  [
-    {
-      url: slug.organization.list,
-      icon: Icon.list,
-      text: 'Danh sách Doanh Nghiệp'
-    },
-    {
-      url: slug.organization.create,
-      icon: Icon.create,
-      text: 'Tạo mới doanh nghiệp'
-    }
-  ]
-)
+// const organizationMenu = createChildListMenuItem(
+//   {
+//     icon: Icon.organization,
+//     text: 'Doanh Nghiệp'
+//   },
+//   [
+//     {
+//       url: slug.organization.list,
+//       icon: Icon.list,
+//       text: 'Danh sách Doanh Nghiệp'
+//     },
+//     {
+//       url: slug.organization.create,
+//       icon: Icon.create,
+//       text: 'Tạo mới doanh nghiệp'
+//     }
+//   ]
+// )
+
+const organizationMenu = {
+  component: (
+    <AkNavigationItem
+      linkComponent={WrapperLinkComponent}
+      href={slug.organization.base}
+      icon={Icon.organization}
+      text="Doanh nghiệp"
+    />
+  )
+}
 
 const categoriesMenu = createChildListMenuItem(
   {
