@@ -60,6 +60,7 @@
     "prettier": "^1.8.2",
     "promise": "8.0.1",
     "prop-types": "^15.6.0",
+    "query-string": "^5.0.1",
     "react": "^16.0.0",
     "react-addons-update": "^15.6.2",
     "react-dev-utils": "^4.1.0",

@@ -20,7 +20,7 @@ export default class OrganizationCreate extends PureComponent {
       description: values.description,
       director: values.director
     })
-    if (!organization) {
+    if (!organization || organization.error) {
       swal({
         title: organization.message
       })

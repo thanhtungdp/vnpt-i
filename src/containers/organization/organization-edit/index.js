@@ -22,7 +22,6 @@ export default class OrganizationCreate extends PureComponent {
   }
 
   async onSubmit(values) {
-    console.log(values)
     const organization = await updateOrganizations({
       _id: this.props.match.params._id,
       name: values.name,
@@ -30,7 +29,7 @@ export default class OrganizationCreate extends PureComponent {
       description: values.description,
       director: values.director
     })
-    if (!organization) {
+    if (!organization || organization.error) {
       swal({
         title: organization.message,
         type: 'error'

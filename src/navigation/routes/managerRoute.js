@@ -11,6 +11,9 @@ import TransitStationList from 'containers/transit-station/transit-station-list'
 import OrganizationList from 'containers/organization/organization-list'
 import OrganizationCreate from 'containers/organization/organization-create'
 import OrganizationEdit from 'containers/organization/organization-edit'
+import CarList from 'containers/car/car-list'
+import CarCreate from 'containers/car/car-create'
+import CarEdit from 'containers/car/car-edit'
 
 @autobind
 export default class ManagerRoute extends React.Component {
@@ -39,6 +42,21 @@ export default class ManagerRoute extends React.Component {
           exact
           path={slug.organization.edit}
           component={OrganizationEdit}
+        />
+        <Route
+          exact
+          path={slug.car.list}
+          component={CarList}
+        />
+        <Route
+          exact
+          path={slug.car.create}
+          component={CarCreate}
+        />
+        <Route
+          exact
+          path={slug.car.edit}
+          component={CarEdit}
         />
         <Route exact path={slug.map.base} component={MapDefault} />
       </PageSidebarLayout>

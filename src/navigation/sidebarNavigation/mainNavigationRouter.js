@@ -127,6 +127,26 @@ const organizationMenu = createChildListMenuItem(
     }
   ]
 )
+
+const carMenu = createChildListMenuItem(
+  {
+    icon: Icon.car,
+    text: 'Xe'
+  },
+  [
+    {
+      url: slug.car.list,
+      icon: Icon.list,
+      text: 'Danh sách Xe'
+    },
+    {
+      url: slug.car.create,
+      icon: Icon.create,
+      text: 'Tạo mới Xe'
+    }
+  ]
+)
+
 export default [
   groupManagerComponent,
   landFillMenu,
@@ -134,6 +154,7 @@ export default [
   appointmentMenu,
   directionMenu,
   organizationMenu,
+  carMenu,
   mapManagerComponent
   
 ]

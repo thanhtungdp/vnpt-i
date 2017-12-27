@@ -15,6 +15,7 @@ export default {
   appointment: <EmojiFrequentIcon label="" />,
   direction: <DecisionIcon label="" />,
   organization: <PdfIcon label=""/>,
+  car: <PdfIcon label=""/>,
   list: <EditorAlignLeftIcon label="" />,
   create: <EditorAddIcon label="" />
 }
