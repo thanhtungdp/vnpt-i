@@ -8,10 +8,9 @@ const LinkA = styled.a`
   ${props =>
     props.colorType
       ? `color: ${getColorFromString(props.colorType)} !important;`
-      : ''}
-  ${props => props.fontSize ? `font-size: ${props.fontSize}px;` : ''}
-  ${props => props.fontWeight ? `font-weight: ${props.fontWeight};` : ''}
-  :hover {
+      : ''} ${props =>
+      props.fontSize ? `font-size: ${props.fontSize}px;` : ''} ${props =>
+      props.fontWeight ? `font-weight: ${props.fontWeight};` : ''} :hover {
     cursor: pointer;
     text-decoration: none;
   }

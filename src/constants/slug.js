@@ -16,6 +16,13 @@ export default {
     list: '/appointment',
     create: '/appointment/create'
   },
+  category: {
+    base: '/category',
+    list: '/category',
+    create: '/category/create',
+    edit: '/category/edit/:code',
+    editWithCode: '/category/edit/'
+  },
   map: {
     base: '/map'
   },

@@ -11,10 +11,11 @@ const InputRestyle = styled(InputBootstrap)`
       ? `
     padding: 16px 16px;
     font-size: 18px;
-  ` : ''}
+  `
+      : ''};
 `
 
-export default function Input (props) {
+export default function Input(props) {
   return <InputRestyle {...props} />
 }
 

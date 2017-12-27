@@ -31,12 +31,7 @@ const View = styled.div`
   ${props => getChildrenColor(props)};
 `
 
-function ReduxFormValidate({
-  input,
-  meta,
-  componentChildren,
-  ...otherProps
-}) {
+function ReduxFormValidate({ input, meta, componentChildren, ...otherProps }) {
   const Input = componentChildren
   return (
     <View
@@ -44,20 +39,13 @@ function ReduxFormValidate({
       isWarning={meta.touched && meta.warning}
     >
       <Input {...input} {...otherProps} />
+      {meta.touched && meta.error && <FormFeedback>{meta.error}</FormFeedback>}
       {meta.touched &&
-        meta.error &&
-        <FormFeedback>
-          {meta.error}
-        </FormFeedback>}
-      {meta.touched &&
-        meta.warning &&
-        <FormFeedback>
-          {meta.warning}
-        </FormFeedback>}
+        meta.warning && <FormFeedback>{meta.warning}</FormFeedback>}
     </View>
   )
 }
 
 export default function createValidateComponent(Component) {
-	return props => <ReduxFormValidate componentChildren={Component} {...props} />
+  return props => <ReduxFormValidate componentChildren={Component} {...props} />
 }

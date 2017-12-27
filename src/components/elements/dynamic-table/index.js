@@ -24,9 +24,12 @@ export default class DynamicTableCustom extends PureComponent {
     return {
       cells: this.props.head.map(cell => ({
         ...cell,
-        content: typeof cell.content === 'string'
-          ? <WrapperHeader>{cell.content}</WrapperHeader>
-          : cell.content
+        content:
+          typeof cell.content === 'string' ? (
+            <WrapperHeader>{cell.content}</WrapperHeader>
+          ) : (
+            cell.content
+          )
       }))
     }
   }
