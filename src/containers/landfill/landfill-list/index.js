@@ -11,6 +11,7 @@ import PageContainer from 'layout/default-sidebar-layout/PageContainer'
 import createManagerListHoc from 'shared/hoc/manager-list'
 import Icon from 'themes/icon'
 import Slug from 'constants/slug'
+import Breadcrumb from '../breadcrumb'
 
 @createManagerListHoc({
   apiCall: StationApi.getStationBurials,
@@ -64,12 +65,11 @@ export default class LandfillList extends PureComponent {
         title="Danh sách bãi"
         right={
           <Link to={Slug.landFill.create}>
-            <Button appearance="primary" iconBefore={Icon.landFill}>
-              Tạo mới bãi
-            </Button>
+            <Button iconBefore={Icon.landFill}>Tạo mới bãi</Button>
           </Link>
         }
       >
+        <Breadcrumb items={['list']} />
         <DynamicTable
           isFixedSize
           head={this.getHead()}
