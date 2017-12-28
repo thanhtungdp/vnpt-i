@@ -1,5 +1,5 @@
 import { CAR_API } from '../config'
-import { getFetch, postFetch, putFetch } from 'utils/fetch'
+import { getFetch, postFetch, putFetch, deleteFetch } from 'utils/fetch'
 import queryString from 'query-string'
 
 const MAX_VALUE = 99999
@@ -71,10 +71,15 @@ export function getListByOrganization({ _id }) {
   })
 }
 
+export function deleteCar(_id, data = {}) {
+  return deleteFetch(getUrl(_id), data)
+}
+
 export default {
   getCars,
   createCars,
   updateCars,
   getCarsFilter,
-  getListByOrganization
+  getListByOrganization,
+  deleteCar
 }

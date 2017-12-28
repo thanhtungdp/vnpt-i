@@ -11,9 +11,11 @@ import PageContainer from 'layout/default-sidebar-layout/PageContainer'
 import createManagerListHoc from 'shared/hoc/manager-list'
 import Icon from 'themes/icon'
 import Slug from 'constants/slug'
+import Breadcrumb from '../breadcrumb'
 
 @createManagerListHoc({
     apiCall: CarApi.getCars,
+    apiDelete: CarApi.deleteCar,
     itemPerPage: 10
 })
 @autobind
@@ -81,8 +83,18 @@ export default class CarList extends PureComponent {
                     <div>
                         <LinkCustom to={Slug.car.editWithCode + `${row.code}`}>Edit</LinkCustom>
                         &nbsp;&nbsp;
-                        <LinkA colorType="red" onClick={this.deleteItem(row.code)}>
-                                        Delete
+                        <LinkA
+                            colorType="red"
+                            onClick={e =>
+                                this.props.onDeleteItem(
+                                    e,
+                                    row.code,
+                                    item => row.code === item.code,
+                                    row.code
+                                )
+                            }
+                        >
+                            Xóa
                         </LinkA>
                     </div>
                 )
@@ -102,6 +114,7 @@ export default class CarList extends PureComponent {
                     </LinkCustom>
                 }
             >
+                <Breadcrumb items={['list']} />
                 <DynamicTable
                     isFixedSize
                     head={this.getHead()}

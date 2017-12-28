@@ -5,6 +5,7 @@ import Icon from 'themes/icon'
 import swal from 'sweetalert2'
 import { createCars } from 'api/CarApi'
 import slug from 'constants/slug'
+import Breadcrumb from '../breadcrumb'
 
 export default class CarCreate extends PureComponent {
     static propTypes = {}
@@ -40,6 +41,7 @@ export default class CarCreate extends PureComponent {
     render() {
         return (
             <PageContainer icon={Icon.create} title="Tạo mới xe">
+             <Breadcrumb items={['list', 'create']} />
                 <CarForm onSubmit={this.onSubmit}
                     submitting={this.state.submitting}
                 />

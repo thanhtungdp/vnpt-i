@@ -118,24 +118,24 @@ const directionMenu = createChildListMenuItem(
   ]
 )
 
-const carMenu = createChildListMenuItem(
-  {
-    icon: Icon.car,
-    text: 'Xe'
-  },
-  [
-    {
-      url: slug.car.list,
-      icon: Icon.list,
-      text: 'Danh sách Xe'
-    },
-    {
-      url: slug.car.create,
-      icon: Icon.create,
-      text: 'Tạo mới Xe'
-    }
-  ]
-)
+// const carMenu = createChildListMenuItem(
+//   {
+//     icon: Icon.car,
+//     text: 'Xe'
+//   },
+//   [
+//     {
+//       url: slug.car.list,
+//       icon: Icon.list,
+//       text: 'Danh sách Xe'
+//     },
+//     {
+//       url: slug.car.create,
+//       icon: Icon.create,
+//       text: 'Tạo mới Xe'
+//     }
+//   ]
+// )
 // const organizationMenu = createChildListMenuItem(
 //   {
 //     icon: Icon.organization,
@@ -173,6 +173,17 @@ const categoryMenu = {
       href={slug.category.base}
       icon={Icon.category}
       text="Chuyên mục"
+    />
+  )
+}
+
+const carMenu = {
+  component: (
+    <AkNavigationItem
+      linkComponent={WrapperLinkComponent}
+      href={slug.car.base}
+      icon={Icon.car}
+      text="Xe"
     />
   )
 }

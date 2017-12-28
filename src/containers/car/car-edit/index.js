@@ -3,6 +3,7 @@ import PageContainer from 'layout/default-sidebar-layout/PageContainer'
 import CarForm from '../car-form'
 import { getOneCars, updateCars } from 'api/CarApi'
 import swal from 'sweetalert2'
+import Breadcrumb from '../breadcrumb'
 
 export default class CarCreate extends PureComponent {
     state = {
@@ -25,7 +26,7 @@ export default class CarCreate extends PureComponent {
         const car = await updateCars({
             code: values.code,
             truckLoad: values.truckLoad,
-            type: typeof(values.type) === "object" ? values.type.value : values.type,
+            type: typeof (values.type) === "object" ? values.type.value : values.type,
             description: values.description,
             organization: values.organization
         })
@@ -52,6 +53,16 @@ export default class CarCreate extends PureComponent {
                         : 'loading ...'
                 }
             >
+                <Breadcrumb
+                    items={[
+                        'list',
+                        {
+                            id: 'edit',
+                            href: '',
+                            name: this.state.formValues.code
+                        }
+                    ]}
+                />
                 {this.state.loaded && (
                     <CarForm
                         isEdit
