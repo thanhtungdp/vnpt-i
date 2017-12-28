@@ -1,8 +1,15 @@
 import React, { PureComponent } from 'react'
 import { autobind } from 'core-decorators'
+import update from 'react-addons-update'
+import swal from 'sweetalert2'
 
-const createManagerListHoc = ({ apiCall, itemPerPage = 10 }) => Component => {
-  @autobind class ManagerListHoc extends PureComponent {
+const createManagerListHoc = ({
+  apiCall,
+  apiDelete,
+  itemPerPage = 10
+}) => Component => {
+  @autobind
+  class ManagerListHoc extends PureComponent {
     state = {
       data: [],
       pagination: {
@@ -51,6 +58,32 @@ const createManagerListHoc = ({ apiCall, itemPerPage = 10 }) => Component => {
       return (page - 1) * itemPerPage + index + 1
     }
 
+    handleDeleteItem(e, itemName, logicFunc = () => {}, itemKeyDelete) {
+      if (e) {
+        e.preventDefault()
+      }
+      swal({
+        title: `Bạn có muốn xóa "${itemName}"`,
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Vâng, hãy xóa',
+        cancelButtonText: 'Bỏ qua'
+      }).then(() => {
+        const itemIndex = this.state.data.findIndex(logicFunc)
+        if (itemIndex === -1) return
+        apiDelete(itemKeyDelete)
+          .then(() => {})
+          .catch(e => {
+            console.log(e)
+          })
+        this.setState({
+          data: update(this.state.data, {
+            $splice: [[itemIndex, 1]]
+          })
+        })
+      })
+    }
+
     render() {
       return (
         <Component
@@ -59,6 +92,7 @@ const createManagerListHoc = ({ apiCall, itemPerPage = 10 }) => Component => {
           pagination={this.state.pagination}
           isLoading={this.state.isLoading}
           onChangePage={this.handleChangePage}
+          onDeleteItem={this.handleDeleteItem}
           getIndexByPagination={this.getIndexByPagination}
         />
       )

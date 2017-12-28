@@ -31,6 +31,16 @@
     babel-runtime "^6.11.6"
     styled-components "^1.4.6"
 
+"@atlaskit/breadcrumbs@^3.1.10":
+  version "3.1.10"
+  resolved "https://registry.yarnpkg.com/@atlaskit/breadcrumbs/-/breadcrumbs-3.1.10.tgz#cc44728e57833cb2e6eebbfdda4ae0bb490ed496"
+  dependencies:
+    "@atlaskit/button" "^6.1.0"
+    "@atlaskit/theme" "^2.2.9"
+    "@atlaskit/tooltip" "^8.0.11"
+    babel-runtime "^6.26.0"
+    styled-components "^1.4.6"
+
 "@atlaskit/button@^5.4.13", "@atlaskit/button@^5.4.14", "@atlaskit/button@^5.4.3", "@atlaskit/button@^5.4.5", "@atlaskit/button@^5.4.8":
   version "5.4.14"
   resolved "https://registry.yarnpkg.com/@atlaskit/button/-/button-5.4.14.tgz#600975141fd356ccbf712885a00f63a1367dd28d"
@@ -44,6 +54,14 @@
 "@atlaskit/button@^6.0.0":
   version "6.0.0"
   resolved "https://registry.yarnpkg.com/@atlaskit/button/-/button-6.0.0.tgz#a89c6cfcbfdaea4acd82ad2eb3e5607ad1803b3b"
+  dependencies:
+    "@atlaskit/theme" "^2.2.9"
+    babel-runtime "^6.26.0"
+    styled-components "^1.4.6"
+
+"@atlaskit/button@^6.1.0":
+  version "6.2.0"
+  resolved "https://registry.yarnpkg.com/@atlaskit/button/-/button-6.2.0.tgz#44723233699ec52d32920dc13ab57858cfb1b957"
   dependencies:
     "@atlaskit/theme" "^2.2.9"
     babel-runtime "^6.26.0"
@@ -226,6 +244,16 @@
     styled-components "^1.4.6"
     tabbable "^1.1.0"
 
+"@atlaskit/layer-manager@^2.5.7":
+  version "2.5.8"
+  resolved "https://registry.yarnpkg.com/@atlaskit/layer-manager/-/layer-manager-2.5.8.tgz#ddd8ea409d55369d5d2a960f64d0f899eb10145d"
+  dependencies:
+    focusin "^2.0.0"
+    prop-types "^15.5.10"
+    react-transition-group "^2.2.1"
+    styled-components "^1.4.6"
+    tabbable "^1.1.0"
+
 "@atlaskit/layer@^2.0.0", "@atlaskit/layer@^2.5.3":
   version "2.5.8"
   resolved "https://registry.yarnpkg.com/@atlaskit/layer/-/layer-2.5.8.tgz#7b6a6f4b1d8963ac4e22350dedf7189f735bd4d3"
@@ -349,6 +377,16 @@
     react-transition-group "^2.2.1"
     styled-components "^1.4.6"
 
+"@atlaskit/tooltip@^8.0.11":
+  version "8.0.12"
+  resolved "https://registry.yarnpkg.com/@atlaskit/tooltip/-/tooltip-8.0.12.tgz#db90a8c8a6ae726485745c98e6095ee0824224aa"
+  dependencies:
+    "@atlaskit/layer-manager" "^2.5.7"
+    "@atlaskit/theme" "^2.2.9"
+    react-deprecate "^0.1.0"
+    react-transition-group "^2.2.1"
+    styled-components "^1.4.6"
+
 "@atlaskit/util-common@^1.1.0", "@atlaskit/util-common@^1.5.2":
   version "1.5.2"
   resolved "https://registry.yarnpkg.com/@atlaskit/util-common/-/util-common-1.5.2.tgz#ae9e96c540aa2517ca922542333ac24eb3473cbc"
@@ -452,6 +490,10 @@ alphanum-sort@^1.0.1, alphanum-sort@^1.0.2:
 amdefine@>=0.0.4:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/amdefine/-/amdefine-1.0.1.tgz#4a5282ac164729e93619bcfd3ad151f817ce91f5"
+
+animate.css@^3.5.2:
+  version "3.5.2"
+  resolved "https://registry.yarnpkg.com/animate.css/-/animate.css-3.5.2.tgz#91e668dc069a808e5e499514867b97aae0166c36"
 
 anser@1.4.1:
   version "1.4.1"
@@ -6051,6 +6093,10 @@ react-addons-update@^15.6.2:
   dependencies:
     fbjs "^0.8.9"
     object-assign "^4.1.0"
+
+react-deprecate@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/react-deprecate/-/react-deprecate-0.1.0.tgz#817bdf22b8275fb767e9f49a8053f642600435c3"
 
 react-dev-utils@^4.1.0:
   version "4.1.0"

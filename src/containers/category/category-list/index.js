@@ -1,39 +1,41 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { autobind } from 'core-decorators'
-import Button from '@atlaskit/button'
-import LinkA from 'components/elements/link-a'
-import OrganizationApi from 'api/OrganizationApi'
+
+import CategoryApi from 'api/CategoryApi'
 import DynamicTable from 'components/elements/dynamic-table'
 import Clearfix from 'components/elements/clearfix'
-import LinkCustom from 'components/elements/link'
+import LinkA from 'components/elements/link'
+import LinkColor from 'components/elements/link-a'
+import Button from '@atlaskit/button'
 import PageContainer from 'layout/default-sidebar-layout/PageContainer'
 import createManagerListHoc from 'shared/hoc/manager-list'
+import slug from 'constants/slug'
 import Icon from 'themes/icon'
-import Slug from 'constants/slug'
 import Breadcrumb from '../breadcrumb'
 
 @createManagerListHoc({
-  apiCall: OrganizationApi.getOrganizations,
-  apiDelete: OrganizationApi.deleteOrganization,
+  apiCall: CategoryApi.getCategories,
+  apiDelete: CategoryApi.deleteCategory,
   itemPerPage: 10
 })
 @autobind
-export default class OrganizationlList extends PureComponent {
+export default class CategoriesList extends PureComponent {
   static propTypes = {
     data: PropTypes.array,
     pagination: PropTypes.object,
     isLoading: PropTypes.bool,
     onChangePage: PropTypes.func,
-    onDeleteItem: PropTypes.func,
-    getIndexByPagination: PropTypes.func
+    getIndexByPagination: PropTypes.func,
+    onDeleteItem: PropTypes.func
   }
 
   getHead() {
     return [
       { content: 'TT', width: 10 },
       { content: 'Tên' },
-      { content: 'Giám đốc' },
+      { content: 'Loại' },
+      { content: 'Chuyên mục con' },
       { content: 'Hành động' }
     ]
   }
@@ -54,30 +56,39 @@ export default class OrganizationlList extends PureComponent {
       {
         content: (
           <div>
-            <span>{row.director}</span>
+            <span>{row.type}</span>
           </div>
         )
       },
       {
         content: (
           <div>
-            <LinkCustom to={Slug.organization.editWithId + `${row._id}`}>
-              Chỉnh sửa
-            </LinkCustom>
-            &nbsp;&nbsp;
-            <LinkA
+            {row.childMenu.map((child, index) => (
+              <span key={index}>
+                {child.name} {index < row.childMenu.length - 1 ? ', ' : null}
+              </span>
+            ))}
+          </div>
+        )
+      },
+      {
+        content: (
+          <div>
+            <LinkA to={slug.category.editWithCode + row.code}>Chỉnh sửa</LinkA>
+            &nbsp;&nbsp;&nbsp;
+            <LinkColor
               colorType="red"
               onClick={e =>
                 this.props.onDeleteItem(
                   e,
                   row.name,
-                  item => row._id === item._id,
-                  row._id
+                  item => item._id === row._id,
+                  row.code
                 )
               }
             >
               Xóa
-            </LinkA>
+            </LinkColor>
           </div>
         )
       }
@@ -87,12 +98,13 @@ export default class OrganizationlList extends PureComponent {
   render() {
     return (
       <PageContainer
+        title="Danh sách chuyên mục"
         right={
-          <LinkCustom to={Slug.organization.create}>
-            <Button  iconBefore={Icon.create}>
+          <LinkA to={slug.category.create}>
+            <Button iconBefore={Icon.create} customColor="primary">
               Tạo mới
             </Button>
-          </LinkCustom>
+          </LinkA>
         }
       >
         <Breadcrumb items={['list']} />

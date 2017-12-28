@@ -1,42 +1,41 @@
 import React, { PureComponent } from 'react'
 import PageContainer from 'layout/default-sidebar-layout/PageContainer'
-import OrganizationForm from '../organization-form'
-import { getOneOrganizations, updateOrganizations } from 'api/OrganizationApi'
+import { getOrganization, updateOrganization } from 'api/OrganizationApi'
 import swal from 'sweetalert2'
+import { autobind } from 'core-decorators'
+import OrganizationForm from '../organization-form'
+import Breadcrumb from '../breadcrumb'
 
+@autobind
 export default class OrganizationCreate extends PureComponent {
   state = {
     loaded: false,
     submitting: false,
     formValues: {}
   }
-  static propTypes = {}
 
   async componentDidMount() {
     const _id = this.props.match.params._id
-    const organization = await getOneOrganizations({ _id })
+    const organization = await getOrganization(_id)
     this.setState({
       loaded: true,
       formValues: organization
     })
   }
 
-  async onSubmit(values) {
-    const organization = await updateOrganizations({
-      _id: this.props.match.params._id,
-      name: values.name,
-      address: values.address,
-      description: values.description,
-      director: values.director
-    })
-    if (!organization || organization.error) {
+  async onSubmit(data) {
+    const organization = await updateOrganization(
+      this.props.match.params._id,
+      data
+    )
+    if (!organization) {
       swal({
         title: organization.message,
         type: 'error'
       })
     } else {
       swal({
-        title: 'Update Organization Successfull',
+        title: 'Cập nhật tổ chức thành công',
         type: 'success'
       })
     }
@@ -51,6 +50,16 @@ export default class OrganizationCreate extends PureComponent {
             : 'loading ...'
         }
       >
+        <Breadcrumb
+          items={[
+            'list',
+            {
+              id: 'edit',
+              href: '',
+              name: this.state.formValues.name
+            }
+          ]}
+        />
         {this.state.loaded && (
           <OrganizationForm
             isEdit

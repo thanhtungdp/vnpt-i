@@ -75,6 +75,7 @@ export default class DefaultSidebarNavigation extends React.Component {
       onClick,
       isSelected:
         item.url === this.props.location.pathname ||
+        this.props.location.pathname.indexOf(item.component.props.href) > -1 ||
         // check navigation parent index
         (navigationIndex > -1
           ? navigationRouterStack[navigationIndex].component.props.text === text

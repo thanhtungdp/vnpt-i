@@ -1,11 +1,11 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import { withRouter } from 'react-router-dom'
 import { reduxForm, Field } from 'redux-form'
 import createValidateComponent from 'components/elements/redux-form-validate'
 import InputLabel from 'components/elements/input-label'
 import Button from 'components/elements/button'
 import Clearfix from 'components/elements/clearfix'
+import { autobind } from 'core-decorators'
 
 const FInputLabel = createValidateComponent(InputLabel)
 
@@ -24,7 +24,7 @@ function validate(values) {
   form: 'organizationForm',
   validate
 })
-@withRouter
+@autobind
 export default class OrganizationForm extends PureComponent {
   static propTypes = {
     onSubmit: PropTypes.func,
@@ -33,34 +33,44 @@ export default class OrganizationForm extends PureComponent {
     isEdit: PropTypes.bool
   }
 
+  handleSubmit(values) {
+    const data = {
+      name: values.name,
+      address: values.address,
+      description: values.description,
+      director: values.director
+    }
+    return this.props.onSubmit(data)
+  }
+
   render() {
     return (
-      <form onSubmit={this.props.handleSubmit(this.props.onSubmit.bind(this))}>
+      <form onSubmit={this.props.handleSubmit(this.handleSubmit)}>
         <Field
           name="name"
-          label="Name"
-          placeholder="Tên Doanh Nghiệp"
+          label="Tên doanh nghiệp"
+          placeholder="Tên doanh nghiệp"
           component={FInputLabel}
         />
         <Clearfix height={16} />
         <Field
           name="address"
-          label="Address"
+          label="Địa chỉ"
           placeholder="Địa chỉ"
           component={FInputLabel}
         />
-        <Clearfix height={16} />
+        <Clearfix height={8} />
         <Field
           name="description"
           type="textarea"
-          label="Description"
+          label="Mô tả"
           placeholder="Mô tả"
           component={FInputLabel}
         />
-        <Clearfix height={16} />
+        <Clearfix height={8} />
         <Field
           name="director"
-          label="Director"
+          label="Giám đốc"
           placeholder="Giám đốc"
           component={FInputLabel}
         />
@@ -72,7 +82,7 @@ export default class OrganizationForm extends PureComponent {
           isLoading={this.props.submitting}
           disabled={this.props.submitting}
         >
-          {this.props.isEdit ? 'Update' : 'Create'}
+          {this.props.isEdit ? 'Cập nhật' : 'Tạo mới'}
         </Button>
       </form>
     )

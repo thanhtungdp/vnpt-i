@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@atlaskit/breadcrumbs": "^3.1.10",
     "@atlaskit/button": "^5.4.14",
     "@atlaskit/checkbox": "^1.1.7",
     "@atlaskit/dropdown-menu": "^3.11.4",
@@ -15,6 +16,7 @@
     "@atlaskit/page-header": "^2.0.0",
     "@atlaskit/single-select": "^3.1.2",
     "@atlaskit/tooltip": "^8.0.7",
+    "animate.css": "^3.5.2",
     "autoprefixer": "7.1.2",
     "axios": "^0.16.2",
     "babel-core": "6.25.0",
@@ -92,7 +94,7 @@
     "dev": "node scripts/start.js",
     "build": "node scripts/build.js",
     "start": "NODE_ENV=production nodemon --exec babel-node server.js",
-    "fixcode": "prettier --no-semi --single-quote --write ./src/*.js ./src/*/*.js  ./src/*/*/*.js",
+    "fixcode": "prettier --no-semi --single-quote --write ./src/*.js ./src/*/*.js ./src/**/*.js  ./src/*/*/*.js ./src/*/*/*/*.js",
     "test": "node scripts/test.js --env=jsdom",
     "deploy-setup": "pm2 deploy ecosystem.config.js production setup",
     "deploy": "pm2 deploy ecosystem.config.js production"

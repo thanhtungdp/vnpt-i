@@ -1,16 +1,16 @@
 import React, { PureComponent } from 'react'
-import SingleSelect from '@atlaskit/single-select';
-import PropTypes from 'prop-types';
+import SingleSelect from '@atlaskit/single-select'
+import PropTypes from 'prop-types'
 import OrganizationApi from 'api/OrganizationApi'
 
 export default class SelectBoxOrganization extends PureComponent {
   static propTypes = {
     query: PropTypes.object
-  };
+  }
 
   state = {
     selectItems: []
-  };
+  }
 
   async componentDidMount() {
     let query = {}
@@ -47,7 +47,6 @@ export default class SelectBoxOrganization extends PureComponent {
         defaultSelected={this.getRealValue()}
         {...this.props}
       />
-    );
+    )
   }
 }
-

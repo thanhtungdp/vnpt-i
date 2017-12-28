@@ -1,6 +1,6 @@
 import stationBurialsData from 'fake-data/stationsBurial'
-import { getFetch } from 'utils/fetch'
 import { STATION_API } from 'config'
+import { getFetch } from 'utils/fetch'
 
 function getUrl(path) {
   return STATION_API + '/' + path
@@ -27,4 +27,7 @@ export function getStationTransits({ itemPerPage = 10, page = 1 }) {
   )
 }
 
-export default { getStationBurials, getStationTransits }
+export default {
+  getStationBurials,
+  getStationTransits
+}
