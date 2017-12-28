@@ -14,117 +14,115 @@ import Slug from 'constants/slug'
 import Breadcrumb from '../breadcrumb'
 
 @createManagerListHoc({
-    apiCall: CarApi.getCars,
-    apiDelete: CarApi.deleteCar,
-    itemPerPage: 10
+  apiCall: CarApi.getCars,
+  apiDelete: CarApi.deleteCar,
+  itemPerPage: 10
 })
 @autobind
 export default class CarList extends PureComponent {
-    static propTypes = {
-        data: PropTypes.array,
-        pagination: PropTypes.object,
-        isLoading: PropTypes.bool,
-        onChangePage: PropTypes.func,
-        getIndexByPagination: PropTypes.func
-    }
+  static propTypes = {
+    data: PropTypes.array,
+    pagination: PropTypes.object,
+    isLoading: PropTypes.bool,
+    onChangePage: PropTypes.func,
+    getIndexByPagination: PropTypes.func
+  }
 
-    deleteItem(_id) {
-        console.log(_id)
-    }
+  deleteItem(_id) {
+    console.log(_id)
+  }
 
-    getHead() {
-        return [
-            { content: 'Id', width: 10 },
-            { content: 'code' },
-            { content: 'truckLoad' },
-            { content: 'type' },
-            { content: 'organization' }
-        ]
-    }
+  getHead() {
+    return [
+      { content: 'Id', width: 10 },
+      { content: 'code' },
+      { content: 'truckLoad' },
+      { content: 'type' },
+      { content: 'organization' }
+    ]
+  }
 
-    getRows() {
-        return this.props.data.map((row, index) => [
-            {
-                content: <strong>{index + 1}</strong>
-            },
-            {
-                content: (
-                    <div>
-                        <strong>{row.code}</strong>
-                        <br />
-                    </div>
-                )
-            },
-            {
-                content: (
-                    <div>
-                        <span>{row.truckLoad}</span>
-                    </div>
-                )
-            },
-            {
-                content: (
-                    <div>
-                        <span>{row.type}</span>
-                    </div>
-                )
-            },
-            {
-                content: (
-                    <div>
-                        {row.organization &&
-                            <span>{row.organization.name}</span>
-                        }
-                    </div>
-                )
-            },
-            {
-                content: (
-                    <div>
-                        <LinkCustom to={Slug.car.editWithCode + `${row.code}`}>Edit</LinkCustom>
-                        &nbsp;&nbsp;
-                        <LinkA
-                            colorType="red"
-                            onClick={e =>
-                                this.props.onDeleteItem(
-                                    e,
-                                    row.code,
-                                    item => row.code === item.code,
-                                    row.code
-                                )
-                            }
-                        >
-                            Xóa
-                        </LinkA>
-                    </div>
-                )
-            }
-        ])
-    }
-
-    render() {
-        return (
-            <PageContainer
-                title="Danh sách Xe"
-                right={
-                    <LinkCustom to={Slug.car.create}>
-                        <Button appearance="primary" iconBefore={Icon.create}>
-                            Tạo mới
-            </Button>
-                    </LinkCustom>
-                }
-            >
-                <Breadcrumb items={['list']} />
-                <DynamicTable
-                    isFixedSize
-                    head={this.getHead()}
-                    rows={this.getRows()}
-                    pagination={this.props.pagination}
-                    onSetPage={this.props.onChangePage}
-                    isLoading={this.props.isLoading}
-                />
-                <Clearfix height={64} />
-            </PageContainer>
+  getRows() {
+    return this.props.data.map((row, index) => [
+      {
+        content: <strong>{index + 1}</strong>
+      },
+      {
+        content: (
+          <div>
+            <strong>{row.code}</strong>
+            <br />
+          </div>
         )
-    }
+      },
+      {
+        content: (
+          <div>
+            <span>{row.truckLoad}</span>
+          </div>
+        )
+      },
+      {
+        content: (
+          <div>
+            <span>{row.type}</span>
+          </div>
+        )
+      },
+      {
+        content: (
+          <div>{row.organization && <span>{row.organization.name}</span>}</div>
+        )
+      },
+      {
+        content: (
+          <div>
+            <LinkCustom to={Slug.car.editWithCode + `${row.code}`}>
+              Edit
+            </LinkCustom>
+            &nbsp;&nbsp;
+            <LinkA
+              colorType="red"
+              onClick={e =>
+                this.props.onDeleteItem(
+                  e,
+                  row.code,
+                  item => row.code === item.code,
+                  row.code
+                )
+              }
+            >
+              Xóa
+            </LinkA>
+          </div>
+        )
+      }
+    ])
+  }
+
+  render() {
+    return (
+      <PageContainer
+        title="Danh sách Xe"
+        right={
+          <LinkCustom to={Slug.car.create}>
+            <Button appearance="primary" iconBefore={Icon.create}>
+              Tạo mới
+            </Button>
+          </LinkCustom>
+        }
+      >
+        <Breadcrumb items={['list']} />
+        <DynamicTable
+          isFixedSize
+          head={this.getHead()}
+          rows={this.getRows()}
+          pagination={this.props.pagination}
+          onSetPage={this.props.onChangePage}
+          isLoading={this.props.isLoading}
+        />
+        <Clearfix height={64} />
+      </PageContainer>
+    )
+  }
 }

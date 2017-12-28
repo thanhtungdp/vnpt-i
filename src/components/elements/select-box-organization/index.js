@@ -25,15 +25,20 @@ export default class SelectBoxOrganization extends PureComponent {
       _id: object._id,
       createdAt: object.createdAt,
       updatedAt: object.updatedAt
-    }));
+    }))
     this.setState({ selectItems: [{ items: orginazationItems }] })
   }
 
-  getRealValue(){
-    if(typeof this.props.value === "string" && this.state.selectItems.length > 0){
-      return this.state.selectItems[0].items.find(i => i.value === this.props.value);
+  getRealValue() {
+    if (
+      typeof this.props.value === 'string' &&
+      this.state.selectItems.length > 0
+    ) {
+      return this.state.selectItems[0].items.find(
+        i => i.value === this.props.value
+      )
     }
-    return this.props.value;
+    return this.props.value
   }
 
   render() {
@@ -43,7 +48,7 @@ export default class SelectBoxOrganization extends PureComponent {
         items={this.state.selectItems}
         noMatchesFound="Empty items"
         hasAutocomplete
-        onSelected={(object) => this.props.onChange(object.item)}
+        onSelected={object => this.props.onChange(object.item)}
         defaultSelected={this.getRealValue()}
         {...this.props}
       />

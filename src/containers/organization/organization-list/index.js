@@ -89,9 +89,7 @@ export default class OrganizationlList extends PureComponent {
       <PageContainer
         right={
           <LinkCustom to={Slug.organization.create}>
-            <Button  iconBefore={Icon.create}>
-              Tạo mới
-            </Button>
+            <Button iconBefore={Icon.create}>Tạo mới</Button>
           </LinkCustom>
         }
       >

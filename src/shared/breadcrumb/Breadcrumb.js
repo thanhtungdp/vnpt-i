@@ -20,15 +20,15 @@ export default class Breadcrumb extends PureComponent {
     autoDestroy: true
   }
 
-  componentDidMount () {
+  componentDidMount() {
     this.props.addBreadcrumb(this.props)
   }
 
-  componentDidUpdate () {
+  componentDidUpdate() {
     this.props.updateBreadcrumb(this.props)
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     if (this.props.autoDestroy) {
       this.props.deleteBreadcrumb(this.props)
     }
@@ -38,7 +38,7 @@ export default class Breadcrumb extends PureComponent {
     this.props.deleteBreadcrumb(this.props)
   }
 
-  render () {
+  render() {
     return null
   }
 }

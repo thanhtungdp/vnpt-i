@@ -8,44 +8,42 @@ import slug from 'constants/slug'
 import Breadcrumb from '../breadcrumb'
 
 export default class CarCreate extends PureComponent {
-    static propTypes = {}
-    state = {
-        submitting: false
+  static propTypes = {}
+  state = {
+    submitting: false
+  }
+
+  async onSubmit(values) {
+    this.setState({ submitting: true })
+
+    const car = await createCars({
+      code: values.code,
+      truckLoad: values.truckLoad,
+      type: values.type.value,
+      description: values.description,
+      organization: values.organization
+    })
+
+    if (!car || car.error) {
+      swal({
+        title: car.message
+      })
+    } else {
+      swal({
+        title: 'Create car Successfull'
+      })
+      this.props.history.push(slug.car.base)
     }
 
-    async onSubmit(values) {
-        this.setState({ submitting: true })
+    this.setState({ submitting: false })
+  }
 
-        const car = await createCars({
-            code: values.code,
-            truckLoad: values.truckLoad,
-            type: values.type.value,
-            description: values.description,
-            organization: values.organization
-        })
-
-        if (!car || car.error) {
-            swal({
-                title: car.message
-            })
-        } else {
-            swal({
-                title: 'Create car Successfull'
-            })
-            this.props.history.push(slug.car.base)
-        }
-
-        this.setState({ submitting: false })
-    }
-
-    render() {
-        return (
-            <PageContainer icon={Icon.create} title="Tạo mới xe">
-             <Breadcrumb items={['list', 'create']} />
-                <CarForm onSubmit={this.onSubmit}
-                    submitting={this.state.submitting}
-                />
-            </PageContainer>
-        )
-    }
+  render() {
+    return (
+      <PageContainer icon={Icon.create} title="Tạo mới xe">
+        <Breadcrumb items={['list', 'create']} />
+        <CarForm onSubmit={this.onSubmit} submitting={this.state.submitting} />
+      </PageContainer>
+    )
+  }
 }

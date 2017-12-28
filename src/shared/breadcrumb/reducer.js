@@ -21,7 +21,7 @@ type BreadcrumbState = Array<Breadcrumb>
 
 const initialState: BreadcrumbState = []
 
-export default function createReducer (
+export default function createReducer(
   state: BreadcrumbState = initialState,
   action: ActionType
 ): Array<Breadcrumb> {
@@ -37,13 +37,13 @@ export default function createReducer (
   }
 }
 
-export function addBreadcrumb (state, { breadcrumb }): BreadcrumbState {
+export function addBreadcrumb(state, { breadcrumb }): BreadcrumbState {
   return update(state, {
     $push: [breadcrumb]
   })
 }
 
-export function updateBreadcrumb (state, { breadcrumb }): BreadcrumbState {
+export function updateBreadcrumb(state, { breadcrumb }): BreadcrumbState {
   const breadcrumbIndex = state.findIndex(b => b.id === breadcrumb.id)
   return update(state, {
     [breadcrumbIndex]: {
@@ -55,7 +55,7 @@ export function updateBreadcrumb (state, { breadcrumb }): BreadcrumbState {
   })
 }
 
-export function deleteBreadcrumb (state, { breadcrumb }): BreadcrumbState {
+export function deleteBreadcrumb(state, { breadcrumb }): BreadcrumbState {
   const breadcrumbIndex = state.findIndex(b => b.id === breadcrumb.id)
   return update(state, {
     $splice: [[breadcrumbIndex, 1]]

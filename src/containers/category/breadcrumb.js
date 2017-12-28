@@ -4,13 +4,13 @@ import Icon from 'themes/icon'
 
 export default createBreadcrumb({
   list: {
-    id: "list",
+    id: 'list',
     href: slug.category.base,
     name: 'Danh sách chuyên mục',
     icon: Icon.category
   },
   create: {
-    id: "create",
+    id: 'create',
     href: slug.category.create,
     name: 'Tạo mới'
   },
