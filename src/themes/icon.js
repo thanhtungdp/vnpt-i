@@ -17,11 +17,8 @@ export default {
   appointment: <EmojiFrequentIcon label="" />,
   direction: <DecisionIcon label="" />,
   organization: <PdfIcon label="" />,
-<<<<<<< HEAD
   car: <PdfIcon label="" />,
-=======
   category: <EditorAlignLeftIcon label="" />,
->>>>>>> develop
   list: <EditorAlignLeftIcon label="" />,
   create: <EditorAddIcon label="" />,
   edit: <EditFilledIcon label="" />

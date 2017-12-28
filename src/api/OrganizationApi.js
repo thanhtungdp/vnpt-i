@@ -1,10 +1,7 @@
 import { ORGANIZATION_API } from '../config'
 import { getFetch, postFetch, putFetch } from 'utils/fetch'
-<<<<<<< HEAD
 import queryString from 'query-string'
-=======
 import { deleteFetch } from '../utils/fetch'
->>>>>>> develop
 
 const MAX_VALUE = 99999
 

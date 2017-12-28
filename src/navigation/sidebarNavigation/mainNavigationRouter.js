@@ -117,24 +117,6 @@ const directionMenu = createChildListMenuItem(
     }
   ]
 )
-const organizationMenu = createChildListMenuItem(
-  {
-    icon: Icon.organization,
-    text: 'Doanh Nghiệp'
-  },
-  [
-    {
-      url: slug.organization.list,
-      icon: Icon.list,
-      text: 'Danh sách Doanh Nghiệp'
-    },
-    {
-      url: slug.organization.create,
-      icon: Icon.create,
-      text: 'Tạo mới doanh nghiệp'
-    }
-  ]
-)
 
 const carMenu = createChildListMenuItem(
   {

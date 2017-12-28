@@ -10,15 +10,12 @@ import TransitStationList from 'containers/transit-station/transit-station-list'
 import OrganizationList from 'containers/organization/organization-list'
 import OrganizationCreate from 'containers/organization/organization-create'
 import OrganizationEdit from 'containers/organization/organization-edit'
-<<<<<<< HEAD
 import CarList from 'containers/car/car-list'
 import CarCreate from 'containers/car/car-create'
 import CarEdit from 'containers/car/car-edit'
-=======
 import CategoriesList from 'containers/category/category-list'
 import CategoriesCreate from 'containers/category/category-create'
 import CategoriesEdit from 'containers/category/category-edit'
->>>>>>> develop
 
 @autobind
 export default class ManagerRoute extends React.Component {
@@ -51,7 +48,7 @@ export default class ManagerRoute extends React.Component {
         <Route exact path={slug.car.list} component={CarList} />
         <Route exact path={slug.car.create} component={CarCreate} />
         <Route exact path={slug.car.edit} component={CarEdit} />
-        <Route exact path={slug.map.base} component={MapDefault} />
+        {/* <Route exact path={slug.map.base} component={MapDefault} /> */}
         <Route exact path={slug.category.list} component={CategoriesList} />
         <Route exact path={slug.category.create} component={CategoriesCreate} />
         <Route exact path={slug.category.edit} component={CategoriesEdit} />
