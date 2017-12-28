@@ -34,11 +34,11 @@ export default class CarList extends PureComponent {
 
   getHead() {
     return [
-      { content: 'Id', width: 10 },
-      { content: 'code' },
-      { content: 'truckLoad' },
-      { content: 'type' },
-      { content: 'organization' }
+      { content: 'TT', width: 10 },
+      { content: 'Biển số xe' },
+      { content: 'Loại' },
+      { content: 'Trọng tải' },
+      { content: 'Hành động' },
     ]
   }
 
@@ -52,6 +52,14 @@ export default class CarList extends PureComponent {
           <div>
             <strong>{row.code}</strong>
             <br />
+            {row.organization && <span>{row.organization.name}</span>}
+          </div>
+        )
+      },
+      {
+        content: (
+          <div>
+            <span>{row.type}</span>
           </div>
         )
       },
@@ -65,20 +73,8 @@ export default class CarList extends PureComponent {
       {
         content: (
           <div>
-            <span>{row.type}</span>
-          </div>
-        )
-      },
-      {
-        content: (
-          <div>{row.organization && <span>{row.organization.name}</span>}</div>
-        )
-      },
-      {
-        content: (
-          <div>
             <LinkCustom to={Slug.car.editWithCode + `${row.code}`}>
-              Edit
+              Chỉnh sửa
             </LinkCustom>
             &nbsp;&nbsp;
             <LinkA

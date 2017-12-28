@@ -8,6 +8,8 @@ import SwitcherIcon from '@atlaskit/icon/glyph/switcher'
 import DecisionIcon from '@atlaskit/icon/glyph/decision'
 import PdfIcon from '@atlaskit/icon/glyph/pdf'
 import EditFilledIcon from '@atlaskit/icon/glyph/edit-filled'
+import OfficeBuildingFilledIcon from '@atlaskit/icon/glyph/office-building-filled';
+import EmojiTravelIcon from '@atlaskit/icon/glyph/emoji/travel';
 // import PageIcon from '@atlaskit/icon/glyph/page'
 
 export default {
@@ -16,8 +18,8 @@ export default {
   transport: <SwitcherIcon label="" />,
   appointment: <EmojiFrequentIcon label="" />,
   direction: <DecisionIcon label="" />,
-  organization: <PdfIcon label="" />,
-  car: <PdfIcon label="" />,
+  organization: <OfficeBuildingFilledIcon label="" />,
+  car: <EmojiTravelIcon label="" />,
   category: <EditorAlignLeftIcon label="" />,
   list: <EditorAlignLeftIcon label="" />,
   create: <EditorAddIcon label="" />,

@@ -22,6 +22,10 @@ const Label = styled.label`
   font-size: 14px;
 `
 
+const Flex = styled.div`
+  display: flex;
+`
+
 function validate(values) {
   const errors = {}
   if (!values.code) {
@@ -71,26 +75,28 @@ export default class CarForm extends PureComponent {
           component={FInputLabel}
         />
         <Clearfix height={16} />
-        <View>
-          <Label>Doanh Nghiệp</Label>
+        <Flex>
+          <View>
+            <Label>Doanh Nghiệp</Label>
+            <Field
+              name="organization"
+              component={FSelectBoxOrganization}
+              query={{}}
+            />
+          </View>
+          <Clearfix width={16} />
+          <View>
+            <Label>Loại</Label>
+            <Field name="type" component={FSelectBoxTypeCar} />
+          </View>
+          <Clearfix width={16} />
           <Field
-            name="organization"
-            component={FSelectBoxOrganization}
-            query={{}}
+            name="truckLoad"
+            label="Trọng tải (tấn)"
+            placeholder=""
+            component={FInputLabel}
           />
-        </View>
-        <Clearfix height={16} />
-        <Field
-          name="truckLoad"
-          label="Trọng tải"
-          placeholder="5 Tấn"
-          component={FInputLabel}
-        />
-        <Clearfix height={16} />
-        <View>
-          <Label>Loại</Label>
-          <Field name="type" component={FSelectBoxTypeCar} />
-        </View>
+        </Flex>
         <Clearfix height={16} />
         <Field
           name="description"
@@ -107,7 +113,7 @@ export default class CarForm extends PureComponent {
           isLoading={this.props.submitting}
           disabled={this.props.submitting}
         >
-          {this.props.isEdit ? 'Update' : 'Create'}
+          {this.props.isEdit ? 'Cập nhật' : 'Tạo mới'}
         </Button>
       </form>
     )

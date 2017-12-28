@@ -71,8 +71,8 @@ export function getListByOrganization({ _id }) {
   })
 }
 
-export function deleteCar(_id, data = {}) {
-  return deleteFetch(getUrl(_id), data)
+export function deleteCar(_id) {
+  return deleteFetch(getUrl(_id))
 }
 
 export default {

@@ -189,14 +189,14 @@ const carMenu = {
 }
 
 export default [
+  groupConfigManagerComponent,
+  categoryMenu,
+  organizationMenu,
+  carMenu,
   groupManagerComponent,
   landFillMenu,
   transportMenu,
   appointmentMenu,
   directionMenu,
-  groupConfigManagerComponent,
-  categoryMenu,
-  organizationMenu,
-  carMenu,
   mapManagerComponent
 ]

@@ -2,9 +2,9 @@ const API_GATEWAY_TEST = 'http://localhost:3000'
 const API_GATEWAY_RELEASE = 'http://swn.vietan-software.com:3000'
 
 const AUTH_API = API_GATEWAY_RELEASE
-const ORGANIZATION_API = 'http://localhost:1103' //API_GATEWAY_TEST
+const ORGANIZATION_API = API_GATEWAY_RELEASE
 const STATION_API = API_GATEWAY_RELEASE
-const CAR_API = 'http://localhost:1104'
+const CAR_API = API_GATEWAY_RELEASE
 const CATEGORY_API = API_GATEWAY_RELEASE
 const PORT_DEPLOY = 1008
 
