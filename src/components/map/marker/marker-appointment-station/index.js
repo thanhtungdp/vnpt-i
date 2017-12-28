@@ -3,7 +3,8 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Icon from 'themes/markerIcon';
-const { InfoWindow, Marker } = require('react-google-maps');
+const { InfoWindow } = require('react-google-maps');
+import Marker from '../../utils/marker-animate'
 const { MarkerWithLabel } = require('react-google-maps/lib/components/addons/MarkerWithLabel');
 const { InfoBox } = require('react-google-maps/lib/components/addons/InfoBox');
 
@@ -37,6 +38,7 @@ export default class MarkerAppointmentStation extends PureComponent {
 					<div style={{minWidth: this.props.name.length * 5.5}}>{this.props.name}</div>
 				</MarkerWithLabel>
 				<Marker
+					duration={3000}
 					icon={{
 						url: Icon.appointmentStation, // url
 						scaledSize: new google.maps.Size(30, 30),

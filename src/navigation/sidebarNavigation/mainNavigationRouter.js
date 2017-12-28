@@ -3,7 +3,7 @@ import { AkNavigationItemGroup, AkNavigationItem } from '@atlaskit/navigation'
 import styled from 'styled-components'
 
 import {
-  createChildListMenuItem,
+  // createChildListMenuItem,
   WrapperLinkComponent
 } from '../../utils/sidebarNavigation'
 import slug from '../../constants/slug'
