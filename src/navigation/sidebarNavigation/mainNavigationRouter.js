@@ -42,6 +42,14 @@ const mapManagerComponent = {
   )
 }
 
+const landFillManagerComponent = {
+  component: (
+    <NavigationWrapper text="Bãi chôn lấp">
+      <AkNavigationItemGroup title="Bãi chôn lấp" />
+    </NavigationWrapper>
+  )
+}
+
 const landFillMenu = createChildListMenuItem(
   {
     icon: Icon.landFill,
@@ -165,5 +173,6 @@ export default [
   groupConfigManagerComponent,
   categoriesMenu,
   organizationMenu,
-  mapManagerComponent
+  mapManagerComponent,
+  landFillManagerComponent
 ]
