@@ -4,7 +4,7 @@ import { autobind } from 'core-decorators'
 
 import MapContainer from 'containers/map'
 import MapCarContainer from 'containers/map-car'
-import slug from "../../constants/slug";
+import slug from '../../constants/slug'
 
 @autobind
 export default class MapRoute extends React.Component {

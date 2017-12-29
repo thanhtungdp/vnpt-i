@@ -1,4 +1,3 @@
-/* eslint-disable */
 /*
  * -----------------------------------------------------------------------------
  * This file is auto-generated from the corresponding file at `src/macros/`.
@@ -8,22 +7,56 @@
 /* global google */
 import React from "react"
 import PropTypes from "prop-types"
+import makeMarkerWithLabel from "./createUtil"
+import ReactDOM from "react-dom"
+
 import {
-  construct,
   componentDidMount,
   componentDidUpdate,
   componentWillUnmount,
+  construct,
 } from "react-google-maps/lib/utils/MapChildHelper"
 
-import { MAP, MARKER, ANCHOR, MARKER_CLUSTERER } from "react-google-maps/lib/constants"
+import { MAP, MARKER_CLUSTERER, MARKER_WITH_LABEL } from "react-google-maps/lib/constants"
 
 /**
- * A wrapper around `google.maps.Marker`
+ * A wrapper around `MarkerWithLabel`
  *
- * @see https://developers.google.com/maps/documentation/javascript/3.exp/reference#Marker
+ * @see https://cdn.rawgit.com/googlemaps/v3-utility-library/master/markerwithlabel/src/markerwithlabel.js
  */
-export class Marker extends React.PureComponent {
+export class MarkerWithLabel extends React.PureComponent {
   static propTypes = {
+    /**
+     * It will be `MarkerWithLabel#labelContent`.
+     * @see https://cdn.rawgit.com/googlemaps/v3-utility-library/master/markerwithlabel/src/markerwithlabel.js
+     */
+    children: PropTypes.node,
+
+    /**
+     * For `MarkerWithLabel`
+     * @see https://cdn.rawgit.com/googlemaps/v3-utility-library/master/markerwithlabel/src/markerwithlabel.js
+     */
+    labelAnchor: PropTypes.object,
+
+    /**
+     * For `MarkerWithLabel`
+     * @see https://cdn.rawgit.com/googlemaps/v3-utility-library/master/markerwithlabel/src/markerwithlabel.js
+     */
+    labelClass: PropTypes.string,
+
+    /**
+     * For `MarkerWithLabel`. This is for native JS style object, so you may
+     * expect some React shorthands for inline styles not working here.
+     * @see https://cdn.rawgit.com/googlemaps/v3-utility-library/master/markerwithlabel/src/markerwithlabel.js
+     */
+    labelStyle: PropTypes.object,
+
+    /**
+     * For `MarkerWithLabel`
+     * @see https://cdn.rawgit.com/googlemaps/v3-utility-library/master/markerwithlabel/src/markerwithlabel.js
+     */
+    labelVisible: PropTypes.bool,
+
     /**
      * For the 2nd argument of `MarkerCluster#addMarker`
      * @see https://github.com/mikesaidani/marker-clusterer-plus
@@ -274,7 +307,10 @@ export class Marker extends React.PureComponent {
      * function
      */
     onZindexChanged: PropTypes.func,
-    duration: PropTypes.number
+  }
+
+  static defaultProps = {
+    labelVisible: true,
   }
 
   static contextTypes = {
@@ -282,66 +318,79 @@ export class Marker extends React.PureComponent {
     [MARKER_CLUSTERER]: PropTypes.object,
   }
 
-  static childContextTypes = {
-    [ANCHOR]: PropTypes.object,
-  }
-
   /*
-   * @see https://developers.google.com/maps/documentation/javascript/3.exp/reference#Marker
+   * @see https://cdn.rawgit.com/googlemaps/v3-utility-library/master/markerwithlabel/src/markerwithlabel.js
    */
   constructor(props, context) {
     super(props, context)
-    // const marker = new google.maps.Marker
     const SlidingMarker = require('marker-animate-unobtrusive')
-    const marker = new SlidingMarker({easing: "linear"})
-    construct(Marker.propTypes, updaterMap, this.props, marker)
+    SlidingMarker.initializeGlobally();
+    const NativeMarkerWithLabel = makeMarkerWithLabel(google.maps)
+    const markerWithLabel = new NativeMarkerWithLabel()
+    construct(
+      MarkerWithLabel.propTypes,
+      updaterMap,
+      this.props,
+      markerWithLabel
+    )
     const markerClusterer = this.context[MARKER_CLUSTERER]
     if (markerClusterer) {
-      markerClusterer.addMarker(marker, !!this.props.noRedraw)
+      markerClusterer.addMarker(markerWithLabel, !!this.props.noRedraw)
     } else {
-      marker.setMap(this.context[MAP])
-      marker.setDuration(props.duration)
+      markerWithLabel.setMap(this.context[MAP])
+      markerWithLabel.setDuration(props.duration)
+      markerWithLabel.setEasing('linear')
     }
     this.state = {
-      [MARKER]: marker,
-    }
-  }
-
-  getChildContext() {
-    return {
-      [ANCHOR]: this.context[ANCHOR] || this.state[MARKER],
+      [MARKER_WITH_LABEL]: markerWithLabel,
     }
   }
 
   componentDidMount() {
-    componentDidMount(this, this.state[MARKER], eventMap)
+    componentDidMount(this, this.state[MARKER_WITH_LABEL], eventMap)
+    const container = document.createElement(`div`)
+    ReactDOM.unstable_renderSubtreeIntoContainer(
+      this,
+      React.Children.only(this.props.children),
+      container
+    )
+    this.state[MARKER_WITH_LABEL].set(`labelContent`, container)
   }
 
   componentDidUpdate(prevProps) {
     componentDidUpdate(
       this,
-      this.state[MARKER],
+      this.state[MARKER_WITH_LABEL],
       eventMap,
       updaterMap,
       prevProps
     )
+    if (this.props.children !== prevProps.children) {
+      ReactDOM.unstable_renderSubtreeIntoContainer(
+        this,
+        React.Children.only(this.props.children),
+        this.state[MARKER_WITH_LABEL].get("labelContent")
+      )
+    }
   }
 
   componentWillUnmount() {
     componentWillUnmount(this)
-    const marker = this.state[MARKER]
-    if (marker) {
+    const markerWithLabel = this.state[MARKER_WITH_LABEL]
+    if (markerWithLabel) {
       const markerClusterer = this.context[MARKER_CLUSTERER]
       if (markerClusterer) {
-        markerClusterer.removeMarker(marker, !!this.props.noRedraw)
+        markerClusterer.removeMarker(markerWithLabel, !!this.props.noRedraw)
       }
-      marker.setMap(null)
+      if (markerWithLabel.get("labelContent")) {
+        ReactDOM.unmountComponentAtNode(markerWithLabel.get("labelContent"))
+      }
+      markerWithLabel.setMap(null)
     }
   }
 
   render() {
-    const { children } = this.props
-    return <div>{children}</div>
+    return false
   }
 
   /**
@@ -350,7 +399,7 @@ export class Marker extends React.PureComponent {
    * @public
    */
   getAnimation() {
-    return this.state[MARKER].getAnimation()
+    return this.state[MARKER_WITH_LABEL].getAnimation()
   }
 
   /**
@@ -359,7 +408,7 @@ export class Marker extends React.PureComponent {
    * @public
    */
   getClickable() {
-    return this.state[MARKER].getClickable()
+    return this.state[MARKER_WITH_LABEL].getClickable()
   }
 
   /**
@@ -368,7 +417,7 @@ export class Marker extends React.PureComponent {
    * @public
    */
   getCursor() {
-    return this.state[MARKER].getCursor()
+    return this.state[MARKER_WITH_LABEL].getCursor()
   }
 
   /**
@@ -377,7 +426,7 @@ export class Marker extends React.PureComponent {
    * @public
    */
   getDraggable() {
-    return this.state[MARKER].getDraggable()
+    return this.state[MARKER_WITH_LABEL].getDraggable()
   }
 
   /**
@@ -386,7 +435,7 @@ export class Marker extends React.PureComponent {
    * @public
    */
   getIcon() {
-    return this.state[MARKER].getIcon()
+    return this.state[MARKER_WITH_LABEL].getIcon()
   }
 
   /**
@@ -395,7 +444,7 @@ export class Marker extends React.PureComponent {
    * @public
    */
   getLabel() {
-    return this.state[MARKER].getLabel()
+    return this.state[MARKER_WITH_LABEL].getLabel()
   }
 
   /**
@@ -404,7 +453,7 @@ export class Marker extends React.PureComponent {
    * @public
    */
   getOpacity() {
-    return this.state[MARKER].getOpacity()
+    return this.state[MARKER_WITH_LABEL].getOpacity()
   }
 
   /**
@@ -413,7 +462,7 @@ export class Marker extends React.PureComponent {
    * @public
    */
   getPlace() {
-    return this.state[MARKER].getPlace()
+    return this.state[MARKER_WITH_LABEL].getPlace()
   }
 
   /**
@@ -422,7 +471,7 @@ export class Marker extends React.PureComponent {
    * @public
    */
   getPosition() {
-    return this.state[MARKER].getPosition()
+    return this.state[MARKER_WITH_LABEL].getPosition()
   }
 
   /**
@@ -431,7 +480,7 @@ export class Marker extends React.PureComponent {
    * @public
    */
   getShape() {
-    return this.state[MARKER].getShape()
+    return this.state[MARKER_WITH_LABEL].getShape()
   }
 
   /**
@@ -440,7 +489,7 @@ export class Marker extends React.PureComponent {
    * @public
    */
   getTitle() {
-    return this.state[MARKER].getTitle()
+    return this.state[MARKER_WITH_LABEL].getTitle()
   }
 
   /**
@@ -449,7 +498,7 @@ export class Marker extends React.PureComponent {
    * @public
    */
   getVisible() {
-    return this.state[MARKER].getVisible()
+    return this.state[MARKER_WITH_LABEL].getVisible()
   }
 
   /**
@@ -458,11 +507,11 @@ export class Marker extends React.PureComponent {
    * @public
    */
   getZIndex() {
-    return this.state[MARKER].getZIndex()
+    return this.state[MARKER_WITH_LABEL].getZIndex()
   }
 }
 
-export default Marker
+export default MarkerWithLabel
 
 const eventMap = {
   onDblClick: "dblclick",
@@ -489,6 +538,38 @@ const eventMap = {
 }
 
 const updaterMap = {
+  /**
+   * For `MarkerWithLabel`
+   * @see https://cdn.rawgit.com/googlemaps/v3-utility-library/master/markerwithlabel/src/markerwithlabel.js
+   */
+  labelAnchor(instance, labelAnchor) {
+    instance.set(`labelAnchor`, labelAnchor)
+  },
+
+  /**
+   * For `MarkerWithLabel`
+   * @see https://cdn.rawgit.com/googlemaps/v3-utility-library/master/markerwithlabel/src/markerwithlabel.js
+   */
+  labelClass(instance, labelClass) {
+    instance.set(`labelClass`, labelClass)
+  },
+
+  /**
+   * For `MarkerWithLabel`
+   * @see https://cdn.rawgit.com/googlemaps/v3-utility-library/master/markerwithlabel/src/markerwithlabel.js
+   */
+  labelStyle(instance, labelStyle) {
+    instance.set(`labelStyle`, labelStyle)
+  },
+
+  /**
+   * For `MarkerWithLabel`
+   * @see https://cdn.rawgit.com/googlemaps/v3-utility-library/master/markerwithlabel/src/markerwithlabel.js
+   */
+  labelVisible(instance, labelVisible) {
+    instance.set(`labelVisible`, labelVisible)
+  },
+
   animation(instance, animation) {
     instance.setAnimation(animation)
   },

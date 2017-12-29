@@ -16,9 +16,7 @@ export default class MapFilter extends React.PureComponent {
 
   state = {
     markerFilter: {
-      isTransitStation: false,
-      isAppointmentStation: false,
-      isBurialStation: false
+      isXe: false
     }
   }
 
@@ -50,25 +48,14 @@ export default class MapFilter extends React.PureComponent {
 
   render() {
     return (
-      <NavigationItemCollapse icon={<BillingIcon />} label="Các điểm trạm">
+      <NavigationItemCollapse icon={<BillingIcon />} label="Các xe">
         <Clearfix height={8} />
         {this.renderCheckBox(
-          markerIcon.transitStation,
-          'Trạm trung chuyển',
-          'isTransitStation'
+          markerIcon.car,
+          'Xe',
+          'isXe'
         )}
-        <Clearfix height={8} />
-        {this.renderCheckBox(
-          markerIcon.appointmentStation,
-          'Trạm tập hợp',
-          'isAppointmentStation'
-        )}
-        <Clearfix height={8} />
-        {this.renderCheckBox(
-          markerIcon.burialStation,
-          'Trạm chôn lấp',
-          'isBurialStation'
-        )}
+
       </NavigationItemCollapse>
     )
   }

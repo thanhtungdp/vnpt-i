@@ -7,7 +7,7 @@ export default class OverviewDashboard extends Component {
   render() {
     return (
       <PageContainer title="Welcome to dashboard login">
-        <Breadcrumb icon={<BitbucketIcon label=""/>} name="Dashboard" />
+        <Breadcrumb icon={<BitbucketIcon label="" />} name="Dashboard" />
         Chào mừng bạn đã đến với hệ thống quản lý chất thải rắn
       </PageContainer>
     )

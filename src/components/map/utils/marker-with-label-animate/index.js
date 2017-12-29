@@ -14,6 +14,7 @@ import {
   componentDidUpdate,
   componentWillUnmount,
 } from "react-google-maps/lib/utils/MapChildHelper"
+import makeMarkerWithLabel from "./createUtil"
 
 import { MAP, MARKER, ANCHOR, MARKER_CLUSTERER } from "react-google-maps/lib/constants"
 
@@ -29,6 +30,7 @@ export class Marker extends React.PureComponent {
      * @see https://github.com/mikesaidani/marker-clusterer-plus
      */
     noRedraw: PropTypes.bool,
+    labelProps: PropTypes.object,
 
     /**
      * @type Animation
@@ -282,6 +284,14 @@ export class Marker extends React.PureComponent {
     [MARKER_CLUSTERER]: PropTypes.object,
   }
 
+  static defaultProps = {
+    labelProps: {
+      labelContent: "Label"
+    }
+  }
+
+
+
   static childContextTypes = {
     [ANCHOR]: PropTypes.object,
   }
@@ -293,7 +303,11 @@ export class Marker extends React.PureComponent {
     super(props, context)
     // const marker = new google.maps.Marker
     const SlidingMarker = require('marker-animate-unobtrusive')
-    const marker = new SlidingMarker({easing: "linear"})
+    SlidingMarker.initializeGlobally();    
+    const NativeMarkerWithLabel = makeMarkerWithLabel(google.maps)
+    const marker = new NativeMarkerWithLabel({
+      ...props.labelProps
+    })
     construct(Marker.propTypes, updaterMap, this.props, marker)
     const markerClusterer = this.context[MARKER_CLUSTERER]
     if (markerClusterer) {
@@ -301,6 +315,7 @@ export class Marker extends React.PureComponent {
     } else {
       marker.setMap(this.context[MAP])
       marker.setDuration(props.duration)
+      marker.setEasing('linear')      
     }
     this.state = {
       [MARKER]: marker,
