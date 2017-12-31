@@ -42,25 +42,6 @@ const mapManagerComponent = {
   )
 }
 
-const landFillMenu = createChildListMenuItem(
-  {
-    icon: Icon.landFill,
-    text: 'Bãi chôn lấp'
-  },
-  [
-    {
-      url: slug.landFill.list,
-      icon: Icon.list,
-      text: 'Danh sách bãi'
-    },
-    {
-      url: slug.landFill.create,
-      icon: Icon.create,
-      text: 'Tạo mới bãi'
-    }
-  ]
-)
-
 const transportMenu = createChildListMenuItem(
   {
     icon: Icon.transport,
@@ -118,42 +99,35 @@ const directionMenu = createChildListMenuItem(
   ]
 )
 
-// const carMenu = createChildListMenuItem(
-//   {
-//     icon: Icon.car,
-//     text: 'Xe'
-//   },
-//   [
-//     {
-//       url: slug.car.list,
-//       icon: Icon.list,
-//       text: 'Danh sách Xe'
-//     },
-//     {
-//       url: slug.car.create,
-//       icon: Icon.create,
-//       text: 'Tạo mới Xe'
-//     }
-//   ]
-// )
-// const organizationMenu = createChildListMenuItem(
-//   {
-//     icon: Icon.organization,
-//     text: 'Doanh Nghiệp'
-//   },
-//   [
-//     {
-//       url: slug.organization.list,
-//       icon: Icon.list,
-//       text: 'Danh sách Doanh Nghiệp'
-//     },
-//     {
-//       url: slug.organization.create,
-//       icon: Icon.create,
-//       text: 'Tạo mới doanh nghiệp'
-//     }
-//   ]
-// )
+/*const landFillMenu = createChildListMenuItem(
+  {
+    icon: Icon.landFill,
+    text: 'Bãi chôn lấp'
+  },
+  [
+    {
+      url: slug.landFill.list,
+      icon: Icon.list,
+      text: 'Danh sách bãi'
+    },
+    {
+      url: slug.landFill.create,
+      icon: Icon.create,
+      text: 'Tạo mới bãi'
+    }
+  ]
+)*/
+
+const landFillMenu = {
+  component: (
+    <AkNavigationItem
+      linkComponent={WrapperLinkComponent}
+      href={slug.landFill.base}
+      icon={Icon.landFill}
+      text="Bãi chôn lấp"
+    />
+  )
+}
 
 const organizationMenu = {
   component: (

@@ -11,6 +11,7 @@ import PageContainer from 'layout/default-sidebar-layout/PageContainer'
 import createManagerListHoc from 'shared/hoc/manager-list'
 import Icon from 'themes/icon'
 import Slug from 'constants/slug'
+import Breadcrumb from '../breadcrumb'
 
 @createManagerListHoc({
   apiCall: StationApi.getStationBurials,
@@ -70,6 +71,7 @@ export default class LandfillList extends PureComponent {
           </Link>
         }
       >
+        <Breadcrumb items={['list']} />
         <DynamicTable
           isFixedSize
           head={this.getHead()}
