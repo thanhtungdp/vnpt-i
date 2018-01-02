@@ -13,7 +13,7 @@ import Marker from '../../utils/marker-with-label-animate'
 const { InfoBox } = require('react-google-maps/lib/components/addons/InfoBox');
 
 const MIN_WIDTH_INFO = '150px';
-const TIME_DURATION = 1000 * 1 * 2
+const TIME_DURATION = 1000 * 60 * 2
 
 @autobind
 export default class MarkerCar extends PureComponent {
@@ -61,10 +61,6 @@ export default class MarkerCar extends PureComponent {
 				this.setState({ indexLocation: ++this.state.indexLocation })
 			else
 				this.setState({ indexLocation: 0 })
-			// const newLocation = {
-			// 	lat: this.state.mapLocation.lat + 0.0002,
-			// 	lng: this.state.mapLocation.lng + 0.0002
-			// }
 			const newLocation = this.props.listLocation[this.state.indexLocation]
 			this.setState({ mapLocation: newLocation });
 		}, TIME_DURATION)
@@ -102,24 +98,3 @@ export default class MarkerCar extends PureComponent {
 		);
 	}
 }
-
-/*
-{this.state.isOpen ? (
-						<InfoWindow onCloseClick={this.toggleOpen.bind(this)}>
-							<div style={{ minWidth: MIN_WIDTH_INFO }}>{this.props.name}</div>
-						</InfoWindow>
-					) : null}*/
-/*
-
-<MarkerWithLabel
-					position={this.state.mapLocation}
-					icon={' '}
-					labelAnchor={new google.maps.Point(this.props.name.length * 2.4, 0)}
-					labelStyle={{
-						backgroundColor: 'yellow',
-						fontSize: '10px',
-					}}
-				>
-					<div style={{ minWidth: this.props.name.length * 5.5 }}>{this.props.name}</div>
-				</MarkerWithLabel>
-				*/
