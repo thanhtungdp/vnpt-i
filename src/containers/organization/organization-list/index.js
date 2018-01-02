@@ -11,6 +11,7 @@ import PageContainer from 'layout/default-sidebar-layout/PageContainer'
 import createManagerListHoc from 'shared/hoc/manager-list'
 import Icon from 'themes/icon'
 import Slug from 'constants/slug'
+import Breadcrumb from '../breadcrumb'
 
 @createManagerListHoc({
   apiCall: OrganizationApi.getOrganizations,
@@ -86,15 +87,13 @@ export default class OrganizationlList extends PureComponent {
   render() {
     return (
       <PageContainer
-        title="Danh sách Doanh Nghiệp"
         right={
           <LinkCustom to={Slug.organization.create}>
-            <Button appearance="primary" iconBefore={Icon.create}>
-              Tạo mới
-            </Button>
+            <Button iconBefore={Icon.create}>Tạo mới</Button>
           </LinkCustom>
         }
       >
+        <Breadcrumb items={['list']} />
         <DynamicTable
           isFixedSize
           head={this.getHead()}

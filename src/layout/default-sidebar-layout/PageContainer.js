@@ -1,13 +1,21 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import PageHeader from '@atlaskit/page-header'
 import styled from 'styled-components'
 import Page, { Grid, GridColumn } from '@atlaskit/page'
+import BreadcrumbBar from 'shared/breadcrumb/BreadcrumbBar'
+import { SHAPE } from 'themes/color'
+import Clearfix from 'components/elements/clearfix'
 
 const HeaderFlex = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+`
+
+const BreadcrumbContainer = styled.div`
+  padding: 16px 0px;
+  background-color: ${SHAPE.GRAYLIGHT};
+  height: 68.8px;
 `
 
 export default class PageContainer extends React.PureComponent {
@@ -19,18 +27,20 @@ export default class PageContainer extends React.PureComponent {
   render() {
     return (
       <Page>
-        <Grid>
-          <GridColumn>
-            {this.props.title && (
+        <BreadcrumbContainer>
+          <Grid>
+            <GridColumn>
               <HeaderFlex>
-                <PageHeader>
-                  {this.props.icon}
-                  {this.props.title}
-                </PageHeader>
+                <BreadcrumbBar />
                 {this.props.right}
               </HeaderFlex>
-            )}
-            {this.props.children}
+            </GridColumn>
+          </Grid>
+        </BreadcrumbContainer>
+        <Clearfix height={16} />
+        <Grid>
+          <GridColumn>
+            <div className="animated fadeIn">{this.props.children}</div>
           </GridColumn>
         </Grid>
       </Page>

@@ -1,45 +1,47 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
+import Moment from 'react-moment'
 import { autobind } from 'core-decorators'
+import Button from '@atlaskit/button'
 
-import CategoryApi from 'api/CategoryApi'
+import StationApi from 'api/StationApi'
 import DynamicTable from 'components/elements/dynamic-table'
 import Clearfix from 'components/elements/clearfix'
 import LinkA from 'components/elements/link'
 import LinkColor from 'components/elements/link-a'
-import Button from '@atlaskit/button'
 import PageContainer from 'layout/default-sidebar-layout/PageContainer'
 import createManagerListHoc from 'shared/hoc/manager-list'
-import slug from 'constants/slug'
 import Icon from 'themes/icon'
+import slug from 'constants/slug'
 import Breadcrumb from '../breadcrumb'
 
 @createManagerListHoc({
-  apiCall: CategoryApi.getCategories,
-  apiDelete: CategoryApi.deleteCategory,
+  apiCall: StationApi.getStationTransits,
+  apiDelete: StationApi.deleteStationTransit,
   itemPerPage: 10
 })
 @autobind
-export default class CategoriesList extends PureComponent {
+export default class StationTransitList extends PureComponent {
   static propTypes = {
     data: PropTypes.array,
     pagination: PropTypes.object,
     isLoading: PropTypes.bool,
     onChangePage: PropTypes.func,
-    getIndexByPagination: PropTypes.func,
-    onDeleteItem: PropTypes.func
+    getIndexByPagination: PropTypes.func
   }
 
   getHead() {
     return [
-      { content: 'TT', width: 10 },
-      { content: 'Tên' },
-      { content: 'Loại' },
-      { content: 'Chuyên mục con' },
+      { content: 'STT', width: 10 },
+      { content: 'Tên và địa chỉ' },
+      { content: 'Thời gian' },
+      { content: 'Khối lượng tăng' },
+      { content: 'Diện tích' },
+      { content: 'Toạ độ' },
+      { content: 'Tổ chức' },
       { content: 'Hành động' }
     ]
   }
-
   getRows() {
     return this.props.data.map((row, index) => [
       {
@@ -50,31 +52,62 @@ export default class CategoriesList extends PureComponent {
           <div>
             <strong>{row.name}</strong>
             <br />
+            <span>{row.address}</span>
           </div>
         )
       },
       {
         content: (
           <div>
-            <span>{row.type}</span>
+            <span>
+              Bắt đầu: <Moment format="YYYY/MM/DD" date={row.workFromTime} />
+            </span>
+            <br />
+            <span>
+              Kết thúc: <Moment format="YYYY/MM/DD" date={row.workToTime} />
+            </span>
           </div>
         )
       },
       {
         content: (
           <div>
-            {row.childMenu.map((child, index) => (
-              <span key={index}>
-                {child.name} {index < row.childMenu.length - 1 ? ', ' : null}
-              </span>
-            ))}
+            <span>{row.arisesMass}</span>
           </div>
         )
       },
       {
         content: (
           <div>
-            <LinkA to={slug.category.editWithCode + row.code}>Chỉnh sửa</LinkA>
+            <span>{row.acreage}</span>
+          </div>
+        )
+      },
+      {
+        content: (
+          <div>
+            <span>
+              Kinh độ:{' '}
+              {row.mapLocation === undefined ? '' : row.mapLocation.long}{' '}
+            </span>
+            <br />
+            <span>
+              Vĩ độ: {row.mapLocation === undefined ? '' : row.mapLocation.lat}
+            </span>
+          </div>
+        )
+      },
+      {
+        content: (
+          <div>
+            <span>{row.organization == null ? '' : row.organization.name}</span>
+          </div>
+        )
+      },
+      {
+        content: (
+          <div>
+            <LinkA to={slug.StationTransit.editWithCode + row._id}>Sửa</LinkA>
             &nbsp;&nbsp;&nbsp;
             <LinkColor
               colorType="red"
@@ -83,7 +116,7 @@ export default class CategoriesList extends PureComponent {
                   e,
                   row.name,
                   item => item._id === row._id,
-                  row.code
+                  row._id
                 )
               }
             >
@@ -98,11 +131,11 @@ export default class CategoriesList extends PureComponent {
   render() {
     return (
       <PageContainer
-        title="Danh sách chuyên mục"
+        title="Danh sách bãi"
         right={
-          <LinkA to={slug.category.create}>
-            <Button iconBefore={Icon.create} customColor="primary">
-              Tạo mới
+          <LinkA to={slug.StationTransit.create}>
+            <Button appearance="primary" iconBefore={Icon.StationTransit}>
+              Tạo mới bãi
             </Button>
           </LinkA>
         }

@@ -6,10 +6,15 @@ import OverviewDashboard from 'containers/dashboard/OverviewDashboard'
 import PageSidebarLayout from 'layout/default-sidebar-layout'
 import LandfillList from 'containers/landfill/landfill-list'
 import LandfillCreate from 'containers/landfill/landfill-create'
-import StationTransitList from 'containers/stationtransit/stationtransit-list'
+import TransitStationList from 'containers/transit-station/transit-station-list'
+import TransitStationCreate from 'containers/transit-station/transit-station-create'
+import TransitStationEdit from 'containers/transit-station/transit-station-edit'
 import OrganizationList from 'containers/organization/organization-list'
 import OrganizationCreate from 'containers/organization/organization-create'
 import OrganizationEdit from 'containers/organization/organization-edit'
+import CarList from 'containers/car/car-list'
+import CarCreate from 'containers/car/car-create'
+import CarEdit from 'containers/car/car-edit'
 import CategoriesList from 'containers/category/category-list'
 import CategoriesCreate from 'containers/category/category-create'
 import CategoriesEdit from 'containers/category/category-edit'
@@ -22,7 +27,21 @@ export default class ManagerRoute extends React.Component {
         <Route exact path="/" component={OverviewDashboard} />
         <Route exact path={slug.landFill.list} component={LandfillList} />
         <Route exact path={slug.landFill.create} component={LandfillCreate} />
-        <Route exact path={slug.transitStation.list} component={StationTransitList} />
+        <Route
+          exact
+          path={slug.StationTransit.list}
+          component={TransitStationList}
+        />
+        <Route
+          exact
+          path={slug.StationTransit.create}
+          component={TransitStationCreate}
+        />
+        <Route
+          exact
+          path={slug.StationTransit.edit}
+          component={TransitStationEdit}
+        />
         <Route
           exact
           path={slug.organization.list}
@@ -38,6 +57,10 @@ export default class ManagerRoute extends React.Component {
           path={slug.organization.edit}
           component={OrganizationEdit}
         />
+        <Route exact path={slug.car.list} component={CarList} />
+        <Route exact path={slug.car.create} component={CarCreate} />
+        <Route exact path={slug.car.edit} component={CarEdit} />
+        {/* <Route exact path={slug.map.base} component={MapDefault} /> */}
         <Route exact path={slug.category.list} component={CategoriesList} />
         <Route exact path={slug.category.create} component={CategoriesCreate} />
         <Route exact path={slug.category.edit} component={CategoriesEdit} />

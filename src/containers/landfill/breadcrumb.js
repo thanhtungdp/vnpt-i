@@ -6,7 +6,7 @@ export default createBreadcrumb({
   list: {
     id: 'list',
     href: slug.landFill.base,
-    name: 'Danh sách chung chuyển',
+    name: 'Danh sách chôn lấp',
     icon: Icon.landFill
   },
   create: {

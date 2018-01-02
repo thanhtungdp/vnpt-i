@@ -1,41 +1,44 @@
 import React, { PureComponent } from 'react'
 import PageContainer from 'layout/default-sidebar-layout/PageContainer'
-import { getOrganization, updateOrganization } from 'api/OrganizationApi'
+import CarForm from '../car-form'
+import { getOneCars, updateCars } from 'api/CarApi'
 import swal from 'sweetalert2'
-import { autobind } from 'core-decorators'
-import OrganizationForm from '../organization-form'
 import Breadcrumb from '../breadcrumb'
 
-@autobind
-export default class OrganizationCreate extends PureComponent {
+export default class CarCreate extends PureComponent {
   state = {
     loaded: false,
     submitting: false,
     formValues: {}
   }
+  static propTypes = {}
 
   async componentDidMount() {
-    const _id = this.props.match.params._id
-    const organization = await getOrganization(_id)
+    const code = this.props.match.params.code
+    const car = await getOneCars({ code })
     this.setState({
       loaded: true,
-      formValues: organization
+      formValues: car
     })
   }
 
-  async onSubmit(data) {
-    const organization = await updateOrganization(
-      this.props.match.params._id,
-      data
-    )
-    if (!organization) {
+  async onSubmit(values) {
+    const car = await updateCars({
+      code: values.code,
+      truckLoad: values.truckLoad,
+      type: typeof values.type === 'object' ? values.type.value : values.type,
+      description: values.description,
+      organization: values.organization
+    })
+
+    if (!car || car.error) {
       swal({
-        title: organization.message,
+        title: car.message,
         type: 'error'
       })
     } else {
       swal({
-        title: 'Cập nhật tổ chức thành công',
+        title: 'Update car Successfull',
         type: 'success'
       })
     }
@@ -45,8 +48,8 @@ export default class OrganizationCreate extends PureComponent {
     return (
       <PageContainer
         title={
-          this.state.formValues.name
-            ? this.state.formValues.name
+          this.state.formValues.code
+            ? this.state.formValues.code
             : 'loading ...'
         }
       >
@@ -56,12 +59,12 @@ export default class OrganizationCreate extends PureComponent {
             {
               id: 'edit',
               href: '',
-              name: this.state.formValues.name
+              name: this.state.formValues.code
             }
           ]}
         />
         {this.state.loaded && (
-          <OrganizationForm
+          <CarForm
             isEdit
             initialValues={this.state.formValues}
             onSubmit={this.onSubmit}

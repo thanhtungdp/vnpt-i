@@ -4,6 +4,8 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import 'simple-line-icons/css/simple-line-icons.css'
 import 'font-awesome/css/font-awesome.css'
 import 'sweetalert2/dist/sweetalert2.css'
+import 'animate.css/animate.css'
+import 'react-datepicker/dist/react-datepicker.css'
 
 import browserHistory from 'history/createBrowserHistory'
 import configureStore from './redux/createStore'

@@ -1,42 +1,43 @@
 import React, { PureComponent } from 'react'
 import PageContainer from 'layout/default-sidebar-layout/PageContainer'
-import { createCategory } from 'api/CategoryApi'
-import swal from 'sweetalert2'
+import { postStationTransit } from 'api/StationApi'
 import { withRouter } from 'react-router-dom'
 import { autobind } from 'core-decorators'
+import TransitStationForm from '../transit-station-form'
 import slug from 'constants/slug'
-import CategoriesForm from '../category-form'
+import swal from 'sweetalert2'
+import Icon from 'themes/icon'
 import Breadcrumb from '../breadcrumb'
 
 @withRouter
 @autobind
-export default class CategoriesCreate extends PureComponent {
+export default class TransitStationCreate extends PureComponent {
   static propTypes = {}
 
-  async handleSubmit(data) {
-    const category = await createCategory(data)
+  async onSubmit(data) {
+    const transitStation = await postStationTransit(data)
     const context = this
-    if (category.error) {
+    if (transitStation.error) {
       swal({
         title: 'Error',
         type: 'error',
-        text: category.message
+        text: transitStation.message
       })
     } else {
       swal({
-        title: 'Tạo chuyên mục thành công',
+        title: 'Tạo trạm thành công',
         type: 'success'
       }).then(() => {
-        context.props.history.push(slug.category.base)
+        context.props.history.push(slug.StationTransit.base)
       })
     }
   }
 
   render() {
     return (
-      <PageContainer title="Tạo chuyên mục">
+      <PageContainer icon={Icon.create} title="Tạo bãi mới">
         <Breadcrumb items={['list', 'create']} />
-        <CategoriesForm onSubmit={this.handleSubmit} />
+        <TransitStationForm onSubmit={this.onSubmit} />
       </PageContainer>
     )
   }

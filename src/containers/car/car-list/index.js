@@ -2,25 +2,24 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { autobind } from 'core-decorators'
 import Button from '@atlaskit/button'
-
-import StationApi from 'api/StationApi'
+import LinkA from 'components/elements/link-a'
+import CarApi from 'api/CarApi'
 import DynamicTable from 'components/elements/dynamic-table'
 import Clearfix from 'components/elements/clearfix'
-import LinkA from 'components/elements/link'
-import LinkColor from 'components/elements/link-a'
+import LinkCustom from 'components/elements/link'
 import PageContainer from 'layout/default-sidebar-layout/PageContainer'
 import createManagerListHoc from 'shared/hoc/manager-list'
 import Icon from 'themes/icon'
-import slug from 'constants/slug'
+import Slug from 'constants/slug'
 import Breadcrumb from '../breadcrumb'
 
 @createManagerListHoc({
-  apiCall: StationApi.getStationTransits(),
-  //apiDelete: StationApi.deleteStationBurial,
+  apiCall: CarApi.getCars,
+  apiDelete: CarApi.deleteCar,
   itemPerPage: 10
 })
 @autobind
-export default class LandfillList extends PureComponent {
+export default class CarList extends PureComponent {
   static propTypes = {
     data: PropTypes.array,
     pagination: PropTypes.object,
@@ -29,16 +28,16 @@ export default class LandfillList extends PureComponent {
     getIndexByPagination: PropTypes.func
   }
 
+  deleteItem(_id) {
+    console.log(_id)
+  }
+
   getHead() {
     return [
-      { content: 'STT', width: 10 },
-      { content: 'Tên và địa chỉ' },
-      { content: 'Ngày hoạt động' },
-      { content: 'Ngày hoạt động' },
-      { content: 'khối lượng tăng' },
-      { content: 'Diện tích' },
-      { content: 'Toạ độ' },
-      { content: 'Tổ chức' },
+      { content: 'TT', width: 10 },
+      { content: 'Biển số xe' },
+      { content: 'Loại' },
+      { content: 'Trọng tải' },
       { content: 'Hành động' }
     ]
   }
@@ -51,67 +50,46 @@ export default class LandfillList extends PureComponent {
       {
         content: (
           <div>
-            <strong>{row.name}</strong>
+            <strong>{row.code}</strong>
             <br />
-            <span>
-              {row.address} {row.district}
-            </span>
+            {row.organization && <span>{row.organization.name}</span>}
           </div>
         )
       },
       {
         content: (
           <div>
-            <span>{row.workFromTime}</span>
+            <span>{row.type}</span>
           </div>
         )
       },
       {
         content: (
           <div>
-            <span>{row.workToTime}</span>
+            <span>{row.truckLoad}</span>
           </div>
         )
       },
       {
         content: (
           <div>
-            <span>{row.arisesMass}</span>
-          </div>
-        )
-      },
-      {
-        content: (
-          <div>
-            <span>{row.acreage}</span>
-          </div>
-        )
-      },
-      {
-        content: (
-          <div>
-            <span>{(row.organization == null ? "" : row.organization.name)}</span>
-          </div>
-        )
-      },
-      {
-        content: (
-          <div>
-            <LinkA to={slug.landFill.editWithCode + row._id}>Sửa</LinkA>
-            &nbsp;&nbsp;&nbsp;
-            <LinkColor
+            <LinkCustom to={Slug.car.editWithCode + `${row.code}`}>
+              Chỉnh sửa
+            </LinkCustom>
+            &nbsp;&nbsp;
+            <LinkA
               colorType="red"
               onClick={e =>
                 this.props.onDeleteItem(
                   e,
-                  row.name,
-                  item => item._id === row._id,
-                  row._id
+                  row.code,
+                  item => row.code === item.code,
+                  row.code
                 )
               }
             >
               Xóa
-            </LinkColor>
+            </LinkA>
           </div>
         )
       }
@@ -121,13 +99,13 @@ export default class LandfillList extends PureComponent {
   render() {
     return (
       <PageContainer
-        title="Danh sách bãi"
+        title="Danh sách Xe"
         right={
-          <LinkA to={slug.landFill.create}>
-            <Button appearance="primary" iconBefore={Icon.landFill}>
-              Tạo mới bãi
+          <LinkCustom to={Slug.car.create}>
+            <Button appearance="primary" iconBefore={Icon.create}>
+              Tạo mới
             </Button>
-          </LinkA>
+          </LinkCustom>
         }
       >
         <Breadcrumb items={['list']} />
