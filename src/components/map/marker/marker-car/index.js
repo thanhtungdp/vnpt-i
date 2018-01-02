@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import Icon from 'themes/markerIcon';
 import { autobind } from 'core-decorators'
 import carStatus from 'constants/carStatus'
-const { InfoWindow } = require('react-google-maps');
+const { InfoWindow, DirectionsRenderer } = require('react-google-maps');
 // import Marker from '../../utils/marker-animate'
 import Marker from '../../utils/marker-with-label-animate'
 
@@ -21,7 +21,9 @@ export default class MarkerCar extends PureComponent {
 		mapLocation: PropTypes.object,
 		name: PropTypes.string,
 		listLocation: PropTypes.array,
-		status: PropTypes.string
+		status: PropTypes.string,
+		stationDetails: PropTypes.array,
+		stationDistance: PropTypes.array
 	};
 
 	constructor(props) {
@@ -30,12 +32,26 @@ export default class MarkerCar extends PureComponent {
 			isOpen: false,
 			mapLocation: props.mapLocation,
 			status: carStatus.WARNING,
-			indexLocation: 0
+			indexLocation: 0,
+			directions: null,
+			isShowDirection: false
 		}
 	}
 
 	toggleOpen() {
-		this.setState({ isOpen: !this.state.isOpen });
+		if(!this.state.directions){
+			const DirectionsService = new google.maps.DirectionsService();
+			DirectionsService.route(this.getRouteDirection(this.props.stationDetails, this.props.stationDistance), (result, status) => {
+				if (status === google.maps.DirectionsStatus.OK) {
+					this.setState({
+						directions: result,
+					});
+				} else {
+					console.error(`error fetching directions ${result}`);
+				}
+			});
+		}
+		this.setState({ isOpen: !this.state.isOpen, isShowDirection: !this.state.isShowDirection });
 	}
 
 	getIconByStatus(status) {
@@ -66,6 +82,33 @@ export default class MarkerCar extends PureComponent {
 		}, TIME_DURATION)
 	}
 
+	getRouteDirection(stationDetails, stationDistance) {
+		let result = {
+			travelMode: google.maps.TravelMode.DRIVING
+		}
+		if (stationDetails && stationDetails.length > 1) {
+			const originStation = stationDetails[0].station
+			const destinationStation = stationDetails[stationDetails.length - 1].station
+			result.origin = new google.maps.LatLng(originStation.mapLocation.lat, originStation.mapLocation.lng)
+			result.destination = new google.maps.LatLng(destinationStation.mapLocation.lat, destinationStation.mapLocation.lng)
+		}
+		if (stationDistance && stationDistance.length > 0) {
+			var arrStreets = [];
+			stationDistance.map(station => arrStreets = arrStreets.concat(station.streets))
+			const waypoints = arrStreets.map(street => {
+				return {
+					location: new google.maps.LatLng(street.mapLocation.lat, street.mapLocation.lng),
+					stopover: false
+				}
+			})
+			
+			result.waypoints = waypoints
+			
+		}
+		
+		return result
+	}
+
 	render() {
 		return (
 			<div>
@@ -89,12 +132,30 @@ export default class MarkerCar extends PureComponent {
 					<div>
 						{this.state.isOpen && (
 							<InfoWindow onCloseClick={this.toggleOpen.bind(this)}>
-								<div style={{ minWidth: MIN_WIDTH_INFO }}>{this.props.name}</div>
+								<div style={{ minWidth: MIN_WIDTH_INFO }}>
+								Biển số xe: {this.props.name} <br/>
+								Trọng tải: {this.props.truckLoad} <br/>
+								Loại rác: {this.props.type} <br/>
+								Doanh nghiệp: {this.props.organization && this.props.organization.name} <br/>
+								Mô tả: {this.props.description}
+								</div>
 							</InfoWindow>
 						)}
 					</div>
 				</Marker>
+				{this.state.isShowDirection && this.state.directions != null && <DirectionsRenderer directions={this.state.directions} />}
 			</div>
 		);
 	}
 }
+
+// {
+// 	origin: new google.maps.LatLng(10.716563, 106.743734),
+// 	destination: new google.maps.LatLng(10.6658129, 106.6660459),
+// 	travelMode: google.maps.TravelMode.DRIVING,
+// 	waypoints: [
+// 		{
+// 			location: new google.maps.LatLng(10.696704, 106.646931),
+// 			stopover: false
+// 		}]
+// }

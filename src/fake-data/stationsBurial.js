@@ -30,7 +30,7 @@ export const burialStationList = [
   {
     id: 2,
     name: 'Đa Phước',
-    mapLocation: { lat: 10.723955, lng: 106.717533 },
+    mapLocation: { lat: 10.6658129, lng: 106.6660459 },
     district: 'Quận Củ Chi'
   }
 ]
