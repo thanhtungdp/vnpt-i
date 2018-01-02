@@ -13,10 +13,8 @@ export function getStationBurials({ itemPerPage = 10, page = 1 }) {
 }
 
 //get One Reocord
-export function getStationBurial(_id){
-  return getFetch(
-    getUrl(`stations-burial/${_id}`)
-  )
+export function getStationBurial(_id) {
+  return getFetch(getUrl(`stations-burial/${_id}`))
 }
 
 export function postStationBurial(stationBurial = {}) {

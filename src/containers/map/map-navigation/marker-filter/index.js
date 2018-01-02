@@ -50,7 +50,7 @@ export default class MapFilter extends React.PureComponent {
 
   render() {
     return (
-      <NavigationItemCollapse icon={<BillingIcon />} label="Các điểm trạm">
+      <NavigationItemCollapse isOpen icon={<BillingIcon />} label="Các điểm trạm">
         <Clearfix height={8} />
         {this.renderCheckBox(
           markerIcon.transitStation,

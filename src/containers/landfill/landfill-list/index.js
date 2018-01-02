@@ -32,11 +32,11 @@ export default class LandfillList extends PureComponent {
   getHead() {
     return [
       { content: 'STT', width: 5 },
-      { content: 'Tên và địa chỉ', width: 22},
+      { content: 'Tên và địa chỉ', width: 22 },
       { content: 'Khối lượng tăng' },
       { content: 'Diện tích' },
       { content: 'Sức chứa' },
-      { content: 'Tổ chức', width: 22},
+      { content: 'Tổ chức', width: 22 },
       { content: 'Hành động' }
     ]
   }

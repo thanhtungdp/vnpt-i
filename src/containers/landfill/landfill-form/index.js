@@ -25,12 +25,10 @@ function validate(values) {
   return errors
 }
 
-
 @reduxForm({
   form: 'LandfillForm',
   validate
 })
-
 @withRouter
 export default class LandfillForm extends PureComponent {
   static propTypes = {
@@ -55,10 +53,14 @@ export default class LandfillForm extends PureComponent {
             <Field name="long" label="Vĩ độ" component={FInputLabel} />
           </Col>
         </Row>
-        <Clearfix height={16}/>
+        <Clearfix height={16} />
         <Row>
           <Col md={4}>
-            <Field name="arisesMass" label="Khối lượng tăng" component={FInputLabel} />
+            <Field
+              name="arisesMass"
+              label="Khối lượng tăng"
+              component={FInputLabel}
+            />
           </Col>
           <Col md={4}>
             <Field name="acreage" label="Diện tích" component={FInputLabel} />

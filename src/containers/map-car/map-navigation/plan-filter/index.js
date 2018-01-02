@@ -3,10 +3,9 @@ import { autobind } from 'core-decorators'
 import PropTypes from 'prop-types'
 import Clearfix from 'components/elements/clearfix'
 import NavigationItemCollapse from 'components/navigation/navigation-item-collapse'
-import markerIcon from 'themes/markerIcon'
 import update from 'react-addons-update'
 import CheckBoxItem from './CheckBoxItem'
-import BillingIcon from '@atlaskit/icon/glyph/billing'
+import Icon from "themes/icon"
 
 @autobind
 export default class MapFilter extends React.PureComponent {
@@ -34,7 +33,9 @@ export default class MapFilter extends React.PureComponent {
         }
       }),
       () => {
-        this.props.onChange(this.state.markerFilter)
+        if(this.props.onChange){
+          this.props.onChange(this.state.markerFilter)
+        }
       }
     )
   }
@@ -52,25 +53,15 @@ export default class MapFilter extends React.PureComponent {
 
   render() {
     return (
-      <NavigationItemCollapse icon={<BillingIcon />} label="Trạng thái xe">
+      <NavigationItemCollapse
+        isOpen
+        icon={Icon.direction}
+        label="Danh sách lộ trình"
+      >
         <Clearfix height={8} />
-        {this.renderCheckBox(markerIcon.car, 'Xe', 'isXe')}
-        {this.renderCheckBox(
-          markerIcon.carOffline,
-          'Xe không chạy',
-          'isOffline'
-        )}
-        {this.renderCheckBox(
-          markerIcon.carRunning,
-          'Xe đang chạy',
-          'isRunning'
-        )}
-        {this.renderCheckBox(
-          markerIcon.carRunningPlan,
-          'Xe đang trong tuyến',
-          'isRunningPlan'
-        )}
-        {this.renderCheckBox(markerIcon.carWarning, 'Xe vi phạm', 'isWarning')}
+        {this.renderCheckBox(null, 'Lộ trình 1', 'lotirnh1')}
+        {this.renderCheckBox(null, 'Lộ trình 2', 'lotirnh1')}
+        {this.renderCheckBox(null, 'Lộ trình 3', 'lotirnh1')}
       </NavigationItemCollapse>
     )
   }

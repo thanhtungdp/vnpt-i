@@ -20,7 +20,7 @@ export default [
   {
     id: 4,
     name: 'TTC  Đào Trí',
-    mapLocation: { lat: 10.716563, lng: 10.716563 },
+    mapLocation: { lat: 10.716563, lng: 106.743734 },
     district: 'Quận 7'
   },
   {

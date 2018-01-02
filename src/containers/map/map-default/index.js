@@ -9,6 +9,7 @@ import MarkerBurial from 'components/map/marker/marker-burial-station'
 import appointmentStationList from 'fake-data/stationsAppointment'
 import transitStationList from 'fake-data/stationsTransit'
 import { burialStationList } from 'fake-data/stationsBurial'
+import { getGoogleMapProps } from 'components/map/utils'
 
 const MapDefaultContainer = styled.div``
 
@@ -72,15 +73,11 @@ export default class MapDefault extends PureComponent {
     return (
       <MapDefaultContainer>
         <CustomGoogleMap
-          isMarkerShown
-          googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyACrFcsYEYnifIzzbIOEI6y2v0qVSi9TvU&v=3.exp&libraries=geometry,drawing,places"
-          loadingElement={<div style={{ height: `100%` }} />}
-          containerElement={<div style={{ height: `100vh` }} />}
-          mapElement={<div style={{ height: `100%` }} />}
           transitStationList={transitStationList}
           appointmentStationList={appointmentStationList}
           markerFilter={this.props.markerFilter}
           burialStationList={burialStationList}
+          {...getGoogleMapProps()}
         />
       </MapDefaultContainer>
     )

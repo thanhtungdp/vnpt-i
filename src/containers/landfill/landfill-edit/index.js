@@ -6,18 +6,16 @@ import swal from 'sweetalert2'
 import Icon from 'themes/icon'
 import Breadcrumb from '../breadcrumb'
 
-
 export default class LandfillCreate extends PureComponent {
   state = {
     loaded: false,
     submitting: false,
-    dataEdit:{}
+    dataEdit: {}
   }
 
-  static propTypes = {
-  }
+  static propTypes = {}
 
-  async componentWillMount(){
+  async componentWillMount() {
     const _id = this.props.match.params._id
     const record = await StationApi.getStationBurial(_id)
     this.setState({
@@ -32,7 +30,7 @@ export default class LandfillCreate extends PureComponent {
 
   async onSubmit(data) {
     const _id = data._id
-    const res = await StationApi.putStationBurial(_id ,data)
+    const res = await StationApi.putStationBurial(_id, data)
     if (res.error) {
       swal({
         title: 'Error',

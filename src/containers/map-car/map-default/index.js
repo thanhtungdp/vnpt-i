@@ -4,7 +4,10 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { GoogleMap, withScriptjs, withGoogleMap } from 'react-google-maps'
 import MarkerCar from 'components/map/marker/marker-car'
+import MarkerCarReal from 'components/map/marker/marker-car/real'
+import { getGoogleMapProps } from 'components/map/utils'
 import carList from 'fake-data/car'
+import carRealList from 'fake-data/carReal'
 
 const MapCarContainer = styled.div``
 
@@ -17,10 +20,6 @@ class CustomGoogleMap extends PureComponent {
 
   static defaultProps = {
     markerFilter: {}
-  }
-
-  componentWillMount() {
-    const SlidingMarker = require('marker-animate-unobtrusive')
   }
 
   render() {
@@ -39,6 +38,26 @@ class CustomGoogleMap extends PureComponent {
                 key={location.id}
                 listLocation={location.listLocation}
                 status={location.status}
+                stationDetails={location.stationDetails}
+                stationDistance={location.stationDistance}
+                truckLoad={location.truckLoad}
+                type={location.type}
+                organization={location.organization}
+              />
+            ))}
+          {markerFilter.isXe &&
+            this.props.carRealList.map(location => (
+              <MarkerCarReal
+                mapLocation={location.mapLocation}
+                name={location.name}
+                key={location.id}
+                listLocation={location.listLocation}
+                status={location.status}
+                stationDetails={location.stationDetails}
+                stationDistance={location.stationDistance}
+                truckLoad={location.truckLoad}
+                type={location.type}
+                organization={location.organization}
               />
             ))}
         </div>
@@ -56,13 +75,10 @@ export default class MapCar extends PureComponent {
     return (
       <MapCarContainer>
         <CustomGoogleMap
-          isMarkerShown
-          googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyACrFcsYEYnifIzzbIOEI6y2v0qVSi9TvU&v=3.exp&libraries=geometry,drawing,places"
-          loadingElement={<div style={{ height: `100%` }} />}
-          containerElement={<div style={{ height: `100vh` }} />}
-          mapElement={<div style={{ height: `100%` }} />}
           carList={carList}
+          carRealList={carRealList}
           markerFilter={this.props.markerFilter}
+          {...getGoogleMapProps()}
         />
       </MapCarContainer>
     )

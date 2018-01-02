@@ -38,8 +38,11 @@ export default class NavigationItemCollapse extends React.PureComponent {
     label: PropTypes.any
   }
 
-  state = {
-    isOpen: false
+  constructor(props) {
+    super(props)
+    this.state = {
+      isOpen: props.isOpen
+    }
   }
 
   toggleOpen() {

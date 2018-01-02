@@ -38,6 +38,12 @@ const mapManagerComponent = {
         icon={Icon.map}
         text="Bản đồ vị trí"
       />
+      <AkNavigationItem
+        linkComponent={WrapperLinkComponent}
+        href={slug.map.car}
+        icon={Icon.car}
+        text="Bản đồ xe chạy"
+      />
     </AkNavigationItemGroup>
   )
 }
