@@ -1,41 +1,43 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { autobind } from 'core-decorators'
-
-import CategoryApi from 'api/CategoryApi'
+import Button from '@atlaskit/button'
+import LinkA from 'components/elements/link-a'
+import CarApi from 'api/CarApi'
 import DynamicTable from 'components/elements/dynamic-table'
 import Clearfix from 'components/elements/clearfix'
-import LinkA from 'components/elements/link'
-import LinkColor from 'components/elements/link-a'
-import Button from '@atlaskit/button'
+import LinkCustom from 'components/elements/link'
 import PageContainer from 'layout/default-sidebar-layout/PageContainer'
 import createManagerListHoc from 'shared/hoc/manager-list'
-import slug from 'constants/slug'
 import Icon from 'themes/icon'
+import Slug from 'constants/slug'
 import Breadcrumb from '../breadcrumb'
 
 @createManagerListHoc({
-  apiCall: CategoryApi.getCategories,
-  apiDelete: CategoryApi.deleteCategory,
+  apiCall: CarApi.getCars,
+  apiDelete: CarApi.deleteCar,
   itemPerPage: 10
 })
 @autobind
-export default class CategoriesList extends PureComponent {
+export default class CarList extends PureComponent {
   static propTypes = {
     data: PropTypes.array,
     pagination: PropTypes.object,
     isLoading: PropTypes.bool,
     onChangePage: PropTypes.func,
-    getIndexByPagination: PropTypes.func,
-    onDeleteItem: PropTypes.func
+    getIndexByPagination: PropTypes.func
+  }
+
+  deleteItem(_id) {
+    console.log(_id)
   }
 
   getHead() {
     return [
       { content: 'TT', width: 10 },
-      { content: 'Tên' },
+      { content: 'Biển số xe' },
       { content: 'Loại' },
-      { content: 'Chuyên mục con' },
+      { content: 'Trọng tải' },
       { content: 'Hành động' }
     ]
   }
@@ -48,8 +50,9 @@ export default class CategoriesList extends PureComponent {
       {
         content: (
           <div>
-            <strong>{row.name}</strong>
+            <strong>{row.code}</strong>
             <br />
+            {row.organization && <span>{row.organization.name}</span>}
           </div>
         )
       },
@@ -63,32 +66,30 @@ export default class CategoriesList extends PureComponent {
       {
         content: (
           <div>
-            {row.childMenu.map((child, index) => (
-              <span key={index}>
-                {child.name} {index < row.childMenu.length - 1 ? ', ' : null}
-              </span>
-            ))}
+            <span>{row.truckLoad}</span>
           </div>
         )
       },
       {
         content: (
           <div>
-            <LinkA to={slug.category.editWithCode + row._id}>Chỉnh sửa</LinkA>
-            &nbsp;&nbsp;&nbsp;
-            <LinkColor
+            <LinkCustom to={Slug.car.editWithCode + `${row.code}`}>
+              Chỉnh sửa
+            </LinkCustom>
+            &nbsp;&nbsp;
+            <LinkA
               colorType="red"
               onClick={e =>
                 this.props.onDeleteItem(
                   e,
-                  row.name,
-                  item => item._id === row._id,
+                  row.code,
+                  item => row.code === item.code,
                   row.code
                 )
               }
             >
               Xóa
-            </LinkColor>
+            </LinkA>
           </div>
         )
       }
@@ -98,13 +99,13 @@ export default class CategoriesList extends PureComponent {
   render() {
     return (
       <PageContainer
-        title="Danh sách chuyên mục"
+        title="Danh sách Xe"
         right={
-          <LinkA to={slug.category.create}>
-            <Button iconBefore={Icon.create} customColor="primary">
+          <LinkCustom to={Slug.car.create}>
+            <Button appearance="primary" iconBefore={Icon.create}>
               Tạo mới
             </Button>
-          </LinkA>
+          </LinkCustom>
         }
       >
         <Breadcrumb items={['list']} />

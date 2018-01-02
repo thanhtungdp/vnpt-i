@@ -6,14 +6,17 @@ import Button from '@atlaskit/button'
 import StationApi from 'api/StationApi'
 import DynamicTable from 'components/elements/dynamic-table'
 import Clearfix from 'components/elements/clearfix'
-import Link from 'components/elements/link'
+import LinkA from 'components/elements/link'
+import LinkColor from 'components/elements/link-a'
 import PageContainer from 'layout/default-sidebar-layout/PageContainer'
 import createManagerListHoc from 'shared/hoc/manager-list'
 import Icon from 'themes/icon'
-import Slug from 'constants/slug'
+import slug from 'constants/slug'
+import Breadcrumb from '../breadcrumb'
 
 @createManagerListHoc({
   apiCall: StationApi.getStationBurials,
+  apiDelete: StationApi.deleteStationBurial,
   itemPerPage: 10
 })
 @autobind
@@ -28,9 +31,14 @@ export default class LandfillList extends PureComponent {
 
   getHead() {
     return [
-      { content: 'Id', width: 10 },
-      { content: 'Name' },
-      { content: 'District' }
+      { content: 'STT', width: 10 },
+      { content: 'Tên và địa chỉ' },
+      { content: 'Khối lượng tăng' },
+      { content: 'Diện tích' },
+      { content: 'Sức chứa' },
+      { content: 'Toạ độ' },
+      { content: 'Tổ chức' },
+      { content: 'Hành động' }
     ]
   }
 
@@ -44,14 +52,67 @@ export default class LandfillList extends PureComponent {
           <div>
             <strong>{row.name}</strong>
             <br />
-            <span>{row.address}</span>
+            <span>
+              {row.address} {row.district}
+            </span>
           </div>
         )
       },
       {
         content: (
+          <di>
+            <span>{row.arisesMass}</span>
+          </di>
+        )
+      },
+      {
+        content: (
+          <di>
+            <span>{row.acreage}</span>
+          </di>
+        )
+      },
+      {
+        content: (
+          <di>
+            <span>{row.capacity}</span>
+          </di>
+        )
+      },
+      {
+        content: (
+          <di>
+            <span>Kinh độ: {(row.mapLocation === undefined ? "" : row.mapLocation.long)} </span>
+            <br />
+            <span>Vĩ độ: {(row.mapLocation === undefined ? "" : row.mapLocation.lat)}</span>
+          </di>
+        )
+      },
+      {
+        content: (
+          <di>
+            <span>{(row.organization == null ? "" : row.organization.name)}</span>
+          </di>
+        )
+      },
+      {
+        content: (
           <div>
-            <span>{row.district}</span>
+            <LinkA to={slug.landFill.editWithCode + row._id}>Sửa</LinkA>
+            &nbsp;&nbsp;&nbsp;
+            <LinkColor
+              colorType="red"
+              onClick={e =>
+                this.props.onDeleteItem(
+                  e,
+                  row.name,
+                  item => item._id === row._id,
+                  row._id
+                )
+              }
+            >
+              Xóa
+            </LinkColor>
           </div>
         )
       }
@@ -63,13 +124,14 @@ export default class LandfillList extends PureComponent {
       <PageContainer
         title="Danh sách bãi"
         right={
-          <Link to={Slug.landFill.create}>
+          <LinkA to={slug.landFill.create}>
             <Button appearance="primary" iconBefore={Icon.landFill}>
               Tạo mới bãi
             </Button>
-          </Link>
+          </LinkA>
         }
       >
+        <Breadcrumb items={['list']} />
         <DynamicTable
           isFixedSize
           head={this.getHead()}

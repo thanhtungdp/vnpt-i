@@ -1,5 +1,6 @@
 import { ORGANIZATION_API } from '../config'
 import { getFetch, postFetch, putFetch } from 'utils/fetch'
+import queryString from 'query-string'
 import { deleteFetch } from '../utils/fetch'
 
 const MAX_VALUE = 99999
@@ -25,7 +26,7 @@ export function getOrganizationsFilter({
   if (address) query.address = address
   if (director) query.director = director
   if (description) query.description = description
-  return getFetch(getUrl('?' + query.join('&')))
+  return getFetch(getUrl('?' + queryString.stringify(query, '&')))
 }
 
 export function getOrganization(_id) {

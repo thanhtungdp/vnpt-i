@@ -4,7 +4,9 @@ export default {
   landFill: {
     base: '/landfill',
     list: '/landfill',
-    create: '/landfill/create'
+    create: '/landfill/create',
+    edit: '/landfill/edit/:_id',
+    editWithCode: '/landfill/edit/'
   },
   transitStation: {
     base: '/transit-station',
@@ -32,5 +34,12 @@ export default {
     create: '/organization/create',
     edit: '/organization/edit/:_id',
     editWithId: '/organization/edit/'
+  },
+  car: {
+    base: '/cars',
+    list: '/cars',
+    create: '/cars/create',
+    edit: '/cars/edit/:code',
+    editWithCode: '/cars/edit/'
   }
 }

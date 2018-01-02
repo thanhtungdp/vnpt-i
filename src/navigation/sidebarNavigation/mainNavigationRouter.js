@@ -42,33 +42,6 @@ const mapManagerComponent = {
   )
 }
 
-const landFillManagerComponent = {
-  component: (
-    <NavigationWrapper text="Bãi chôn lấp">
-      <AkNavigationItemGroup title="Bãi chôn lấp" />
-    </NavigationWrapper>
-  )
-}
-
-const landFillMenu = createChildListMenuItem(
-  {
-    icon: Icon.landFill,
-    text: 'Bãi chôn lấp'
-  },
-  [
-    {
-      url: slug.landFill.list,
-      icon: Icon.list,
-      text: 'Danh sách bãi'
-    },
-    {
-      url: slug.landFill.create,
-      icon: Icon.create,
-      text: 'Tạo mới bãi'
-    }
-  ]
-)
-
 const transportMenu = createChildListMenuItem(
   {
     icon: Icon.transport,
@@ -126,53 +99,59 @@ const directionMenu = createChildListMenuItem(
   ]
 )
 
-const organizationMenu = createChildListMenuItem(
-  {
-    icon: Icon.organization,
-    text: 'Doanh Nghiệp'
-  },
-  [
-    {
-      url: slug.organization.list,
-      icon: Icon.list,
-      text: 'Danh sách Doanh Nghiệp'
-    },
-    {
-      url: slug.organization.create,
-      icon: Icon.create,
-      text: 'Tạo mới doanh nghiệp'
-    }
-  ]
-)
+const landFillMenu = {
+  component: (
+    <AkNavigationItem
+      linkComponent={WrapperLinkComponent}
+      href={slug.landFill.base}
+      icon={Icon.landFill}
+      text="Bãi chôn lấp"
+    />
+  )
+}
 
-const categoriesMenu = createChildListMenuItem(
-  {
-    icon: Icon.category,
-    text: 'Chuyên mục'
-  },
-  [
-    {
-      url: slug.category.list,
-      icon: Icon.list,
-      text: 'Danh sách chuyên mục'
-    },
-    {
-      url: slug.category.create,
-      icon: Icon.create,
-      text: 'Tạo chuyên mục'
-    }
-  ]
-)
+const organizationMenu = {
+  component: (
+    <AkNavigationItem
+      linkComponent={WrapperLinkComponent}
+      href={slug.organization.base}
+      icon={Icon.organization}
+      text="Doanh nghiệp"
+    />
+  )
+}
+
+const categoryMenu = {
+  component: (
+    <AkNavigationItem
+      linkComponent={WrapperLinkComponent}
+      href={slug.category.base}
+      icon={Icon.category}
+      text="Chuyên mục"
+    />
+  )
+}
+
+const carMenu = {
+  component: (
+    <AkNavigationItem
+      linkComponent={WrapperLinkComponent}
+      href={slug.car.base}
+      icon={Icon.car}
+      text="Xe"
+    />
+  )
+}
 
 export default [
+  groupConfigManagerComponent,
+  categoryMenu,
+  organizationMenu,
+  carMenu,
   groupManagerComponent,
   landFillMenu,
   transportMenu,
   appointmentMenu,
   directionMenu,
-  groupConfigManagerComponent,
-  categoriesMenu,
-  organizationMenu,
-  mapManagerComponent,
-  landFillManagerComponent
+  mapManagerComponent
 ]

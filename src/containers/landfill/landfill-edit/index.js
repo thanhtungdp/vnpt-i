@@ -1,30 +1,38 @@
 import React, { PureComponent } from 'react'
 import PageContainer from 'layout/default-sidebar-layout/PageContainer'
-import Icon from 'themes/icon'
-import { getCategory, updateCategory } from 'api/CategoryApi'
+import StationApi from 'api/StationApi'
+import LandfillForm from '../landfill-form'
 import swal from 'sweetalert2'
-import CategoryForm from '../category-form'
+import Icon from 'themes/icon'
 import Breadcrumb from '../breadcrumb'
 
-export default class CategoriesEdit extends PureComponent {
-  static propTypes = {}
 
+export default class LandfillCreate extends PureComponent {
   state = {
     loaded: false,
-    dataEdit: {}
+    submitting: false,
+    dataEdit:{}
   }
 
-  async componentWillMount() {
-    const code = this.props.match.params.code
-    const record = await getCategory(code)
+  static propTypes = {
+  }
+
+  async componentWillMount(){
+    const _id = this.props.match.params._id
+    const record = await StationApi.getStationBurial(_id)
     this.setState({
       loaded: true,
-      dataEdit: record
+      dataEdit: {
+        ...record,
+        lat: record.mapLocation.lat,
+        long: record.mapLocation.long
+      }
     })
   }
 
-  async handleSubmit(categoryData) {
-    const res = await updateCategory(this.state.dataEdit.code, categoryData)
+  async onSubmit(data) {
+    const _id = data._id
+    const res = await StationApi.putStationBurial(_id ,data)
     if (res.error) {
       swal({
         title: 'Error',
@@ -41,24 +49,20 @@ export default class CategoriesEdit extends PureComponent {
 
   render() {
     return (
-      <PageContainer
-        icon={Icon.edit}
-        title={this.state.dataEdit.name ? this.state.dataEdit.name : ''}
-      >
+      <PageContainer icon={Icon.edit} title="Sửa bãi">
         <Breadcrumb
           items={[
             'list',
             {
               id: 'edit',
-              href: '/',
+              href: '',
               name: this.state.dataEdit.name
             }
           ]}
         />
         {this.state.loaded && (
-          <CategoryForm
-            isEdit
-            onSubmit={this.handleSubmit}
+          <LandfillForm
+            onSubmit={this.onSubmit}
             initialValues={this.state.dataEdit}
           />
         )}
