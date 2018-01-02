@@ -1,19 +1,23 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
+import Moment from 'react-moment'
 import { autobind } from 'core-decorators'
 import Button from '@atlaskit/button'
 
 import StationApi from 'api/StationApi'
 import DynamicTable from 'components/elements/dynamic-table'
 import Clearfix from 'components/elements/clearfix'
-import Link from 'components/elements/link'
+import LinkA from 'components/elements/link'
+import LinkColor from 'components/elements/link-a'
 import PageContainer from 'layout/default-sidebar-layout/PageContainer'
 import createManagerListHoc from 'shared/hoc/manager-list'
 import Icon from 'themes/icon'
-import Slug from 'constants/slug'
+import slug from 'constants/slug'
+import Breadcrumb from '../breadcrumb'
 
 @createManagerListHoc({
   apiCall: StationApi.getStationTransits,
+  apiDelete: StationApi.deleteStationTransit,
   itemPerPage: 10
 })
 @autobind
@@ -28,12 +32,16 @@ export default class TransitStationList extends PureComponent {
 
   getHead() {
     return [
-      { content: 'Id', width: 10 },
-      { content: 'Name' },
-      { content: 'District' }
+      { content: 'STT', width: 10 },
+      { content: 'Tên và địa chỉ' },
+      { content: 'Thời gian' },
+      { content: 'Khối lượng tăng' },
+      { content: 'Diện tích' },
+      { content: 'Toạ độ' },
+      { content: 'Tổ chức' },
+      { content: 'Hành động' }
     ]
   }
-
   getRows() {
     return this.props.data.map((row, index) => [
       {
@@ -51,7 +59,69 @@ export default class TransitStationList extends PureComponent {
       {
         content: (
           <div>
-            <span>{row.district}</span>
+            <span>
+              Bắt đầu: <Moment format="YYYY/MM/DD" date={row.workFromTime} />
+            </span>
+            <br />
+            <span>
+              Kết thúc: <Moment format="YYYY/MM/DD" date={row.workToTime} />
+            </span>
+          </div>
+        )
+      },
+      {
+        content: (
+          <div>
+            <span>{row.arisesMass}</span>
+          </div>
+        )
+      },
+      {
+        content: (
+          <div>
+            <span>{row.acreage}</span>
+          </div>
+        )
+      },
+      {
+        content: (
+          <div>
+            <span>
+              Kinh độ:{' '}
+              {row.mapLocation === undefined ? '' : row.mapLocation.long}{' '}
+            </span>
+            <br />
+            <span>
+              Vĩ độ: {row.mapLocation === undefined ? '' : row.mapLocation.lat}
+            </span>
+          </div>
+        )
+      },
+      {
+        content: (
+          <div>
+            <span>{row.organization == null ? '' : row.organization.name}</span>
+          </div>
+        )
+      },
+      {
+        content: (
+          <div>
+            <LinkA to={slug.transitStation.editWithCode + row._id}>Sửa</LinkA>
+            &nbsp;&nbsp;&nbsp;
+            <LinkColor
+              colorType="red"
+              onClick={e =>
+                this.props.onDeleteItem(
+                  e,
+                  row.name,
+                  item => item._id === row._id,
+                  row._id
+                )
+              }
+            >
+              Xóa
+            </LinkColor>
           </div>
         )
       }
@@ -63,13 +133,14 @@ export default class TransitStationList extends PureComponent {
       <PageContainer
         title="Danh sách bãi"
         right={
-          <Link to={Slug.transitStation.create}>
-            <Button appearance="primary" iconBefore={Icon.transport}>
-              Tạo mới trạm
+          <LinkA to={slug.transitStation.create}>
+            <Button appearance="primary" iconBefore={Icon.transitStation}>
+              Tạo mới bãi
             </Button>
-          </Link>
+          </LinkA>
         }
       >
+        <Breadcrumb items={['list']} />
         <DynamicTable
           isFixedSize
           head={this.getHead()}

@@ -47,14 +47,3 @@ export default class PageContainer extends React.PureComponent {
     )
   }
 }
-
-/*
-            {this.props.title && (
-              <HeaderFlex>
-                <PageHeader>
-                  {this.props.icon}
-                  {this.props.title}
-                </PageHeader>
-              </HeaderFlex>
-            )}
- */

@@ -43,7 +43,7 @@ export default class LandfillForm extends PureComponent {
             <Field
               name="airsesToDate"
               label="Phát sinh đến ngày"
-              component={FCalendarCustom}
+              componaent={FCalendarCustom}
             />
           </Col>
           <Col md={4}>
