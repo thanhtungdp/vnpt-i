@@ -32,6 +32,7 @@ export default class LandfillCreate extends PureComponent {
 
   async onSubmit(data) {
     const _id = data._id
+    console.log(data)
     const res = await StationApi.putStationBurial(_id ,data)
     if (res.error) {
       swal({
