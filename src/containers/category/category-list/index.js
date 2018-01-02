@@ -74,7 +74,7 @@ export default class CategoriesList extends PureComponent {
       {
         content: (
           <div>
-            <LinkA to={slug.category.editWithCode + row.code}>Chỉnh sửa</LinkA>
+            <LinkA to={slug.category.editWithCode + row._id}>Chỉnh sửa</LinkA>
             &nbsp;&nbsp;&nbsp;
             <LinkColor
               colorType="red"

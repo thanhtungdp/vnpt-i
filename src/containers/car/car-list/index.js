@@ -38,7 +38,7 @@ export default class CarList extends PureComponent {
       { content: 'Biển số xe' },
       { content: 'Loại' },
       { content: 'Trọng tải' },
-      { content: 'Hành động' },
+      { content: 'Hành động' }
     ]
   }
 

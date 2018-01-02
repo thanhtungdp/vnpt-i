@@ -10,9 +10,9 @@ import { addBreadcrumb, deleteBreadcrumb, updateBreadcrumb } from './action'
 })
 export default class Breadcrumb extends PureComponent {
   static propTypes = {
-    icon: PropTypes.string,
-    name: PropTypes.string,
-    href: PropTypes.string,
+    icon: PropTypes.any,
+    name: PropTypes.any,
+    href: PropTypes.any,
     autoDestroy: PropTypes.bool
   }
 

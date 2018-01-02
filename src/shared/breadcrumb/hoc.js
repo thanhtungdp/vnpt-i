@@ -5,7 +5,7 @@ import Breadcrumb from './Breadcrumb'
 export default function createBreadCrumbHoc(config) {
   return class BreadcrumbCustom extends React.Component {
     static propTypes = {
-      items: PropTypes.arrayOf(PropTypes.string)
+      items: PropTypes.arrayOf(PropTypes.any)
     }
     renderBreadcrumb(item) {
       let itemObject = item

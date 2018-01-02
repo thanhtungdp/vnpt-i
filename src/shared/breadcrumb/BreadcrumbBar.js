@@ -96,9 +96,9 @@ function BreadcrumbBar({ breadcrumbs }) {
 BreadcrumbBar.propTypes = {
   breadcrumbs: PropTypes.arrayOf(
     PropTypes.shape({
-      icon: PropTypes.string,
-      name: PropTypes.string,
-      href: PropTypes.string
+      icon: PropTypes.any,
+      name: PropTypes.any,
+      href: PropTypes.any
     })
   )
 }

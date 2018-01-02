@@ -3,7 +3,7 @@ import { AkNavigationItemGroup, AkNavigationItem } from '@atlaskit/navigation'
 import styled from 'styled-components'
 
 import {
-  createChildListMenuItem,
+  // createChildListMenuItem,
   WrapperLinkComponent
 } from '../../utils/sidebarNavigation'
 import slug from '../../constants/slug'
@@ -61,16 +61,6 @@ const mapManagerComponent = {
 //   ]
 // )
 
-const landFillMenu = {
-  component: (
-    <AkNavigationItem
-      linkComponent={WrapperLinkComponent}
-      href={slug.landFill.base}
-      icon={Icon.landFill}
-      text="Bãi chôn lấp"
-    />
-  )
-}
 const transportMenu = {
   component: (
     <AkNavigationItem
@@ -81,6 +71,7 @@ const transportMenu = {
     />
   )
 }
+
 const appointmentMenu = {
   component: (
     <AkNavigationItem
@@ -101,99 +92,17 @@ const directionMenu = {
     />
   )
 }
-// const transportMenu = createChildListMenuItem(
-//   {
-//     icon: Icon.transport,
-//     text: 'Trạm chung chuyển'
-//   },
-//   [
-//     {
-//       url: slug.transitStation.list,
-//       icon: Icon.list,
-//       text: 'Danh sách trạm'
-//     },
-//     {
-//       url: slug.transitStation.create,
-//       icon: Icon.create,
-//       text: 'Tạo mới trạm'
-//     }
-//   ]
-// )
 
-// const appointmentMenu = createChildListMenuItem(
-//   {
-//     icon: Icon.appointment,
-//     text: 'Điểm hẹn'
-//   },
-//   [
-//     {
-//       url: slug.appointment.list,
-//       icon: Icon.list,
-//       text: 'Danh sách điểm'
-//     },
-//     {
-//       url: slug.appointment.create,
-//       icon: Icon.create,
-//       text: 'Tạo mới điểm'
-//     }
-//   ]
-// )
-
-// const directionMenu = createChildListMenuItem(
-//   {
-//     icon: Icon.direction,
-//     text: 'Lộ trình'
-//   },
-//   [
-//     {
-//       url: slug.appointment.list,
-//       icon: Icon.list,
-//       text: 'Danh sách lộ trình'
-//     },
-//     {
-//       url: slug.appointment.create,
-//       icon: Icon.create,
-//       text: 'Tạo lộ trình mới'
-//     }
-//   ]
-// )
-
-// const carMenu = createChildListMenuItem(
-//   {
-//     icon: Icon.car,
-//     text: 'Xe'
-//   },
-//   [
-//     {
-//       url: slug.car.list,
-//       icon: Icon.list,
-//       text: 'Danh sách Xe'
-//     },
-//     {
-//       url: slug.car.create,
-//       icon: Icon.create,
-//       text: 'Tạo mới Xe'
-//     }
-//   ]
-// )
-// const organizationMenu = createChildListMenuItem(
-//   {
-//     icon: Icon.organization,
-//     text: 'Doanh Nghiệp'
-//   },
-//   [
-//     {
-//       url: slug.organization.list,
-//       icon: Icon.list,
-//       text: 'Danh sách Doanh Nghiệp'
-//     },
-//     {
-//       url: slug.organization.create,
-//       icon: Icon.create,
-//       text: 'Tạo mới doanh nghiệp'
-//     }
-//   ]
-// )
+const landFillMenu = {
+  component: (
+    <AkNavigationItem
+      linkComponent={WrapperLinkComponent}
+      href={slug.landFill.base}
+      icon={Icon.landFill}
+      text="Bãi chôn lấp"
+    />
+  )
+}
 
 const organizationMenu = {
   component: (
