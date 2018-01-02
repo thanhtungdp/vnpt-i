@@ -60,25 +60,16 @@ const landFillMenu = createChildListMenuItem(
     }
   ]
 )
-
-const transportMenu = createChildListMenuItem(
-  {
-    icon: Icon.transport,
-    text: 'Trạm chung chuyển'
-  },
-  [
-    {
-      url: slug.transitStation.list,
-      icon: Icon.list,
-      text: 'Danh sách trạm'
-    },
-    {
-      url: slug.transitStation.create,
-      icon: Icon.create,
-      text: 'Tạo mới trạm'
-    }
-  ]
-)
+const transitMenu = {
+  component: (
+    <AkNavigationItem
+      linkComponent={WrapperLinkComponent}
+      href={slug.StationTransit.base}
+      icon={Icon.transit}
+      text="Trạm chung chuyển"
+    />
+  )
+}
 
 const appointmentMenu = createChildListMenuItem(
   {
@@ -159,7 +150,7 @@ const categoriesMenu = createChildListMenuItem(
 export default [
   groupManagerComponent,
   landFillMenu,
-  transportMenu,
+  transitMenu,
   appointmentMenu,
   directionMenu,
   groupConfigManagerComponent,

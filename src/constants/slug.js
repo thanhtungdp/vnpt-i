@@ -6,7 +6,7 @@ export default {
     list: '/landfill',
     create: '/landfill/create'
   },
-  transitStation: {
+  StationTransit: {
     base: '/transit-station',
     list: '/transit-station',
     create: '/transit-station/create',

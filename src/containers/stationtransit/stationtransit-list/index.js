@@ -15,8 +15,8 @@ import slug from 'constants/slug'
 import Breadcrumb from '../breadcrumb'
 
 @createManagerListHoc({
-  apiCall: StationApi.getStationBurials,
-  apiDelete: StationApi.deleteStationBurial,
+  apiCall: StationApi.getStationTransits(),
+  //apiDelete: StationApi.deleteStationBurial,
   itemPerPage: 10
 })
 @autobind
@@ -33,9 +33,10 @@ export default class LandfillList extends PureComponent {
     return [
       { content: 'STT', width: 10 },
       { content: 'Tên và địa chỉ' },
-      { content: 'Khối lượng tăng' },
+      { content: 'Ngày hoạt động' },
+      { content: 'Ngày hoạt động' },
+      { content: 'khối lượng tăng' },
       { content: 'Diện tích' },
-      { content: 'Sức chứa' },
       { content: 'Toạ độ' },
       { content: 'Tổ chức' },
       { content: 'Hành động' }
@@ -60,39 +61,37 @@ export default class LandfillList extends PureComponent {
       },
       {
         content: (
-          <di>
+          <div>
+            <span>{row.workFromTime}</span>
+          </div>
+        )
+      },
+      {
+        content: (
+          <div>
+            <span>{row.workToTime}</span>
+          </div>
+        )
+      },
+      {
+        content: (
+          <div>
             <span>{row.arisesMass}</span>
-          </di>
+          </div>
         )
       },
       {
         content: (
-          <di>
+          <div>
             <span>{row.acreage}</span>
-          </di>
+          </div>
         )
       },
       {
         content: (
-          <di>
-            <span>{row.capacity}</span>
-          </di>
-        )
-      },
-      {
-        content: (
-          <di>
-            <span>Kinh độ: {(row.mapLocation === undefined ? "" : row.mapLocation.long)} </span>
-            <br />
-            <span>Vĩ độ: {(row.mapLocation === undefined ? "" : row.mapLocation.lat)}</span>
-          </di>
-        )
-      },
-      {
-        content: (
-          <di>
+          <div>
             <span>{(row.organization == null ? "" : row.organization.name)}</span>
-          </di>
+          </div>
         )
       },
       {

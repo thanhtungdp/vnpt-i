@@ -13,7 +13,7 @@ import PageIcon from '@atlaskit/icon/glyph/page'
 export default {
   map: <MapLocation label="" />,
   landFill: <EmojiFoodIcon label="" />,
-  transport: <SwitcherIcon label="" />,
+  transit: <SwitcherIcon label="" />,
   appointment: <EmojiFrequentIcon label="" />,
   direction: <DecisionIcon label="" />,
   organization: <PdfIcon label="" />,

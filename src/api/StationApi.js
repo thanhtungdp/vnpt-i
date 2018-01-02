@@ -2,23 +2,9 @@ import stationBurialsData from 'fake-data/stationsBurial'
 import { STATION_API } from 'config'
 import { getFetch } from 'utils/fetch'
 
+
 function getUrl(path) {
   return STATION_API + '/' + path
-}
-
-export function getStationBurials({ itemPerPage = 10, page = 1 }) {
-  return new Promise(resolve => {
-    setTimeout(() => {
-      resolve({
-        data: stationBurialsData(itemPerPage),
-        pagination: {
-          page: page,
-          itemPerPage: itemPerPage,
-          totalItem: 30
-        }
-      })
-    }, 300)
-  })
 }
 
 export function getStationTransits({ itemPerPage = 10, page = 1 }) {
@@ -27,7 +13,15 @@ export function getStationTransits({ itemPerPage = 10, page = 1 }) {
   )
 }
 
+//get One Reocord
+export function getStationTransit(_id){
+  return getFetch(
+    getUrl(`stations-transit/${_id}`)
+  )
+}
+
+
 export default {
-  getStationBurials,
-  getStationTransits
+  getStationTransits,
+  getStationTransit
 }
