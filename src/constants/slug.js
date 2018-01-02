@@ -9,7 +9,10 @@ export default {
   transitStation: {
     base: '/transit-station',
     list: '/transit-station',
-    create: '/transit-station/create'
+    create: '/transit-station/create',
+    edit: '/transit-station/edit/:_id',
+    editWithCode: '/transit-station/edit/'
+
   },
   appointment: {
     base: '/appointment',

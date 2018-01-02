@@ -22,10 +22,7 @@ export default class ManagerRoute extends React.Component {
         <Route exact path="/" component={OverviewDashboard} />
         <Route exact path={slug.landFill.list} component={LandfillList} />
         <Route exact path={slug.landFill.create} component={LandfillCreate} />
-        <Route
-          exact
-          path={slug.transitStation.list}
-          component={TransitStationList}
+        <Route exact path={slug.transitStation.list} component={TransitStationList}
         />
         <Route
           exact
