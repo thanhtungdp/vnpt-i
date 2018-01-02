@@ -1,4 +1,4 @@
-const API_GATEWAY_TEST = 'http://localhost:3002'
+const API_GATEWAY_TEST = 'http://localhost:3005'
 const API_GATEWAY_RELEASE = 'http://swn.vietan-software.com:3000'
 
 const AUTH_API = API_GATEWAY_RELEASE

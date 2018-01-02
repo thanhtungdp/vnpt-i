@@ -26,7 +26,8 @@ export default {
     editWithCode: '/category/edit/'
   },
   map: {
-    base: '/map'
+    base: '/map',
+    car: '/map/car'
   },
   organization: {
     base: '/organization',
