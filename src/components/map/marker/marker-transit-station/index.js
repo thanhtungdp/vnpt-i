@@ -36,7 +36,9 @@ export default class MarkerTransitStation extends PureComponent {
 						labelContent: this.props.name ? this.props.name : 'label',
 						labelAnchor: new google.maps.Point(this.props.name.length * 2.4, 0),
 						labelStyle: {
-							backgroundColor: 'yellow',
+							//backgroundColor: 'transparent',
+							color:'#ff9900',
+							fontWeight: 'bold',
 							fontSize: '10px',
 							width: this.props.name.length * 7
 						}

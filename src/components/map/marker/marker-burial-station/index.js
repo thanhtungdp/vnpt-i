@@ -36,7 +36,9 @@ export default class MarkerBurialStation extends PureComponent {
 						labelContent: this.props.name ? this.props.name : 'label',
 						labelAnchor: new google.maps.Point(this.props.name.length * 2.4, 0),
 						labelStyle: {
-							backgroundColor: 'yellow',
+							//backgroundColor: 'transparent',
+							color:'#cc33ff',
+							fontWeight: 'bold',
 							fontSize: '10px',
 							width: this.props.name.length * 7
 						}

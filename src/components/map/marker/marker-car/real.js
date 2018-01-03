@@ -24,7 +24,8 @@ export default class MarkerRealCar extends PureComponent {
 		listLocation: PropTypes.array,
 		status: PropTypes.string,
 		stationDetails: PropTypes.array,
-		stationDistance: PropTypes.array
+		stationDistance: PropTypes.array,
+		markerFilter: PropTypes.object
 	};
 
 	constructor(props) {
@@ -63,6 +64,17 @@ export default class MarkerRealCar extends PureComponent {
 			case carStatus.RUNNING_PLAN: return Icon.carRunningPlan; break;
 			case carStatus.WARNING: return Icon.carWarning; break;
 		}
+	}
+
+	checkShowByFilterAndStatus(markerFilter){
+		let result = false
+		switch(this.state.status){
+			case carStatus.OFFLINE: result = markerFilter.isOffline; break;
+			case carStatus.RUNNING: result = markerFilter.isRunning; break;
+			case carStatus.RUNNING_PLAN: result = markerFilter.isRunningPlan; break;
+			case carStatus.WARNING: result =  markerFilter.isWarning; break;
+		}
+		return result
 	}
 
 	async componentDidMount() {
@@ -117,7 +129,7 @@ export default class MarkerRealCar extends PureComponent {
 	render() {
 		return (
 			<div>
-				{this.state.mapLocation &&
+				{this.state.mapLocation && this.checkShowByFilterAndStatus(this.props.markerFilter) &&
 					<Marker
 						duration={TIME_DURATION}
 						icon={{
@@ -128,10 +140,15 @@ export default class MarkerRealCar extends PureComponent {
 						position={this.state.mapLocation}
 						labelProps={{
 							labelContent: this.props.name ? this.props.name : 'label',
-							labelAnchor: new google.maps.Point(this.props.name.length * 2.4, 0),
+							labelAnchor: new google.maps.Point(30, 0),
 							labelStyle: {
-								backgroundColor: 'yellow',
-								fontSize: '10px',
+								backgroundColor: '#2ecc71',
+								borderRadius: '3px',
+								fontSize: '12px',
+								padding: '2px',
+								color: 'white',
+								textAlign: 'center',
+								whiteteSpace: 'nowrap'
 							}
 						}}
 					>

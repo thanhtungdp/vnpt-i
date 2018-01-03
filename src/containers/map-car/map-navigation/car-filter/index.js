@@ -15,7 +15,6 @@ export default class CarFilter extends React.PureComponent {
 
   state = {
     markerFilter: {
-      isCar: false,
       isOffline: false,
       isRunning: false,
       isRunningPlan: false,

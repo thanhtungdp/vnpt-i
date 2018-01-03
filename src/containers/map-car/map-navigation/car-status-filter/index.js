@@ -56,7 +56,6 @@ export default class CarStatusFilter extends React.PureComponent {
     return (
       <NavigationItemCollapse icon={Icon.car} label="Trạng thái xe">
         <Clearfix height={8} />
-        {this.renderCheckBox(markerIcon.car, 'Xe', 'isCar')}
         {this.renderCheckBox(
           markerIcon.carOffline,
           'Xe không chạy',
