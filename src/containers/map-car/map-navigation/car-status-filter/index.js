@@ -3,12 +3,13 @@ import { autobind } from 'core-decorators'
 import PropTypes from 'prop-types'
 import Clearfix from 'components/elements/clearfix'
 import NavigationItemCollapse from 'components/navigation/navigation-item-collapse'
+import markerIcon from 'themes/markerIcon'
 import update from 'react-addons-update'
 import CheckBoxItem from 'components/map/filter/check-box-item'
 import Icon from 'themes/icon'
 
 @autobind
-export default class CarFilter   extends React.PureComponent {
+export default class CarStatusFilter extends React.PureComponent {
   static propTypes = {
     onChange: PropTypes.func
   }
@@ -53,28 +54,25 @@ export default class CarFilter   extends React.PureComponent {
 
   render() {
     return (
-      <NavigationItemCollapse icon={Icon.car} label="Danh sách xe">
+      <NavigationItemCollapse icon={Icon.car} label="Trạng thái xe">
         <Clearfix height={8} />
+        {this.renderCheckBox(markerIcon.car, 'Xe', 'isCar')}
         {this.renderCheckBox(
-          '',
-          '51D12345',
-          'XXXX'
+          markerIcon.carOffline,
+          'Xe không chạy',
+          'isOffline'
         )}
         {this.renderCheckBox(
-          '',
-          '51D12343',
-          'XXXX'
+          markerIcon.carRunning,
+          'Xe đang chạy',
+          'isRunning'
         )}
         {this.renderCheckBox(
-          '',
-          '51D12343',
-          'XXXX'
+          markerIcon.carRunningPlan,
+          'Xe đang trong tuyến',
+          'isRunningPlan'
         )}
-        {this.renderCheckBox(
-          '',
-          '51D12345',
-          'XXXX'
-        )}
+        {this.renderCheckBox(markerIcon.carWarning, 'Xe vi phạm', 'isWarning')}
       </NavigationItemCollapse>
     )
   }

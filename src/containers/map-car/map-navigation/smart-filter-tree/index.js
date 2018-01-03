@@ -8,7 +8,16 @@ import CarFilter from '../car-filter'
 
 const districtStack = [
   {
-    component: <AkNavigationItemGroup title="Lọc theo quận" />
+    component: (
+      <AkNavigationItemGroup
+        text="filter"
+        title={
+          <span key={1}>
+            <i className="fa-filter fa" /> Lọc theo quận
+          </span>
+        }
+      />
+    )
   },
   {
     isDistrict: true,
@@ -108,7 +117,7 @@ export default class SmartFilterTee extends React.PureComponent {
     }
   }
 
-  renderItem(item) {
+  renderItem(item, index) {
     // const navigationIndex = getIndexLocationWithNavigationRouter(
     //   this.props.location,
     //   navigationRouterStack
@@ -118,7 +127,7 @@ export default class SmartFilterTee extends React.PureComponent {
     //   : () => console.log(`Link item clicked: '${item.component.props.text}'`)
     const text = item.component.props.text
     return React.cloneElement(item.component, {
-      key: text,
+      key: index,
       onClick: () => {
         this.setState({ currentText: text })
         this.handleClickItem(item)
@@ -137,7 +146,11 @@ export default class SmartFilterTee extends React.PureComponent {
           <AkNavigationItem
             isSelected
             onClick={this.stackPop}
-            text={this.state.currentText}
+            text={
+              <span>
+                <i className="fa fa-angle-left" /> {this.state.currentText}
+              </span>
+            }
           />
         )}
         <AkContainerNavigationNested stack={this.renderStack()} />

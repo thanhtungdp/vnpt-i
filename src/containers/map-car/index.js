@@ -8,7 +8,11 @@ import MapDefault from './map-default'
 export default class MapCarContainer extends Component {
   state = {
     navigationWidth: 300,
-    markerFilter: {}
+    markerFilter: {
+      isTransitStation: true,
+      // isAppointmentStation: true,
+      // isBurialStation: true
+    }
   }
 
   handleChangeMarkerFilter(markerFilter) {
@@ -21,6 +25,7 @@ export default class MapCarContainer extends Component {
         navigationWidth={this.state.navigationWidth}
         navigation={
           <SidebarNavigation
+            markerFilter={this.state.markerFilter}
             onChangeMarkerFilter={this.handleChangeMarkerFilter}
           />
         }

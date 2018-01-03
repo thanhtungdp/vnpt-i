@@ -5,7 +5,7 @@ import Clearfix from 'components/elements/clearfix'
 import NavigationItemCollapse from 'components/navigation/navigation-item-collapse'
 import markerIcon from 'themes/markerIcon'
 import update from 'react-addons-update'
-import CheckBoxItem from './CheckBoxItem'
+import CheckBoxItem from 'components/map/filter/check-box-item'
 import BillingIcon from '@atlaskit/icon/glyph/billing'
 
 @autobind
@@ -14,13 +14,14 @@ export default class MapFilter extends React.PureComponent {
     onChange: PropTypes.func
   }
 
-  state = {
-    markerFilter: {
-      isXe: false,
-      isOffline: false,
-      isRunning: false,
-      isRunningPlan: false,
-      isWarning: false
+  constructor(props) {
+    super(props)
+    this.state = {
+      markerFilter: {
+        isTransitStation: props.markerFilter.isTransitStation,
+        isAppointmentStation: props.markerFilter.isAppointmentStation,
+        isBurialStation: props.markerFilter.isBurialStation
+      }
     }
   }
 
@@ -52,25 +53,29 @@ export default class MapFilter extends React.PureComponent {
 
   render() {
     return (
-      <NavigationItemCollapse icon={<BillingIcon />} label="Trạng thái xe">
+      <NavigationItemCollapse
+        isOpen
+        icon={<BillingIcon label=""/>}
+        label="Các điểm trạm"
+      >
         <Clearfix height={8} />
-        {this.renderCheckBox(markerIcon.car, 'Xe', 'isXe')}
         {this.renderCheckBox(
-          markerIcon.carOffline,
-          'Xe không chạy',
-          'isOffline'
+          markerIcon.transitStation,
+          'Trạm trung chuyển',
+          'isTransitStation'
         )}
+        <Clearfix height={8} />
         {this.renderCheckBox(
-          markerIcon.carRunning,
-          'Xe đang chạy',
-          'isRunning'
+          markerIcon.appointmentStation,
+          'Trạm tập hợp',
+          'isAppointmentStation'
         )}
+        <Clearfix height={8} />
         {this.renderCheckBox(
-          markerIcon.carRunningPlan,
-          'Xe đang trong tuyến',
-          'isRunningPlan'
+          markerIcon.burialStation,
+          'Trạm chôn lấp',
+          'isBurialStation'
         )}
-        {this.renderCheckBox(markerIcon.carWarning, 'Xe vi phạm', 'isWarning')}
       </NavigationItemCollapse>
     )
   }

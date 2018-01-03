@@ -5,9 +5,15 @@ import styled from 'styled-components'
 import { GoogleMap, withScriptjs, withGoogleMap } from 'react-google-maps'
 import MarkerCar from 'components/map/marker/marker-car'
 import MarkerCarReal from 'components/map/marker/marker-car/real'
+import MarkerTransit from 'components/map/marker/marker-transit-station'
+import MarkerAppointment from 'components/map/marker/marker-appointment-station'
+import MarkerBurial from 'components/map/marker/marker-burial-station'
 import { getGoogleMapProps } from 'components/map/utils'
 import carList from 'fake-data/car'
 import carRealList from 'fake-data/carReal'
+import appointmentStationList from 'fake-data/stationsAppointment'
+import transitStationList from 'fake-data/stationsTransit'
+import { burialStationList } from 'fake-data/stationsBurial'
 
 const MapCarContainer = styled.div``
 
@@ -15,7 +21,14 @@ const MapCarContainer = styled.div``
 @withGoogleMap
 class CustomGoogleMap extends PureComponent {
   static propTypes = {
-    markerFilter: PropTypes.object
+    markerFilter: PropTypes.object,
+    isOffline: PropTypes.bool,
+    isRunning: PropTypes.bool,
+    isRunningPlan: PropTypes.bool,
+    isWarning: PropTypes.bool,
+    isTransitStation: PropTypes.bool,
+    isAppointmentStation: PropTypes.bool,
+    isBurialStation: PropTypes.bool
   }
 
   static defaultProps = {
@@ -30,7 +43,7 @@ class CustomGoogleMap extends PureComponent {
         defaultCenter={{ lat: 10.726909, lng: 106.616678 }}
       >
         <div>
-          {markerFilter.isXe &&
+          {markerFilter.isRunningPlan &&
             this.props.carList.map(location => (
               <MarkerCar
                 mapLocation={location.mapLocation}
@@ -45,7 +58,7 @@ class CustomGoogleMap extends PureComponent {
                 organization={location.organization}
               />
             ))}
-          {markerFilter.isXe &&
+          {markerFilter.isCar &&
             this.props.carRealList.map(location => (
               <MarkerCarReal
                 mapLocation={location.mapLocation}
@@ -58,6 +71,32 @@ class CustomGoogleMap extends PureComponent {
                 truckLoad={location.truckLoad}
                 type={location.type}
                 organization={location.organization}
+              />
+            ))}
+          {markerFilter.isTransitStation &&
+            this.props.transitStationList.map(location => (
+              <MarkerTransit
+                mapLocation={location.mapLocation}
+                name={location.name}
+                key={location.id}
+              />
+            ))}
+
+          {markerFilter.isAppointmentStation &&
+            this.props.appointmentStationList.map(location => (
+              <MarkerAppointment
+                mapLocation={location.mapLocation}
+                name={location.name}
+                key={location.id}
+              />
+            ))}
+
+          {markerFilter.isBurialStation &&
+            this.props.burialStationList.map(location => (
+              <MarkerBurial
+                mapLocation={location.mapLocation}
+                name={location.name}
+                key={location.id}
               />
             ))}
         </div>
@@ -78,6 +117,9 @@ export default class MapCar extends PureComponent {
           carList={carList}
           carRealList={carRealList}
           markerFilter={this.props.markerFilter}
+          transitStationList={transitStationList}
+          appointmentStationList={appointmentStationList}
+          burialStationList={burialStationList}
           {...getGoogleMapProps()}
         />
       </MapCarContainer>

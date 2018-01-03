@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import Clearfix from 'components/elements/clearfix'
 import NavigationItemCollapse from 'components/navigation/navigation-item-collapse'
 import update from 'react-addons-update'
-import CheckBoxItem from './CheckBoxItem'
+import CheckBoxItem from 'components/map/filter/check-box-item'
 import Icon from "themes/icon"
 
 @autobind
