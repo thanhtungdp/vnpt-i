@@ -3,11 +3,16 @@ import Link from 'components/elements/link'
 import { AkNavigationItem } from '@atlaskit/navigation'
 
 export class WrapperLinkComponent extends React.PureComponent {
+  static defaultProps = {
+    onClick: () => {}
+  }
+
   render() {
     const props = this.props
     return (
       <Link
         to={props.href}
+        onClick={this.props.onClick}
         className={props.className}
         title={props.title}
         style={props.style}

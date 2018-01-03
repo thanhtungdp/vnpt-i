@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react'
 import SingleSelect from '@atlaskit/single-select'
 import PropTypes from 'prop-types'
 import OrganizationApi from 'api/OrganizationApi'
+import Label from 'components/elements/label'
 
 export default class SelectBoxOrganization extends PureComponent {
   static propTypes = {
@@ -43,15 +44,21 @@ export default class SelectBoxOrganization extends PureComponent {
 
   render() {
     return (
-      <SingleSelect
-        placeholder="Choose a Organization"
-        items={this.state.selectItems}
-        noMatchesFound="Empty items"
-        hasAutocomplete
-        onSelected={object => this.props.onChange(object.item)}
-        defaultSelected={this.getRealValue()}
-        {...this.props}
-      />
+      <div>
+        {this.props.label && <Label>{this.props.label}</Label>}
+        <div>
+          <SingleSelect
+            placeholder="Choose a Organization"
+            items={this.state.selectItems}
+            noMatchesFound="Empty items"
+            hasAutocomplete
+            onSelected={object => this.props.onChange(object.item)}
+            defaultSelected={this.getRealValue()}
+            {...this.props}
+            label={null}
+          />
+        </div>
+      </div>
     )
   }
 }

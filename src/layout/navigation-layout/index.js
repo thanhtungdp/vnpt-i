@@ -9,12 +9,13 @@ import MediaServicesBlurIcon from '@atlaskit/icon/glyph/media-services/blur'
 import { withRouter } from 'react-router-dom'
 import AvatarCharacter from 'components/elements/avatar-character'
 import Link from 'components/elements/link'
+import CreateDrawer from './CreateDrawer'
 
 import Navigation, {
   AkContainerTitle,
   AkNavigationItem,
-  createGlobalTheme,
-  AkGlobalItem
+  AkGlobalItem,
+  createGlobalTheme
 } from '@atlaskit/navigation'
 import AkDropdownMenu, {
   DropdownItemGroup,
@@ -42,6 +43,22 @@ export default class BasicNestedNavigation extends React.Component {
     isShowBack: PropTypes.bool,
     onBack: PropTypes.func,
     logout: PropTypes.func
+  }
+
+  state = {
+    drawers: {
+      create: false
+    }
+  }
+
+  toggleDrawer(type) {
+    console.log(this.state)
+    this.setState({
+      drawers: {
+        ...this.state.drawers,
+        [type]: !this.state.drawers[type]
+      }
+    })
   }
 
   getContainerHeaderComponent = () => {
@@ -110,7 +127,26 @@ export default class BasicNestedNavigation extends React.Component {
         globalTheme={globalTheme}
         globalPrimaryIcon={<Logo />}
         containerHeaderComponent={() => this.getContainerHeaderComponent()}
-        globalCreateIcon={<AddItem label="Create" />}
+        drawers={[
+          <CreateDrawer
+            onBackButton={() => this.toggleDrawer('create')}
+            isOpen={this.state.drawers.create}
+          />
+        ]}
+        globalPrimaryActions={[
+          <AkGlobalItem
+            size="medium"
+            onClick={() => this.toggleDrawer('create')}
+          >
+            <Tooltip position="right" content="Create">
+              <AddItem
+                label="Create icon"
+                secondaryColor="inherit"
+                size="medium"
+              />
+            </Tooltip>
+          </AkGlobalItem>
+        ]}
         globalSecondaryActions={this.globalSecondaryActions()}
       >
         {this.props.children}

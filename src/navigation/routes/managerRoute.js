@@ -8,6 +8,8 @@ import LandfillList from 'containers/landfill/landfill-list'
 import LandfillCreate from 'containers/landfill/landfill-create'
 import LandfillEdit from 'containers/landfill/landfill-edit'
 import TransitStationList from 'containers/transit-station/transit-station-list'
+import TransitStationCreate from 'containers/transit-station/transit-station-create'
+import TransitStationEdit from 'containers/transit-station/transit-station-edit'
 import OrganizationList from 'containers/organization/organization-list'
 import OrganizationCreate from 'containers/organization/organization-create'
 import OrganizationEdit from 'containers/organization/organization-edit'
@@ -29,8 +31,18 @@ export default class ManagerRoute extends React.Component {
         <Route exact path={slug.landFill.edit} component={LandfillEdit} />
         <Route
           exact
-          path={slug.transitStation.list}
+          path={slug.stationTransit.list}
           component={TransitStationList}
+        />
+        <Route
+          exact
+          path={slug.stationTransit.create}
+          component={TransitStationCreate}
+        />
+        <Route
+          exact
+          path={slug.stationTransit.edit}
+          component={TransitStationEdit}
         />
         <Route
           exact

@@ -28,11 +28,26 @@ export function putStationBurial(_id, data) {
   return putFetch(getUrl(`stations-burial/${_id}`), data)
 }
 
-//API of Station Transits
 export function getStationTransits({ itemPerPage = 10, page = 1 }) {
   return getFetch(
     getUrl(`stations-transit?itemPerPage=${itemPerPage}&page=${page}`)
   )
+}
+
+//get One Reocord
+export function getStationTransit(_id) {
+  return getFetch(getUrl(`stations-transit/${_id}`))
+}
+
+export function postStationTransit(StationTransit = {}) {
+  return postFetch(getUrl('stations-transit'), StationTransit)
+}
+export function deleteStationTransit(_id) {
+  return deleteFetch(getUrl(`stations-transit/${_id}`))
+}
+
+export function putStationTransit(_id, data) {
+  return putFetch(getUrl(`stations-transit/${_id}`), data)
 }
 
 export default {
@@ -41,5 +56,9 @@ export default {
   postStationBurial,
   putStationBurial,
   deleteStationBurial,
-  getStationTransits
+  getStationTransits,
+  getStationTransit,
+  postStationTransit,
+  deleteStationTransit,
+  putStationTransit
 }

@@ -14,7 +14,7 @@ import EmojiTravelIcon from '@atlaskit/icon/glyph/emoji/travel'
 export default {
   map: <MapLocation label="" />,
   landFill: <EmojiFoodIcon label="" />,
-  transport: <SwitcherIcon label="" />,
+  transitStation: <SwitcherIcon label="" />,
   appointment: <EmojiFrequentIcon label="" />,
   direction: <DecisionIcon label="" />,
   organization: <OfficeBuildingFilledIcon label="" />,

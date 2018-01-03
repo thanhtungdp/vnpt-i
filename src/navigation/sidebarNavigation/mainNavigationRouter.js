@@ -38,43 +38,7 @@ const mapManagerComponent = {
         icon={Icon.map}
         text="Bản đồ vị trí"
       />
-      <AkNavigationItem
-        linkComponent={WrapperLinkComponent}
-        href={slug.map.car}
-        icon={Icon.car}
-        text="Bản đồ xe chạy"
-      />
     </AkNavigationItemGroup>
-  )
-}
-//
-// const landFillMenu = createChildListMenuItem(
-//   {
-//     icon: Icon.landFill,
-//     text: 'Bãi chôn lấp'
-//   },
-//   [
-//     {
-//       url: slug.landFill.list,
-//       icon: Icon.list,
-//       text: 'Danh sách bãi'
-//     },
-//     {
-//       url: slug.landFill.create,
-//       icon: Icon.create,
-//       text: 'Tạo mới bãi'
-//     }
-//   ]
-// )
-
-const transportMenu = {
-  component: (
-    <AkNavigationItem
-      linkComponent={WrapperLinkComponent}
-      href={slug.transitStation.base}
-      icon={Icon.transport}
-      text="Trạm trung chuyển"
-    />
   )
 }
 
@@ -95,6 +59,17 @@ const directionMenu = {
       href={slug.appointment.base}
       icon={Icon.direction}
       text="Lộ trình"
+    />
+  )
+}
+
+const transitMenu = {
+  component: (
+    <AkNavigationItem
+      linkComponent={WrapperLinkComponent}
+      href={slug.stationTransit.base}
+      icon={Icon.transitStation}
+      text="Trạm chung chuyển"
     />
   )
 }
@@ -150,7 +125,7 @@ export default [
   carMenu,
   groupManagerComponent,
   landFillMenu,
-  transportMenu,
+  transitMenu,
   appointmentMenu,
   directionMenu,
   mapManagerComponent
