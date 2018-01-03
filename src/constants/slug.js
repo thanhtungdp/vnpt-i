@@ -15,10 +15,12 @@ export default {
     edit: '/transit-station/edit/:_id',
     editWithCode: '/transit-station/edit/'
   },
-  appointment: {
+  staionAppointment: {
     base: '/appointment',
     list: '/appointment',
-    create: '/appointment/create'
+    create: '/appointment/create',
+    edit: '/appointment/edit/:_id',
+    editWithCode: '/appointment/edit/'
   },
   category: {
     base: '/category',

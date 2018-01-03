@@ -58,7 +58,7 @@ export default class CreateDrawer extends PureComponent {
               text="Thêm trạm trung chuyển"
             />
             <AkNavigationItem
-              href={slug.appointment.create}
+              href={slug.staionAppointment.create}
               linkComponent={WrapperLinkComponent}
               onClick={this.props.onBackButton}
               icon={Icon.appointment}

@@ -19,6 +19,9 @@ import CarEdit from 'containers/car/car-edit'
 import CategoriesList from 'containers/category/category-list'
 import CategoriesCreate from 'containers/category/category-create'
 import CategoriesEdit from 'containers/category/category-edit'
+import AppointmentStationList from 'containers/appointment-station/appointment-station-list'
+import AppointmentStationCreate from 'containers/appointment-station/appointment-station-create'
+import AppointmentStationEdit from 'containers/appointment-station/appointment-station-edit'
 
 @autobind
 export default class ManagerRoute extends React.Component {
@@ -43,6 +46,21 @@ export default class ManagerRoute extends React.Component {
           exact
           path={slug.stationTransit.edit}
           component={TransitStationEdit}
+        />
+        <Route
+          exact
+          path={slug.staionAppointment.list}
+          component={AppointmentStationList}
+        />
+        <Route
+          exact
+          path={slug.staionAppointment.create}
+          component={AppointmentStationCreate}
+        />
+        <Route
+          exact
+          path={slug.staionAppointment.edit}
+          component={AppointmentStationEdit}
         />
         <Route
           exact

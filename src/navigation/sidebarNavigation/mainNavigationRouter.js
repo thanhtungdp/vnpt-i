@@ -46,7 +46,7 @@ const appointmentMenu = {
   component: (
     <AkNavigationItem
       linkComponent={WrapperLinkComponent}
-      href={slug.appointment.base}
+      href={slug.staionAppointment.base}
       icon={Icon.appointment}
       text="Điểm hẹn"
     />
@@ -56,7 +56,7 @@ const directionMenu = {
   component: (
     <AkNavigationItem
       linkComponent={WrapperLinkComponent}
-      href={slug.appointment.base}
+      href={slug.staionAppointment.base}
       icon={Icon.direction}
       text="Lộ trình"
     />
