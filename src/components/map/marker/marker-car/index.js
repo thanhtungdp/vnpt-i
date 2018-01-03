@@ -12,7 +12,7 @@ import Marker from '../../utils/marker-with-label-animate'
 const { InfoBox } = require('react-google-maps/lib/components/addons/InfoBox')
 
 const MIN_WIDTH_INFO = '150px'
-const TIME_DURATION = 1000 * 60 * 2
+const TIME_DURATION = 1000 * 30 * 2
 
 @autobind
 export default class MarkerCar extends PureComponent {
@@ -146,12 +146,15 @@ export default class MarkerCar extends PureComponent {
           position={this.state.mapLocation}
           labelProps={{
             labelContent: this.props.name ? this.props.name : 'label',
-            labelAnchor: new google.maps.Point(this.props.name.length * 2.4, 0),
+            labelAnchor: new google.maps.Point(30, 0),
             labelStyle: {
-              backgroundColor: 'yellow',
-              borderRadius: 2,
+              backgroundColor: '#2ecc71',
+              borderRadius: '3px',
               fontSize: '12px',
-              padding: 10
+              padding: '2px',
+              color: 'white',
+              textAlign: 'center',
+              whiteteSpace: 'nowrap'
             }
           }}
         >

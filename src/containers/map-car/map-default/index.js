@@ -39,8 +39,8 @@ class CustomGoogleMap extends PureComponent {
     const markerFilter = this.props.markerFilter
     return (
       <GoogleMap
-        defaultZoom={8}
-        defaultCenter={{ lat: 10.726909, lng: 106.616678 }}
+        defaultZoom={12}
+        defaultCenter={{ lat: 10.7607494, lng: 106.6954122 }}
       >
         <div>
           {markerFilter.isRunningPlan &&
@@ -58,21 +58,21 @@ class CustomGoogleMap extends PureComponent {
                 organization={location.organization}
               />
             ))}
-          {markerFilter.isCar &&
-            this.props.carRealList.map(location => (
-              <MarkerCarReal
-                mapLocation={location.mapLocation}
-                name={location.name}
-                key={location.id}
-                listLocation={location.listLocation}
-                status={location.status}
-                stationDetails={location.stationDetails}
-                stationDistance={location.stationDistance}
-                truckLoad={location.truckLoad}
-                type={location.type}
-                organization={location.organization}
-              />
-            ))}
+          {this.props.carRealList.map(location => (
+            <MarkerCarReal
+              mapLocation={location.mapLocation}
+              name={location.name}
+              key={location.id}
+              listLocation={location.listLocation}
+              status={location.status}
+              stationDetails={location.stationDetails}
+              stationDistance={location.stationDistance}
+              truckLoad={location.truckLoad}
+              type={location.type}
+              organization={location.organization}
+              markerFilter={markerFilter}
+            />
+          ))}
           {markerFilter.isTransitStation &&
             this.props.transitStationList.map(location => (
               <MarkerTransit
