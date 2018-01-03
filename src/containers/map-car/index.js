@@ -9,7 +9,7 @@ export default class MapCarContainer extends Component {
   state = {
     navigationWidth: 300,
     markerFilter: {
-      isTransitStation: true,
+      isTransitStation: true
       // isAppointmentStation: true,
       // isBurialStation: true
     }

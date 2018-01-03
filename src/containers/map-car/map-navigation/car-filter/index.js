@@ -8,7 +8,7 @@ import CheckBoxItem from 'components/map/filter/check-box-item'
 import Icon from 'themes/icon'
 
 @autobind
-export default class CarFilter   extends React.PureComponent {
+export default class CarFilter extends React.PureComponent {
   static propTypes = {
     onChange: PropTypes.func
   }
