@@ -14,16 +14,16 @@ export function createCategory(categoryData = {}) {
 }
 
 //get one record
-export function getCategory(code) {
-  return getFetch(getUrl(code))
+export function getCategory(_id) {
+  return getFetch(getUrl(_id))
 }
 
-export function updateCategory(code, categoryData) {
-  return putFetch(getUrl(code), categoryData)
+export function updateCategory(_id, categoryData) {
+  return putFetch(getUrl(_id), categoryData)
 }
 
-export function deleteCategory(code) {
-  return deleteFetch(getUrl(code))
+export function deleteCategory(_id) {
+  return deleteFetch(getUrl(_id))
 }
 
 export default {
