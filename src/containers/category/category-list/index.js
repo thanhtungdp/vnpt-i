@@ -83,7 +83,7 @@ export default class CategoriesList extends PureComponent {
                   e,
                   row.name,
                   item => item._id === row._id,
-                  row.code
+                  row._id
                 )
               }
             >
@@ -101,7 +101,7 @@ export default class CategoriesList extends PureComponent {
         title="Danh sách chuyên mục"
         right={
           <LinkA to={slug.category.create}>
-            <Button iconBefore={Icon.create} customColor="primary">
+            <Button iconBefore={Icon.category} appearance="primary">
               Tạo mới
             </Button>
           </LinkA>

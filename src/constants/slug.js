@@ -26,7 +26,7 @@ export default {
     base: '/category',
     list: '/category',
     create: '/category/create',
-    edit: '/category/edit/:code',
+    edit: '/category/edit/:_id',
     editWithCode: '/category/edit/'
   },
   map: {

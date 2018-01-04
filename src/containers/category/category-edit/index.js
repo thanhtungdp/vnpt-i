@@ -15,16 +15,17 @@ export default class CategoriesEdit extends PureComponent {
   }
 
   async componentWillMount() {
-    const code = this.props.match.params.code
-    const record = await getCategory(code)
+    const _id = this.props.match.params._id
+    const record = await getCategory(_id)
     this.setState({
       loaded: true,
       dataEdit: record
     })
+    console.log(this.state.dataEdit)
   }
 
   async handleSubmit(categoryData) {
-    const res = await updateCategory(this.state.dataEdit.code, categoryData)
+    const res = await updateCategory(categoryData._id, categoryData)
     if (res.error) {
       swal({
         title: 'Error',

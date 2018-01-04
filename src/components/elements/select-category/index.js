@@ -27,12 +27,14 @@ export default class SelectCategory extends React.Component {
   }
 
   render() {
-    return (
-      <SingleSelect
-        shouldFitContainer
-        dataItems={this.state.dataItems}
-        {...this.props}
-      />
-    )
+    if (this.state.dataItems.length > 0)
+      return (
+        <SingleSelect
+          shouldFitContainer
+          dataItems={this.state.dataItems}
+          {...this.props}
+        />
+      )
+    return null
   }
 }
