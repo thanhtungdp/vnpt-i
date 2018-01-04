@@ -15,16 +15,25 @@ export default {
     edit: '/transit-station/edit/:_id',
     editWithCode: '/transit-station/edit/'
   },
-  appointment: {
+  staionAppointment: {
     base: '/appointment',
     list: '/appointment',
-    create: '/appointment/create'
+    create: '/appointment/create',
+    edit: '/appointment/edit/:_id',
+    editWithCode: '/appointment/edit/'
+  },
+  routePlan: {
+    base: '/route-plan',
+    list: '/route-plan',
+    create: '/route-plan/create',
+    edit: '/route-plan/edit/:_id',
+    editWithCode: '/route-plan/edit/'
   },
   category: {
     base: '/category',
     list: '/category',
     create: '/category/create',
-    edit: '/category/edit/:code',
+    edit: '/category/edit/:_id',
     editWithCode: '/category/edit/'
   },
   map: {

@@ -50,6 +50,28 @@ export function putStationTransit(_id, data) {
   return putFetch(getUrl(`stations-transit/${_id}`), data)
 }
 
+export function getStationAppointments({ itemPerPage = 10, page = 1 }) {
+  return getFetch(
+    getUrl(`stations-appointment?itemPerPage=${itemPerPage}&page=${page}`)
+  )
+}
+
+//get One Reocord
+export function getStationAppointment(_id) {
+  return getFetch(getUrl(`stations-appointment/${_id}`))
+}
+
+export function postStationAppointment(StationAppointment = {}) {
+  return postFetch(getUrl('stations-appointment'), StationAppointment)
+}
+export function deleteStationAppointment(_id) {
+  return deleteFetch(getUrl(`stations-appointment/${_id}`))
+}
+
+export function putStationAppointment(_id, data) {
+  return putFetch(getUrl(`stations-appointment/${_id}`), data)
+}
+
 export default {
   getStationBurials,
   getStationBurial,
@@ -60,5 +82,10 @@ export default {
   getStationTransit,
   postStationTransit,
   deleteStationTransit,
-  putStationTransit
+  putStationTransit,
+  getStationAppointments,
+  getStationAppointment,
+  postStationAppointment,
+  deleteStationAppointment,
+  putStationAppointment
 }

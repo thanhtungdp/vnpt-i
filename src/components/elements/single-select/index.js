@@ -34,6 +34,7 @@ export default class SingleSelectCustom extends React.PureComponent {
     }
     return this.props.value
   }
+
   render() {
     return (
       <div style={{ width: '100%', display: 'block' }}>

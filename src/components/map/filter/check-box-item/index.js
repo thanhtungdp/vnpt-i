@@ -23,7 +23,7 @@ export default class CheckBoxItemCustom extends React.PureComponent {
           {...this.props}
           label={
             <span>
-              <CheckboxItemImage src={this.props.image} />
+              {this.props.image && <CheckboxItemImage src={this.props.image} />}
               {this.props.label}
             </span>
           }
