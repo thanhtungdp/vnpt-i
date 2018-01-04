@@ -9,10 +9,12 @@ import SelectBoxOrganization from 'components/elements/select-box-organization'
 import Button from 'components/elements/button'
 import Clearfix from 'components/elements/clearfix'
 import DateTimePicker from 'components/elements/datetime-picker'
+import SelectBoxStations from 'components/elements/select-box-stations'
 
 const FInputLabel = createValidateComponent(InputLabel)
 const FSelectBoxOrganization = createValidateComponent(SelectBoxOrganization)
 const FDateTimePicker = createValidateComponent(DateTimePicker)
+const FSelectBoxStations = createValidateComponent(SelectBoxStations)
 
 function validate(values) {
   const errors = {}
@@ -43,6 +45,8 @@ export default class LandfillForm extends PureComponent {
   render() {
     return (
       <form onSubmit={this.props.handleSubmit(this.props.onSubmit.bind(this))}>
+        <Field name="" label="Test" labelType="Loại" labelStation="Station" component={FSelectBoxStations} />
+        <Clearfix height={16} />
         <Field name="name" label="Tên trạm" component={FInputLabel} />
         <Clearfix height={16} />
         <Field name="address" label="Địa chỉ" component={FInputLabel} />

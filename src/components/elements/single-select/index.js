@@ -35,6 +35,7 @@ export default class SingleSelectCustom extends React.PureComponent {
     return this.props.value
   }
   render() {
+    console.log(this.props.dataItems)
     return (
       <div style={{ width: '100%', display: 'block' }}>
         <Label>{this.props.label}</Label>
