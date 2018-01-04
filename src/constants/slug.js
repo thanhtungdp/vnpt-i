@@ -22,6 +22,13 @@ export default {
     edit: '/appointment/edit/:_id',
     editWithCode: '/appointment/edit/'
   },
+  routePlan: {
+    base: '/route-plan',
+    list: '/route-plan',
+    create: '/route-plan/create',
+    edit: '/route-plan/edit/:_id',
+    editWithCode: '/route-plan/edit/'
+  },
   category: {
     base: '/category',
     list: '/category',

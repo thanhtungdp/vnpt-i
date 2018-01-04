@@ -2,12 +2,12 @@ import React, { PureComponent } from 'react'
 import PageContainer from 'layout/default-sidebar-layout/PageContainer'
 import { withRouter } from 'react-router-dom'
 import { autobind } from 'core-decorators'
-import AppointmentStationForm from '../appointment-station-form/index'
 import slug from 'constants/slug'
 import swal from 'sweetalert2'
 import Icon from 'themes/icon'
-import Breadcrumb from '../breadcrumb'
 import { postStationAppointment } from 'api/StationApi'
+import AppointmentStationForm from '../appointment-station-form/index'
+import Breadcrumb from '../breadcrumb'
 
 @withRouter
 @autobind

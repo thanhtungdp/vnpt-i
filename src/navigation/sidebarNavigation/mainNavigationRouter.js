@@ -56,7 +56,7 @@ const directionMenu = {
   component: (
     <AkNavigationItem
       linkComponent={WrapperLinkComponent}
-      href={slug.staionAppointment.base}
+      href={slug.routePlan.base}
       icon={Icon.direction}
       text="Lộ trình"
     />
