@@ -53,14 +53,7 @@ export default class CategoriesForm extends PureComponent {
   }
 
   handleSubmit(values) {
-    const data = {
-      name: values.name,
-      code: values.code,
-      description: values.description,
-      type: values.type,
-      parentCode: values.parentCode === undefined ? '' : values.parentCode
-    }
-    return this.props.onSubmit(data)
+    return this.props.onSubmit(values)
   }
 
   render() {
@@ -77,7 +70,7 @@ export default class CategoriesForm extends PureComponent {
           </Col>
           <Col md={4}>
             <Field
-              name="parentCode"
+              name="parentId"
               component={FSelectCategory}
               label="Chuyên mục cha"
             />

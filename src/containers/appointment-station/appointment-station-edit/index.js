@@ -1,31 +1,36 @@
 import React, { PureComponent } from 'react'
 import PageContainer from 'layout/default-sidebar-layout/PageContainer'
-import Icon from 'themes/icon'
-import { getCategory, updateCategory } from 'api/CategoryApi'
+import StationApi from 'api/StationApi'
+import AppointmentStationForm from '../appointment-station-form'
 import swal from 'sweetalert2'
-import CategoryForm from '../category-form'
+import Icon from 'themes/icon'
 import Breadcrumb from '../breadcrumb'
 
-export default class CategoriesEdit extends PureComponent {
-  static propTypes = {}
-
+export default class AppointmentStationEdit extends PureComponent {
   state = {
     loaded: false,
+    submitting: false,
     dataEdit: {}
   }
 
+  static propTypes = {}
+
   async componentWillMount() {
     const _id = this.props.match.params._id
-    const record = await getCategory(_id)
+    const record = await StationApi.getStationAppointment(_id)
     this.setState({
       loaded: true,
-      dataEdit: record
+      dataEdit: {
+        ...record,
+        lat: record.mapLocation.lat,
+        long: record.mapLocation.long
+      }
     })
-    console.log(this.state.dataEdit)
   }
 
-  async handleSubmit(categoryData) {
-    const res = await updateCategory(categoryData._id, categoryData)
+  async onSubmit(data) {
+    const _id = data._id
+    const res = await StationApi.putStationAppointment(_id, data)
     if (res.error) {
       swal({
         title: 'Error',
@@ -42,24 +47,21 @@ export default class CategoriesEdit extends PureComponent {
 
   render() {
     return (
-      <PageContainer
-        icon={Icon.edit}
-        title={this.state.dataEdit.name ? this.state.dataEdit.name : ''}
-      >
+      <PageContainer icon={Icon.edit} title="Sửa bãi">
         <Breadcrumb
           items={[
             'list',
             {
               id: 'edit',
-              href: '/',
+              href: '',
               name: this.state.dataEdit.name
             }
           ]}
         />
         {this.state.loaded && (
-          <CategoryForm
-            isEdit
-            onSubmit={this.handleSubmit}
+          <AppointmentStationForm
+            isEdit={true}
+            onSubmit={this.onSubmit}
             initialValues={this.state.dataEdit}
           />
         )}

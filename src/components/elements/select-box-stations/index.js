@@ -1,16 +1,15 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import SingleSelect from 'components/elements/single-select'
-import Clearfix from 'components/elements/clearfix'
 import styled from 'styled-components'
 import { autobind } from 'core-decorators'
 import stationType from 'constants/stationType'
 import { Row, Col } from 'reactstrap'
+import StationApi from 'api/StationApi'
 
 const View = styled.div`
   display: flex;
 `
-
 
 const stationTypeDataItems = [
   {
@@ -36,24 +35,29 @@ export default class SelectBoxStations extends PureComponent {
   }
 
   async handleChangeStationType(value) {
-    console.log(value)
-    return
-    const station = await this.componentSelectBoxCar.loatDataWithOrganization({
-      _id: value._id
-    })
+    const stationWithType = await StationApi.getStationWithType(value, {})
+
+    const items = stationWithType.data.map(record => ({
+      content: `${record.name}`,
+      value: record._id
+    }))
+
     this.setState(
       {
-        station: station
+        station: [
+          {
+            heading: 'Tên',
+            items: items
+          }
+        ]
       },
       () => {
-        this.props.onChange(this.state)
+        this.props.onChange(this.state.station)
       }
     )
   }
 
   handleChangeStations(value) {
-    //console.log(value)
-
     this.setState({ value }, () => {
       this.props.onChange(this.state)
     })
@@ -66,7 +70,6 @@ export default class SelectBoxStations extends PureComponent {
           <Col>
             <SingleSelect
               label={this.props.labelType}
-              //dataItems={stationTypeDataItems}
               dataItems={stationTypeDataItems}
               onChange={this.handleChangeStationType}
             />
@@ -74,10 +77,8 @@ export default class SelectBoxStations extends PureComponent {
           <Col>
             <SingleSelect
               label={this.props.labelStation}
-              //dataItems={stationTypeDataItems}
               dataItems={this.state.station}
               onChange={this.handleChangeStations}
-              //query={{}}
             />
           </Col>
         </Row>

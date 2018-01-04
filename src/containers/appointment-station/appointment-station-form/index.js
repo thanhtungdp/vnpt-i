@@ -1,20 +1,17 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import { withRouter } from 'react-router-dom'
 import { Row, Col } from 'reactstrap'
 import { reduxForm, Field } from 'redux-form'
 import createValidateComponent from 'components/elements/redux-form-validate'
 import InputLabel from 'components/elements/input-label'
 import SelectBoxOrganization from 'components/elements/select-box-organization'
+import CalendarCustom from 'components/elements/datetime-picker'
 import Button from 'components/elements/button'
 import Clearfix from 'components/elements/clearfix'
-import DateTimePicker from 'components/elements/datetime-picker'
-import SelectBoxStations from 'components/elements/select-box-stations'
 
 const FInputLabel = createValidateComponent(InputLabel)
 const FSelectBoxOrganization = createValidateComponent(SelectBoxOrganization)
-const FDateTimePicker = createValidateComponent(DateTimePicker)
-const FSelectBoxStations = createValidateComponent(SelectBoxStations)
+const FCalendarCustom = createValidateComponent(CalendarCustom)
 
 function validate(values) {
   const errors = {}
@@ -30,15 +27,12 @@ function validate(values) {
 }
 
 @reduxForm({
-  form: 'LandfillForm',
+  form: 'AppointmentStationForm',
   validate
 })
-@withRouter
-export default class LandfillForm extends PureComponent {
+export default class AppointmentStationForm extends PureComponent {
   static propTypes = {
     onSubmit: PropTypes.func,
-    submitting: PropTypes.bool,
-    handleSubmit: PropTypes.func,
     isEdit: PropTypes.bool
   }
 
@@ -59,30 +53,37 @@ export default class LandfillForm extends PureComponent {
         </Row>
         <Clearfix height={16} />
         <Row>
-          <Col md={4}>
+          <Col md={6}>
+            <Field
+              name="airsesFromDate"
+              label="Hoạt động: Từ ngày"
+              component={FCalendarCustom}
+            />
+          </Col>
+          <Col md={6}>
+            <Field
+              name="airsesToDate"
+              label="Đến ngày"
+              component={FCalendarCustom}
+            />
+          </Col>
+        </Row>
+        <Clearfix height={16} />
+        <Row>
+          <Col md={6}>
+            <Field name="year" label="Năm" component={FInputLabel} />
+          </Col>
+          <Col md={6}>
             <Field
               name="arisesMass"
               label="Khối lượng tăng"
               component={FInputLabel}
             />
           </Col>
-          <Col md={4}>
-            <Field name="acreage" label="Diện tích" component={FInputLabel} />
-          </Col>
-          <Col md={4}>
-            <Field name="capacity" label="Sức chứa" component={FInputLabel} />
-          </Col>
         </Row>
         <Clearfix height={16} />
         <Row>
-          <Col md={4}>
-            <Field
-              name="airsesToDate"
-              label="Phát sinh đến ngày"
-              component={FDateTimePicker}
-            />
-          </Col>
-          <Col md={4}>
+          <Col>
             <Field
               name="organization"
               label="Tổ chức"
