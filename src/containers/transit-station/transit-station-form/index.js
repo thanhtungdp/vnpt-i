@@ -45,10 +45,10 @@ export default class TransitStationForm extends PureComponent {
         <Clearfix height={16} />
         <Row>
           <Col md={6}>
-            <Field name="lat" label="Kinh độ" component={FInputLabel} />
+            <Field name="long" label="Kinh độ" component={FInputLabel} />
           </Col>
           <Col md={6}>
-            <Field name="long" label="Vĩ độ" component={FInputLabel} />
+            <Field name="lat" label="Vĩ độ" component={FInputLabel} />
           </Col>
         </Row>
         <Clearfix height={16} />

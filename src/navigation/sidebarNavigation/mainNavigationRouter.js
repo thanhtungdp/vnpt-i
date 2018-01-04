@@ -69,7 +69,7 @@ const transitMenu = {
       linkComponent={WrapperLinkComponent}
       href={slug.stationTransit.base}
       icon={Icon.transitStation}
-      text="Trạm chung chuyển"
+      text="Trạm trung chuyển"
     />
   )
 }
