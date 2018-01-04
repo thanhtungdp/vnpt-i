@@ -67,13 +67,13 @@ export default class MapFilter extends React.PureComponent {
         <Clearfix height={8} />
         {this.renderCheckBox(
           markerIcon.appointmentStation,
-          'Trạm tập hợp',
+          'Điểm hẹn',
           'isAppointmentStation'
         )}
         <Clearfix height={8} />
         {this.renderCheckBox(
           markerIcon.burialStation,
-          'Trạm chôn lấp',
+          'Bãi chôn lấp',
           'isBurialStation'
         )}
       </NavigationItemCollapse>
