@@ -14,7 +14,6 @@ export default class CategoriesCreate extends PureComponent {
   static propTypes = {}
 
   async handleSubmit(data) {
-    console.log(data)
     const category = await createCategory(data)
     const context = this
     if (category.error) {

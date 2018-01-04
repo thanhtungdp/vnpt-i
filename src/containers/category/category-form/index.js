@@ -53,7 +53,6 @@ export default class CategoriesForm extends PureComponent {
   }
 
   handleSubmit(values) {
-
     return this.props.onSubmit(values)
   }
 

@@ -82,7 +82,9 @@ export default class StationTransitList extends PureComponent {
       {
         content: (
           <div>
-            <LinkA to={slug.staionAppointment.editWithCode + row._id}>Sửa</LinkA>
+            <LinkA to={slug.staionAppointment.editWithCode + row._id}>
+              Sửa
+            </LinkA>
             &nbsp;&nbsp;&nbsp;
             <LinkColor
               colorType="red"
