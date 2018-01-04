@@ -21,7 +21,6 @@ export default class CategoriesEdit extends PureComponent {
       loaded: true,
       dataEdit: record
     })
-    console.log(this.state.dataEdit)
   }
 
   async handleSubmit(categoryData) {
