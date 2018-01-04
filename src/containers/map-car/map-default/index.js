@@ -13,8 +13,12 @@ import carList from 'fake-data/car'
 import carRealList from 'fake-data/carReal'
 import appointmentStationList from 'fake-data/stationsAppointment'
 import transitStationList from 'fake-data/stationsTransit'
-import { burialStationList as aaaa } from 'fake-data/stationsBurial'
-import { getStationBurials, getStationTransits } from 'api/StationApi'
+import { burialStationList } from 'fake-data/stationsBurial'
+import {
+  getStationBurials,
+  getStationTransits,
+  getStationAppointments
+} from 'api/StationApi'
 import { resolveMapLocation } from 'utils/resolveMapLocation'
 
 const MapCarContainer = styled.div``
@@ -37,8 +41,6 @@ class CustomGoogleMap extends PureComponent {
   static defaultProps = {
     markerFilter: {}
   }
-
-
 
   render() {
     const markerFilter = this.props.markerFilter
@@ -83,7 +85,7 @@ class CustomGoogleMap extends PureComponent {
               <MarkerTransit
                 mapLocation={location.mapLocation}
                 name={location.name}
-                key={location.id}
+                key={location._id}
               />
             ))}
 
@@ -92,7 +94,7 @@ class CustomGoogleMap extends PureComponent {
               <MarkerAppointment
                 mapLocation={location.mapLocation}
                 name={location.name}
-                key={location.id}
+                key={location._id}
               />
             ))}
 
@@ -101,7 +103,7 @@ class CustomGoogleMap extends PureComponent {
               <MarkerBurial
                 mapLocation={location.mapLocation}
                 name={location.name}
-                key={location.name}
+                key={location._id}
               />
             ))}
         </div>
@@ -116,19 +118,31 @@ export default class MapCar extends PureComponent {
   }
   state = {
     burialStationList: [],
-    transitStationList: []
+    transitStationList: [],
+    appointmentStationList: []
   }
 
   async componentDidMount() {
-    const burialStationList = await getStationBurials({ itemPerPage: MAX_VALUE })
+    const burialStationList = await getStationBurials({
+      itemPerPage: MAX_VALUE
+    })
     this.setState({
       burialStationList: await resolveMapLocation(burialStationList.data)
     })
-    const transitStationList = await getStationTransits({ itemPerPage: MAX_VALUE })
+    const transitStationList = await getStationTransits({
+      itemPerPage: MAX_VALUE
+    })
     this.setState({
       transitStationList: await resolveMapLocation(transitStationList.data)
     })
-    
+    const appointmentStationList = await getStationAppointments({
+      itemPerPage: MAX_VALUE
+    })
+    this.setState({
+      appointmentStationList: await resolveMapLocation(
+        appointmentStationList.data
+      )
+    })
   }
 
   render() {
@@ -139,9 +153,9 @@ export default class MapCar extends PureComponent {
           carRealList={carRealList}
           markerFilter={this.props.markerFilter}
           transitStationList={this.state.transitStationList}
-          appointmentStationList={appointmentStationList}
+          appointmentStationList={this.state.appointmentStationList}
           burialStationList={this.state.burialStationList}
-          {...getGoogleMapProps() }
+          {...getGoogleMapProps()}
         />
       </MapCarContainer>
     )
