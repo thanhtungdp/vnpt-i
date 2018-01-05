@@ -14,12 +14,7 @@ export default class SingleSelectCustom extends React.PureComponent {
     dataItems: PropTypes.arrayOf(
       PropTypes.shape({
         heading: PropTypes.string,
-        items: PropTypes.arrayOf(
-          PropTypes.shape({
-            content: PropTypes.string,
-            value: PropTypes.string
-          })
-        )
+        items: PropTypes.arrayOf(PropTypes.shape())
       })
     )
   }
@@ -50,7 +45,7 @@ export default class SingleSelectCustom extends React.PureComponent {
                 ? false
                 : this.props.droplistShouldFitContainer
             }
-            onSelected={object => this.props.onChange(object.item.value)}
+            onSelected={object => this.props.onChange(object.item)}
             defaultSelected={this.getRealValue()}
             selectedItem={this.getRealValue()}
           />

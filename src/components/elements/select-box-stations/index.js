@@ -31,6 +31,7 @@ export default class SelectBoxStations extends PureComponent {
   }
 
   state = {
+    type: [],
     station: []
   }
 
@@ -52,7 +53,7 @@ export default class SelectBoxStations extends PureComponent {
         ]
       },
       () => {
-        this.props.onChange(this.state.station)
+        this.props.onChange(this.state)
       }
     )
   }
