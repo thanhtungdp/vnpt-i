@@ -11,10 +11,12 @@ import Button from 'components/elements/button'
 
 import Clearfix from 'components/elements/clearfix'
 import categoriesType from 'constants/categoryType'
+import SelectStation from 'components/elements/select-box-stations'
 
 const FInputLabel = createValidateComponent(InputLabel)
 const FSelect = createValidateComponent(SingleSelect)
 const FSelectCategory = createValidateComponent(SelectCategory)
+const FSelectStation = createValidateComponent(SelectStation)
 
 function validate(values) {
   const min = 4

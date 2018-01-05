@@ -35,7 +35,6 @@ export default class SelectBoxOrganizationAndCar extends PureComponent {
     const car = await this.componentSelectBoxCar.loatDataWithOrganization({
       _id: organization._id
     })
-    console.log(car)
     this.setState(
       {
         organization,
