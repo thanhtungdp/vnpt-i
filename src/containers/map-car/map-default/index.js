@@ -14,8 +14,15 @@ import carRealList from 'fake-data/carReal'
 import appointmentStationList from 'fake-data/stationsAppointment'
 import transitStationList from 'fake-data/stationsTransit'
 import { burialStationList } from 'fake-data/stationsBurial'
+import {
+  getStationBurials,
+  getStationTransits,
+  getStationAppointments
+} from 'api/StationApi'
+import { resolveMapLocation } from 'utils/resolveMapLocation'
 
 const MapCarContainer = styled.div``
+const MAX_VALUE = 99999
 
 @withScriptjs
 @withGoogleMap
@@ -78,7 +85,7 @@ class CustomGoogleMap extends PureComponent {
               <MarkerTransit
                 mapLocation={location.mapLocation}
                 name={location.name}
-                key={location.id}
+                key={location._id}
               />
             ))}
 
@@ -87,7 +94,7 @@ class CustomGoogleMap extends PureComponent {
               <MarkerAppointment
                 mapLocation={location.mapLocation}
                 name={location.name}
-                key={location.id}
+                key={location._id}
               />
             ))}
 
@@ -96,7 +103,7 @@ class CustomGoogleMap extends PureComponent {
               <MarkerBurial
                 mapLocation={location.mapLocation}
                 name={location.name}
-                key={location.id}
+                key={location._id}
               />
             ))}
         </div>
@@ -109,6 +116,34 @@ export default class MapCar extends PureComponent {
   static propTypes = {
     markerFilter: PropTypes.object
   }
+  state = {
+    burialStationList: [],
+    transitStationList: [],
+    appointmentStationList: []
+  }
+
+  async componentDidMount() {
+    const burialStationList = await getStationBurials({
+      itemPerPage: MAX_VALUE
+    })
+    this.setState({
+      burialStationList: await resolveMapLocation(burialStationList.data)
+    })
+    const transitStationList = await getStationTransits({
+      itemPerPage: MAX_VALUE
+    })
+    this.setState({
+      transitStationList: await resolveMapLocation(transitStationList.data)
+    })
+    const appointmentStationList = await getStationAppointments({
+      itemPerPage: MAX_VALUE
+    })
+    this.setState({
+      appointmentStationList: await resolveMapLocation(
+        appointmentStationList.data
+      )
+    })
+  }
 
   render() {
     return (
@@ -117,9 +152,9 @@ export default class MapCar extends PureComponent {
           carList={carList}
           carRealList={carRealList}
           markerFilter={this.props.markerFilter}
-          transitStationList={transitStationList}
-          appointmentStationList={appointmentStationList}
-          burialStationList={burialStationList}
+          transitStationList={this.state.transitStationList}
+          appointmentStationList={this.state.appointmentStationList}
+          burialStationList={this.state.burialStationList}
           {...getGoogleMapProps()}
         />
       </MapCarContainer>

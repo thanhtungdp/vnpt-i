@@ -6,7 +6,7 @@ export default createBreadcrumb({
   list: {
     id: 'list',
     href: slug.stationTransit.base,
-    name: 'Trạm chung chuyển',
+    name: 'Trạm trung chuyển',
     icon: Icon.transitStation
   },
   create: {
