@@ -289,5 +289,33 @@ export default [
     mapLocation: { lat: 10.775502, lng: 106.727618 },
     status: carStatus.RUNNING,
     district: 'Quận Bình Tân'
+  },
+  {
+    id: 7,
+    name: '51D11856',
+    mapLocation: { lat: 10.775502, lng: 106.727618 },
+    status: carStatus.RUNNING,
+    district: 'Quận Bình Tân'
+  },
+  {
+    id: 8,
+    name: '51D08241',
+    mapLocation: { lat: 10.775502, lng: 106.727618 },
+    status: carStatus.RUNNING,
+    district: 'Quận Bình Tân'
+  },
+  {
+    id: 9,
+    name: '51D12610',
+    mapLocation: { lat: 10.775502, lng: 106.727618 },
+    status: carStatus.RUNNING,
+    district: 'Quận Bình Tân'
+  },
+  {
+    id: 10,
+    name: '51C39876',
+    mapLocation: { lat: 10.775502, lng: 106.727618 },
+    status: carStatus.RUNNING,
+    district: 'Quận Bình Tân'
   }
 ]
