@@ -1,8 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import SingleSelect from '@atlaskit/single-select'
-import Label from '../label'
 import styled from 'styled-components'
+import Label from '../label'
 
 const Container = styled.div`
   display: flex;
@@ -14,7 +14,7 @@ export default class SingleSelectCustom extends React.PureComponent {
     dataItems: PropTypes.arrayOf(
       PropTypes.shape({
         heading: PropTypes.string,
-        items: PropTypes.arrayOf(PropTypes.shape())
+        items: PropTypes.arrayOf(PropTypes.object)
       })
     )
   }
