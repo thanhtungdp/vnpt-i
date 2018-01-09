@@ -5,6 +5,24 @@ function getUrl(path) {
   return STATION_API + '/' + path
 }
 
+/* API lấy trạm theo loại */
+export function getStationWithType(type, { itemPerPage = 1000, page = 1 }) {
+  console.log(type, itemPerPage, page)
+  if (type === 'appointment') {
+    return getFetch(
+      getUrl(`stations-appointment?itemPerPage=${itemPerPage}&page=${page}`)
+    )
+  } else if (type === 'transit') {
+    return getFetch(
+      getUrl(`stations-transit?itemPerPage=${itemPerPage}&page=${page}`)
+    )
+  } else if (type === 'burial') {
+    return getFetch(
+      getUrl(`stations-burial?itemPerPage=${itemPerPage}&page=${page}`)
+    )
+  }
+}
+
 //API of Station Burial
 export function getStationBurials({ itemPerPage = 10, page = 1 }) {
   return getFetch(
@@ -87,5 +105,6 @@ export default {
   getStationAppointment,
   postStationAppointment,
   deleteStationAppointment,
-  putStationAppointment
+  putStationAppointment,
+  getStationWithType
 }
