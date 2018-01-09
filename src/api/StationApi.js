@@ -7,7 +7,6 @@ function getUrl(path) {
 
 /* API lấy trạm theo loại */
 export function getStationWithType(type, { itemPerPage = 1000, page = 1 }) {
-  console.log(type, itemPerPage, page)
   if (type === 'appointment') {
     return getFetch(
       getUrl(`stations-appointment?itemPerPage=${itemPerPage}&page=${page}`)

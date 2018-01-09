@@ -1,8 +1,12 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import CategoryApi from 'api/CategoryApi'
 import SingleSelect from '../single-select'
 
 export default class SelectCategory extends React.Component {
+  static propTypes = {
+    onChange: PropTypes.func
+  }
   state = {
     dataItems: []
   }
@@ -13,6 +17,7 @@ export default class SelectCategory extends React.Component {
       page: 1
     })
     const items = res.data.map(record => ({
+      ...record,
       content: `[${record.code}] ${record.name}`,
       value: record._id
     }))
