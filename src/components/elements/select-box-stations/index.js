@@ -31,36 +31,57 @@ export default class SelectBoxStations extends PureComponent {
   }
 
   state = {
-    station: []
+    dataStation: [],
+    staionValue: {},
+    typeValue: {}
   }
 
-  async handleChangeStationType(value) {
-    const stationWithType = await StationApi.getStationWithType(value, {})
-
+  async handleChangeStationType(object) {
+    const stationWithType = await StationApi.getStationWithType(
+      object.value,
+      {}
+    )
     const items = stationWithType.data.map(record => ({
+      ...record,
       content: `${record.name}`,
       value: record._id
     }))
 
     this.setState(
       {
-        station: [
+        dataStation: [
           {
             heading: 'Tên',
             items: items
           }
-        ]
+        ],
+        staionValue: object
       },
       () => {
-        this.props.onChange(this.state.station)
+        this.props.onChange(
+          {
+            type: this.state.typeValue,
+            station: this.state.staionValue
+          }
+        )
       }
     )
   }
 
-  handleChangeStations(value) {
-    this.setState({ value }, () => {
-      this.props.onChange(this.state)
-    })
+  handleChangeStations(Object) {
+    this.setState(
+      {
+        typeValue: Object
+      },
+      () => {
+        this.props.onChange(
+          {
+            type: this.state.typeValue,
+            station: this.state.staionValue
+          }
+        )
+      }
+    )
   }
 
   render() {
@@ -77,7 +98,7 @@ export default class SelectBoxStations extends PureComponent {
           <Col>
             <SingleSelect
               label={this.props.labelStation}
-              dataItems={this.state.station}
+              dataItems={this.state.dataStation}
               onChange={this.handleChangeStations}
             />
           </Col>
