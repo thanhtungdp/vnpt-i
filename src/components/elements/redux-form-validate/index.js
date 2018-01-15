@@ -31,21 +31,26 @@ const View = styled.div`
   ${props => getChildrenColor(props)};
 `
 
-function ReduxFormValidate({ input, meta, componentChildren, ...otherProps }) {
-  const Input = componentChildren
-  return (
-    <View
-      isError={meta.touched && meta.error}
-      isWarning={meta.touched && meta.warning}
-    >
-      <Input {...input} {...otherProps} />
-      {meta.touched && meta.error && <FormFeedback>{meta.error}</FormFeedback>}
-      {meta.touched &&
-        meta.warning && <FormFeedback>{meta.warning}</FormFeedback>}
-    </View>
-  )
-}
+export default function createValidateComponent(InputComponent) {
+  return class ValidateComponent extends React.PureComponent {
+    getInputRef(){
+      return this.inputRef
+    }
 
-export default function createValidateComponent(Component) {
-  return props => <ReduxFormValidate componentChildren={Component} {...props} />
+    render() {
+      const { input, meta, ...otherProps } = this.props
+      return (
+        <View
+          isError={meta.touched && meta.error}
+          isWarning={meta.touched && meta.warning}
+        >
+          <InputComponent {...input} {...otherProps} ref={ref => this.inputRef = ref}/>
+          {meta.touched &&
+            meta.error && <FormFeedback>{meta.error}</FormFeedback>}
+          {meta.touched &&
+            meta.warning && <FormFeedback>{meta.warning}</FormFeedback>}
+        </View>
+      )
+    }
+  }
 }
