@@ -13,120 +13,50 @@ const NavigationWrapper = styled.div`
   margin-top: -12px;
 `
 
-const groupManagerComponent = {
+const groupConfirmManager = {
   component: (
-    <NavigationWrapper text="Quản lý trạm">
-      <AkNavigationItemGroup title="Quản lý trạm" />
-    </NavigationWrapper>
-  )
-}
-
-const groupConfigManagerComponent = {
-  component: (
-    <NavigationWrapper text="Quản lý cấu hình">
+    <NavigationWrapper text="Kiểm duyệt">
       <AkNavigationItemGroup title="Quản lý cấu hình" />
     </NavigationWrapper>
   )
 }
 
-const mapManagerComponent = {
-  component: (
-    <AkNavigationItemGroup href={slug.map.base} text="Bản đồ" title="Bản đồ">
-      <AkNavigationItem
-        linkComponent={WrapperLinkComponent}
-        href={slug.map.base}
-        icon={Icon.map}
-        text="Bản đồ vị trí"
-      />
-    </AkNavigationItemGroup>
-  )
-}
-
-const appointmentMenu = {
+const quizListsMenu = {
   component: (
     <AkNavigationItem
       linkComponent={WrapperLinkComponent}
-      href={slug.staionAppointment.base}
-      icon={Icon.appointment}
-      text="Điểm hẹn"
-    />
-  )
-}
-const directionMenu = {
-  component: (
-    <AkNavigationItem
-      linkComponent={WrapperLinkComponent}
-      href={slug.routePlan.base}
-      icon={Icon.direction}
-      text="Lộ trình"
+      href={slug.quizLists.base}
+      icon={Icon.quizLists}
+      text="Đề thi"
     />
   )
 }
 
-const transitMenu = {
+const userManagerMenu = {
   component: (
     <AkNavigationItem
       linkComponent={WrapperLinkComponent}
-      href={slug.stationTransit.base}
-      icon={Icon.transitStation}
-      text="Trạm trung chuyển"
+      href={slug.users.base}
+      icon={Icon.users}
+      text="Thành viên"
     />
   )
 }
 
-const landFillMenu = {
+const gallerySliderMenu = {
   component: (
     <AkNavigationItem
       linkComponent={WrapperLinkComponent}
-      href={slug.landFill.base}
-      icon={Icon.landFill}
-      text="Bãi chôn lấp"
-    />
-  )
-}
-
-const organizationMenu = {
-  component: (
-    <AkNavigationItem
-      linkComponent={WrapperLinkComponent}
-      href={slug.organization.base}
-      icon={Icon.organization}
-      text="Doanh nghiệp"
-    />
-  )
-}
-
-const categoryMenu = {
-  component: (
-    <AkNavigationItem
-      linkComponent={WrapperLinkComponent}
-      href={slug.category.base}
-      icon={Icon.category}
-      text="Chuyên mục"
-    />
-  )
-}
-
-const carMenu = {
-  component: (
-    <AkNavigationItem
-      linkComponent={WrapperLinkComponent}
-      href={slug.car.base}
-      icon={Icon.car}
-      text="Xe"
+      href={slug.gallerySlider.base}
+      icon={Icon.gallerySlider}
+      text="Gallery slider"
     />
   )
 }
 
 export default [
-  groupConfigManagerComponent,
-  categoryMenu,
-  organizationMenu,
-  carMenu,
-  groupManagerComponent,
-  landFillMenu,
-  transitMenu,
-  appointmentMenu,
-  directionMenu,
-  mapManagerComponent
+  groupConfirmManager,
+  quizListsMenu,
+  userManagerMenu,
+  gallerySliderMenu
 ]

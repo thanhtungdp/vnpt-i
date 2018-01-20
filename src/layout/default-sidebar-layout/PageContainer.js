@@ -1,15 +1,22 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import Page, { Grid, GridColumn } from '@atlaskit/page'
+import Page from '@atlaskit/page'
 import BreadcrumbBar from 'shared/breadcrumb/BreadcrumbBar'
 import { SHAPE } from 'themes/color'
 import Clearfix from 'components/elements/clearfix'
+import { StickyContainer, Sticky } from 'react-sticky'
 
 const HeaderFlex = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+`
+
+const Grid = styled.div`
+  width: 95%;
+  margin-left: auto;
+  margin-right: auto;
 `
 
 const BreadcrumbContainer = styled.div`
@@ -24,26 +31,43 @@ export default class PageContainer extends React.PureComponent {
     right: PropTypes.any
   }
 
+  renderHeader() {
+    return (
+      <Sticky>
+        {props => (
+          <div
+            style={{
+              ...props.style,
+              top: 0,
+              zIndex: 2,
+              borderBottom: props.isSticky ? '1px solid #eeeeee' : ''
+            }}
+          >
+            <BreadcrumbContainer>
+              <Grid>
+                <HeaderFlex>
+                  <BreadcrumbBar />
+                  {this.props.right}
+                </HeaderFlex>
+              </Grid>
+            </BreadcrumbContainer>
+          </div>
+        )}
+      </Sticky>
+    )
+  }
+
   render() {
     return (
-      <Page>
-        <BreadcrumbContainer>
+      <StickyContainer>
+        <Page>
+          {this.renderHeader()}
+          <Clearfix height={16} />
           <Grid>
-            <GridColumn>
-              <HeaderFlex>
-                <BreadcrumbBar />
-                {this.props.right}
-              </HeaderFlex>
-            </GridColumn>
-          </Grid>
-        </BreadcrumbContainer>
-        <Clearfix height={16} />
-        <Grid>
-          <GridColumn>
             <div className="animated fadeIn">{this.props.children}</div>
-          </GridColumn>
-        </Grid>
-      </Page>
+          </Grid>
+        </Page>
+      </StickyContainer>
     )
   }
 }

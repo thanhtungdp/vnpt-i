@@ -1,4 +1,4 @@
-const PRIMARY = '#18a406'
+const PRIMARY = '#389BFF'
 
 export const SHAPE = {
   RED: '#EB5C55',

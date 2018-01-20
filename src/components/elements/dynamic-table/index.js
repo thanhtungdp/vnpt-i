@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import DynamicTable from '@atlaskit/dynamic-table'
+import Pagination from 'components/elements/pagination'
 
 const WrapperHeader = styled.div`
   padding: 8px 0px;
@@ -17,7 +18,14 @@ export default class DynamicTableCustom extends PureComponent {
     pagination: PropTypes.shape({
       itemPerPage: PropTypes.number,
       page: PropTypes.number
+    }),
+    paginationOptions: PropTypes.shape({
+      isSticky: PropTypes.bool
     })
+  }
+
+  static defaultProps = {
+    paginationOptions: PropTypes.object
   }
 
   renderHead() {
@@ -41,26 +49,7 @@ export default class DynamicTableCustom extends PureComponent {
         content: <WrapperTdBody>{cell.content}</WrapperTdBody>
       }))
     }))
-    let fakeRows = []
-    if (this.props.pagination.totalItem > rows.length) {
-      fakeRows = this.getArrayFromNumber(
-        this.props.pagination.totalItem - this.props.rows.length
-      ).map(number => ({
-        cells: this.getArrayFromNumber(this.props.head.length).map(n => ({
-          key: n,
-          content: ''
-        }))
-      }))
-    }
-    return [...rows, ...fakeRows]
-  }
-
-  getArrayFromNumber(number) {
-    let array = []
-    for (let i = 0; i < number; i++) {
-      array.push(i)
-    }
-    return array
+    return rows
   }
 
   render() {
@@ -68,11 +57,14 @@ export default class DynamicTableCustom extends PureComponent {
       <div>
         <DynamicTable
           {...this.props}
-          rowsPerPage={this.props.pagination.itemPerPage}
-          page={this.props.pagination.page}
           head={this.renderHead()}
           rows={this.renderRows()}
           ref={ref => (this.table = ref)}
+        />
+        <Pagination
+          {...this.props.pagination}
+          {...this.props.paginationOptions}
+          onChange={this.props.onSetPage}
         />
       </div>
     )

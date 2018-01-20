@@ -26,14 +26,14 @@ import { connectAutoDispatch } from 'redux/connect'
 import { logout } from 'redux/actions/authAction'
 
 import Logo from './Logo'
-import Color from '../../themes/color'
+import { SHAPE } from '../../themes/color'
 
 const WrapperTitle = styled.div`
   margin-left: -8px;
   margin-right: -8px;
 `
 
-const globalTheme = createGlobalTheme('#ffffff', Color.PRIMARY)
+const globalTheme = createGlobalTheme('#ffffff', SHAPE.PRIMARYBOLD)
 
 @connectAutoDispatch(() => ({}), { logout })
 @withRouter
@@ -73,17 +73,13 @@ export default class BasicNestedNavigation extends React.Component {
 
     /* eslint-disable jsx-a11y/no-static-element-interactions */
     return [
-      <Tooltip
-        key="1"
-        position="right"
-        content="Hệ thống quản lý chất thải rắn"
-      >
+      <Tooltip key="1" position="right" content="Admin system">
         <WrapperTitle>
           <Link to="/">
             <AkContainerTitle
               icon={<MediaServicesBlurIcon label="" size="large" />}
-              text="SCM Manager"
-              subText="Quản lý chất thải rắn"
+              text="Tungtung.vn"
+              subText="Admin System"
             />
           </Link>
         </WrapperTitle>
@@ -129,6 +125,7 @@ export default class BasicNestedNavigation extends React.Component {
         containerHeaderComponent={() => this.getContainerHeaderComponent()}
         drawers={[
           <CreateDrawer
+            key="create"
             onBackButton={() => this.toggleDrawer('create')}
             isOpen={this.state.drawers.create}
           />

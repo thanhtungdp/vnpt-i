@@ -20,7 +20,7 @@ const Form = styled.form`
 `
 
 const Logo = styled.img`
-  height: 80px;
+  height: 70px;
   width: auto;
   margin-left: auto;
   margin-right: auto;
@@ -71,7 +71,7 @@ export default class Login extends PureComponent {
   render() {
     return (
       <Container>
-        <Logo src="/logo.png" />
+        <Logo src="/images/brand-logo.png" />
         <Form onSubmit={this.props.handleSubmit(this.handleLogin.bind(this))}>
           <Field
             label="Email"

@@ -1,22 +1,39 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import SingleSelect from '@atlaskit/single-select'
+import { StatelessSelect } from '@atlaskit/single-select'
+import { autobind } from 'core-decorators'
 import styled from 'styled-components'
 import Label from '../label'
 
 const Container = styled.div`
   display: flex;
   flex-direction: column;
+  .crdjFp,
+  .jGirHg {
+    display: block;
+  }
 `
+
+@autobind
 export default class SingleSelectCustom extends React.PureComponent {
   static propTypes = {
     onChange: PropTypes.func,
+    value: PropTypes.any,
     dataItems: PropTypes.arrayOf(
       PropTypes.shape({
         heading: PropTypes.string,
         items: PropTypes.arrayOf(PropTypes.object)
       })
     )
+  }
+
+  state = {
+    isOpen: false,
+    filterValue: ''
+  }
+
+  toggleOpen({ isOpen }) {
+    this.setState({ isOpen })
   }
 
   getRealValue() {
@@ -33,10 +50,9 @@ export default class SingleSelectCustom extends React.PureComponent {
   render() {
     return (
       <div style={{ width: '100%', display: 'block' }}>
-        <Label>{this.props.label}</Label>
+        {this.props.label && <Label>{this.props.label}</Label>}
         <Container>
-          <SingleSelect
-            {...this.props}
+          <StatelessSelect
             label={null}
             hasAutocomplete={true}
             items={this.props.dataItems == null ? [] : this.props.dataItems}
@@ -45,9 +61,12 @@ export default class SingleSelectCustom extends React.PureComponent {
                 ? false
                 : this.props.droplistShouldFitContainer
             }
-            onSelected={object => this.props.onChange(object.item)}
+            isOpen={this.state.isOpen}
+            onOpenChange={this.toggleOpen}
+            onSelected={this.props.onChange}
             defaultSelected={this.getRealValue()}
             selectedItem={this.getRealValue()}
+            {...this.props}
           />
         </Container>
       </div>

@@ -5,8 +5,6 @@ import slug from 'constants/slug'
 
 import ManagerRoute from './managerRoute'
 import LoginRoute from './loginRoute'
-import MapCarContainer from 'containers/map-car'
-
 import createProtectedAuth from 'shared/hoc/protected-auth'
 
 const ManagerRouteProtected = createProtectedAuth(ManagerRoute)
@@ -17,7 +15,6 @@ export default class RouteDefault extends React.Component {
     return (
       <div>
         <Route path={slug.login} exact component={LoginRoute} />
-        <Route path={slug.map.base} exact component={MapCarContainer} />
         <Route path="/" component={ManagerRouteProtected} />
       </div>
     )

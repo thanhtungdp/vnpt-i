@@ -33,7 +33,7 @@ const View = styled.div`
 
 export default function createValidateComponent(InputComponent) {
   return class ValidateComponent extends React.PureComponent {
-    getInputRef(){
+    getInputRef() {
       return this.inputRef
     }
 
@@ -44,7 +44,11 @@ export default function createValidateComponent(InputComponent) {
           isError={meta.touched && meta.error}
           isWarning={meta.touched && meta.warning}
         >
-          <InputComponent {...input} {...otherProps} ref={ref => this.inputRef = ref}/>
+          <InputComponent
+            {...input}
+            {...otherProps}
+            ref={ref => (this.inputRef = ref)}
+          />
           {meta.touched &&
             meta.error && <FormFeedback>{meta.error}</FormFeedback>}
           {meta.touched &&

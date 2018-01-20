@@ -5,7 +5,7 @@ module.exports = {
 	 */
 	apps: [
 		{
-			name: 'scm_cms_frontend',
+			name: 'tungtung_admin_frontend',
 			script: './run_server.sh'
 		}
 	],
@@ -17,10 +17,10 @@ module.exports = {
 	deploy: {
 		production: {
 			user: 'root', // user
-			host: '125.212.251.174', // ip
+			host: 'sv5.tungtung.co', // ip
 			ref: 'origin/release', // branch được config để chạy production
-			repo: 'git@gitlab.com:vietan-chatthairan/swm-cms-frontend.git', // git
-			path: '/data/swm/swm-cms-frontend',
+			repo: 'git@gitlab.com:tungtung-dev/admin-manager/react-admin.git', // git
+			path: '/data/pm2/tungtung-admin-frontend',
 			'post-deploy': 'yarn install && yarn build && pm2 reload ecosystem.config.js --env production'
 		}
 	}

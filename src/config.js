@@ -1,38 +1,23 @@
 const API_GATEWAY_TEST = 'http://localhost:3003'
 const API_GATEWAY_RELEASE = 'http://swn.vietan-software.com:3000'
 
-const AUTH_API = API_GATEWAY_RELEASE
-const ORGANIZATION_API = API_GATEWAY_RELEASE
-const STATION_API = API_GATEWAY_RELEASE
-const CAR_API = API_GATEWAY_RELEASE
-const CAR_LOGS_API = API_GATEWAY_RELEASE
-const CATEGORY_API = API_GATEWAY_RELEASE
+const AUTH_API = 'https://auth-api.tungtung.vn'
+const ADMIN_API = 'http://localhost:1200/admin'
+const MEDIA_API = 'https://media.tungtung.vn'
 const PORT_DEPLOY = 1008
-
-const GOOGLE_MAP = {
-  KEY: 'AIzaSyACrFcsYEYnifIzzbIOEI6y2v0qVSi9TvU'
-}
 
 module.exports.API_GATEWAY_TEST = API_GATEWAY_TEST
 module.exports.API_GATEWAY_RELEASE = API_GATEWAY_RELEASE
 module.exports.AUTH_API = AUTH_API
-module.exports.STATION_API = STATION_API
-module.exports.ORGANIZATION_API = ORGANIZATION_API
-module.exports.CAR_API = CAR_API
-module.exports.CAR_LOGS_API = CAR_LOGS_API
+module.exports.ADMIN_API = ADMIN_API
+module.exports.MEDIA_API = MEDIA_API
 module.exports.PORT_DEPLOY = PORT_DEPLOY
-module.exports.CATEGORY_API = CATEGORY_API
-module.exports.GOOGLE_MAP = GOOGLE_MAP
 
 module.exports.default = {
   API_GATEWAY_TEST,
   API_GATEWAY_RELEASE,
   AUTH_API,
-  STATION_API,
-  ORGANIZATION_API,
-  CAR_API,
-  CAR_LOGS_API,
-  CATEGORY_API,
-  PORT_DEPLOY,
-  GOOGLE_MAP
+  ADMIN_API,
+  MEDIA_API,
+  PORT_DEPLOY
 }

@@ -9,7 +9,7 @@ const View = styled.div``
 export default function InputLabel({ label, ...props }) {
   return (
     <View>
-      <Label>{label}</Label>
+      {label && <Label>{label}</Label>}
       <Input {...props} />
     </View>
   )

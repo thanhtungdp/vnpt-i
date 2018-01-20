@@ -2,10 +2,29 @@ import React, { PureComponent } from 'react'
 import { autobind } from 'core-decorators'
 import update from 'react-addons-update'
 import swal from 'sweetalert2'
+import $ from 'jquery'
+
+function cleanPagination(pagination) {
+  return {
+    itemPerPage: parseInt(
+      pagination.item_per_page
+        ? pagination.item_per_page
+        : pagination.itemPerPage,
+      10
+    ),
+    page: parseInt(pagination.page, 10),
+    totalItem: parseInt(
+      pagination.total_item ? pagination.total_item : pagination.totalItem,
+      10
+    )
+  }
+}
 
 const createManagerListHoc = ({
   apiCall,
+  cleanData,
   apiDelete,
+  keyData = 'data',
   itemPerPage = 10
 }) => Component => {
   @autobind
@@ -26,35 +45,36 @@ const createManagerListHoc = ({
         page: 1
       })
       this.setState({
-        data: res.data,
-        pagination: res.pagination,
+        data: cleanData ? cleanData(res[keyData]) : res[keyData],
+        pagination: cleanPagination(res.pagination),
         isLoading: false,
         pageLogs: [...this.state.pageLogs, 1]
       })
     }
 
     async handleChangePage(page) {
-      if (this.state.pageLogs.indexOf(page) > -1) {
-        return
-      }
       this.setState({
-        isLoading: true,
-        pageLogs: [...this.state.pageLogs, page]
+        isLoading: true
       })
       const res = await apiCall({
         itemPerPage: this.state.pagination.itemPerPage,
         page
       })
       this.setState({
-        data: [...this.state.data, ...res.data],
-        pagination: res.pagination,
+        data: cleanData ? cleanData(res[keyData]) : res[keyData],
+        pagination: cleanPagination(res.pagination),
         isLoading: false
       })
+      $('html, body').animate(
+        {
+          scrollTop: 0
+        },
+        600
+      )
     }
 
     getIndexByPagination(index) {
       const { page, itemPerPage } = this.state.pagination
-      console.log((page - 1) * itemPerPage + index + 1)
       return (page - 1) * itemPerPage + index + 1
     }
 
@@ -84,6 +104,10 @@ const createManagerListHoc = ({
       })
     }
 
+    handleRefresh() {
+      this.handleChangePage(this.state.pagination.page)
+    }
+
     render() {
       return (
         <Component
@@ -93,6 +117,7 @@ const createManagerListHoc = ({
           isLoading={this.state.isLoading}
           onChangePage={this.handleChangePage}
           onDeleteItem={this.handleDeleteItem}
+          onRefresh={this.handleRefresh}
           getIndexByPagination={this.getIndexByPagination}
         />
       )

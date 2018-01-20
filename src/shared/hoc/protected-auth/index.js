@@ -30,7 +30,7 @@ export default function createProtectedAuth(Component) {
     async componentWillMount() {
       if (!this.props.isAuthenticated) {
         const auth = await this.props.fetchUserMe()
-        if (auth.error) {
+        if (auth.success === false || (auth.data && !auth.data.admin)) {
           this.props.history.push('/login')
         }
       }

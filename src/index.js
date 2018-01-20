@@ -7,6 +7,7 @@ import 'sweetalert2/dist/sweetalert2.css'
 import 'animate.css/animate.css'
 import 'react-datepicker/dist/react-datepicker.css'
 
+import { AppContainer } from 'react-hot-loader'
 import browserHistory from 'history/createBrowserHistory'
 import configureStore from './redux/createStore'
 import App from './App'
@@ -24,12 +25,21 @@ const store = configureStore(getStoreDefault(), {
   routerHistory: browserHistory()
 })
 
-ReactDOM.render(<App store={store} />, rootEl)
-if (module.hot) {
-  module.hot.accept('./App', () => {
-    const NextApp = require('./App').default
-    ReactDOM.render(<NextApp store={store} />, rootEl)
-  })
+const render = Component => {
+  ReactDOM.render(
+    <AppContainer>
+      <App store={store} />
+    </AppContainer>,
+    rootEl
+  )
 }
 
+render(App)
+
+// Webpack Hot Module Replacement API
+if (module.hot) {
+  module.hot.accept('./App', () => {
+    render(App)
+  })
+}
 registerServiceWorker()

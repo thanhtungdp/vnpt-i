@@ -12,19 +12,28 @@ export function fetchUserMe() {
     dispatch({
       type: FETCH_PENDING_USER
     })
-    const auth = await AuthApi.getMe()
-    if (auth.error) {
+    try {
+      const auth = await AuthApi.getMe()
+      if (auth.success === false) {
+        dispatch({
+          type: FETCH_FAIL_USER
+        })
+      } else {
+        dispatch({
+          type: FETCH_SUCCESS_USER,
+          token: getAuthToken(),
+          auth: auth.data
+        })
+      }
+      return auth
+    } catch (e) {
       dispatch({
         type: FETCH_FAIL_USER
       })
-    } else {
-      dispatch({
-        type: FETCH_SUCCESS_USER,
-        token: getAuthToken(),
-        auth: auth.data
-      })
+      return {
+        success: false
+      }
     }
-    return auth
   }
 }
 
