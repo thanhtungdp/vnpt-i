@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 const LogoContainer = styled.img`
-  height: 40px;
+  height: 25px;
   width: auto;
 `
 

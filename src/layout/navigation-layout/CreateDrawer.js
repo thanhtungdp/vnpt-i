@@ -23,7 +23,7 @@ export default class CreateDrawer extends PureComponent {
         <div key="drawler" style={{ marginTop: -64 }}>
           <AkNavigationItemGroup title="Thêm cấu hình">
             <AkNavigationItem
-              href={slug.quizLists.create}
+              href={slug.measuring.create}
               linkComponent={WrapperLinkComponent}
               onClick={this.props.onBackButton}
               icon={Icon.car}

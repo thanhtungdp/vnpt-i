@@ -9,7 +9,7 @@ const getHeaders = () => {
     if (getAuthToken()) {
       headers = {
         ...headers,
-        Authorization: 'JWT ' + getAuthToken(true)
+        Authorization: getAuthToken(true)
       }
     }
   }

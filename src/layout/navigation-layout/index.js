@@ -33,7 +33,7 @@ const WrapperTitle = styled.div`
   margin-right: -8px;
 `
 
-const globalTheme = createGlobalTheme('#ffffff', SHAPE.PRIMARYBOLD)
+const globalTheme = createGlobalTheme('#ffffff', '#1aa309')
 
 @connectAutoDispatch(() => ({}), { logout })
 @withRouter

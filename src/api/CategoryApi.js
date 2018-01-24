@@ -1,35 +1,65 @@
-import { postFetch, getFetch, deleteFetch, putFetch } from 'utils/fetch'
-import { CATEGORY_API } from 'config'
+import { CATEGORY_API } from '../config'
+import { deleteFetch, getFetch, postFetch, putFetch } from '../utils/fetch'
 
-function getUrl(path = '') {
-  return CATEGORY_API + '/categories/' + path
+const urlMeasuring = CATEGORY_API + '/measuring/'
+
+export function getMeasurings({ page = 1, itemPerPage = 10 }, { unit, name }) {
+  var urlSearch = `${urlMeasuring}?page=${page}&itemPerPage=${itemPerPage}`
+  if (unit) urlSearch += `&unit=${unit}`
+  if (name) urlSearch += `&name=${name}`
+  return getFetch(urlSearch)
 }
 
-export function getCategories({ itemPerPage = 10, page = 1 }) {
-  return getFetch(getUrl(`?itemPerPage=${itemPerPage}&page=${page}`))
+export function getMeasuring(key) {
+  return getFetch(urlMeasuring + key)
 }
 
-export function createCategory(categoryData = {}) {
-  return postFetch(getUrl(), categoryData)
+export function createMeasuring(measuring = {}) {
+  return postFetch(urlMeasuring, measuring)
 }
 
-//get one record
-export function getCategory(_id) {
-  return getFetch(getUrl(_id))
+export function updateMeasuring(key, measuring = {}) {
+  return putFetch(urlMeasuring + key, measuring)
 }
 
-export function updateCategory(_id, categoryData) {
-  return putFetch(getUrl(_id), categoryData)
+export function deleteMeasuring(key) {
+  return deleteFetch(urlMeasuring + key)
 }
 
-export function deleteCategory(_id) {
-  return deleteFetch(getUrl(_id))
+const urlStationType = CATEGORY_API + '/station-type/'
+
+export function getStationTypes({ page = 1, itemPerPage = 10 }, { key, name }) {
+  var urlSearch = `${urlStationType}?page=${page}&itemPerPage=${itemPerPage}`
+  if (key) urlSearch += `&key=${key}`
+  if (name) urlSearch += `&name=${name}`
+  return getFetch(urlSearch)
+}
+
+export function getStationType(key) {
+  return getFetch(urlStationType + key)
+}
+
+export function createStationType(measuring = {}) {
+  return postFetch(urlStationType, measuring)
+}
+
+export function updateStationType(key, measuring = {}) {
+  return putFetch(urlStationType + key, measuring)
+}
+
+export function deleteStationType(key) {
+  return deleteFetch(urlStationType + key)
 }
 
 export default {
-  getCategories,
-  createCategory,
-  getCategory,
-  updateCategory,
-  deleteCategory
+  getMeasurings,
+  getMeasuring,
+  createMeasuring,
+  updateMeasuring,
+  deleteMeasuring,
+  getStationTypes,
+  getStationType,
+  createStationType,
+  updateStationType,
+  deleteStationType
 }

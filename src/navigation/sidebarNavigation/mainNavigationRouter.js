@@ -15,48 +15,48 @@ const NavigationWrapper = styled.div`
 
 const groupConfirmManager = {
   component: (
-    <NavigationWrapper text="Kiểm duyệt">
-      <AkNavigationItemGroup title="Quản lý cấu hình" />
+    <NavigationWrapper text="Manage">
+      <AkNavigationItemGroup title="Manage" />
     </NavigationWrapper>
   )
 }
 
-const quizListsMenu = {
+const measuringMenu = {
   component: (
     <AkNavigationItem
       linkComponent={WrapperLinkComponent}
-      href={slug.quizLists.base}
+      href={slug.measuring.base}
       icon={Icon.quizLists}
-      text="Đề thi"
+      text="Measuring"
     />
   )
 }
 
-const userManagerMenu = {
+const stationTypeMenu = {
   component: (
     <AkNavigationItem
       linkComponent={WrapperLinkComponent}
-      href={slug.users.base}
+      href={slug.stationType.base}
       icon={Icon.users}
-      text="Thành viên"
+      text="Station type"
     />
   )
 }
 
-const gallerySliderMenu = {
+const stationAutoMenu = {
   component: (
     <AkNavigationItem
       linkComponent={WrapperLinkComponent}
-      href={slug.gallerySlider.base}
+      href={slug.stationAuto.base}
       icon={Icon.gallerySlider}
-      text="Gallery slider"
+      text="Station auto"
     />
   )
 }
 
 export default [
   groupConfirmManager,
-  quizListsMenu,
-  userManagerMenu,
-  gallerySliderMenu
+  measuringMenu,
+  stationTypeMenu,
+  stationAutoMenu
 ]

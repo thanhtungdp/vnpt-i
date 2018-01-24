@@ -1,26 +1,25 @@
+const stationTypeUrl = '/station-type'
 export default {
-  dashboard: '/dashboard',
-  login: '/login',
-  test: '/test',
-  quizLists: {
-    base: '/quiz-lists',
-    list: '/quiz-lists',
-    create: '/quiz-lists/create',
-    edit: '/quiz-lists/edit/:_id',
-    editWithCode: '/quiz-lists/edit/'
-  },
-  gallerySlider: {
-    base: '/gallery-sliders',
-    list: '/gallery-sliders',
-    create: '/gallery-sliders/create',
-    edit: '/gallery-sliders/edit/:_id',
-    editWithCode: '/gallery-sliders/edit/'
-  },
-  users: {
-    base: '/users',
-    list: '/users',
-    create: '/users/create',
-    edit: '/users/edit/:_id',
-    editWithCode: '/users/edit/'
-  }
+	login: '/login',
+	measuring: {
+		list: '/measuring',
+		base: '/measuring',
+		create: '/measuring/create',
+		edit: '/measuring/edit/:key',
+		editWithKey: '/measuring/edit'
+	},
+	stationType: {
+		list: stationTypeUrl,
+		base: stationTypeUrl,
+		create: stationTypeUrl + '/create',
+		edit: stationTypeUrl + '/edit/:key',
+		editWithKey: stationTypeUrl + '/edit'
+	},
+	stationAuto: {
+		list: '/station-auto',
+		base: '/station-auto',
+		create: '/station-auto/create',
+		edit: '/station-auto/edit/:key',
+		editWithKey: '/station-auto/edit'
+	}
 }
