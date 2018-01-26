@@ -9,11 +9,14 @@ import { autobind } from 'core-decorators'
 import createManagerList from 'hoc/manager-list'
 import createManagerDelete from 'hoc/manager-delete'
 import createLanguage, { langPropTypes } from 'hoc/create-lang'
+import DynamicTable from 'components/elements/dynamic-table'
 import Breadcrumb from '../breadcrumb'
-import MeasuringSearchForm from "../measuring-search-form";
+import MeasuringSearchForm from '../measuring-search-form'
+import MeasuringSearchAdvancedForm from '../measuring-search-form/advanced'
 
 @createManagerList({
-  apiList: CategoryApi.getMeasurings
+  apiList: CategoryApi.getMeasurings,
+  itemPerPage: 20
 })
 @createManagerDelete({
   apiDelete: CategoryApi.deleteMeasuring
@@ -32,6 +35,16 @@ export default class MeasuringList extends React.Component {
     lang: langPropTypes
   }
 
+  state = {
+    isAdvanced: false
+  }
+
+  toggleAdvanced(){
+    this.setState({
+			isAdvanced: !this.state.isAdvanced
+    })
+  }
+
   buttonAdd() {
     const { lang: { t } } = this.props
     return (
@@ -45,37 +58,45 @@ export default class MeasuringList extends React.Component {
     )
   }
 
-  getColumns() {
-    const { lang: { t } } = this.props
+  getHead() {
     return [
+      { content: 'TT', width: 2 },
+      { content: 'Key', width: 30 },
+      { content: 'Name', width: 10 },
+      { content: 'Unit', width: 10 },
+      { content: 'Action', width: 10 }
+    ]
+  }
+
+  getRows() {
+    return this.props.dataSource.map((row, index) => [
       {
-        title: t('measuringManager.form.key.label'),
-        dataIndex: 'key',
-        key: 'key'
+        content: (
+          <strong>
+            {(this.props.pagination.page - 1) *
+              this.props.pagination.itemPerPage +
+              index +
+              1}
+          </strong>
+        )
       },
       {
-        title: t('measuringManager.form.name.label'),
-        dataIndex: 'name.vi',
-        key: 'name'
+        content: row.key
       },
       {
-        title: t('measuringManager.form.unit.label'),
-        dataIndex: 'unit',
-        key: 'unit'
+        content: row.name.vi
       },
       {
-        title: '',
-        key: 'action',
-        render: (text, record) => (
+        content: row.unit
+      },
+      {
+        content: (
           <span>
-            <Link to={slug.measuring.editWithKey + '/' + record.key}>
-              {' '}
-              Edit{' '}
-            </Link>
+            <Link to={slug.measuring.editWithKey + '/' + row.key}> Edit </Link>
             <Divider type="vertical" />
             <a
               onClick={() =>
-                this.props.onDeleteItem(record.key, this.props.fetchData)
+                this.props.onDeleteItem(row.key, this.props.fetchData)
               }
             >
               Delete
@@ -83,27 +104,43 @@ export default class MeasuringList extends React.Component {
           </span>
         )
       }
-    ]
+    ])
+  }
+
+  renderSearchForm() {
+    return (
+      <MeasuringSearchForm
+        onChangeSearch={this.props.onChangeSearch}
+        initialValues={this.props.data}
+        isAdvanced={this.state.isAdvanced}
+        onAdvanced={this.toggleAdvanced}
+      />
+    )
+  }
+
+	renderSearchAdvanced(){
+    if(!this.state.isAdvanced) return null
+    return (
+      <MeasuringSearchAdvancedForm
+        onChangeSearch={this.props.onChangeSearch}
+        initialValues={this.props.data}
+        onAdvanced={this.toggleAdvanced}
+      />
+		)
   }
 
   render() {
     return (
-      <PageContainer
-        right={this.buttonAdd()}
-      >
+      <PageContainer center={this.renderSearchForm()} headerBottom={this.renderSearchAdvanced()} right={this.buttonAdd()}>
         <Breadcrumb items={['list']} />
-        <MeasuringSearchForm onChangeSearch={this.props.onChangeSearch} initialValues={this.props.data}/>
-        <Table
-          size="small"
-          loading={this.props.isLoading}
-          columns={this.getColumns()}
-          dataSource={this.props.dataSource}
-          pagination={{
-            showSizeChanger: true,
-            onChange: this.props.onChangePage,
-            onShowSizeChange: this.props.onChangePageSize,
-            total: this.props.pagination.totalItem
+        <DynamicTable
+          rows={this.getRows()}
+          head={this.getHead()}
+          paginationOptions={{
+            isSticky: true
           }}
+          onSetPage={this.props.onChangePage}
+          pagination={this.props.pagination}
         />
       </PageContainer>
     )

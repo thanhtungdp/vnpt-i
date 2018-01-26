@@ -13,7 +13,7 @@ const HeaderFlex = styled.div`
   align-items: center;
 `
 
-const Grid = styled.div`
+export const Grid = styled.div`
   width: 95%;
   margin-left: auto;
   margin-right: auto;
@@ -47,6 +47,7 @@ export default class PageContainer extends React.PureComponent {
               <Grid>
                 <HeaderFlex>
                   <BreadcrumbBar />
+                  {this.props.center}
                   {this.props.right}
                 </HeaderFlex>
               </Grid>
@@ -62,6 +63,7 @@ export default class PageContainer extends React.PureComponent {
       <StickyContainer>
         <Page>
           {this.renderHeader()}
+          {this.props.headerBottom}
           <Clearfix height={16} />
           <Grid>
             <div className="animated fadeIn">{this.props.children}</div>

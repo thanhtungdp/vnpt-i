@@ -28,21 +28,19 @@ export default class PaginationWithSticky extends React.Component {
     stickyOptions: {}
   }
 
+  getTotal() {
+    const { totalItem, itemPerPage } = this.props
+    const orginal = totalItem / itemPerPage
+    const parse = parseInt(totalItem / itemPerPage, 10)
+    if (orginal - parse > 0) {
+      return parse + 1
+    }
+    return parse
+  }
   render() {
-    const {
-      totalItem,
-      itemPerPage,
-      onChange,
-      page,
-      isSticky,
-      stickyOptions
-    } = this.props
+    const { onChange, page, isSticky, stickyOptions } = this.props
     const paginationComponent = (
-      <Pagination
-        total={parseInt(totalItem / itemPerPage, 10)}
-        current={page}
-        onSetPage={onChange}
-      />
+      <Pagination total={this.getTotal()} current={page} onSetPage={onChange} />
     )
     return isSticky ? (
       <Sticky {...stickyOptions}>
