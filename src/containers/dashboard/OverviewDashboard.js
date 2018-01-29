@@ -8,7 +8,7 @@ export default class OverviewDashboard extends Component {
     return (
       <PageContainer title="Welcome to dashboard login">
         <Breadcrumb icon={<BitbucketIcon label="" />} name="Dashboard" />
-        Welcome to tungtung.vn
+        Welcome to iLotusLand
       </PageContainer>
     )
   }

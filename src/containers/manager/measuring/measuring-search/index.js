@@ -1,5 +1,5 @@
 import React from 'react'
-import { Form as FormStyle, Input, Button, Row, Col, Icon } from 'antd'
+import { Form as FormStyle, Input, Button, Icon } from 'antd'
 import PropTypes from 'prop-types'
 import { autobind } from 'core-decorators'
 import { mapPropsToFields } from 'utils/form'
@@ -55,11 +55,7 @@ export default class MeasuringSearchForm extends React.PureComponent {
     const { getFieldDecorator } = this.props.form
     const { lang: { t } } = this.props
     if (this.props.isAdvanced) {
-      return (
-        <Form>
-          <h5 style={{ marginBottom: 0 }}>Search advanced</h5>
-        </Form>
-      )
+      return null
     }
     return (
       <Form className="fadeIn animated" onSubmit={this.changeSearch}>

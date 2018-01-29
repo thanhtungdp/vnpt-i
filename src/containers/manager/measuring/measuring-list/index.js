@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
-import { Table, Divider, Button, Icon } from 'antd'
+import { Divider, Button, Icon } from 'antd'
 import CategoryApi from 'api/CategoryApi'
 import PageContainer from 'layout/default-sidebar-layout/PageContainer'
 import slug from 'constants/slug'
@@ -11,8 +11,8 @@ import createManagerDelete from 'hoc/manager-delete'
 import createLanguage, { langPropTypes } from 'hoc/create-lang'
 import DynamicTable from 'components/elements/dynamic-table'
 import Breadcrumb from '../breadcrumb'
-import MeasuringSearchForm from '../measuring-search-form'
-import MeasuringSearchAdvancedForm from '../measuring-search-form/advanced'
+import MeasuringSearchForm from '../measuring-search'
+import MeasuringSearchAdvancedForm from '../measuring-search/advanced'
 
 @createManagerList({
   apiList: CategoryApi.getMeasurings,
@@ -39,9 +39,9 @@ export default class MeasuringList extends React.Component {
     isAdvanced: false
   }
 
-  toggleAdvanced(){
+  toggleAdvanced() {
     this.setState({
-			isAdvanced: !this.state.isAdvanced
+      isAdvanced: !this.state.isAdvanced
     })
   }
 
@@ -118,20 +118,24 @@ export default class MeasuringList extends React.Component {
     )
   }
 
-	renderSearchAdvanced(){
-    if(!this.state.isAdvanced) return null
+  renderSearchAdvanced() {
+    if (!this.state.isAdvanced) return null
     return (
       <MeasuringSearchAdvancedForm
         onChangeSearch={this.props.onChangeSearch}
         initialValues={this.props.data}
         onAdvanced={this.toggleAdvanced}
       />
-		)
+    )
   }
 
   render() {
     return (
-      <PageContainer center={this.renderSearchForm()} headerBottom={this.renderSearchAdvanced()} right={this.buttonAdd()}>
+      <PageContainer
+        center={this.renderSearchForm()}
+        headerBottom={this.renderSearchAdvanced()}
+        right={this.buttonAdd()}
+      >
         <Breadcrumb items={['list']} />
         <DynamicTable
           rows={this.getRows()}

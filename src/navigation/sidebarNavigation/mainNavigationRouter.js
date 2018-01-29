@@ -13,7 +13,67 @@ const NavigationWrapper = styled.div`
   margin-top: -12px;
 `
 
-const groupConfirmManager = {
+const dashboardMenu = {
+  component: (
+    <AkNavigationItem
+      linkComponent={WrapperLinkComponent}
+      icon={Icon.quizLists}
+      text="Dashboard"
+    />
+  )
+}
+
+const monitoringMenu = {
+  component: (
+    <AkNavigationItem
+      linkComponent={WrapperLinkComponent}
+      href={slug.onlineMonitoring.base}
+      icon={Icon.quizLists}
+      text="Monitoring"
+    />
+  )
+}
+
+const mapMenu = {
+  component: (
+    <AkNavigationItem
+      linkComponent={WrapperLinkComponent}
+      href={slug.map.base}
+      icon={Icon.quizLists}
+      text="Map"
+    />
+  )
+}
+
+const groupData = {
+  component: (
+    <NavigationWrapper text="Data">
+      <AkNavigationItemGroup title="Data" />
+    </NavigationWrapper>
+  )
+}
+
+const dataSearchMenu = {
+  component: (
+    <AkNavigationItem
+      linkComponent={WrapperLinkComponent}
+      icon={Icon.quizLists}
+      text="Data Search"
+    />
+  )
+}
+
+const avgDataMenu = {
+  component: (
+    <AkNavigationItem
+      linkComponent={WrapperLinkComponent}
+      icon={Icon.quizLists}
+      text="AVG Data"
+    />
+  )
+}
+
+const groupManager = {
   component: (
     <NavigationWrapper text="Manage">
       <AkNavigationItemGroup title="Manage" />
@@ -55,7 +115,13 @@ const stationAutoMenu = {
 }
 
 export default [
-  groupConfirmManager,
+  dashboardMenu,
+  monitoringMenu,
+  mapMenu,
+  groupData,
+  dataSearchMenu,
+  avgDataMenu,
+  groupManager,
   measuringMenu,
   stationTypeMenu,
   stationAutoMenu

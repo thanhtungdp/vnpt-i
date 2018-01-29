@@ -6,7 +6,7 @@ import 'font-awesome/css/font-awesome.css'
 import 'sweetalert2/dist/sweetalert2.css'
 import 'animate.css/animate.css'
 import 'react-datepicker/dist/react-datepicker.css'
-import 'antd/dist/antd.css';
+import 'antd/dist/antd.css'
 
 import { AppContainer } from 'react-hot-loader'
 import browserHistory from 'history/createBrowserHistory'

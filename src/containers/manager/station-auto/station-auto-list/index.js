@@ -10,7 +10,7 @@ import createManagerList from 'hoc/manager-list'
 import createManagerDelete from 'hoc/manager-delete'
 import Breadcrumb from '../breadcrumb'
 import { mapPropsToFields } from '../../../../utils/form'
-import StationAutoSearchForm from '../station-auto-search-form'
+import StationAutoSearchForm from '../station-auto-search'
 import createLanguageHoc, { langPropTypes } from '../../../../hoc/create-lang'
 
 @createManagerList({
@@ -96,15 +96,18 @@ export default class StationAutoList extends React.Component {
     ]
   }
 
+  renderSearch() {
+    return (
+      <StationAutoSearchForm
+        onChangeSearch={this.props.onChangeSearch}
+        initialValues={this.props.data}
+      />
+    )
+  }
   render() {
     return (
-      <PageContainer right={this.buttonAdd()}>
+      <PageContainer center={this.renderSearch()} right={this.buttonAdd()}>
         <Breadcrumb items={['list']} />
-        <StationAutoSearchForm
-          onChangeSearch={this.props.onChangeSearch}
-          initialValues={this.props.data}
-        />
-        <br />
         <Table
           size="small"
           loading={this.props.isLoading}

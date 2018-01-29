@@ -53,7 +53,11 @@ export default class SelectStationType extends PureComponent {
         {this.props.getFieldDecorator('stationType', {
           initialValue: this.props.value
         })(
-          <Select showSearch onChange={this.changeStationType} value={this.state.value}>
+          <Select
+            showSearch
+            onChange={this.changeStationType}
+            value={this.state.value}
+          >
             {this.state.selectItems}
           </Select>
         )}
