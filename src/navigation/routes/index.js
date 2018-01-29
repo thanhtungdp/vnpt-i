@@ -10,6 +10,7 @@ import MeasuringRoute from 'containers/manager/measuring'
 import StationAutoRoute from 'containers/manager/station-auto'
 import StationTypeRoute from 'containers/manager/station-type'
 import OnlineMonitoring from 'containers/online-monitoring'
+import Map from 'containers/map'
 
 @autobind
 export default class RouteDefault extends React.Component {
@@ -17,7 +18,7 @@ export default class RouteDefault extends React.Component {
     return (
       <div>
         <LayoutRoute path="/" exact component={OverviewDashboard} />
-        <LayoutRoute path={slug.map.base} component={OverviewDashboard} />
+        <Route path={slug.map.base} exact component={Map} />
         <LayoutRoute path={slug.measuring.base} component={MeasuringRoute} />
         <LayoutRoute
           path={slug.stationAuto.base}

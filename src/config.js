@@ -6,12 +6,16 @@ const CATEGORY_API = API_GATEWAY_RELEASE
 const STATION_AUTO_API = API_GATEWAY_RELEASE
 const PORT_DEPLOY = 5555
 
+const GOOGLE_MAP = {
+  KEY: 'AIzaSyACrFcsYEYnifIzzbIOEI6y2v0qVSi9TvU'
+}
 module.exports.API_GATEWAY_TEST = API_GATEWAY_TEST
 module.exports.API_GATEWAY_RELEASE = API_GATEWAY_RELEASE
 module.exports.AUTH_API = AUTH_API
 module.exports.CATEGORY_API = CATEGORY_API
 module.exports.STATION_AUTO_API = STATION_AUTO_API
 module.exports.PORT_DEPLOY = PORT_DEPLOY
+module.exports.GOOGLE_MAP = GOOGLE_MAP
 
 module.exports.default = {
   API_GATEWAY_TEST,
@@ -19,5 +23,6 @@ module.exports.default = {
   AUTH_API,
   CATEGORY_API,
   STATION_AUTO_API,
+  GOOGLE_MAP,
   PORT_DEPLOY
 }
