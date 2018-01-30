@@ -40,7 +40,7 @@ export default class MapCar extends PureComponent {
   async componentDidMount() {
     const stationAutoList = await getStationAutos({}, {})
     this.setState({
-      stationAutoList:  await resolveMapLocation(stationAutoList.data)//StationsAppointment
+      stationAutoList: await resolveMapLocation(stationAutoList.data) //StationsAppointment
     })
   }
 

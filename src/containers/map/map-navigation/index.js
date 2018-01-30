@@ -14,8 +14,7 @@ export default class MapNavigation extends React.PureComponent {
   render() {
     return (
       <NavigationLayout>
-        <NavigationItemCollapse label="Location station auto ">
-        </NavigationItemCollapse>
+        <NavigationItemCollapse label="Location station auto " />
       </NavigationLayout>
     )
   }
