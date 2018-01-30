@@ -107,7 +107,8 @@ export default class OnlineMonitoring extends React.Component {
           if (!existItems || existItems.length === 0)
             columns.push({
               dataIndex: measuring.key,
-              title: measuring.name,
+              title:
+                measuring.name + (measuring.unit ? ` (${measuring.unit})` : ''),
               render: (value, record) => {
                 var color = currentState.config.normal
                 if (
@@ -129,7 +130,7 @@ export default class OnlineMonitoring extends React.Component {
         dataSource.push({
           ...station.lastLog.measuringLogs,
           receivedAt: station.lastLog.receivedAt,
-          stationName: station.name.vi,
+          stationName: station.name,
           stationKey: station.key,
           stationType: station.stationType.key,
           key: station.key
@@ -151,7 +152,7 @@ export default class OnlineMonitoring extends React.Component {
       <StyledTabs defaultActiveKey="1" key={stationType.key}>
         <Tabs.TabPane
           rowKey="uid"
-          tab={stationType.name.vi}
+          tab={stationType.name}
           stype={{ fontSize: '20px' }}
           key="1"
         >

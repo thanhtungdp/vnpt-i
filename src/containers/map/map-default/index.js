@@ -5,8 +5,7 @@ import { GoogleMap, withScriptjs, withGoogleMap } from 'react-google-maps'
 import { getGoogleMapProps } from 'components/map/utils'
 import { getStationAutos } from 'api/StationAuto'
 import { resolveMapLocation } from 'utils/resolveMapLocation'
-import MarkerAppointment from 'components/map/marker/marker-appointment-station'
-import StationsAppointment from 'fake-data/stationsAppointment'
+import MarkerStation from 'components/map/marker'
 const MapContainer = styled.div``
 
 @withScriptjs
@@ -19,11 +18,14 @@ class CustomGoogleMap extends PureComponent {
         defaultCenter={{ lat: 10.7607494, lng: 106.6954122 }}
       >
         <div>
-          {this.props.stationAutoList.map(location => (
-            <MarkerAppointment
-              mapLocation={location.mapLocation}
-              name={location.name}
-              key={location._id}
+          {this.props.stationAutoList.map(item => (
+            <MarkerStation
+              mapLocation={item.mapLocation}
+              name={item.name}
+              key={item._id}
+              status={'good'}
+              address={item.address}
+              lastLog={item.lastLog}
             />
           ))}
         </div>
@@ -40,7 +42,7 @@ export default class MapCar extends PureComponent {
   async componentDidMount() {
     const stationAutoList = await getStationAutos({}, {})
     this.setState({
-      stationAutoList: await resolveMapLocation(stationAutoList.data) //StationsAppointment
+      stationAutoList: await resolveMapLocation(stationAutoList.data)
     })
   }
 

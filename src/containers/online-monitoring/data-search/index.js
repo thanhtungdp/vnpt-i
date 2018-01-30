@@ -59,7 +59,7 @@ class DataSearch extends React.PureComponent {
       const options = stationAutos ? (
         this.state.stationAutos.map(d => (
           <Select.Option key={d.key} value={d.key}>
-            {d.name.vi}
+            {d.name}
           </Select.Option>
         ))
       ) : (
@@ -102,7 +102,6 @@ class DataSearch extends React.PureComponent {
       query
     )
     var lines = []
-
     var station = this.state.stationAutos.find(item => item.key === query.key)
     var dataLines = {}
     if (station)
@@ -147,7 +146,7 @@ class DataSearch extends React.PureComponent {
     const options = stations ? (
       this.state.stationAutos.map(d => (
         <Select.Option key={d.key} value={d.key}>
-          {d.name.vi}
+          {d.name}
         </Select.Option>
       ))
     ) : (
@@ -159,7 +158,6 @@ class DataSearch extends React.PureComponent {
   render() {
     const { getFieldDecorator } = this.props.form
     const { t } = this.props.lang
-    console.log(this.props.initialValues)
     return (
       <Form className="ant-advanced-search-form" onSubmit={this.changeSearch}>
         <Row gutter={24}>

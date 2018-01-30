@@ -1,4 +1,4 @@
-import carStatus from 'constants/carStatus'
+import carStatus from 'constants/stationStatus'
 
 export default [
   {
