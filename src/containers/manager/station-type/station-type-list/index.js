@@ -55,7 +55,7 @@ export default class StationTypeList extends React.Component {
       },
       {
         title: t('stationTypeManager.form.name.label'),
-        dataIndex: 'name.vi',
+        dataIndex: 'name',
         key: 'name'
       },
       {

@@ -84,7 +84,7 @@ export default class MeasuringList extends React.Component {
         content: row.key
       },
       {
-        content: row.name.vi
+        content: row.name
       },
       {
         content: row.unit
