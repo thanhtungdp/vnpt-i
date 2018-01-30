@@ -60,7 +60,7 @@ export default class StationAutoList extends React.Component {
       },
       {
         title: t('stationAutoManager.form.name.label'),
-        dataIndex: 'name.vi',
+        dataIndex: 'name',
         key: 'name'
       },
       {

@@ -17,7 +17,7 @@ const dashboardMenu = {
   component: (
     <AkNavigationItem
       linkComponent={WrapperLinkComponent}
-      icon={Icon.quizLists}
+      icon={Icon.dashboardIco}
       text="Dashboard"
     />
   )
@@ -28,7 +28,7 @@ const monitoringMenu = {
     <AkNavigationItem
       linkComponent={WrapperLinkComponent}
       href={slug.onlineMonitoring.base}
-      icon={Icon.quizLists}
+      icon={Icon.screenIcon}
       text="Monitoring"
     />
   )
@@ -39,7 +39,7 @@ const mapMenu = {
     <AkNavigationItem
       linkComponent={WrapperLinkComponent}
       href={slug.map.base}
-      icon={Icon.quizLists}
+      icon={Icon.location}
       text="Map"
     />
   )
@@ -57,7 +57,7 @@ const dataSearchMenu = {
   component: (
     <AkNavigationItem
       linkComponent={WrapperLinkComponent}
-      icon={Icon.quizLists}
+      icon={Icon.graphBarIcon}
       text="Data Search"
     />
   )
@@ -67,7 +67,7 @@ const avgDataMenu = {
   component: (
     <AkNavigationItem
       linkComponent={WrapperLinkComponent}
-      icon={Icon.quizLists}
+      icon={Icon.graphLineIcon}
       text="AVG Data"
     />
   )
@@ -97,7 +97,7 @@ const stationTypeMenu = {
     <AkNavigationItem
       linkComponent={WrapperLinkComponent}
       href={slug.stationType.base}
-      icon={Icon.users}
+      icon={Icon.hipchatIcon}
       text="Station type"
     />
   )
@@ -108,7 +108,7 @@ const stationAutoMenu = {
     <AkNavigationItem
       linkComponent={WrapperLinkComponent}
       href={slug.stationAuto.base}
-      icon={Icon.gallerySlider}
+      icon={Icon.bookIcon}
       text="Station auto"
     />
   )

@@ -22,7 +22,7 @@ class CustomGoogleMap extends PureComponent {
           {this.props.stationAutoList.map(location => (
             <MarkerAppointment
               mapLocation={location.mapLocation}
-              name={location.name.vi}
+              name={location.name}
               key={location._id}
             />
           ))}
