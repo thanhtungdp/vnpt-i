@@ -4,9 +4,12 @@ import PropTypes from 'prop-types'
 import Icon from 'themes/markerIcon'
 import { autobind } from 'core-decorators'
 import stationStatus from 'constants/stationStatus'
+
 const { InfoWindow } = require('react-google-maps')
 import Marker from '../utils/marker-with-label-animate'
 import { Table } from 'react-bootstrap'
+import DateFormat from 'dateformat'
+
 const MIN_WIDTH_INFO = '150px'
 
 @autobind
@@ -17,11 +20,13 @@ export default class MarkerStation extends PureComponent {
     status: PropTypes.string,
     address: PropTypes.string,
     lastLog: PropTypes.object,
-    measuringList: PropTypes.array
+    measuringList: PropTypes.array,
+    visible: PropTypes.bool
   }
   state = {
     isOpen: false
   }
+
   toggleOpen() {
     this.setState({ isOpen: !this.state.isOpen })
   }
@@ -40,12 +45,28 @@ export default class MarkerStation extends PureComponent {
   }
 
   componentDidMount() {}
+
   renderTableData() {
-    let measuringList = this.props.measuringList
     let lastLog = this.props.lastLog
+    let measuringList = this.props.measuringList.map((item, index) => (
+      <tr>
+        <td>{index + 1}</td>
+        <td>{item.name}</td>
+        <td>
+          {lastLog.measuringLogs[item.key]
+            ? lastLog.measuringLogs[item.key].value
+            : ''}
+        </td>
+        <td>{item.unit}</td>
+      </tr>
+    ))
     return (
       <div>
-        <Table striped bordered condensed hover>
+        <span>
+          Received at:{' '}
+          {DateFormat(new Date(lastLog.receivedAt), 'dd/mm/yyyy hh:mm:ss')}
+        </span>
+        <Table striped={true} bordered condensed hover responsive={true}>
           <thead>
             <tr>
               <th>#</th>
@@ -54,25 +75,7 @@ export default class MarkerStation extends PureComponent {
               <th>Unit</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <td>1</td>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td>Jacob</td>
-              <td>Thornton</td>
-              <td>@fat</td>
-            </tr>
-            <tr>
-              <td>3</td>
-              <td colSpan="2">Larry the Bird</td>
-              <td>@twitter</td>
-            </tr>
-          </tbody>
+          <tbody>{measuringList}</tbody>
         </Table>
       </div>
     )
@@ -82,6 +85,7 @@ export default class MarkerStation extends PureComponent {
     return (
       <div>
         <Marker
+          visible={this.props.visible}
           icon={{
             url: this.getIconByStatus(this.props.status), // url
             scaledSize: new google.maps.Size(30, 30)
@@ -117,9 +121,14 @@ export default class MarkerStation extends PureComponent {
                     {this.props.name}
                   </b>
                   <br />
+                  <span>
+                    Longitude: {this.props.mapLocation.lng} - Latitude:{' '}
+                    {this.props.mapLocation.lat}
+                  </span>
+                  <br />
                   <span> Address: {this.props.address}</span>
                   <br />
-                  {this.renderTableData()}
+                  {this.props.lastLog && this.renderTableData()}
                 </div>
               </InfoWindow>
             )}
