@@ -89,8 +89,7 @@ export default class SearchFrom extends React.PureComponent {
       var station = this.state.stationAutos.find(
         item => item.key === values.stationAuto
       )
-        if(values.measuringList)
-          data.measuringArray= values.measuringList
+      if (values.measuringList) data.measuringArray = values.measuringList
       var measuringList = this.state.measuringList.filter(
         item => values.measuringList.indexOf(item.key) > -1
       )
@@ -99,7 +98,7 @@ export default class SearchFrom extends React.PureComponent {
       var advanced = values.advanced.find(item => item.measuringKey)
       data.advanced = advanced
       console.log(data)
-        console.log(values.advanced)
+      console.log(values.advanced)
       this.setState({ dataSearch: data, station: station }, () =>
         this.props.onChangeSearch(data)
       )

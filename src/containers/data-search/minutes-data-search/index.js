@@ -24,13 +24,13 @@ class MinutesDataSearch extends React.Component {
     dataSources: [],
     measuringList: [],
     lines: [],
-      query:{},
+    query: {},
     config: {
-        multiplicationTime: 1,
-        prepareExceeded: 0.9,
-        exceededColor: 'red',
-        prepareColor: 'orange',
-        normal: 'black'
+      multiplicationTime: 1,
+      prepareExceeded: 0.9,
+      exceededColor: 'red',
+      prepareColor: 'orange',
+      normal: 'black'
     }
   }
 
@@ -76,7 +76,7 @@ class MinutesDataSearch extends React.Component {
       dataSources: dataSources.data,
       measuringList: query.measuringList,
       lines,
-        query
+      query
     })
   }
 
@@ -103,35 +103,29 @@ class MinutesDataSearch extends React.Component {
         }
       }
     ]
-      var currentState = this.state
+    var currentState = this.state
     var column1s = this.state.measuringList.map(item => ({
-      title: item.name + (item.unit ? '('+ item.unit+')': ''),
+      title: item.name + (item.unit ? '(' + item.unit + ')' : ''),
       dataIndex: `measuringLogs.${item.key}`,
       key: item.key,
-        render: (value, record) => {
-            var color = currentState.config.normal
-            if (
-                value.value >=
-                value.maxLimit * currentState.config.prepareExceeded
-            )
-                color = currentState.config.prepareColor
-            if (
-                value.value <= value.minLimit ||
-                value.value >=
-                value.maxLimit * currentState.config.multiplicationTime
-            )
-                color = currentState.config.exceededColor
-            return <div style={{ color: color }}>{value.value}</div>
-        }
+      render: (value, record) => {
+        var color = currentState.config.normal
+        if (value.value >= value.maxLimit * currentState.config.prepareExceeded)
+          color = currentState.config.prepareColor
+        if (
+          value.value <= value.minLimit ||
+          value.value >= value.maxLimit * currentState.config.multiplicationTime
+        )
+          color = currentState.config.exceededColor
+        return <div style={{ color: color }}>{value.value}</div>
+      }
     }))
     columns.push(...column1s)
     return columns
   }
 
-  async downloadData(){
-      DataStationAutoApi.getExportData(
-          this.state.query
-      )
+  async downloadData() {
+    DataStationAutoApi.getExportData(this.state.query)
   }
 
   render() {
@@ -141,36 +135,47 @@ class MinutesDataSearch extends React.Component {
         <SearchFrom initialValues={{}} onChangeSearch={this.changeSearch} />
         <Tabs defaultActiveKey="1">
           <Tabs.TabPane tab="Data" key="1">
-              <Row gutter={24}>
-                  <Col span={24}>
-                      <Button type="primary" shape="circle" icon="file-excel" size={18} style={{float:'right', margin:'5px', }} onClick={this.downloadData}/>
-                  </Col>
-                  <Col span={24}>
-                      <Table
-                          size="small"
-                          columns={this.getColumns()}
-                          dataSource={this.state.dataSources}
-                      />
-                  </Col>
-              </Row>
+            <Row gutter={24}>
+              <Col span={24}>
+                <Button
+                  type="primary"
+                  shape="circle"
+                  icon="file-excel"
+                  size={18}
+                  style={{ float: 'right', margin: '5px' }}
+                  onClick={this.downloadData}
+                />
+              </Col>
+              <Col span={24}>
+                <Table
+                  size="small"
+                  columns={this.getColumns()}
+                  dataSource={this.state.dataSources}
+                />
+              </Col>
+            </Row>
           </Tabs.TabPane>
           <Tabs.TabPane tab="Chart" key="2">
-              <Row gutter={24}>
-                  <Col span={24}>
-                      <HighchartsStockChart>
-                          <Chart width={1000} />
+            <Row gutter={24}>
+              <Col span={24}>
+                <HighchartsStockChart>
+                  <Chart width={1000} />
 
-                          <Title>Chart</Title>
-                          <Legend layout="horizontal" align="center" verticalAlign="bottom" />
+                  <Title>Chart</Title>
+                  <Legend
+                    layout="horizontal"
+                    align="center"
+                    verticalAlign="bottom"
+                  />
 
-                          <XAxis type="datetime">
-                              <XAxis.Title>Time</XAxis.Title>
-                          </XAxis>
+                  <XAxis type="datetime">
+                    <XAxis.Title>Time</XAxis.Title>
+                  </XAxis>
 
-                          <YAxis id="number">{this.state.lines}</YAxis>
-                      </HighchartsStockChart>
-                  </Col>
-              </Row>
+                  <YAxis id="number">{this.state.lines}</YAxis>
+                </HighchartsStockChart>
+              </Col>
+            </Row>
           </Tabs.TabPane>
         </Tabs>
       </PageContainer>
