@@ -151,7 +151,7 @@ export default class OnlineMonitoring extends React.Component {
       <StyledTabs defaultActiveKey="1" key={stationType.key}>
         <Tabs.TabPane
           rowKey="uid"
-          tab={stationType.name.vi}
+          tab={stationType.name}
           stype={{ fontSize: '20px' }}
           key="1"
         >

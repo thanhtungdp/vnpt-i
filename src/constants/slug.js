@@ -27,5 +27,8 @@ export default {
   },
   map: {
     base: '/map'
+  },
+  dataSearch: {
+    base: '/data-search'
   }
 }
