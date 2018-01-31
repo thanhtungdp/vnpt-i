@@ -7,15 +7,30 @@ import MapDefault from './map-default'
 @autobind
 export default class MapCarContainer extends Component {
   state = {
-    navigationWidth: 300
+    navigationWidth: 300,
+    stationAutoMarker: []
   }
+
+  handleGetStationAuto(stationAutoMarker) {
+    console.log(stationAutoMarker)
+    this.setState({ stationAutoMarker })
+  }
+
   render() {
     return (
       <Page
         navigationWidth={this.state.navigationWidth}
-        navigation={<SidebarNavigation />}
+        navigation={
+          <SidebarNavigation
+            stationAutoMarker={this.state.stationAutoMarker}
+            onChangeMarkerFilter={this.handleGetStationAuto}
+          />
+        }
       >
-        <MapDefault markerFilter={this.state.markerFilter} />
+        <MapDefault
+          stationAutoMarker={this.state.stationAutoMarker}
+          handleGetStationAuto={this.handleGetStationAuto}
+        />
       </Page>
     )
   }
