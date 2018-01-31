@@ -113,7 +113,7 @@ class DataSearch extends React.PureComponent {
           data: []
         }
       })
-    if (dataSource) {
+    if (dataSource && dataSource.data) {
       dataSource.data.forEach(function(rec) {
         for (var k in rec.measuringLogs)
           if (dataLines[k]) {

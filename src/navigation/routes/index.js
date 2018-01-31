@@ -11,6 +11,7 @@ import StationAutoRoute from 'containers/manager/station-auto'
 import StationTypeRoute from 'containers/manager/station-type'
 import OnlineMonitoring from 'containers/online-monitoring'
 import Map from 'containers/map'
+import MinutesDataSearch from '../../containers/data-search/minutes-data-search'
 
 @autobind
 export default class RouteDefault extends React.Component {
@@ -31,6 +32,10 @@ export default class RouteDefault extends React.Component {
         <LayoutRoute
           path={slug.onlineMonitoring.base}
           component={OnlineMonitoring}
+        />
+        <LayoutRoute
+          path={slug.dataSearch.base}
+          component={MinutesDataSearch}
         />
         <Route path={slug.login} exact component={LoginRoute} />
       </div>
