@@ -71,7 +71,7 @@ class AvgDataForm extends React.Component {
       var line = (
         <LineSeries
           id={dataLines[item].key}
-          name={dataLines[item].name}
+          name={dataLines[item].name + (dataLines[item].unit ? '(' + dataLines[item].unit + ')' : '')}
           data={dataLines[item].data}
         />
       )
