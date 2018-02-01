@@ -30,5 +30,8 @@ export default {
   },
   dataSearch: {
     base: '/data-search'
+  },
+  avgSearch: {
+    base: '/avg-search'
   }
 }

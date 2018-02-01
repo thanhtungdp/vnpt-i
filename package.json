@@ -103,6 +103,7 @@
     "redux-await": "^5.0.1",
     "redux-form": "^7.1.1",
     "redux-thunk": "^2.2.0",
+    "round-to": "^2.0.0",
     "simple-line-icons": "^2.4.1",
     "style-loader": "0.18.2",
     "styled-components": "^2.2.1",
