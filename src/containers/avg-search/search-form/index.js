@@ -17,7 +17,6 @@ import SelectStationType from 'components/elements/select-station-type'
 import createLanguageHoc, { langPropTypes } from 'hoc/create-lang'
 import StationAutoApi from 'api/StationAuto'
 import moment from 'moment'
-import Input from '../../../components/elements/input'
 
 const FormItem = Form.Item
 
@@ -86,6 +85,7 @@ export default class SearchFrom extends React.PureComponent {
       if (values.toDate)
         data.toDate = moment(values.toDate, this.state.formatDate).toISOString()
       if (values.stationAuto) data.key = values.stationAuto
+      if (values.type) data.type = values.type
       var station = this.state.stationAutos.find(
         item => item.key === values.stationAuto
       )
@@ -94,11 +94,6 @@ export default class SearchFrom extends React.PureComponent {
         item => values.measuringList.indexOf(item.key) > -1
       )
       if (measuringList) data.measuringList = measuringList
-      if (values.isExceeded) data.isExceeded = true
-      var advanced = values.advanced.find(item => item.measuringKey)
-      data.advanced = advanced
-      console.log(data)
-      console.log(values.advanced)
       this.setState({ dataSearch: data, station: station }, () =>
         this.props.onChangeSearch(data)
       )
@@ -151,58 +146,6 @@ export default class SearchFrom extends React.PureComponent {
     })
   }
 
-  renderAdvanced() {
-    const { t } = this.props.lang
-    const { getFieldDecorator } = this.props.form
-
-    var advanced = []
-    for (var i = 0; i < this.state.measuringList.length; i++) {
-      var d = this.state.measuringList[i]
-      advanced.push(
-        <Row gutter={24}>
-          <Col span={6} key={d.key}>
-            <FormItem label={t('dataSearchFrom.form.measuringList.label')}>
-              {getFieldDecorator(`advanced[${i}].measuringKey`)(
-                <Select showSearch>{this.state.measuringOps}</Select>
-              )}
-            </FormItem>
-          </Col>
-          <Col span={6} key={d.key + 'Operator'}>
-            <FormItem label={t('dataSearchFrom.form.operator.label')}>
-              {getFieldDecorator(`advanced[${i}].operator`)(
-                <Select>
-                  <Select.Option value={'>'}> > </Select.Option>
-                  <Select.Option value={'>='}> >= </Select.Option>
-                  <Select.Option value={'<='}> {'<='} </Select.Option>
-                  <Select.Option value={'<'}>{'<'}</Select.Option>
-                  <Select.Option value={'='}>{'='}</Select.Option>
-                </Select>
-              )}
-            </FormItem>
-          </Col>
-          <Col span={6} key={d.key + 'Value'}>
-            <FormItem label={t('dataSearchFrom.form.value.label')}>
-              {getFieldDecorator(`advanced[${i}].value`)(
-                <InputNumber style={{ width: '100%' }} />
-              )}
-            </FormItem>
-          </Col>
-          <Col span={6} key={d.key + 'Operator2'}>
-            <FormItem label={t('dataSearchFrom.form.operator.label')}>
-              {getFieldDecorator(`advanced[${i}].operator2`)(
-                <Select>
-                  <Select.Option value={'AND'}>AND</Select.Option>
-                  <Select.Option value={'OR'}>OR</Select.Option>
-                </Select>
-              )}
-            </FormItem>
-          </Col>
-        </Row>
-      )
-    }
-    return advanced
-  }
-
   render() {
     const { getFieldDecorator } = this.props.form
     const { t } = this.props.lang
@@ -210,16 +153,16 @@ export default class SearchFrom extends React.PureComponent {
       <Row>
         <Form onSubmit={this.changeSearch}>
           <Row gutter={24}>
-            <Col span={6} key="name">
+            <Col span={8} key="name">
               <SelectStationType
                 value={this.props.initialValues.stationType}
                 getFieldDecorator={getFieldDecorator}
-                label={t('searchFrom.form.stationType.label')}
+                label={t('avgSearchFrom.form.stationType.label')}
                 onChangeStationType={this.changeStationType}
               />
             </Col>
-            <Col span={6} key="stationAuto">
-              <FormItem label={t('dataSearchFrom.form.stationAuto.label')}>
+            <Col span={8} key="stationAuto">
+              <FormItem label={t('avgSearchFrom.form.stationAuto.label')}>
                 {getFieldDecorator(`stationAuto`, {
                   initialValue: this.props.initialValues.stationAuto
                 })(
@@ -229,24 +172,23 @@ export default class SearchFrom extends React.PureComponent {
                 )}
               </FormItem>
             </Col>
-            <Col span={6} key="fromDate">
-              <FormItem label={t('dataSearchFrom.form.fromDate.label')}>
-                {getFieldDecorator(`fromDate`, {
-                  initialValue: moment(this.state.fromDate, 'DD/MM/YYYY HH:mm')
-                })(<DatePicker format={'DD/MM/YYYY HH:mm'} />)}
-              </FormItem>
-            </Col>
-            <Col span={6} key="toDate">
-              <FormItem label={t('dataSearchFrom.form.toDate.label')}>
-                {getFieldDecorator(`toDate`, {
-                  initialValue: moment(this.state.toDate, 'DD/MM/YYYY HH:mm')
-                })(<DatePicker format={'DD/MM/YYYY HH:mm'} />)}
+            <Col span={8} key="type">
+              <FormItem label={t('avgSearchFrom.form.type.label')}>
+                {getFieldDecorator(`type`, {
+                  initialValue: this.props.initialValues.type
+                })(
+                  <Select showSearch>
+                    <Select.Option value={'hour'}>Hour</Select.Option>
+                    <Select.Option value={'day'}>Day</Select.Option>
+                    <Select.Option value={'month'}>Month</Select.Option>
+                  </Select>
+                )}
               </FormItem>
             </Col>
           </Row>
           <Row gutter={24}>
-            <Col span={6} key="measuringList">
-              <FormItem label={t('dataSearchFrom.form.measuringList.label')}>
+            <Col span={8} key="measuringList">
+              <FormItem label={t('avgSearchFrom.form.measuringList.label')}>
                 {getFieldDecorator(`measuringList`, {
                   initialValue: this.state.measuringSelected
                 })(
@@ -260,22 +202,19 @@ export default class SearchFrom extends React.PureComponent {
                 )}
               </FormItem>
             </Col>
-            <Col span={6} key="isExceeded">
-              <FormItem label={t('dataSearchFrom.form.isExceeded.label')}>
-                {getFieldDecorator(`isExceeded`)(<Checkbox />)}
+            <Col span={8} key="fromDate">
+              <FormItem label={t('avgSearchFrom.form.fromDate.label')}>
+                {getFieldDecorator(`fromDate`, {
+                  initialValue: moment(this.state.fromDate, 'DD/MM/YYYY HH:mm')
+                })(<DatePicker format={'DD/MM/YYYY HH:mm'} />)}
               </FormItem>
             </Col>
-          </Row>
-          <Row gutter={24}>
-            <Col span={24}>
-              <Collapse>
-                <Collapse.Panel
-                  header={t('dataSearchFrom.form.advanced.label')}
-                  key="1"
-                >
-                  {this.renderAdvanced()}
-                </Collapse.Panel>
-              </Collapse>
+            <Col span={8} key="toDate">
+              <FormItem label={t('avgSearchFrom.form.toDate.label')}>
+                {getFieldDecorator(`toDate`, {
+                  initialValue: moment(this.state.toDate, 'DD/MM/YYYY HH:mm')
+                })(<DatePicker format={'DD/MM/YYYY HH:mm'} />)}
+              </FormItem>
             </Col>
           </Row>
           <Row gutter={24}>

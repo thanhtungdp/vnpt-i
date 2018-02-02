@@ -137,7 +137,7 @@ export default {
       error: 'Error!'
     }
   },
-  searchFrom: {
+  dataSearchFrom: {
     form: {
       stationType: {
         label: 'Station type',
@@ -167,6 +167,56 @@ export default {
       },
       value: {
         label: 'Value'
+      },
+      type: {
+        label: 'Report type'
+      },
+      advanced: {
+        label: 'Advanced'
+      }
+    }
+  },
+  avgSearchFrom: {
+    form: {
+      stationType: {
+        label: 'Station type',
+        placeholder: 'Select station type'
+      },
+      stationAuto: {
+        label: 'Station auto',
+        placeholder: 'Select station auto'
+      },
+      fromDate: {
+        label: 'From',
+        placeholder: 'Select from date'
+      },
+      toDate: {
+        label: 'To',
+        placeholder: 'Select to date'
+      },
+      measuringList: {
+        label: 'Measuring',
+        placeholder: 'Select measuring'
+      },
+      isExceeded: {
+        label: 'Is exceeded'
+      },
+      operator: {
+        label: 'Operator'
+      },
+      value: {
+        label: 'Value'
+      },
+      type: {
+        label: 'Report type'
+      },
+      advanced: {
+        label: 'Advanced'
+      }
+    },
+    list: {
+      receivedAt: {
+        label: 'Received at'
       }
     }
   },

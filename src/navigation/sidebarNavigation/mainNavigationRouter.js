@@ -58,6 +58,7 @@ const dataSearchMenu = {
     <AkNavigationItem
       linkComponent={WrapperLinkComponent}
       icon={Icon.graphBarIcon}
+      href={slug.dataSearch.base}
       text="Data Search"
     />
   )
@@ -68,6 +69,7 @@ const avgDataMenu = {
     <AkNavigationItem
       linkComponent={WrapperLinkComponent}
       icon={Icon.graphLineIcon}
+      href={slug.avgSearch.base}
       text="AVG Data"
     />
   )

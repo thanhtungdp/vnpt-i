@@ -12,6 +12,7 @@ import StationTypeRoute from 'containers/manager/station-type'
 import OnlineMonitoring from 'containers/online-monitoring'
 import Map from 'containers/map'
 import MinutesDataSearch from '../../containers/data-search/minutes-data-search'
+import AvgDataForm from 'containers/avg-search/avg-data-form'
 
 @autobind
 export default class RouteDefault extends React.Component {
@@ -37,6 +38,7 @@ export default class RouteDefault extends React.Component {
           path={slug.dataSearch.base}
           component={MinutesDataSearch}
         />
+        <LayoutRoute path={slug.avgSearch.base} component={AvgDataForm} />
         <Route path={slug.login} exact component={LoginRoute} />
       </div>
     )
