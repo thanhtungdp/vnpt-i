@@ -27,13 +27,13 @@ export default class OnlineMonitoring extends React.Component {
       { page: 1, itemPerPage: 100000 },
       {}
     )
-    var stationAutos = await StationAutoApi.getStationAutos(
+    var stationAutos = await StationAutoApi.getLastDataStationAuto(
       { page: 1, itemPerPage: 1000000 },
       {}
     )
     this.setState({
       stationTypes: dataStationTypes.data,
-      stationAutos: stationAutos.data
+      stationAutos: stationAutos
     })
   }
 

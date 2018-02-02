@@ -27,11 +27,14 @@ export function updateStationAuto(key, measuring = {}) {
 export function deleteStationAuto(key) {
   return deleteFetch(STATION_AUTO_API + '/station-auto/' + key)
 }
-
+export function getLastDataStationAuto() {
+  return getFetch(STATION_AUTO_API + '/station-auto/last-data')
+}
 export default {
   getStationAutos,
   getStationAuto,
   createStationAuto,
   updateStationAuto,
-  deleteStationAuto
+  deleteStationAuto,
+  getLastDataStationAuto
 }
