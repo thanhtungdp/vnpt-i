@@ -1,12 +1,10 @@
 /* eslint-disable */
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
 import Icon from 'themes/markerIcon';
 import { autobind } from 'core-decorators'
-import carStatus from 'constants/carStatus'
+import carStatus from 'constants/stationStatus'
 const { InfoWindow, DirectionsRenderer } = require('react-google-maps');
-// import Marker from '../../utils/marker-animate'
 import Marker from '../../utils/marker-with-label-animate'
 import CarLogApi from 'api/CarLogApi'
 

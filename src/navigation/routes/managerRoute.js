@@ -6,7 +6,6 @@ import OverviewDashboard from 'containers/dashboard/OverviewDashboard'
 import PageSidebarLayout from 'layout/default-sidebar-layout'
 import MeasuringList from 'containers/manager/measuring'
 
-
 @autobind
 export default class ManagerRoute extends React.Component {
   render() {

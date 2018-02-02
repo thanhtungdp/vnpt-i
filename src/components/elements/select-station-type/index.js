@@ -28,7 +28,7 @@ export default class SelectStationType extends PureComponent {
       stationTypes.data !== undefined ? (
         stationTypes.data.map(d => (
           <Select.Option key={d.key} value={d.key}>
-            {d.name.vi}
+            {d.name}
           </Select.Option>
         ))
       ) : (
@@ -53,7 +53,11 @@ export default class SelectStationType extends PureComponent {
         {this.props.getFieldDecorator('stationType', {
           initialValue: this.props.value
         })(
-          <Select showSearch onChange={this.changeStationType} value={this.state.value}>
+          <Select
+            showSearch
+            onChange={this.changeStationType}
+            value={this.state.value}
+          >
             {this.state.selectItems}
           </Select>
         )}

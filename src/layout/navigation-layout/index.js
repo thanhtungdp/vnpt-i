@@ -24,9 +24,7 @@ import AkDropdownMenu, {
 import styled from 'styled-components'
 import { connectAutoDispatch } from 'redux/connect'
 import { logout } from 'redux/actions/authAction'
-
 import Logo from './Logo'
-import { SHAPE } from '../../themes/color'
 
 const WrapperTitle = styled.div`
   margin-left: -8px;
@@ -52,7 +50,6 @@ export default class BasicNestedNavigation extends React.Component {
   }
 
   toggleDrawer(type) {
-    console.log(this.state)
     this.setState({
       drawers: {
         ...this.state.drawers,
@@ -78,7 +75,7 @@ export default class BasicNestedNavigation extends React.Component {
           <Link to="/">
             <AkContainerTitle
               icon={<MediaServicesBlurIcon label="" size="large" />}
-              text="Tungtung.vn"
+              text="iLotusLand"
               subText="Admin System"
             />
           </Link>
@@ -102,7 +99,10 @@ export default class BasicNestedNavigation extends React.Component {
         trigger={
           <AkGlobalItem>
             <Tooltip position="right" content="User profile">
-              <AvatarCharacter size={32} username="thanhtungdp" />
+              <AvatarCharacter
+                size={32}
+                username="duong.nguyen@vietan-software."
+              />
             </Tooltip>
           </AkGlobalItem>
         }

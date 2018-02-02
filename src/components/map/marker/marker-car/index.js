@@ -1,12 +1,10 @@
 /* eslint-disable */
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
 import Icon from 'themes/markerIcon'
 import { autobind } from 'core-decorators'
-import carStatus from 'constants/carStatus'
+import carStatus from 'constants/stationStatus'
 const { InfoWindow, DirectionsRenderer } = require('react-google-maps')
-// import Marker from '../../utils/marker-animate'
 import Marker from '../../utils/marker-with-label-animate'
 
 const { InfoBox } = require('react-google-maps/lib/components/addons/InfoBox')
@@ -182,14 +180,3 @@ export default class MarkerCar extends PureComponent {
     )
   }
 }
-
-// {
-// 	origin: new google.maps.LatLng(10.716563, 106.743734),
-// 	destination: new google.maps.LatLng(10.6658129, 106.6660459),
-// 	travelMode: google.maps.TravelMode.DRIVING,
-// 	waypoints: [
-// 		{
-// 			location: new google.maps.LatLng(10.696704, 106.646931),
-// 			stopover: false
-// 		}]
-// }

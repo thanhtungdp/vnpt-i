@@ -3,8 +3,8 @@ export async function resolveMapLocation(array) {
   if (array && array.length > 0 && array[0].mapLocation) {
     array = array.map(station => {
       station.mapLocation = {
-        lat: station.mapLocation.lat,
-        lng: station.mapLocation.long
+        lat: parseFloat(station.mapLocation.lat),
+        lng: parseFloat(station.mapLocation.long)
       }
       return station
     })

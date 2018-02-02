@@ -1,24 +1,4 @@
-// const mapInitial = {
-//     lat: 10.726909,
-//     lng: 106.616678
-// }
-
-// var list = []
-
-// for(var i=0;i<100;i++){
-//   list.push({
-//       id: i,
-//       code: 'Point ' + i,
-//       mapLocation: {
-//           lat: mapInitial.lat + parseFloat(('0.0'+i)),
-//           lng: mapInitial.lng + parseFloat(('0.0'+i))
-//       },
-//       district: 'Quận Bình Tân'
-//   })
-// }
-
-// export default list;
-import carStatus from 'constants/carStatus'
+import carStatus from 'constants/stationStatus'
 
 export default [
   {

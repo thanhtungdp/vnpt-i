@@ -53,13 +53,13 @@ export default class Login extends PureComponent {
   async handleLogin(values) {
     if (values.email) {
       const user = await this.props.userLogin(values)
-      this.props.history.push('/')
       if (user.error) {
         swal({
           title: user.message,
           type: 'error'
         })
       } else {
+        this.props.history.push('/')
         swal({
           type: 'success',
           text: 'Chào mừng ' + user.data.email

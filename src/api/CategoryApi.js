@@ -3,7 +3,10 @@ import { deleteFetch, getFetch, postFetch, putFetch } from '../utils/fetch'
 
 const urlMeasuring = CATEGORY_API + '/measuring/'
 
-export function getMeasurings({ page = 1, itemPerPage = 10 }, { unit, name }) {
+export function getMeasurings(
+  { page = 1, itemPerPage = 10 },
+  { unit = null, name = null }
+) {
   var urlSearch = `${urlMeasuring}?page=${page}&itemPerPage=${itemPerPage}`
   if (unit) urlSearch += `&unit=${unit}`
   if (name) urlSearch += `&name=${name}`
@@ -28,7 +31,10 @@ export function deleteMeasuring(key) {
 
 const urlStationType = CATEGORY_API + '/station-type/'
 
-export function getStationTypes({ page = 1, itemPerPage = 10 }, { key, name }) {
+export function getStationTypes(
+  { page = 1, itemPerPage = 10 },
+  { key = null, name = null }
+) {
   var urlSearch = `${urlStationType}?page=${page}&itemPerPage=${itemPerPage}`
   if (key) urlSearch += `&key=${key}`
   if (name) urlSearch += `&name=${name}`

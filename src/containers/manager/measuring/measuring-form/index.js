@@ -25,7 +25,7 @@ export default class MeasuringForm extends React.PureComponent {
       if (err) return
       const data = {
         key: values.key,
-        name: { vi: values.name, en: values.name },
+        name: values.name,
         unit: values.unit ? values.unit : ''
       }
       // Callback submit form Container Component

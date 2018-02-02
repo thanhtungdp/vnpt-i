@@ -41,8 +41,7 @@ export default class MeasuringEdit extends React.PureComponent {
 
   cleanData() {
     return {
-      ...this.props.data,
-      name: this.props.data.name.vi
+      ...this.props.data
     }
   }
 

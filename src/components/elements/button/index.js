@@ -67,8 +67,8 @@ const ButtonStyle = styled(
   border-radius: ${props =>
     props.borderRadius ? props.borderRadius : 3}px !important;
   ${props => (props.block ? 'width: 100%;' : '')} ${props =>
-      props.shadowButton
-        ? `
+  props.shadowButton
+    ? `
    background-color: linear-gradient(180deg,#fffffe,#fbfeff);
    border: 1px solid rgba(94,176,240,.98);
    color: #389bff;
@@ -82,7 +82,7 @@ const ButtonStyle = styled(
      outline: none;
    }
  `
-        : ''} ${props => getBackgroundColor(props)};
+    : ''} ${props => getBackgroundColor(props)};
 `
 ButtonStyle.defaultProps = {
   fontSize: 14,
