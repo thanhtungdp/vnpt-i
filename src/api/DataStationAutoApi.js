@@ -9,7 +9,7 @@ export function getDataStationAutos(
   if (fromDate) url += `&from=${fromDate}`
   if (toDate) url += `&to=${toDate}`
   if (advanced) url += `&advanced=${JSON.stringify(advanced)}`
-    if (measuringArray) url += `&measuringList=${measuringArray.join(',')}`
+  if (measuringArray) url += `&measuringList=${measuringArray.join(',')}`
   if (isExceeded) url += `&isExceeded=${isExceeded}`
   return getFetch(url)
 }
@@ -38,7 +38,7 @@ export function getDataStationAutoAVg(
   var url = `${DATA_STATION_AUTO_API}/data-station-auto/${key}/avg?page=${page}&itemPerPage=${itemPerPage}`
   if (fromDate) url += `&from=${fromDate}`
   if (toDate) url += `&to=${toDate}`
-    if (measuringArray) url += `&measuringList=${measuringArray.join(',')}`
+  if (measuringArray) url += `&measuringList=${measuringArray.join(',')}`
   if (type) url += `&type=${type}`
   return getFetch(url)
 }
@@ -53,7 +53,7 @@ export function getDataStationAutoExportAVg({
   var url = `${DATA_STATION_AUTO_API}/data-station-auto/${key}/export-avg?`
   if (fromDate) url += `&from=${fromDate}`
   if (toDate) url += `&to=${toDate}`
-    if (measuringArray) url += `&measuringList=${measuringArray.join(',')}`
+  if (measuringArray) url += `&measuringList=${measuringArray.join(',')}`
   if (type) url += `&type=${type}`
   window.location = url
 }
