@@ -214,7 +214,7 @@ export default class SearchFrom extends React.PureComponent {
               <SelectStationType
                 value={this.props.initialValues.stationType}
                 getFieldDecorator={getFieldDecorator}
-                label={t('searchFrom.form.stationType.label')}
+                label={t('dataSearchFrom.form.stationType.label')}
                 onChangeStationType={this.changeStationType}
               />
             </Col>
