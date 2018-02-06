@@ -98,6 +98,12 @@ const AnalyticChart = styled.div`
 `
 const TableList = styled(Table)`
   flex-grow: 1;
+  .oval {
+    width: 8px;
+    height: 8px;
+    background-color: #1dce6c;
+    border-radius: 4px;
+  }
 `
 class OverviewDashboard extends Component {
   state = {
@@ -179,7 +185,10 @@ class OverviewDashboard extends Component {
       {
         title: 'Status',
         dataIndex: 'status',
-        key: 'status'
+        key: 'status',
+        render: (text, record) => {
+          return <div class="oval" />
+        }
       }
     ]
   }
@@ -192,7 +201,6 @@ class OverviewDashboard extends Component {
           <BoxChartContainer>
             <Heading class="heading">
               <span class="title">
-                {/*{this.getStationAuto(item.key)}*/}
                 {item.name}
                 {' ('}
                 {this.state.stationCount[item.key]}
@@ -219,11 +227,7 @@ class OverviewDashboard extends Component {
                     <XAxis.Title />
                   </XAxis>
                   <YAxis id="number">
-                    <LineSeries
-                      id="installation"
-                      name="Installation"
-                      data={[1, 2, 3, 4, 3, 2]}
-                    />
+                    <LineSeries id="COD" name="COD" data={[1, 2, 3, 4, 3, 2]} />
                   </YAxis>
                 </HighchartsChart>
               </div>
