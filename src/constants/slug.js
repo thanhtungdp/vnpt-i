@@ -1,5 +1,6 @@
 const stationTypeUrl = '/station-type'
 export default {
+  dashboard: '/',
   login: '/login',
   measuring: {
     list: '/measuring',

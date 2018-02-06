@@ -17,6 +17,7 @@ const dashboardMenu = {
   component: (
     <AkNavigationItem
       linkComponent={WrapperLinkComponent}
+      href={slug.dashboard}
       icon={Icon.dashboardIco}
       text="Dashboard"
     />

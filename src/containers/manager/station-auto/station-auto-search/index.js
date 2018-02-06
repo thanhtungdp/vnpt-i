@@ -70,7 +70,7 @@ export default class StationAutoSearchForm extends React.PureComponent {
         <FormItem>
           {getFieldDecorator(`name`)(
             <Input
-              placeholder={t('stationAutoManager.form.name.placeholder')}
+              placeholder={t('stationAutoManager.form.name.label')}
             />
           )}
         </FormItem>
@@ -88,6 +88,7 @@ export default class StationAutoSearchForm extends React.PureComponent {
             classNane="select-form-auto"
             getFieldDecorator={getFieldDecorator}
             onChangeStationType={this.changeStationType}
+            placeholder={t('stationAutoManager.form.stationType.placeholder')}
           />
         </SelectWrapper>
         <Button shape="circle" htmlType="submit">
