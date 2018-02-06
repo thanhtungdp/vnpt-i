@@ -84,6 +84,7 @@ export default class MapNavigation extends React.PureComponent {
         <Clearfix height={8} />
         {this.state.isLoaded &&
           this.state.stationType.map(item => {
+            console.log(this.state.stationAutoList)
             let stationAutoFilter = this.state.stationAutoList.filter(
               station => station.stationType.key == item.key
             )
