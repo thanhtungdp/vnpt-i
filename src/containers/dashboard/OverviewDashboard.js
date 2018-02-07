@@ -82,9 +82,28 @@ const Heading = styled.div`
     text-align: left;
     color: #3b3b3b;
   }
+  .moreAction {
+    font-size: 12px;
+    letter-spacing: -0.2px;
+    text-align: left;
+    color: #a0a0a0;
+  }
+  .moreAction::before {
+    display: inline-block;
+    padding-right: 0.5rem;
+    padding-left: 0.5rem;
+    font-family: 'simple-line-icons';
+    color: #d4d4d4;
+    content: '\\e606';
+    font-size: 10px;
+    position: relative;
+    top: 2px;
+  }
 `
 const AnalyticChart = styled.div`
   height: 250px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 10px 0 rgba(241, 241, 241, 0.5);
   display: flex;
   margin: 5px;
   flex-direction: row;
@@ -98,6 +117,7 @@ const AnalyticChart = styled.div`
 `
 const TableList = styled(Table)`
   flex-grow: 1;
+  border: none;
   .oval {
     width: 8px;
     height: 8px;
@@ -206,10 +226,12 @@ class OverviewDashboard extends Component {
                 {this.state.stationCount[item.key]}
                 {')'}
               </span>
-              <span>More action</span>
+              <span class="moreAction">More action</span>
             </Heading>
             <AnalyticChart>
               <TableList
+                size={'small'}
+                bordered={false}
                 scroll={{ y: 200 }}
                 columns={this.getHead()}
                 dataSource={this.state.rows[item.key]}
