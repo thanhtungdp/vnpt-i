@@ -31,6 +31,11 @@ const WrapperTitle = styled.div`
   margin-right: -8px;
 `
 
+const LogoIcon = styled.img`
+  width: 30px !important;
+  height: auto !important;
+`
+
 const globalTheme = createGlobalTheme('#ffffff', '#1aa309')
 
 @connectAutoDispatch(() => ({}), { logout })
@@ -74,7 +79,7 @@ export default class BasicNestedNavigation extends React.Component {
         <WrapperTitle>
           <Link to="/">
             <AkContainerTitle
-              icon={<MediaServicesBlurIcon label="" size="large" />}
+              icon={<LogoIcon src="/images/logo-icon.png"/>}
               text="iLotusLand"
               subText="Admin System"
             />
