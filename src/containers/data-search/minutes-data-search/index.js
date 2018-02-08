@@ -36,34 +36,40 @@ class MinutesDataSearch extends React.Component {
 
   async changeSearch(query) {
     var dataSources = await DataStationAutoApi.getDataStationAutos(
-      { page: 1, itemPerPage: 1000000000000 },
+      { page: 1, itemPerPage: 100 },
       query
     )
-    var lines = []
-    var dataLines = {}
-    query.measuringList.forEach(function(rec) {
-      dataLines[rec.key] = {
-        key: rec.key,
-        name: rec.name,
-        unit: rec.unit,
+    let lines = []
+    let dataLines = {}
+    query.measuringList.forEach(function(item) {
+      dataLines[item.key] = {
+        key: item.key,
+        name: item.name,
+        unit: item.unit,
         data: []
       }
     })
     if (dataSources) {
-      dataSources.data.forEach(function(rec) {
-        for (var k in rec.measuringLogs)
+      let data = dataSources.data
+      data.sort((a, b) => {
+        return (
+          new Date(a.receivedAt).getTime() - new Date(b.receivedAt).getTime()
+        )
+      })
+      data.forEach(function(item) {
+        for (let k in item.measuringLogs)
           if (dataLines[k]) {
             if (!dataLines[k].data) dataLines[k].data = []
             dataLines[k].data.push([
-              new Date(rec.receivedAt).getTime(),
-              rec.measuringLogs[k].value
+              new Date(item.receivedAt).getTime(),
+              item.measuringLogs[k].value
             ])
           }
       })
     }
 
-    for (var item in dataLines) {
-      var line = (
+    for (let item in dataLines) {
+      let line = (
         <LineSeries
           id={dataLines[item].key}
           name={dataLines[item].name}
