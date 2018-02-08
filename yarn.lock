@@ -8012,6 +8012,10 @@ react-checkbox-tree@^1.0.2:
     prop-types "^15.5.8"
     shortid "^2.2.6"
 
+react-content-loader@^3.0.2:
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/react-content-loader/-/react-content-loader-3.0.2.tgz#b1014e44e7a0281abd42cfe66a953ba21d89cf6c"
+
 react-datepicker@^1.0.3:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/react-datepicker/-/react-datepicker-1.0.3.tgz#f639f22d09b6300c31c151de3699c70e18cef86c"

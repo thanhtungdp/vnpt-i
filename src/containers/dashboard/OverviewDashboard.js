@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PageContainer from 'layout/default-sidebar-layout/PageContainer'
 import SummaryList from 'components/dashboard/summary/summary-list'
 import ChartList from 'components/dashboard/chart/chart-row-list'
+import SummaryLoader from 'components/dashboard/sumary-loader'
 import { getStationTypes } from 'api/CategoryApi'
 import { getStationAutos } from 'api/StationAuto'
 
@@ -10,7 +11,8 @@ export default class OverviewDashboard extends Component {
     stationTypeList: [],
     stationCount: {},
     rows: {},
-    lineSeries: {}
+    lineSeries: {},
+    isLoaded: false
   }
 
   async componentWillMount() {
@@ -24,7 +26,7 @@ export default class OverviewDashboard extends Component {
       rows[item.key] = []
       lineSeries[item.key] = []
     })
-    this.setState({ stationTypeList, stationCount, rows, lineSeries })
+    this.setState({ stationTypeList, stationCount, rows, lineSeries, isLoaded: true })
     for (var i = 0; i < stationTypeList.length; i++) {
       let stationAutos = await getStationAutos(
         {},
@@ -38,7 +40,7 @@ export default class OverviewDashboard extends Component {
         rows: {
           ...this.state.rows,
           [stationTypeList[i].key]: stationAutos.data
-        }
+        },
       })
     }
   }

@@ -2,7 +2,6 @@ import React from 'react'
 import { autobind } from 'core-decorators'
 import styled from 'styled-components'
 import {
-  withHighcharts,
   HighchartsChart,
   Chart,
   Title,
@@ -12,12 +11,11 @@ import {
   YAxis,
   LineSeries
 } from 'react-jsx-highstock'
-import Highcharts from 'highcharts'
 
 const ChartWrapper = styled.div``
 
 @autobind
-export class ChartOverview extends React.PureComponent {
+export default class ChartOverview extends React.PureComponent {
   render() {
     return (
       <ChartWrapper>
@@ -35,5 +33,3 @@ export class ChartOverview extends React.PureComponent {
     )
   }
 }
-
-export default withHighcharts(ChartOverview, Highcharts)

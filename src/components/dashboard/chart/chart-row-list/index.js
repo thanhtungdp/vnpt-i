@@ -2,6 +2,9 @@ import React from 'react'
 import { autobind } from 'core-decorators'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
+import { withHighcharts } from 'react-jsx-highstock'
+import Highcharts from 'highcharts'
+
 import ChartRow from '../chart-row'
 
 const ChartRowListWrapper = styled.div`
@@ -14,7 +17,7 @@ const ChartRowWrapper = styled.div`
 `
 
 @autobind
-export default class ChartRowList extends React.PureComponent {
+export class ChartRowList extends React.PureComponent {
   static propTypes = {
     data: PropTypes.arrayOf(PropTypes.shape(ChartRow.propTypes))
   }
@@ -31,3 +34,5 @@ export default class ChartRowList extends React.PureComponent {
     )
   }
 }
+
+export default withHighcharts(ChartRowList, Highcharts)

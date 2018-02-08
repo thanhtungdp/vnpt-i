@@ -2,7 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { autobind } from 'core-decorators'
 import styled from 'styled-components'
-import Heading from 'components/elements/heading/index'
+import Heading from 'components/elements/heading'
+import { Menu, Dropdown, Icon } from 'antd';
 import TableList from './TableList'
 import Chart from './Chart'
 
@@ -21,6 +22,13 @@ const TableWidth = styled.div`
 const ChartWidth = styled.div`
   flex: 1;
   padding: 16px 16px 0px;
+`
+
+const LinkSpan = styled.span`
+  color: #d4d4d4;
+  &:hover{
+    cursor: pointer;
+  }
 `
 
 @autobind
@@ -43,13 +51,29 @@ export default class ChartSummary extends React.PureComponent {
     })
   }
 
+  rightChilren(){
+    const dropdown = <Menu>
+      <Menu.Item key="0">
+        <a href="http://www.alipay.com/">Realtime Tracking</a>
+      </Menu.Item>
+      <Menu.Item key="1">
+        <a href="http://www.taobao.com/">View in map</a>
+      </Menu.Item>
+    </Menu>
+    return <Dropdown overlay={dropdown} trigger={['click']}>
+      <LinkSpan className="ant-dropdown-link">
+        <Icon type="right" /> View more
+      </LinkSpan>
+    </Dropdown>
+  }
+
   render() {
     return (
       <ChartSummaryWrapper>
-        <Heading>
+        <Heading rightChildren={this.rightChilren()}>
           {this.props.title} ({this.props.totalStation})
         </Heading>
-        <ChartWrapper>
+        {this.props.stationList.length && <ChartWrapper>
           <TableWidth>
             <TableList
               onChangeItem={this.handleChangeItem}
@@ -60,7 +84,7 @@ export default class ChartSummary extends React.PureComponent {
           <ChartWidth>
             <Chart />
           </ChartWidth>
-        </ChartWrapper>
+        </ChartWrapper>}
       </ChartSummaryWrapper>
     )
   }
