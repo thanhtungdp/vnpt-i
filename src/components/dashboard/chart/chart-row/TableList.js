@@ -12,7 +12,7 @@ const Status = styled.div`
 const Row = styled.div`
   display: flex;
   padding: 8px 0px;
-  transition: all .2s linear;
+  transition: all 0.2s linear;
   ${props =>
     props.isActive
       ? `

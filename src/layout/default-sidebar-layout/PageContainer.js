@@ -26,7 +26,7 @@ const BreadcrumbContainer = styled.div`
 `
 
 const PageBodyWrapper = styled.div`
-  background-color: ${props => props.color ? props.color : '#ffffff'};
+  background-color: ${props => (props.color ? props.color : '#ffffff')};
   flex: 1 1 auto;
   position: relative;
   z-index: 1;

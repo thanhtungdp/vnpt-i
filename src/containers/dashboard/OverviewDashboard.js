@@ -26,7 +26,13 @@ export default class OverviewDashboard extends Component {
       rows[item.key] = []
       lineSeries[item.key] = []
     })
-    this.setState({ stationTypeList, stationCount, rows, lineSeries, isLoaded: true })
+    this.setState({
+      stationTypeList,
+      stationCount,
+      rows,
+      lineSeries,
+      isLoaded: true
+    })
     for (var i = 0; i < stationTypeList.length; i++) {
       let stationAutos = await getStationAutos(
         {},
@@ -40,7 +46,7 @@ export default class OverviewDashboard extends Component {
         rows: {
           ...this.state.rows,
           [stationTypeList[i].key]: stationAutos.data
-        },
+        }
       })
     }
   }

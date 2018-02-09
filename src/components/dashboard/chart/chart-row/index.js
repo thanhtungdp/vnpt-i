@@ -7,6 +7,8 @@ import { Menu, Dropdown, Icon } from 'antd'
 import TableList from './TableList'
 import Chart from './Chart'
 import slug from 'constants/slug'
+import { getDataStationAutos } from 'api/DataStationAutoApi'
+
 const ChartSummaryWrapper = styled.div``
 
 const ChartWrapper = styled.div`
@@ -40,15 +42,64 @@ export default class ChartSummary extends React.PureComponent {
   }
 
   state = {
-    currentItem: {}
+    currentItem: {},
+    dataLines: {},
+    isFirstLoad: true
   }
 
   handleChangeItem(e, item) {
     e.preventDefault()
-    console.log(item)
+    this.changeItem(item)
+  }
+
+  async changeItem(stationAuto) {
     this.setState({
-      currentItem: item
+      currentItem: stationAuto
     })
+    if (!stationAuto.measuringList) return {}
+    let dataLines = {}
+    let measuringArray = []
+    stationAuto.measuringList.forEach(function(item) {
+      measuringArray.push(item.key)
+      dataLines[item.key] = {
+        key: item.key,
+        name: item.name,
+        unit: item.unit,
+        data: []
+      }
+    })
+    let dataSources = await getDataStationAutos(
+      { page: 1, itemPerPage: 200 },
+      { key: stationAuto.key, measuringArray: measuringArray }
+    )
+    if (dataSources) {
+      let data = dataSources.data
+      // OrderBy ASC of list
+      data.sort((a, b) => {
+        return (
+          new Date(a.receivedAt).getTime() - new Date(b.receivedAt).getTime()
+        )
+      })
+      data.forEach(function(dataItem) {
+        for (let k in dataItem.measuringLogs)
+          if (dataLines[k]) {
+            if (!dataLines[k].data) dataLines[k].data = []
+            dataLines[k].data.push([
+              new Date(dataItem.receivedAt).getTime(),
+              dataItem.measuringLogs[k].value
+            ])
+          }
+      })
+    }
+    this.setState({ dataLines })
+  }
+
+  firstRowSelected(item) {
+    if (this.state.isFirstLoad) {
+      this.changeItem(item)
+      this.setState({ isFirstLoad: false })
+    }
+    return true
   }
 
   rightChilren() {
@@ -72,26 +123,28 @@ export default class ChartSummary extends React.PureComponent {
   }
 
   render() {
-    return (
-      <ChartSummaryWrapper>
-        <Heading rightChildren={this.rightChilren()}>
-          {this.props.title} ({this.props.totalStation})
-        </Heading>
-        {this.props.stationList.length && (
-          <ChartWrapper>
-            <TableWidth>
-              <TableList
-                onChangeItem={this.handleChangeItem}
-                currentItem={this.state.currentItem}
-                data={this.props.stationList}
-              />
-            </TableWidth>
-            <ChartWidth>
-              <Chart />
-            </ChartWidth>
-          </ChartWrapper>
-        )}
-      </ChartSummaryWrapper>
-    )
+    if (this.props.stationList.length > 0)
+      return (
+        <ChartSummaryWrapper>
+          <Heading rightChildren={this.rightChilren()}>
+            {this.props.title} ({this.props.totalStation})
+          </Heading>
+          {this.firstRowSelected(this.props.stationList[0]) && (
+            <ChartWrapper>
+              <TableWidth>
+                <TableList
+                  onChangeItem={this.handleChangeItem}
+                  currentItem={this.state.currentItem}
+                  data={this.props.stationList}
+                />
+              </TableWidth>
+              <ChartWidth>
+                <Chart dataLines={this.state.dataLines} />
+              </ChartWidth>
+            </ChartWrapper>
+          )}
+        </ChartSummaryWrapper>
+      )
+    return ""
   }
 }

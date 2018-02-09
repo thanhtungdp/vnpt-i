@@ -79,7 +79,7 @@ export default class BasicNestedNavigation extends React.Component {
         <WrapperTitle>
           <Link to="/">
             <AkContainerTitle
-              icon={<LogoIcon src="/images/logo-icon.png"/>}
+              icon={<LogoIcon src="/images/logo-icon.png" />}
               text="iLotusLand"
               subText="Admin System"
             />

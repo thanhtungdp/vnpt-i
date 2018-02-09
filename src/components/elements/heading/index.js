@@ -14,15 +14,17 @@ const H4 = styled.h4`
   font-weight: 600;
 `
 
-export default class Heading extends React.PureComponent{
+export default class Heading extends React.PureComponent {
   static propTypes = {
     rightChildren: PropTypes.any
   }
 
-  render(){
-    return <HeadingWrapper>
-      <H4>{this.props.children}</H4>
-      {this.props.rightChildren}
-    </HeadingWrapper>
+  render() {
+    return (
+      <HeadingWrapper>
+        <H4>{this.props.children}</H4>
+        {this.props.rightChildren}
+      </HeadingWrapper>
+    )
   }
 }
