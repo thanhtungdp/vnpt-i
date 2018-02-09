@@ -1,116 +1,18 @@
 import React, { Component } from 'react'
 import PageContainer from 'layout/default-sidebar-layout/PageContainer'
-import Breadcrumb from 'shared/breadcrumb/Breadcrumb'
-import BitbucketIcon from '@atlaskit/icon/glyph/bitbucket'
-import styled from 'styled-components'
-import Clearfix from '../../components/elements/clearfix'
-import { Table } from 'antd'
+import SummaryList from 'components/dashboard/summary/summary-list'
+import ChartList from 'components/dashboard/chart/chart-row-list'
+import SummaryLoader from 'components/dashboard/sumary-loader'
 import { getStationTypes } from 'api/CategoryApi'
 import { getStationAutos } from 'api/StationAuto'
-import { getDataStationAutos } from 'api/DataStationAutoApi'
-import {
-  withHighcharts,
-  HighchartsChart,
-  Chart,
-  Title,
-  Subtitle,
-  Legend,
-  XAxis,
-  YAxis,
-  LineSeries
-} from 'react-jsx-highstock'
-import Highcharts from 'highcharts'
 
-const SummaryContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-`
-const SummaryItem = styled.div`
-  flex-grow: 1;
-  margin: 2px;
-  width: 224px;
-  height: 68px;
-  opacity: 0.85;
-  border-radius: 4px;
-  div {
-    display: flex;
-    justify-content: space-between;
-    margin: 5px;
-  }
-  .groupText {
-    display: flex;
-    flex-direction: column;
-    color: #ffffff;
-  }
-  .groupText .countText {
-    width: 23px;
-    height: 27px;
-    font-family: OpenSans;
-    font-size: 20px;
-    letter-spacing: -0.2px;
-    text-align: left;
-  }
-  .groupText .itemText {
-    font-size: 14px;
-    letter-spacing: 0.2px;
-    text-align: left;
-  }
-  .groupIcon {
-    align-items: center;
-    display: flex;
-  }
-`
-const StationTypeImg = styled.img`
-  width: 40px;
-  height: 28.4px;
-`
-const BoxChartContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-`
-const Heading = styled.div`
-  display: flex;
-  margin: 5px;
-  justify-content: space-between;
-  .title {
-    height: 24px;
-    font-family: OpenSans;
-    font-size: 18px;
-    letter-spacing: -0.2px;
-    text-align: left;
-    color: #3b3b3b;
-  }
-`
-const AnalyticChart = styled.div`
-  height: 250px;
-  display: flex;
-  margin: 5px;
-  flex-direction: row;
-  align-items: stretch;
-  .tableList {
-    flex-grow: 1;
-  }
-  .spaceChart {
-    flex-grow: 2;
-  }
-`
-const TableList = styled(Table)`
-  flex-grow: 1;
-  .oval {
-    width: 8px;
-    height: 8px;
-    background-color: #1dce6c;
-    border-radius: 4px;
-  }
-`
-class OverviewDashboard extends Component {
+export default class OverviewDashboard extends Component {
   state = {
     stationTypeList: [],
     stationCount: {},
     rows: {},
-    lineSeries: {}
+    lineSeries: {},
+    isLoaded: false
   }
 
   async componentWillMount() {
@@ -124,7 +26,13 @@ class OverviewDashboard extends Component {
       rows[item.key] = []
       lineSeries[item.key] = []
     })
-    this.setState({ stationTypeList, stationCount, rows, lineSeries })
+    this.setState({
+      stationTypeList,
+      stationCount,
+      rows,
+      lineSeries,
+      isLoaded: true
+    })
     for (var i = 0; i < stationTypeList.length; i++) {
       let stationAutos = await getStationAutos(
         {},
@@ -143,7 +51,7 @@ class OverviewDashboard extends Component {
     }
   }
 
-  renderSummary() {
+  getSummaryList() {
     let arrayColor = ['#1dce6c', '#389bff', '#7ece23', '#e74c3c']
     let arrayIcon = [
       '/images/dashboard/cloud.png',
@@ -151,101 +59,30 @@ class OverviewDashboard extends Component {
       '/images/dashboard/surfaceWater.png',
       '/images/dashboard/wasteWater.png'
     ]
-
-    let items = this.state.stationTypeList.map((item, index) => {
-      return (
-        <SummaryItem
-          style={{
-            backgroundColor: arrayColor[index]
-          }}
-        >
-          <div>
-            <div class="groupText">
-              <span class="countText">{this.state.stationCount[item.key]}</span>
-              <span class="itemText">{item.name}</span>
-            </div>
-            <div class="groupIcon">
-              <StationTypeImg src={arrayIcon[index]} />
-            </div>
-          </div>
-        </SummaryItem>
-      )
-    })
-    return <SummaryContainer>{items}</SummaryContainer>
+    return this.state.stationTypeList.map((item, index) => ({
+      color: arrayColor[index],
+      name: item.name,
+      image: arrayIcon[index],
+      number: this.state.stationCount[item.key]
+    }))
   }
 
-  getHead() {
-    return [
-      {
-        title: 'Name',
-        dataIndex: 'name',
-        key: 'name',
-        width: 250
-      },
-      {
-        title: 'Status',
-        dataIndex: 'status',
-        key: 'status',
-        render: (text, record) => {
-          return <div class="oval" />
-        }
-      }
-    ]
-  }
-
-  renderBoxChart() {
-    return this.state.stationTypeList.map(item => {
-      return (
-        <div>
-          <Clearfix height={25} />
-          <BoxChartContainer>
-            <Heading class="heading">
-              <span class="title">
-                {item.name}
-                {' ('}
-                {this.state.stationCount[item.key]}
-                {')'}
-              </span>
-              <span>More action</span>
-            </Heading>
-            <AnalyticChart>
-              <TableList
-                scroll={{ y: 200 }}
-                columns={this.getHead()}
-                dataSource={this.state.rows[item.key]}
-                pagination={false}
-              />
-              <div class="spaceChart">
-                <HighchartsChart>
-                  <Chart height={250} />
-                  <Legend
-                    layout="horizontal"
-                    align="center"
-                    verticalAlign="bottom"
-                  />
-                  <XAxis>
-                    <XAxis.Title />
-                  </XAxis>
-                  <YAxis id="number">
-                    <LineSeries id="COD" name="COD" data={[1, 2, 3, 4, 3, 2]} />
-                  </YAxis>
-                </HighchartsChart>
-              </div>
-            </AnalyticChart>
-          </BoxChartContainer>
-        </div>
-      )
-    })
+  getChartList() {
+    return this.state.stationTypeList.map(item => ({
+      key: item.key,
+      title: item.name,
+      totalStation: this.state.stationCount[item.key],
+      stationList: this.state.rows[item.key]
+    }))
+    return
   }
 
   render() {
     return (
-      <PageContainer title="Welcome to dashboard login">
-        <Breadcrumb icon={<BitbucketIcon label="" />} name="Dashboard" />
-        {this.renderSummary()}
-        {this.renderBoxChart()}
+      <PageContainer backgroundColor="#fafbfb" hideTitle>
+        <SummaryList data={this.getSummaryList()} />
+        <ChartList data={this.getChartList()} />
       </PageContainer>
     )
   }
 }
-export default withHighcharts(OverviewDashboard, Highcharts)

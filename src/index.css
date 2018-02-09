@@ -1,0 +1,8 @@
+@font-face {
+  font-family: 'OpenSans';
+  font-style: normal;
+  font-weight: 400;
+  src: url('fonts/OpenSans/OpenSans-Regular.ttf'); /* IE9 Compat Modes */
+  src: local('Open Sans'), local('OpenSans'),
+    url('fonts/OpenSans/OpenSans-Regular.ttf') format('embedded-opentype'); /* IE6-IE8 */
+}

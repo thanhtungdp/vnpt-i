@@ -25,9 +25,18 @@ const BreadcrumbContainer = styled.div`
   height: 68.8px;
 `
 
+const PageBodyWrapper = styled.div`
+  background-color: ${props => (props.color ? props.color : '#ffffff')};
+  flex: 1 1 auto;
+  position: relative;
+  z-index: 1;
+`
+
 export default class PageContainer extends React.PureComponent {
   static propTypes = {
     title: PropTypes.string,
+    backgroundColor: PropTypes.string,
+    hideTitle: PropTypes.bool,
     right: PropTypes.any
   }
 
@@ -61,14 +70,14 @@ export default class PageContainer extends React.PureComponent {
   render() {
     return (
       <StickyContainer>
-        <Page>
-          {this.renderHeader()}
+        <PageBodyWrapper color={this.props.backgroundColor}>
+          {!this.props.hideTitle ? this.renderHeader() : null}
           {this.props.headerBottom}
           <Clearfix height={16} />
           <Grid>
             <div className="animated fadeIn">{this.props.children}</div>
           </Grid>
-        </Page>
+        </PageBodyWrapper>
       </StickyContainer>
     )
   }
