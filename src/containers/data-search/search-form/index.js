@@ -109,7 +109,7 @@ export default class SearchFrom extends React.PureComponent {
     var stations = this.state.stationAutos.find(
       item => item.stationType && item.stationType.key === stationType.key
     )
-      console.log(stations)
+    console.log(stations)
     if (!Array.isArray(stations)) {
       stations = [stations]
     }

@@ -8,6 +8,8 @@ import StationAutoApi from 'api/StationAuto'
 import CategoriesApi from 'api/CategoryApi'
 import DataSearch from './data-search'
 import styled from 'styled-components'
+import playSound from 'utils/audio'
+import dateFormat from 'dateformat'
 
 const StyledTabs = styled(Tabs)`
   .ant-tabs-tab {
@@ -22,12 +24,30 @@ export default class OnlineMonitoring extends React.Component {
     super(props)
   }
 
+  startTimer() {
+    clearInterval(this.timer)
+    this.timer = setInterval(this.loadData.bind(this), 60000)
+    this.loadData()
+  }
+
+  stopTimer() {
+    clearInterval(this.timer)
+  }
+
   async componentWillMount() {
-    var dataStationTypes = await CategoriesApi.getStationTypes(
+    this.startTimer()
+  }
+
+  componentWillUnmount() {
+    this.stopTimer()
+  }
+
+  async loadData() {
+    let dataStationTypes = await CategoriesApi.getStationTypes(
       { page: 1, itemPerPage: 100000 },
       {}
     )
-    var stationAutos = await StationAutoApi.getLastDataStationAuto(
+    let stationAutos = await StationAutoApi.getLastDataStationAuto(
       { page: 1, itemPerPage: 1000000 },
       {}
     )
@@ -45,6 +65,7 @@ export default class OnlineMonitoring extends React.Component {
       prepareExceeded: 0.9,
       exceededColor: 'red',
       prepareColor: 'orange',
+      trendExceededColor: 'yellow',
       normal: 'black'
     },
     isLoading: true,
@@ -66,24 +87,13 @@ export default class OnlineMonitoring extends React.Component {
 
   renderStationTypeContainer(stationType) {
     const { t } = this.props.lang
-    var columns = [
+    let columns = [
       {
         dataIndex: 'receivedAt',
         title: 'receivedAt',
         render(value, record) {
-          var date = new Date(value)
-          var options = {
-            year: 'numeric',
-            month: 'numeric',
-            day: 'numeric',
-            hour: 'numeric',
-            minute: 'numeric',
-            second: 'numeric',
-            hour12: false
-          }
-          return (
-            <div>{new Intl.DateTimeFormat('en-GB', options).format(date)}</div>
-          )
+          let date = new Date(value)
+          return <div>{dateFormat(date, 'dd/mm/yyyy HH:MM')}</div>
         },
         fixed: 'left'
       },
@@ -93,9 +103,9 @@ export default class OnlineMonitoring extends React.Component {
       }
     ]
 
-    var dataSource = []
-    var currentState = this.state
-    var stations = this.state.stationAutos.filter(
+    let dataSource = []
+    let currentState = this.state
+    let stations = this.state.stationAutos.filter(
       item => item.stationType && item.stationType.key === stationType.key
     )
     stations.forEach(function(station) {
@@ -110,18 +120,14 @@ export default class OnlineMonitoring extends React.Component {
               title:
                 measuring.name + (measuring.unit ? ` (${measuring.unit})` : ''),
               render: (value, record) => {
-                var color = currentState.config.normal
-                if (
-                  value.value >=
-                  value.maxLimit * currentState.config.prepareExceeded
-                )
-                  color = currentState.config.prepareColor
-                if (
-                  value.value <= value.minLimit ||
-                  value.value >=
-                    value.maxLimit * currentState.config.multiplicationTime
-                )
+                let color = currentState.config.normal
+                if (value.status === 2) color = currentState.config.prepareColor
+                else if (value.status === 3 || value.status === 4) {
                   color = currentState.config.exceededColor
+                  playSound('audio/alarm_beep.wav')
+                } else if (value.status === 1)
+                  color = currentState.config.trendExceededColor
+
                 return <div style={{ color: color }}>{value.value}</div>
               }
             })
@@ -136,7 +142,7 @@ export default class OnlineMonitoring extends React.Component {
           key: station.key
         })
     })
-    var openModal = this.setModal2Visible
+    let openModal = this.setModal2Visible
     columns.push({
       dataIndex: 'stationKey',
       render(value, record) {
@@ -168,7 +174,6 @@ export default class OnlineMonitoring extends React.Component {
   }
 
   render() {
-    const { t } = this.props.lang
     return (
       <PageContainer {...this.props.wrapperProps}>
         <Breadcrumb items={['list']} />
