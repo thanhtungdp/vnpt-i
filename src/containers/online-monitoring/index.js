@@ -121,14 +121,19 @@ export default class OnlineMonitoring extends React.Component {
                 measuring.name + (measuring.unit ? ` (${measuring.unit})` : ''),
               render: (value, record) => {
                 let color = currentState.config.normal
-                if (value.status === 2) color = currentState.config.prepareColor
-                else if (value.status === 3 || value.status === 4) {
-                  color = currentState.config.exceededColor
-                  playSound('audio/alarm_beep.wav')
-                } else if (value.status === 1)
-                  color = currentState.config.trendExceededColor
-
-                return <div style={{ color: color }}>{value.value}</div>
+                if (value) {
+                  if (value.status) {
+                    if (value.status === 2)
+                      color = currentState.config.prepareColor
+                    else if (value.status === 3 || value.status === 4) {
+                      color = currentState.config.exceededColor
+                      playSound('audio/alarm_beep.wav')
+                    } else if (value.status === 1)
+                      color = currentState.config.trendExceededColor
+                  }
+                  return <div style={{ color: color }}>{value.value}</div>
+                }
+                return value
               }
             })
         })
