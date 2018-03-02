@@ -136,7 +136,7 @@ export default {
       },
       options: {
         isAllowWarning: 'Allow Warning',
-        isAllowRemote: 'Allow Remote',
+        isAllowRemote: 'Allow Remote'
       },
       error: 'Error!'
     }

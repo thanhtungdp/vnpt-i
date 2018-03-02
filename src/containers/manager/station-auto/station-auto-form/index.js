@@ -386,11 +386,10 @@ export default class StationAutoForm extends React.PureComponent {
           <Col span={24} />
         </Row>
 
-
         <Row>
-          <Col span={8}><Checkbox value="isAllowWarning" onChange={this.onOptionChange} 
+          <Col span={8}><Checkbox value="isAllowWarning" onChange={this.onOptionChange}
             checked={this.state.options.isAllowWarning}>{t('stationAutoManager.form.options.isAllowWarning')}</Checkbox></Col>
-          <Col span={8}><Checkbox value="isAllowRemote" onChange={this.onOptionChange} 
+          <Col span={8}><Checkbox value="isAllowRemote" onChange={this.onOptionChange}
             checked={this.state.options.isAllowRemote}>{t('stationAutoManager.form.options.isAllowRemote')}</Checkbox></Col>
         </Row>
 
