@@ -127,7 +127,7 @@ export default class ChartSummary extends React.PureComponent {
       return (
         <ChartSummaryWrapper>
           <Heading rightChildren={this.rightChilren()}>
-           My Home
+						{this.props.title} ({this.props.totalStation})
           </Heading>
           {this.firstRowSelected(this.props.stationList[0]) && (
             <ChartWrapper>
