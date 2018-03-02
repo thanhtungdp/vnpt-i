@@ -8,7 +8,8 @@ import {
   Select,
   Table,
   Popconfirm,
-  Icon
+  Icon,
+  Checkbox
 } from 'antd'
 import PropTypes from 'prop-types'
 import { autobind } from 'core-decorators'
@@ -42,7 +43,8 @@ export default class StationAutoForm extends React.PureComponent {
       stationTypes: [],
       measuringList: [],
       measuringListSource: [],
-      measuringOps: []
+      measuringOps: [],
+      options: {}
     }
     const { t } = this.props.lang
     this.columns = [
@@ -92,24 +94,24 @@ export default class StationAutoForm extends React.PureComponent {
                   </Popconfirm>
                 </span>
               ) : (
-                <span>
-                  {' '}
-                  <a onClick={() => this.editMeasuring(record.key)}>
-                    <Icon type="edit" />
-                  </a>
-                  <Popconfirm
-                    title="Sure to delete?"
-                    onConfirm={() => this.removeMeasuring(record.key)}
-                  >
-                    <a>
-                      <Icon
-                        type="delete"
-                        style={{ marginLeft: '5px', color: 'red' }}
-                      />
+                  <span>
+                    {' '}
+                    <a onClick={() => this.editMeasuring(record.key)}>
+                      <Icon type="edit" />
                     </a>
-                  </Popconfirm>
-                </span>
-              )}
+                    <Popconfirm
+                      title="Sure to delete?"
+                      onConfirm={() => this.removeMeasuring(record.key)}
+                    >
+                      <a>
+                        <Icon
+                          type="delete"
+                          style={{ marginLeft: '5px', color: 'red' }}
+                        />
+                      </a>
+                    </Popconfirm>
+                  </span>
+                )}
             </div>
           )
         }
@@ -131,7 +133,8 @@ export default class StationAutoForm extends React.PureComponent {
     if (this.props.initialValues)
       this.setState({
         measuringList: this.props.initialValues.measuringList,
-        stationType: this.props.initialValues.objStationType
+        stationType: this.props.initialValues.objStationType,
+        options: this.props.initialValues.options
       })
   }
 
@@ -237,7 +240,8 @@ export default class StationAutoForm extends React.PureComponent {
         emails: values.emails,
         phones: values.phones,
         stationType: this.state.stationType,
-        measuringList: this.state.measuringList
+        measuringList: this.state.measuringList,
+        options: this.state.options
       }
       // Callback submit form Container Component
       this.props.onSubmit(data)
@@ -264,6 +268,15 @@ export default class StationAutoForm extends React.PureComponent {
     this.edit(record.key)
   }
 
+  onOptionChange(checkedValues) {
+    this.setState({
+      options: {
+        ...this.state.options,
+        [checkedValues.target.value]: checkedValues.target.checked
+      }
+    })
+  }
+
   render() {
     const { getFieldDecorator } = this.props.form
     const { t } = this.props.lang
@@ -284,7 +297,7 @@ export default class StationAutoForm extends React.PureComponent {
                   disabled={this.props.isEdit}
                   placeholder={t('stationAutoManager.form.key.placeholder')}
                 />
-              )}
+                )}
             </FormItem>
           </Col>
           <Col span={12}>
@@ -295,7 +308,7 @@ export default class StationAutoForm extends React.PureComponent {
                 <Input
                   placeholder={t('stationAutoManager.form.name.placeholder')}
                 />
-              )}
+                )}
             </FormItem>
           </Col>
         </Row>
@@ -308,7 +321,7 @@ export default class StationAutoForm extends React.PureComponent {
                 <Input
                   placeholder={t('stationAutoManager.form.long.placeholder')}
                 />
-              )}
+                )}
             </FormItem>
           </Col>
           <Col span={12}>
@@ -319,7 +332,7 @@ export default class StationAutoForm extends React.PureComponent {
                 <Input
                   placeholder={t('stationAutoManager.form.lat.placeholder')}
                 />
-              )}
+                )}
             </FormItem>
           </Col>
         </Row>
@@ -372,6 +385,15 @@ export default class StationAutoForm extends React.PureComponent {
         <Row gutter={8}>
           <Col span={24} />
         </Row>
+
+
+        <Row>
+          <Col span={8}><Checkbox value="isAllowWarning" onChange={this.onOptionChange} 
+            checked={this.state.options.isAllowWarning}>{t('stationAutoManager.form.options.isAllowWarning')}</Checkbox></Col>
+          <Col span={8}><Checkbox value="isAllowRemote" onChange={this.onOptionChange} 
+            checked={this.state.options.isAllowRemote}>{t('stationAutoManager.form.options.isAllowRemote')}</Checkbox></Col>
+        </Row>
+
         <Button
           style={{ width: '200px', right: '0' }}
           type="primary"

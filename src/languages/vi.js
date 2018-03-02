@@ -4,7 +4,11 @@ export default {
       title: 'Measuring'
     },
     create: {
-      title: 'Create'
+      success: 'Add measuring success!',
+      keyExisted: 'Measuring code is existed!'
+    },
+    edit: {
+      success: 'Update measuring success!'
     },
     form: {
       key: {
@@ -20,7 +24,8 @@ export default {
       unit: {
         label: 'Unit',
         placeholder: 'Input unit of measuring'
-      }
+      },
+      error: 'Error!'
     }
   },
   stationTypeManager: {
@@ -129,7 +134,94 @@ export default {
         placeholder: 'Input max limit',
         error: 'Please input max limit'
       },
+      options: {
+        isAllowWarning: 'Allow Warning',
+        isAllowRemote: 'Allow Remote',
+      },
       error: 'Error!'
+    }
+  },
+  dataSearchFrom: {
+    form: {
+      stationType: {
+        label: 'Station type',
+        placeholder: 'Select station type'
+      },
+      stationAuto: {
+        label: 'Station auto',
+        placeholder: 'Select station auto'
+      },
+      fromDate: {
+        label: 'From',
+        placeholder: 'Select from date'
+      },
+      toDate: {
+        label: 'To',
+        placeholder: 'Select to date'
+      },
+      measuringList: {
+        label: 'Measuring',
+        placeholder: 'Select measuring'
+      },
+      isExceeded: {
+        label: 'Is exceeded'
+      },
+      operator: {
+        label: 'Operator'
+      },
+      value: {
+        label: 'Value'
+      },
+      type: {
+        label: 'Report type'
+      },
+      advanced: {
+        label: 'Advanced'
+      }
+    }
+  },
+  avgSearchFrom: {
+    form: {
+      stationType: {
+        label: 'Station type',
+        placeholder: 'Select station type'
+      },
+      stationAuto: {
+        label: 'Station auto',
+        placeholder: 'Select station auto'
+      },
+      fromDate: {
+        label: 'From',
+        placeholder: 'Select from date'
+      },
+      toDate: {
+        label: 'To',
+        placeholder: 'Select to date'
+      },
+      measuringList: {
+        label: 'Measuring',
+        placeholder: 'Select measuring'
+      },
+      isExceeded: {
+        label: 'Is exceeded'
+      },
+      operator: {
+        label: 'Operator'
+      },
+      value: {
+        label: 'Value'
+      },
+      type: {
+        label: 'Report type'
+      },
+      advanced: {
+        label: 'Advanced'
+      }
+    },
+    list: {
+      receivedAt: {
+        label: 'Received at'
+      }
     }
   },
   addon: {
@@ -137,6 +229,20 @@ export default {
     edit: 'Edit',
     delete: 'Delete',
     save: 'Save',
+    onSave: {
+      add: {
+        success: 'Add success!',
+        error: 'Add error!'
+      },
+      update: {
+        success: 'Update success!',
+        error: 'Update error'
+      }
+    },
+    onDelete: {
+      success: 'Delete success!',
+      error: 'Delete error!'
+    },
     search: 'Search'
   }
 }

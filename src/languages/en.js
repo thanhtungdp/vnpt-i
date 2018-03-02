@@ -134,6 +134,10 @@ export default {
         placeholder: 'Input max limit',
         error: 'Please input max limit'
       },
+      options: {
+        isAllowWarning: 'Allow Warning',
+        isAllowRemote: 'Allow Remote',
+      },
       error: 'Error!'
     }
   },
