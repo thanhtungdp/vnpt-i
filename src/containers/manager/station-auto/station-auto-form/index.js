@@ -314,7 +314,7 @@ export default class StationAutoForm extends React.PureComponent {
     this.setState({ previewVisible: false })
   }
 
-  handleChange = ({ fileList, file, event }) => {
+  handleImageChange = ({ fileList, file, event }) => {
     for (var i = 0; i < fileList.length; i++) {
       if (fileList[i].thumbUrl != '') {
         fileList[i].status = 'done'
@@ -346,6 +346,7 @@ export default class StationAutoForm extends React.PureComponent {
   }
 
   render() {
+    const urlPhotoUpload = MediaApi.urlPhotoUploadWithDirectory('station-autos')
     const { previewVisible, previewImage, fileList } = this.state;
     const uploadButton = (
       <div>
@@ -472,11 +473,11 @@ export default class StationAutoForm extends React.PureComponent {
         <Row gutter={8}>
           <Col span={24}>
             <Upload
-              action={MediaApi.urlPhotoUpload}
+              action={urlPhotoUpload}
               listType="picture-card"
               fileList={fileList}
               onPreview={this.handlePreview}
-              onChange={this.handleChange}
+              onChange={this.handleImageChange}
             >
               {fileList.length >= 1 ? null : uploadButton}
             </Upload>
