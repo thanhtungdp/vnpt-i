@@ -6,6 +6,7 @@ import { mapPropsToFields } from 'utils/form'
 import { STATION_TYPE_API } from 'config'
 import createLanguageHoc, { langPropTypes } from 'hoc/create-lang'
 import swal from 'sweetalert2'
+import MediaApi from 'api/MediaApi'
 
 const FormItem = Form.Item
 
@@ -48,6 +49,7 @@ export default class StationTypeForm extends React.PureComponent {
           small: this.state.smallImgList.length > 0 ? this.state.smallImgList[0].response : null
         }
       }
+
       // Callback submit form Container Component
       this.props.onSubmit(data)
     })
@@ -107,6 +109,7 @@ export default class StationTypeForm extends React.PureComponent {
         url: this.props.initialValues.icon.large.url,
         name: this.props.initialValues.icon.large.file.originalname,
         status: 'done',
+        response: this.props.initialValues.icon.large
       })
     if (this.props.initialValues.icon.normal != null && this.props.initialValues.icon.normal.file)
       normalImgList.push({
@@ -114,6 +117,7 @@ export default class StationTypeForm extends React.PureComponent {
         url: this.props.initialValues.icon.normal.url,
         name: this.props.initialValues.icon.normal.file.originalname,
         status: 'done',
+        response: this.props.initialValues.icon.normal
       })
     if (this.props.initialValues.icon.small != null && this.props.initialValues.icon.small.file)
       smallImgList.push({
@@ -121,6 +125,7 @@ export default class StationTypeForm extends React.PureComponent {
         url: this.props.initialValues.icon.small.url,
         name: this.props.initialValues.icon.small.file.originalname,
         status: 'done',
+        response: this.props.initialValues.icon.small
       })
 
     this.setState({
@@ -134,7 +139,8 @@ export default class StationTypeForm extends React.PureComponent {
   render() {
     const { getFieldDecorator } = this.props.form
     const { t } = this.props.lang
-    const { previewVisible, previewImage, fileList } = this.state;
+    const { previewVisible, previewImage, fileList } = this.state
+    const urlPhotoUpload = MediaApi.urlPhotoUploadWithDirectory('station-types')
     return (
       <Form onSubmit={this.handleSubmit}>
         <Row gutter={16}>
@@ -173,7 +179,7 @@ export default class StationTypeForm extends React.PureComponent {
               <Col span={6}>
                 <div className="dropbox">
                   <Upload
-                    action='http://localhost:1234/photo/uploadWithDirectory/station-types'
+                    action={urlPhotoUpload}
                     listType="picture-card"
                     fileList={this.state.largeImgList}
                     onPreview={this.handlePreview}
@@ -191,7 +197,7 @@ export default class StationTypeForm extends React.PureComponent {
               <Col span={6}>
                 <div className="dropbox">
                   <Upload
-                    action='http://localhost:1234/photo/uploadWithDirectory/station-types'
+                    action={urlPhotoUpload}
                     listType="picture-card"
                     fileList={this.state.normalImgList}
                     onPreview={this.handlePreview}
@@ -206,7 +212,7 @@ export default class StationTypeForm extends React.PureComponent {
               <Col span={6}>
                 <div className="dropbox">
                   <Upload
-                    action='http://localhost:1234/photo/uploadWithDirectory/station-types'
+                    action={urlPhotoUpload}
                     listType="picture-card"
                     fileList={this.state.smallImgList}
                     onPreview={this.handlePreview}
