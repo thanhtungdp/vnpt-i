@@ -8012,6 +8012,10 @@ react-checkbox-tree@^1.0.2:
     prop-types "^15.5.8"
     shortid "^2.2.6"
 
+react-clearfix@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/react-clearfix/-/react-clearfix-1.0.0.tgz#be2fb3135645ee53d6ab8d936044b59d21fc52e9"
+
 react-content-loader@^3.0.2:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/react-content-loader/-/react-content-loader-3.0.2.tgz#b1014e44e7a0281abd42cfe66a953ba21d89cf6c"

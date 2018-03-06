@@ -82,6 +82,7 @@
     "react-bootstrap-date-picker": "^5.1.0",
     "react-calendar": "^2.9.0",
     "react-checkbox-tree": "^1.0.2",
+    "react-clearfix": "^1.0.0",
     "react-content-loader": "^3.0.2",
     "react-datepicker": "^1.0.3",
     "react-datetime": "^2.11.1",

@@ -7,14 +7,20 @@ import PageContainer from 'layout/default-sidebar-layout/PageContainer'
 import StationAutoApi from 'api/StationAuto'
 import CategoriesApi from 'api/CategoryApi'
 import DataSearch from './data-search'
+import ControlStation from './control-station'
 import styled from 'styled-components'
 import playSound from 'utils/audio'
 import dateFormat from 'dateformat'
+import Clearfix from 'components/elements/clearfix'
 
 const StyledTabs = styled(Tabs)`
   .ant-tabs-tab {
     font-size: 20px;
   }
+`
+
+const FlexStyle = styled.div`
+  display: flex;
 `
 
 @createLanguageHoc
@@ -71,12 +77,15 @@ export default class OnlineMonitoring extends React.Component {
     isLoading: true,
     stationTypes: [],
     stationAutos: [],
+    visibleControl: false,
+    visibleChart: false,
     lang: langPropTypes
   }
 
-  setModal2Visible(visible, record = {}) {
+  setModal2Visible(visibleKey, visible, record = {}) {
+    console.log()
     this.setState({
-      visible,
+      [visibleKey]: visible,
       record,
       searchData: {
         stationAuto: record.stationKey,
@@ -136,6 +145,7 @@ export default class OnlineMonitoring extends React.Component {
                 return value
               }
             })
+
         })
       if (station.lastLog)
         dataSource.push({
@@ -147,14 +157,19 @@ export default class OnlineMonitoring extends React.Component {
           key: station.key
         })
     })
-    let openModal = this.setModal2Visible
     columns.push({
       dataIndex: 'stationKey',
       render(value, record) {
         return (
-          <Button type="primary" onClick={() => openModal(true, record)}>
-            Chart
-          </Button>
+          <FlexStyle>
+            <Button type="primary" onClick={() => this.setModal2Visible('visibleControl', true, record)}>
+              Control
+            </Button>
+            <Clearfix width={8}/>
+            <Button type="primary" onClick={() => this.setModal2Visible('visibleChart', true, record)}>
+              Chart
+            </Button>
+          </FlexStyle>
         )
       }
     })
@@ -190,11 +205,20 @@ export default class OnlineMonitoring extends React.Component {
           rowKey="uid"
           title="Chart"
           wrapClassName="vertical-center-modal"
-          visible={this.state.visible}
+          visible={this.state.visibleChart}
           onCancel={() => this.setModal2Visible(false)}
-          width={'99vw'}
+          width={'99'}
         >
           <DataSearch initialValues={this.state.searchData} />
+        </Modal>
+        <Modal
+          rowKey="uid1"
+          title="Control station"
+          wrapClassName="vertical-center-modal"
+          visible={this.state.visibleControl}
+          width={'50%'}
+        >
+          <ControlStation initialValues={this.state.searchData} />
         </Modal>
       </PageContainer>
     )
