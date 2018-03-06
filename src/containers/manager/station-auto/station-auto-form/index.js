@@ -9,7 +9,9 @@ import {
   Table,
   Popconfirm,
   Icon,
-  Checkbox
+  Checkbox,
+  Upload,
+  Modal
 } from 'antd'
 import PropTypes from 'prop-types'
 import { autobind } from 'core-decorators'
@@ -20,6 +22,8 @@ import SelectStationType from 'components/elements/select-station-type'
 import AutoCompleteCell from 'components/elements/auto-complete-cell'
 import InputNumberCell from '../../../../components/elements/input-number-cell'
 import createLanguageHoc, { langPropTypes } from '../../../../hoc/create-lang'
+import MediaApi from 'api/MediaApi'
+import swal from 'sweetalert2'
 
 const FormItem = Form.Item
 
@@ -44,7 +48,12 @@ export default class StationAutoForm extends React.PureComponent {
       measuringList: [],
       measuringListSource: [],
       measuringOps: [],
-      options: {}
+      options: {},
+
+      previewVisible: false,
+      previewImage: '',
+      fileList: [],
+      imgList: []
     }
     const { t } = this.props.lang
     this.columns = [
@@ -129,13 +138,29 @@ export default class StationAutoForm extends React.PureComponent {
         {d.name}
       </Select.Option>
     ))
+
     this.setState({ measuringListSource: measuringList.data, measuringOps: options })
-    if (this.props.initialValues)
+    if (this.props.initialValues) {
+      let fileList = []
+      if (this.props.initialValues.image) {
+
+        //set image display
+        let img = this.props.initialValues.image
+        fileList.push({
+          uid: -1,
+          url: img.url,
+          name: img.file.originalname,
+          status: 'done',
+        })
+      }
       this.setState({
         measuringList: this.props.initialValues.measuringList,
         stationType: this.props.initialValues.objStationType,
-        options: this.props.initialValues.options
+        options: this.props.initialValues.options ? this.props.initialValues.options : {},
+        fileList: fileList
       })
+    }
+
   }
 
   renderColumns(text, record, column) {
@@ -241,7 +266,8 @@ export default class StationAutoForm extends React.PureComponent {
         phones: values.phones,
         stationType: this.state.stationType,
         measuringList: this.state.measuringList,
-        options: this.state.options
+        options: this.state.options,
+        image: this.state.imgList.length > 0 ? this.state.imgList[0] : null
       }
       // Callback submit form Container Component
       this.props.onSubmit(data)
@@ -277,7 +303,57 @@ export default class StationAutoForm extends React.PureComponent {
     })
   }
 
+  handlePreview = (file) => {
+    this.setState({
+      previewImage: file.url || file.thumbUrl,
+      previewVisible: true,
+    });
+  }
+
+  handleCancel = () => {
+    this.setState({ previewVisible: false })
+  }
+
+  handleChange = ({ fileList, file, event }) => {
+    for (var i = 0; i < fileList.length; i++) {
+      if (fileList[i].thumbUrl != '') {
+        fileList[i].status = 'done'
+      }
+    }
+    let imgList = []
+    imgList = this.state.fileList.map((img) => {
+      if (img.response)
+        return img.response
+    })
+
+    if (file.response != null) {
+      this.setState({
+        fileList: fileList,
+        imgList: imgList
+      })
+    }
+
+    //error
+    if (file.status == 'error') {
+      fileList = []
+      swal({
+        title: 'upload image fail',
+        type: 'error'
+      })
+    }
+
+    this.setState({ fileList: fileList })
+  }
+
   render() {
+    const { previewVisible, previewImage, fileList } = this.state;
+    const uploadButton = (
+      <div>
+        <Icon type="plus" />
+        <div className="ant-upload-text">Upload</div>
+      </div>
+    );
+
     const { getFieldDecorator } = this.props.form
     const { t } = this.props.lang
     return (
@@ -392,6 +468,25 @@ export default class StationAutoForm extends React.PureComponent {
           <Col span={8}><Checkbox value="isAllowRemote" onChange={this.onOptionChange}
             checked={this.state.options.isAllowRemote}>{t('stationAutoManager.form.options.isAllowRemote')}</Checkbox></Col>
         </Row>
+
+        <Row gutter={8}>
+          <Col span={24}>
+            <Upload
+              action={MediaApi.urlPhotoUpload}
+              listType="picture-card"
+              fileList={fileList}
+              onPreview={this.handlePreview}
+              onChange={this.handleChange}
+            >
+              {fileList.length >= 1 ? null : uploadButton}
+            </Upload>
+            <Modal visible={previewVisible} footer={null} onCancel={this.handleCancel}>
+              <img alt="example" style={{ width: '100%' }} src={previewImage} />
+            </Modal>
+
+          </Col>
+        </Row>
+
 
         <Button
           style={{ width: '200px', right: '0' }}
