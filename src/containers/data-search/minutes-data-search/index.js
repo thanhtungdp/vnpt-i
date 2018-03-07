@@ -31,17 +31,27 @@ class MinutesDataSearch extends React.Component {
       exceededColor: 'red',
       prepareColor: 'orange',
       normal: 'black'
+    },
+    loading: false,
+    pagination: {
+      current: 1,
+      pageSize: 50
     }
   }
 
   async changeSearch(query) {
-    var dataSources = await DataStationAutoApi.getDataStationAutos(
-      { page: 1, itemPerPage: 100 },
+    this.setState({
+      loading: true
+    })
+    var dataSources = await DataStationAutoApi.getDataStationAutos({
+      page: this.state.pagination.current,
+      itemPerPage: this.state.pagination.pageSize
+    },
       query
     )
     let lines = []
     let dataLines = {}
-    query.measuringList.forEach(function(item) {
+    query.measuringList.forEach(function (item) {
       dataLines[item.key] = {
         key: item.key,
         name: item.name,
@@ -49,14 +59,14 @@ class MinutesDataSearch extends React.Component {
         data: []
       }
     })
-    if (dataSources) {
+    if (dataSources && dataSources.data) {
       let data = dataSources.data
       data.sort((a, b) => {
         return (
           new Date(a.receivedAt).getTime() - new Date(b.receivedAt).getTime()
         )
       })
-      data.forEach(function(item) {
+      data.forEach(function (item) {
         for (let k in item.measuringLogs)
           if (dataLines[k]) {
             if (!dataLines[k].data) dataLines[k].data = []
@@ -78,11 +88,17 @@ class MinutesDataSearch extends React.Component {
       )
       lines.push(line)
     }
+
     this.setState({
       dataSources: dataSources.data,
       measuringList: query.measuringList,
       lines,
-      query
+      query,
+      loading: false,
+      pagination: {
+        ...this.state.pagination,
+        total: dataSources.pagination.totalItem
+      }
     })
   }
 
@@ -115,6 +131,8 @@ class MinutesDataSearch extends React.Component {
       dataIndex: `measuringLogs.${item.key}`,
       key: item.key,
       render: (value, record) => {
+        if (value == null)
+          return <div />
         var color = currentState.config.normal
         if (value.value >= value.maxLimit * currentState.config.prepareExceeded)
           color = currentState.config.prepareColor
@@ -134,11 +152,30 @@ class MinutesDataSearch extends React.Component {
     DataStationAutoApi.getExportData(this.state.query)
   }
 
+  onChange(pagination) {
+    this.setState({
+      loading: true,
+      pagination: {
+        ...pagination,
+      }
+    }, () => {
+      this.changeSearch(this.state.query)
+    })
+  }
+
   render() {
     return (
       <PageContainer {...this.props.wrapperProps}>
         <Breadcrumb items={['list']} />
-        <SearchFrom initialValues={{}} onChangeSearch={this.changeSearch} />
+        <SearchFrom initialValues={{}} onChangeSearch={(query) => {
+          this.setState({
+            pagination: {
+              ...this.state.pagination,
+              current: 1
+            }
+          }, () => this.changeSearch(query))
+        }
+        } />
         <Tabs defaultActiveKey="1">
           <Tabs.TabPane tab="Data" key="1">
             <Row gutter={24}>
@@ -155,8 +192,11 @@ class MinutesDataSearch extends React.Component {
               <Col span={24}>
                 <Table
                   size="small"
+                  loading={this.state.loading}
                   columns={this.getColumns()}
                   dataSource={this.state.dataSources}
+                  pagination={this.state.pagination}
+                  onChange={this.onChange}
                 />
               </Col>
             </Row>
