@@ -1,9 +1,9 @@
-const API_GATEWAY_TEST = 'http://localhost:5003'
+const API_GATEWAY_TEST = 'http://localhost:5002'
 const API_GATEWAY_MEDIA_TEST = 'http://localhost:1234'
 const API_GATEWAY_RELEASE = 'http://swn.vietan-software.com:5000'
 
 const AUTH_API = API_GATEWAY_RELEASE
-const CATEGORY_API = API_GATEWAY_RELEASE
+const CATEGORY_API = API_GATEWAY_TEST
 const STATION_AUTO_API = API_GATEWAY_TEST
 const PORT_DEPLOY = 5555
 const DATA_STATION_AUTO_API = API_GATEWAY_RELEASE
