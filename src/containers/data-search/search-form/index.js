@@ -56,18 +56,15 @@ export default class SearchFrom extends React.PureComponent {
     var toDate = new Date()
     var fromDate = new Date()
     fromDate.setMonth(fromDate.getMonth() - 1)
-    this.setState({ stationAutos: stationAutos.data, fromDate, toDate }, () => {
-      const options = stationAutos ? (
-        this.state.stationAutos.map(d => (
-          <Select.Option key={d.key} value={d.key}>
-            {d.name}
-          </Select.Option>
-        ))
-      ) : (
-        <Select.Option key={'012'} />
-      )
-      this.setState({ stationAutoSelects: options || [] })
+
+    let options = stationAutos.data
+    this.setState({
+      stationAutos: stationAutos.data,
+      fromDate,
+      toDate,
+      stationAutoSelects: options || []
     })
+
     if (this.props.initialValues.stationAuto) {
       this.changeSearch({})
     }
@@ -106,24 +103,17 @@ export default class SearchFrom extends React.PureComponent {
   }
 
   changeStationType(stationType) {
-    var stations = this.state.stationAutos.find(
-      item => item.stationType && item.stationType.key === stationType.key
-    )
+    let stations = this.state.stationAutos.filter(station => {
+      return station.stationType && station.stationType.key === stationType.key
+    })
     console.log(stations)
-    if (!Array.isArray(stations)) {
-      stations = [stations]
-    }
-    const options = stations ? (
-      stations.map(d => (
-        <Select.Option key={d.key} value={d.key}>
-          {d.name}
-        </Select.Option>
-      ))
-    ) : (
-      <Select.Option />
-    )
-
-    this.setState({ stationAutoSelects: options || [] })
+    this.setState({ stationAutoSelects: stations, station: {} }, () => {
+      this.props.form.setFields({
+        stationAuto: {
+          value: ''
+        }
+      })
+    })
   }
 
   changeStationAuto(value) {
@@ -161,14 +151,14 @@ export default class SearchFrom extends React.PureComponent {
       var d = this.state.measuringList[i]
       advanced.push(
         <Row gutter={24}>
-          <Col span={6} key={d.key}>
+          <Col span={8} key={d.key}>
             <FormItem label={t('dataSearchFrom.form.measuringList.label')}>
               {getFieldDecorator(`advanced[${i}].measuringKey`)(
                 <Select showSearch>{this.state.measuringOps}</Select>
               )}
             </FormItem>
           </Col>
-          <Col span={6} key={d.key + 'Operator'}>
+          <Col span={8} key={d.key + 'Operator'}>
             <FormItem label={t('dataSearchFrom.form.operator.label')}>
               {getFieldDecorator(`advanced[${i}].operator`)(
                 <Select>
@@ -181,14 +171,14 @@ export default class SearchFrom extends React.PureComponent {
               )}
             </FormItem>
           </Col>
-          <Col span={6} key={d.key + 'Value'}>
+          <Col span={8} key={d.key + 'Value'}>
             <FormItem label={t('dataSearchFrom.form.value.label')}>
               {getFieldDecorator(`advanced[${i}].value`)(
                 <InputNumber style={{ width: '100%' }} />
               )}
             </FormItem>
           </Col>
-          <Col span={6} key={d.key + 'Operator2'}>
+          {/* <Col span={6} key={d.key + 'Operator2'}>
             <FormItem label={t('dataSearchFrom.form.operator.label')}>
               {getFieldDecorator(`advanced[${i}].operator2`)(
                 <Select>
@@ -197,7 +187,7 @@ export default class SearchFrom extends React.PureComponent {
                 </Select>
               )}
             </FormItem>
-          </Col>
+          </Col> */}
         </Row>
       )
     }
@@ -225,7 +215,14 @@ export default class SearchFrom extends React.PureComponent {
                   initialValue: this.props.initialValues.stationAuto
                 })(
                   <Select showSearch onChange={this.changeStationAuto}>
-                    {this.state.stationAutoSelects}
+                    {this.state.stationAutoSelects &&
+                      this.state.stationAutoSelects.map(item => {
+                        return (
+                          <Select.Option key={item.key} value={item.key}>
+                            {item.name}
+                          </Select.Option>
+                        )
+                      })}
                   </Select>
                 )}
               </FormItem>
