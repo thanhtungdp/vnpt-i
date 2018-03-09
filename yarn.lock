@@ -8122,19 +8122,19 @@ react-hot-loader@^3.1.3:
     redbox-react "^1.3.6"
     source-map "^0.6.1"
 
-react-jsx-highcharts@^2.1.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/react-jsx-highcharts/-/react-jsx-highcharts-2.1.0.tgz#fa0d935df487a9dc5883cd8b6771208876bf994c"
+react-jsx-highcharts@^2.2.1:
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/react-jsx-highcharts/-/react-jsx-highcharts-2.2.1.tgz#b03f72f06b471c9fe6b890d6e859e75c2bfce881"
   dependencies:
     immutable-is "^3.7.6"
     is-immutable "^1.0.1"
     lodash "^4.17.4"
 
-react-jsx-highstock@^2.1.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/react-jsx-highstock/-/react-jsx-highstock-2.1.0.tgz#9fd9e24bea9d49359d963f2c339392641baab147"
+react-jsx-highstock@^2.2.1:
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/react-jsx-highstock/-/react-jsx-highstock-2.2.1.tgz#813e5de7a4fcfe3d0e27b63793da9735606ab2d6"
   dependencies:
-    react-jsx-highcharts "^2.1.0"
+    react-jsx-highcharts "^2.2.1"
 
 react-lazy-load@^3.0.12:
   version "3.0.13"
