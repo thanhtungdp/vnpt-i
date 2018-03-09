@@ -75,7 +75,8 @@ class MinutesDataSearch extends React.Component {
           if (dataLines[k]) {
             if (!dataLines[k].data) dataLines[k].data = []
             dataLines[k].data.push([
-              new Date(item.receivedAt).getTime() - ((new Date()).getTimezoneOffset() * 60000),
+              new Date(item.receivedAt).getTime() -
+                new Date().getTimezoneOffset() * 60000,
               item.measuringLogs[k].value
             ])
           }
@@ -171,12 +172,11 @@ class MinutesDataSearch extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (this.chart != null)
-      this.chart.redraw()
+    if (this.chart != null) this.chart.redraw()
   }
 
   getChart = chart => {
-    this.chart = chart;
+    this.chart = chart
   }
 
   render() {
@@ -235,9 +235,12 @@ class MinutesDataSearch extends React.Component {
                     verticalAlign="bottom"
                   />
 
-                  <XAxis type="datetime" dateTimeLabelFormats={{
-                    minute: '%e. %b %H:%M'
-                  }}>
+                  <XAxis
+                    type="datetime"
+                    dateTimeLabelFormats={{
+                      minute: '%e. %b %H:%M'
+                    }}
+                  >
                     <XAxis.Title>Time</XAxis.Title>
                   </XAxis>
 
@@ -247,7 +250,6 @@ class MinutesDataSearch extends React.Component {
                   <Navigator>
                     <Navigator.Series seriesId="datetime" />
                   </Navigator>
-
                 </HighchartsStockChart>
               </Col>
             </Row>

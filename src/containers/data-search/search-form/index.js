@@ -119,7 +119,7 @@ export default class SearchFrom extends React.PureComponent {
         error: null
       }
     })
-    
+
     var stations = this.state.stationAutos.find(item => item.key === value)
     var measuringList = stations.measuringList
     if (!Array.isArray(measuringList)) {
@@ -132,8 +132,8 @@ export default class SearchFrom extends React.PureComponent {
         </Select.Option>
       ))
     ) : (
-        <Select.Option />
-      )
+      <Select.Option />
+    )
 
     var measuringSelected = []
     measuringList.forEach(function(rec) {
@@ -217,9 +217,14 @@ export default class SearchFrom extends React.PureComponent {
               <FormItem label={t('dataSearchFrom.form.stationAuto.label')}>
                 {getFieldDecorator(`stationAuto`, {
                   initialValue: this.props.initialValues.stationAuto,
-                  rules: [{
-                    required: true, message: 'Please input ' + t('dataSearchFrom.form.stationAuto.label'),
-                  }]
+                  rules: [
+                    {
+                      required: true,
+                      message:
+                        'Please input ' +
+                        t('dataSearchFrom.form.stationAuto.label')
+                    }
+                  ]
                 })(
                   <Select showSearch onChange={this.changeStationAuto}>
                     {this.state.stationAutoSelects &&
@@ -238,9 +243,14 @@ export default class SearchFrom extends React.PureComponent {
               <FormItem label={t('dataSearchFrom.form.fromDate.label')}>
                 {getFieldDecorator(`fromDate`, {
                   initialValue: moment(this.state.fromDate, 'DD/MM/YYYY HH:mm'),
-                  rules: [{
-                    required: true, message: 'Please input ' + t('dataSearchFrom.form.fromDate.label')
-                  }]
+                  rules: [
+                    {
+                      required: true,
+                      message:
+                        'Please input ' +
+                        t('dataSearchFrom.form.fromDate.label')
+                    }
+                  ]
                 })(<DatePicker format={'DD/MM/YYYY HH:mm'} />)}
               </FormItem>
             </Col>
@@ -248,9 +258,13 @@ export default class SearchFrom extends React.PureComponent {
               <FormItem label={t('dataSearchFrom.form.toDate.label')}>
                 {getFieldDecorator(`toDate`, {
                   initialValue: moment(this.state.toDate, 'DD/MM/YYYY HH:mm'),
-                  rules: [{
-                    required: true, message: 'Please input ' + t('dataSearchFrom.form.toDate.label')
-                  }]
+                  rules: [
+                    {
+                      required: true,
+                      message:
+                        'Please input ' + t('dataSearchFrom.form.toDate.label')
+                    }
+                  ]
                 })(<DatePicker format={'DD/MM/YYYY HH:mm'} />)}
               </FormItem>
             </Col>
@@ -260,9 +274,12 @@ export default class SearchFrom extends React.PureComponent {
               <FormItem label={t('dataSearchFrom.form.measuringList.label')}>
                 {getFieldDecorator(`measuringList`, {
                   initialValue: this.state.measuringSelected,
-                  rules: [{
-                    required: true, message: t('dataSearchFrom.form.measuringList.require')
-                  }]
+                  rules: [
+                    {
+                      required: true,
+                      message: t('dataSearchFrom.form.measuringList.require')
+                    }
+                  ]
                 })(
                   <Select
                     showSearch
