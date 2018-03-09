@@ -14,7 +14,10 @@ import {
   Legend,
   XAxis,
   YAxis,
-  LineSeries
+  LineSeries,
+  Tooltip,
+  Navigator,
+  RangeSelector
 } from 'react-jsx-highstock'
 import Highcharts from 'highcharts/highstock'
 
@@ -72,7 +75,7 @@ class MinutesDataSearch extends React.Component {
           if (dataLines[k]) {
             if (!dataLines[k].data) dataLines[k].data = []
             dataLines[k].data.push([
-              new Date(item.receivedAt).getTime(),
+              new Date(item.receivedAt).getTime() - ((new Date()).getTimezoneOffset() * 60000),
               item.measuringLogs[k].value
             ])
           }
@@ -82,6 +85,7 @@ class MinutesDataSearch extends React.Component {
     for (let item in dataLines) {
       let line = (
         <LineSeries
+          key={dataLines[item].key}
           id={dataLines[item].key}
           name={dataLines[item].name}
           data={dataLines[item].data}
@@ -166,6 +170,15 @@ class MinutesDataSearch extends React.Component {
     )
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (this.chart != null)
+      this.chart.redraw()
+  }
+
+  getChart = chart => {
+    this.chart = chart;
+  }
+
   render() {
     return (
       <PageContainer {...this.props.wrapperProps}>
@@ -212,8 +225,8 @@ class MinutesDataSearch extends React.Component {
           <Tabs.TabPane tab="Chart" key="2">
             <Row gutter={24}>
               <Col span={24}>
-                <HighchartsStockChart>
-                  <Chart width={1000} />
+                <HighchartsStockChart callback={this.getChart}>
+                  <Chart width={1000} zoomType="x" />
 
                   <Title>Chart</Title>
                   <Legend
@@ -222,11 +235,19 @@ class MinutesDataSearch extends React.Component {
                     verticalAlign="bottom"
                   />
 
-                  <XAxis type="datetime">
+                  <XAxis type="datetime" dateTimeLabelFormats={{
+                    minute: '%e. %b %H:%M'
+                  }}>
                     <XAxis.Title>Time</XAxis.Title>
                   </XAxis>
 
                   <YAxis id="number">{this.state.lines}</YAxis>
+                  <Tooltip />
+
+                  <Navigator>
+                    <Navigator.Series seriesId="datetime" />
+                  </Navigator>
+
                 </HighchartsStockChart>
               </Col>
             </Row>

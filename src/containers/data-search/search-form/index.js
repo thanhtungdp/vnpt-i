@@ -94,8 +94,6 @@ export default class SearchFrom extends React.PureComponent {
       if (values.isExceeded) data.isExceeded = true
       var advanced = values.advanced.filter(item => item.measuringKey)
       data.advanced = advanced
-      console.log(data)
-      console.log(values.advanced)
       this.setState({ dataSearch: data, station: station }, () =>
         this.props.onChangeSearch(data)
       )
@@ -106,7 +104,6 @@ export default class SearchFrom extends React.PureComponent {
     let stations = this.state.stationAutos.filter(station => {
       return station.stationType && station.stationType.key === stationType.key
     })
-    console.log(stations)
     this.setState({ stationAutoSelects: stations, station: {} }, () => {
       this.props.form.setFields({
         stationAuto: {
@@ -117,6 +114,12 @@ export default class SearchFrom extends React.PureComponent {
   }
 
   changeStationAuto(value) {
+    this.props.form.setFields({
+      measuringList: {
+        error: null
+      }
+    })
+    
     var stations = this.state.stationAutos.find(item => item.key === value)
     var measuringList = stations.measuringList
     if (!Array.isArray(measuringList)) {
@@ -129,8 +132,9 @@ export default class SearchFrom extends React.PureComponent {
         </Select.Option>
       ))
     ) : (
-      <Select.Option />
-    )
+        <Select.Option />
+      )
+
     var measuringSelected = []
     measuringList.forEach(function(rec) {
       measuringSelected.push(rec.key)
@@ -212,7 +216,10 @@ export default class SearchFrom extends React.PureComponent {
             <Col span={6} key="stationAuto">
               <FormItem label={t('dataSearchFrom.form.stationAuto.label')}>
                 {getFieldDecorator(`stationAuto`, {
-                  initialValue: this.props.initialValues.stationAuto
+                  initialValue: this.props.initialValues.stationAuto,
+                  rules: [{
+                    required: true, message: 'Please input ' + t('dataSearchFrom.form.stationAuto.label'),
+                  }]
                 })(
                   <Select showSearch onChange={this.changeStationAuto}>
                     {this.state.stationAutoSelects &&
@@ -230,14 +237,20 @@ export default class SearchFrom extends React.PureComponent {
             <Col span={6} key="fromDate">
               <FormItem label={t('dataSearchFrom.form.fromDate.label')}>
                 {getFieldDecorator(`fromDate`, {
-                  initialValue: moment(this.state.fromDate, 'DD/MM/YYYY HH:mm')
+                  initialValue: moment(this.state.fromDate, 'DD/MM/YYYY HH:mm'),
+                  rules: [{
+                    required: true, message: 'Please input ' + t('dataSearchFrom.form.fromDate.label')
+                  }]
                 })(<DatePicker format={'DD/MM/YYYY HH:mm'} />)}
               </FormItem>
             </Col>
             <Col span={6} key="toDate">
               <FormItem label={t('dataSearchFrom.form.toDate.label')}>
                 {getFieldDecorator(`toDate`, {
-                  initialValue: moment(this.state.toDate, 'DD/MM/YYYY HH:mm')
+                  initialValue: moment(this.state.toDate, 'DD/MM/YYYY HH:mm'),
+                  rules: [{
+                    required: true, message: 'Please input ' + t('dataSearchFrom.form.toDate.label')
+                  }]
                 })(<DatePicker format={'DD/MM/YYYY HH:mm'} />)}
               </FormItem>
             </Col>
@@ -246,7 +259,10 @@ export default class SearchFrom extends React.PureComponent {
             <Col span={6} key="measuringList">
               <FormItem label={t('dataSearchFrom.form.measuringList.label')}>
                 {getFieldDecorator(`measuringList`, {
-                  initialValue: this.state.measuringSelected
+                  initialValue: this.state.measuringSelected,
+                  rules: [{
+                    required: true, message: t('dataSearchFrom.form.measuringList.require')
+                  }]
                 })(
                   <Select
                     showSearch
