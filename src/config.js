@@ -1,14 +1,15 @@
 const API_GATEWAY_TEST = 'http://localhost:5000'
+const API_GATEWAY_RELEASE = 'http://swn.vietan-software.com:5000'
 
 const API_GATEWAY_MEDIA_TEST = 'http://localhost:1234'
-const API_GATEWAY_RELEASE = 'http://swn.vietan-software.com:5000'
+const API_GATEWAY_MEDIA_RELEASE = 'http://swn.vietan-software.com:1234'
 
 const AUTH_API = API_GATEWAY_RELEASE
 const CATEGORY_API = API_GATEWAY_RELEASE
 const STATION_AUTO_API = API_GATEWAY_RELEASE
 const PORT_DEPLOY = 5555
-const DATA_STATION_AUTO_API = API_GATEWAY_TEST
-const MEDIA_API = API_GATEWAY_MEDIA_TEST
+const DATA_STATION_AUTO_API = API_GATEWAY_RELEASE
+const MEDIA_API = API_GATEWAY_MEDIA_RELEASE
 
 const GOOGLE_MAP = {
   KEY: 'AIzaSyCcApeoQRqf1Fq2g7_rn1aALfEEm7nNS8U'
