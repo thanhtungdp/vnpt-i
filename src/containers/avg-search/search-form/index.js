@@ -55,18 +55,15 @@ export default class SearchFrom extends React.PureComponent {
     var toDate = new Date()
     var fromDate = new Date()
     fromDate.setMonth(fromDate.getMonth() - 1)
-    this.setState({ stationAutos: stationAutos.data, fromDate, toDate }, () => {
-      const options = stationAutos ? (
-        this.state.stationAutos.map(d => (
-          <Select.Option key={d.key} value={d.key}>
-            {d.name}
-          </Select.Option>
-        ))
-      ) : (
-        <Select.Option key={'012'} />
-      )
-      this.setState({ stationAutoSelects: options || [] })
+
+    let options = stationAutos.data
+    this.setState({
+      stationAutos: stationAutos.data,
+      fromDate,
+      toDate,
+      stationAutoSelects: options || []
     })
+
     if (this.props.initialValues.stationAuto) {
       this.changeSearch({})
     }
@@ -101,26 +98,27 @@ export default class SearchFrom extends React.PureComponent {
   }
 
   changeStationType(stationType) {
-    var stations = this.state.stationAutos.find(
-      item => item.stationType && item.stationType.key === stationType.key
-    )
-    if (!Array.isArray(stations)) {
-      stations = [stations]
-    }
-    const options = stations ? (
-      stations.map(d => (
-        <Select.Option key={d.key} value={d.key}>
-          {d.name}
-        </Select.Option>
-      ))
-    ) : (
-      <Select.Option />
-    )
+    let stations = this.state.stationAutos.filter(station => {
+      return station.stationType && station.stationType.key === stationType.key
+    })
 
-    this.setState({ stationAutoSelects: options || [] })
+    this.setState({ stationAutoSelects: stations, station: {} }, () => {
+      this.props.form.setFields({
+        stationAuto: {
+          value: ''
+        }
+      })
+    })
+
   }
 
   changeStationAuto(value) {
+    this.props.form.setFields({
+      measuringList: {
+        error: null
+      }
+    })
+
     var stations = this.state.stationAutos.find(item => item.key === value)
     var measuringList = stations.measuringList
     if (!Array.isArray(measuringList)) {
@@ -133,10 +131,10 @@ export default class SearchFrom extends React.PureComponent {
         </Select.Option>
       ))
     ) : (
-      <Select.Option />
-    )
+        <Select.Option />
+      )
     var measuringSelected = []
-    measuringList.forEach(function(rec) {
+    measuringList.forEach(function (rec) {
       measuringSelected.push(rec.key)
     })
     this.setState({
@@ -164,25 +162,50 @@ export default class SearchFrom extends React.PureComponent {
             <Col span={8} key="stationAuto">
               <FormItem label={t('avgSearchFrom.form.stationAuto.label')}>
                 {getFieldDecorator(`stationAuto`, {
-                  initialValue: this.props.initialValues.stationAuto
+                  initialValue: this.props.initialValues.stationAuto,
+                  rules: [
+                    {
+                      required: true,
+                      message:
+                        'Please input ' +
+                        t('avgSearchFrom.form.stationAuto.label')
+                    }
+                  ]
                 })(
                   <Select showSearch onChange={this.changeStationAuto}>
-                    {this.state.stationAutoSelects}
+                    {this.state.stationAutoSelects &&
+                      this.state.stationAutoSelects.map(item => {
+                        return (
+                          <Select.Option key={item.key} value={item.key}>
+                            {item.name}
+                          </Select.Option>
+                        )
+                      })}
                   </Select>
-                )}
+                  )}
               </FormItem>
             </Col>
             <Col span={8} key="type">
               <FormItem label={t('avgSearchFrom.form.type.label')}>
                 {getFieldDecorator(`type`, {
-                  initialValue: this.props.initialValues.type
+                  initialValue: this.props.initialValues.type,
+                  rules: [
+                    {
+                      required: true,
+                      message:
+                        'Please input ' +
+                        t('avgSearchFrom.form.type.label')
+                    }
+                  ]
                 })(
                   <Select showSearch>
-                    <Select.Option value={'hour'}>Hour</Select.Option>
-                    <Select.Option value={'day'}>Day</Select.Option>
+                  <Select.Option value={15}>15 Minues</Select.Option>
+                  <Select.Option value={30}>30 Minues</Select.Option>
+                    <Select.Option value={60}>Hour</Select.Option>
+                    <Select.Option value={24 * 60}>Day</Select.Option>
                     <Select.Option value={'month'}>Month</Select.Option>
                   </Select>
-                )}
+                  )}
               </FormItem>
             </Col>
           </Row>
@@ -190,7 +213,13 @@ export default class SearchFrom extends React.PureComponent {
             <Col span={8} key="measuringList">
               <FormItem label={t('avgSearchFrom.form.measuringList.label')}>
                 {getFieldDecorator(`measuringList`, {
-                  initialValue: this.state.measuringSelected
+                  initialValue: this.state.measuringSelected,
+                  rules: [
+                    {
+                      required: true,
+                      message: t('avgSearchFrom.form.measuringList.require')
+                    }
+                  ]
                 })(
                   <Select
                     showSearch
@@ -199,20 +228,36 @@ export default class SearchFrom extends React.PureComponent {
                   >
                     {this.state.measuringOps}
                   </Select>
-                )}
+                  )}
               </FormItem>
             </Col>
             <Col span={8} key="fromDate">
               <FormItem label={t('avgSearchFrom.form.fromDate.label')}>
                 {getFieldDecorator(`fromDate`, {
-                  initialValue: moment(this.state.fromDate, 'DD/MM/YYYY HH:mm')
+                  initialValue: moment(this.state.fromDate, 'DD/MM/YYYY HH:mm'),
+                  rules: [
+                    {
+                      required: true,
+                      message:
+                        'Please input ' +
+                        t('avgSearchFrom.form.fromDate.label')
+                    }
+                  ]
                 })(<DatePicker format={'DD/MM/YYYY HH:mm'} />)}
               </FormItem>
             </Col>
             <Col span={8} key="toDate">
               <FormItem label={t('avgSearchFrom.form.toDate.label')}>
                 {getFieldDecorator(`toDate`, {
-                  initialValue: moment(this.state.toDate, 'DD/MM/YYYY HH:mm')
+                  initialValue: moment(this.state.toDate, 'DD/MM/YYYY HH:mm'),
+                  rules: [
+                    {
+                      required: true,
+                      message:
+                        'Please input ' +
+                        t('avgSearchFrom.form.toDate.label')
+                    }
+                  ]
                 })(<DatePicker format={'DD/MM/YYYY HH:mm'} />)}
               </FormItem>
             </Col>

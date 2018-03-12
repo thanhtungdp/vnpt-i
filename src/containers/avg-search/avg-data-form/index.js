@@ -13,7 +13,9 @@ import {
   Legend,
   XAxis,
   YAxis,
-  LineSeries
+  LineSeries,
+  Navigator,
+  Tooltip
 } from 'react-jsx-highstock'
 import Highcharts from 'highcharts/highstock'
 import dateFormat from 'dateformat'
@@ -38,18 +40,27 @@ class AvgDataForm extends React.Component {
       prepareColor: 'orange',
       normal: 'black'
     },
-    isLoading: false
+    isLoading: false,
+    pagination: {
+      current: 1,
+      pageSize: 50
+    }
   }
 
   async changeSearch(query) {
     this.setState({ isLoading: true })
+
     var dataSources = await DataStationAutoApi.getDataStationAutoAVg(
-      { page: 1, itemPerPage: 1000000000000 },
+      {
+        page: this.state.pagination.current,
+        itemPerPage: this.state.pagination.pageSize
+      },
       query
     )
+
     var lines = []
     var dataLines = {}
-    query.measuringList.forEach(function(rec) {
+    query.measuringList.forEach(function (rec) {
       dataLines[rec.key] = {
         key: rec.key,
         name: rec.name,
@@ -57,19 +68,32 @@ class AvgDataForm extends React.Component {
         data: []
       }
     })
-    if (dataSources) {
-      dataSources.data.forEach(function(rec) {
+    if (dataSources && dataSources.data) {
+      let data = dataSources.data.map((item) => item)
+      data.sort((a, b) => {
+        return (
+          new Date(a._id).getTime() - new Date(b._id).getTime()
+        )
+      })
+
+      data.forEach(function (rec) {
         for (var k in rec)
           if (dataLines[k]) {
             if (!dataLines[k].data) dataLines[k].data = []
-            dataLines[k].data.push([new Date(rec.receivedAt).getTime(), rec[k]])
+            dataLines[k].data.push([
+              new Date(rec._id).getTime() -
+              new Date().getTimezoneOffset() * 60000,
+              rec[k]
+            ])
+            // dataLines[k].data.push([new Date(rec.receivedAt).getTime(), rec[k]])
           }
       })
     }
 
-    for (var item in dataLines) {
-      var line = (
+    for (let item in dataLines) {
+      let line = (
         <LineSeries
+          key={dataLines[item].key}
           id={dataLines[item].key}
           name={
             dataLines[item].name +
@@ -80,12 +104,17 @@ class AvgDataForm extends React.Component {
       )
       lines.push(line)
     }
+
     this.setState({
       dataSources: dataSources.data,
       measuringList: query.measuringList,
       lines,
       query,
-      isLoading: false
+      isLoading: false,
+      pagination: {
+        ...this.state.pagination,
+        total: dataSources.pagination.totalItem
+      }
     })
   }
 
@@ -93,16 +122,39 @@ class AvgDataForm extends React.Component {
     const { t } = this.props.lang
     var currentState = this.state
     var columns = [
+      // {
+      //   title: t('avgSearchFrom.list.receivedAt.label'),
+      //   dataIndex: `receivedAt`,
+      //   key: 'receivedAt',
+      //   render(value, record) {
+      //     var date = new Date(value)
+      //     var format = 'dd/mm/yyyy HH'
+      //     if (currentState.query.type === 'day') format = 'dd/mm/yyyy'
+      //     if (currentState.query.type === 'month') format = 'mm/yyyy'
+      //     return <div>{dateFormat(date, format)}</div>
+      //   }
+      // }
       {
         title: t('avgSearchFrom.list.receivedAt.label'),
-        dataIndex: `receivedAt`,
+        dataIndex: `_id`,
         key: 'receivedAt',
         render(value, record) {
           var date = new Date(value)
-          var format = 'dd/mm/yyyy HH'
-          if (currentState.query.type === 'day') format = 'dd/mm/yyyy'
-          if (currentState.query.type === 'month') format = 'mm/yyyy'
-          return <div>{dateFormat(date, format)}</div>
+          var options = {
+            year: 'numeric',
+            month: 'numeric',
+            hour12: false
+          }
+          if (currentState.query.type !== 'month') options.day = 'numeric'
+          if (currentState.query.type < 60 * 24) options.hour = 'numeric'
+          if (currentState.query.type < 60) {
+            options.minute = 'numeric'
+            options.second = 'numeric'
+          }
+
+          return (
+            <div>{new Intl.DateTimeFormat('en-GB', options).format(date)}</div>
+          )
         }
       }
     ]
@@ -121,7 +173,7 @@ class AvgDataForm extends React.Component {
         // )
         //   color = currentState.config.exceededColor
         //   style={{ color: color }}
-        return <div>{roundTo(value, 2)}</div>
+        return <div>{value && value != '' && roundTo(value, 2)}</div>
       }
     }))
     columns.push(...column1s)
@@ -132,11 +184,43 @@ class AvgDataForm extends React.Component {
     DataStationAutoApi.getDataStationAutoExportAVg(this.state.query)
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (this.chart != null) this.chart.redraw()
+  }
+
+  getChart = chart => {
+    this.chart = chart
+  }
+
+  onChange(pagination) {
+    this.setState(
+      {
+        isLoading: true,
+        pagination: {
+          ...pagination
+        }
+      },
+      () => {
+        this.changeSearch(this.state.query)
+      }
+    )
+  }
+
   render() {
     return (
       <PageContainer {...this.props.wrapperProps}>
         <Breadcrumb items={['list']} />
-        <SearchFrom initialValues={{}} onChangeSearch={this.changeSearch} />
+        <SearchFrom initialValues={{}} onChangeSearch={query => {
+          this.setState(
+            {
+              pagination: {
+                ...this.state.pagination,
+                current: 1
+              }
+            },
+            () => this.changeSearch(query)
+          )
+        }} />
         <Tabs defaultActiveKey="1">
           <Tabs.TabPane tab="Data" key="1">
             <Row gutter={24}>
@@ -156,6 +240,8 @@ class AvgDataForm extends React.Component {
                   size="small"
                   columns={this.getColumns()}
                   dataSource={this.state.dataSources}
+                  pagination={this.state.pagination}
+                  onChange={this.onChange}
                 />
               </Col>
             </Row>
@@ -163,8 +249,8 @@ class AvgDataForm extends React.Component {
           <Tabs.TabPane tab="Chart" key="2">
             <Row gutter={24}>
               <Col span={24}>
-                <HighchartsStockChart>
-                  <Chart width={1000} />
+                <HighchartsStockChart callback={this.getChart}>
+                  <Chart width={1000} zoomType="x" />
 
                   <Title>Chart</Title>
                   <Legend
@@ -173,11 +259,21 @@ class AvgDataForm extends React.Component {
                     verticalAlign="bottom"
                   />
 
-                  <XAxis type="datetime">
+                  <XAxis type="datetime"
+                    dateTimeLabelFormats={{
+                      minute: '%e. %b %H:%M'
+                    }}>
                     <XAxis.Title>Time</XAxis.Title>
                   </XAxis>
 
                   <YAxis id="number">{this.state.lines}</YAxis>
+
+                  <Tooltip />
+
+                  {/* <Navigator>
+                    <Navigator.Series seriesId="datetime" />
+                  </Navigator> */}
+
                 </HighchartsStockChart>
               </Col>
             </Row>

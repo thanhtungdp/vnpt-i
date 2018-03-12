@@ -201,7 +201,8 @@ export default {
       },
       measuringList: {
         label: 'Measuring',
-        placeholder: 'Select measuring'
+        placeholder: 'Select measuring',
+        require: 'choose at least 1 measuring'
       },
       isExceeded: {
         label: 'Is exceeded'
