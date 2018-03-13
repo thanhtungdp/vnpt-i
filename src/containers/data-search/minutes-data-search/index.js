@@ -64,7 +64,7 @@ class MinutesDataSearch extends React.Component {
       }
     })
     if (dataSources && dataSources.data) {
-      let data = dataSources.data
+      let data = dataSources.data.map((item) => item)
       data.sort((a, b) => {
         return (
           new Date(a.receivedAt).getTime() - new Date(b.receivedAt).getTime()
@@ -247,9 +247,9 @@ class MinutesDataSearch extends React.Component {
                   <YAxis id="number">{this.state.lines}</YAxis>
                   <Tooltip />
 
-                  <Navigator>
+                  {/* <Navigator>
                     <Navigator.Series seriesId="datetime" />
-                  </Navigator>
+                  </Navigator> */}
                 </HighchartsStockChart>
               </Col>
             </Row>
