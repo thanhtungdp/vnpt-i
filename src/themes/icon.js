@@ -9,16 +9,19 @@ import GraphBarIcon from '@atlaskit/icon/glyph/graph-bar'
 import GraphLineIcon from '@atlaskit/icon/glyph/graph-line'
 import BookIcon from '@atlaskit/icon/glyph/book'
 import HipchatIcon from '@atlaskit/icon/glyph/hipchat'
-
+import PersonIcon from '@atlaskit/icon/glyph/person'
+import PeopleGroupIcon from '@atlaskit/icon/glyph/people-group'
 export default {
   quizLists: <QuizListIcon label={''} />,
   users: <UserIcon label={''} />,
   gallerySlider: <ImageIcon label={''} />,
   location: <LocationIcon label={''} />,
-  screenIcon: <ScreenIcon label={''} />,
-  dashboardIco: <DashboardIcon label={''} />,
-  graphBarIcon: <GraphBarIcon label={''} />,
-  graphLineIcon: <GraphLineIcon label={''} />,
-  bookIcon: <BookIcon label={''} />,
-  hipchatIcon: <HipchatIcon label={''} />
+  screen: <ScreenIcon label={''} />,
+  dashboard: <DashboardIcon label={''} />,
+  graphBar: <GraphBarIcon label={''} />,
+  graphLine: <GraphLineIcon label={''} />,
+  book: <BookIcon label={''} />,
+  hipchat: <HipchatIcon label={''} />,
+  person: <PersonIcon />,
+  peopleGroup: <PeopleGroupIcon />
 }

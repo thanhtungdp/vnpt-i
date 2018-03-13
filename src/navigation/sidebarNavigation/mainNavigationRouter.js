@@ -18,7 +18,7 @@ const dashboardMenu = {
     <AkNavigationItem
       linkComponent={WrapperLinkComponent}
       href={slug.dashboard}
-      icon={Icon.dashboardIco}
+      icon={Icon.dashboard}
       text="Dashboard"
     />
   )
@@ -29,7 +29,7 @@ const monitoringMenu = {
     <AkNavigationItem
       linkComponent={WrapperLinkComponent}
       href={slug.onlineMonitoring.base}
-      icon={Icon.screenIcon}
+      icon={Icon.screen}
       text="Monitoring"
     />
   )
@@ -58,7 +58,7 @@ const dataSearchMenu = {
   component: (
     <AkNavigationItem
       linkComponent={WrapperLinkComponent}
-      icon={Icon.graphBarIcon}
+      icon={Icon.graphBar}
       href={slug.dataSearch.base}
       text="Data Search"
     />
@@ -69,7 +69,7 @@ const avgDataMenu = {
   component: (
     <AkNavigationItem
       linkComponent={WrapperLinkComponent}
-      icon={Icon.graphLineIcon}
+      icon={Icon.graphLine}
       href={slug.avgSearch.base}
       text="AVG Data"
     />
@@ -100,7 +100,7 @@ const stationTypeMenu = {
     <AkNavigationItem
       linkComponent={WrapperLinkComponent}
       href={slug.stationType.base}
-      icon={Icon.hipchatIcon}
+      icon={Icon.hipchat}
       text="Station type"
     />
   )
@@ -111,12 +111,41 @@ const stationAutoMenu = {
     <AkNavigationItem
       linkComponent={WrapperLinkComponent}
       href={slug.stationAuto.base}
-      icon={Icon.bookIcon}
+      icon={Icon.book}
       text="Station auto"
     />
   )
 }
 
+const groupAdmin = {
+	component: (
+    <NavigationWrapper text="Admin management">
+      <AkNavigationItemGroup title="Admin management" />
+    </NavigationWrapper>
+	)
+}
+
+const userMenu = {
+	component: (
+    <AkNavigationItem
+      linkComponent={WrapperLinkComponent}
+      href={slug.user.base}
+      icon={Icon.person}
+      text="User"
+    />
+	)
+}
+
+const roleMenu = {
+	component: (
+    <AkNavigationItem
+      linkComponent={WrapperLinkComponent}
+      href={slug.role.base}
+      icon={Icon.peopleGroup}
+      text="Role"
+    />
+	)
+}
 export default [
   dashboardMenu,
   monitoringMenu,
@@ -127,5 +156,8 @@ export default [
   groupManager,
   measuringMenu,
   stationTypeMenu,
-  stationAutoMenu
+  stationAutoMenu,
+  groupAdmin,
+  userMenu,
+  roleMenu
 ]
