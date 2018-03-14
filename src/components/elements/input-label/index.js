@@ -10,7 +10,10 @@ export default function InputLabel({ label, ...props }) {
   return (
     <View>
       {label && <Label>{label}</Label>}
-      <Input {...props} />
+      <Input
+        value={props.initialValue ? props.initialValue : props.value}
+        {...props}
+      />
     </View>
   )
 }

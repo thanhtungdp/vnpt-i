@@ -8,6 +8,7 @@ import SelectStationType from 'components/elements/select-station-type'
 import createLanguageHoc, { langPropTypes } from '../../../../hoc/create-lang'
 
 const FormItem = FormStyle.Item
+
 const Form = styled(FormStyle)`
   display: flex;
   .ant-form-item-control {
@@ -20,6 +21,7 @@ const Form = styled(FormStyle)`
     flex-grow: 1;
   }
 `
+
 const Clearfix = styled.div`
   width: 8px;
 `
@@ -48,6 +50,7 @@ export default class StationAutoSearchForm extends React.PureComponent {
   }
 
   async componentWillMount() {}
+
   changeSearch(e) {
     e.preventDefault()
     this.props.form.validateFields((err, values) => {
@@ -60,6 +63,7 @@ export default class StationAutoSearchForm extends React.PureComponent {
       this.setState({ dataSearch: data }, () => this.props.onChangeSearch(data))
     })
   }
+
   changeStationType(stationType) {}
 
   render() {
