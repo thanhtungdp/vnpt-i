@@ -7,9 +7,11 @@ import PageContainer from 'layout/default-sidebar-layout/PageContainer'
 import StationAutoApi from 'api/StationAuto'
 import CategoriesApi from 'api/CategoryApi'
 import DataSearch from './data-search'
+import ControlStation from 'containers/control-station'
 import styled from 'styled-components'
 import playSound from 'utils/audio'
 import dateFormat from 'dateformat'
+import Clearfix from 'components/elements/clearfix'
 
 const StyledTabs = styled(Tabs)`
   .ant-tabs-tab {
@@ -17,13 +19,13 @@ const StyledTabs = styled(Tabs)`
   }
 `
 
+const FlexStyle = styled.div`
+  display: flex;
+`
+
 @createLanguageHoc
 @autobind
 export default class OnlineMonitoring extends React.Component {
-  constructor(props) {
-    super(props)
-  }
-
   startTimer() {
     clearInterval(this.timer)
     this.timer = setInterval(this.loadData.bind(this), 60000)
@@ -71,22 +73,28 @@ export default class OnlineMonitoring extends React.Component {
     isLoading: true,
     stationTypes: [],
     stationAutos: [],
+    visibleControl: false,
+    visibleChart: false,
     lang: langPropTypes
   }
 
-  setModal2Visible(visible, record = {}) {
-    this.setState({
-      visible,
-      record,
-      searchData: {
-        stationAuto: record.stationKey,
-        stationType: record.stationType
-      }
-    })
+  setModal2Visible(visibleKey, visible, record = {}) {
+    this.setState(
+      {
+        [visibleKey]: visible,
+        record,
+        searchData: {
+          stationKey: record.stationKey,
+          stationName: record.stationName,
+          stationType: record.stationType
+        }
+      },
+      () => {}
+    )
   }
 
   renderStationTypeContainer(stationType) {
-    const { t } = this.props.lang
+    // const { t } = this.props.lang
     let columns = [
       {
         dataIndex: 'receivedAt',
@@ -127,7 +135,7 @@ export default class OnlineMonitoring extends React.Component {
                       color = currentState.config.prepareColor
                     else if (value.status === 3 || value.status === 4) {
                       color = currentState.config.exceededColor
-                      playSound('audio/alarm_beep.wav')
+                      //playSound('audio/alarm_beep.wav')
                     } else if (value.status === 1)
                       color = currentState.config.trendExceededColor
                   }
@@ -147,14 +155,26 @@ export default class OnlineMonitoring extends React.Component {
           key: station.key
         })
     })
-    let openModal = this.setModal2Visible
+    var openModal = this.setModal2Visible
     columns.push({
       dataIndex: 'stationKey',
       render(value, record) {
         return (
-          <Button type="primary" onClick={() => openModal(true, record)}>
-            Chart
-          </Button>
+          <FlexStyle>
+            <Button
+              type="primary"
+              onClick={() => openModal('visibleControl', true, record)}
+            >
+              Control
+            </Button>
+            <Clearfix width={8} />
+            <Button
+              type="primary"
+              onClick={() => openModal('visibleChart', true, record)}
+            >
+              Chart
+            </Button>
+          </FlexStyle>
         )
       }
     })
@@ -189,12 +209,27 @@ export default class OnlineMonitoring extends React.Component {
         <Modal
           rowKey="uid"
           title="Chart"
+          destroyOnClose
           wrapClassName="vertical-center-modal"
-          visible={this.state.visible}
-          onCancel={() => this.setModal2Visible(false)}
-          width={'99vw'}
+          visible={this.state.visibleChart}
+          onCancel={() => this.setModal2Visible('visibleChart', false)}
+          width={'99'}
         >
           <DataSearch initialValues={this.state.searchData} />
+        </Modal>
+        <Modal
+          rowKey="uid1"
+          title={'STATION NAME: ' + this.state.searchData.stationName}
+          wrapClassName="vertical-center-modal"
+          visible={this.state.visibleControl}
+          destroyOnClose
+          onCancel={() => this.setModal2Visible('visibleControl', false)}
+          width={'50%'}
+        >
+          <ControlStation
+            stationKey={this.state.searchData.stationKey}
+            stationName={this.state.searchData.stationName}
+          />
         </Modal>
       </PageContainer>
     )

@@ -6,16 +6,8 @@ export default class InputNumberCell extends React.Component {
   static propTypes = {
     editable: PropTypes.bool,
     onChange: PropTypes.func,
-    value: PropTypes.number
-  }
-  state = {
-    value: this.props.value
-  }
-
-  onChange(value) {
-    console.log(value)
-    this.props.onChange(value)
-    this.setState({ value: value })
+    value: PropTypes.number,
+    defaultValue: PropTypes.object
   }
 
   render() {
@@ -23,9 +15,10 @@ export default class InputNumberCell extends React.Component {
       <div>
         {this.props.editable ? (
           <InputNumber
-            style={{ margin: '-5px 0' }}
+            style={{ margin: '-5px 0', width: '100%' }}
             value={this.props.value}
-            onChange={e => this.props.onChange(e)}
+            disabled={this.props.disabled}
+            onChange={this.props.onChange}
           />
         ) : (
           this.props.value

@@ -67,7 +67,7 @@ class DataSearch extends React.PureComponent {
       )
       this.setState({ stationAutoSelects: options || [] })
     })
-    if (this.props.initialValues.stationAuto) {
+    if (this.props.initialValues.stationKey) {
       this.changeSearch({})
     }
   }
@@ -175,7 +175,7 @@ class DataSearch extends React.PureComponent {
           <Col span={5} key="stationAuto">
             <FormItem label={t('onlineMonitoring.form.stationAuto.label')}>
               {getFieldDecorator(`stationAuto`, {
-                initialValue: this.props.initialValues.stationAuto
+                initialValue: this.props.initialValues.stationKey
               })(<Select showSearch>{this.state.stationAutoSelects}</Select>)}
             </FormItem>
           </Col>

@@ -11,6 +11,8 @@ const PORT_DEPLOY = 5555
 const DATA_STATION_AUTO_API = API_GATEWAY_TEST
 const MEDIA_API = API_GATEWAY_MEDIA_RELEASE
 
+const STATION_CONTROL_API = 'http://118.69.55.217:8180'
+
 const GOOGLE_MAP = {
   KEY: 'AIzaSyCcApeoQRqf1Fq2g7_rn1aALfEEm7nNS8U'
 }
@@ -23,6 +25,7 @@ module.exports.PORT_DEPLOY = PORT_DEPLOY
 module.exports.GOOGLE_MAP = GOOGLE_MAP
 module.exports.DATA_STATION_AUTO_API = DATA_STATION_AUTO_API
 module.exports.MEDIA_API = MEDIA_API
+module.exports.STATION_CONTROL_API = STATION_CONTROL_API
 
 module.exports.default = {
   API_GATEWAY_TEST,
@@ -33,5 +36,6 @@ module.exports.default = {
   GOOGLE_MAP,
   PORT_DEPLOY,
   DATA_STATION_AUTO_API,
-  MEDIA_API
+  MEDIA_API,
+  STATION_CONTROL_API
 }

@@ -1,10 +1,10 @@
 import React from 'react'
-import { Input as InputBootstrap } from 'reactstrap'
+import { Input as InputAntd } from 'reactstrap'
 import styled from 'styled-components'
 
 import style from './style'
 
-const InputRestyle = styled(InputBootstrap)`
+const InputRestyle = styled(InputAntd)`
   ${style};
   ${props =>
     props.size === 'lg'
@@ -20,5 +20,5 @@ export default function Input(props) {
 }
 
 Input.propTypes = {
-  ...InputBootstrap.propTypes
+  ...InputAntd.propTypes
 }

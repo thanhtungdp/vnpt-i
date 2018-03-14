@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import PageContainer from 'layout/default-sidebar-layout/PageContainer'
 import SummaryList from 'components/dashboard/summary/summary-list'
 import ChartList from 'components/dashboard/chart/chart-row-list'
-import SummaryLoader from 'components/dashboard/sumary-loader'
 import { getStationTypes } from 'api/CategoryApi'
 import { getStationAutos } from 'api/StationAuto'
 
@@ -21,7 +20,7 @@ export default class OverviewDashboard extends Component {
     let stationCount = {}
     let rows = {}
     let lineSeries = {}
-    stationTypeList.map(item => {
+    stationTypeList.forEach(item => {
       stationCount[item.key] = 0
       rows[item.key] = []
       lineSeries[item.key] = []
@@ -74,7 +73,6 @@ export default class OverviewDashboard extends Component {
       totalStation: this.state.stationCount[item.key],
       stationList: this.state.rows[item.key]
     }))
-    return
   }
 
   render() {
