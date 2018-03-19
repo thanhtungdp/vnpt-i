@@ -1,0 +1,43 @@
+import React from 'react'
+import PropTypes from 'prop-types'
+import { autobind } from 'core-decorators'
+import styled from 'styled-components'
+import StationTypeItem from '../station-type-item'
+
+const StationTypeListWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-left: -8px;
+  margin-right: -8px;
+`
+
+const StationTypeContainer = styled.div`
+  padding: 0px 8px;
+  flex: 1;
+`
+
+@autobind
+export default class SummaryList extends React.PureComponent {
+  static propTypes = {
+    stationAutos: PropTypes.array,
+    stationTypes: PropTypes.array
+  }
+
+  render() {
+    return (
+      <StationTypeListWrapper>
+        <StationTypeContainer>
+          {this.props.stationTypes.map(item => (
+            <StationTypeItem
+              name={item.name}
+              stationAutoList={this.props.stationAutos.filter(
+                stationItem => stationItem.stationType.key == item.key
+              )}
+            />
+          ))}
+        </StationTypeContainer>
+      </StationTypeListWrapper>
+    )
+  }
+}

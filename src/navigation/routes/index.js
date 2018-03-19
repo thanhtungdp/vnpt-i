@@ -13,7 +13,7 @@ import OnlineMonitoring from 'containers/online-monitoring'
 import Map from 'containers/map'
 import MinutesDataSearch from '../../containers/data-search/minutes-data-search'
 import AvgDataForm from 'containers/avg-search/avg-data-form'
-
+import Monitoring from '/containers/monitoring'
 @autobind
 export default class RouteDefault extends React.Component {
   render() {
@@ -34,6 +34,7 @@ export default class RouteDefault extends React.Component {
           path={slug.onlineMonitoring.base}
           component={OnlineMonitoring}
         />
+        <LayoutRoute path={'/monitoring'} component={Monitoring} />
         <LayoutRoute
           path={slug.dataSearch.base}
           component={MinutesDataSearch}
