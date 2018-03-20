@@ -118,33 +118,33 @@ const stationAutoMenu = {
 }
 
 const groupAdmin = {
-	component: (
+  component: (
     <NavigationWrapper text="Admin management">
       <AkNavigationItemGroup title="Admin management" />
     </NavigationWrapper>
-	)
+  )
 }
 
 const userMenu = {
-	component: (
+  component: (
     <AkNavigationItem
       linkComponent={WrapperLinkComponent}
       href={slug.user.base}
       icon={Icon.person}
       text="User"
     />
-	)
+  )
 }
 
 const roleMenu = {
-	component: (
+  component: (
     <AkNavigationItem
       linkComponent={WrapperLinkComponent}
       href={slug.role.base}
       icon={Icon.peopleGroup}
       text="Role"
     />
-	)
+  )
 }
 export default [
   dashboardMenu,

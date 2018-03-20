@@ -109,7 +109,6 @@ export default class SearchFrom extends React.PureComponent {
         }
       })
     })
-
   }
 
   changeStationAuto(value) {
@@ -131,10 +130,10 @@ export default class SearchFrom extends React.PureComponent {
         </Select.Option>
       ))
     ) : (
-        <Select.Option />
-      )
+      <Select.Option />
+    )
     var measuringSelected = []
-    measuringList.forEach(function (rec) {
+    measuringList.forEach(function(rec) {
       measuringSelected.push(rec.key)
     })
     this.setState({
@@ -182,7 +181,7 @@ export default class SearchFrom extends React.PureComponent {
                         )
                       })}
                   </Select>
-                  )}
+                )}
               </FormItem>
             </Col>
             <Col span={8} key="type">
@@ -193,19 +192,18 @@ export default class SearchFrom extends React.PureComponent {
                     {
                       required: true,
                       message:
-                        'Please input ' +
-                        t('avgSearchFrom.form.type.label')
+                        'Please input ' + t('avgSearchFrom.form.type.label')
                     }
                   ]
                 })(
                   <Select showSearch>
-                  <Select.Option value={15}>15 Minues</Select.Option>
-                  <Select.Option value={30}>30 Minues</Select.Option>
+                    <Select.Option value={15}>15 Minues</Select.Option>
+                    <Select.Option value={30}>30 Minues</Select.Option>
                     <Select.Option value={60}>Hour</Select.Option>
                     <Select.Option value={24 * 60}>Day</Select.Option>
                     <Select.Option value={'month'}>Month</Select.Option>
                   </Select>
-                  )}
+                )}
               </FormItem>
             </Col>
           </Row>
@@ -228,7 +226,7 @@ export default class SearchFrom extends React.PureComponent {
                   >
                     {this.state.measuringOps}
                   </Select>
-                  )}
+                )}
               </FormItem>
             </Col>
             <Col span={8} key="fromDate">
@@ -239,8 +237,7 @@ export default class SearchFrom extends React.PureComponent {
                     {
                       required: true,
                       message:
-                        'Please input ' +
-                        t('avgSearchFrom.form.fromDate.label')
+                        'Please input ' + t('avgSearchFrom.form.fromDate.label')
                     }
                   ]
                 })(<DatePicker format={'DD/MM/YYYY HH:mm'} />)}
@@ -254,8 +251,7 @@ export default class SearchFrom extends React.PureComponent {
                     {
                       required: true,
                       message:
-                        'Please input ' +
-                        t('avgSearchFrom.form.toDate.label')
+                        'Please input ' + t('avgSearchFrom.form.toDate.label')
                     }
                   ]
                 })(<DatePicker format={'DD/MM/YYYY HH:mm'} />)}

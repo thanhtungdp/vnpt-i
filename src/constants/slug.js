@@ -34,18 +34,18 @@ export default {
   avgSearch: {
     base: '/avg-search'
   },
-	user: {
-		list: '/user',
-		base: '/user',
-		create: '/user/create',
-		edit: '/user/edit/:key',
-		editWithKey: '/user/edit'
-	},
-	role: {
-		list: '/role',
-		base: '/role',
-		create: '/role/create',
-		edit: '/role/edit/:key',
-		editWithKey: '/role/edit'
-	}
+  user: {
+    list: '/user',
+    base: '/user',
+    create: '/user/create',
+    edit: '/user/edit/:key',
+    editWithKey: '/user/edit'
+  },
+  role: {
+    list: '/role',
+    base: '/role',
+    create: '/role/create',
+    edit: '/role/edit/:key',
+    editWithKey: '/role/edit'
+  }
 }

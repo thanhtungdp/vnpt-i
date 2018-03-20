@@ -64,7 +64,7 @@ class MinutesDataSearch extends React.Component {
       }
     })
     if (dataSources && dataSources.data) {
-      let data = dataSources.data.map((item) => item)
+      let data = dataSources.data.map(item => item)
       data.sort((a, b) => {
         return (
           new Date(a.receivedAt).getTime() - new Date(b.receivedAt).getTime()
