@@ -60,7 +60,7 @@ class AvgDataForm extends React.Component {
 
     var lines = []
     var dataLines = {}
-    query.measuringList.forEach(function (rec) {
+    query.measuringList.forEach(function(rec) {
       dataLines[rec.key] = {
         key: rec.key,
         name: rec.name,
@@ -69,20 +69,18 @@ class AvgDataForm extends React.Component {
       }
     })
     if (dataSources && dataSources.data) {
-      let data = dataSources.data.map((item) => item)
+      let data = dataSources.data.map(item => item)
       data.sort((a, b) => {
-        return (
-          new Date(a._id).getTime() - new Date(b._id).getTime()
-        )
+        return new Date(a._id).getTime() - new Date(b._id).getTime()
       })
 
-      data.forEach(function (rec) {
+      data.forEach(function(rec) {
         for (var k in rec)
           if (dataLines[k]) {
             if (!dataLines[k].data) dataLines[k].data = []
             dataLines[k].data.push([
               new Date(rec._id).getTime() -
-              new Date().getTimezoneOffset() * 60000,
+                new Date().getTimezoneOffset() * 60000,
               rec[k]
             ])
             // dataLines[k].data.push([new Date(rec.receivedAt).getTime(), rec[k]])
@@ -210,17 +208,20 @@ class AvgDataForm extends React.Component {
     return (
       <PageContainer {...this.props.wrapperProps}>
         <Breadcrumb items={['list']} />
-        <SearchFrom initialValues={{}} onChangeSearch={query => {
-          this.setState(
-            {
-              pagination: {
-                ...this.state.pagination,
-                current: 1
-              }
-            },
-            () => this.changeSearch(query)
-          )
-        }} />
+        <SearchFrom
+          initialValues={{}}
+          onChangeSearch={query => {
+            this.setState(
+              {
+                pagination: {
+                  ...this.state.pagination,
+                  current: 1
+                }
+              },
+              () => this.changeSearch(query)
+            )
+          }}
+        />
         <Tabs defaultActiveKey="1">
           <Tabs.TabPane tab="Data" key="1">
             <Row gutter={24}>
@@ -259,10 +260,12 @@ class AvgDataForm extends React.Component {
                     verticalAlign="bottom"
                   />
 
-                  <XAxis type="datetime"
+                  <XAxis
+                    type="datetime"
                     dateTimeLabelFormats={{
                       minute: '%e. %b %H:%M'
-                    }}>
+                    }}
+                  >
                     <XAxis.Title>Time</XAxis.Title>
                   </XAxis>
 
@@ -273,7 +276,6 @@ class AvgDataForm extends React.Component {
                   {/* <Navigator>
                     <Navigator.Series seriesId="datetime" />
                   </Navigator> */}
-
                 </HighchartsStockChart>
               </Col>
             </Row>

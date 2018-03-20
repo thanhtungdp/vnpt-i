@@ -9,6 +9,7 @@ import { withRouter } from 'react-router-dom'
 import AvatarCharacter from 'components/elements/avatar-character'
 import Link from 'components/elements/link'
 import CreateDrawer from './CreateDrawer'
+import slug from 'constants/slug'
 
 import Navigation, {
   AkContainerTitle,
@@ -95,6 +96,10 @@ export default class BasicNestedNavigation extends React.Component {
     this.props.history.push('/login')
   }
 
+  handleChangePassword() {
+    this.props.history.push(slug.user.changePassword)
+  }
+
   globalSecondaryActions() {
     return [
       <AkDropdownMenu
@@ -115,6 +120,9 @@ export default class BasicNestedNavigation extends React.Component {
           <DropdownItem>View profile</DropdownItem>
           <DropdownItem>Integrations</DropdownItem>
           <DropdownItem>Bitbucket labs</DropdownItem>
+          <DropdownItem onClick={this.handleChangePassword}>
+            Change password
+          </DropdownItem>
           <DropdownItem onClick={this.handleLogout}>Log out</DropdownItem>
         </DropdownItemGroup>
       </AkDropdownMenu>

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 import { autobind } from 'core-decorators'
 import slug from 'constants/slug'
 
@@ -13,12 +13,17 @@ import OnlineMonitoring from 'containers/online-monitoring'
 import Map from 'containers/map'
 import MinutesDataSearch from '../../containers/data-search/minutes-data-search'
 import AvgDataForm from 'containers/avg-search/avg-data-form'
+import ChangePassword from 'containers/auth/change-password'
 
 @autobind
 export default class RouteDefault extends React.Component {
   render() {
     return (
       <div>
+        <LayoutRoute
+          path={slug.user.changePassword}
+          component={ChangePassword}
+        />
         <LayoutRoute path="/" exact component={OverviewDashboard} />
         <Route path={slug.map.base} exact component={Map} />
         <LayoutRoute path={slug.measuring.base} component={MeasuringRoute} />
@@ -39,7 +44,7 @@ export default class RouteDefault extends React.Component {
           component={MinutesDataSearch}
         />
         <LayoutRoute path={slug.avgSearch.base} component={AvgDataForm} />
-        <Route path={slug.login} exact component={LoginRoute} />
+        <Route path={slug.login} component={LoginRoute} />
       </div>
     )
   }

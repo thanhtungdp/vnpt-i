@@ -9,11 +9,11 @@ export default {
     editWithKey: '/measuring/edit'
   },
   stationType: {
-    list: 'station-type',
-    base: 'station-type',
-    create: 'station-type/create',
-    edit: 'station-type/edit/:key',
-    editWithKey: 'station-type/edit'
+    list: '/station-type',
+    base: '/station-type',
+    create: '/station-type/create',
+    edit: '/station-type/edit/:key',
+    editWithKey: '/station-type/edit'
   },
   stationAuto: {
     list: '/station-auto',
@@ -34,18 +34,19 @@ export default {
   avgSearch: {
     base: '/avg-search'
   },
-	user: {
-		list: '/user',
-		base: '/user',
-		create: '/user/create',
-		edit: '/user/edit/:key',
-		editWithKey: '/user/edit'
-	},
-	role: {
-		list: '/role',
-		base: '/role',
-		create: '/role/create',
-		edit: '/role/edit/:key',
-		editWithKey: '/role/edit'
-	}
+  user: {
+    list: '/user',
+    base: '/user',
+    create: '/user/create',
+    edit: '/user/edit/:key',
+    editWithKey: '/user/edit',
+    changePassword: '/user/change-password'
+  },
+  role: {
+    list: '/role',
+    base: '/role',
+    create: '/role/create',
+    edit: '/role/edit/:key',
+    editWithKey: '/role/edit'
+  }
 }
