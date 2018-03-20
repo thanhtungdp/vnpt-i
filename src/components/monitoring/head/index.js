@@ -3,6 +3,8 @@ import PropTypes from 'prop-types'
 import { autobind } from 'core-decorators'
 import styled from 'styled-components'
 import { Input } from 'antd'
+import { colorLevels } from 'constants/warningLevels'
+
 const HeadItemWrapper = styled.div`
   height: 68px;
   display: flex;
@@ -82,10 +84,10 @@ export default class HeadItem extends React.PureComponent {
         <WarningWrapper>
           <WarningTitle>WARNING LEVELS</WarningTitle>
           <WrapperColor>
-            <ColorLevel color={'#1dce6c'} />
-            <ColorLevel color={'#FFF954'} />
-            <ColorLevel color={'#F08432'} />
-            <ColorLevel color={'#EA3223'} />
+            <ColorLevel color={colorLevels.GOOD} />
+            <ColorLevel color={colorLevels.EXCEEDED_TENDENCY} />
+            <ColorLevel color={colorLevels.EXCEEDED_PREPARING} />
+            <ColorLevel color={colorLevels.EXCEEDED} />
           </WrapperColor>
           <WrapperText>
             <TextLevel>Good</TextLevel>

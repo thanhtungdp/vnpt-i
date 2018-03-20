@@ -26,7 +26,7 @@ const LinkSpan = styled.span`
 @autobind
 export default class StationTypeSummary extends React.PureComponent {
   static propTypes = {
-    name: PropTypes.string,
+    stationType: PropTypes.object,
     stationAutoList: PropTypes.array
   }
 
@@ -51,14 +51,16 @@ export default class StationTypeSummary extends React.PureComponent {
   }
 
   render() {
-    const { name, stationAutoList } = this.props
+    const { stationType, stationAutoList } = this.props
     return (
-      <StationTypeWrapper>
-        <Heading rightChildren={this.rightChildren()}>
-          {name} ({stationAutoList.length})
-        </Heading>
-        <StationAutoList stationAutoList />
-      </StationTypeWrapper>
+      stationAutoList.length > 0 && (
+        <StationTypeWrapper>
+          <Heading rightChildren={this.rightChildren()}>
+            {stationType.name} ({stationAutoList.length})
+          </Heading>
+          <StationAutoList stationAutoList={stationAutoList} />
+        </StationTypeWrapper>
+      )
     )
   }
 }

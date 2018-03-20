@@ -20,22 +20,14 @@ const StationTypeContainer = styled.div`
 @autobind
 export default class SummaryList extends React.PureComponent {
   static propTypes = {
-    stationAutos: PropTypes.array,
-    stationTypes: PropTypes.array
+    data: PropTypes.arrayOf(PropTypes.shape(StationTypeItem.propTypes))
   }
 
   render() {
     return (
       <StationTypeListWrapper>
         <StationTypeContainer>
-          {this.props.stationTypes.map(item => (
-            <StationTypeItem
-              name={item.name}
-              stationAutoList={this.props.stationAutos.filter(
-                stationItem => stationItem.stationType.key == item.key
-              )}
-            />
-          ))}
+          {this.props.data.map(item => <StationTypeItem {...item} />)}
         </StationTypeContainer>
       </StationTypeListWrapper>
     )

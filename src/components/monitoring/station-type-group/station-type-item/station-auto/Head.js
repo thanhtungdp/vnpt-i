@@ -59,21 +59,22 @@ const CameraAction = styled.div``
 @autobind
 export default class StationAutoHead extends React.PureComponent {
   static propTypes = {
-    number: PropTypes.number,
     name: PropTypes.string,
-    image: PropTypes.string,
-    color: PropTypes.string
+    receivedAt: PropTypes.string,
+    orderNumber: PropTypes.number
   }
 
   render() {
+    const { name, receivedAt, orderNumber } = this.props
     return (
       <StationHeadItemWrapper>
         <TitleWrapper>
-          <OrderNumber>1</OrderNumber>
-          <StationName>KCN Song Hau</StationName>
-          <ReceivedAt> - 15/03/2018 23:00</ReceivedAt>
+          <OrderNumber>{orderNumber}</OrderNumber>
+          <StationName>{name}</StationName>
+          <ReceivedAt>{receivedAt ? ' - ' + receivedAt : ''}</ReceivedAt>
         </TitleWrapper>
         <ActionWrapper>
+          <CameraAction>Control</CameraAction>
           <CameraAction>Camera</CameraAction>
         </ActionWrapper>
       </StationHeadItemWrapper>

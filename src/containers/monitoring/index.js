@@ -9,30 +9,54 @@ import StationTypeList from 'components/monitoring/station-type-group/station-ty
 
 @autobind
 export default class Monitoring extends React.Component {
+  state = {
+    isLoading: false,
+    data: []
+  }
+
   async loadData() {
+    this.setState({ isLoading: false })
     let dataStationTypes = await CategoriesApi.getStationTypes(
       { page: 1, itemPerPage: 10 },
       {}
     )
+
     let stationAutos = await StationAutoApi.getLastDataStationAuto(
       { page: 1, itemPerPage: 100 },
       {}
     )
+    let dataMonitoring = []
+    dataStationTypes.data.forEach(stationType => {
+      let stationAutoList = []
+      for (let i = 0; i < stationAutos.length; i++) {
+        let stationAuto = stationAutos[i]
+        if (stationAuto.stationType.key === stationType.key)
+          stationAutoList.push(stationAuto)
+      }
+      dataMonitoring.push({ stationType, stationAutoList })
+    })
     this.setState({
-      stationTypes: dataStationTypes.data,
-      stationAutos: stationAutos
+      data: dataMonitoring
     })
     this.setState({ isLoading: true })
   }
 
-  state = {
-    isLoading: true,
-    stationTypes: [],
-    stationAutos: []
+  startTimer() {
+    clearInterval(this.timer)
+    this.timer = setInterval(this.loadData.bind(this), 60000)
+    this.loadData()
+  }
+
+  stopTimer() {
+    clearInterval(this.timer)
   }
 
   async componentWillMount() {
-    this.loadData()
+    this.startTimer()
+  }
+
+  componentWillUnmount() {
+    this.stopTimer()
   }
 
   render() {
@@ -40,10 +64,7 @@ export default class Monitoring extends React.Component {
       <PageContainer backgroundColor="#fafbfb" hideTitle>
         <HeadItem />
         <Clearfix />
-        <StationTypeList
-          stationTypes={this.state.stationTypes}
-          stationAutos={this.state.stationAutos}
-        />
+        <StationTypeList data={this.state.data} />
       </PageContainer>
     )
   }
