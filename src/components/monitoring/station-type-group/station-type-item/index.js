@@ -8,12 +8,7 @@ import StationAutoList from './station-auto-list'
 // import Measuring from './Measuring'
 // import slug from 'constants/slug'
 
-const StationTypeWrapper = styled.div``
-
-const ChartWrapper = styled.div`
-  display: flex;
-  box-shadow: 0 2px 10px 0 rgba(238, 238, 238, 0.5);
-  background-color: #ffffff;
+const StationTypeWrapper = styled.div`
 `
 
 const LinkSpan = styled.span`

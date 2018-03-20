@@ -28,7 +28,7 @@ const monitoringMenu = {
   component: (
     <AkNavigationItem
       linkComponent={WrapperLinkComponent}
-      href={slug.onlineMonitoring.base}
+      href={slug.monitoring.base}
       icon={Icon.screen}
       text="Monitoring"
     />

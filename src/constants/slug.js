@@ -25,6 +25,9 @@ export default {
   onlineMonitoring: {
     base: '/online-monitoring'
   },
+  monitoring: {
+    base: '/monitoring'
+  },
   map: {
     base: '/map'
   },

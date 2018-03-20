@@ -8,6 +8,7 @@ import dateFormat from 'dateformat'
 
 const StationAutoWrapper = styled.div`
   padding: 16px 15px 16px 15px;
+  transition: all 0.2s linear;
   margin-bottom: 16px;
   height: 151px;
   background-color: #ffffff;
