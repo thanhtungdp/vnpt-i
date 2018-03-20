@@ -1,4 +1,19 @@
 export default {
+  changePassword: {
+    form: {
+      oldPassword: {
+        error: 'Please input old password!'
+      },
+      newPassword: {
+        error: 'Please input new password!'
+      },
+      newPasswordConfirmation: {
+        error: 'Please input new password confirmation!',
+        error1: "Password confirmation doesn't match Password"
+      },
+      Success: 'Change password successfully'
+    }
+  },
   measuringManager: {
     list: {
       title: 'Measuring'

@@ -40,10 +40,6 @@ const createLanguageHoc = Component => {
 
     static getInitialProps = Component.getInitialProps
 
-    constructor(props) {
-      super(props)
-    }
-
     translate(key, params = {}, isParse = true) {
       let translated = objectPath.get(this.props.languageData, key)
       if (translated && isParse) {

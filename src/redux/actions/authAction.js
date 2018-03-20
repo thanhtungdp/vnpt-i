@@ -19,7 +19,6 @@ export function fetchUserMe() {
       type: FETCH_PENDING_USER
     })
     const auth = await AuthApi.getMe()
-    console.log(auth)
     if (auth.error) {
       dispatch({
         type: FETCH_FAIL_USER

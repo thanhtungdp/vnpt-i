@@ -13,7 +13,6 @@ export function getHistory_StationControl(key) {
 
 //Điều khiển lấy mẫu theo trạm
 export function trigger_StationControl(status, measuring = {}) {
-  console.log('API', status, measuring)
   return putFetch(STATION_CONTROL_API + '/LayMau_MT/' + status, measuring)
 }
 
