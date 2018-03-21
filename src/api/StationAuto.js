@@ -5,7 +5,9 @@ export function getStationAutos(
   { page = 1, itemPerPage = 10 },
   { address, stationType, name }
 ) {
-  var url = `${STATION_AUTO_API}/station-auto?page=${page}&itemPerPage=${itemPerPage}`
+  var url = `${STATION_AUTO_API}/station-auto?page=${page}&itemPerPage=${
+    itemPerPage
+  }`
   if (address) url += `&address=${address}`
   if (stationType) url += `&stationType=${stationType}`
   if (name) url += `&name=${name}`
@@ -27,8 +29,8 @@ export function updateStationAuto(key, measuring = {}) {
 export function deleteStationAuto(key) {
   return deleteFetch(STATION_AUTO_API + '/station-auto/' + key)
 }
-export function getLastDataStationAuto() {
-  return getFetch(STATION_AUTO_API + '/station-auto/last-data')
+export function getLastLog() {
+  return getFetch(STATION_AUTO_API + '/station-auto/last-log')
 }
 export default {
   getStationAutos,
@@ -36,5 +38,5 @@ export default {
   createStationAuto,
   updateStationAuto,
   deleteStationAuto,
-  getLastDataStationAuto
+  getLastLog
 }

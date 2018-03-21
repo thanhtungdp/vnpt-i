@@ -21,10 +21,7 @@ export default class Monitoring extends React.Component {
       {}
     )
 
-    let stationAutos = await StationAutoApi.getLastDataStationAuto(
-      { page: 1, itemPerPage: 100 },
-      {}
-    )
+    let stationAutos = await StationAutoApi.getLastLog()
     let dataMonitoring = []
     dataStationTypes.data.forEach(stationType => {
       let stationAutoList = []
