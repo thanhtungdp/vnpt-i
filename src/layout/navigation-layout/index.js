@@ -8,11 +8,14 @@ import Tooltip from '@atlaskit/tooltip'
 import { withRouter } from 'react-router-dom'
 import AvatarCharacter from 'components/elements/avatar-character'
 import Link from 'components/elements/link'
-import CreateDrawer from './CreateDrawer'
 import slug from 'constants/slug'
+import StyleWrapper from './StyleWrapper'
+import Logo from './Logo'
+import LogoSubIcon from './LogoSubIcon'
+import CreateDrawer from './CreateDrawer'
 
 import Navigation, {
-  AkContainerTitle,
+// AkContainerTitle,
   AkNavigationItem,
   AkGlobalItem,
   createGlobalTheme
@@ -24,19 +27,13 @@ import AkDropdownMenu, {
 import styled from 'styled-components'
 import { connectAutoDispatch } from 'redux/connect'
 import { logout } from 'redux/actions/authAction'
-import Logo from './Logo'
 
 const WrapperTitle = styled.div`
   margin-left: -8px;
   margin-right: -8px;
 `
 
-const LogoIcon = styled.img`
-  width: 30px !important;
-  height: auto !important;
-`
-
-const globalTheme = createGlobalTheme('#ffffff', '#1aa309')
+const globalTheme = createGlobalTheme('#ffffff', '#1d89ce')
 
 @connectAutoDispatch(() => ({}), { logout })
 @withRouter
@@ -78,11 +75,7 @@ export default class BasicNestedNavigation extends React.Component {
       <Tooltip key="1" position="right" content="Admin system">
         <WrapperTitle>
           <Link to="/">
-            <AkContainerTitle
-              icon={<LogoIcon src="/images/logo-icon.png" />}
-              text="iLotusLand"
-              subText="Admin System"
-            />
+            <Logo src="/images/logo/logo-text-icon.png" />
           </Link>
         </WrapperTitle>
       </Tooltip>,
@@ -131,35 +124,37 @@ export default class BasicNestedNavigation extends React.Component {
 
   render() {
     return (
-      <Navigation
-        globalTheme={globalTheme}
-        globalPrimaryIcon={<Logo />}
-        containerHeaderComponent={() => this.getContainerHeaderComponent()}
-        drawers={[
-          <CreateDrawer
-            key="create"
-            onBackButton={() => this.toggleDrawer('create')}
-            isOpen={this.state.drawers.create}
-          />
-        ]}
-        globalPrimaryActions={[
-          <AkGlobalItem
-            size="medium"
-            onClick={() => this.toggleDrawer('create')}
-          >
-            <Tooltip position="right" content="Create">
-              <AddItem
-                label="Create icon"
-                secondaryColor="inherit"
-                size="medium"
-              />
-            </Tooltip>
-          </AkGlobalItem>
-        ]}
-        globalSecondaryActions={this.globalSecondaryActions()}
-      >
-        {this.props.children}
-      </Navigation>
+      <StyleWrapper>
+        <Navigation
+          globalTheme={globalTheme}
+          globalPrimaryIcon={<LogoSubIcon />}
+          containerHeaderComponent={() => this.getContainerHeaderComponent()}
+          drawers={[
+            <CreateDrawer
+              key="create"
+              onBackButton={() => this.toggleDrawer('create')}
+              isOpen={this.state.drawers.create}
+            />
+          ]}
+          globalPrimaryActions={[
+            <AkGlobalItem
+              size="medium"
+              onClick={() => this.toggleDrawer('create')}
+            >
+              <Tooltip position="right" content="Create">
+                <AddItem
+                  label="Create icon"
+                  secondaryColor="inherit"
+                  size="medium"
+                />
+              </Tooltip>
+            </AkGlobalItem>
+          ]}
+          globalSecondaryActions={this.globalSecondaryActions()}
+        >
+          {this.props.children}
+        </Navigation>
+      </StyleWrapper>
     )
   }
 }
