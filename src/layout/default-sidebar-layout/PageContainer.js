@@ -70,7 +70,12 @@ export default class PageContainer extends React.PureComponent {
     return (
       <StickyContainer>
         <PageBodyWrapper color={this.props.backgroundColor}>
-          <style type="text/css" dangerouslySetInnerHTML={{__html: 'body{background-color: #fafbfb;}'}}></style>
+          <style
+            type="text/css"
+            dangerouslySetInnerHTML={{
+              __html: 'body{background-color: #fafbfb;}'
+            }}
+          />
           {!this.props.hideTitle ? this.renderHeader() : null}
           {this.props.headerBottom}
           <Clearfix height={16} />

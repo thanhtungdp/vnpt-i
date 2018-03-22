@@ -323,6 +323,7 @@ export default class StationAutoForm extends React.PureComponent {
         fileList[i].status = 'done'
       }
     }
+
     const imgList = this.state.fileList
       .filter(img => img.response)
       .map(img => img.response)

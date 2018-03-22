@@ -9,7 +9,7 @@ import AuthApi from 'api/AuthApi'
 import { translate } from 'hoc/create-lang'
 import PageContainer from 'layout/default-sidebar-layout/PageContainer'
 import { autobind } from 'core-decorators'
-import Breadcrumb from './breadcrumb'
+import Breadcrumb from 'containers/auth/breadcrumb'
 
 const FInput = createValidateComponent(InputLabel)
 
@@ -78,7 +78,7 @@ export default class ChangePassword extends PureComponent {
   render() {
     return (
       <PageContainer {...this.props.wrapperProps}>
-        <Breadcrumb items={['base']} />
+        <Breadcrumb items={['changePassword']} />
         <Form onSubmit={this.props.handleSubmit(this.handleLogin.bind(this))}>
           <Field
             label="Current password"

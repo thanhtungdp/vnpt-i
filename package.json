@@ -97,6 +97,7 @@
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
     "react-sticky": "^6.0.1",
+    "react-telephone-input": "^4.3.4",
     "react-timeago": "^3.4.3",
     "react-timestamp": "^4.3.1",
     "react-transition-group": "^2.2.1",
@@ -126,17 +127,19 @@
     "dev": "node scripts/start.js",
     "build": "node scripts/build.js",
     "start": "NODE_ENV=production nodemon --exec babel-node server.js",
-    "fixcode":
-      "prettier --no-semi --single-quote --write ./src/*.js ./src/*/*.js ./src/**/*.js  ./src/*/*/*.js ./src/*/*/*/*.js ./src/*/*/*/*/*.js ./src/*/*/*/*/*/*.js ./src/*/*/*/*/*/*/*.js ./src/*/*/*/*/*/*/*/*.js",
-    "prettier":
-      "prettier --no-semi --single-quote --write ./src/*.js ./src/*/*.js",
+    "fixcode": "prettier --no-semi --single-quote --write ./src/*.js ./src/*/*.js ./src/**/*.js  ./src/*/*/*.js ./src/*/*/*/*.js ./src/*/*/*/*/*.js ./src/*/*/*/*/*/*.js ./src/*/*/*/*/*/*/*.js ./src/*/*/*/*/*/*/*/*.js",
+    "prettier": "prettier --no-semi --single-quote --write ./src/*.js ./src/*/*.js",
     "test": "node scripts/test.js --env=jsdom",
     "deploy-setup": "pm2 deploy ecosystem.config.js production setup",
     "deploy": "pm2 deploy ecosystem.config.js production"
   },
   "jest": {
-    "collectCoverageFrom": ["src/**/*.{js,jsx}"],
-    "setupFiles": ["<rootDir>/config/polyfills.js"],
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx}"
+    ],
+    "setupFiles": [
+      "<rootDir>/config/polyfills.js"
+    ],
     "testMatch": [
       "<rootDir>/src/**/__tests__/**/*.js?(x)",
       "<rootDir>/src/**/?(*.)(spec|test).js?(x)"
@@ -148,14 +151,25 @@
       "^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",
       "^(?!.*\\.(js|jsx|css|json)$)": "<rootDir>/config/jest/fileTransform.js"
     },
-    "transformIgnorePatterns": ["[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$"],
+    "transformIgnorePatterns": [
+      "[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$"
+    ],
     "moduleNameMapper": {
       "^react-native$": "react-native-web"
     },
-    "moduleFileExtensions": ["web.js", "js", "json", "web.jsx", "jsx", "node"]
+    "moduleFileExtensions": [
+      "web.js",
+      "js",
+      "json",
+      "web.jsx",
+      "jsx",
+      "node"
+    ]
   },
   "babel": {
-    "presets": ["react-app"]
+    "presets": [
+      "react-app"
+    ]
   },
   "eslintConfig": {
     "extends": "react-app"

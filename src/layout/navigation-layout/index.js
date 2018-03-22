@@ -93,6 +93,10 @@ export default class BasicNestedNavigation extends React.Component {
     this.props.history.push(slug.user.changePassword)
   }
 
+  handleProfile() {
+    this.props.history.push(slug.user.profile)
+  }
+
   globalSecondaryActions() {
     return [
       <AkDropdownMenu
@@ -110,7 +114,7 @@ export default class BasicNestedNavigation extends React.Component {
         }
       >
         <DropdownItemGroup title="Luke Skywalker">
-          <DropdownItem>View profile</DropdownItem>
+          <DropdownItem onClick={this.handleProfile}>View profile</DropdownItem>
           <DropdownItem>Integrations</DropdownItem>
           <DropdownItem>Bitbucket labs</DropdownItem>
           <DropdownItem onClick={this.handleChangePassword}>

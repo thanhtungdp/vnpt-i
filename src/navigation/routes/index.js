@@ -15,6 +15,7 @@ import MinutesDataSearch from '../../containers/data-search/minutes-data-search'
 import AvgDataForm from 'containers/avg-search/avg-data-form'
 import Monitoring from '/containers/monitoring'
 import ChangePassword from 'containers/auth/change-password'
+import ProfileUser from 'containers/auth/profile-user'
 
 @autobind
 export default class RouteDefault extends React.Component {
@@ -25,6 +26,7 @@ export default class RouteDefault extends React.Component {
           path={slug.user.changePassword}
           component={ChangePassword}
         />
+        <LayoutRoute path={slug.user.profile} component={ProfileUser} />
         <LayoutRoute path="/" exact component={OverviewDashboard} />
         <Route path={slug.map.base} exact component={Map} />
         <LayoutRoute path={slug.measuring.base} component={MeasuringRoute} />
