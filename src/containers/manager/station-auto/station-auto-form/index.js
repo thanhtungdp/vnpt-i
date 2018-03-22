@@ -103,24 +103,24 @@ export default class StationAutoForm extends React.PureComponent {
                   </Popconfirm>
                 </span>
               ) : (
-                  <span>
-                    {' '}
-                    <a onClick={() => this.editMeasuring(record.key)}>
-                      <Icon type="edit" />
+                <span>
+                  {' '}
+                  <a onClick={() => this.editMeasuring(record.key)}>
+                    <Icon type="edit" />
+                  </a>
+                  <Popconfirm
+                    title="Sure to delete?"
+                    onConfirm={() => this.removeMeasuring(record.key)}
+                  >
+                    <a>
+                      <Icon
+                        type="delete"
+                        style={{ marginLeft: '5px', color: 'red' }}
+                      />
                     </a>
-                    <Popconfirm
-                      title="Sure to delete?"
-                      onConfirm={() => this.removeMeasuring(record.key)}
-                    >
-                      <a>
-                        <Icon
-                          type="delete"
-                          style={{ marginLeft: '5px', color: 'red' }}
-                        />
-                      </a>
-                    </Popconfirm>
-                  </span>
-                )}
+                  </Popconfirm>
+                </span>
+              )}
             </div>
           )
         }
@@ -139,28 +139,31 @@ export default class StationAutoForm extends React.PureComponent {
       </Select.Option>
     ))
 
-    this.setState({ measuringListSource: measuringList.data, measuringOps: options })
+    this.setState({
+      measuringListSource: measuringList.data,
+      measuringOps: options
+    })
     if (this.props.initialValues) {
       let fileList = []
       if (this.props.initialValues.image) {
-
         //set image display
         let img = this.props.initialValues.image
         fileList.push({
           uid: -1,
           url: img.url,
           name: img.file.originalname,
-          status: 'done',
+          status: 'done'
         })
       }
       this.setState({
         measuringList: this.props.initialValues.measuringList,
         stationType: this.props.initialValues.objStationType,
-        options: this.props.initialValues.options ? this.props.initialValues.options : {},
+        options: this.props.initialValues.options
+          ? this.props.initialValues.options
+          : {},
         fileList: fileList
       })
     }
-
   }
 
   renderColumns(text, record, column) {
@@ -303,11 +306,11 @@ export default class StationAutoForm extends React.PureComponent {
     })
   }
 
-  handlePreview = (file) => {
+  handlePreview = file => {
     this.setState({
       previewImage: file.url || file.thumbUrl,
-      previewVisible: true,
-    });
+      previewVisible: true
+    })
   }
 
   handleCancel = () => {
@@ -320,11 +323,10 @@ export default class StationAutoForm extends React.PureComponent {
         fileList[i].status = 'done'
       }
     }
-    let imgList = []
-    imgList = this.state.fileList.map((img) => {
-      if (img.response)
-        return img.response
-    })
+
+    let imgList = this.state.fileList
+      .filter(img => img.response)
+      .map(img => img.response)
 
     if (file.response != null) {
       this.setState({
@@ -347,13 +349,13 @@ export default class StationAutoForm extends React.PureComponent {
 
   render() {
     const urlPhotoUpload = MediaApi.urlPhotoUploadWithDirectory('station-autos')
-    const { previewVisible, previewImage, fileList } = this.state;
+    const { previewVisible, previewImage, fileList } = this.state
     const uploadButton = (
       <div>
         <Icon type="plus" />
         <div className="ant-upload-text">Upload</div>
       </div>
-    );
+    )
 
     const { getFieldDecorator } = this.props.form
     const { t } = this.props.lang
@@ -374,7 +376,7 @@ export default class StationAutoForm extends React.PureComponent {
                   disabled={this.props.isEdit}
                   placeholder={t('stationAutoManager.form.key.placeholder')}
                 />
-                )}
+              )}
             </FormItem>
           </Col>
           <Col span={12}>
@@ -385,7 +387,7 @@ export default class StationAutoForm extends React.PureComponent {
                 <Input
                   placeholder={t('stationAutoManager.form.name.placeholder')}
                 />
-                )}
+              )}
             </FormItem>
           </Col>
         </Row>
@@ -398,7 +400,7 @@ export default class StationAutoForm extends React.PureComponent {
                 <Input
                   placeholder={t('stationAutoManager.form.long.placeholder')}
                 />
-                )}
+              )}
             </FormItem>
           </Col>
           <Col span={12}>
@@ -409,7 +411,7 @@ export default class StationAutoForm extends React.PureComponent {
                 <Input
                   placeholder={t('stationAutoManager.form.lat.placeholder')}
                 />
-                )}
+              )}
             </FormItem>
           </Col>
         </Row>
@@ -464,10 +466,24 @@ export default class StationAutoForm extends React.PureComponent {
         </Row>
 
         <Row>
-          <Col span={8}><Checkbox value="isAllowWarning" onChange={this.onOptionChange}
-            checked={this.state.options.isAllowWarning}>{t('stationAutoManager.form.options.isAllowWarning')}</Checkbox></Col>
-          <Col span={8}><Checkbox value="isAllowRemote" onChange={this.onOptionChange}
-            checked={this.state.options.isAllowRemote}>{t('stationAutoManager.form.options.isAllowRemote')}</Checkbox></Col>
+          <Col span={8}>
+            <Checkbox
+              value="isAllowWarning"
+              onChange={this.onOptionChange}
+              checked={this.state.options.isAllowWarning}
+            >
+              {t('stationAutoManager.form.options.isAllowWarning')}
+            </Checkbox>
+          </Col>
+          <Col span={8}>
+            <Checkbox
+              value="isAllowRemote"
+              onChange={this.onOptionChange}
+              checked={this.state.options.isAllowRemote}
+            >
+              {t('stationAutoManager.form.options.isAllowRemote')}
+            </Checkbox>
+          </Col>
         </Row>
 
         <Row gutter={8}>
@@ -481,13 +497,15 @@ export default class StationAutoForm extends React.PureComponent {
             >
               {fileList.length >= 1 ? null : uploadButton}
             </Upload>
-            <Modal visible={previewVisible} footer={null} onCancel={this.handleCancel}>
+            <Modal
+              visible={previewVisible}
+              footer={null}
+              onCancel={this.handleCancel}
+            >
               <img alt="example" style={{ width: '100%' }} src={previewImage} />
             </Modal>
-
           </Col>
         </Row>
-
 
         <Button
           style={{ width: '200px', right: '0' }}

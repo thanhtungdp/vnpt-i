@@ -40,7 +40,8 @@ export default {
     create: '/user/create',
     edit: '/user/edit/:key',
     editWithKey: '/user/edit',
-    changePassword: '/user/change-password'
+    changePassword: '/user/change-password',
+    profile: '/user/profile'
   },
   role: {
     list: '/role',

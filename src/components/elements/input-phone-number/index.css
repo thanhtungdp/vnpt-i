@@ -1,0 +1,10 @@
+.react-tel-input {
+    position: relative;
+    width: 100%;
+  }
+  .react-tel-input input[type=tel]{
+    height: 32px;
+  }
+  .react-tel-input .selected-flag{
+    height: 30px;
+  }

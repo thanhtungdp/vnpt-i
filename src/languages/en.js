@@ -14,6 +14,9 @@ export default {
       Success: 'Change password successfully'
     }
   },
+  profileUser: {
+    success: 'Change infomation successfully'
+  },
   measuringManager: {
     list: {
       title: 'Measuring'
