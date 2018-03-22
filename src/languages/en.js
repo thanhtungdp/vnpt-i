@@ -1,4 +1,18 @@
 export default {
+  login: {
+    title: 'Login',
+    form: {
+      email: {
+        label: 'Email',
+        placeholder: 'user@example.com'
+      },
+      password: {
+        label: 'Password',
+        placeholder: '********'
+      },
+      buttonLogin: 'Login'
+    }
+  },
   changePassword: {
     form: {
       oldPassword: {

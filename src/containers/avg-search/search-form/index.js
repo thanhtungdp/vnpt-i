@@ -1,16 +1,5 @@
 import React from 'react'
-import {
-  Form,
-  Checkbox,
-  Select,
-  Button,
-  Row,
-  Col,
-  Icon,
-  DatePicker,
-  Collapse,
-  InputNumber
-} from 'antd'
+import { Form, Select, Button, Row, Col, Icon, DatePicker } from 'antd'
 import PropTypes from 'prop-types'
 import { autobind } from 'core-decorators'
 import SelectStationType from 'components/elements/select-station-type'
@@ -41,10 +30,6 @@ export default class SearchFrom extends React.PureComponent {
     formatDate: 'YYYY-MM-DD HH:mm',
     measuringSelected: [],
     measuringList: []
-  }
-
-  constructor(props) {
-    super(props)
   }
 
   async componentWillMount() {

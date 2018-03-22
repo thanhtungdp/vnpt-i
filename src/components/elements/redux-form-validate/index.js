@@ -1,6 +1,7 @@
 import React from 'react'
 import { FormFeedback } from 'reactstrap'
 import styled from 'styled-components'
+import { isStateless } from 'utils'
 
 function getChildrenColor(props) {
   let defaultColor = ''
@@ -39,16 +40,17 @@ export default function createValidateComponent(InputComponent) {
 
     render() {
       const { input, meta, ...otherProps } = this.props
+      const refProps = !isStateless(InputComponent)
+        ? {
+            ref: ref => (this.inputRef = ref)
+          }
+        : {}
       return (
         <View
           isError={meta.touched && meta.error}
           isWarning={meta.touched && meta.warning}
         >
-          <InputComponent
-            {...input}
-            {...otherProps}
-            ref={ref => (this.inputRef = ref)}
-          />
+          <InputComponent {...input} {...otherProps} {...refProps} />
           {meta.touched &&
             meta.error && <FormFeedback>{meta.error}</FormFeedback>}
           {meta.touched &&

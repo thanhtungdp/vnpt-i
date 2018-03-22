@@ -4,8 +4,6 @@ import styled from 'styled-components'
 import {
   HighchartsChart,
   Chart,
-  Title,
-  Subtitle,
   Legend,
   XAxis,
   YAxis,
@@ -47,9 +45,7 @@ export default class ChartOverview extends React.PureComponent {
           <XAxis type="datetime">
             <XAxis.Title />
           </XAxis>
-          <YAxis id="number">
-            {this.getDataLines()}
-          </YAxis>
+          <YAxis id="number">{this.getDataLines()}</YAxis>
         </HighchartsChart>
       </ChartWrapper>
     )

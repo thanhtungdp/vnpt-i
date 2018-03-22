@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { autobind } from 'core-decorators'
 import NavigationLayout from 'layout/navigation-layout/index'
-import update from 'react-addons-update'
 import NavigationItemCollapse from 'components/navigation/navigation-item-collapse'
 import Clearfix from 'components/elements/clearfix'
 import CheckBoxItem from 'components/map/filter/check-box-item'
@@ -41,7 +40,7 @@ export default class MapNavigation extends React.PureComponent {
 
   toggleMarkerFilter(key, e) {
     let stationAutoMarker = this.props.stationAutoMarker.map(item => {
-      if (item.key == key) item.visible = e.isChecked
+      if (item.key === key) item.visible = e.isChecked
       return item
     })
     this.props.onChangeMarkerFilter(stationAutoMarker)
@@ -59,59 +58,56 @@ export default class MapNavigation extends React.PureComponent {
     )
   }
 
+  handleChangeSearch(value) {
+    let stationAutoList = this.state.stationAutoListFull
+    if (value) {
+      stationAutoList = stationAutoList.filter(item => {
+        return item.name.indexOf(value) > -1 || item.address.indexOf(value) > -1
+      })
+    }
+    this.setState({ stationAutoList: stationAutoList })
+  }
+
+  renderStationTypeList(stationType) {
+    let stationAutoFilter = this.state.stationAutoList.filter(
+      station => station.stationType.key === stationType.key
+    )
+    return (
+      <div key={stationType.key}>
+        <Clearfix height={8} />
+        <NavigationItemCollapse
+          icon={Icon.quizLists}
+          isOpen
+          label={stationType.name + ' (' + stationAutoFilter.length + ')'}
+        >
+          {stationAutoFilter.map(station => {
+            return (
+              <div>
+                <Clearfix height={8} />
+                {this.renderCheckBox(station.image, station.name, station.key)}
+              </div>
+            )
+          })}
+        </NavigationItemCollapse>
+      </div>
+    )
+  }
+
   render() {
     return (
       <NavigationLayout>
         <div>
           <Input.Search
             placeholder="Search station"
-            onSearch={value => {
-              let stationAutoList = this.state.stationAutoListFull
-              if (value) {
-                stationAutoList = stationAutoList.filter(item => {
-                  if (
-                    item.name.indexOf(value) > -1 ||
-                    item.address.indexOf(value) > -1
-                  )
-                    return true
-                })
-              }
-              this.setState({ stationAutoList: stationAutoList })
-            }}
+            onSearch={this.handleChangeSearch}
             style={{ width: '100%' }}
           />
         </div>
         <Clearfix height={8} />
         {this.state.isLoaded &&
-          this.state.stationType.map(item => {
-            console.log(this.state.stationAutoList)
-            let stationAutoFilter = this.state.stationAutoList.filter(
-              station => station.stationType.key == item.key
-            )
-            return (
-              <div>
-                <Clearfix height={8} />
-                <NavigationItemCollapse
-                  icon={Icon.quizLists}
-                  isOpen
-                  label={item.name + ' (' + stationAutoFilter.length + ')'}
-                >
-                  {stationAutoFilter.map(station => {
-                    return (
-                      <div>
-                        <Clearfix height={8} />
-                        {this.renderCheckBox(
-                          station.image,
-                          station.name,
-                          station.key
-                        )}
-                      </div>
-                    )
-                  })}
-                </NavigationItemCollapse>
-              </div>
-            )
-          })}
+          this.state.stationType.map(stationType =>
+            this.renderStationTypeList(stationType)
+          )})}
       </NavigationLayout>
     )
   }

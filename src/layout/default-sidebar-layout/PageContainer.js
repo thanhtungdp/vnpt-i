@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import Page from '@atlaskit/page'
 import BreadcrumbBar from 'shared/breadcrumb/BreadcrumbBar'
 import { SHAPE } from 'themes/color'
 import Clearfix from 'components/elements/clearfix'

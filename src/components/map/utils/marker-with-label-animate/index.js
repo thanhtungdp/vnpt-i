@@ -6,17 +6,22 @@
  * -----------------------------------------------------------------------------
  */
 /* global google */
-import React from "react"
-import PropTypes from "prop-types"
+import React from 'react'
+import PropTypes from 'prop-types'
 import {
   construct,
   componentDidMount,
   componentDidUpdate,
-  componentWillUnmount,
-} from "react-google-maps/lib/utils/MapChildHelper"
-import makeMarkerWithLabel from "./createUtil"
+  componentWillUnmount
+} from 'react-google-maps/lib/utils/MapChildHelper'
+import makeMarkerWithLabel from './createUtil'
 
-import { MAP, MARKER, ANCHOR, MARKER_CLUSTERER } from "react-google-maps/lib/constants"
+import {
+  MAP,
+  MARKER,
+  ANCHOR,
+  MARKER_CLUSTERER
+} from 'react-google-maps/lib/constants'
 
 /**
  * A wrapper around `google.maps.Marker`
@@ -281,19 +286,17 @@ export class Marker extends React.PureComponent {
 
   static contextTypes = {
     [MAP]: PropTypes.object,
-    [MARKER_CLUSTERER]: PropTypes.object,
+    [MARKER_CLUSTERER]: PropTypes.object
   }
 
   static defaultProps = {
     labelProps: {
-      labelContent: "Label"
+      labelContent: 'Label'
     }
   }
 
-
-
   static childContextTypes = {
-    [ANCHOR]: PropTypes.object,
+    [ANCHOR]: PropTypes.object
   }
 
   /*
@@ -303,7 +306,7 @@ export class Marker extends React.PureComponent {
     super(props, context)
     // const marker = new google.maps.Marker
     const SlidingMarker = require('marker-animate-unobtrusive')
-    SlidingMarker.initializeGlobally();    
+    SlidingMarker.initializeGlobally()
     const NativeMarkerWithLabel = makeMarkerWithLabel(google.maps)
     const marker = new NativeMarkerWithLabel({
       ...props.labelProps
@@ -315,16 +318,16 @@ export class Marker extends React.PureComponent {
     } else {
       marker.setMap(this.context[MAP])
       marker.setDuration(props.duration)
-      marker.setEasing('linear')      
+      marker.setEasing('linear')
     }
     this.state = {
-      [MARKER]: marker,
+      [MARKER]: marker
     }
   }
 
   getChildContext() {
     return {
-      [ANCHOR]: this.context[ANCHOR] || this.state[MARKER],
+      [ANCHOR]: this.context[ANCHOR] || this.state[MARKER]
     }
   }
 
@@ -480,27 +483,27 @@ export class Marker extends React.PureComponent {
 export default Marker
 
 const eventMap = {
-  onDblClick: "dblclick",
-  onDragEnd: "dragend",
-  onDragStart: "dragstart",
-  onMouseDown: "mousedown",
-  onMouseOut: "mouseout",
-  onMouseOver: "mouseover",
-  onMouseUp: "mouseup",
-  onRightClick: "rightclick",
-  onAnimationChanged: "animation_changed",
-  onClick: "click",
-  onClickableChanged: "clickable_changed",
-  onCursorChanged: "cursor_changed",
-  onDrag: "drag",
-  onDraggableChanged: "draggable_changed",
-  onFlatChanged: "flat_changed",
-  onIconChanged: "icon_changed",
-  onPositionChanged: "position_changed",
-  onShapeChanged: "shape_changed",
-  onTitleChanged: "title_changed",
-  onVisibleChanged: "visible_changed",
-  onZindexChanged: "zindex_changed",
+  onDblClick: 'dblclick',
+  onDragEnd: 'dragend',
+  onDragStart: 'dragstart',
+  onMouseDown: 'mousedown',
+  onMouseOut: 'mouseout',
+  onMouseOver: 'mouseover',
+  onMouseUp: 'mouseup',
+  onRightClick: 'rightclick',
+  onAnimationChanged: 'animation_changed',
+  onClick: 'click',
+  onClickableChanged: 'clickable_changed',
+  onCursorChanged: 'cursor_changed',
+  onDrag: 'drag',
+  onDraggableChanged: 'draggable_changed',
+  onFlatChanged: 'flat_changed',
+  onIconChanged: 'icon_changed',
+  onPositionChanged: 'position_changed',
+  onShapeChanged: 'shape_changed',
+  onTitleChanged: 'title_changed',
+  onVisibleChanged: 'visible_changed',
+  onZindexChanged: 'zindex_changed'
 }
 
 const updaterMap = {
@@ -558,5 +561,5 @@ const updaterMap = {
 
   zIndex(instance, zIndex) {
     instance.setZIndex(zIndex)
-  },
+  }
 }

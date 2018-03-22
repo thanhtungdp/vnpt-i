@@ -10,14 +10,11 @@ import {
   HighchartsStockChart,
   Chart,
   Title,
-  Subtitle,
   Legend,
   XAxis,
   YAxis,
   LineSeries,
-  Tooltip,
-  Navigator,
-  RangeSelector
+  Tooltip
 } from 'react-jsx-highstock'
 import Highcharts from 'highcharts/highstock'
 

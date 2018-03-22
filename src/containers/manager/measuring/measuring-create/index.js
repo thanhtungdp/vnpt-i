@@ -10,7 +10,6 @@ import { message } from 'antd'
 import createManagerCreate from 'hoc/manager-create'
 import createLanguage, { langPropTypes } from 'hoc/create-lang'
 
-
 @createManagerCreate({
   apiCreate: CategoryApi.createMeasuring
 })

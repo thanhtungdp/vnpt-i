@@ -9,10 +9,12 @@ const ImageAvatar = styled.img`
   border-radius: ${props => props.size / 2}px;
 `
 
-export default function Avatar ({ avatar, avatarSize = 24, username }) {
-  return avatar
-    ? <ImageAvatar size={avatarSize} src={avatar} />
-    : <AvatarCharacter size={avatarSize} username={username} />
+export default function Avatar({ avatar, avatarSize = 24, username }) {
+  return avatar ? (
+    <ImageAvatar size={avatarSize} src={avatar} />
+  ) : (
+    <AvatarCharacter size={avatarSize} username={username} />
+  )
 }
 
 Avatar.propTypes = {

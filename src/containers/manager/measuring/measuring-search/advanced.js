@@ -1,5 +1,5 @@
 import React from 'react'
-import { Form as FormStyle, Input, Button, Row, Col, Icon } from 'antd'
+import { Form as FormStyle, Input, Button, Icon } from 'antd'
 import PropTypes from 'prop-types'
 import { autobind } from 'core-decorators'
 import { mapPropsToFields } from 'utils/form'
@@ -63,7 +63,10 @@ export default class MeasuringSearchAdvancedForm extends React.PureComponent {
     return (
       <Sticky>
         {props => (
-          <StyleWrapper className="fadeInDown animated" style={{ ...props.style, top: '69.77px', zIndex: 10 }}>
+          <StyleWrapper
+            className="fadeInDown animated"
+            style={{ ...props.style, top: '69.77px', zIndex: 10 }}
+          >
             <Grid>
               <Form onSubmit={this.changeSearch}>
                 <FormItem>

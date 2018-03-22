@@ -5,9 +5,7 @@ export function getStationAutos(
   { page = 1, itemPerPage = 10 },
   { address, stationType, name }
 ) {
-  var url = `${STATION_AUTO_API}/station-auto?page=${page}&itemPerPage=${
-    itemPerPage
-  }`
+  var url = `${STATION_AUTO_API}/station-auto?page=${page}&itemPerPage=${itemPerPage}`
   if (address) url += `&address=${address}`
   if (stationType) url += `&stationType=${stationType}`
   if (name) url += `&name=${name}`

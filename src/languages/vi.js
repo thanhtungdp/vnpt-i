@@ -1,4 +1,18 @@
 export default {
+  login: {
+    title: 'Đăng nhập',
+    form: {
+      username: {
+        label: 'Email',
+        placeholder: 'user@example.com'
+      },
+      password: {
+        label: 'Mật khẩu',
+        placeholder: '********'
+      },
+      buttonLogin: 'Đăng nhập'
+    }
+  },
   changePassword: {
     form: {
       oldPassword: {

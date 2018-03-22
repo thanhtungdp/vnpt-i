@@ -9,20 +9,25 @@ const HeadingWrapper = styled.div`
   align-items: center;
 `
 const H4 = styled.h4`
-  font-size: 18px;
+  font-size: ${props => props.fontSize}px;
   margin-bottom: 0px;
   font-weight: 600;
 `
 
 export default class Heading extends React.PureComponent {
   static propTypes = {
-    rightChildren: PropTypes.any
+    rightChildren: PropTypes.any,
+    fontSize: PropTypes.number
+  }
+
+  static defaultProps = {
+    fontSize: 18
   }
 
   render() {
     return (
       <HeadingWrapper>
-        <H4>{this.props.children}</H4>
+        <H4 fontSize={this.props.fontSize}>{this.props.children}</H4>
         {this.props.rightChildren}
       </HeadingWrapper>
     )

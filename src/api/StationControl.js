@@ -1,5 +1,5 @@
 import { STATION_CONTROL_API } from '../config'
-import { deleteFetch, getFetch, postFetch, putFetch } from '../utils/fetch'
+import { getFetch, postFetch, putFetch } from '../utils/fetch'
 
 //Lấy thông tin điều khiển của trạm theo mã trạm
 export function getStationControl(key) {

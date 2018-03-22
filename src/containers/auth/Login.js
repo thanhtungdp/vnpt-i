@@ -6,32 +6,42 @@ import { reduxForm, Field } from 'redux-form'
 import { Container } from 'reactstrap'
 import swal from 'sweetalert2'
 import { withRouter } from 'react-router'
+import Heading from 'components/elements/heading'
+import createLang from 'hoc/create-lang'
 import { InputLabel, createValidateComponent } from 'components/elements'
 import Button from 'components/elements/button'
+import Clearfix from 'components/elements/clearfix'
 import { userLogin } from 'redux/actions/authAction'
 
 const FInput = createValidateComponent(InputLabel)
 
 const Form = styled.form`
-  width: 600px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 24px;
-`
-
-const Logo = styled.img`
-  height: 70px;
-  width: auto;
+  width: 450px;
   margin-left: auto;
   margin-right: auto;
   margin-top: 100px;
-  display: block;
+  box-shadow: 0 2px 10px 0 rgba(238, 238, 238, 0.5);
+  background-color: #ffffff;
+  padding: 24px 32px;
 `
 
-const Clearfix = styled.div`
-  height: 24px;
+const Header = {
+  Wrapper: styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  `,
+  Logo: styled.img`
+    height: 36px;
+    width: auto;
+  `
+}
+
+const bodyStyle = `
+  body { background-color: #fafbfb;}
 `
 
+@createLang
 @withRouter
 @reduxForm({
   form: 'LoginForm'
@@ -69,34 +79,34 @@ export default class Login extends PureComponent {
   }
 
   render() {
+    const { t } = this.props.lang
     return (
       <Container>
-        <Logo src="/images/brand-logo.png" />
+        <style dangerouslySetInnerHTML={{ __html: bodyStyle }} />
         <Form onSubmit={this.props.handleSubmit(this.handleLogin.bind(this))}>
+          <Header.Wrapper>
+            <Heading fontSize={28}>{t('login.title')}</Heading>
+            <Header.Logo src="/images/logo/logo-text-enviro.png" />
+          </Header.Wrapper>
+          <Clearfix height={8} />
           <Field
-            label="Email"
-            placeholder="Email đăng nhập"
+            label={t('login.form.email.label')}
+            placeholder={t('login.form.email.placeholder')}
             name="email"
             icon="fa fa-user"
             component={FInput}
-            size="lg"
           />
-          <Clearfix />
+          <Clearfix height={16} />
           <Field
-            label="Password"
+            label={t('login.form.password.label')}
+            placeholder={t('login.form.password.placeholder')}
             type="password"
             name="password"
             component={FInput}
-            size="lg"
           />
-          <Clearfix />
-          <Button
-            isLoading={this.props.submitting}
-            size="lg"
-            block
-            color="primary"
-          >
-            Đăng nhập
+          <Clearfix height={16} />
+          <Button isLoading={this.props.submitting} block color="primary">
+            {t('login.form.buttonLogin')}
           </Button>
         </Form>
       </Container>

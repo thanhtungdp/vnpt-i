@@ -14,11 +14,10 @@ import {
   XAxis,
   YAxis,
   LineSeries,
-  Navigator,
   Tooltip
 } from 'react-jsx-highstock'
 import Highcharts from 'highcharts/highstock'
-import dateFormat from 'dateformat'
+// import dateFormat from 'dateformat'
 import roundTo from 'round-to'
 import createLanguageHoc, { langPropTypes } from 'hoc/create-lang'
 
@@ -156,7 +155,6 @@ class AvgDataForm extends React.Component {
         }
       }
     ]
-    var currentState = this.state
     var column1s = this.state.measuringList.map(item => ({
       title: item.name + (item.unit ? '(' + item.unit + ')' : ''),
       dataIndex: `${item.key}`,
@@ -171,7 +169,7 @@ class AvgDataForm extends React.Component {
         // )
         //   color = currentState.config.exceededColor
         //   style={{ color: color }}
-        return <div>{value && value != '' && roundTo(value, 2)}</div>
+        return <div>{value && value !== '' && roundTo(value, 2)}</div>
       }
     }))
     columns.push(...column1s)

@@ -1,20 +1,20 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
-import { Table, Divider, Button, Icon, Form } from 'antd'
+import { Divider, Button, Icon, Form } from 'antd'
 import StationAutoApi from 'api/StationAuto'
 import PageContainer from 'layout/default-sidebar-layout/PageContainer'
 import slug from 'constants/slug'
 import { autobind } from 'core-decorators'
 import createManagerList from 'hoc/manager-list'
 import createManagerDelete from 'hoc/manager-delete'
-import Breadcrumb from '../breadcrumb'
-import { mapPropsToFields } from '../../../../utils/form'
+import { mapPropsToFields } from 'utils/form'
+import createLanguageHoc, { langPropTypes } from 'hoc/create-lang'
 import StationAutoSearchForm from '../station-auto-search'
-import createLanguageHoc, { langPropTypes } from '../../../../hoc/create-lang'
-import Heading from 'components/elements/heading'
-import { getStationTypes } from 'api/CategoryApi'
-import { getStationAutos } from 'api/StationAuto'
+import Breadcrumb from '../breadcrumb'
+// import Heading from 'components/elements/heading'
+// import { getStationTypes } from 'api/CategoryApi'
+// import { getStationAutos } from 'api/StationAuto'
 
 import DynamicTable from 'components/elements/dynamic-table'
 
@@ -55,52 +55,6 @@ export default class StationAutoList extends React.Component {
     )
   }
 
-  getColumns() {
-    const { t } = this.props.lang
-    return [
-      {
-        title: t('stationAutoManager.form.key.label'),
-        dataIndex: 'key',
-        key: 'key'
-      },
-      {
-        title: t('stationAutoManager.form.name.label'),
-        dataIndex: 'name',
-        key: 'name'
-      },
-      {
-        title: t('stationAutoManager.form.type.label'),
-        dataIndex: 'stationType',
-        key: 'stationType'
-      },
-      {
-        title: t('stationAutoManager.form.address.label'),
-        dataIndex: 'address',
-        key: 'address'
-      },
-      {
-        title: '',
-        key: 'action',
-        render: (text, record) => (
-          <span>
-            <Link to={slug.stationAuto.editWithKey + '/' + record.key}>
-              {' '}
-              Edit{' '}
-            </Link>
-            <Divider type="vertical" />
-            <a
-              onClick={() =>
-                this.props.onDeleteItem(record.key, this.props.fetchData)
-              }
-            >
-              Delete
-            </a>
-          </span>
-        )
-      }
-    ]
-  }
-
   renderSearch() {
     return (
       <StationAutoSearchForm
@@ -123,69 +77,82 @@ export default class StationAutoList extends React.Component {
   getRows() {
     let stationTypeArr = []
     //sort dataSource
-    let sourceSorted = this.props.dataSource.sort(function (a, b) {
-      if (a.stationType.key < b.stationType.key) return -1;
-      if (a.stationType.key > b.stationType.key) return 1;
-      return 0;
+    let sourceSorted = this.props.dataSource.sort(function(a, b) {
+      if (a.stationType.key < b.stationType.key) return -1
+      if (a.stationType.key > b.stationType.key) return 1
+      return 0
     })
 
     let stationCount = {}
     for (var i = 0; i < sourceSorted.length; i++) {
-      stationCount[sourceSorted[i].stationType.key] =
-        (stationCount[sourceSorted[i].stationType.key]) ?
-          stationCount[sourceSorted[i].stationType.key] + 1 : 1
+      stationCount[sourceSorted[i].stationType.key] = stationCount[
+        sourceSorted[i].stationType.key
+      ]
+        ? stationCount[sourceSorted[i].stationType.key] + 1
+        : 1
     }
 
     //logic return groupRow or groupRow and Row
-    let result = [].concat.apply([], sourceSorted.map((row, index) => {
-      //content Row
-      let resultRow = [
-        {
-          content: <span>&emsp;{row.key}</span>
-        },
-        {
-          content: <span>{row.name}</span>
-        },
-        {
-          content: <span>{row.address}</span>
-        },
-        {
-          content: (
-            <div>
-              <span>
-                <Link to={slug.stationAuto.editWithKey + '/' + row.key}>
-                  {' '}
-                  Edit{' '}
-                </Link>
-                <Divider type="vertical" />
-                <a
-                  onClick={() =>
-                    this.props.onDeleteItem(row.key, this.props.fetchData)
-                  }
-                >
-                  Delete
-            </a>
-              </span>
-            </div>
-          )
+    let result = [].concat.apply(
+      [],
+      sourceSorted.map((row, index) => {
+        //content Row
+        let resultRow = [
+          {
+            content: <span>&emsp;{row.key}</span>
+          },
+          {
+            content: <span>{row.name}</span>
+          },
+          {
+            content: <span>{row.address}</span>
+          },
+          {
+            content: (
+              <div>
+                <span>
+                  <Link to={slug.stationAuto.editWithKey + '/' + row.key}>
+                    {' '}
+                    Edit{' '}
+                  </Link>
+                  <Divider type="vertical" />
+                  <a
+                    onClick={() =>
+                      this.props.onDeleteItem(row.key, this.props.fetchData)
+                    }
+                  >
+                    Delete
+                  </a>
+                </span>
+              </div>
+            )
+          }
+        ]
+        //check if Group exist or not
+        if (row.stationType && stationTypeArr.indexOf(row.stationType.key) > -1)
+          return [resultRow]
+        else {
+          stationTypeArr.push(row.stationType.key)
+          return [
+            [
+              {
+                content: (
+                  <div>
+                    <strong>
+                      {row.stationType.name}{' '}
+                      {stationCount[row.stationType.key]
+                        ? '(' + stationCount[row.stationType.key] + ')'
+                        : ''}
+                    </strong>
+                  </div>
+                )
+              }
+            ],
+            resultRow
+          ]
         }
-      ]
-      //check if Group exist or not
-      if (row.stationType && stationTypeArr.indexOf(row.stationType.key) > -1)
-        return [resultRow]
-      else {
-        stationTypeArr.push(row.stationType.key)
-        return [
-          [{
-            content: <div>
-              <strong>{row.stationType.name} {stationCount[row.stationType.key] ? "(" + stationCount[row.stationType.key] + ")" : ""}</strong>
-            </div>
-          }],
-          resultRow]
-      }
-      return [resultRow]
-    }
-    ))
+      })
+    )
     return result
   }
 
@@ -201,7 +168,6 @@ export default class StationAutoList extends React.Component {
           onSetPage={this.props.onChangePage}
           isLoading={this.props.isLoading}
         />
-
       </PageContainer>
     )
   }

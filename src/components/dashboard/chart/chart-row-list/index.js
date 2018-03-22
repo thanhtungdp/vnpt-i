@@ -25,7 +25,7 @@ export class ChartRowList extends React.PureComponent {
   render() {
     return (
       <ChartRowListWrapper>
-        {this.props.data.map((item) => (
+        {this.props.data.map(item => (
           <ChartRowWrapper key={item.key}>
             <ChartRow {...item} />
           </ChartRowWrapper>

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Form as FormStyle, Input, Button, Row, Col, Icon } from 'antd'
+import { Form as FormStyle, Input, Button, Icon } from 'antd'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import { autobind } from 'core-decorators'
@@ -28,7 +28,7 @@ const Clearfix = styled.div`
 
 const SelectWrapper = styled.div`
   width: 140px;
-  margin-right:5px;
+  margin-right: 5px;
 `
 
 @FormStyle.create({
@@ -73,9 +73,7 @@ export default class StationAutoSearchForm extends React.PureComponent {
       <Form className="fadeIn animated" onSubmit={this.changeSearch}>
         <FormItem>
           {getFieldDecorator(`name`)(
-            <Input
-              placeholder={t('stationAutoManager.form.name.label')}
-            />
+            <Input placeholder={t('stationAutoManager.form.name.label')} />
           )}
         </FormItem>
         <Clearfix />
