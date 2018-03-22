@@ -14,28 +14,24 @@ import PropTypes from 'prop-types'
 const ChartWrapper = styled.div``
 
 @autobind
-export default class ChartOverview extends React.PureComponent {
+export default class ChartRowToChart extends React.PureComponent {
   static propTypes = {
     dataLines: PropTypes.object
   }
+
   getDataLines() {
-    let lines = []
-    let dataLines = this.props.dataLines
-    for (let item in dataLines) {
-      let line = (
+    return Object.keys(this.props.dataLines)
+      .map(key => this.props.dataLines[key])
+      .map(line => (
         <LineSeries
-          id={dataLines[item].key}
-          name={
-            dataLines[item].name +
-            (dataLines[item].unit ? '(' + dataLines[item].unit + ')' : '')
-          }
-          data={dataLines[item].data}
+          id={line.key}
+          key={line.key}
+          name={line.name + (line.unit ? '(' + line.unit + ')' : '')}
+          data={line.data}
         />
-      )
-      lines.push(line)
-    }
-    return lines
+      ))
   }
+
   render() {
     return (
       <ChartWrapper>
