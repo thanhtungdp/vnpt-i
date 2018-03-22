@@ -123,8 +123,6 @@ export class ChartSummary extends React.Component {
   // }
 
   componentDidMount() {
-    console.log('firrst load')
-    console.log(this.props.stationList)
     if (this.props.stationList.length > 0) {
       this.changeItem(this.props.stationList[0])
     }
