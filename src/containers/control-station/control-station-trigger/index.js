@@ -1,5 +1,5 @@
 import React from 'react'
-import { Form, Tabs, Icon, Button, Row, Col } from 'antd'
+import { Form, Button, Row, Col } from 'antd'
 import PropTypes from 'prop-types'
 import { autobind } from 'core-decorators'
 import { mapPropsToFields } from 'utils/form'
@@ -95,7 +95,7 @@ export default class ControlStationTrigger extends React.PureComponent {
   }
 
   render() {
-    const { form: { getFieldDecorator }, lang: { t } } = this.props
+    const { form: { getFieldDecorator } } = this.props
     return (
       <Form>
         <Row gutter={16}>
@@ -155,7 +155,7 @@ export default class ControlStationTrigger extends React.PureComponent {
           </Col>
         </Row>
         {console.log(this.props, this.state.autoControl, 'tessd')}
-        {this.state.autoControl == 0 ? (
+        {this.state.autoControl === 0 ? (
           <div>
             <Row gutter={50} type="flex" justify="center">
               <Col span={12}>

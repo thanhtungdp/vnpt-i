@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import Page from '@atlaskit/page'
 import BreadcrumbBar from 'shared/breadcrumb/BreadcrumbBar'
 import { SHAPE } from 'themes/color'
 import Clearfix from 'components/elements/clearfix'
@@ -71,6 +70,7 @@ export default class PageContainer extends React.PureComponent {
     return (
       <StickyContainer>
         <PageBodyWrapper color={this.props.backgroundColor}>
+          <style type="text/css" dangerouslySetInnerHTML={{__html: 'body{background-color: #fafbfb;}'}}></style>
           {!this.props.hideTitle ? this.renderHeader() : null}
           {this.props.headerBottom}
           <Clearfix height={16} />

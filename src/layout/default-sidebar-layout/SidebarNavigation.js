@@ -70,12 +70,14 @@ export default class DefaultSidebarNavigation extends React.Component {
       ? () => this.stackPush(item.childMenu)
       : () => console.log(`Link item clicked: '${item.component.props.text}'`)
     const text = item.component.props.text
+    //const itemHref = item.component.props.href
+    const pathname = this.props.location.pathname
+    //        (pathname !== '/' && pathname.indexOf(itemHref) > -1)
     return React.cloneElement(item.component, {
       key: text,
       onClick,
       isSelected:
-        item.url === this.props.location.pathname ||
-        this.props.location.pathname.indexOf(item.component.props.href) > -1 ||
+        item.url === pathname ||
         // check navigation parent index
         (navigationIndex > -1
           ? navigationRouterStack[navigationIndex].component.props.text === text

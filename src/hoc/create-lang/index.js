@@ -5,7 +5,7 @@ import objectPath from 'object-path'
 import { connectAutoDispatch } from 'redux/connect'
 import { changeLanguage } from 'redux/actions/languageAction'
 import { autobind } from 'core-decorators'
-import ejs from 'ejs'
+import dot from 'dot'
 
 // eslint-disable-next-line
 export const langPropTypes = PropTypes.shape({
@@ -20,7 +20,8 @@ export function translate(key, params = {}, isParse = true) {
       : global.currentLanguage
   let translated = objectPath.get(languageData, key)
   if (translated && isParse) {
-    return ejs.render(translated, params)
+    const tempFn = dot.template(translated)
+    return tempFn(params)
   } else return translated ? translated : ''
 }
 
@@ -33,17 +34,16 @@ const createLanguageHoc = Component => {
     { changeLanguage }
   )
   @autobind
-  class LanguageHoc extends React.PureComponent {
+  class LanguageHoc extends React.Component {
     static propTypes = {
       changeLanguage: PropTypes.func
     }
 
-    static getInitialProps = Component.getInitialProps
-
     translate(key, params = {}, isParse = true) {
       let translated = objectPath.get(this.props.languageData, key)
       if (translated && isParse) {
-        return ejs.render(translated, params)
+        const tempFn = dot.template(translated)
+        return tempFn(params)
       } else return translated ? translated : ''
     }
 

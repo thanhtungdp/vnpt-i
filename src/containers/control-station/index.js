@@ -50,7 +50,7 @@ export default class ControlStation extends React.PureComponent {
         configTotal: record_info.TongChai,
         total: record_info.TongChai,
         totalTaken: record_info.ChaiDaLay,
-        typeControl: record_info.ThuCong == true ? 1 : 0,
+        typeControl: record_info.ThuCong === true ? 1 : 0,
         amount_get: record_info.ChaiCanLay,
         timer:
           record_info.HenGio === null ? moment() : moment(record_info.HenGio),
@@ -63,7 +63,7 @@ export default class ControlStation extends React.PureComponent {
       isLoaded: true,
       isTriggerAuto: this.getTriggerAuto(record_info.HenGio),
       isTriggerExceeded:
-        record_info.LayMauVuotNguong == null
+        record_info.LayMauVuotNguong === null
           ? false
           : record_info.LayMauVuotNguong
     })
@@ -102,9 +102,9 @@ export default class ControlStation extends React.PureComponent {
   }
 
   onTabClick(tabkey) {
-    if (tabkey == 1) {
+    if (tabkey === 1) {
       this.loadData()
-    } else if (tabkey == 2) {
+    } else if (tabkey === 2) {
       this.getHistory()
     }
   }

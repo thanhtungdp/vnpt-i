@@ -48,7 +48,7 @@ export default class ControlStationConfig extends PureComponent {
   }
 
   render() {
-    const { form: { getFieldDecorator }, lang: { t } } = this.props
+    const { form: { getFieldDecorator } } = this.props
     return (
       <form>
         <Row gutter={16}>

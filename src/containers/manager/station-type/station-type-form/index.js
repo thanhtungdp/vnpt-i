@@ -1,16 +1,23 @@
 import React from 'react'
-import { Form, Input, Button, Row, Col, Checkbox, Upload, Icon, Modal } from 'antd'
+import {
+  Form,
+  Input,
+  Button,
+  Row,
+  Col,
+  Checkbox,
+  Upload,
+  Icon,
+  Modal
+} from 'antd'
 import PropTypes from 'prop-types'
 import { autobind } from 'core-decorators'
 import { mapPropsToFields } from 'utils/form'
-import { STATION_TYPE_API } from 'config'
 import createLanguageHoc, { langPropTypes } from 'hoc/create-lang'
 import swal from 'sweetalert2'
 import MediaApi from 'api/MediaApi'
 
 const FormItem = Form.Item
-
-const urlUpdate = STATION_TYPE_API + '/station-type/upload'
 
 @Form.create({
   mapPropsToFields: mapPropsToFields
@@ -44,9 +51,18 @@ export default class StationTypeForm extends React.PureComponent {
         isAuto: values.isAuto,
         files: {},
         icon: {
-          large: this.state.largeImgList.length > 0 ? this.state.largeImgList[0].response : null,
-          normal: this.state.normalImgList.length > 0 ? this.state.normalImgList[0].response : null,
-          small: this.state.smallImgList.length > 0 ? this.state.smallImgList[0].response : null
+          large:
+            this.state.largeImgList.length > 0
+              ? this.state.largeImgList[0].response
+              : null,
+          normal:
+            this.state.normalImgList.length > 0
+              ? this.state.normalImgList[0].response
+              : null,
+          small:
+            this.state.smallImgList.length > 0
+              ? this.state.smallImgList[0].response
+              : null
         }
       }
 
@@ -55,13 +71,12 @@ export default class StationTypeForm extends React.PureComponent {
     })
   }
 
-  handlePreview = (file) => {
+  handlePreview = file => {
     this.setState({
       previewImage: file.url || file.thumbUrl,
-      previewVisible: true,
-    });
+      previewVisible: true
+    })
   }
-
 
   handleCancel = () => {
     this.setState({ previewVisible: false })
@@ -69,13 +84,13 @@ export default class StationTypeForm extends React.PureComponent {
 
   handleImageChange(type, fileList, file, event) {
     for (var i = 0; i < fileList.length; i++) {
-      if (fileList[i].thumbUrl != '') {
+      if (fileList[i].thumbUrl !== '') {
         fileList[i].status = 'done'
       }
     }
 
     //error
-    if (file.status == 'error') {
+    if (file.status === 'error') {
       fileList = []
       swal({
         title: 'upload image fail',
@@ -87,23 +102,26 @@ export default class StationTypeForm extends React.PureComponent {
   }
 
   renderButtonUpload(name) {
-    return <div>
-      <Icon type="plus" />
-      <div className="ant-upload-text">{name}</div>
-    </div>
+    return (
+      <div>
+        <Icon type="plus" />
+        <div className="ant-upload-text">{name}</div>
+      </div>
+    )
   }
 
   async componentWillMount() {
-    if (this.props.initialValues == null)
-      return
-    if (this.props.initialValues.icon == null)
-      return
+    if (this.props.initialValues == null) return
+    if (this.props.initialValues.icon == null) return
 
     //Set image Icon
     let largeImgList = []
     let normalImgList = []
     let smallImgList = []
-    if (this.props.initialValues.icon.large != null && this.props.initialValues.icon.large.file)
+    if (
+      this.props.initialValues.icon.large != null &&
+      this.props.initialValues.icon.large.file
+    )
       largeImgList.push({
         uid: -1,
         url: this.props.initialValues.icon.large.url,
@@ -111,7 +129,10 @@ export default class StationTypeForm extends React.PureComponent {
         status: 'done',
         response: this.props.initialValues.icon.large
       })
-    if (this.props.initialValues.icon.normal != null && this.props.initialValues.icon.normal.file)
+    if (
+      this.props.initialValues.icon.normal != null &&
+      this.props.initialValues.icon.normal.file
+    )
       normalImgList.push({
         uid: -1,
         url: this.props.initialValues.icon.normal.url,
@@ -119,7 +140,10 @@ export default class StationTypeForm extends React.PureComponent {
         status: 'done',
         response: this.props.initialValues.icon.normal
       })
-    if (this.props.initialValues.icon.small != null && this.props.initialValues.icon.small.file)
+    if (
+      this.props.initialValues.icon.small != null &&
+      this.props.initialValues.icon.small.file
+    )
       smallImgList.push({
         uid: -1,
         url: this.props.initialValues.icon.small.url,
@@ -133,13 +157,12 @@ export default class StationTypeForm extends React.PureComponent {
       normalImgList: normalImgList,
       smallImgList: smallImgList
     })
-
   }
 
   render() {
     const { getFieldDecorator } = this.props.form
     const { t } = this.props.lang
-    const { previewVisible, previewImage, fileList } = this.state
+    const { previewVisible, previewImage } = this.state
     const urlPhotoUpload = MediaApi.urlPhotoUploadWithDirectory('station-types')
     return (
       <Form onSubmit={this.handleSubmit}>
@@ -155,7 +178,7 @@ export default class StationTypeForm extends React.PureComponent {
                 ]
               })(
                 <Input placeholder={t('stationTypeManager.form.key.label')} />
-                )}
+              )}
             </FormItem>
           </Col>
           <Col span={12}>
@@ -169,7 +192,7 @@ export default class StationTypeForm extends React.PureComponent {
                 ]
               })(
                 <Input placeholder={t('stationTypeManager.form.name.label')} />
-                )}
+              )}
             </FormItem>
           </Col>
         </Row>
@@ -187,10 +210,20 @@ export default class StationTypeForm extends React.PureComponent {
                       this.handleImageChange('large', fileList, file, event)
                     }}
                   >
-                    {this.state.largeImgList.length >= 1 ? null : this.renderButtonUpload('Large')}
+                    {this.state.largeImgList.length >= 1
+                      ? null
+                      : this.renderButtonUpload('Large')}
                   </Upload>
-                  <Modal visible={previewVisible} footer={null} onCancel={this.handleCancel}>
-                    <img alt="example" style={{ width: '100%' }} src={previewImage} />
+                  <Modal
+                    visible={previewVisible}
+                    footer={null}
+                    onCancel={this.handleCancel}
+                  >
+                    <img
+                      alt="example"
+                      style={{ width: '100%' }}
+                      src={previewImage}
+                    />
                   </Modal>
                 </div>
               </Col>
@@ -205,7 +238,9 @@ export default class StationTypeForm extends React.PureComponent {
                       this.handleImageChange('normal', fileList, file, event)
                     }}
                   >
-                    {this.state.normalImgList.length >= 1 ? null : this.renderButtonUpload('Normal')}
+                    {this.state.normalImgList.length >= 1
+                      ? null
+                      : this.renderButtonUpload('Normal')}
                   </Upload>
                 </div>
               </Col>
@@ -220,7 +255,9 @@ export default class StationTypeForm extends React.PureComponent {
                       this.handleImageChange('small', fileList, file, event)
                     }}
                   >
-                    {this.state.smallImgList.length >= 1 ? null : this.renderButtonUpload('Small')}
+                    {this.state.smallImgList.length >= 1
+                      ? null
+                      : this.renderButtonUpload('Small')}
                   </Upload>
                 </div>
               </Col>

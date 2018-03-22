@@ -7,6 +7,8 @@ import { Menu, Dropdown, Icon } from 'antd'
 import TableList from './TableList'
 import Chart from './Chart'
 import slug from 'constants/slug'
+import { withHighcharts } from 'react-jsx-highstock'
+import Highcharts from 'highcharts'
 import { getDataStationAutos } from 'api/DataStationAutoApi'
 
 const ChartSummaryWrapper = styled.div``
@@ -34,7 +36,7 @@ const LinkSpan = styled.span`
 `
 
 @autobind
-export default class ChartSummary extends React.PureComponent {
+export class ChartSummary extends React.Component {
   static propTypes = {
     title: PropTypes.string,
     totalStation: PropTypes.number,
@@ -94,14 +96,6 @@ export default class ChartSummary extends React.PureComponent {
     this.setState({ dataLines })
   }
 
-  firstRowSelected(item) {
-    if (this.state.isFirstLoad) {
-      this.changeItem(item)
-      this.setState({ isFirstLoad: false })
-    }
-    return true
-  }
-
   rightChilren() {
     const dropdown = (
       <Menu>
@@ -122,29 +116,49 @@ export default class ChartSummary extends React.PureComponent {
     )
   }
 
+  // componentWillReceiveProps(nextProps) {
+  //   if (nextProps.stationList.length > this.props.stationList.length && this.props.stationList.length === 0) {
+  //     this.changeItem(this.props.stationList[0])
+  //   }
+  // }
+
+  componentDidMount() {
+    console.log('firrst load')
+    console.log(this.props.stationList)
+    if (this.props.stationList.length > 0) {
+      this.changeItem(this.props.stationList[0])
+    }
+  }
+
+  componentDidUpdate(nextProps) {
+    if (nextProps.stationList.length !== this.props.stationList.length) {
+      this.changeItem(this.props.stationList[0])
+    }
+  }
+
   render() {
     if (this.props.stationList.length > 0)
       return (
         <ChartSummaryWrapper>
           <Heading rightChildren={this.rightChilren()}>
-						{this.props.title} ({this.props.totalStation})
+            {this.props.title} ({this.props.totalStation})
           </Heading>
-          {this.firstRowSelected(this.props.stationList[0]) && (
-            <ChartWrapper>
-              <TableWidth>
-                <TableList
-                  onChangeItem={this.handleChangeItem}
-                  currentItem={this.state.currentItem}
-                  data={this.props.stationList}
-                />
-              </TableWidth>
-              <ChartWidth>
-                <Chart dataLines={this.state.dataLines} />
-              </ChartWidth>
-            </ChartWrapper>
-          )}
+          <ChartWrapper>
+            <TableWidth>
+              <TableList
+                onChangeItem={this.handleChangeItem}
+                currentItem={this.state.currentItem}
+                data={this.props.stationList}
+              />
+            </TableWidth>
+            <ChartWidth>
+              <Chart dataLines={this.state.dataLines} />
+            </ChartWidth>
+          </ChartWrapper>
         </ChartSummaryWrapper>
       )
-    return ""
+    return null
   }
 }
+
+export default withHighcharts(ChartSummary, Highcharts)

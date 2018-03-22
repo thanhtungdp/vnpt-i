@@ -148,6 +148,7 @@ module.exports = {
               plugins: [
                 'transform-decorators-legacy',
                 'react-hot-loader/babel',
+                ['styled-jsx/babel', { optimizeForSpeed: true }],
                 [
                   'module-resolver',
                   {

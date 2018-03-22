@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, Switch } from 'react-router-dom'
+import { Route } from 'react-router-dom'
 import { autobind } from 'core-decorators'
 import slug from 'constants/slug'
 

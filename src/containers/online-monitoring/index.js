@@ -9,7 +9,7 @@ import CategoriesApi from 'api/CategoryApi'
 import DataSearch from './data-search'
 import ControlStation from 'containers/control-station'
 import styled from 'styled-components'
-import playSound from 'utils/audio'
+// import playSound from 'utils/audio'
 import dateFormat from 'dateformat'
 import Clearfix from 'components/elements/clearfix'
 

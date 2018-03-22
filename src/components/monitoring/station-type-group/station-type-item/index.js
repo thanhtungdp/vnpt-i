@@ -8,8 +8,7 @@ import StationAutoList from './station-auto-list'
 // import Measuring from './Measuring'
 // import slug from 'constants/slug'
 
-const StationTypeWrapper = styled.div`
-`
+const StationTypeWrapper = styled.div``
 
 const LinkSpan = styled.span`
   color: #d4d4d4;

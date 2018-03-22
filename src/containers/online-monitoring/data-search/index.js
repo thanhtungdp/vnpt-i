@@ -1,5 +1,5 @@
 import React from 'react'
-import { Form, Input, Select, Button, Row, Col, Icon, DatePicker } from 'antd'
+import { Form, Select, Button, Row, Col, Icon, DatePicker } from 'antd'
 import PropTypes from 'prop-types'
 import { autobind } from 'core-decorators'
 import SelectStationType from 'components/elements/select-station-type'
@@ -11,7 +11,6 @@ import {
   HighchartsStockChart,
   Chart,
   Title,
-  Subtitle,
   Legend,
   XAxis,
   YAxis,
@@ -41,10 +40,6 @@ class DataSearch extends React.PureComponent {
     fromDate: '',
     toDate: '',
     formatDate: 'YYYY-MM-DD HH:mm'
-  }
-
-  constructor(props) {
-    super(props)
   }
 
   async componentWillMount() {

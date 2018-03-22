@@ -17,7 +17,6 @@ import SelectStationType from 'components/elements/select-station-type'
 import createLanguageHoc, { langPropTypes } from 'hoc/create-lang'
 import StationAutoApi from 'api/StationAuto'
 import moment from 'moment'
-import Input from '../../../components/elements/input'
 
 const FormItem = Form.Item
 
@@ -42,10 +41,6 @@ export default class SearchFrom extends React.PureComponent {
     formatDate: 'YYYY-MM-DD HH:mm',
     measuringSelected: [],
     measuringList: []
-  }
-
-  constructor(props) {
-    super(props)
   }
 
   async componentWillMount() {
