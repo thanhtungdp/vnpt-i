@@ -62,5 +62,4 @@ const createLanguageHoc = Component => {
   }
   return LanguageHoc
 }
-
 export default createLanguageHoc
