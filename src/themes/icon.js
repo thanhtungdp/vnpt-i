@@ -22,6 +22,6 @@ export default {
   graphLine: <GraphLineIcon label={''} />,
   book: <BookIcon label={''} />,
   hipchat: <HipchatIcon label={''} />,
-  person: <PersonIcon label={''}/>,
-  peopleGroup: <PeopleGroupIcon label={''}/>
+  person: <PersonIcon label={''} />,
+  peopleGroup: <PeopleGroupIcon label={''} />
 }

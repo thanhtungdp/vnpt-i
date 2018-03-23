@@ -2,15 +2,17 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { autobind } from 'core-decorators'
 import styled from 'styled-components'
+import Clearfix from 'components/elements/clearfix'
+import { SHAPE } from 'themes/color'
 
 const StationHeadItemWrapper = styled.div`
-  height: 29px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 `
 const TitleWrapper = styled.div`
   display: flex;
+  align-items: center;
 `
 const OrderNumber = styled.div`
   display: flex;
@@ -21,34 +23,22 @@ const OrderNumber = styled.div`
   border-radius: 7px;
   text-align: center;
   vertical-align: middle;
-  background-color: #f6f6f6;
+  background: linear-gradient(
+    135deg,
+    rgb(29, 137, 206) 0%,
+    rgb(86, 210, 243) 100%
+  );
+  font-weight: 700;
+  color: #ffffff;
 `
-const StationName = styled.div`
-  display: flex;
-  padding: 0 5px 0 15px;
-  align-items: center;
-  justify-content: center;
-  font-family: OpenSans;
-  font-size: 16px;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: normal;
-  letter-spacing: -0.2px;
-  text-align: left;
-  color: #3b3b3b;
+const StationName = styled.h4`
+  font-weight: 600;
+  font-size: 18px;
+  margin-top: 0px;
+  margin-bottom: 0px;
 `
 const ReceivedAt = styled.span`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: OpenSans;
-  font-size: 16px;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: normal;
-  letter-spacing: -0.2px;
-  text-align: left;
-  color: #3b3b3b;
+  color: ${SHAPE.GRAYTEXT};
 `
 
 const ActionWrapper = styled.div`
@@ -70,7 +60,9 @@ export default class StationAutoHead extends React.PureComponent {
       <StationHeadItemWrapper>
         <TitleWrapper>
           <OrderNumber>{orderNumber}</OrderNumber>
+          <Clearfix width={8} />
           <StationName>{name}</StationName>
+          <Clearfix width={8} />
           <ReceivedAt>{receivedAt ? ' - ' + receivedAt : ''}</ReceivedAt>
         </TitleWrapper>
         <ActionWrapper>

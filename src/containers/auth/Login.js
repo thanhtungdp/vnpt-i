@@ -38,7 +38,7 @@ const Header = {
 }
 
 const bodyStyle = `
-  body { background-color: #fafbfb;}
+  body { background: linear-gradient(135deg,#1d89ce 0%,#56d2f3 100%) !important; }
 `
 
 @createLang

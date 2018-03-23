@@ -10,6 +10,9 @@ const StationTypeListWrapper = styled.div`
   flex-wrap: wrap;
   margin-left: -8px;
   margin-right: -8px;
+  .stationTypeItem {
+    margin-bottom: 24px;
+  }
 `
 
 const StationTypeContainer = styled.div`
@@ -18,7 +21,7 @@ const StationTypeContainer = styled.div`
 `
 
 @autobind
-export default class SummaryList extends React.PureComponent {
+export default class StationTypeList extends React.PureComponent {
   static propTypes = {
     data: PropTypes.arrayOf(PropTypes.shape(StationTypeItem.propTypes))
   }
@@ -27,7 +30,11 @@ export default class SummaryList extends React.PureComponent {
     return (
       <StationTypeListWrapper>
         <StationTypeContainer>
-          {this.props.data.map(item => <StationTypeItem {...item} />)}
+          {this.props.data.map((item, index) => (
+            <div key={index} className="stationTypeItem">
+              <StationTypeItem {...item} />
+            </div>
+          ))}
         </StationTypeContainer>
       </StationTypeListWrapper>
     )
