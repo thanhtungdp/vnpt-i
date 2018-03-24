@@ -39,20 +39,22 @@ class MinutesDataSearch extends React.Component {
     }
   }
 
-  async changeSearch(query) {
+  async changeSearch(dataSearch) {
     this.setState({
       loading: true
     })
+
     var dataSources = await DataStationAutoApi.getDataStationAutos(
       {
         page: this.state.pagination.current,
         itemPerPage: this.state.pagination.pageSize
       },
-      query
+      dataSearch
     )
+
     let lines = []
     let dataLines = {}
-    query.measuringList.forEach(function(item) {
+    dataSearch.measuringData.forEach(function(item) {
       dataLines[item.key] = {
         key: item.key,
         name: item.name,
@@ -60,6 +62,7 @@ class MinutesDataSearch extends React.Component {
         data: []
       }
     })
+
     if (dataSources && dataSources.data) {
       let data = dataSources.data.map(item => item)
       data.sort((a, b) => {
@@ -92,11 +95,13 @@ class MinutesDataSearch extends React.Component {
       lines.push(line)
     }
 
+    console.log(dataSearch.measuringList)
+
     this.setState({
       dataSources: dataSources.data,
-      measuringList: query.measuringList,
+      measuringList: dataSearch.measuringData,
       lines,
-      query,
+      query: dataSearch,
       loading: false,
       pagination: {
         ...this.state.pagination,
@@ -178,11 +183,11 @@ class MinutesDataSearch extends React.Component {
 
   render() {
     return (
-      <PageContainer {...this.props.wrapperProps}>
+      <PageContainer {...this.props.wrapperProps} backgroundColor={'#fafbfb'}>
         <Breadcrumb items={['list']} />
         <SearchFrom
           initialValues={{}}
-          onChangeSearch={query => {
+          onSubmit={query => {
             this.setState(
               {
                 pagination: {
@@ -202,7 +207,6 @@ class MinutesDataSearch extends React.Component {
                   type="primary"
                   shape="circle"
                   icon="file-excel"
-                  size={18}
                   style={{ float: 'right', margin: '5px' }}
                   onClick={this.downloadData}
                 />

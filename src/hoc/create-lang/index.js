@@ -51,9 +51,16 @@ const createLanguageHoc = Component => {
       this.props.changeLanguage(lang)
     }
 
+    createNameSpace(namespace) {
+      return (key, params, isParse) => {
+        return this.translate(`${namespace}.${key}`, params, isParse)
+      }
+    }
+
     render() {
       const langProps = {
         t: this.translate,
+        createNameSpace: this.createNameSpace,
         locale: this.props.languageLocale,
         changeLanguage: this.changeLanguage
       }

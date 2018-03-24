@@ -1,7 +1,10 @@
 import React from 'react'
 import { autobind } from 'core-decorators'
 import PropTypes from 'prop-types'
+import styled from 'styled-components'
 import StationAuto from '../station-auto'
+
+const StationListWrapper = styled.div``
 
 @autobind
 export default class StationAutoList extends React.PureComponent {
@@ -10,11 +13,16 @@ export default class StationAutoList extends React.PureComponent {
   }
   render() {
     return (
-      <div>
-        {this.props.stationAutoList.map((item, index) => (
-          <StationAuto {...item} orderNumber={index + 1} />
-        ))}
-      </div>
+      <StationListWrapper>
+        {this.props.stationAutoList.map((item, index) => {
+          const { key, ...otherProps } = item
+          return (
+            <div className="stationAutoItem" key={key}>
+              <StationAuto {...otherProps} orderNumber={index + 1} />
+            </div>
+          )
+        })}
+      </StationListWrapper>
     )
   }
 }
