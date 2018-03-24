@@ -46,13 +46,10 @@ export default class OnlineMonitoring extends React.Component {
 
   async loadData() {
     let dataStationTypes = await CategoriesApi.getStationTypes(
-      { page: 1, itemPerPage: 100000 },
+      { page: 1, itemPerPage: 100 },
       {}
     )
-    let stationAutos = await StationAutoApi.getLastDataStationAuto(
-      { page: 1, itemPerPage: 1000000 },
-      {}
-    )
+    let stationAutos = await StationAutoApi.getLastLog()
     this.setState({
       stationTypes: dataStationTypes.data,
       stationAutos: stationAutos
