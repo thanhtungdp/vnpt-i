@@ -7,6 +7,13 @@ const HeadingWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  ${props =>
+    props.isBackground
+      ? `
+     background: linear-gradient(135deg,#1d89ce 0%,#56d2f3 100%);
+     padding: 16px 16px;
+  `
+      : null};
 `
 
 const H4 = styled.h4`
@@ -19,7 +26,8 @@ const H4 = styled.h4`
 export default class Heading extends React.PureComponent {
   static propTypes = {
     rightChildren: PropTypes.any,
-    fontSize: PropTypes.number
+    fontSize: PropTypes.number,
+    isBackground: PropTypes.bool
   }
 
   static defaultProps = {
@@ -29,7 +37,10 @@ export default class Heading extends React.PureComponent {
 
   render() {
     return (
-      <HeadingWrapper style={this.props.style}>
+      <HeadingWrapper
+        isBackground={this.props.isBackground}
+        style={this.props.style}
+      >
         <H4 color={this.props.textColor} fontSize={this.props.fontSize}>
           {this.props.children}
         </H4>

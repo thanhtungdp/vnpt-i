@@ -34,10 +34,7 @@ export default class HeadStypeType extends React.Component {
   render() {
     return (
       <Heading
-        style={{
-          background: 'linear-gradient(135deg,#1d89ce 0%,#56d2f3 100%)',
-          padding: '16px 16px'
-        }}
+        isBackground
         textColor="#ffffff"
         rightChildren={this.rightChildren()}
       >

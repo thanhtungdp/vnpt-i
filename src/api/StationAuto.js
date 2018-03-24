@@ -3,7 +3,7 @@ import { deleteFetch, getFetch, postFetch, putFetch } from '../utils/fetch'
 
 export function getStationAutos(
   { page = 1, itemPerPage = 10 },
-  { address, stationType, name }
+  { address, stationType, name } = {}
 ) {
   var url = `${STATION_AUTO_API}/station-auto?page=${page}&itemPerPage=${itemPerPage}`
   if (address) url += `&address=${address}`

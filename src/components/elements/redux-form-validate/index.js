@@ -2,6 +2,7 @@ import React from 'react'
 import { FormFeedback } from 'reactstrap'
 import styled from 'styled-components'
 import { isStateless } from 'utils'
+import Label from '../label'
 
 function getChildrenColor(props) {
   let defaultColor = ''
@@ -30,16 +31,19 @@ const View = styled.div`
     font-size: 14px;
   }
   ${props => getChildrenColor(props)};
+  .ant-select {
+    display: block;
+  }
 `
 
 export default function createValidateComponent(InputComponent) {
-  return class ValidateComponent extends React.PureComponent {
+  return class ValidateComponent extends React.Component {
     getInputRef() {
       return this.inputRef
     }
 
     render() {
-      const { input, meta, ...otherProps } = this.props
+      const { input, meta, label, ...otherProps } = this.props
       const refProps = !isStateless(InputComponent)
         ? {
             ref: ref => (this.inputRef = ref)
@@ -50,6 +54,9 @@ export default function createValidateComponent(InputComponent) {
           isError={meta.touched && meta.error}
           isWarning={meta.touched && meta.warning}
         >
+          {label ? (
+            <Label style={{ display: 'block' }}>{this.props.label}</Label>
+          ) : null}
           <InputComponent {...input} {...otherProps} {...refProps} />
           {meta.touched &&
             meta.error && <FormFeedback>{meta.error}</FormFeedback>}

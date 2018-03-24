@@ -3,13 +3,13 @@ import { getFetch } from '../utils/fetch'
 
 export function getDataStationAutos(
   { page = 1, itemPerPage = 10 },
-  { fromDate, toDate, key, advanced, measuringArray, isExceeded }
+  { fromDate, toDate, key, advanced, measuringList, isExceeded }
 ) {
   var url = `${DATA_STATION_AUTO_API}/data-station-auto/${key}?page=${page}&itemPerPage=${itemPerPage}`
   if (fromDate) url += `&from=${fromDate}`
   if (toDate) url += `&to=${toDate}`
   if (advanced) url += `&advanced=${JSON.stringify(advanced)}`
-  if (measuringArray) url += `&measuringList=${measuringArray.join(',')}`
+  if (measuringList) url += `&measuringList=${measuringList.join(',')}`
   if (isExceeded) url += `&isExceeded=${isExceeded}`
   return getFetch(url)
 }
@@ -47,13 +47,13 @@ export function getDataStationAutoExportAVg({
   fromDate,
   toDate,
   key,
-  measuringArray,
+  measuringList,
   type
 }) {
   var url = `${DATA_STATION_AUTO_API}/data-station-auto/${key}/export-avg?`
   if (fromDate) url += `&from=${fromDate}`
   if (toDate) url += `&to=${toDate}`
-  if (measuringArray) url += `&measuringList=${measuringArray.join(',')}`
+  if (measuringList) url += `&measuringList=${measuringList.join(',')}`
   if (type) url += `&type=${type}`
   window.location = url
 }
