@@ -42,6 +42,7 @@ const Container = styled.div`
 export default class SearchForm extends React.Component {
   state = {
     stationTypeKey: '',
+    measuringData: [],
     measuringList: []
   }
 
@@ -50,14 +51,15 @@ export default class SearchForm extends React.Component {
   }
 
   handleChangeStationAuto(stationAuto) {
-    const measuringList = stationAuto.measuringList.map(measuring => ({
-      value: measuring.key,
-      name: measuring.name
-    }))
+    const measuringData = stationAuto.measuringList
     this.setState({
-      measuringList
+      measuringList: measuringData.map(measuring => ({
+        value: measuring.key,
+        name: measuring.name
+      })),
+      measuringData: measuringData
     })
-    this.props.change('measuringList', measuringList.map(m => m.value))
+    this.props.change('measuringList', measuringData.map(m => m.key))
   }
 
   convertDateToString(date) {
@@ -70,7 +72,7 @@ export default class SearchForm extends React.Component {
       toDate: this.convertDateToString(values.toDate),
       key: values.stationAuto,
       measuringList: values.measuringList,
-      measuringData: this.state.measuringList,
+      measuringData: this.state.measuringData,
       isExceeded: values.isExceeded,
       advanced: []
     })
@@ -118,6 +120,20 @@ export default class SearchForm extends React.Component {
                 onChangeObject={this.handleChangeStationAuto}
               />
             </Col>
+            <Col span={12}>
+              <Field
+                label={t('measuringList.label')}
+                name="measuringList"
+                size="large"
+                showSearch
+                mode="multiple"
+                options={this.state.measuringList}
+                component={FSelectAnt}
+              />
+            </Col>
+          </Row>
+          <Clearfix height={16} />
+          <Row gutter={24}>
             <Col span={6}>
               <Field
                 label={t('fromDate.label')}
@@ -134,20 +150,6 @@ export default class SearchForm extends React.Component {
                 size="large"
                 component={FDatePicker}
                 dateFormat={DATE_FORMAT}
-              />
-            </Col>
-          </Row>
-          <Clearfix height={16} />
-          <Row gutter={24}>
-            <Col span={12}>
-              <Field
-                label={t('measuringList.label')}
-                name="measuringList"
-                size="large"
-                showSearch
-                mode="multiple"
-                options={this.state.measuringList}
-                component={FSelectAnt}
               />
             </Col>
             <Col span={6}>
