@@ -3,16 +3,17 @@ import { autobind } from 'core-decorators'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
 import { reduxForm, Field } from 'redux-form'
-import { Row, Col, Button, Switch } from 'antd'
-import DatePicker from 'components/elements/datetime-picker/index'
-import createLang from 'hoc/create-lang/index'
-import SelectStationType from 'components/elements/select-station-type/index'
-import SelectAnt from 'components/elements/select-ant/index'
-import Clearfix from 'components/elements/clearfix/index'
-import createValidateComponent from 'components/elements/redux-form-validate/index'
+import { Row, Col, Button, Switch, InputNumber } from 'antd'
+import DatePicker from 'components/elements/datetime-picker'
+import createLang from 'hoc/create-lang'
+import SelectStationType from 'components/elements/select-station-type'
+import SelectAnt from 'components/elements/select-ant'
+import Clearfix from 'components/elements/clearfix'
+import createValidateComponent from 'components/elements/redux-form-validate'
 import moment from 'moment'
-import { default as BoxShadowStyle } from 'components/elements/box-shadow/index'
-import Heading from 'components/elements/heading/index'
+import { default as BoxShadowStyle } from 'components/elements/box-shadow'
+import Heading from 'components/elements/heading'
+import AdvancedOperator from './AdvancedOperator'
 import SelectStationAuto from '../../common/select-station-auto'
 
 const FSelectStationType = createValidateComponent(SelectStationType)
@@ -74,9 +75,20 @@ export default class SearchForm extends React.Component {
       measuringList: values.measuringList,
       measuringData: this.state.measuringData,
       isExceeded: values.isExceeded,
-      advanced: []
+      advanced: values.advanced
+        ? values.advanced.filter(
+            item =>
+              item.measuringKey &&
+              item.operator &&
+              item.value !== null &&
+              typeof item.value !== 'undefined'
+          )
+        : []
     })
-    console.log(values)
+  }
+
+  handleResetAdvanced() {
+    this.props.array.removeAll('advanced')
   }
 
   render() {
@@ -161,6 +173,15 @@ export default class SearchForm extends React.Component {
               />
             </Col>
           </Row>
+          {this.state.measuringList.length > 0 ? (
+            <div>
+              <Clearfix height={16} />
+              <AdvancedOperator
+                onReset={this.handleResetAdvanced}
+                measuringList={this.state.measuringList}
+              />
+            </div>
+          ) : null}
         </Container>
       </SearchFormContainer>
     )
