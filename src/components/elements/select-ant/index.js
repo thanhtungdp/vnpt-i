@@ -17,7 +17,9 @@ export default class SelectAnt extends React.PureComponent {
   }
 
   getRealValue() {
-    if (!Array.isArray(this.props.value)) return []
+    if (this.props.mode === 'multiple') {
+      if (!Array.isArray(this.props.value)) return []
+    }
     return this.props.value
   }
 

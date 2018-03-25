@@ -9,11 +9,12 @@ import createLang from 'hoc/create-lang'
 import SelectStationType from 'components/elements/select-station-type'
 import SelectAnt from 'components/elements/select-ant'
 import Clearfix from 'components/elements/clearfix'
-import SelectStationAuto from './SelectStationAuto'
 import createValidateComponent from 'components/elements/redux-form-validate'
 import moment from 'moment'
 import { default as BoxShadowStyle } from 'components/elements/box-shadow'
 import Heading from 'components/elements/heading'
+import AdvancedOperator from './AdvancedOperator'
+import SelectStationAuto from '../../common/select-station-auto'
 
 const FSelectStationType = createValidateComponent(SelectStationType)
 const FSelectStationAuto = createValidateComponent(SelectStationAuto)
@@ -35,13 +36,14 @@ const Container = styled.div`
   }
 }))
 @reduxForm({
-  form: 'searchForm'
+  form: 'dataSearchForm'
 })
 @createLang
 @autobind
 export default class SearchForm extends React.Component {
   state = {
     stationTypeKey: '',
+    measuringData: [],
     measuringList: []
   }
 
@@ -50,14 +52,15 @@ export default class SearchForm extends React.Component {
   }
 
   handleChangeStationAuto(stationAuto) {
-    const measuringList = stationAuto.measuringList.map(measuring => ({
-      value: measuring.key,
-      name: measuring.name
-    }))
+    const measuringData = stationAuto.measuringList
     this.setState({
-      measuringList
+      measuringList: measuringData.map(measuring => ({
+        value: measuring.key,
+        name: measuring.name
+      })),
+      measuringData: measuringData
     })
-    this.props.change('measuringList', measuringList.map(m => m.value))
+    this.props.change('measuringList', measuringData.map(m => m.key))
   }
 
   convertDateToString(date) {
@@ -70,11 +73,22 @@ export default class SearchForm extends React.Component {
       toDate: this.convertDateToString(values.toDate),
       key: values.stationAuto,
       measuringList: values.measuringList,
-      measuringData: this.state.measuringList,
+      measuringData: this.state.measuringData,
       isExceeded: values.isExceeded,
-      advanced: []
+      advanced: values.advanced
+        ? values.advanced.filter(
+            item =>
+              item.measuringKey &&
+              item.operator &&
+              item.value !== null &&
+              typeof item.value !== 'undefined'
+          )
+        : []
     })
-    console.log(values)
+  }
+
+  handleResetAdvanced() {
+    this.props.array.removeAll('advanced')
   }
 
   render() {
@@ -99,7 +113,7 @@ export default class SearchForm extends React.Component {
         </Heading>
         <Container>
           <Row gutter={16}>
-            <Col span={6}>
+            <Col span={8}>
               <Field
                 label={t('stationType.label')}
                 name="stationType"
@@ -108,7 +122,7 @@ export default class SearchForm extends React.Component {
                 component={FSelectStationType}
               />
             </Col>
-            <Col span={6}>
+            <Col span={8}>
               <Field
                 label={t('stationAuto.label')}
                 name="stationAuto"
@@ -118,28 +132,7 @@ export default class SearchForm extends React.Component {
                 onChangeObject={this.handleChangeStationAuto}
               />
             </Col>
-            <Col span={6}>
-              <Field
-                label={t('fromDate.label')}
-                name="fromDate"
-                size="large"
-                component={FDatePicker}
-                dateFormat={DATE_FORMAT}
-              />
-            </Col>
-            <Col span={6}>
-              <Field
-                label={t('toDate.label')}
-                name="toDate"
-                size="large"
-                component={FDatePicker}
-                dateFormat={DATE_FORMAT}
-              />
-            </Col>
-          </Row>
-          <Clearfix height={16} />
-          <Row gutter={24}>
-            <Col span={12}>
+            <Col span={8}>
               <Field
                 label={t('measuringList.label')}
                 name="measuringList"
@@ -150,7 +143,28 @@ export default class SearchForm extends React.Component {
                 component={FSelectAnt}
               />
             </Col>
-            <Col span={6}>
+          </Row>
+          <Clearfix height={16} />
+          <Row gutter={24}>
+            <Col span={8}>
+              <Field
+                label={t('fromDate.label')}
+                name="fromDate"
+                size="large"
+                component={FDatePicker}
+                dateFormat={DATE_FORMAT}
+              />
+            </Col>
+            <Col span={8}>
+              <Field
+                label={t('toDate.label')}
+                name="toDate"
+                size="large"
+                component={FDatePicker}
+                dateFormat={DATE_FORMAT}
+              />
+            </Col>
+            <Col span={8}>
               <Field
                 label={t('isExceeded.label')}
                 name="isExceeded"
@@ -159,6 +173,15 @@ export default class SearchForm extends React.Component {
               />
             </Col>
           </Row>
+          {this.state.measuringList.length > 0 ? (
+            <div>
+              <Clearfix height={16} />
+              <AdvancedOperator
+                onReset={this.handleResetAdvanced}
+                measuringList={this.state.measuringList}
+              />
+            </div>
+          ) : null}
         </Container>
       </SearchFormContainer>
     )

@@ -32,7 +32,8 @@ function validate(values) {
 }
 
 @reduxForm({
-  form: 'ProfileUser'
+  form: 'ProfileUser',
+  validate
 })
 @autobind
 export class ProfileUserForm extends PureComponent {

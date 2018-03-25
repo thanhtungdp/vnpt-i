@@ -19,31 +19,31 @@ export function getExportData({
   toDate,
   key,
   advanced,
-  measuringArray,
+  measuringList,
   isExceeded
 }) {
   var url = `${DATA_STATION_AUTO_API}/data-station-auto/${key}/export-download?`
   if (fromDate) url += `&from=${fromDate}`
   if (toDate) url += `&to=${toDate}`
   if (advanced) url += `&advanced=${JSON.stringify(advanced)}`
-  if (measuringArray) url += `&measuringList=${JSON.stringify(measuringArray)}`
+  if (measuringList) url += `&measuringList=${measuringList.join(',')}`
   if (isExceeded) url += `&isExceeded=${isExceeded}`
   window.location = url
 }
 
-export function getDataStationAutoAVg(
+export function getDataStationAutoAvg(
   { page = 1, itemPerPage = 10 },
-  { fromDate, toDate, key, measuringArray, type }
+  { fromDate, toDate, key, measuringList, type }
 ) {
   var url = `${DATA_STATION_AUTO_API}/data-station-auto/${key}/avg?page=${page}&itemPerPage=${itemPerPage}`
   if (fromDate) url += `&from=${fromDate}`
   if (toDate) url += `&to=${toDate}`
-  if (measuringArray) url += `&measuringList=${measuringArray.join(',')}`
+  if (measuringList) url += `&measuringList=${measuringList.join(',')}`
   if (type) url += `&type=${type}`
   return getFetch(url)
 }
 
-export function getDataStationAutoExportAVg({
+export function getDataStationAutoExportAvg({
   fromDate,
   toDate,
   key,
@@ -61,6 +61,6 @@ export function getDataStationAutoExportAVg({
 export default {
   getDataStationAutos,
   getExportData,
-  getDataStationAutoAVg,
-  getDataStationAutoExportAVg
+  getDataStationAutoAvg,
+  getDataStationAutoExportAvg
 }

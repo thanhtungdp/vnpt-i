@@ -6,7 +6,7 @@ export default createBreadcrumb({
   list: {
     id: 'base',
     icon: '',
-    href: slug.dataSearch.minutesDataSearch,
-    name: 'Minutes data search'
+    href: slug.dataSearch.base,
+    name: 'Data search'
   }
 })
