@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import StationAutoHead from './Head'
 import MeasuringList from './measuring/measuring-list'
 import PropTypes from 'prop-types'
-import dateFormat from 'dateformat'
+import moment from 'moment'
 
 const StationAutoWrapper = styled.div`
   padding: 16px;
@@ -38,10 +38,11 @@ export default class StationAutoItem extends React.PureComponent {
   }
   render() {
     let { name, lastLog, orderNumber } = this.props
-    let receivedAt
+    let receivedAt = ''
     if (lastLog && lastLog.receivedAt) {
-      let date = new Date(lastLog.receivedAt)
-      receivedAt = dateFormat(date, 'dd/mm/yyyy HH:MM')
+      receivedAt = moment(lastLog.receivedAt)
+        .format('DD/MM/YYYY HH:MM')
+        .toString()
     }
     return (
       <StationAutoWrapper>
