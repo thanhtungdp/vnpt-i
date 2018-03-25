@@ -7,10 +7,7 @@ import PropTypes from 'prop-types'
 import dateFormat from 'dateformat'
 
 const StationAutoWrapper = styled.div`
-  padding: 16px 15px 16px 15px;
-  transition: all 0.2s linear;
-  margin-bottom: 16px;
-  height: 151px;
+  padding: 16px;
   background-color: #ffffff;
   box-shadow: 0 4px 10px 0 rgba(241, 241, 241, 0.5);
 `
@@ -18,14 +15,14 @@ const StationAutoWrapper = styled.div`
 @autobind
 export default class StationAutoItem extends React.PureComponent {
   static propTypes = {
-    orderNumber: PropTypes.string,
+    orderNumber: PropTypes.number,
     key: PropTypes.string,
     name: PropTypes.string,
     measuringList: PropTypes.array,
     lastLog: PropTypes.object
   }
 
-  measuring_lastLog() {
+  measuringLastLog() {
     let { measuringList, lastLog } = this.props
     if (!lastLog) return
     let measuringLogs = lastLog.measuringLogs
@@ -53,7 +50,7 @@ export default class StationAutoItem extends React.PureComponent {
           receivedAt={receivedAt}
           orderNumber={orderNumber}
         />
-        <MeasuringList data={this.measuring_lastLog()} />
+        <MeasuringList data={this.measuringLastLog()} />
       </StationAutoWrapper>
     )
   }

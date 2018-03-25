@@ -3,19 +3,17 @@ import PropTypes from 'prop-types'
 import { autobind } from 'core-decorators'
 import styled from 'styled-components'
 import { colorLevels } from 'constants/warningLevels'
+
 const MeasuringItemWrapper = styled.div`
   display: flex;
-  padding: 16px 25px;
+  padding: 16px 16px;
   flex-direction: column;
   justify-content: space-between;
-  width: 208.3px;
-  height: 77px;
   border-radius: 8px;
   border: solid 1px #f1f1f1;
 `
 const MeasuringItemText = styled.div`
   display: flex;
-  height: 22px;
   justify-content: space-between;
 `
 
@@ -30,23 +28,15 @@ const MeasuringName = styled.span`
   background-color: ${props => props.color};
 `
 const MeasuringValue = styled.span`
-  font-family: OpenSans;
   font-size: 16px;
-  letter-spacing: -0.2px;
   text-align: left;
   color: ${props => props.color};
 `
 const MeasuringLimit = styled.span`
-  font-family: OpenSans;
   font-size: 10px;
-  font-weight: normal;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: normal;
-  letter-spacing: -0.2px;
-  text-align: left;
   color: #b9b9b9;
 `
+
 @autobind
 export default class MeasuringItem extends React.PureComponent {
   static propTypes = {
@@ -58,11 +48,8 @@ export default class MeasuringItem extends React.PureComponent {
     warningLevel: PropTypes.string
   }
 
-  render() {
-    const { value, unit, name, minLimit, maxLimit, warningLevel } = this.props
-    let colorLevel = colorLevels.GOOD
-    if (warningLevel && colorLevels[warningLevel])
-      colorLevel = colorLevels[warningLevel]
+  getLimitText() {
+    const { unit, minLimit, maxLimit } = this.props
     let limitText = ''
     if (minLimit || maxLimit) {
       if (minLimit) limitText = 'Limit: > ' + minLimit
@@ -71,16 +58,27 @@ export default class MeasuringItem extends React.PureComponent {
         else limitText = 'Limit: < ' + maxLimit
       }
     }
-    if (limitText) limitText = limitText + ' ' + unit
+    return limitText ? `${limitText} ${unit}` : <span>&nbsp;</span>
+  }
+
+  getColorLevel() {
+    const { warningLevel } = this.props
+    if (warningLevel && colorLevels[warningLevel])
+      return colorLevels[warningLevel]
+    return colorLevels.GOOD
+  }
+
+  render() {
+    const { value, unit, name } = this.props
     return (
       <MeasuringItemWrapper>
         <MeasuringItemText>
-          <MeasuringValue color={colorLevel}>
+          <MeasuringValue color={this.getColorLevel()}>
             {value} {unit ? unit : ''}
           </MeasuringValue>
-          <MeasuringName color={colorLevel}>{name}</MeasuringName>
+          <MeasuringName color={this.getColorLevel()}>{name}</MeasuringName>
         </MeasuringItemText>
-        <MeasuringLimit>{limitText}</MeasuringLimit>
+        <MeasuringLimit>{this.getLimitText()}</MeasuringLimit>
       </MeasuringItemWrapper>
     )
   }

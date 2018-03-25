@@ -1,40 +1,42 @@
 import React, { PureComponent } from 'react'
 import { DatePicker } from 'antd'
-import Label from '../label'
 import styled from 'styled-components'
 import moment from 'moment'
 
 const Container = styled.div`
-  display: flex;
-  flex-direction: column;
   .react-datepicker-wrapper,
   .react-datepicker-wrapper .react-datepicker__input-container {
     width: 100%;
+  }
+  .ant-calendar-picker {
+    display: block;
   }
 `
 const dateFormat = 'DD/MM/YYYY'
 
 export default class CalendarCustom extends PureComponent {
+  getDateFormat() {
+    return this.props.dateFormat ? this.props.dateFormat : dateFormat
+  }
+
   getRealy() {
+    if (!this.props.value) return moment(new Date(), this.getDateFormat())
     if (typeof this.props.value === 'string') {
-      return moment(this.props.value, 'DD/MM/YYYY')
+      return moment(this.props.value, this.getDateFormat())
     } else return this.props.value
   }
 
   render() {
     //khi xử dung Form của Ant getFieldDecorator thì giá trị mặc định luôn là
     return (
-      <div style={{ width: '100%', display: 'block' }}>
-        <Label>{this.props.label}</Label>
-        <Container>
-          <DatePicker
-            value={this.getRealy()}
-            defaultValue={moment()}
-            onChange={date => this.props.onChange(date)}
-            format={dateFormat}
-          />
-        </Container>
-      </div>
+      <Container>
+        <DatePicker
+          {...this.props}
+          value={this.getRealy()}
+          onChange={date => this.props.onChange(date)}
+          format={this.getDateFormat()}
+        />
+      </Container>
     )
   }
 }

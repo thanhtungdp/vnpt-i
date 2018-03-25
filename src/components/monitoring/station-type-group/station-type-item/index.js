@@ -2,20 +2,13 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { autobind } from 'core-decorators'
 import styled from 'styled-components'
-import Heading from 'components/elements/heading'
-import { Menu, Dropdown, Icon } from 'antd'
+import { Sticky, StickyContainer } from 'react-sticky'
 import StationAutoList from './station-auto-list'
+import HeadStationType from './HeadStationType'
 // import Measuring from './Measuring'
 // import slug from 'constants/slug'
 
 const StationTypeWrapper = styled.div``
-
-const LinkSpan = styled.span`
-  color: #d4d4d4;
-  &:hover {
-    cursor: pointer;
-  }
-`
 
 @autobind
 export default class StationTypeSummary extends React.PureComponent {
@@ -24,37 +17,30 @@ export default class StationTypeSummary extends React.PureComponent {
     stationAutoList: PropTypes.array
   }
 
-  rightChildren() {
-    const dropdown = (
-      <Menu>
-        <Menu.Item key="0">
-          <a> Realtime Tracking</a>
-        </Menu.Item>
-        <Menu.Item key="1">
-          <a>View in map</a>
-        </Menu.Item>
-      </Menu>
-    )
-    return (
-      <Dropdown overlay={dropdown} trigger={['click']}>
-        <LinkSpan className="ant-dropdown-link">
-          <Icon type="right" /> View more
-        </LinkSpan>
-      </Dropdown>
-    )
-  }
-
   render() {
     const { stationType, stationAutoList } = this.props
+    if (stationAutoList.length === 0) return null
     return (
-      stationAutoList.length > 0 && (
+      <StickyContainer>
         <StationTypeWrapper>
-          <Heading rightChildren={this.rightChildren()}>
-            {stationType.name} ({stationAutoList.length})
-          </Heading>
+          <Sticky>
+            {props => (
+              <div
+                style={{
+                  ...props.style,
+                  top: props.isSticky ? '68.8px' : null,
+                  transition: 'all .3s linear'
+                }}
+              >
+                <HeadStationType>
+                  {stationType.name} ({stationAutoList.length})
+                </HeadStationType>
+              </div>
+            )}
+          </Sticky>
           <StationAutoList stationAutoList={stationAutoList} />
         </StationTypeWrapper>
-      )
+      </StickyContainer>
     )
   }
 }

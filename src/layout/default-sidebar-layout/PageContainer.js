@@ -36,6 +36,7 @@ export default class PageContainer extends React.PureComponent {
     title: PropTypes.string,
     backgroundColor: PropTypes.string,
     hideTitle: PropTypes.bool,
+    headerCustom: PropTypes.any,
     right: PropTypes.any
   }
 
@@ -53,11 +54,15 @@ export default class PageContainer extends React.PureComponent {
           >
             <BreadcrumbContainer>
               <Grid>
-                <HeaderFlex>
-                  <BreadcrumbBar />
-                  {this.props.center}
-                  {this.props.right}
-                </HeaderFlex>
+                {this.props.headerCustom ? (
+                  this.props.headerCustom
+                ) : (
+                  <HeaderFlex>
+                    <BreadcrumbBar />
+                    {this.props.center}
+                    {this.props.right}
+                  </HeaderFlex>
+                )}
               </Grid>
             </BreadcrumbContainer>
           </div>

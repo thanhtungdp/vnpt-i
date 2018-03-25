@@ -72,7 +72,7 @@ export class ChartSummary extends React.Component {
     })
     let dataSources = await getDataStationAutos(
       { page: 1, itemPerPage: 200 },
-      { key: stationAuto.key, measuringArray: measuringArray }
+      { key: stationAuto.key, measuringList: measuringArray }
     )
     if (dataSources) {
       let data = dataSources.data
@@ -115,12 +115,6 @@ export class ChartSummary extends React.Component {
       </Dropdown>
     )
   }
-
-  // componentWillReceiveProps(nextProps) {
-  //   if (nextProps.stationList.length > this.props.stationList.length && this.props.stationList.length === 0) {
-  //     this.changeItem(this.props.stationList[0])
-  //   }
-  // }
 
   componentDidMount() {
     if (this.props.stationList.length > 0) {

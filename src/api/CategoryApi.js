@@ -33,7 +33,7 @@ const urlStationType = CATEGORY_API + '/station-type/'
 
 export function getStationTypes(
   { page = 1, itemPerPage = 10 },
-  { key = null, name = null }
+  { key = null, name = null } = {}
 ) {
   var urlSearch = `${urlStationType}?page=${page}&itemPerPage=${itemPerPage}`
   if (key) urlSearch += `&key=${key}`

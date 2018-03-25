@@ -3,9 +3,9 @@ import { autobind } from 'core-decorators'
 import PageContainer from 'layout/default-sidebar-layout/PageContainer'
 import StationAutoApi from 'api/StationAuto'
 import CategoriesApi from 'api/CategoryApi'
-import Clearfix from 'components/elements/clearfix'
-import HeadItem from 'components/monitoring/head'
+import Header from 'components/monitoring/head'
 import StationTypeList from 'components/monitoring/station-type-group/station-type-list'
+import Clearfix from 'components/elements/clearfix'
 
 @autobind
 export default class Monitoring extends React.Component {
@@ -16,26 +16,29 @@ export default class Monitoring extends React.Component {
 
   async loadData() {
     this.setState({ isLoading: false })
-    let dataStationTypes = await CategoriesApi.getStationTypes(
-      { page: 1, itemPerPage: 10 },
-      {}
-    )
 
-    let stationAutos = await StationAutoApi.getLastLog()
-    let dataMonitoring = []
-    dataStationTypes.data.forEach(stationType => {
-      let stationAutoList = []
-      for (let i = 0; i < stationAutos.length; i++) {
-        let stationAuto = stationAutos[i]
-        if (stationAuto.stationType.key === stationType.key)
-          stationAutoList.push(stationAuto)
+    // Fetch data
+    let dataStationTypes = await CategoriesApi.getStationTypes({
+      page: 1,
+      itemPerPage: 10
+    })
+    let dataStationAutos = await StationAutoApi.getLastLog()
+
+    // Caculate data
+    let dataMonitoring = dataStationTypes.data.map(stationType => {
+      const stationAutoList = dataStationAutos.filter(
+        stationAuto => stationAuto.stationType.key === stationType.key
+      )
+      return {
+        stationType,
+        stationAutoList
       }
-      dataMonitoring.push({ stationType, stationAutoList })
     })
+
     this.setState({
-      data: dataMonitoring
+      data: dataMonitoring,
+      isLoading: true
     })
-    this.setState({ isLoading: true })
   }
 
   startTimer() {
@@ -58,10 +61,9 @@ export default class Monitoring extends React.Component {
 
   render() {
     return (
-      <PageContainer backgroundColor="#fafbfb" hideTitle>
-        <HeadItem />
-        <Clearfix />
+      <PageContainer backgroundColor="#fafbfb" headerCustom={<Header />}>
         <StationTypeList data={this.state.data} />
+        <Clearfix height={64} />
       </PageContainer>
     )
   }
