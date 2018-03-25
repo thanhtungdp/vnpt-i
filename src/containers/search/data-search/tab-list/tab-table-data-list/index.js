@@ -29,7 +29,7 @@ export default class TableDataList extends React.PureComponent {
       }
     }
     const columnsMeasurings = this.props.measuringList.map(measuring => ({
-      title: measuring.name,
+      title: `${measuring.name}(${measuring.unit})`,
       dataIndex: `measuringLogs.${measuring.key}`,
       key: measuring.key,
       render: value => {

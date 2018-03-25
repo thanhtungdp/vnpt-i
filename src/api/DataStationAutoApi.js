@@ -31,7 +31,7 @@ export function getExportData({
   window.location = url
 }
 
-export function getDataStationAutoAVg(
+export function getDataStationAutoAvg(
   { page = 1, itemPerPage = 10 },
   { fromDate, toDate, key, measuringList, type }
 ) {
@@ -43,7 +43,7 @@ export function getDataStationAutoAVg(
   return getFetch(url)
 }
 
-export function getDataStationAutoExportAVg({
+export function getDataStationAutoExportAvg({
   fromDate,
   toDate,
   key,
@@ -61,6 +61,6 @@ export function getDataStationAutoExportAVg({
 export default {
   getDataStationAutos,
   getExportData,
-  getDataStationAutoAVg,
-  getDataStationAutoExportAVg
+  getDataStationAutoAvg,
+  getDataStationAutoExportAvg
 }

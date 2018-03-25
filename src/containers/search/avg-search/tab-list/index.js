@@ -3,9 +3,9 @@ import { autobind } from 'core-decorators'
 import { Tabs, Button } from 'antd'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import BoxShadow from 'components/elements/box-shadow'
-import TabTableDataList from './tab-table-data-list'
-import TabChart from './tab-chart'
+import BoxShadow from 'components/elements/box-shadow/index'
+import TabTableDataList from './tab-table-data-list/index'
+import TabChart from './tab-chart/index'
 
 const TabeListWrapper = BoxShadow.extend`
   padding: 0px 16px 16px 16px;

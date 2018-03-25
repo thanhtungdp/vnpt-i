@@ -4,16 +4,16 @@ import styled from 'styled-components'
 import { connect } from 'react-redux'
 import { reduxForm, Field } from 'redux-form'
 import { Row, Col, Button, Switch } from 'antd'
-import DatePicker from 'components/elements/datetime-picker'
-import createLang from 'hoc/create-lang'
-import SelectStationType from 'components/elements/select-station-type'
-import SelectAnt from 'components/elements/select-ant'
-import Clearfix from 'components/elements/clearfix'
-import SelectStationAuto from './SelectStationAuto'
-import createValidateComponent from 'components/elements/redux-form-validate'
+import DatePicker from 'components/elements/datetime-picker/index'
+import createLang from 'hoc/create-lang/index'
+import SelectStationType from 'components/elements/select-station-type/index'
+import SelectAnt from 'components/elements/select-ant/index'
+import Clearfix from 'components/elements/clearfix/index'
+import createValidateComponent from 'components/elements/redux-form-validate/index'
 import moment from 'moment'
-import { default as BoxShadowStyle } from 'components/elements/box-shadow'
-import Heading from 'components/elements/heading'
+import { default as BoxShadowStyle } from 'components/elements/box-shadow/index'
+import Heading from 'components/elements/heading/index'
+import SelectStationAuto from '../../common/select-station-auto'
 
 const FSelectStationType = createValidateComponent(SelectStationType)
 const FSelectStationAuto = createValidateComponent(SelectStationAuto)
@@ -35,7 +35,7 @@ const Container = styled.div`
   }
 }))
 @reduxForm({
-  form: 'searchForm'
+  form: 'dataSearchForm'
 })
 @createLang
 @autobind
@@ -101,7 +101,7 @@ export default class SearchForm extends React.Component {
         </Heading>
         <Container>
           <Row gutter={16}>
-            <Col span={6}>
+            <Col span={8}>
               <Field
                 label={t('stationType.label')}
                 name="stationType"
@@ -110,7 +110,7 @@ export default class SearchForm extends React.Component {
                 component={FSelectStationType}
               />
             </Col>
-            <Col span={6}>
+            <Col span={8}>
               <Field
                 label={t('stationAuto.label')}
                 name="stationAuto"
@@ -120,7 +120,7 @@ export default class SearchForm extends React.Component {
                 onChangeObject={this.handleChangeStationAuto}
               />
             </Col>
-            <Col span={12}>
+            <Col span={8}>
               <Field
                 label={t('measuringList.label')}
                 name="measuringList"
@@ -134,7 +134,7 @@ export default class SearchForm extends React.Component {
           </Row>
           <Clearfix height={16} />
           <Row gutter={24}>
-            <Col span={6}>
+            <Col span={8}>
               <Field
                 label={t('fromDate.label')}
                 name="fromDate"
@@ -143,7 +143,7 @@ export default class SearchForm extends React.Component {
                 dateFormat={DATE_FORMAT}
               />
             </Col>
-            <Col span={6}>
+            <Col span={8}>
               <Field
                 label={t('toDate.label')}
                 name="toDate"
@@ -152,7 +152,7 @@ export default class SearchForm extends React.Component {
                 dateFormat={DATE_FORMAT}
               />
             </Col>
-            <Col span={6}>
+            <Col span={8}>
               <Field
                 label={t('isExceeded.label')}
                 name="isExceeded"

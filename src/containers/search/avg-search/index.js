@@ -2,18 +2,17 @@ import React from 'react'
 import { autobind } from 'core-decorators'
 import PageContainer from 'layout/default-sidebar-layout/PageContainer'
 import DataStationAutoApi from 'api/DataStationAutoApi'
-import Clearfix from 'components/elements/clearfix'
-import TabList from '../tab-list'
-import Breadcrumb from '../breadcrumb'
-import SearchFrom from '../search-form'
+import Clearfix from 'components/elements/clearfix/index'
+import TabList from './tab-list/index'
+import Breadcrumb from './breadcrumb'
+import SearchFrom from './search-form/index'
 
 @autobind
-export default class MinutesDataSearch extends React.Component {
+export default class AvgSearch extends React.Component {
   state = {
     dataStationAuto: [],
     measuringList: [],
     searchFormData: {},
-    lines: [],
     isLoading: false,
     isHaveData: false,
     pagination: {
@@ -32,7 +31,7 @@ export default class MinutesDataSearch extends React.Component {
       isHaveData: true
     })
 
-    var dataStationAuto = await DataStationAutoApi.getDataStationAutos(
+    var dataStationAuto = await DataStationAutoApi.getDataStationAutoAvg(
       {
         page: pagination.current,
         itemPerPage: pagination.pageSize
@@ -57,7 +56,7 @@ export default class MinutesDataSearch extends React.Component {
   }
 
   async handleExportExcel() {
-    DataStationAutoApi.getExportData(this.state.searchFormData)
+    DataStationAutoApi.getDataStationAutoExportAvg(this.state.searchFormData)
   }
 
   render() {

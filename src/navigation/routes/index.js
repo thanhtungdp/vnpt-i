@@ -11,9 +11,9 @@ import StationAutoRoute from 'containers/manager/station-auto'
 import StationTypeRoute from 'containers/manager/station-type'
 import OnlineMonitoring from 'containers/online-monitoring'
 import Map from 'containers/map'
-import MinutesDataSearch from '../../containers/data-search/minutes-data-search'
-import AvgDataForm from 'containers/avg-search/avg-data-form'
-import Monitoring from '/containers/monitoring'
+import DataSearch from 'containers/search/data-search'
+import AvgSearch from 'containers/search/avg-search'
+import Monitoring from 'containers/monitoring'
 import ChangePassword from 'containers/auth/change-password'
 
 @autobind
@@ -41,11 +41,8 @@ export default class RouteDefault extends React.Component {
           component={OnlineMonitoring}
         />
         <LayoutRoute path={slug.monitoring.base} component={Monitoring} />
-        <LayoutRoute
-          path={slug.dataSearch.base}
-          component={MinutesDataSearch}
-        />
-        <LayoutRoute path={slug.avgSearch.base} component={AvgDataForm} />
+        <LayoutRoute path={slug.dataSearch.base} component={DataSearch} />
+        <LayoutRoute path={slug.avgSearch.base} component={AvgSearch} />
         <Route path={slug.login} component={LoginRoute} />
       </div>
     )
