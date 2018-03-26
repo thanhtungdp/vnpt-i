@@ -25,6 +25,11 @@ const Form = styled.form`
   padding: 24px 32px;
 `
 
+const FloatRight = styled.div`
+  text-align: right;
+  padding-top: 8px;
+`
+
 const Header = {
   Wrapper: styled.div`
     display: flex;
@@ -96,6 +101,11 @@ export default class Login extends PureComponent {
             icon="fa fa-user"
             component={FInput}
           />
+          <FloatRight>
+            <Link to={slug.user.emailConfirm}>
+              {translate('resetPassword.key')}
+            </Link>
+          </FloatRight>
           <Clearfix height={16} />
           <Field
             label={t('login.form.password.label')}
