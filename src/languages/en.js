@@ -1,4 +1,8 @@
 export default {
+  error: {
+    require: 'Require',
+    email: 'Invalid email address'
+  },
   login: {
     title: 'Login',
     form: {
@@ -27,6 +31,15 @@ export default {
       },
       Success: 'Change password successfully'
     }
+  },
+  resetPassword: {
+    key: 'I forgot my password',
+    key2:
+      "Enter your email address and we'll send you an email with introduction to reset your password",
+    key3: 'Reset password',
+    key4: 'Resend code',
+    key5: 'Confirm',
+    key6: 'Send code',
   },
   profileUser: {
     success: 'Change infomation successfully'
