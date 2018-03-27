@@ -13,29 +13,42 @@ import { autobind } from 'core-decorators'
 const FInput = createValidateComponent(InputLabel)
 
 const Form = styled.form`
-  width: 600px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 24px;
-`
-const Logo = styled.img`
-  height: 70px;
-  width: auto;
+  width: 450px;
   margin-left: auto;
   margin-right: auto;
   margin-top: 100px;
-  display: block;
+  box-shadow: 0 2px 10px 0 rgba(238, 238, 238, 0.5);
+  background-color: #ffffff;
+  padding: 24px 32px;
 `
+
+const FloatRight = styled.div`
+  text-align: right;
+  padding-top: 8px;
+`
+
+const Header = {
+  Wrapper: styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  `,
+  Logo: styled.img`
+    height: 36px;
+    width: auto;
+  `
+}
+
 const Clearfix = styled.div`
-  height: 24px;
+  height: 16px;
+`
+
+const bodyStyle = `
+  body { background: linear-gradient(135deg,#1d89ce 0%,#56d2f3 100%) !important; }
 `
 
 function validate(values) {
   const errors = {}
-  if (values.oldPassword === undefined || !values.oldPassword) {
-    errors.oldPassword = translate('changePassword.form.oldPassword.error')
-  }
-
   if (values.newPassword === undefined || !values.newPassword) {
     errors.newPassword = translate('changePassword.form.newPassword.error')
   }
@@ -58,19 +71,34 @@ function validate(values) {
 @withRouter
 @autobind
 export default class ResetPassword extends PureComponent {
+
+  constructor(props){
+    super(props)
+    this.state = {
+      userInfo: {}
+    }
+  }
+
+  async componentWillMount(){
+    this.setState({
+      userInfo: this.props.history.location.state.data
+    })
+  }
+
   async handleLogin(values) {
+
+    console.log(this.state.userInfo,"user Data")
     if (values.newPassword !== values.newPasswordConfirmation) {
       swal({
         title: translate('changePassword.form.newPasswordConfirmation.error1'),
         type: 'error'
       })
     } else {
-      const auth = await AuthApi.getMe()
       const data = {
-        oldPassword: values.oldPassword,
-        newPassword: values.newPasswordConfirmation
+        _id: this.state.userInfo._id,
+        password: values.newPasswordConfirmation
       }
-      const record = await AuthApi.changePassword(auth.data._id, data)
+      const record = await AuthApi.PutResetPassword(data._id , data)
       if (record.error) {
         swal({
           type: 'error',
@@ -87,9 +115,10 @@ export default class ResetPassword extends PureComponent {
   }
 
   render() {
+    {console.log(this.props,"render()")}
     return (
       <Container>
-        <Logo src="/images/brand-logo.png" />
+        <style dangerouslySetInnerHTML={{ __html: bodyStyle }} />
         <Form onSubmit={this.props.handleSubmit(this.handleLogin.bind(this))}>
           <Field
             label="New password"

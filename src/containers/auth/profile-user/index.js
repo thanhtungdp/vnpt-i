@@ -141,7 +141,7 @@ export class ProfileUserForm extends PureComponent {
           </Col>
         </Row>
         <Clearfix />
-        <Button type="submit" block color="primary">
+        <Button controtertype="submit" block color="primary">
           Save
         </Button>
       </form>
