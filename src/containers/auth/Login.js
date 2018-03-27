@@ -4,6 +4,9 @@ import styled from 'styled-components'
 import { connectAutoDispatch } from 'redux/connect'
 import { reduxForm, Field } from 'redux-form'
 import { Container } from 'reactstrap'
+import { Link } from 'react-router-dom'
+import { translate } from 'hoc/create-lang'
+import slug from 'constants/slug'
 import swal from 'sweetalert2'
 import { withRouter } from 'react-router'
 import Heading from 'components/elements/heading'
@@ -23,6 +26,11 @@ const Form = styled.form`
   box-shadow: 0 2px 10px 0 rgba(238, 238, 238, 0.5);
   background-color: #ffffff;
   padding: 24px 32px;
+`
+
+const FloatRight = styled.div`
+  text-align: right;
+  padding-top: 8px;
 `
 
 const Header = {
@@ -108,6 +116,13 @@ export default class Login extends PureComponent {
           <Button isLoading={this.props.submitting} block color="primary">
             {t('login.form.buttonLogin')}
           </Button>
+          <Clearfix height={16} />
+          <FloatRight>
+            <Link to={slug.user.emailConfirm}>
+              {translate('resetPassword.key')}
+            </Link>
+          </FloatRight>
+
         </Form>
       </Container>
     )

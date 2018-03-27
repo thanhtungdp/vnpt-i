@@ -44,7 +44,11 @@ export default {
     edit: '/user/edit/:key',
     editWithKey: '/user/edit',
     changePassword: '/user/change-password',
-    profile: '/user/profile'
+    profile: '/user/profile',
+    emailConfirm: '/user/email-confirm',
+    codeConfirm: '/user/code-confirm/:key',
+    codeConfirmWithKey: '/user/code-confirm',
+    resetPassword: '/user/reset-password'
   },
   role: {
     list: '/role',

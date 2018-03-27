@@ -107,7 +107,7 @@ export default class MapNavigation extends React.PureComponent {
         {this.state.isLoaded &&
           this.state.stationType.map(stationType =>
             this.renderStationTypeList(stationType)
-          )})}
+          )}
       </NavigationLayout>
     )
   }
