@@ -20,7 +20,9 @@ export default {
     base: '/station-auto',
     create: '/station-auto/create',
     edit: '/station-auto/edit/:key',
-    editWithKey: '/station-auto/edit'
+    editWithKey: '/station-auto/edit',
+    config: '/station-auto/config/:key',
+    configWithKey: '/station-auto/config'
   },
   onlineMonitoring: {
     base: '/online-monitoring'

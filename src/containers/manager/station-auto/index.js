@@ -4,6 +4,7 @@ import slug from 'constants/slug'
 import StationAutoList from './station-auto-list'
 import StationAutoCreate from './station-auto-create'
 import StationAutoEdit from './station-auto-edit'
+import StationAutoConfig from './station-auto-config'
 
 export default props => (
   <Switch>
@@ -18,6 +19,7 @@ export default props => (
       render={matchProps => <StationAutoCreate {...matchProps} {...props} />}
     />
     <Route path={slug.stationAuto.edit} component={StationAutoEdit} />
+    <Route path={slug.stationAuto.config} component={StationAutoConfig} />
     {/*<Route path={slug.stationAuto.create} component={StationAutoCreate} />*/}
   </Switch>
 )
