@@ -22,23 +22,6 @@ const Form = styled.form`
   padding: 24px 32px;
 `
 
-const FloatRight = styled.div`
-  text-align: right;
-  padding-top: 8px;
-`
-
-const Header = {
-  Wrapper: styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  `,
-  Logo: styled.img`
-    height: 36px;
-    width: auto;
-  `
-}
-
 const Clearfix = styled.div`
   height: 16px;
 `
@@ -71,23 +54,18 @@ function validate(values) {
 @withRouter
 @autobind
 export default class ResetPassword extends PureComponent {
-
-  constructor(props){
-    super(props)
-    this.state = {
-      userInfo: {}
-    }
+  state = {
+    userInfo: {}
   }
 
-  async componentWillMount(){
+  async componentWillMount() {
     this.setState({
       userInfo: this.props.history.location.state.data
     })
   }
 
   async handleLogin(values) {
-
-    console.log(this.state.userInfo,"user Data")
+    console.log(this.state.userInfo, 'user Data')
     if (values.newPassword !== values.newPasswordConfirmation) {
       swal({
         title: translate('changePassword.form.newPasswordConfirmation.error1'),
@@ -98,7 +76,7 @@ export default class ResetPassword extends PureComponent {
         _id: this.state.userInfo._id,
         password: values.newPasswordConfirmation
       }
-      const record = await AuthApi.PutResetPassword(data._id , data)
+      const record = await AuthApi.PutResetPassword(data._id, data)
       if (record.error) {
         swal({
           type: 'error',
@@ -115,7 +93,6 @@ export default class ResetPassword extends PureComponent {
   }
 
   render() {
-    {console.log(this.props,"render()")}
     return (
       <Container>
         <style dangerouslySetInnerHTML={{ __html: bodyStyle }} />
