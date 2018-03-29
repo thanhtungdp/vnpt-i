@@ -60,7 +60,7 @@ export default class MapDefault extends React.PureComponent {
         </ColLeft>
         <Clearfix />
         <MapCenter>
-          <MapView windowHeight={this.props.windowHeight}/>
+          <MapView windowHeight={this.props.windowHeight} />
         </MapCenter>
         <Clearfix />
         <ColRight>

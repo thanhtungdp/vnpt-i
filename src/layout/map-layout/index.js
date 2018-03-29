@@ -16,7 +16,9 @@ const Wrapper = styled.div`
   background-color: #fafbfb;
 `
 
-const Clearfix = styled.div`height: 8px`
+const Clearfix = styled.div`
+  height: 8px;
+`
 const PaddingWrapper = styled.div`
   // padding: 16px 16px;
 `
@@ -27,8 +29,8 @@ export default class PageWrapperMapLayout extends Component {
     return (
       <Wrapper>
         <Page navigation={<NavigationLayout hide />}>
-          <Header/>
-          <Clearfix/>
+          <Header />
+          <Clearfix />
           <PaddingWrapper>{this.props.children}</PaddingWrapper>
         </Page>
       </Wrapper>

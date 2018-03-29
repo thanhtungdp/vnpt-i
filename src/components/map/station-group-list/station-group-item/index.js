@@ -29,10 +29,13 @@ const StationItem = styled.div`
     background-color: #fafbfb;
     cursor: pointer;
   }
-  ${props => props.isActive ? `
+  ${props =>
+    props.isActive
+      ? `
     background-color: #FAFBFB;
     color: #007EE5;
-  ` : ``}
+  `
+      : ``};
 `
 
 @autobind
