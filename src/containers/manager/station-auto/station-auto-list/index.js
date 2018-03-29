@@ -123,6 +123,11 @@ export default class StationAutoList extends React.Component {
                   >
                     Delete
                   </a>
+                  <Divider type="vertical" />
+                  <Link to={slug.stationAuto.configWithKey + '/' + row.key}>
+                    {' '}
+                    Config{' '}
+                  </Link>
                 </span>
               </div>
             )

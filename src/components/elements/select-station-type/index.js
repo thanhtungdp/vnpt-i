@@ -9,22 +9,36 @@ export default class SelectStationType extends PureComponent {
   static propTypes = {
     query: PropTypes.object,
     label: PropTypes.string,
-    onChange: PropTypes.func
+    onChange: PropTypes.func,
+    value: PropTypes.value
   }
 
   state = {
-    stationTypes: []
+    stationTypes: [],
+    value: ''
   }
 
   async componentDidMount() {
     let query = {}
     const stationTypes = await CategoryApi.getStationTypes({}, query)
-    this.setState({ stationTypes: stationTypes.data })
+    this.setState({
+      stationTypes: stationTypes.data,
+      value: this.props.value
+    })
+  }
+
+  onChange(value) {
+    let res = this.state.stationTypes.find(item => item.key === value)
+    this.setState({
+      value: value
+    })
+    if (this.props.onHandleChange)
+      this.props.onHandleChange(res)
   }
 
   render() {
     return (
-      <Select showSearch {...this.props}>
+      <Select showSearch {...this.props} onChange={this.onChange} value={this.state.value}  >
         {this.state.stationTypes.map(stationType => (
           <Select.Option key={stationType.key} value={stationType.key}>
             {stationType.name}

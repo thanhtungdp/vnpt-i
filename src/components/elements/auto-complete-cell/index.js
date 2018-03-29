@@ -26,8 +26,9 @@ export default class AutoCompleteCell extends React.Component {
                 .toLowerCase()
                 .indexOf(input.toLowerCase()) >= 0
             }
-            value={this.props.value}
+            //value={this.props.value}
             autoFocus={this.props.autoFocus}
+            {...this.props}
           >
             {this.props.options}
           </Select>

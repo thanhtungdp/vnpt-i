@@ -184,6 +184,32 @@ export default {
         isAllowRemote: 'Allow Remote'
       },
       error: 'Error!'
+    },
+    config: {
+      fileName: {
+        label: 'fileName',
+        placeholder: 'fileName'
+      },
+      path: {
+        label: 'path',
+        placeholder: 'path'
+      },
+      measuringSrc: {
+        label: 'measuringSrc',
+        placeholder: 'measuringSrc'
+      },
+      measuringDes: {
+        label: 'measuringDes',
+        placeholder: 'measuringDes'
+      },
+      ratio: {
+        label: 'ratio',
+        placeholder: 'ratio'
+      },
+      message: {
+        success: 'Update station auto config success!',
+        error: 'Update station auto config fail!'
+      }
     }
   },
   dataSearchFrom: {
