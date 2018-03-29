@@ -19,12 +19,17 @@ import ProfileUser from 'containers/auth/profile-user'
 import EmailConfirm from 'containers/auth/reset-password/email-confirm'
 import CodeConfirm from 'containers/auth/reset-password/code-confirm'
 import ResetPassword from 'containers/auth/reset-password'
+import Role from 'containers/role'
 
 @autobind
 export default class RouteDefault extends React.Component {
   render() {
     return (
       <div>
+        <LayoutRoute
+          path={slug.role.base}
+          component={Role}
+        />
         <LayoutRoute
           path={slug.user.changePassword}
           component={ChangePassword}
