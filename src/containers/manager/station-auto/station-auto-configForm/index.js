@@ -107,23 +107,12 @@ export default class StationAutoForm extends React.PureComponent {
   }
 
   async componentWillMount() {
-    console.log('======')
-    console.log(this.props.initialValues)
 
-    console.log('ijhbgftyujhbgvhjhbvg')
-    console.log(this.props.measuringListSource)
-    // this.setState({
-    //     measuringListSource: this.props.initialValues.measuringList
-
-    // })
-    // console.log('=======aa')
-    // console.log(this.props.initialValues)
   }
 
   handleSubmit(e) {
     e.preventDefault()
     this.props.form.validateFields((err, values) => {
-      console.log(values)
       if (err) return
       const data = {
         fileName: values.fileName,

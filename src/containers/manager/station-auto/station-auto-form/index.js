@@ -6,8 +6,6 @@ import {
   Row,
   Col,
   Select,
-  Table,
-  Popconfirm,
   Icon,
   Checkbox,
   Upload,
@@ -17,13 +15,11 @@ import PropTypes from 'prop-types'
 import { autobind } from 'core-decorators'
 import { mapPropsToFields } from 'utils/form'
 import CategoryApi from 'api/CategoryApi'
-import update from 'immutability-helper'
 import SelectStationType from 'components/elements/select-station-type'
-import AutoCompleteCell from 'components/elements/auto-complete-cell'
-import InputNumberCell from '../../../../components/elements/input-number-cell'
 import createLanguageHoc, { langPropTypes } from '../../../../hoc/create-lang'
 import MediaApi from 'api/MediaApi'
 import swal from 'sweetalert2'
+import MeasuringTable from '../station-auto-formTable/'
 
 const FormItem = Form.Item
 
@@ -49,6 +45,8 @@ export default class StationAutoForm extends React.PureComponent {
       measuringListSource: [],
       measuringOps: [],
       options: {},
+      phones: [],
+      emails: [],
 
       previewVisible: false,
       previewImage: '',
@@ -56,76 +54,7 @@ export default class StationAutoForm extends React.PureComponent {
       imgList: []
     }
     const { t } = this.props.lang
-    this.columns = [
-      {
-        dataIndex: 'key',
-        title: t('stationAutoManager.form.measuringKey.label'),
-        width: 150
-      },
-      {
-        dataIndex: 'name',
-        title: t('stationAutoManager.form.measuringName.label'),
-        render: (text, record) => this.renderSelectColumns(text, record, 'name')
-      },
-      {
-        dataIndex: 'minLimit',
-        title: t('stationAutoManager.form.measuringMinLimit.label'),
-        render: (text, record) => this.renderColumns(text, record, 'minLimit')
-      },
-      {
-        dataIndex: 'maxLimit',
-        title: t('stationAutoManager.form.measuringMaxLimit.label'),
-        render: (text, record) => this.renderColumns(text, record, 'maxLimit')
-      },
-      {
-        dataIndex: 'unit',
-        title: t('stationAutoManager.form.measuringUnit.label')
-      },
-      {
-        dataIndex: 'name',
-        title: 'Action',
-        render: (text, record) => {
-          const { editable } = record
-          return (
-            <div className="editable-row-operations">
-              {editable ? (
-                <span>
-                  <a onClick={() => this.saveMeasuring(record.key)}>
-                    <Icon type="save" />
-                  </a>
-                  <Popconfirm
-                    title="Sure to cancel?"
-                    onConfirm={() => this.cancelMeasuring(record.key)}
-                  >
-                    <a>
-                      <Icon type="close" />
-                    </a>
-                  </Popconfirm>
-                </span>
-              ) : (
-                <span>
-                  {' '}
-                  <a onClick={() => this.editMeasuring(record.key)}>
-                    <Icon type="edit" />
-                  </a>
-                  <Popconfirm
-                    title="Sure to delete?"
-                    onConfirm={() => this.removeMeasuring(record.key)}
-                  >
-                    <a>
-                      <Icon
-                        type="delete"
-                        style={{ marginLeft: '5px', color: 'red' }}
-                      />
-                    </a>
-                  </Popconfirm>
-                </span>
-              )}
-            </div>
-          )
-        }
-      }
-    ]
+    const { getFieldDecorator } = this.props.form
   }
 
   async componentWillMount() {
@@ -133,15 +62,9 @@ export default class StationAutoForm extends React.PureComponent {
       { page: 1, itemPerPage: 100000 },
       {}
     )
-    var options = measuringList.data.map(d => (
-      <Select.Option key={d.key} value={d.key}>
-        {d.name}
-      </Select.Option>
-    ))
 
     this.setState({
       measuringListSource: measuringList.data,
-      measuringOps: options
     })
     if (this.props.initialValues) {
       let fileList = []
@@ -155,7 +78,10 @@ export default class StationAutoForm extends React.PureComponent {
           status: 'done'
         })
       }
+
       this.setState({
+        emails: this.props.initialValues.emails,
+        phones: this.props.initialValues.phones,
         measuringList: this.props.initialValues.measuringList,
         stationType: this.props.initialValues.objStationType,
         options: this.props.initialValues.options
@@ -166,92 +92,11 @@ export default class StationAutoForm extends React.PureComponent {
     }
   }
 
-  renderColumns(text, record, column) {
-    return (
-      <InputNumberCell
-        editable={record.editable}
-        value={text}
-        onChange={value => this.handleChange(value, record.key, column)}
-      />
-    )
-  }
-
-  renderSelectColumns(text, record, column) {
-    return (
-      <AutoCompleteCell
-        editable={record.editable}
-        value={text}
-        onChange={value =>
-          this.handleChangeMeasuring(value, record.key, column)
-        }
-        options={this.state.measuringOps}
-        autoFocus={true}
-      />
-    )
-  }
-
-  handleChangeMeasuring(value, key, column) {
-    const newData = [...this.state.measuringList]
-    const measuring = this.state.measuringListSource.filter(
-      item => value === item.key
-    )[0]
-    const target = newData.filter(item => key === item.key)[0]
-    if (target) {
-      target.key = measuring.key
-      target.name = measuring.name
-      target.unit = measuring.unit
-    }
-    this.setState({ measuringList: newData })
-  }
-
   handleChange(value, key, column) {
     const newData = [...this.state.measuringList]
     const target = newData.filter(item => key === item.key)[0]
     if (target) {
       target[column] = value
-      this.setState({ measuringList: newData })
-    }
-  }
-
-  editMeasuring(key) {
-    const newData = [...this.state.measuringList]
-    const target = newData.filter(item => key === item.key)[0]
-    if (target) {
-      target.editable = true
-      this.setState({ measuringList: newData })
-      this.cacheData = newData.map(item => ({ ...item }))
-    }
-  }
-
-  saveMeasuring(key) {
-    const newData = [...this.state.measuringList]
-    const target = newData.filter(item => key === item.key)[0]
-    if (target) {
-      delete target.editable
-      this.setState({ measuringList: newData })
-      this.cacheData = newData.map(item => ({ ...item }))
-    }
-  }
-
-  removeMeasuring(key) {
-    const newData = [...this.state.measuringList]
-    const target = newData.filter(item => key !== item.key) || []
-    if (target) {
-      this.setState({ measuringList: target })
-      this.cacheData = newData.map(item => ({ ...item }))
-    }
-  }
-
-  cancelMeasuring(key) {
-    const newData = [...this.state.measuringList]
-    const target = newData.filter(item => key === item.key)[0]
-    if (target) {
-      if (this.cacheData)
-        Object.assign(
-          target,
-          this.cacheData.filter(item => key === item.key)[0]
-        )
-      delete target.editable
       this.setState({ measuringList: newData })
     }
   }
@@ -265,10 +110,10 @@ export default class StationAutoForm extends React.PureComponent {
         name: values.name,
         mapLocation: { long: values.long, lat: values.lat },
         address: values.address,
-        emails: values.emails,
-        phones: values.phones,
+        emails: this.state.emails,
+        phones: this.state.phones,
         stationType: this.state.stationType,
-        measuringList: this.state.measuringList,
+        measuringList: values.measuringList,
         options: this.state.options,
         image: this.state.imgList.length > 0 ? this.state.imgList[0] : null
       }
@@ -279,22 +124,6 @@ export default class StationAutoForm extends React.PureComponent {
 
   changeStationType(stationType) {
     this.setState({ stationType: stationType })
-  }
-
-  handleAddRow() {
-    const newRow = {
-      key: '' + this.state.measuringList.length,
-      name: '',
-      unit: '',
-      editable: true
-    }
-    let rows = this.state.measuringList.slice()
-    rows = update(rows, { $push: [newRow] })
-    this.setState({ measuringList: rows })
-  }
-
-  onSelect(record, selected, selectedRows) {
-    this.edit(record.key)
   }
 
   onOptionChange(checkedValues) {
@@ -319,16 +148,17 @@ export default class StationAutoForm extends React.PureComponent {
 
   handleImageChange = ({ fileList, file, event }) => {
     for (var i = 0; i < fileList.length; i++) {
-      if (fileList[i].thumbUrl !== '') {
+      if (fileList[i].response)
         fileList[i].status = 'done'
-      }
+      else
+        fileList[i].status = 'uploading'
     }
 
     const imgList = this.state.fileList
       .filter(img => img.response)
       .map(img => img.response)
 
-    if (file.response !== null) {
+    if (file.response !== null && imgList.length > 0) {
       this.setState({
         fileList: fileList,
         imgList: imgList
@@ -345,6 +175,17 @@ export default class StationAutoForm extends React.PureComponent {
     }
 
     this.setState({ fileList: fileList })
+  }
+
+  handleEmailsChange(value) {
+    this.setState({
+      emails: value
+    })
+  }
+  handlePhonesChange(value) {
+    this.setState({
+      phones: value
+    })
   }
 
   render() {
@@ -376,7 +217,7 @@ export default class StationAutoForm extends React.PureComponent {
                   disabled={this.props.isEdit}
                   placeholder={t('stationAutoManager.form.key.placeholder')}
                 />
-              )}
+                )}
             </FormItem>
           </Col>
           <Col span={12}>
@@ -387,7 +228,7 @@ export default class StationAutoForm extends React.PureComponent {
                 <Input
                   placeholder={t('stationAutoManager.form.name.placeholder')}
                 />
-              )}
+                )}
             </FormItem>
           </Col>
         </Row>
@@ -400,7 +241,7 @@ export default class StationAutoForm extends React.PureComponent {
                 <Input
                   placeholder={t('stationAutoManager.form.long.placeholder')}
                 />
-              )}
+                )}
             </FormItem>
           </Col>
           <Col span={12}>
@@ -411,7 +252,7 @@ export default class StationAutoForm extends React.PureComponent {
                 <Input
                   placeholder={t('stationAutoManager.form.lat.placeholder')}
                 />
-              )}
+                )}
             </FormItem>
           </Col>
         </Row>
@@ -426,39 +267,43 @@ export default class StationAutoForm extends React.PureComponent {
             </FormItem>
           </Col>
           <Col span={12}>
-            <SelectStationType
-              getFieldDecorator={getFieldDecorator}
-              label={t('stationAutoManager.form.stationType.label')}
-              placeholder={t('stationAutoManager.form.stationType.placeholder')}
-              onChangeStationType={this.changeStationType}
-              value={
-                this.props.initialValues
-                  ? this.props.initialValues.stationType
-                  : ''
-              }
-            />
+            <FormItem label={t('stationAutoManager.form.stationType.label')}>
+              {getFieldDecorator('stationType', {
+                initialValue: this.props.initialValues
+                  ? this.props.initialValues.stationType.key
+                  : '',
+              })(
+                <SelectStationType
+                  label={t('stationAutoManager.form.stationType.label')}
+                  placeholder={t('stationAutoManager.form.stationType.placeholder')}
+                  onHandleChange={this.changeStationType}
+                />
+                )}
+            </FormItem>
           </Col>
         </Row>
         <Row gutter={8}>
           <Col span={12}>
-            <FormItem label={t('stationAutoManager.form.emails.label')}>
-              {getFieldDecorator('emails')(
-                <Select
-                  mode="tags"
-                  placeholder={t('stationAutoManager.form.emails.placeholder')}
-                />
-              )}
-            </FormItem>
+            <div className={"ant-row ant-form-item"}>
+              <div className="ant-form-item-label"><label htmlFor="phones" title="Phones">Emails</label></div>
+              <Select
+                mode="tags"
+                placeholder={t('stationAutoManager.form.emails.placeholder')}
+                defaultValue={this.props.initialValues ? this.props.initialValues.emails : []}
+                onChange={this.handleEmailsChange}
+              />
+            </div>
           </Col>
           <Col span={12}>
-            <FormItem label={t('stationAutoManager.form.phones.label')}>
-              {getFieldDecorator('phones')(
-                <Select
-                  mode="tags"
-                  placeholder={t('stationAutoManager.form.phones.placeholder')}
-                />
-              )}
-            </FormItem>
+            <div className={"ant-row ant-form-item"}>
+              <div className="ant-form-item-label"><label htmlFor="phones" className="" title="Phones">Phones</label></div>
+              <Select
+                mode="tags"
+                placeholder={t('stationAutoManager.form.phones.placeholder')}
+                defaultValue={this.props.initialValues ? this.props.initialValues.phones : []}
+                onChange={this.handlePhonesChange}
+              />
+            </div>
           </Col>
         </Row>
         <Row gutter={8}>
@@ -506,21 +351,12 @@ export default class StationAutoForm extends React.PureComponent {
             </Modal>
           </Col>
         </Row>
-
-        <Button
-          style={{ width: '200px', right: '0' }}
-          type="primary"
-          onClick={this.handleAddRow}
-        >
-          add
-        </Button>
-        <Table
-          rowKey={record => record.key}
-          bordered
-          dataSource={this.state.measuringList}
-          columns={this.columns}
-          rowSelection={{ onSelect: this.onSelect }}
-        />
+        <MeasuringTable
+          lang={this.props.lang}
+          form={this.props.form}
+          dataSource={this.props.initialValues ? this.props.initialValues.measuringList : []}
+          measuringListSource={this.state.measuringListSource}
+        ></MeasuringTable>
         <FormItem>
           <Button style={{ width: '100%' }} type="primary" htmlType="submit">
             {t('addon.save')}

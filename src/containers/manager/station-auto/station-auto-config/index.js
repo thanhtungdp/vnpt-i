@@ -66,7 +66,7 @@ export default class StationAutoEdit extends React.PureComponent {
             initialValues={
               this.props.data && this.props.data.configLogger
                 ? this.props.data.configLogger
-                : {}
+                : { measuringList: [] }
             }
             measuringListSource={
               this.props.data && this.props.data.measuringList
