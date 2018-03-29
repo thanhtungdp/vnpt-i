@@ -41,6 +41,7 @@ const globalTheme = createGlobalTheme('#ffffff', '#1d89ce')
 export default class BasicNestedNavigation extends React.Component {
   static propTypes = {
     isShowBack: PropTypes.bool,
+    hide: PropTypes.bool,
     onBack: PropTypes.func,
     logout: PropTypes.func
   }
@@ -131,6 +132,7 @@ export default class BasicNestedNavigation extends React.Component {
       <StyleWrapper>
         <Navigation
           globalTheme={globalTheme}
+          width={this.props.hide ? 0 : 320}
           globalPrimaryIcon={<LogoSubIcon />}
           containerHeaderComponent={() => this.getContainerHeaderComponent()}
           drawers={[

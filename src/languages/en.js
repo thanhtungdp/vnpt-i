@@ -39,7 +39,7 @@ export default {
     key3: 'Reset password',
     key4: 'Resend code',
     key5: 'Confirm',
-    key6: 'Send code',
+    key6: 'Send code'
   },
   profileUser: {
     success: 'Change infomation successfully'
