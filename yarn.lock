@@ -5201,6 +5201,12 @@ is-property@^1.0.0:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/is-property/-/is-property-1.0.2.tgz#57fe1c4e48474edd65b09911f26b1cd4095dda84"
 
+is-react@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/is-react/-/is-react-1.1.0.tgz#4698b6b4f9291081d9e638bd0bff73bb0d56bdcc"
+  dependencies:
+    react "^16.0.0"
+
 is-redirect@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/is-redirect/-/is-redirect-1.0.0.tgz#1d03dded53bd8db0f30c26e4f95d36fc7c87dc24"

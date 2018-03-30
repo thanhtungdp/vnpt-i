@@ -4,6 +4,7 @@ import slug from 'constants/slug'
 import MeasuringList from './measuring-list'
 import MeasuringCreate from './measuring-create'
 import MeasuringEdit from './measuring-edit'
+import protectRole from 'hoc/protect-role'
 // Khởi tạo danh sách route dành cho measuring
 
 export default props => (
