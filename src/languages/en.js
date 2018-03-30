@@ -291,5 +291,96 @@ export default {
       error: 'Delete error!'
     },
     search: 'Search'
+  },
+  userSearchFrom: {
+    form: {
+      userName: {
+        label: 'Username',
+        placeholder: 'Username'
+      },
+      email: {
+        label: 'Email',
+        placeholder: 'Email'
+      },
+      firstName: {
+        label: 'FirstName',
+        placeholder: 'FirstName'
+      },
+      lastName: {
+        label: 'LastName',
+        placeholder: 'LastName'
+      },
+      country: {
+        label: 'Country',
+        placeholder: 'Select Country'
+      },
+      organization: {
+        label: 'Organization',
+        placeholder: 'Select Organization'
+      },
+      phone: {
+        label: 'Phone',
+        placeholder: 'Phone'
+      }
+    }
+  },
+  userForm: {
+    form: {
+      userName: {
+        label: 'Username',
+        placeholder: 'Username'
+      },
+      email: {
+        label: 'Email',
+        placeholder: 'Email'
+      },
+      password: {
+        label: 'Password',
+        placeholder: 'Password'
+      },
+      confirmPassword: {
+        label: 'Confirm Password',
+        placeholder: 'Confirm Password',
+        message: 'Please confirm your password!'
+      },
+      firstName: {
+        label: 'FirstName',
+        placeholder: 'FirstName'
+      },
+      lastName: {
+        label: 'LastName',
+        placeholder: 'LastName'
+      },
+      country: {
+        label: 'Country',
+        placeholder: 'Select Country'
+      },
+      organization: {
+        label: 'Organization',
+        placeholder: 'Select Organization'
+      },
+      phone: {
+        label: 'Phone',
+        placeholder: 'Phone'
+      }
+    }
+  },
+  userRule: {
+    name: {
+      label: 'name',
+      placeholder: 'name'
+    },
+    address: {
+      label: 'address',
+      placeholder: 'address'
+    },
+    role: {
+      label: 'role',
+      placeholder: 'role'
+    },
+    message:{
+      success: 'Update Rule User success!',
+      error: 'Update Rule User fail!',
+    }
   }
 }

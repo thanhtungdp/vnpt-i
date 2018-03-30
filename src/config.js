@@ -1,5 +1,5 @@
 const API_GATEWAY_TEST = 'http://localhost:5000'
-const API_GATEWAY_RELEASE = 'http://api.ilotusland.vn'
+const API_GATEWAY_RELEASE = 'http://192.168.252.121:5000'
 
 // const API_GATEWAY_MEDIA_TEST = 'http://localhost:1234'
 const API_GATEWAY_MEDIA_RELEASE = 'http://192.168.252.121:1234'
@@ -10,6 +10,7 @@ const STATION_AUTO_API = API_GATEWAY_RELEASE
 const PORT_DEPLOY = 5555
 const DATA_STATION_AUTO_API = API_GATEWAY_RELEASE
 const MEDIA_API = API_GATEWAY_MEDIA_RELEASE
+const ROLE_API = API_GATEWAY_RELEASE
 
 const STATION_CONTROL_API = 'http://118.69.55.217:8180'
 
@@ -26,6 +27,8 @@ module.exports.GOOGLE_MAP = GOOGLE_MAP
 module.exports.DATA_STATION_AUTO_API = DATA_STATION_AUTO_API
 module.exports.MEDIA_API = MEDIA_API
 module.exports.STATION_CONTROL_API = STATION_CONTROL_API
+module.exports.ROLE_API = ROLE_API
+
 
 module.exports.default = {
   API_GATEWAY_TEST,
@@ -37,5 +40,6 @@ module.exports.default = {
   PORT_DEPLOY,
   DATA_STATION_AUTO_API,
   MEDIA_API,
-  STATION_CONTROL_API
+  STATION_CONTROL_API,
+  ROLE_API
 }

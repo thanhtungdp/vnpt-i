@@ -48,7 +48,9 @@ export default {
     emailConfirm: '/user/email-confirm',
     codeConfirm: '/user/code-confirm/:key',
     codeConfirmWithKey: '/user/code-confirm',
-    resetPassword: '/user/reset-password'
+    resetPassword: '/user/reset-password',
+    rule: '/user/rule/:key',
+    ruleWithKey: '/user/rule',
   },
   role: {
     list: '/role',

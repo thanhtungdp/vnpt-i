@@ -85,6 +85,7 @@
     "react-checkbox-tree": "^1.0.2",
     "react-clearfix": "^1.0.0",
     "react-content-loader": "^3.0.2",
+    "react-country-flag": "^0.2.0",
     "react-datepicker": "^1.0.3",
     "react-datetime": "^2.11.1",
     "react-dev-utils": "^4.1.0",
