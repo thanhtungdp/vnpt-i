@@ -15,13 +15,13 @@ import slug from 'constants/slug'
 const FInput = createValidateComponent(InputLabel)
 
 const Form = styled.form`
-    width: 450px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 100px;
-    box-shadow: 0 2px 10px 0 rgba(238,238,238,0.5);
-    background-color: #ffffff;
-    padding: 24px 32px;
+  width: 450px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 100px;
+  box-shadow: 0 2px 10px 0 rgba(238, 238, 238, 0.5);
+  background-color: #ffffff;
+  padding: 24px 32px;
 `
 
 const Header = {
@@ -46,13 +46,10 @@ const bodyStyle = `
 `
 
 function validate(values) {
-
   const errors = {}
   if (values.email === undefined || !values.email) {
     errors.email = translate('error.require')
-  }
-  else if(!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email))
-  {
+  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
     errors.email = translate('error.email')
   }
   return errors
@@ -100,7 +97,13 @@ export default class EmailConfirm extends PureComponent {
             size="small"
           />
           <Note>{translate('resetPassword.key2')}</Note>
-          <Button isLoading={this.props.submitting} disabled={this.props.submitting} size="small" block color="primary">
+          <Button
+            isLoading={this.props.submitting}
+            disabled={this.props.submitting}
+            size="small"
+            block
+            color="primary"
+          >
             {translate('resetPassword.key6')}
           </Button>
         </Form>

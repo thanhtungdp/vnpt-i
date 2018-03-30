@@ -8,5 +8,14 @@ export default createBreadcrumb({
     icon: '',
     href: slug.role.base,
     name: 'Role'
+  },
+  create: {
+    id: 'create',
+    href: slug.role.create,
+    name: 'Create'
+  },
+  edit: {
+    href: slug.role.edit,
+    name: 'Update'
   }
 })

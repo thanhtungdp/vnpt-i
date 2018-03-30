@@ -71,23 +71,20 @@ function validate(values) {
 @withRouter
 @autobind
 export default class ResetPassword extends PureComponent {
-
-  constructor(props){
+  constructor(props) {
     super(props)
     this.state = {
       userInfo: {}
     }
   }
 
-  async componentWillMount(){
+  async componentWillMount() {
     this.setState({
       userInfo: this.props.history.location.state.data
     })
   }
 
   async handleLogin(values) {
-
-    console.log(this.state.userInfo,"user Data")
     if (values.newPassword !== values.newPasswordConfirmation) {
       swal({
         title: translate('changePassword.form.newPasswordConfirmation.error1'),
@@ -98,7 +95,7 @@ export default class ResetPassword extends PureComponent {
         _id: this.state.userInfo._id,
         password: values.newPasswordConfirmation
       }
-      const record = await AuthApi.PutResetPassword(data._id , data)
+      const record = await AuthApi.PutResetPassword(data._id, data)
       if (record.error) {
         swal({
           type: 'error',
@@ -115,7 +112,6 @@ export default class ResetPassword extends PureComponent {
   }
 
   render() {
-    {console.log(this.props,"render()")}
     return (
       <Container>
         <style dangerouslySetInnerHTML={{ __html: bodyStyle }} />

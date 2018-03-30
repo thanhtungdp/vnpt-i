@@ -1,25 +1,31 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import styled from 'styled-components'
 import { Link } from 'react-router-dom'
-import { Divider, Button, Icon } from 'antd'
-import CategoryApi from 'api/CategoryApi'
+import { Divider, Button, Icon, Form } from 'antd'
+import RoleApi from 'api/RoleApi'
 import PageContainer from 'layout/default-sidebar-layout/PageContainer'
 import slug from 'constants/slug'
 import { autobind } from 'core-decorators'
+import { mapPropsToFields } from 'utils/form'
 import createManagerList from 'hoc/manager-list'
 import createManagerDelete from 'hoc/manager-delete'
-import createLanguage, { langPropTypes } from 'hoc/create-lang'
+import createLanguageHoc, { langPropTypes } from 'hoc/create-lang'
 import DynamicTable from 'components/elements/dynamic-table'
 import Breadcrumb from 'containers/manager/measuring/breadcrumb'
 
+const FloatRight = styled.div`
+  text-align: right;
+`
+
 @createManagerList({
-  apiList: CategoryApi.getMeasurings,
-  itemPerPage: 20
+  apiList: RoleApi.getRoles,
+  itemPerPage:2
 })
 @createManagerDelete({
-  apiDelete: CategoryApi.deleteMeasuring
+  apiDelete: RoleApi.deleteRole
 })
-@createLanguage
+@createLanguageHoc
 @autobind
 export default class RoleList extends React.Component {
   static propTypes = {
@@ -37,17 +43,11 @@ export default class RoleList extends React.Component {
     isAdvanced: false
   }
 
-  toggleAdvanced() {
-    this.setState({
-      isAdvanced: !this.state.isAdvanced
-    })
-  }
-
   buttonAdd() {
     const { lang: { t } } = this.props
     return (
       <div>
-        <Link to={slug.measuring.create}>
+        <Link to={slug.role.create}>
           <Button type="primary">
             <Icon type="plus" /> {t('addon.create')}
           </Button>
@@ -58,48 +58,44 @@ export default class RoleList extends React.Component {
 
   getHead() {
     return [
-      { content: 'TT', width: 2 },
-      { content: 'Key', width: 30 },
-      { content: 'Name', width: 10 },
-      { content: 'Unit', width: 10 },
-      { content: 'Action', width: 10 }
+      { content: 'TT', width: 5 },
+      { content: 'Name' },
+      { content: 'Description' }
     ]
   }
 
   getRows() {
     return this.props.dataSource.map((row, index) => [
       {
+        content: <strong>{index + 1}</strong>
+      },
+      {
         content: (
-          <strong>
-            {(this.props.pagination.page - 1) *
-            this.props.pagination.itemPerPage +
-            index +
-            1}
-          </strong>
+          <div>
+            <strong>{row.name}</strong>
+          </div>
         )
       },
       {
-        content: row.key
-      },
-      {
-        content: row.name
-      },
-      {
-        content: row.unit
+        content: (
+          <div>
+            <strong>{row.description}</strong>
+          </div>
+        )
       },
       {
         content: (
-          <span>
-            <Link to={slug.measuring.editWithKey + '/' + row.key}> Edit </Link>
+          <FloatRight>
+            <Link to={slug.role.editWithKey + '/' + row._id}> Edit </Link>
             <Divider type="vertical" />
             <a
               onClick={() =>
-                this.props.onDeleteItem(row.key, this.props.fetchData)
+                this.props.onDeleteItem(row._id, this.props.fetchData)
               }
             >
               Delete
             </a>
-          </span>
+          </FloatRight>
         )
       }
     ])
@@ -107,7 +103,7 @@ export default class RoleList extends React.Component {
 
   render() {
     return (
-      <PageContainer right={this.buttonAdd()} >
+      <PageContainer right={this.buttonAdd()}>
         <Breadcrumb items={['list']} />
         <DynamicTable
           rows={this.getRows()}

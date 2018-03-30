@@ -7,13 +7,33 @@ import slug from 'constants/slug'
 import RoleForm from 'containers/role/role-form'
 import Breadcrumb from 'containers/role/breadcrumb'
 import RoleApi from 'api/RoleApi'
-import AuthApi from 'api/AuthApi'
-import PropTypes from 'prop-types'
 
 @withRouter
 @autobind
-export default class RoleCreate extends PureComponent {
+export default class RoleEdit extends PureComponent {
   static propTypes = {}
+
+  state = {
+    isLoaded: false,
+    dataEdit: []
+  }
+
+  async componentWillMount() {
+    const _id = this.props.match.params._id
+    const record = await RoleApi.getRole(_id)
+    if (record.error) {
+      swal({
+        title: 'Error',
+        type: 'error',
+        text: record.message
+      })
+    } else {
+      this.setState({
+        isLoaded: true,
+        dataEdit: record.data
+      })
+    }
+  }
 
   async onSubmit(values) {
     const data = {
@@ -21,7 +41,8 @@ export default class RoleCreate extends PureComponent {
       description: values.description,
       menu: values.menu
     }
-    const record = await RoleApi.createRole(data)
+    const _id = this.props.match.params._id
+    const record = await RoleApi.updateRole(_id, data)
     if (record.error) {
       swal({
         title: 'Error',
@@ -41,8 +62,13 @@ export default class RoleCreate extends PureComponent {
   render() {
     return (
       <PageContainer>
-        <Breadcrumb items={['list', 'create']} />
-        <RoleForm onSubmit={this.onSubmit} />
+        <Breadcrumb items={['list', 'edit']} />
+        {this.state.isLoaded && (
+          <RoleForm
+            onSubmit={this.onSubmit}
+            initialValues={this.state.dataEdit}
+          />
+        )}
       </PageContainer>
     )
   }

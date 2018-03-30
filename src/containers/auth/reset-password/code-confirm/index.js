@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { reduxForm, Field } from 'redux-form'
 import { Container } from 'reactstrap'
 import { withRouter } from 'react-router'
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import swal from 'sweetalert2'
 import { translate } from 'hoc/create-lang'
 import { InputLabel, createValidateComponent } from 'components/elements'
@@ -50,13 +50,7 @@ const bodyStyle = `
   body { background: linear-gradient(135deg,#1d89ce 0%,#56d2f3 100%) !important; }
 `
 
-const Note = styled.p`
-  font-style: italic;
-  padding: 8px 0px 8px 0px;
-`
-
 function validate(values) {
-
   const errors = {}
   if (values.code === undefined || !values.code) {
     errors.code = translate('error.require')
@@ -71,8 +65,7 @@ function validate(values) {
 })
 @autobind
 export default class CodeConfirm extends PureComponent {
-
-  constructor(props){
+  constructor(props) {
     super(props)
     this.state = {
       userInfo: {}
@@ -93,13 +86,12 @@ export default class CodeConfirm extends PureComponent {
         title: ''
       })
     }
-
   }
 
-  async handleConfirm(values){
-    const data={
-        email: this.props.match.params.key,
-        code: values.code
+  async handleConfirm(values) {
+    const data = {
+      email: this.props.match.params.key,
+      code: values.code
     }
     const record = await AuthApi.PostConfirmCode(data)
     if (record.error) {
@@ -108,7 +100,7 @@ export default class CodeConfirm extends PureComponent {
         title: record.message
       })
     } else {
-      this.props.history.push(slug.user.resetPassword,record)
+      this.props.history.push(slug.user.resetPassword, record)
     }
   }
 
@@ -116,11 +108,7 @@ export default class CodeConfirm extends PureComponent {
     return (
       <Container>
         <style dangerouslySetInnerHTML={{ __html: bodyStyle }} />
-        <Form
-          onSubmit={this.props.handleSubmit(
-            this.handleConfirm.bind(this)
-          )}
-        >
+        <Form onSubmit={this.props.handleSubmit(this.handleConfirm.bind(this))}>
           <Header.Wrapper>
             <Heading fontSize={28}>{''}</Heading>
             <Header.Logo src="/images/logo/logo-text-enviro.png" />
@@ -134,12 +122,22 @@ export default class CodeConfirm extends PureComponent {
             size="small"
           />
           <Clearfix />
-          <Button isLoading={this.props.submitting} disabled={this.props.submitting}  size="small" type="primary" block color="primary">
+          <Button
+            isLoading={this.props.submitting}
+            disabled={this.props.submitting}
+            size="small"
+            type="primary"
+            block
+            color="primary"
+          >
             {translate('resetPassword.key5')}
           </Button>
           <Clearfix />
           <FloatRight>
-            <Link to={this.props.location.pathname}  onClick={this.handleResendCode}>
+            <Link
+              to={this.props.location.pathname}
+              onClick={this.handleResendCode}
+            >
               {translate('resetPassword.key4')}
             </Link>
           </FloatRight>

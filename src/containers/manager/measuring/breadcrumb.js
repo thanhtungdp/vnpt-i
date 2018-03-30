@@ -7,16 +7,16 @@ export default createBreadcrumb({
   list: {
     id: 'list',
     //icon: Icon.car,
-    href: slug.measuring.list,
-    name: 'Measuring'
+    href: slug.role.list,
+    name: 'Role'
   },
   create: {
     id: 'create',
-    href: slug.measuring.create,
+    href: slug.role.create,
     name: 'Create'
   },
   edit: {
-    href: slug.measuring.edit,
+    href: slug.role.edit,
     name: 'Update'
   }
 })

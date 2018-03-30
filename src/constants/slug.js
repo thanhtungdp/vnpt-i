@@ -54,7 +54,7 @@ export default {
     list: '/role',
     base: '/role',
     create: '/role/create',
-    edit: '/role/edit/:key',
+    edit: '/role/edit/:_id',
     editWithKey: '/role/edit'
   }
 }
