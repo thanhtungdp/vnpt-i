@@ -28,7 +28,7 @@ export default class SelectStationAuto extends React.PureComponent {
   getStationAutos() {
     return this.state.stationAutoSelects.filter(
       stationAuto =>
-        stationAuto.stationType
+        this.props.stationTypeKey && this.props.stationTypeKey !== ''
           ? stationAuto.stationType.key === this.props.stationTypeKey
           : false
     )

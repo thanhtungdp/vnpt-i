@@ -33,7 +33,7 @@ export default class SelectStationType extends PureComponent {
       value: value
     })
     if (this.props.onHandleChange)
-      this.props.onHandleChange(res)
+      this.props.onHandleChange(res, this)
   }
 
   render() {
