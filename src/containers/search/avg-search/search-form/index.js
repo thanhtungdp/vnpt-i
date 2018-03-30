@@ -47,8 +47,8 @@ export default class SearchAvgForm extends React.Component {
     measuringList: []
   }
 
-  handleChangeStationType(e, stationTypeKey) {
-    this.setState({ stationTypeKey })
+  handleChangeStationType(stationTypeKey, e) {
+    this.setState({ stationTypeKey: stationTypeKey? stationTypeKey.key : '' })
   }
 
   handleChangeStationAuto(stationAuto) {
@@ -105,7 +105,7 @@ export default class SearchAvgForm extends React.Component {
                 label={t('stationType.label')}
                 name="stationType"
                 size="large"
-                onChange={this.handleChangeStationType}
+                onHandleChange={this.handleChangeStationType}
                 component={FSelectStationType}
               />
             </Col>
