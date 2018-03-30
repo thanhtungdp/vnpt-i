@@ -45,10 +45,12 @@ export default class RoleList extends React.Component {
         let roles = await RoleApi.getRole({ itemPerPage: MAX_VALUE }, {})
         let user = await UserApi.getOne(key)
 
-        console.log(user)
         this.setState({
             dataStations: (stations && stations.data) ? stations.data : [],
-            dataRoles: (roles && roles.data) ? roles.data : []
+            dataRoles: (roles && roles.data) ? roles.data : [],
+            selectedRole: (user.success && user.data.role) ? user.data.role : { _id: '' },
+            selectedRows: (user.success && user.data.stationAuto) ? user.data.stationAuto : [],
+            selectedRowKeys: (user.success && user.data.stationAuto) ? user.data.stationAuto.map(item=>item.key) : [],
         })
     }
 
@@ -61,6 +63,7 @@ export default class RoleList extends React.Component {
                 return item
             })
         }
+
         const key = this.props.match.params.key
         const res = { success: true }//await UserApi.updateRole(key, data)
         if (res.success)
@@ -113,7 +116,9 @@ export default class RoleList extends React.Component {
                         ]}
                     />
                     <FormItem label={t('userRule.role.label')} labelCol={{ span: 1 }} wrapperCol={{ span: 12 }}>
-                        <Select defaultValue="lucy" style={{ width: 240 }} onChange={this.onChangeRole}>
+                        <Select style={{ width: 240 }} onChange={this.onChangeRole}
+                            value={this.state.selectedRole._id}
+                        >
                             {this.state.dataRoles.map((role) => <Option
                                 key={role._id}
                                 value={role._id}
