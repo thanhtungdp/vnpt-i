@@ -30,11 +30,17 @@ export function deleteStationAuto(key) {
 export function getLastLog() {
   return getFetch(STATION_AUTO_API + '/station-auto/last-log')
 }
+
+export function updateStationAutoConfig(key, data = {}) {
+  return putFetch(STATION_AUTO_API + '/station-auto/config-logger/' + key, data)
+}
+
 export default {
   getStationAutos,
   getStationAuto,
   createStationAuto,
   updateStationAuto,
   deleteStationAuto,
-  getLastLog
+  getLastLog,
+  updateStationAutoConfig
 }

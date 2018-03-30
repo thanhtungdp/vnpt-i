@@ -1,4 +1,8 @@
 export default {
+  error: {
+    require: 'Require',
+    email: 'Invalid email address'
+  },
   login: {
     title: 'Login',
     form: {
@@ -27,6 +31,15 @@ export default {
       },
       Success: 'Change password successfully'
     }
+  },
+  resetPassword: {
+    key: 'I forgot my password',
+    key2:
+      "Enter your email address and we'll send you an email with introduction to reset your password",
+    key3: 'Reset password',
+    key4: 'Resend code',
+    key5: 'Confirm',
+    key6: 'Send code'
   },
   profileUser: {
     success: 'Change infomation successfully'
@@ -171,6 +184,32 @@ export default {
         isAllowRemote: 'Allow Remote'
       },
       error: 'Error!'
+    },
+    config: {
+      fileName: {
+        label: 'fileName',
+        placeholder: 'fileName'
+      },
+      path: {
+        label: 'path',
+        placeholder: 'path'
+      },
+      measuringSrc: {
+        label: 'measuringSrc',
+        placeholder: 'measuringSrc'
+      },
+      measuringDes: {
+        label: 'measuringDes',
+        placeholder: 'measuringDes'
+      },
+      ratio: {
+        label: 'ratio',
+        placeholder: 'ratio'
+      },
+      message: {
+        success: 'Update station auto config success!',
+        error: 'Update station auto config fail!'
+      }
     }
   },
   dataSearchFrom: {

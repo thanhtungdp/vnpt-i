@@ -20,7 +20,9 @@ export default {
     base: '/station-auto',
     create: '/station-auto/create',
     edit: '/station-auto/edit/:key',
-    editWithKey: '/station-auto/edit'
+    editWithKey: '/station-auto/edit',
+    config: '/station-auto/config/:key',
+    configWithKey: '/station-auto/config'
   },
   onlineMonitoring: {
     base: '/online-monitoring'
@@ -44,7 +46,11 @@ export default {
     edit: '/user/edit/:key',
     editWithKey: '/user/edit',
     changePassword: '/user/change-password',
-    profile: '/user/profile'
+    profile: '/user/profile',
+    emailConfirm: '/user/email-confirm',
+    codeConfirm: '/user/code-confirm/:key',
+    codeConfirmWithKey: '/user/code-confirm',
+    resetPassword: '/user/reset-password'
   },
   role: {
     list: '/role',

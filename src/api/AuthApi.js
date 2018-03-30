@@ -17,9 +17,27 @@ export function putProfile(_id, data) {
   return putFetch(AUTH_API + '/auth/' + _id, data)
 }
 
+//Send Code
+export function GetForgotSendCode(email) {
+  return getFetch(AUTH_API + `/auth/forgot-password?usernameOrEmail=${email}`)
+}
+
+//confirm Code
+export function PostConfirmCode(data) {
+  return postFetch(AUTH_API + '/auth/forgot-password', data)
+}
+
+//Reset password
+export function PutResetPassword(_id, data) {
+  return putFetch(AUTH_API + `/auth/forgot-password/${_id}`, data)
+}
+
 export default {
   loginUser,
   getMe,
   changePassword,
-  putProfile
+  putProfile,
+  GetForgotSendCode,
+  PostConfirmCode,
+  PutResetPassword
 }

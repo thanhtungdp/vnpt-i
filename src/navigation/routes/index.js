@@ -6,6 +6,7 @@ import slug from 'constants/slug'
 import OverviewDashboard from 'containers/dashboard/OverviewDashboard'
 import LoginRoute from './loginRoute'
 import LayoutRoute from 'layout/default-sidebar-layout/routeCombine'
+import MapLayoutRoute from 'layout/map-layout/routeCombine'
 import MeasuringRoute from 'containers/manager/measuring'
 import StationAutoRoute from 'containers/manager/station-auto'
 import StationTypeRoute from 'containers/manager/station-type'
@@ -16,6 +17,9 @@ import AvgSearch from 'containers/search/avg-search'
 import Monitoring from 'containers/monitoring'
 import ChangePassword from 'containers/auth/change-password'
 import ProfileUser from 'containers/auth/profile-user'
+import EmailConfirm from 'containers/auth/reset-password/email-confirm'
+import CodeConfirm from 'containers/auth/reset-password/code-confirm'
+import ResetPassword from 'containers/auth/reset-password'
 
 @autobind
 export default class RouteDefault extends React.Component {
@@ -28,7 +32,7 @@ export default class RouteDefault extends React.Component {
         />
         <LayoutRoute path={slug.user.profile} component={ProfileUser} />
         <LayoutRoute path="/" exact component={OverviewDashboard} />
-        <Route path={slug.map.base} exact component={Map} />
+        <MapLayoutRoute path={slug.map.base} exact component={Map} />
         <LayoutRoute path={slug.measuring.base} component={MeasuringRoute} />
         <LayoutRoute
           path={slug.stationAuto.base}
@@ -46,6 +50,9 @@ export default class RouteDefault extends React.Component {
         <LayoutRoute path={slug.dataSearch.base} component={DataSearch} />
         <LayoutRoute path={slug.avgSearch.base} component={AvgSearch} />
         <Route path={slug.login} component={LoginRoute} />
+        <Route path={slug.user.emailConfirm} component={EmailConfirm} />
+        <Route path={slug.user.codeConfirm} component={CodeConfirm} />
+        <Route path={slug.user.resetPassword} component={ResetPassword} />
       </div>
     )
   }
