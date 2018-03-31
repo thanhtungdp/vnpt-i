@@ -3,6 +3,24 @@ export default {
     require: 'Require',
     email: 'Invalid email address'
   },
+  form: {
+    save: 'Save',
+    update: 'Update'
+  },
+  Role: {
+    form: {
+      name: {
+        label: 'Name',
+        placeholder: 'Input Name',
+        error: 'Please input Name'
+      },
+      description: {
+        label: 'Description',
+        placeholder: 'Input description',
+        error: 'Please input description'
+      }
+    }
+  },
   login: {
     title: 'Login',
     form: {

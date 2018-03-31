@@ -22,6 +22,23 @@ const Form = styled.form`
   padding: 24px 32px;
 `
 
+const FloatRight = styled.div`
+  text-align: right;
+  padding-top: 8px;
+`
+
+const Header = {
+  Wrapper: styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  `,
+  Logo: styled.img`
+    height: 36px;
+    width: auto;
+  `
+}
+
 const Clearfix = styled.div`
   height: 16px;
 `
@@ -54,8 +71,11 @@ function validate(values) {
 @withRouter
 @autobind
 export default class ResetPassword extends PureComponent {
-  state = {
-    userInfo: {}
+  constructor(props) {
+    super(props)
+    this.state = {
+      userInfo: {}
+    }
   }
 
   async componentWillMount() {
@@ -65,7 +85,6 @@ export default class ResetPassword extends PureComponent {
   }
 
   async handleLogin(values) {
-    console.log(this.state.userInfo, 'user Data')
     if (values.newPassword !== values.newPasswordConfirmation) {
       swal({
         title: translate('changePassword.form.newPasswordConfirmation.error1'),

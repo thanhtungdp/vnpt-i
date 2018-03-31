@@ -48,7 +48,7 @@ export default class SearchForm extends React.Component {
   }
 
   handleChangeStationType(stationTypeKey, e) {
-    this.setState({ stationTypeKey: stationTypeKey? stationTypeKey.key : '' })
+    this.setState({ stationTypeKey: stationTypeKey ? stationTypeKey.key : '' })
   }
 
   handleChangeStationAuto(stationAuto) {
@@ -77,12 +77,12 @@ export default class SearchForm extends React.Component {
       isExceeded: values.isExceeded,
       advanced: values.advanced
         ? values.advanced.filter(
-          item =>
-            item.measuringKey &&
-            item.operator &&
-            item.value !== null &&
-            typeof item.value !== 'undefined'
-        )
+            item =>
+              item.measuringKey &&
+              item.operator &&
+              item.value !== null &&
+              typeof item.value !== 'undefined'
+          )
         : []
     })
   }
