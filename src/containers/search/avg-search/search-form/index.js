@@ -48,7 +48,7 @@ export default class SearchAvgForm extends React.Component {
   }
 
   handleChangeStationType(stationTypeKey, e) {
-    this.setState({ stationTypeKey: stationTypeKey? stationTypeKey.key : '' })
+    this.setState({ stationTypeKey: stationTypeKey ? stationTypeKey.key : '' })
   }
 
   handleChangeStationAuto(stationAuto) {
