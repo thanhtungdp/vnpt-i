@@ -68,6 +68,8 @@ export default class SearchAvgForm extends React.Component {
   }
 
   handleSubmit(values) {
+    console.log('======')
+    console.log(values.measuringList)
     this.props.onSubmit({
       fromDate: this.convertDateToString(values.fromDate),
       toDate: this.convertDateToString(values.toDate),

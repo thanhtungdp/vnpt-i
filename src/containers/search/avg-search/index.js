@@ -39,6 +39,7 @@ export default class AvgSearch extends React.Component {
       searchFormData
     )
 
+    console.log(searchFormData.measuringData)
     this.setState({
       isLoading: false,
       dataStationAuto: dataStationAuto.data,

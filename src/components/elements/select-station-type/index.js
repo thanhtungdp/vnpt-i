@@ -10,7 +10,7 @@ export default class SelectStationType extends PureComponent {
     query: PropTypes.object,
     label: PropTypes.string,
     onChange: PropTypes.func,
-    value: PropTypes.value
+    value: PropTypes.string
   }
 
   state = {
