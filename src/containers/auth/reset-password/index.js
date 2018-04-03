@@ -85,6 +85,7 @@ export default class ResetPassword extends PureComponent {
   }
 
   async handleLogin(values) {
+    console.log(this.state.userInfo, 'user Data')
     if (values.newPassword !== values.newPasswordConfirmation) {
       swal({
         title: translate('changePassword.form.newPasswordConfirmation.error1'),
@@ -112,6 +113,9 @@ export default class ResetPassword extends PureComponent {
   }
 
   render() {
+    {
+      console.log(this.props, 'render()')
+    }
     return (
       <Container>
         <style dangerouslySetInnerHTML={{ __html: bodyStyle }} />

@@ -6,7 +6,6 @@ import slug from 'constants/slug'
 import OverviewDashboard from 'containers/dashboard/OverviewDashboard'
 import LoginRoute from './loginRoute'
 import LayoutRoute from 'layout/default-sidebar-layout/routeCombine'
-import MapLayoutRoute from 'layout/map-layout/routeCombine'
 import MeasuringRoute from 'containers/manager/measuring'
 import StationAutoRoute from 'containers/manager/station-auto'
 import StationTypeRoute from 'containers/manager/station-type'
@@ -20,21 +19,20 @@ import ProfileUser from 'containers/auth/profile-user'
 import EmailConfirm from 'containers/auth/reset-password/email-confirm'
 import CodeConfirm from 'containers/auth/reset-password/code-confirm'
 import ResetPassword from 'containers/auth/reset-password'
-import Role from 'containers/role/index'
+import UserRoute from 'containers/user'
 
 @autobind
 export default class RouteDefault extends React.Component {
   render() {
     return (
       <div>
-        <LayoutRoute path={slug.role.base} component={Role} />
         <LayoutRoute
           path={slug.user.changePassword}
           component={ChangePassword}
         />
         <LayoutRoute path={slug.user.profile} component={ProfileUser} />
         <LayoutRoute path="/" exact component={OverviewDashboard} />
-        <MapLayoutRoute path={slug.map.base} exact component={Map} />
+        <Route path={slug.map.base} exact component={Map} />
         <LayoutRoute path={slug.measuring.base} component={MeasuringRoute} />
         <LayoutRoute
           path={slug.stationAuto.base}
@@ -55,6 +53,7 @@ export default class RouteDefault extends React.Component {
         <Route path={slug.user.emailConfirm} component={EmailConfirm} />
         <Route path={slug.user.codeConfirm} component={CodeConfirm} />
         <Route path={slug.user.resetPassword} component={ResetPassword} />
+        <LayoutRoute path={slug.user.base} component={UserRoute} />
       </div>
     )
   }

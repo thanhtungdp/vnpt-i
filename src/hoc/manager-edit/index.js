@@ -25,7 +25,8 @@ const createManagerEdit = ({ apiUpdate, apiGetByKey }) => Component => {
     async getItem() {
       const key = this.props.match.params.key
       const item = await apiGetByKey(key)
-      this.setState({ isLoaded: true, data: item })
+      if (item.success) this.setState({ isLoaded: true, data: item.data })
+      else this.setState({ isLoaded: true, data: {}, message: item.message })
     }
 
     render() {
