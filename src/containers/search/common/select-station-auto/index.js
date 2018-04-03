@@ -46,7 +46,12 @@ export default class SelectStationAuto extends React.PureComponent {
 
   render() {
     return (
-      <Select {...this.props} onChange={this.handleChange} showSearch>
+      <Select
+        {...this.props}
+        onChange={this.handleChange}
+        showSearch
+        value={this.props.setKey ? this.props.stationAutoKey : this.props.value}
+      >
         {this.getStationAutos().map(item => (
           <Select.Option key={item.key} value={item.key}>
             {item.name}

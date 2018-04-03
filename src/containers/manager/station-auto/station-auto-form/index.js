@@ -53,8 +53,6 @@ export default class StationAutoForm extends React.PureComponent {
       fileList: [],
       imgList: []
     }
-    const { t } = this.props.lang
-    const { getFieldDecorator } = this.props.form
   }
 
   async componentWillMount() {
@@ -64,7 +62,7 @@ export default class StationAutoForm extends React.PureComponent {
     )
 
     this.setState({
-      measuringListSource: measuringList.data,
+      measuringListSource: measuringList.data
     })
     if (this.props.initialValues) {
       let fileList = []
@@ -148,10 +146,8 @@ export default class StationAutoForm extends React.PureComponent {
 
   handleImageChange = ({ fileList, file, event }) => {
     for (var i = 0; i < fileList.length; i++) {
-      if (fileList[i].response)
-        fileList[i].status = 'done'
-      else
-        fileList[i].status = 'uploading'
+      if (fileList[i].response) fileList[i].status = 'done'
+      else fileList[i].status = 'uploading'
     }
 
     const imgList = this.state.fileList
@@ -217,7 +213,7 @@ export default class StationAutoForm extends React.PureComponent {
                   disabled={this.props.isEdit}
                   placeholder={t('stationAutoManager.form.key.placeholder')}
                 />
-                )}
+              )}
             </FormItem>
           </Col>
           <Col span={12}>
@@ -228,7 +224,7 @@ export default class StationAutoForm extends React.PureComponent {
                 <Input
                   placeholder={t('stationAutoManager.form.name.placeholder')}
                 />
-                )}
+              )}
             </FormItem>
           </Col>
         </Row>
@@ -241,7 +237,7 @@ export default class StationAutoForm extends React.PureComponent {
                 <Input
                   placeholder={t('stationAutoManager.form.long.placeholder')}
                 />
-                )}
+              )}
             </FormItem>
           </Col>
           <Col span={12}>
@@ -252,7 +248,7 @@ export default class StationAutoForm extends React.PureComponent {
                 <Input
                   placeholder={t('stationAutoManager.form.lat.placeholder')}
                 />
-                )}
+              )}
             </FormItem>
           </Col>
         </Row>
@@ -271,36 +267,54 @@ export default class StationAutoForm extends React.PureComponent {
               {getFieldDecorator('stationType', {
                 initialValue: this.props.initialValues
                   ? this.props.initialValues.stationType.key
-                  : '',
+                  : ''
               })(
                 <SelectStationType
                   label={t('stationAutoManager.form.stationType.label')}
-                  placeholder={t('stationAutoManager.form.stationType.placeholder')}
+                  placeholder={t(
+                    'stationAutoManager.form.stationType.placeholder'
+                  )}
                   onHandleChange={this.changeStationType}
                 />
-                )}
+              )}
             </FormItem>
           </Col>
         </Row>
         <Row gutter={8}>
           <Col span={12}>
-            <div className={"ant-row ant-form-item"}>
-              <div className="ant-form-item-label"><label htmlFor="phones" title="Phones">Emails</label></div>
+            <div className={'ant-row ant-form-item'}>
+              <div className="ant-form-item-label">
+                <label htmlFor="phones" title="Phones">
+                  Emails
+                </label>
+              </div>
               <Select
                 mode="tags"
                 placeholder={t('stationAutoManager.form.emails.placeholder')}
-                defaultValue={this.props.initialValues ? this.props.initialValues.emails : []}
+                defaultValue={
+                  this.props.initialValues
+                    ? this.props.initialValues.emails
+                    : []
+                }
                 onChange={this.handleEmailsChange}
               />
             </div>
           </Col>
           <Col span={12}>
-            <div className={"ant-row ant-form-item"}>
-              <div className="ant-form-item-label"><label htmlFor="phones" className="" title="Phones">Phones</label></div>
+            <div className={'ant-row ant-form-item'}>
+              <div className="ant-form-item-label">
+                <label htmlFor="phones" className="" title="Phones">
+                  Phones
+                </label>
+              </div>
               <Select
                 mode="tags"
                 placeholder={t('stationAutoManager.form.phones.placeholder')}
-                defaultValue={this.props.initialValues ? this.props.initialValues.phones : []}
+                defaultValue={
+                  this.props.initialValues
+                    ? this.props.initialValues.phones
+                    : []
+                }
                 onChange={this.handlePhonesChange}
               />
             </div>
@@ -354,9 +368,13 @@ export default class StationAutoForm extends React.PureComponent {
         <MeasuringTable
           lang={this.props.lang}
           form={this.props.form}
-          dataSource={this.props.initialValues ? this.props.initialValues.measuringList : []}
+          dataSource={
+            this.props.initialValues
+              ? this.props.initialValues.measuringList
+              : []
+          }
           measuringListSource={this.state.measuringListSource}
-        ></MeasuringTable>
+        />
         <FormItem>
           <Button style={{ width: '100%' }} type="primary" htmlType="submit">
             {t('addon.save')}

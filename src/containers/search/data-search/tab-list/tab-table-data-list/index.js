@@ -16,7 +16,8 @@ const CONFIG = {
 @autobind
 export default class TableDataList extends React.PureComponent {
   static propTypes = {
-    measuringList: PropTypes.array
+    measuringList: PropTypes.array,
+    measuringData: PropTypes.array
   }
 
   getColumns() {
@@ -25,27 +26,31 @@ export default class TableDataList extends React.PureComponent {
       dataIndex: 'receivedAt',
       key: 'receivedAt',
       render(value) {
-        return <div>{moment(value).toString()}</div>
+        return (
+          <div>{moment(value).format('dddd, MMMM Do YYYY, h:mm:ss a')}</div>
+        )
       }
     }
-    const columnsMeasurings = this.props.measuringList.map(measuring => ({
-      title: `${measuring.name}(${measuring.unit})`,
-      dataIndex: `measuringLogs.${measuring.key}`,
-      key: measuring.key,
-      render: value => {
-        if (value == null) return <div />
-        var color = SHAPE.BLACK
-        if (value.value >= value.maxLimit * CONFIG.prepareExceeded) {
-          color = SHAPE.ORANGE
-        } else if (
-          value.value <= value.minLimit ||
-          value.value >= value.maxLimit * CONFIG.multiplicationTime
-        ) {
-          color = SHAPE.RED
+    const columnsMeasurings = this.props.measuringData
+      .filter(measuring => this.props.measuringList.includes(measuring.key))
+      .map(measuring => ({
+        title: `${measuring.name}(${measuring.unit})`,
+        dataIndex: `measuringLogs.${measuring.key}`,
+        key: measuring.key,
+        render: value => {
+          if (value == null) return <div />
+          var color = SHAPE.BLACK
+          if (value.value >= value.maxLimit * CONFIG.prepareExceeded) {
+            color = SHAPE.ORANGE
+          } else if (
+            value.value <= value.minLimit ||
+            value.value >= value.maxLimit * CONFIG.multiplicationTime
+          ) {
+            color = SHAPE.RED
+          }
+          return <div style={{ color: color }}>{value.value}</div>
         }
-        return <div style={{ color: color }}>{value.value}</div>
-      }
-    }))
+      }))
     return [columnReceivedAt, ...columnsMeasurings]
   }
 

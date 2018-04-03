@@ -6,12 +6,12 @@ import Clearfix from 'components/elements/clearfix/index'
 import TabList from './tab-list/index'
 import Breadcrumb from './breadcrumb'
 import SearchFrom from './search-form/index'
-
 @autobind
 export default class AvgSearch extends React.Component {
   state = {
     dataStationAuto: [],
     measuringList: [],
+    measuringData: [],
     searchFormData: {},
     isLoading: false,
     isHaveData: false,
@@ -39,11 +39,11 @@ export default class AvgSearch extends React.Component {
       searchFormData
     )
 
-    console.log(searchFormData.measuringData)
     this.setState({
       isLoading: false,
       dataStationAuto: dataStationAuto.data,
-      measuringList: searchFormData.measuringData,
+      measuringData: searchFormData.measuringData,
+      measuringList: searchFormData.measuringList,
       searchFormData: searchFormData,
       pagination: {
         ...pagination,
@@ -69,11 +69,13 @@ export default class AvgSearch extends React.Component {
         {this.state.isHaveData ? (
           <TabList
             isLoading={this.state.isLoading}
+            measuringData={this.state.measuringData}
             measuringList={this.state.measuringList}
             dataStationAuto={this.state.dataStationAuto}
             pagination={this.state.pagination}
             onChangePage={this.handleChangePage}
             onExportExcel={this.handleExportExcel}
+            nameChart={this.state.searchFormData.name}
           />
         ) : null}
       </PageContainer>

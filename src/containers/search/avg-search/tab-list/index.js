@@ -24,10 +24,12 @@ export default class TabeList extends React.PureComponent {
   static propTypes = {
     isLoading: PropTypes.bool,
     measuringList: PropTypes.array,
+    measuringData: PropTypes.array,
     dataStationAuto: PropTypes.array,
     pagination: PropTypes.object,
     onChangePage: PropTypes.func,
-    onExportExcel: PropTypes.func
+    onExportExcel: PropTypes.func,
+    nameChart: PropTypes.string
   }
 
   render() {
@@ -48,6 +50,7 @@ export default class TabeList extends React.PureComponent {
             <TabTableDataList
               loading={this.props.isLoading}
               measuringList={this.props.measuringList}
+              measuringData={this.props.measuringData}
               dataSource={this.props.dataStationAuto}
               pagination={this.props.pagination}
               onChange={this.props.onChangePage}
@@ -56,7 +59,10 @@ export default class TabeList extends React.PureComponent {
           <Tabs.TabPane tab="Chart" key="2">
             <TabChart
               dataStationAuto={this.props.dataStationAuto}
-              measuringData={this.props.measuringList}
+              measuringData={this.props.measuringData.filter(item =>
+                this.props.measuringList.includes(item.key)
+              )}
+              nameChart={this.props.nameChart}
             />
           </Tabs.TabPane>
         </Tabs>

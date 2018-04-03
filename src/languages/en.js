@@ -256,11 +256,13 @@ export default {
     form: {
       stationType: {
         label: 'Station type',
-        placeholder: 'Select station type'
+        placeholder: 'Select station type',
+        error: 'Please choose station type'
       },
       stationAuto: {
         label: 'Station auto',
-        placeholder: 'Select station auto'
+        placeholder: 'Select station auto',
+        error: 'Please choose station auto'
       },
       fromDate: {
         label: 'From',
@@ -285,7 +287,8 @@ export default {
         label: 'Value'
       },
       type: {
-        label: 'Report type'
+        label: 'Report type',
+        error: 'Please choose report type'
       },
       advanced: {
         label: 'Advanced'

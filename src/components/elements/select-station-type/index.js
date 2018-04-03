@@ -32,13 +32,17 @@ export default class SelectStationType extends PureComponent {
     this.setState({
       value: value
     })
-    if (this.props.onHandleChange)
-      this.props.onHandleChange(res, this)
+    if (this.props.onHandleChange) this.props.onHandleChange(res, this)
   }
 
   render() {
     return (
-      <Select showSearch {...this.props} onChange={this.onChange} value={this.state.value}  >
+      <Select
+        showSearch
+        {...this.props}
+        onChange={this.onChange}
+        value={this.state.value}
+      >
         {this.state.stationTypes.map(stationType => (
           <Select.Option key={stationType.key} value={stationType.key}>
             {stationType.name}

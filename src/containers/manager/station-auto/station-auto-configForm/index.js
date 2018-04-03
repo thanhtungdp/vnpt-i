@@ -106,9 +106,7 @@ export default class StationAutoForm extends React.PureComponent {
     return res ? res.ratio : 1
   }
 
-  async componentWillMount() {
-
-  }
+  async componentWillMount() {}
 
   handleSubmit(e) {
     e.preventDefault()
