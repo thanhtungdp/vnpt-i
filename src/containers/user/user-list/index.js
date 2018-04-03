@@ -50,9 +50,9 @@ export default class UserList extends React.Component {
     const { lang: { t } } = this.props
     return [
       {
-        title: t('userSearchFrom.form.userName.label'),
-        dataIndex: 'username',
-        key: 'username',
+        title: t('userSearchFrom.form.email.label'),
+        dataIndex: 'email',
+        key: 'email',
         render: (text, record) => (
           <div>
             {record.phone &&
@@ -62,14 +62,9 @@ export default class UserList extends React.Component {
                   <ReactCountryFlag code={record.phone.iso2} />
                 </span>
               )}
-            <span>{record.username}</span>
+            <span>{text}</span>
           </div>
         )
-      },
-      {
-        title: t('userSearchFrom.form.email.label'),
-        dataIndex: 'email',
-        key: 'email'
       },
       {
         title: t('userSearchFrom.form.organization.label'),
@@ -111,7 +106,8 @@ export default class UserList extends React.Component {
           }}
           initialValues={this.props.data}
         />
-        <Table rowKey="_id"
+        <Table
+          rowKey="_id"
           loading={this.props.isLoading}
           columns={this.getColumns()}
           dataSource={this.props.dataSource}

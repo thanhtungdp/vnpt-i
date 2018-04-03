@@ -1,5 +1,5 @@
 import { ROLE_API } from 'config'
-import { deleteFetch, getFetch, postFetch, putFetch } from 'utils/fetch'
+import { getFetch } from 'utils/fetch'
 
 const urlROLEAPI = ROLE_API + '/role'
 

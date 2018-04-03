@@ -1,5 +1,5 @@
 import React from 'react'
-import { Form, Input, Button, Row, Col, Select } from 'antd'
+import { Form, Input, Button, Row, Col } from 'antd'
 import PropTypes from 'prop-types'
 import { autobind } from 'core-decorators'
 import { mapPropsToFields } from 'utils/form'
@@ -20,7 +20,8 @@ export default class UserForm extends React.PureComponent {
     onSubmit: PropTypes.func,
     lang: langPropTypes,
     isEdit: PropTypes.bool,
-    initialValues: PropTypes.object
+    initialValues: PropTypes.object,
+    isLoading: PropTypes.bool
   }
   constructor(props) {
     super(props)
@@ -34,9 +35,9 @@ export default class UserForm extends React.PureComponent {
   handleSubmit(e) {
     e.preventDefault()
     this.props.form.validateFields((err, values) => {
+      console.log(values)
       if (err) return
       const data = {
-        username: values.userName,
         email: values.email,
         password: values.password,
         firstName: values.firstName,
@@ -83,9 +84,7 @@ export default class UserForm extends React.PureComponent {
     })
   }
 
-  async componentWillMount() {
-
-  }
+  async componentWillMount() {}
 
   render() {
     const { form: { getFieldDecorator }, lang: { t } } = this.props
@@ -93,30 +92,10 @@ export default class UserForm extends React.PureComponent {
       <Form onSubmit={this.handleSubmit}>
         <Row gutter={16}>
           <Col span={12}>
-            <FormItem label={t('userForm.form.userName.label')}>
-              {getFieldDecorator('userName', {
-                initialValue: this.props.initialValues
-                  ? this.props.initialValues.data.username
-                  : null,
-                rules: [
-                  {
-                    required: true,
-                    message: t('userForm.form.userName.label')
-                  }
-                ]
-              })(
-                <Input
-                  disabled={this.props.isEdit}
-                  placeholder={t('userForm.form.userName.placeholder')}
-                />
-              )}
-            </FormItem>
-          </Col>
-          <Col span={12}>
             <FormItem label={t('userForm.form.email.label')}>
               {getFieldDecorator('email', {
                 initialValue: this.props.initialValues
-                  ? this.props.initialValues.data.email
+                  ? this.props.initialValues.email
                   : null,
                 rules: [
                   {
@@ -190,7 +169,7 @@ export default class UserForm extends React.PureComponent {
             <FormItem label={t('userForm.form.firstName.label')}>
               {getFieldDecorator('firstName', {
                 initialValue: this.props.initialValues
-                  ? this.props.initialValues.data.firstName
+                  ? this.props.initialValues.firstName
                   : null,
                 rules: [
                   {
@@ -207,7 +186,7 @@ export default class UserForm extends React.PureComponent {
             <FormItem label={t('userForm.form.lastName.label')}>
               {getFieldDecorator('lastName', {
                 initialValue: this.props.initialValues
-                  ? this.props.initialValues.data.lastName
+                  ? this.props.initialValues.lastName
                   : null,
                 rules: [
                   {
@@ -224,11 +203,7 @@ export default class UserForm extends React.PureComponent {
           <Col span={12}>
             <FormItem label={t('userForm.form.phone.label')}>
               {getFieldDecorator(`phone`, {
-                initialValue:
-                  this.props.initialValues &&
-                  this.props.initialValues.data.phone
-                    ? this.props.initialValues.data.phone.phoneNumber
-                    : null,
+                valuePropName: 'telNumber',
                 rules: [
                   {
                     required: true,
@@ -243,8 +218,12 @@ export default class UserForm extends React.PureComponent {
                       ? '../images/flags.png'
                       : '../../images/flags.png'
                   }
+                  initialValue={
+                    this.props.initialValues &&
+                    this.props.initialValues.phone &&
+                    this.props.initialValues.phone.phoneNumber
+                  }
                   onChange={this.handleTelChange}
-                  // onBlur={this.handleInputBlur}
                 />
               )}
             </FormItem>
@@ -252,7 +231,12 @@ export default class UserForm extends React.PureComponent {
         </Row>
 
         <FormItem>
-          <Button style={{ width: '100%' }} type="primary" htmlType="submit">
+          <Button
+            style={{ width: '100%' }}
+            type="primary"
+            htmlType="submit"
+            loading={this.props.isLoading}
+          >
             Save
           </Button>
         </FormItem>

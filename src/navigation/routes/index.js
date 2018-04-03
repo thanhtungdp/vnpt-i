@@ -53,10 +53,7 @@ export default class RouteDefault extends React.Component {
         <Route path={slug.user.emailConfirm} component={EmailConfirm} />
         <Route path={slug.user.codeConfirm} component={CodeConfirm} />
         <Route path={slug.user.resetPassword} component={ResetPassword} />
-        <LayoutRoute
-          path={slug.user.base}
-          component={UserRoute}
-        />
+        <LayoutRoute path={slug.user.base} component={UserRoute} />
       </div>
     )
   }

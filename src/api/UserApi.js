@@ -1,11 +1,12 @@
-import { AUTH_API } from '../config'
+import { USER_API } from '../config'
 import { getFetch, postFetch, putFetch, deleteFetch } from 'utils/fetch'
 
 export function searchUser(
   { page = 1, itemPerPage = 10 },
   { userName, email, firstName, lastName, organization, phone }
 ) {
-  var urlSearch = AUTH_API + `/auth/?page=${page}&itemPerPage=${itemPerPage}`
+  var urlSearch =
+    USER_API + `/user/organization/?page=${page}&itemPerPage=${itemPerPage}`
   if (userName) urlSearch += `&username=${userName}`
   if (email) urlSearch += `&email=${email}`
   if (firstName) urlSearch += `&firstName=${firstName}`
@@ -17,29 +18,28 @@ export function searchUser(
 }
 
 export function registerUser(data = {}) {
-  return postFetch(AUTH_API + '/auth/register', data)
+  return postFetch(USER_API + '/user/organization', data)
 }
 
 export function getOne(_id) {
-  let urlFetch = AUTH_API + '/auth/' + _id
+  let urlFetch = USER_API + '/user/organization/' + _id
   return getFetch(urlFetch)
 }
 
 export function updateOne(_id, user = {}) {
-  let urlFetch = AUTH_API + '/auth/' + _id
+  let urlFetch = USER_API + '/user/organization/' + _id
   return putFetch(urlFetch, user)
 }
 
 export function deleteOne(_id) {
-  let urlFetch = AUTH_API + '/auth/' + _id
+  let urlFetch = USER_API + '/user/organization/' + _id
   return deleteFetch(urlFetch)
 }
 
 export function updateRole(_id, data = {}) {
-  let urlFetch = AUTH_API + '/auth/role/' + _id
+  let urlFetch = USER_API + '/user/organization/role/' + _id
   return putFetch(urlFetch, data)
 }
-
 
 export default {
   searchUser,

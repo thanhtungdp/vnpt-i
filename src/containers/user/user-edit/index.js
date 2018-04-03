@@ -21,20 +21,26 @@ export default class UserEdit extends React.PureComponent {
     getItem: PropTypes.func,
     isLoaded: PropTypes.bool
   }
+  constructor(props) {
+    super(props)
+    this.state = {
+      isLoading: false
+    }
+  }
 
   async handleSubmit(data) {
-    this.props.onUpdateItem(data, this.props.history.push(slug.user.list))
+    this.setState({
+      isLoading: true
+    })
+    await this.props.onUpdateItem(data)
+    this.setState({
+      isLoading: false
+    })
   }
 
   //Su kien truoc khi component duoc tao ra
   async componentWillMount() {
     this.props.getItem()
-  }
-
-  cleanData() {
-    return {
-      ...this.props.data
-    }
   }
 
   // Su kien xoa measuring
@@ -63,7 +69,7 @@ export default class UserEdit extends React.PureComponent {
             'list',
             {
               id: 'edit',
-              name: this.props.isLoaded ? this.cleanData().data.username : null
+              name: this.props.isLoaded ? this.props.data.username : null
             }
           ]}
         />
@@ -73,6 +79,7 @@ export default class UserEdit extends React.PureComponent {
               initialValues={this.props.data}
               onSubmit={this.handleSubmit}
               isEdit
+              isLoading={this.state.isLoading}
             />
           )}
       </PageContainer>

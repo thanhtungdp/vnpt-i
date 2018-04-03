@@ -122,7 +122,6 @@ export default class Login extends PureComponent {
               {translate('resetPassword.key')}
             </Link>
           </FloatRight>
-
         </Form>
       </Container>
     )

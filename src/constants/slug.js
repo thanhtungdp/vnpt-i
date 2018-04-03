@@ -50,7 +50,7 @@ export default {
     codeConfirmWithKey: '/user/code-confirm',
     resetPassword: '/user/reset-password',
     rule: '/user/rule/:key',
-    ruleWithKey: '/user/rule',
+    ruleWithKey: '/user/rule'
   },
   role: {
     list: '/role',

@@ -9,8 +9,18 @@ import Breadcrumb from '../breadcrumb'
 
 @autobind
 export default class UserCreate extends React.PureComponent {
+  constructor(props) {
+    super(props)
+    this.state = {
+      isLoading: false
+    }
+  }
+
   async handleSubmit(data) {
-      debugger
+    this.setState({
+      isLoading: true
+    })
+
     const res = await UserApi.registerUser(data)
     if (res.success) {
       message.info('Register User success!')
@@ -23,7 +33,10 @@ export default class UserCreate extends React.PureComponent {
     return (
       <PageContainer title="Create station type" {...this.props.wrapperProps}>
         <Breadcrumb items={['list', 'create']} />
-        <UserForm onSubmit={this.handleSubmit} />
+        <UserForm
+          onSubmit={this.handleSubmit}
+          isLoading={this.state.isLoading}
+        />
       </PageContainer>
     )
   }

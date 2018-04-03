@@ -1,5 +1,5 @@
 import React from 'react'
-import { Form, Input, Button, Row, Col, Icon, Select } from 'antd'
+import { Form, Input, Button, Row, Col, Icon } from 'antd'
 import PropTypes from 'prop-types'
 import { autobind } from 'core-decorators'
 import { mapPropsToFields } from 'utils/form'
@@ -27,19 +27,17 @@ export default class UserSearchForm extends React.PureComponent {
     super(props)
     this.state = {
       dataSearch: {},
-      phone: {},
+      phone: {}
     }
   }
 
-  async componentWillMount() {
-  }
+  async componentWillMount() {}
 
   changeSearch(e) {
     e.preventDefault()
     this.props.form.validateFields((err, values) => {
       if (err) return
       const dataSearch = {}
-      if (values.userName) dataSearch.userName = values.userName
       if (values.email) dataSearch.email = values.email
       if (values.firstName) dataSearch.firstName = values.firstName
       if (values.lastName) dataSearch.lastName = values.lastName
@@ -73,16 +71,7 @@ export default class UserSearchForm extends React.PureComponent {
     return (
       <Form className="ant-advanced-search-form" onSubmit={this.changeSearch}>
         <Row gutter={24}>
-          <Col span={6} key="userName">
-            <FormItem label={t('userSearchFrom.form.userName.label')}>
-              {getFieldDecorator(`userName`)(
-                <Input
-                  placeholder={t('userSearchFrom.form.userName.placeholder')}
-                />
-              )}
-            </FormItem>
-          </Col>
-          <Col span={6} key="email">
+          <Col span={8} key="email">
             <FormItem label={t('userSearchFrom.form.email.label')}>
               {getFieldDecorator(`email`)(
                 <Input
@@ -92,7 +81,7 @@ export default class UserSearchForm extends React.PureComponent {
             </FormItem>
           </Col>
 
-          <Col span={6} key="firstName">
+          <Col span={8} key="firstName">
             <FormItem label={t('userSearchFrom.form.firstName.label')}>
               {getFieldDecorator(`firstName`)(
                 <Input
@@ -101,7 +90,7 @@ export default class UserSearchForm extends React.PureComponent {
               )}
             </FormItem>
           </Col>
-          <Col span={6} key="lastName">
+          <Col span={8} key="lastName">
             <FormItem label={t('userSearchFrom.form.lastName.label')}>
               {getFieldDecorator(`lastName`)(
                 <Input

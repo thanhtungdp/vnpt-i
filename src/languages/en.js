@@ -39,7 +39,7 @@ export default {
     key3: 'Reset password',
     key4: 'Resend code',
     key5: 'Confirm',
-    key6: 'Send code',
+    key6: 'Send code'
   },
   profileUser: {
     success: 'Change infomation successfully'
@@ -362,6 +362,9 @@ export default {
       phone: {
         label: 'Phone',
         placeholder: 'Phone'
+      },
+      isAdmin: {
+        label: 'isAdmin'
       }
     }
   },
@@ -378,9 +381,9 @@ export default {
       label: 'role',
       placeholder: 'role'
     },
-    message:{
+    message: {
       success: 'Update Rule User success!',
-      error: 'Update Rule User fail!',
+      error: 'Update Rule User fail!'
     }
   }
 }

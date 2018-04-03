@@ -28,7 +28,7 @@ export function PostConfirmCode(data) {
 }
 
 //Reset password
-export function PutResetPassword(_id,data) {
+export function PutResetPassword(_id, data) {
   return putFetch(AUTH_API + `/auth/forgot-password/${_id}`, data)
 }
 
