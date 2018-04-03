@@ -87,7 +87,7 @@ class DataSearch extends React.PureComponent {
       if (station) {
         data.measuringArray = station.measuringList.map(item => item.key)
       }
-      console.log(data)
+
       this.setState({ dataSearch: data, station: station }, () =>
         this.searchData(data)
       )

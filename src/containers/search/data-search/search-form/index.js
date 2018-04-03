@@ -15,6 +15,7 @@ import { default as BoxShadowStyle } from 'components/elements/box-shadow'
 import Heading from 'components/elements/heading'
 import AdvancedOperator from './AdvancedOperator'
 import SelectStationAuto from '../../common/select-station-auto'
+import { translate } from 'hoc/create-lang'
 
 const FSelectStationType = createValidateComponent(SelectStationType)
 const FSelectStationAuto = createValidateComponent(SelectStationAuto)
@@ -29,6 +30,18 @@ const Container = styled.div`
   padding: 16px 16px;
 `
 
+function validate(values) {
+  const errors = {}
+  if (!values.stationType)
+    errors.stationType = translate('avgSearchFrom.form.stationType.error')
+  if (!values.stationAuto || values.stationAuto === '')
+    errors.stationAuto = translate('avgSearchFrom.form.stationAuto.error')
+  if (!values.type) errors.type = translate('avgSearchFrom.form.type.error')
+  if (values.measuringList && values.measuringList.length === 0)
+    errors.measuringList = translate('avgSearchFrom.form.measuringList.require')
+
+  return errors
+}
 @connect(state => ({
   initialValues: {
     fromDate: moment(new Date().setMonth(new Date().getMonth() - 1)),
@@ -36,19 +49,25 @@ const Container = styled.div`
   }
 }))
 @reduxForm({
-  form: 'dataSearchForm'
+  form: 'dataSearchForm',
+  validate
 })
 @createLang
 @autobind
 export default class SearchForm extends React.Component {
   state = {
     stationTypeKey: '',
+    stationAutoKey: '',
     measuringData: [],
     measuringList: []
   }
 
   handleChangeStationType(stationTypeKey, e) {
-    this.setState({ stationTypeKey: stationTypeKey ? stationTypeKey.key : '' })
+    this.setState({
+      stationTypeKey: stationTypeKey ? stationTypeKey.key : '',
+      stationAutoKey: ''
+    })
+    this.props.change('stationAuto', '')
   }
 
   handleChangeStationAuto(stationAuto) {
@@ -58,7 +77,9 @@ export default class SearchForm extends React.Component {
         value: measuring.key,
         name: measuring.name
       })),
-      measuringData: measuringData
+      measuringData: measuringData,
+      stationAutoKey: stationAuto.key,
+      stationAutoName: stationAuto.name
     })
     this.props.change('measuringList', measuringData.map(m => m.key))
   }
@@ -72,6 +93,7 @@ export default class SearchForm extends React.Component {
       fromDate: this.convertDateToString(values.fromDate),
       toDate: this.convertDateToString(values.toDate),
       key: values.stationAuto,
+      name: this.state.stationAutoName,
       measuringList: values.measuringList,
       measuringData: this.state.measuringData,
       isExceeded: values.isExceeded,
@@ -130,6 +152,8 @@ export default class SearchForm extends React.Component {
                 stationTypeKey={this.state.stationTypeKey}
                 component={FSelectStationAuto}
                 onChangeObject={this.handleChangeStationAuto}
+                stationAutoKey={this.state.stationAutoKey}
+                setKey
               />
             </Col>
             <Col span={8}>

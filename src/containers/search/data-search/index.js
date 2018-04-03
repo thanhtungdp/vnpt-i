@@ -12,6 +12,7 @@ export default class MinutesDataSearch extends React.Component {
   state = {
     dataStationAuto: [],
     measuringList: [],
+    measuringData: [],
     searchFormData: {},
     lines: [],
     isLoading: false,
@@ -43,7 +44,8 @@ export default class MinutesDataSearch extends React.Component {
     this.setState({
       isLoading: false,
       dataStationAuto: dataStationAuto.data,
-      measuringList: searchFormData.measuringData,
+      measuringData: searchFormData.measuringData,
+      measuringList: searchFormData.measuringList,
       searchFormData: searchFormData,
       pagination: {
         ...pagination,
@@ -69,11 +71,13 @@ export default class MinutesDataSearch extends React.Component {
         {this.state.isHaveData ? (
           <TabList
             isLoading={this.state.isLoading}
+            measuringData={this.state.measuringData}
             measuringList={this.state.measuringList}
             dataStationAuto={this.state.dataStationAuto}
             pagination={this.state.pagination}
             onChangePage={this.handleChangePage}
             onExportExcel={this.handleExportExcel}
+            nameChart={this.state.searchFormData.name}
           />
         ) : null}
       </PageContainer>

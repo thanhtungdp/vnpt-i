@@ -10,10 +10,12 @@ import {
   XAxis,
   YAxis,
   LineSeries,
-  Tooltip
+  Tooltip,
+  RangeSelector
 } from 'react-jsx-highstock'
 import PropTypes from 'prop-types'
 import Highcharts from 'highcharts/highstock'
+import moment from 'moment/moment'
 
 const TabChartWrapper = styled.div`
   display: flex;
@@ -26,7 +28,8 @@ export class TabChart extends React.PureComponent {
   static propTypes = {
     getChart: PropTypes.func,
     dataStationAuto: PropTypes.array,
-    measuringData: PropTypes.array
+    measuringData: PropTypes.array,
+    nameChart: PropTypes.string
   }
 
   getDataSort() {
@@ -40,11 +43,11 @@ export class TabChart extends React.PureComponent {
     return this.getDataSort()
       .map(stationAuto => {
         if (stationAuto.measuringLogs[measuringKey]) {
-          return (
+          return [
             new Date(stationAuto.receivedAt).getTime() -
               new Date().getTimezoneOffset() * 60000,
             stationAuto.measuringLogs[measuringKey].value
-          )
+          ]
         }
         return null
       })
@@ -72,17 +75,33 @@ export class TabChart extends React.PureComponent {
     return (
       <TabChartWrapper>
         <HighchartsStockChart callback={this.getChart}>
-          <Chart width={1000} zoomType="x" />
-          <Title>Chart</Title>
+          <Chart width={800} zoomType="x" />
+          <Title>{this.props.nameChart ? this.props.nameChart : 'Chart'}</Title>
           <Legend layout="horizontal" align="center" verticalAlign="bottom" />
+
+          <RangeSelector>
+            <RangeSelector.Button type="all">All</RangeSelector.Button>
+            <RangeSelector.Input
+              boxBorderColor="#7cb5ec"
+              boxWidth={150}
+              inputDateParser={value => {
+                return moment.utc(value, 'DD. MMM hh:mm').valueOf()
+              }}
+              editDateFormat="%e. %b %H:%M"
+              dateFormat="%e. %b %H:%M"
+            />
+          </RangeSelector>
+
           <XAxis
             type="datetime"
             dateTimeLabelFormats={{
+              hour: '%e. %b %H:%M',
               minute: '%e. %b %H:%M'
             }}
           >
             <XAxis.Title>Time</XAxis.Title>
           </XAxis>
+
           <YAxis id="number">
             {this.getDataLines().map(dataLine => (
               <LineSeries

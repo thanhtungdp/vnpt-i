@@ -53,8 +53,6 @@ export default class StationAutoForm extends React.PureComponent {
       fileList: [],
       imgList: []
     }
-    const { t } = this.props.lang
-    const { getFieldDecorator } = this.props.form
   }
 
   async componentWillMount() {
