@@ -29,6 +29,7 @@ const createManagerList = ({ apiList, itemPerPage = 20 }) => Component => {
         isLoading: true
       })
       const res = await apiList(this.state.pagination, this.state.data)
+
       this.setState({
         dataSource: res.data,
         pagination: res.pagination,
@@ -52,7 +53,8 @@ const createManagerList = ({ apiList, itemPerPage = 20 }) => Component => {
         {
           pagination: {
             ...this.state.pagination,
-            page: page
+            page: page,
+            itemPerPage: pageSize
           }
         },
         () => {
@@ -61,9 +63,13 @@ const createManagerList = ({ apiList, itemPerPage = 20 }) => Component => {
       )
     }
 
-    onChangeSearch(dataSearch) {
+    onChangeSearch(pagination, dataSearch) {
       this.setState(
         {
+          pagination: {
+            ...this.state.pagination,
+            pagination
+          },
           data: { ...dataSearch }
         },
         () => {
@@ -81,11 +87,12 @@ const createManagerList = ({ apiList, itemPerPage = 20 }) => Component => {
       this.setState(
         {
           pagination: {
-            page: currentPage,
+            page: 1,
             itemPerPage: pageSize
           }
         },
         () => {
+          console.log(this.state.pagination)
           this.fetchData()
         }
       )

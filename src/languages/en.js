@@ -274,11 +274,13 @@ export default {
     form: {
       stationType: {
         label: 'Station type',
-        placeholder: 'Select station type'
+        placeholder: 'Select station type',
+        error: 'Please choose station type'
       },
       stationAuto: {
         label: 'Station auto',
-        placeholder: 'Select station auto'
+        placeholder: 'Select station auto',
+        error: 'Please choose station auto'
       },
       fromDate: {
         label: 'From',
@@ -303,7 +305,8 @@ export default {
         label: 'Value'
       },
       type: {
-        label: 'Report type'
+        label: 'Report type',
+        error: 'Please choose report type'
       },
       advanced: {
         label: 'Advanced'
@@ -335,5 +338,99 @@ export default {
       error: 'Delete error!'
     },
     search: 'Search'
+  },
+  userSearchFrom: {
+    form: {
+      userName: {
+        label: 'Username',
+        placeholder: 'Username'
+      },
+      email: {
+        label: 'Email',
+        placeholder: 'Email'
+      },
+      firstName: {
+        label: 'FirstName',
+        placeholder: 'FirstName'
+      },
+      lastName: {
+        label: 'LastName',
+        placeholder: 'LastName'
+      },
+      country: {
+        label: 'Country',
+        placeholder: 'Select Country'
+      },
+      organization: {
+        label: 'Organization',
+        placeholder: 'Select Organization'
+      },
+      phone: {
+        label: 'Phone',
+        placeholder: 'Phone'
+      }
+    }
+  },
+  userForm: {
+    form: {
+      userName: {
+        label: 'Username',
+        placeholder: 'Username'
+      },
+      email: {
+        label: 'Email',
+        placeholder: 'Email'
+      },
+      password: {
+        label: 'Password',
+        placeholder: 'Password'
+      },
+      confirmPassword: {
+        label: 'Confirm Password',
+        placeholder: 'Confirm Password',
+        message: 'Please confirm your password!'
+      },
+      firstName: {
+        label: 'FirstName',
+        placeholder: 'FirstName'
+      },
+      lastName: {
+        label: 'LastName',
+        placeholder: 'LastName'
+      },
+      country: {
+        label: 'Country',
+        placeholder: 'Select Country'
+      },
+      organization: {
+        label: 'Organization',
+        placeholder: 'Select Organization'
+      },
+      phone: {
+        label: 'Phone',
+        placeholder: 'Phone'
+      },
+      isAdmin: {
+        label: 'isAdmin'
+      }
+    }
+  },
+  userRule: {
+    name: {
+      label: 'name',
+      placeholder: 'name'
+    },
+    address: {
+      label: 'address',
+      placeholder: 'address'
+    },
+    role: {
+      label: 'role',
+      placeholder: 'role'
+    },
+    message: {
+      success: 'Update Rule User success!',
+      error: 'Update Rule User fail!'
+    }
   }
 }

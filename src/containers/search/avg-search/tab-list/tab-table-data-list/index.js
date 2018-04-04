@@ -11,7 +11,8 @@ const TableDataListWrapper = styled.div``
 @autobind
 export default class TableDataList extends React.PureComponent {
   static propTypes = {
-    measuringList: PropTypes.array
+    measuringList: PropTypes.array,
+    measuringData: PropTypes.array
   }
 
   getColumns() {
@@ -19,16 +20,22 @@ export default class TableDataList extends React.PureComponent {
       title: 'Received At',
       dataIndex: 'receivedAt',
       key: 'receivedAt',
-      render(value) {
-        return <div>{moment(value).toString()}</div>
+      render(value, record) {
+        return (
+          <div>
+            {moment(record._id).format('dddd, MMMM Do YYYY, h:mm:ss a')}
+          </div>
+        )
       }
     }
-    const columnsMeasurings = this.props.measuringList.map(measuring => ({
-      title: `${measuring.name}(${measuring.unit})`,
-      dataIndex: `${measuring.key}`,
-      key: measuring.key,
-      render: value => <div>{value && value !== '' && roundTo(value, 2)}</div>
-    }))
+    const columnsMeasurings = this.props.measuringData
+      .filter(measuring => this.props.measuringList.includes(measuring.key))
+      .map(measuring => ({
+        title: `${measuring.name}(${measuring.unit})`,
+        dataIndex: `${measuring.key}`,
+        key: measuring.key,
+        render: value => <div>{value && value !== '' && roundTo(value, 2)}</div>
+      }))
     return [columnReceivedAt, ...columnsMeasurings]
   }
 
