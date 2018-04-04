@@ -25,7 +25,8 @@ export default class MeasuringList extends React.PureComponent {
   render() {
     return (
       <MeasuringListWrapper>
-        {this.props.data.length !== 0 &&
+        {this.props.data &&
+          this.props.data.length !== 0 &&
           this.props.data.map(item => (
             <MeasuringItemWrapper key={item.key}>
               <MeasuringItem {...item} />

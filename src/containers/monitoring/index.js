@@ -23,10 +23,9 @@ export default class Monitoring extends React.Component {
       itemPerPage: 10
     })
     let dataStationAutos = await StationAutoApi.getLastLog()
-
     // Caculate data
     let dataMonitoring = dataStationTypes.data.map(stationType => {
-      const stationAutoList = dataStationAutos.filter(
+      const stationAutoList = dataStationAutos.data.filter(
         stationAuto => stationAuto.stationType.key === stationType.key
       )
       return {
@@ -34,7 +33,6 @@ export default class Monitoring extends React.Component {
         stationAutoList
       }
     })
-
     this.setState({
       data: dataMonitoring,
       isLoading: true
