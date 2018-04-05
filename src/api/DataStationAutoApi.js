@@ -28,7 +28,8 @@ export function getExportData({
   if (advanced) url += `&advanced=${JSON.stringify(advanced)}`
   if (measuringList) url += `&measuringList=${measuringList.join(',')}`
   if (isExceeded) url += `&isExceeded=${isExceeded}`
-  window.location = url
+  return getFetch(url)
+  //window.location = url
 }
 
 export function getDataStationAutoAvg(
@@ -55,7 +56,7 @@ export function getDataStationAutoExportAvg({
   if (toDate) url += `&to=${toDate}`
   if (measuringList) url += `&measuringList=${measuringList.join(',')}`
   if (type) url += `&type=${type}`
-  window.location = url
+  return getFetch(url)
 }
 
 export default {

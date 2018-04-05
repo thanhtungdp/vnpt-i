@@ -29,7 +29,8 @@ export default class TabeList extends React.PureComponent {
     pagination: PropTypes.object,
     onChangePage: PropTypes.func,
     onExportExcel: PropTypes.func,
-    nameChart: PropTypes.string
+    nameChart: PropTypes.string,
+    isExporting: PropTypes.bool
   }
 
   render() {
@@ -41,6 +42,7 @@ export default class TabeList extends React.PureComponent {
             icon="file-excel"
             style={{ float: 'right', margin: '5px' }}
             onClick={this.props.onExportExcel}
+            loading={this.props.isExporting}
           >
             Export to excel
           </Button>
