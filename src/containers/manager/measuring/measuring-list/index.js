@@ -92,11 +92,11 @@ export default class MeasuringList extends React.Component {
       {
         content: (
           <span>
-            <Link to={slug.measuring.editWithKey + '/' + row.key}> Edit </Link>
+            <Link to={slug.measuring.editWithKey + '/' + row._id}> Edit </Link>
             <Divider type="vertical" />
             <a
               onClick={() =>
-                this.props.onDeleteItem(row.key, this.props.fetchData)
+                this.props.onDeleteItem(row._id, this.props.fetchData)
               }
             >
               Delete
