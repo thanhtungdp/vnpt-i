@@ -111,20 +111,20 @@ export default class StationAutoList extends React.Component {
             content: (
               <div>
                 <span>
-                  <Link to={slug.stationAuto.editWithKey + '/' + row.key}>
+                  <Link to={slug.stationAuto.editWithKey + '/' + row._id}>
                     {' '}
                     Edit{' '}
                   </Link>
                   <Divider type="vertical" />
                   <a
                     onClick={() =>
-                      this.props.onDeleteItem(row.key, this.props.fetchData)
+                      this.props.onDeleteItem(row._id, this.props.fetchData)
                     }
                   >
                     Delete
                   </a>
                   <Divider type="vertical" />
-                  <Link to={slug.stationAuto.configWithKey + '/' + row.key}>
+                  <Link to={slug.stationAuto.configWithKey + '/' + row._id}>
                     {' '}
                     Config{' '}
                   </Link>

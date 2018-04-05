@@ -9,6 +9,7 @@ import createManagerDelete from 'hoc/manager-delete'
 import createManagerEdit from 'hoc/manager-edit'
 import PropTypes from 'prop-types'
 import Breadcrumb from '../breadcrumb'
+import { message } from 'antd'
 
 @createManagerDelete({
   apiDelete: StationAutoApi.deleteStationAuto
@@ -34,7 +35,11 @@ export default class StationAutoEdit extends React.PureComponent {
   //Su kien truoc khi component duoc tao ra
   async componentWillMount() {
     //const key = this.props.match.params.key
-    this.props.getItem()
+    await this.props.getItem()
+    if (!this.props.success) {
+      message.error(this.props.lang.t('addon.error'))
+      this.props.history.push(slug.stationAuto.list)
+    }
   }
 
   cleanData() {
@@ -78,17 +83,21 @@ export default class StationAutoEdit extends React.PureComponent {
             'list',
             {
               id: 'edit',
-              name: this.props.isLoaded ? this.cleanData().name : null
+              name:
+                this.props.isLoaded && this.props.success
+                  ? this.cleanData().name
+                  : null
             }
           ]}
         />
-        {this.props.isLoaded && (
-          <StationAutoForm
-            initialValues={this.cleanData()}
-            onSubmit={this.handleSubmit}
-            isEdit={true}
-          />
-        )}
+        {this.props.isLoaded &&
+          this.props.success && (
+            <StationAutoForm
+              initialValues={this.cleanData()}
+              onSubmit={this.handleSubmit}
+              isEdit={true}
+            />
+          )}
       </PageContainer>
     )
   }

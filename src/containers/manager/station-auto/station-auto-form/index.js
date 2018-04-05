@@ -121,6 +121,7 @@ export default class StationAutoForm extends React.PureComponent {
   }
 
   changeStationType(stationType) {
+    this.props.form.setFieldsValue({ stationType })
     this.setState({ stationType: stationType })
   }
 
@@ -267,7 +268,8 @@ export default class StationAutoForm extends React.PureComponent {
               {getFieldDecorator('stationType', {
                 initialValue: this.props.initialValues
                   ? this.props.initialValues.stationType.key
-                  : ''
+                  : '',
+                rules: [{ required: true }]
               })(
                 <SelectStationType
                   label={t('stationAutoManager.form.stationType.label')}
