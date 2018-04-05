@@ -6,7 +6,7 @@ import Clearfix from 'components/elements/clearfix/index'
 import TabList from './tab-list/index'
 import Breadcrumb from './breadcrumb'
 import SearchFrom from './search-form/index'
-
+import { message, Spin } from 'antd'
 @autobind
 export default class MinutesDataSearch extends React.Component {
   state = {
@@ -17,6 +17,7 @@ export default class MinutesDataSearch extends React.Component {
     lines: [],
     isLoading: false,
     isHaveData: false,
+    isExporting: false,
     pagination: {
       current: 1,
       pageSize: 50
@@ -30,7 +31,7 @@ export default class MinutesDataSearch extends React.Component {
   async loadData(pagination, searchFormData) {
     this.setState({
       isLoading: true,
-      isHaveData: true
+      isHaveData: true,
     })
 
     var dataStationAuto = await DataStationAutoApi.getDataStationAutos(
@@ -59,27 +60,41 @@ export default class MinutesDataSearch extends React.Component {
   }
 
   async handleExportExcel() {
-    DataStationAutoApi.getExportData(this.state.searchFormData)
+    this.setState({
+      isExporting: true
+    })
+    let res = await DataStationAutoApi.getExportData(this.state.searchFormData)
+    if (res.success)
+      window.location = res.data
+    else
+      message.error(res.message)
+
+    this.setState({
+      isExporting: false
+    })
   }
 
   render() {
     return (
       <PageContainer {...this.props.wrapperProps} backgroundColor={'#fafbfb'}>
-        <Breadcrumb items={['list']} />
-        <SearchFrom onSubmit={this.handleSubmitSearch} />
-        <Clearfix height={16} />
-        {this.state.isHaveData ? (
-          <TabList
-            isLoading={this.state.isLoading}
-            measuringData={this.state.measuringData}
-            measuringList={this.state.measuringList}
-            dataStationAuto={this.state.dataStationAuto}
-            pagination={this.state.pagination}
-            onChangePage={this.handleChangePage}
-            onExportExcel={this.handleExportExcel}
-            nameChart={this.state.searchFormData.name}
-          />
-        ) : null}
+        <Spin size="large" tip="Exporting..." spinning={this.state.isExporting}>
+          <Breadcrumb items={['list']} />
+          <SearchFrom onSubmit={this.handleSubmitSearch} />
+          <Clearfix height={16} />
+          {this.state.isHaveData ? (
+            <TabList
+              isLoading={this.state.isLoading}
+              measuringData={this.state.measuringData}
+              measuringList={this.state.measuringList}
+              dataStationAuto={this.state.dataStationAuto}
+              pagination={this.state.pagination}
+              onChangePage={this.handleChangePage}
+              onExportExcel={this.handleExportExcel}
+              nameChart={this.state.searchFormData.name}
+              isExporting={this.state.isExporting}
+            />
+          ) : null}
+        </Spin>
       </PageContainer>
     )
   }
