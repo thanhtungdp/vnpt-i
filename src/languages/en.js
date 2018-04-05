@@ -146,7 +146,8 @@ export default {
       },
       stationType: {
         label: 'Type',
-        placeholder: 'Input type'
+        placeholder: 'Input type',
+        error: 'Please choose stationType!'
       },
       address: {
         label: 'Address',
@@ -227,6 +228,32 @@ export default {
       message: {
         success: 'Update station auto config success!',
         error: 'Update station auto config fail!'
+      }
+    },
+    options: {
+      allowSendWarning: {
+        label: 'allow Send Warning',
+        placeholder: 'allowSendWarning'
+      },
+      allowSampling: {
+        label: 'allow Sampling',
+        placeholder: 'allowSendWarning'
+      },
+      apiAddress: {
+        label: 'API Address',
+        placeholder: 'allowSendWarning'
+      },
+      allowCamera: {
+        label: 'allow Camera',
+        placeholder: 'allow Camera'
+      },
+      name: {
+        label: 'Name',
+        placeholder: 'Name'
+      },
+      RTSP: {
+        label: 'RTSP URL',
+        placeholder: 'RTSP URL'
       }
     }
   },
@@ -337,7 +364,8 @@ export default {
       success: 'Delete success!',
       error: 'Delete error!'
     },
-    search: 'Search'
+    search: 'Search',
+    error: 'Something went wrong!!!'
   },
   userSearchFrom: {
     form: {

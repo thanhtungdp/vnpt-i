@@ -133,6 +133,9 @@ export default class StationAutoForm extends React.PureComponent {
           <Col span={12}>
             <FormItem label={t('stationAutoManager.config.fileName.label')}>
               {getFieldDecorator('fileName', {
+                initialValue: this.props.initialValues
+                  ? this.props.initialValues.fileName
+                  : '',
                 rules: [
                   {
                     required: true,
@@ -152,6 +155,9 @@ export default class StationAutoForm extends React.PureComponent {
           <Col span={12}>
             <FormItem label={t('stationAutoManager.config.path.label')}>
               {getFieldDecorator('path', {
+                initialValue: this.props.initialValues
+                  ? this.props.initialValues.path
+                  : '',
                 rules: [
                   {
                     required: true,
@@ -181,11 +187,11 @@ export default class StationAutoForm extends React.PureComponent {
             hideOnSinglePage: true
           }}
         />
-        <FormItem>
+        {/* <FormItem>
           <Button style={{ width: '100%' }} type="primary" htmlType="submit">
             {t('addon.save')}
           </Button>
-        </FormItem>
+        </FormItem> */}
       </Form>
     )
   }
