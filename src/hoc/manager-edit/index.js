@@ -8,7 +8,8 @@ const createManagerEdit = ({ apiUpdate, apiGetByKey }) => Component => {
   class ManagerEditHoc extends React.Component {
     state = {
       isLoaded: false,
-      data: {}
+      data: {},
+      success: false
     }
     static propTypes = {
       lang: langPropTypes
@@ -25,8 +26,13 @@ const createManagerEdit = ({ apiUpdate, apiGetByKey }) => Component => {
     async getItem() {
       const key = this.props.match.params.key
       const item = await apiGetByKey(key)
-      if (item.success) this.setState({ isLoaded: true, data: item.data })
-      else this.setState({ isLoaded: true, data: {}, message: item.message })
+      if (item.success)
+        this.setState({
+          isLoaded: true,
+          data: item.data,
+          success: item.success
+        })
+      else this.setState({ isLoaded: true, message: item.message })
     }
 
     render() {
@@ -34,7 +40,8 @@ const createManagerEdit = ({ apiUpdate, apiGetByKey }) => Component => {
         isLoaded: this.state.isLoaded,
         data: this.state.data,
         onUpdateItem: this.updateItem,
-        getItem: this.getItem
+        getItem: this.getItem,
+        success: this.state.success
       }
       return <Component {...this.props} {...props} />
     }
