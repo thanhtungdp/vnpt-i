@@ -54,7 +54,7 @@ export default class RoleEdit extends PureComponent {
         title: 'success',
         type: 'success'
       }).then(() => {
-        this.props.history.push(slug.role.base)
+       // this.props.history.push(slug.role.base)
       })
     }
   }
