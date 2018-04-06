@@ -24,7 +24,23 @@ import MeasuringTable from '../station-auto-formTable/'
 const FormItem = Form.Item
 
 @Form.create({
-  mapPropsToFields: mapPropsToFields
+  mapPropsToFields: ({ initialValues }) => {
+    if (!initialValues) return
+    if (initialValues.stationType) {
+      initialValues.stationTypeObject = initialValues.stationType
+      initialValues.stationType = initialValues.stationType.key
+    }
+    if (initialValues.mapLocation) {
+      initialValues = {
+        ...initialValues,
+        lat: initialValues.mapLocation.lat,
+        long: initialValues.mapLocation.long
+      }
+    }
+    if (!initialValues.emails) initialValues.emails = []
+    if (!initialValues.phones) initialValues.phones = []
+    return mapPropsToFields({ initialValues })
+  }
 })
 @createLanguageHoc
 @autobind
@@ -81,7 +97,8 @@ export default class StationAutoForm extends React.PureComponent {
         emails: this.props.initialValues.emails,
         phones: this.props.initialValues.phones,
         measuringList: this.props.initialValues.measuringList,
-        stationType: this.props.initialValues.objStationType,
+        stationType: this.props.initialValues.stationType,
+        stationTypeObject: this.props.initialValues.stationTypeObject,
         options: this.props.initialValues.options
           ? this.props.initialValues.options
           : {},
@@ -110,7 +127,7 @@ export default class StationAutoForm extends React.PureComponent {
         address: values.address,
         emails: this.state.emails,
         phones: this.state.phones,
-        stationType: this.state.stationType,
+        stationType: this.state.stationTypeObject,
         measuringList: values.measuringList,
         options: this.state.options,
         image: this.state.imgList.length > 0 ? this.state.imgList[0] : null
@@ -120,9 +137,12 @@ export default class StationAutoForm extends React.PureComponent {
     })
   }
 
-  changeStationType(stationType) {
-    this.props.form.setFieldsValue({ stationType })
-    this.setState({ stationType: stationType })
+  changeStationType(stationTypeObject) {
+    this.props.form.setFieldsValue({ stationType: stationTypeObject.key })
+    this.setState({
+      stationType: stationTypeObject.key,
+      stationTypeObject: stationTypeObject
+    })
   }
 
   onOptionChange(checkedValues) {
@@ -266,9 +286,6 @@ export default class StationAutoForm extends React.PureComponent {
           <Col span={12}>
             <FormItem label={t('stationAutoManager.form.stationType.label')}>
               {getFieldDecorator('stationType', {
-                initialValue: this.props.initialValues
-                  ? this.props.initialValues.stationType.key
-                  : '',
                 rules: [{ required: true }]
               })(
                 <SelectStationType
@@ -373,7 +390,13 @@ export default class StationAutoForm extends React.PureComponent {
           dataSource={
             this.props.initialValues
               ? this.props.initialValues.measuringList
-              : []
+              : [
+                  {
+                    key: '',
+                    name: '',
+                    unit: ''
+                  }
+                ]
           }
           measuringListSource={this.state.measuringListSource}
         />

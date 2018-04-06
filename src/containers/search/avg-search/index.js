@@ -40,8 +40,7 @@ export default class AvgSearch extends React.Component {
       },
       searchFormData
     )
-    if (dataStationAuto.error)
-      message.error(dataStationAuto.message)
+    if (dataStationAuto.error) message.error(dataStationAuto.message)
 
     this.setState({
       isLoading: false,
@@ -51,10 +50,11 @@ export default class AvgSearch extends React.Component {
       searchFormData: searchFormData,
       pagination: {
         ...pagination,
-        total: dataStationAuto.success ? dataStationAuto.pagination.totalItem : 0
+        total: dataStationAuto.success
+          ? dataStationAuto.pagination.totalItem
+          : 0
       }
     })
-
   }
 
   handleChangePage(pagination) {
@@ -65,11 +65,11 @@ export default class AvgSearch extends React.Component {
     this.setState({
       isExporting: true
     })
-    let res = await DataStationAutoApi.getDataStationAutoExportAvg(this.state.searchFormData)
-    if (res.success)
-      window.location = res.data
-    else
-      message.error(res.message)
+    let res = await DataStationAutoApi.getDataStationAutoExportAvg(
+      this.state.searchFormData
+    )
+    if (res.success) window.location = res.data
+    else message.error(res.message)
 
     this.setState({
       isExporting: false

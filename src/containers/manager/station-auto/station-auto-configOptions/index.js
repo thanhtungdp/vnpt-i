@@ -6,7 +6,6 @@ import {
   Row,
   Col,
   Table,
-  InputNumber,
   Checkbox,
   Popconfirm,
   Icon
@@ -87,19 +86,21 @@ export default class StationAutoForm extends React.PureComponent {
         render: (text, record, index) => {
           return (
             <div className="editable-row-operations">
-              <span>
-                <Popconfirm
-                  title="Sure to delete?"
-                  onConfirm={() => this.removeCamera(index)}
-                >
-                  <a>
-                    <Icon
-                      type="delete"
-                      style={{ verticalAlign: '5px', color: 'red' }}
-                    />
-                  </a>
-                </Popconfirm>
-              </span>
+              {index !== 0 && (
+                <span>
+                  <Popconfirm
+                    title="Sure to delete?"
+                    onConfirm={() => this.removeCamera(index)}
+                  >
+                    <a>
+                      <Icon
+                        type="delete"
+                        style={{ verticalAlign: '5px', color: 'red' }}
+                      />
+                    </a>
+                  </Popconfirm>
+                </span>
+              )}
             </div>
           )
         }
@@ -108,8 +109,8 @@ export default class StationAutoForm extends React.PureComponent {
   }
 
   removeCamera(index) {
+    /* eslint-disable */
     this.state.cameraList = this.props.form.getFieldValue('list')
-
     this.state.count = 0
     this.state.cameraList.splice(index, 1)
 
@@ -124,7 +125,11 @@ export default class StationAutoForm extends React.PureComponent {
   }
 
   async componentWillMount() {
-    if (this.props.initialValues && this.props.initialValues.camera.allowed)
+    if (
+      this.props.initialValues &&
+      this.props.initialValues.camera &&
+      this.props.initialValues.camera.allowed
+    )
       this.setState({
         cameraList: this.props.initialValues.camera.list.map(item => {
           item.key = this.state.count++
