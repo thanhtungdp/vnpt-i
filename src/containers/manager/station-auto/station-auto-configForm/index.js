@@ -1,5 +1,5 @@
 import React from 'react'
-import { Form, Input, Button, Row, Col, Table, InputNumber } from 'antd'
+import { Form, Input, Row, Col, Table, InputNumber } from 'antd'
 import PropTypes from 'prop-types'
 import { autobind } from 'core-decorators'
 import { mapPropsToFields } from 'utils/form'

@@ -31,7 +31,7 @@ export default class MinutesDataSearch extends React.Component {
   async loadData(pagination, searchFormData) {
     this.setState({
       isLoading: true,
-      isHaveData: true,
+      isHaveData: true
     })
 
     var dataStationAuto = await DataStationAutoApi.getDataStationAutos(
@@ -64,10 +64,8 @@ export default class MinutesDataSearch extends React.Component {
       isExporting: true
     })
     let res = await DataStationAutoApi.getExportData(this.state.searchFormData)
-    if (res.success)
-      window.location = res.data
-    else
-      message.error(res.message)
+    if (res.success) window.location = res.data
+    else message.error(res.message)
 
     this.setState({
       isExporting: false

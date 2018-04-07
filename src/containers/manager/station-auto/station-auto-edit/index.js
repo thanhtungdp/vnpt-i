@@ -43,17 +43,10 @@ export default class StationAutoEdit extends React.PureComponent {
   }
 
   cleanData() {
-    var data = {
-      ...this.props.data,
-      long: this.props.data.mapLocation
-        ? this.props.data.mapLocation.long
-        : null,
-      lat: this.props.data.mapLocation ? this.props.data.mapLocation.lat : null
+    let data = {
+      ...this.props.data
     }
-    if (this.props.data.stationType) {
-      data.stationType = this.props.data.stationType.key
-      data.objStationType = this.props.data.stationType
-    }
+
     data.measuringList = this.props.data.measuringList || []
     return data
   }

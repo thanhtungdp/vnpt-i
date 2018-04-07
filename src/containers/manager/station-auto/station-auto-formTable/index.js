@@ -107,19 +107,21 @@ export default class StationAutoFormTable extends React.PureComponent {
         render: (text, record, index) => {
           return (
             <div className="editable-row-operations">
-              <span>
-                <Popconfirm
-                  title="Sure to delete?"
-                  onConfirm={() => this.removeMeasuring(index)}
-                >
-                  <a>
-                    <Icon
-                      type="delete"
-                      style={{ marginLeft: '5px', color: 'red' }}
-                    />
-                  </a>
-                </Popconfirm>
-              </span>
+              {index !== 0 && (
+                <span>
+                  <Popconfirm
+                    title="Sure to delete?"
+                    onConfirm={() => this.removeMeasuring(index)}
+                  >
+                    <a>
+                      <Icon
+                        type="delete"
+                        style={{ marginLeft: '5px', color: 'red' }}
+                      />
+                    </a>
+                  </Popconfirm>
+                </span>
+              )}
             </div>
           )
         }

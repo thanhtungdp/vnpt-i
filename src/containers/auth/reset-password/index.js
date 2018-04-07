@@ -22,11 +22,13 @@ const Form = styled.form`
   padding: 24px 32px;
 `
 
+// eslint-disable-next-line
 const FloatRight = styled.div`
   text-align: right;
   padding-top: 8px;
 `
 
+// eslint-disable-next-line
 const Header = {
   Wrapper: styled.div`
     display: flex;
@@ -113,9 +115,6 @@ export default class ResetPassword extends PureComponent {
   }
 
   render() {
-    {
-      console.log(this.props, 'render()')
-    }
     return (
       <Container>
         <style dangerouslySetInnerHTML={{ __html: bodyStyle }} />
