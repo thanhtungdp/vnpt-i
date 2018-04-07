@@ -20,6 +20,7 @@ import EmailConfirm from 'containers/auth/reset-password/email-confirm'
 import CodeConfirm from 'containers/auth/reset-password/code-confirm'
 import ResetPassword from 'containers/auth/reset-password'
 import UserRoute from 'containers/user'
+import RoleRoute from 'containers/role'
 
 @autobind
 export default class RouteDefault extends React.Component {
@@ -54,6 +55,7 @@ export default class RouteDefault extends React.Component {
         <Route path={slug.user.codeConfirm} component={CodeConfirm} />
         <Route path={slug.user.resetPassword} component={ResetPassword} />
         <LayoutRoute path={slug.user.base} component={UserRoute} />
+        <LayoutRoute path={slug.role.base} component={RoleRoute} />
       </div>
     )
   }

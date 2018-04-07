@@ -78,6 +78,10 @@ export default class StationAutoList extends React.Component {
     let stationTypeArr = []
     //sort dataSource
     let sourceSorted = this.props.dataSource.sort(function(a, b) {
+      if (!a.stationType)
+        a.stationType = { key: 'NOT SETUP', name: 'NOT SETUP' }
+      if (!b.stationType)
+        b.stationType = { key: 'NOT SETUP', name: 'NOT SETUP' }
       if (a.stationType.key < b.stationType.key) return -1
       if (a.stationType.key > b.stationType.key) return 1
       return 0

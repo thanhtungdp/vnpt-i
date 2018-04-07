@@ -1,18 +1,34 @@
 import { ROLE_API } from 'config'
-import { getFetch } from 'utils/fetch'
+import { deleteFetch, getFetch, postFetch, putFetch } from 'utils/fetch'
 
-const urlROLEAPI = ROLE_API + '/role'
+function getUrl(path = '') {
+  return ROLE_API + '/role/' + path
+}
 
-export function getRole(
-  { page = 1, itemPerPage = 10 },
-  { unit = null, name = null }
-) {
-  var urlSearch = `${urlROLEAPI}?page=${page}&itemPerPage=${itemPerPage}`
-  if (unit) urlSearch += `&unit=${unit}`
-  if (name) urlSearch += `&name=${name}`
-  return getFetch(urlSearch)
+export function getRoles({ page = 1, itemPerPage = 2 }) {
+  return getFetch(getUrl(`?itemPerPage=${itemPerPage}&page=${page}`))
+}
+
+export function createRole(data = {}) {
+  return postFetch(getUrl(), data)
+}
+
+export function deleteRole(_id) {
+  return deleteFetch(getUrl(`${_id}`))
+}
+
+export function getRole(_id) {
+  return getFetch(getUrl() + `${_id}`)
+}
+
+export function updateRole(_id, data) {
+  return putFetch(getUrl() + `${_id}`, data)
 }
 
 export default {
-  getRole
+  getRoles,
+  createRole,
+  deleteRole,
+  getRole,
+  updateRole
 }
