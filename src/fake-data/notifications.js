@@ -91,7 +91,7 @@ export default [
   },
   {
     color: SHAPE.ORANGE,
-    stationName: 'Trạm quan trắc số 4',
+    stationName: 'DoanhTN',
     measuring: {
       ...measurings[0],
       value: 20
