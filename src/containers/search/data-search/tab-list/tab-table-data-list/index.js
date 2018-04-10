@@ -21,6 +21,18 @@ export default class TableDataList extends React.PureComponent {
   }
 
   getColumns() {
+    var me = this
+    const columnIndex = {
+      title: '#',
+      dataIndex: 'Index',
+      key: 'Index',
+      render(value, record, index) {
+        const current = me.props.pagination.current
+        const pageSize = me.props.pagination.pageSize
+        return <div>{(current - 1) * pageSize + index + 1}</div>
+      }
+    }
+
     const columnReceivedAt = {
       title: 'Received At',
       dataIndex: 'receivedAt',
@@ -34,7 +46,11 @@ export default class TableDataList extends React.PureComponent {
     const columnsMeasurings = this.props.measuringData
       .filter(measuring => this.props.measuringList.includes(measuring.key))
       .map(measuring => ({
-        title: `${measuring.name}(${measuring.unit})`,
+        title:
+          `${measuring.name}` +
+          (measuring.unit && measuring.unit !== ''
+            ? `(${measuring.unit})`
+            : ''),
         dataIndex: `measuringLogs.${measuring.key}`,
         key: measuring.key,
         render: value => {
@@ -51,7 +67,7 @@ export default class TableDataList extends React.PureComponent {
           return <div style={{ color: color }}>{value.value}</div>
         }
       }))
-    return [columnReceivedAt, ...columnsMeasurings]
+    return [columnIndex, columnReceivedAt, ...columnsMeasurings]
   }
 
   render() {

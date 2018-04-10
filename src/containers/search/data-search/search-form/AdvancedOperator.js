@@ -53,12 +53,12 @@ export default class AdvancedOperator extends React.PureComponent {
             header={<strong>{t('advanced.label')}</strong>}
             key="1"
           >
-            {this.props.measuringList.map((measuring, index) => (
-              <div key={measuring.value}>
+            {[1, 2, 3].map((measuring, index) => (
+              <div key={index}>
                 <Row gutter={16}>
                   <Col span={8}>
                     <Field
-                      label={t('measuringList.label') + measuring.value}
+                      label={t('measuringList.label')}
                       name={`advanced[${index}].measuringKey`}
                       size="large"
                       showSearch
