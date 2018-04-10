@@ -6,10 +6,18 @@ import notifications from 'fake-data/notifications'
 import NotificationsApi from 'api/NotificationApi'
 import styled from 'styled-components'
 import connectWindowHeight from '../../hoc-window-height'
+import { Icon } from 'antd'
 
 const Wrapper = styled.div`
   height: ${props => props.height}px;
   overflow-y: scroll;
+`
+const Nodata = styled.div`
+  height: 100%;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `
 
 @connectWindowHeight
@@ -22,16 +30,20 @@ export default class BoxNotifications extends React.PureComponent {
 
   async loadData() {
     this.setState({ isLoading: false })
-
     // Fetch data
-    let result = await NotificationsApi.getNotification()
-
-    if (result && result.success) {
-      this.setState({
-        notifications: result.data,
-        isLoading: true
-      })
-    } else {
+    try {
+      let result = await NotificationsApi.getNotification()
+      if (result && result.success) {
+        this.setState({
+          notifications: result.data,
+          isLoading: true
+        })
+      } else {
+        this.setState({
+          isLoading: true
+        })
+      }
+    } catch (e) {
       this.setState({
         isLoading: true
       })
@@ -61,7 +73,18 @@ export default class BoxNotifications extends React.PureComponent {
     return (
       <BoxLayout noPadding style={{ flex: 1 }} title="Notifications">
         <Wrapper height={height}>
-          <NotificationList notifications={this.state.notifications} />
+          {this.state.notifications.length == 0 && (
+            <Nodata>
+              <span>
+                {' '}
+                <Icon type="warning" />Nodata
+              </span>
+            </Nodata>
+          )}
+
+          {this.state.notifications.length > 0 && (
+            <NotificationList notifications={this.state.notifications} />
+          )}
         </Wrapper>
       </BoxLayout>
     )

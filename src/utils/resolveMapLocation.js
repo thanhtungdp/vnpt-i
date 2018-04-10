@@ -12,3 +12,10 @@ export async function resolveMapLocation(array) {
   }
   return result
 }
+
+export function resolveMapLocationObject(object) {
+  return {
+    lat: parseFloat(object.mapLocation.lat),
+    lng: parseFloat(object.mapLocation.long)
+  }
+}

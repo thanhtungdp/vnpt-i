@@ -6,6 +6,7 @@ import connectWindowHeight from '../hoc-window-height'
 import SidebarList from './sidebar-list'
 import AnalyticView from './analytic-view'
 import MapView from './map-view'
+import { resolveMapLocationObject } from 'utils/resolveMapLocation'
 
 const MapDefaultWrapper = styled.div`
   display: flex;
@@ -33,11 +34,25 @@ const ColRight = styled.div`
 export default class MapDefault extends React.PureComponent {
   state = {
     stationsAuto: [],
-    stationSelected: {}
+    stationSelected: {},
+    center: null,
+    map: null,
+    zoom: 5
   }
 
   handleSelectStation(stationSelected) {
-    this.setState({ stationSelected })
+    const defaultZoom = 12
+    let updateState = { stationSelected }
+    if (this.state.map && this.state.map.getZoom() !== defaultZoom)
+      updateState.zoom = defaultZoom
+    updateState.timeUpdate = new Date()
+    this.setState(updateState, () => {
+      if (this.state.map) {
+        this.state.map.panTo(resolveMapLocationObject(stationSelected))
+      }
+      this.mapView.closeInfoMarker()
+      this.mapView.openInfoMarkerByKey(stationSelected.key)
+    })
   }
 
   async componentDidMount() {
@@ -60,7 +75,15 @@ export default class MapDefault extends React.PureComponent {
         </ColLeft>
         <Clearfix />
         <MapCenter>
-          <MapView windowHeight={this.props.windowHeight} />
+          <MapView
+            ref={mapView => {
+              this.mapView = mapView
+            }}
+            windowHeight={this.props.windowHeight}
+            center={this.state.center}
+            getMap={map => this.setState({ map })}
+            zoom={this.state.zoom}
+          />
         </MapCenter>
         <Clearfix />
         <ColRight>
