@@ -53,12 +53,12 @@ export default class AdvancedOperator extends React.PureComponent {
             header={<strong>{t('advanced.label')}</strong>}
             key="1"
           >
-            {this.props.measuringList.map((measuring, index) => (
-              <div key={measuring.value}>
-                <Row gutter={16}>
-                  <Col span={8}>
+            {[1, 2, 3].map((measuring, index) => (
+              <div key={index}>
+                <Row gutter={10}>
+                  <Col span={10}>
                     <Field
-                      label={t('measuringList.label') + measuring.value}
+                      label={t('measuringList.label')}
                       name={`advanced[${index}].measuringKey`}
                       size="large"
                       showSearch
@@ -66,7 +66,7 @@ export default class AdvancedOperator extends React.PureComponent {
                       component={FSelectAnt}
                     />
                   </Col>
-                  <Col span={8}>
+                  <Col span={10}>
                     <Field
                       label={t('operator.label')}
                       name={`advanced[${index}].operator`}
@@ -76,11 +76,14 @@ export default class AdvancedOperator extends React.PureComponent {
                       component={FSelectAnt}
                     />
                   </Col>
-                  <Col span={8}>
+                  <Col span={4}>
                     <Field
                       label={t('value.label')}
                       name={`advanced[${index}].value`}
                       size="large"
+                      style={{
+                        width: '100%'
+                      }}
                       component={FInputNumber}
                     />
                   </Col>
