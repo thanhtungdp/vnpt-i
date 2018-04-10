@@ -26,7 +26,7 @@ export default class StationsGroupList extends React.PureComponent {
     return (
       <StationsGroupListWrapper>
         {this.props.stationGroups.map((stationGroup, index) => (
-          <div className="stationGroupItem">
+          <div className="stationGroupItem" key={index + '_stationGroupItem'}>
             <StationGroupItem
               key={index}
               stationType={stationGroup.stationType}

@@ -6,6 +6,8 @@ import slug from 'constants/slug'
 import OverviewDashboard from 'containers/dashboard/OverviewDashboard'
 import LoginRoute from './loginRoute'
 import LayoutRoute from 'layout/default-sidebar-layout/routeCombine'
+import MapLayoutRoute from 'layout/map-layout/routeCombine'
+
 import MeasuringRoute from 'containers/manager/measuring'
 import StationAutoRoute from 'containers/manager/station-auto'
 import StationTypeRoute from 'containers/manager/station-type'
@@ -33,7 +35,7 @@ export default class RouteDefault extends React.Component {
         />
         <LayoutRoute path={slug.user.profile} component={ProfileUser} />
         <LayoutRoute path="/" exact component={OverviewDashboard} />
-        <Route path={slug.map.base} exact component={Map} />
+        <MapLayoutRoute path={slug.map.base} exact component={Map} />
         <LayoutRoute path={slug.measuring.base} component={MeasuringRoute} />
         <LayoutRoute
           path={slug.stationAuto.base}
