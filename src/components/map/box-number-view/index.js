@@ -28,7 +28,7 @@ const Type = styled.span`
 @autobind
 export default class BoxView extends React.PureComponent {
   static propTypes = {
-    number: PropTypes.string,
+    number: PropTypes.number,
     type: PropTypes.string,
     color: PropTypes.string
   }

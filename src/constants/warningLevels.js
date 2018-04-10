@@ -11,4 +11,11 @@ export const colorLevels = {
   EXCEEDED_PREPARING: '#F08432',
   EXCEEDED: '#EA3223'
 }
-// export default { warningLevels, colorLevels }
+
+export const warningLevelsNumber = {
+  GOOD: 1,
+  EXCEEDED_TENDENCY: 2,
+  EXCEEDED_PREPARING: 3,
+  EXCEEDED: 4
+}
+export default { warningLevels, colorLevels, warningLevelsNumber }

@@ -42,7 +42,7 @@ const StationItem = styled.div`
 export default class StationGroupItem extends React.PureComponent {
   static propTypes = {
     stationType: PropTypes.string,
-    stationSelected: PropTypes.string,
+    stationSelected: PropTypes.object,
     stations: PropTypes.arrayOf(
       PropTypes.shape({
         key: PropTypes.string,
@@ -64,7 +64,9 @@ export default class StationGroupItem extends React.PureComponent {
     return (
       <StationGroupItemWrapper>
         <GroupLabel onClick={this.toggleCollapse}>
-          <span>{this.props.stationType}</span>
+          <span>
+            {this.props.stationType} ({this.props.stations.length})
+          </span>
           {this.state.isCollapse ? <Icon type="down" /> : <Icon type="right" />}
         </GroupLabel>
         <Collapse isOpen={this.state.isCollapse}>

@@ -20,7 +20,7 @@ const WrapperWhite = styled.div`
 export default class BoxWhiteLayout extends React.PureComponent {
   static propTypes = {
     title: PropTypes.string,
-    right: PropTypes.string,
+    right: PropTypes.object,
     style: PropTypes.object,
     noPadding: PropTypes.bool
   }
