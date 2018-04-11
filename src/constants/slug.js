@@ -1,6 +1,15 @@
 export default {
   dashboard: '/',
   login: '/login',
+  controlStation: {
+    base: '/control-station',
+    trigger: '/control-station/:key/:name',
+    triggerWithKey: '/control-station',
+    config: '/control-station/config/:key/:name',
+    configWithKey: '/control-station/config',
+    history: '/control-station/history/:key/:name',
+    historyWithKey: '/control-station/history'
+  },
   measuring: {
     list: '/measuring',
     base: '/measuring',

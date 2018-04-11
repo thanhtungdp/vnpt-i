@@ -7,6 +7,22 @@ export default {
     save: 'Save',
     update: 'Update'
   },
+  controlStation: {
+    trigger: {
+      base: 'Trigger',
+      triggerSuccess: 'Trigger success',
+      triggerCancel: 'Trigger cancel success',
+      triggerExceeded: 'Exceeded success'
+    },
+    history: {
+      base: 'History'
+    },
+    config: {
+      base: 'Config',
+      reset: 'Reset success',
+      success: 'Config success'
+    }
+  },
   Role: {
     form: {
       name: {

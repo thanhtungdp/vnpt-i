@@ -12,6 +12,12 @@ export default function createBreadCrumbHoc(config) {
       if (typeof item === 'string') {
         itemObject = config[item]
       }
+      if (typeof item === 'object' && item.key) {
+        itemObject = {
+          ...config[item.key],
+          ...item.custom
+        }
+      }
       return (
         <Breadcrumb
           icon={itemObject.icon}

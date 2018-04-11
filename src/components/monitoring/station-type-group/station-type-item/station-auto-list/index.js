@@ -18,7 +18,11 @@ export default class StationAutoList extends React.PureComponent {
           const { key, ...otherProps } = item
           return (
             <div className="stationAutoItem" key={key}>
-              <StationAuto {...otherProps} orderNumber={index + 1} />
+              <StationAuto
+                {...otherProps}
+                stationID={key}
+                orderNumber={index + 1}
+              />
             </div>
           )
         })}

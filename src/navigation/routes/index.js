@@ -2,7 +2,6 @@ import React from 'react'
 import { Route } from 'react-router-dom'
 import { autobind } from 'core-decorators'
 import slug from 'constants/slug'
-
 import OverviewDashboard from 'containers/dashboard/OverviewDashboard'
 import LoginRoute from './loginRoute'
 import LayoutRoute from 'layout/default-sidebar-layout/routeCombine'
@@ -21,6 +20,7 @@ import CodeConfirm from 'containers/auth/reset-password/code-confirm'
 import ResetPassword from 'containers/auth/reset-password'
 import UserRoute from 'containers/user'
 import RoleRoute from 'containers/role'
+import ControlStation from 'containers/control-station'
 
 @autobind
 export default class RouteDefault extends React.Component {
@@ -56,6 +56,10 @@ export default class RouteDefault extends React.Component {
         <Route path={slug.user.resetPassword} component={ResetPassword} />
         <LayoutRoute path={slug.user.base} component={UserRoute} />
         <LayoutRoute path={slug.role.base} component={RoleRoute} />
+        <LayoutRoute
+          path={slug.controlStation.base}
+          component={ControlStation}
+        />
       </div>
     )
   }

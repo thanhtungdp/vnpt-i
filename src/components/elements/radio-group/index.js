@@ -49,9 +49,9 @@ export default class RadioGroupCustom extends React.PureComponent {
   }
 
   componentDidMount() {
-    if (typeof this.props.initialValue === 'number') {
+    if (typeof this.props.value === 'number') {
       let item = this.props.dataItems.find(
-        item => item.value === this.props.initialValue
+        item => item.value === this.props.value
       )
       this.props.onChange(item)
     }
