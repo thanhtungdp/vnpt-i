@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-
 import { getColorFromText } from 'utils/color'
 
 const View = styled.div`
@@ -21,10 +20,25 @@ const Span = styled.span`
   font-weight: 600;
 `
 
-export default function AvatarCharacter({ size = 30, username }) {
+const LogoUser = styled.img`
+  height: 35px;
+  width: auto;
+  border-radius: 17.5px;
+`
+
+export default function AvatarCharacter({ size = 30, username, avatarUrl }) {
+
+  if(avatarUrl && avatarUrl.indexOf("http:/") != -1){
+    avatarUrl = avatarUrl.replace("http:/", "http://")
+  }
+
   return (
     <View size={size} backgroundColor={getColorFromText(username)}>
-      <Span size={size / 2}>{username[0].toUpperCase()}</Span>
+      {avatarUrl ? (
+        <LogoUser src={avatarUrl} />
+      ) : (
+        <Span size={size / 2}>{username[0].toUpperCase()}</Span>
+      )}
     </View>
   )
 }

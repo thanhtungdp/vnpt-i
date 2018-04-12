@@ -1,4 +1,6 @@
 import React from 'react'
+import { withRouter } from 'react-router-dom'
+import queryString from 'query-string'
 import { autobind } from 'core-decorators'
 import PageContainer from 'layout/default-sidebar-layout/PageContainer'
 import StationAutoApi from 'api/StationAuto'
@@ -7,6 +9,7 @@ import Header from 'components/monitoring/head'
 import StationTypeList from 'components/monitoring/station-type-group/station-type-list'
 import Clearfix from 'components/elements/clearfix'
 
+@withRouter
 @autobind
 export default class Monitoring extends React.Component {
   state = {
@@ -17,12 +20,21 @@ export default class Monitoring extends React.Component {
   async loadData() {
     this.setState({ isLoading: false })
 
+    const stationType = queryString.parse(this.props.location.search)
+
     // Fetch data
-    let dataStationTypes = await CategoriesApi.getStationTypes({
-      page: 1,
-      itemPerPage: 10
-    })
+    let query = {
+      key: stationType.Id
+    }
+    let dataStationTypes = await CategoriesApi.getStationTypes(
+      {
+        page: 1,
+        itemPerPage: 10
+      },
+      query
+    )
     let dataStationAutos = await StationAutoApi.getLastLog()
+
     // Caculate data
     let dataMonitoring = dataStationTypes.data.map(stationType => {
       const stationAutoList = dataStationAutos.data.filter(
