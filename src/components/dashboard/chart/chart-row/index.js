@@ -1,4 +1,6 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { autobind } from 'core-decorators'
 import styled from 'styled-components'
@@ -35,6 +37,7 @@ const LinkSpan = styled.span`
   }
 `
 
+@withRouter
 @autobind
 export class ChartSummary extends React.Component {
   static propTypes = {
@@ -96,14 +99,17 @@ export class ChartSummary extends React.Component {
     this.setState({ dataLines })
   }
 
-  rightChilren() {
+  rightChilren(value) {
+    const stationType = value.slice(0, 1)[0].stationType
     const dropdown = (
       <Menu>
         <Menu.Item key="0">
-          <a href={slug.onlineMonitoring.base}> Realtime Tracking</a>
+          <Link to={slug.monitoring.base + `?Id=${stationType.key}`}>
+            Realtime Tracking
+          </Link>
         </Menu.Item>
         <Menu.Item key="1">
-          <a href={slug.map.base}>View in map</a>
+          <Link to={slug.map.base + `?Id=${stationType.key}`}>View in map</Link>
         </Menu.Item>
       </Menu>
     )
@@ -132,7 +138,7 @@ export class ChartSummary extends React.Component {
     if (this.props.stationList.length > 0)
       return (
         <ChartSummaryWrapper>
-          <Heading rightChildren={this.rightChilren()}>
+          <Heading rightChildren={this.rightChilren(this.props.stationList)}>
             {this.props.title} ({this.props.totalStation})
           </Heading>
           <ChartWrapper>

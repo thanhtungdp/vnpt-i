@@ -35,7 +35,12 @@ const WrapperTitle = styled.div`
 
 const globalTheme = createGlobalTheme('#ffffff', '#1d89ce')
 
-@connectAutoDispatch(() => ({}), { logout })
+@connectAutoDispatch(
+  state => ({
+    authInfo: state.auth.userInfo
+  }),
+  { logout }
+)
 @withRouter
 @autobind
 export default class BasicNestedNavigation extends React.Component {
@@ -108,13 +113,18 @@ export default class BasicNestedNavigation extends React.Component {
             <Tooltip position="right" content="User profile">
               <AvatarCharacter
                 size={32}
-                username="duong.nguyen@vietan-software."
+                username={this.props.authInfo.email}
+                avatarUrl={this.props.authInfo.avatar}
               />
             </Tooltip>
           </AkGlobalItem>
         }
       >
-        <DropdownItemGroup title="Luke Skywalker">
+        <DropdownItemGroup
+          title={`${this.props.authInfo.lastName} ${
+            this.props.authInfo.firstName
+          }`}
+        >
           <DropdownItem onClick={this.handleProfile}>View profile</DropdownItem>
           <DropdownItem>Integrations</DropdownItem>
           <DropdownItem>Bitbucket labs</DropdownItem>
