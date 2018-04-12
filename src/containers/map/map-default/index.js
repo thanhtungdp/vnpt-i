@@ -6,7 +6,13 @@ import connectWindowHeight from '../hoc-window-height'
 import SidebarList from './sidebar-list'
 import AnalyticView from './analytic-view'
 import MapView from './map-view'
-import { resolveMapLocationObject } from 'utils/resolveMapLocation'
+import {
+  resolveMapLocationObject,
+  resolveMapLocation
+} from 'utils/resolveMapLocation'
+import BoxHideLayout from 'components/map/box-hide-layout'
+import stationStatus from 'constants/stationStatus'
+import { warningLevelsNumber, warningLevels } from 'constants/warningLevels'
 
 const MapDefaultWrapper = styled.div`
   display: flex;
@@ -37,7 +43,10 @@ export default class MapDefault extends React.PureComponent {
     stationSelected: {},
     center: null,
     map: null,
-    zoom: 5
+    zoom: 5,
+    isHidden: false,
+    isLeft: true,
+    isRight: true
   }
 
   handleSelectStation(stationSelected) {
@@ -48,17 +57,75 @@ export default class MapDefault extends React.PureComponent {
     updateState.timeUpdate = new Date()
     this.setState(updateState, () => {
       if (this.state.map) {
-        this.state.map.panTo(resolveMapLocationObject(stationSelected))
+        this.state.map.panTo(stationSelected.mapLocation)
       }
-      this.mapView.closeInfoMarker()
+      //this.mapView.closeInfoMarker()
       this.mapView.openInfoMarkerByKey(stationSelected.key)
     })
   }
 
-  async componentDidMount() {
-    let resStationsAuto = await StationAutoApi.getStationAutos({}, {})
+  async componentWillMount() {
+    let resStationsAuto = await StationAutoApi.getLastLog()
+    if (resStationsAuto.success) {
+      let stationAutoList = resStationsAuto.data
+      stationAutoList = stationAutoList.map(item => {
+        item.visible = true
+        return item
+      })
+      stationAutoList = await resolveMapLocation(stationAutoList)
+      this.setState({
+        stationsAuto: stationAutoList
+      })
+    }
+  }
+
+  handelOnLickHideLeftLayout({ isLeft, isRight }) {
     this.setState({
-      stationsAuto: resStationsAuto.data
+      isLeft: isLeft
+    })
+  }
+
+  handelOnLickHideRightLayout({ isLeft, isRight }) {
+    this.setState({
+      isRight: isRight
+    })
+  }
+
+  fillStatusChange(focusStatus) {
+    let res = this.state.stationsAuto
+
+    res = res.map(element => {
+      element.visible = false
+
+      let isFind = false
+      let status
+      if (element.status === stationStatus.DATA_LOSS) {
+        status = stationStatus.DATA_LOSS
+        isFind = true
+      }
+      if (!isFind && element.status === stationStatus.NOT_USE) {
+        status = stationStatus.NOT_USE
+        isFind = true
+      }
+
+      if (!isFind) {
+        let warLevel = warningLevels.GOOD
+        let measuringLogs = element.lastLog.measuringLogs
+        for (var key in measuringLogs) {
+          if (
+            warningLevelsNumber[warLevel] <
+            warningLevelsNumber[measuringLogs[key].warningLevel]
+          )
+            warLevel = measuringLogs[key].warningLevel
+          status = warLevel
+        }
+      }
+      if (focusStatus.includes(status)) element.visible = true
+      return element
+    })
+
+    this.setState({
+      stationsAuto: res
     })
   }
 
@@ -66,14 +133,16 @@ export default class MapDefault extends React.PureComponent {
     return (
       <MapDefaultWrapper height={this.props.windowHeight}>
         <Clearfix />
-        <ColLeft>
-          <SidebarList
-            onSelectStation={this.handleSelectStation}
-            stationSelected={this.state.stationSelected}
-            stationsAuto={this.state.stationsAuto}
-          />
-        </ColLeft>
-        <Clearfix />
+        {this.state.isLeft && (
+          <ColLeft>
+            <SidebarList
+              onSelectStation={this.handleSelectStation}
+              stationSelected={this.state.stationSelected}
+              stationsAuto={this.state.stationsAuto}
+            />
+          </ColLeft>
+        )}
+        <BoxHideLayout handelOnLick={this.handelOnLickHideLeftLayout} />
         <MapCenter>
           <MapView
             ref={mapView => {
@@ -83,12 +152,21 @@ export default class MapDefault extends React.PureComponent {
             center={this.state.center}
             getMap={map => this.setState({ map })}
             zoom={this.state.zoom}
+            stationsAutoList={this.state.stationsAuto}
           />
         </MapCenter>
-        <Clearfix />
-        <ColRight>
-          <AnalyticView />
-        </ColRight>
+        <BoxHideLayout
+          isRight={true}
+          handelOnLick={this.handelOnLickHideRightLayout}
+        />
+        {this.state.isRight && (
+          <ColRight>
+            <AnalyticView
+              stationsAutoList={this.state.stationsAuto}
+              fillStatusChange={this.fillStatusChange}
+            />
+          </ColRight>
+        )}
         <Clearfix />
       </MapDefaultWrapper>
     )

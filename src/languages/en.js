@@ -476,5 +476,15 @@ export default {
       success: 'Update Rule User success!',
       error: 'Update Rule User fail!'
     }
+  },
+  map: {
+    menuRight: {
+      good: 'Good',
+      dataLoss: 'Data loss',
+      notUse: 'Not use',
+      exceeded: 'Exceeded',
+      exceededPreparing: 'Exceeded preparing',
+      exceededTendency: 'Exceeded tendency'
+    }
   }
 }

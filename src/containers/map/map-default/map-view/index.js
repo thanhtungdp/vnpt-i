@@ -92,24 +92,28 @@ class CustomGoogleMap extends PureComponent {
             maxZoom={11}
           >
             {this.props.stationAutoMarker.map((item, index) => {
-              return (
-                <MarkerStation
-                  code={item.key}
-                  getRef={this.getRefMarker.bind(this)}
-                  mapLocation={item.mapLocation}
-                  visible={item.visible}
-                  name={item.name}
-                  key={item.key}
-                  status={
-                    item.lastLog && item.lastLog.measuringLogs
-                      ? this.getStatusStation(item.lastLog.measuringLogs)
-                      : warningLevels.GOOD
-                  }
-                  address={item.address}
-                  lastLog={item.lastLog}
-                  measuringList={item.measuringList}
-                />
-              )
+              if (item.visible)
+                return (
+                  <MarkerStation
+                    code={item.key}
+                    visible={false}
+                    getRef={this.getRefMarker.bind(this)}
+                    mapLocation={item.mapLocation}
+                    visible={item.visible}
+                    name={item.name}
+                    key={item.key}
+                    status={
+                      item.lastLog && item.lastLog.measuringLogs
+                        ? this.getStatusStation(item.lastLog.measuringLogs)
+                        : warningLevels.GOOD
+                    }
+                    stationStatus={item.status}
+                    address={item.address}
+                    lastLog={item.lastLog}
+                    measuringList={item.measuringList}
+                  />
+                )
+              else return <div key={item.key} />
             })}
           </MarkerClusterer>
         </div>
@@ -126,13 +130,9 @@ export default class MapStationAuto extends PureComponent {
   }
 
   state = {
-    stationAutoMarker: [],
     map: {},
-    listStationMarker: []
-  }
-
-  handleGetStationAuto(stationAutoMarker) {
-    this.setState({ stationAutoMarker })
+    listStationMarker: [],
+    isHidden: false
   }
 
   setMap(map) {
@@ -157,14 +157,18 @@ export default class MapStationAuto extends PureComponent {
     })
   }
 
-  async componentDidMount() {
-    let stationAutoList = await getStationAutos({}, {})
-    stationAutoList = stationAutoList.data.map(item => {
-      item.visible = true
-      return item
-    })
-    stationAutoList = await resolveMapLocation(stationAutoList)
-    this.handleGetStationAuto(stationAutoList)
+  async componentDidMount() {}
+
+  handelIsHidden() {
+    this.setState(
+      {
+        isHidden: !this.state.isHidden
+      },
+      () => {
+        if (this.props.handleIsHidden)
+          this.props.handleIsHidden(this.state.isHidden)
+      }
+    )
   }
 
   render() {
@@ -177,7 +181,7 @@ export default class MapStationAuto extends PureComponent {
           ref={map => {
             this.mapTamp = map
           }}
-          stationAutoMarker={this.state.stationAutoMarker}
+          stationAutoMarker={this.props.stationsAutoList}
           center={this.props.center}
           getMap={this.setMap}
           getRefMarker={this.setListMarker}
