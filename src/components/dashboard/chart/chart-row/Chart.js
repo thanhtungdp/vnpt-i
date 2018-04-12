@@ -2,19 +2,25 @@ import React from 'react'
 import { autobind } from 'core-decorators'
 import styled from 'styled-components'
 import {
-  HighchartsChart,
+  withHighcharts,
+  HighchartsStockChart,
   Chart,
+  Title,
   Legend,
   XAxis,
   YAxis,
-  LineSeries
+  LineSeries,
+  Tooltip,
+  RangeSelector
 } from 'react-jsx-highstock'
 import PropTypes from 'prop-types'
+import Highcharts from 'highcharts/highstock'
+import moment from 'moment/moment'
 
 const ChartWrapper = styled.div``
 
 @autobind
-export default class ChartRowToChart extends React.PureComponent {
+export class ChartRowToChart extends React.PureComponent {
   static propTypes = {
     dataLines: PropTypes.object
   }
@@ -32,18 +38,42 @@ export default class ChartRowToChart extends React.PureComponent {
       ))
   }
 
+  getChart(chart) {
+    this.chart = chart
+  }
+
   render() {
     return (
       <ChartWrapper>
-        <HighchartsChart>
-          <Chart height={250} />
+        <HighchartsStockChart callback={this.getChart}>
+          <Chart height={250} zoomType="x" />
           <Legend layout="horizontal" align="center" verticalAlign="bottom" />
-          <XAxis type="datetime">
+          <RangeSelector>
+            <RangeSelector.Button type="all">All</RangeSelector.Button>
+            <RangeSelector.Input
+              boxBorderColor="#7cb5ec"
+              boxWidth={150}
+              inputDateParser={value => {
+                return moment.utc(value, 'DD. MMM hh:mm').valueOf()
+              }}
+              editDateFormat="%e. %b %H:%M"
+              dateFormat="%e. %b %H:%M"
+            />
+          </RangeSelector>
+          <XAxis
+            type="datetime"
+            dateTimeLabelFormats={{
+              hour: '%e. %b %H:%M',
+              minute: '%e. %b %H:%M'
+            }}
+          >
             <XAxis.Title />
           </XAxis>
           <YAxis id="number">{this.getDataLines()}</YAxis>
-        </HighchartsChart>
+          <Tooltip />
+        </HighchartsStockChart>
       </ChartWrapper>
     )
   }
 }
+export default withHighcharts(ChartRowToChart, Highcharts)

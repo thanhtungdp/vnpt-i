@@ -1,5 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import queryString from 'query-string'
+import { withRouter } from 'react-router-dom'
 import { autobind } from 'core-decorators'
 import { Input } from 'antd'
 import BoxLayout from 'components/map/box-white-layout'
@@ -8,6 +10,7 @@ import Clearfix from 'components/elements/clearfix'
 import _ from 'lodash'
 import SelectStationType from './SelectStationType'
 
+@withRouter
 @autobind
 export default class SidebarList extends React.PureComponent {
   static propTypes = {
@@ -23,6 +26,13 @@ export default class SidebarList extends React.PureComponent {
   state = {
     stationType: '',
     filterText: ''
+  }
+
+  async componentDidMount() {
+    const stationType = queryString.parse(this.props.location.search)
+    if (stationType) {
+      this.handleChangeStationType(stationType.Id) // Lấy mã loại trạm
+    }
   }
 
   handleChangeStationType(stationType) {
