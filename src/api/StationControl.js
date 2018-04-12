@@ -3,36 +3,30 @@ import { getFetch, postFetch, putFetch } from '../utils/fetch'
 
 //Lấy thông tin điều khiển của trạm theo mã trạm
 export function getStationControl(key) {
-  return getFetch(STATION_CONTROL_API + '/LayMau_MT/' + key)
-}
-
-//Lấy nhật ký điều khiển của trạm theo mã trạm
-export function getHistory_StationControl(key) {
-  return getFetch(STATION_CONTROL_API + '/NhatKyLayMau_MT/' + key)
-}
-
-//Điều khiển lấy mẫu theo trạm
-export function trigger_StationControl(status, measuring = {}) {
-  return putFetch(STATION_CONTROL_API + '/LayMau_MT/' + status, measuring)
+  return getFetch(STATION_CONTROL_API + '/sampling-api/sampling/' + key)
 }
 
 //Cấu hình lấy mẫu theo trạm
 export function config_StationControl(data) {
   return postFetch(
-    STATION_CONTROL_API +
-      `/LayMau_MT_CauHinh_Reset/${data.config}?maTram=${
-        data.stationKey
-      }&tenTram=${data.stationName}&mt_Name=${data.mt_Name}&tongSoChai=${
-        data.total
-      }`
+    STATION_CONTROL_API + `/sampling-api/sampling-config-reset`,
+    data
   )
 }
+
+//Lấy nhật ký điều khiển của trạm theo mã trạm
+export function getHistory_StationControl(key) {
+  return getFetch(STATION_CONTROL_API + '/sampling-api/sampling-logs/' + key)
+}
+
+//Điều khiển lấy mẫu theo trạm, tự đông và thủ công, huỷ lấy mẫu
+export function trigger_StationControl(data) {
+  return putFetch(STATION_CONTROL_API + '/sampling-api/sampling/', data)
+}
+
 //Kích hoạt lấy mẫu vượt ngưỡng
-export function triggerExceeded_StationControl(key, status) {
-  return getFetch(
-    STATION_CONTROL_API +
-      `/LayMau_MT_LMVN?maTram=${key}&layMauVuotNguong=${status}`
-  )
+export function triggerExceeded_StationControl(data) {
+  return postFetch(STATION_CONTROL_API + `/sampling-api/samling-exceeded`, data)
 }
 export default {
   getStationControl,

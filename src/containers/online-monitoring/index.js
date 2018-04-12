@@ -1,5 +1,5 @@
 import React from 'react'
-import { Table, Modal, Button, Tabs } from 'antd'
+import { Divider, Table, Modal, Button, Tabs } from 'antd'
 import Breadcrumb from './breadcrumb'
 import createLanguageHoc, { langPropTypes } from '../../hoc/create-lang'
 import { autobind } from 'core-decorators'
@@ -162,9 +162,9 @@ export default class OnlineMonitoring extends React.Component {
               type="primary"
               onClick={() => openModal('visibleControl', true, record)}
             >
-              Control
+              Control dd
             </Button>
-            <Clearfix width={8} />
+            <Divider type="vertical" />
             <Button
               type="primary"
               onClick={() => openModal('visibleChart', true, record)}
@@ -203,7 +203,7 @@ export default class OnlineMonitoring extends React.Component {
           this.state.stationTypes.map(item =>
             this.renderStationTypeContainer(item)
           )}
-        <Modal
+        {/*<Modal
           rowKey="uid"
           title="Chart"
           destroyOnClose
@@ -227,7 +227,7 @@ export default class OnlineMonitoring extends React.Component {
             stationKey={this.state.searchData.stationKey}
             stationName={this.state.searchData.stationName}
           />
-        </Modal>
+        </Modal>*/}
       </PageContainer>
     )
   }

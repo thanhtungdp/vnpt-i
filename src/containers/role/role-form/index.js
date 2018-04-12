@@ -1,7 +1,5 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import { Table, Checkbox } from 'antd'
-import update from 'react-addons-update'
 import { autobind } from 'core-decorators'
 import { Row, Col } from 'reactstrap'
 import { reduxForm, Field } from 'redux-form'

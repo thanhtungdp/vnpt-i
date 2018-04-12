@@ -1,5 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { Divider } from 'antd'
+import { Link } from 'react-router-dom'
+import slug from 'constants/slug'
 import { autobind } from 'core-decorators'
 import styled from 'styled-components'
 import Clearfix from 'components/elements/clearfix'
@@ -44,18 +47,19 @@ const ReceivedAt = styled.span`
 const ActionWrapper = styled.div`
   display: flex;
 `
-const CameraAction = styled.div``
 
 @autobind
 export default class StationAutoHead extends React.PureComponent {
   static propTypes = {
     name: PropTypes.string,
     receivedAt: PropTypes.string,
-    orderNumber: PropTypes.number
+    orderNumber: PropTypes.number,
+    stationID: PropTypes.string
   }
 
   render() {
-    const { name, receivedAt, orderNumber } = this.props
+    //console.log(this.props)
+    const { name, receivedAt, orderNumber, stationID } = this.props
     return (
       <StationHeadItemWrapper>
         <TitleWrapper>
@@ -66,8 +70,13 @@ export default class StationAutoHead extends React.PureComponent {
           <ReceivedAt>{receivedAt ? ' - ' + receivedAt : ''}</ReceivedAt>
         </TitleWrapper>
         <ActionWrapper>
-          <CameraAction>Control</CameraAction>
-          <CameraAction>Camera</CameraAction>
+          <Link
+            to={slug.controlStation.triggerWithKey + `/${stationID}/${name}`}
+          >
+            Control
+          </Link>
+          <Divider type="vertical" />
+          <Link to={'/'}>Camera</Link>
         </ActionWrapper>
       </StationHeadItemWrapper>
     )
