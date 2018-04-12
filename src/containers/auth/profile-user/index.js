@@ -14,6 +14,8 @@ import { translate } from 'hoc/create-lang'
 import PageContainer from 'layout/default-sidebar-layout/PageContainer'
 import { autobind } from 'core-decorators'
 import Breadcrumb from 'containers/auth/breadcrumb'
+import {fetchUserMe} from "redux/actions/authAction"
+import {connectAutoDispatch} from "redux/connect";
 import moment from 'moment'
 
 const FInput = createValidateComponent(InputLabel)
@@ -57,15 +59,6 @@ export class ProfileUserForm extends PureComponent {
         }
       })
     }
-  }
-
-  handleTelChange(telNumber, selectedCountry) {
-    this.setState({
-      phone: {
-        phoneNumber: telNumber,
-        ...selectedCountry
-      }
-    })
   }
 
   render() {
@@ -117,7 +110,7 @@ export class ProfileUserForm extends PureComponent {
               label="Birthday"
               name="birthday"
               component={FCalendar}
-              size="small"
+              size="large"
             />
           </Col>
           <Col md={6}>
@@ -125,7 +118,7 @@ export class ProfileUserForm extends PureComponent {
               label="Phone"
               name="phone"
               component={FInputPhoneNumber}
-              size="small"
+              size="large"
             />
           </Col>
         </Row>
@@ -141,7 +134,7 @@ export class ProfileUserForm extends PureComponent {
           </Col>
         </Row>
         <Clearfix />
-        <Button controtertype="submit" block color="primary">
+        <Button disabled={this.props.submitting}  isLoading={this.props.submitting} controtertype="submit" block color="primary">
           Save
         </Button>
       </form>
@@ -149,6 +142,8 @@ export class ProfileUserForm extends PureComponent {
   }
 }
 
+@connectAutoDispatch((state) => ({}), {fetchUserMe})
+@autobind
 export default class ProfileUser extends PureComponent {
   static propTypes = {
     onSubmit: PropTypes.func
@@ -164,7 +159,6 @@ export default class ProfileUser extends PureComponent {
 
   async componentWillMount() {
     const record = await AuthApi.getMe()
-
     this.setState({
       userInfo: {
         ...record.data,
@@ -179,9 +173,8 @@ export default class ProfileUser extends PureComponent {
     const data = {
       ...values
     }
-
-    console.log(data, 'data')
     const result = await AuthApi.putProfile(_id, data)
+    this.props.fetchUserMe()
     if (result.error) {
       swal({
         type: 'error',

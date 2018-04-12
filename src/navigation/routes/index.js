@@ -29,11 +29,6 @@ export default class RouteDefault extends React.Component {
   render() {
     return (
       <div>
-        <LayoutRoute
-          path={slug.user.changePassword}
-          component={ChangePassword}
-        />
-        <LayoutRoute path={slug.user.profile} component={ProfileUser} />
         <LayoutRoute path="/" exact component={OverviewDashboard} />
         <MapLayoutRoute path={slug.map.base} exact component={Map} />
         <LayoutRoute path={slug.measuring.base} component={MeasuringRoute} />
@@ -53,11 +48,16 @@ export default class RouteDefault extends React.Component {
         <LayoutRoute path={slug.dataSearch.base} component={DataSearch} />
         <LayoutRoute path={slug.avgSearch.base} component={AvgSearch} />
         <Route path={slug.login} component={LoginRoute} />
+        <LayoutRoute exact path={slug.user.base} component={UserRoute} />
+        <LayoutRoute path={slug.role.base} component={RoleRoute} />
+        <LayoutRoute
+          path={slug.user.changePassword}
+          component={ChangePassword}
+        />
+        <LayoutRoute path={slug.user.profile} component={ProfileUser} />
         <Route path={slug.user.emailConfirm} component={EmailConfirm} />
         <Route path={slug.user.codeConfirm} component={CodeConfirm} />
         <Route path={slug.user.resetPassword} component={ResetPassword} />
-        <LayoutRoute path={slug.user.base} component={UserRoute} />
-        <LayoutRoute path={slug.role.base} component={RoleRoute} />
       </div>
     )
   }

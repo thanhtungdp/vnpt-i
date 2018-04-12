@@ -14,7 +14,7 @@ export function changePassword(_id, data) {
 }
 
 export function putProfile(_id, data) {
-  return putFetch(AUTH_API + '/auth/' + _id, data)
+  return putFetch(AUTH_API + '/user/organization/' + _id, data)
 }
 
 //Send Code
