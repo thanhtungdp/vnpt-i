@@ -35,7 +35,7 @@ export default class InputPhoneNumber extends PureComponent {
     if (typeof this.props.value === "object") {
       return this.props.value.phoneNumber
     }
-    return 0
+    return ''
   }
 
   render(){

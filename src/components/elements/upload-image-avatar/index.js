@@ -53,7 +53,7 @@ export default class UpdateLoadImage extends React.PureComponent {
           }
         }),
         () => {
-          console.log(this.state)
+          //console.log(this.state)
         }
       )
     }
