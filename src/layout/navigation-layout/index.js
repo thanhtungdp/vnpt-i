@@ -13,6 +13,8 @@ import StyleWrapper from './StyleWrapper'
 import Logo from './Logo'
 import LogoSubIcon from './LogoSubIcon'
 import CreateDrawer from './CreateDrawer'
+import ChangeLanguage from './ChangeLanguage'
+
 
 import Navigation, {
 // AkContainerTitle,
@@ -133,7 +135,8 @@ export default class BasicNestedNavigation extends React.Component {
           </DropdownItem>
           <DropdownItem onClick={this.handleLogout}>Log out</DropdownItem>
         </DropdownItemGroup>
-      </AkDropdownMenu>
+      </AkDropdownMenu>,
+      <ChangeLanguage/>
     ]
   }
 

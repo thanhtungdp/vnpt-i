@@ -15,7 +15,7 @@ import PageContainer from 'layout/default-sidebar-layout/PageContainer'
 import { autobind } from 'core-decorators'
 import Breadcrumb from 'containers/auth/breadcrumb'
 import {fetchUserMe} from "redux/actions/authAction"
-import {connectAutoDispatch} from "redux/connect";
+import {connectAutoDispatch} from "redux/connect"
 import moment from 'moment'
 
 const FInput = createValidateComponent(InputLabel)
