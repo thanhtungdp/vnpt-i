@@ -1,5 +1,5 @@
 export default {
-  GOOD: 'good',
-  EXCEEDS: 'exceeds',
-  EXCEEDS_PREPARING: 'exceeds_preparing'
+  GOOD: 'GOOD',
+  DATA_LOSS: 'DATA_LOSS',
+  NOT_USE: 'NOT_USE'
 }

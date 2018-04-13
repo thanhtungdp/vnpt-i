@@ -1,5 +1,5 @@
 const API_GATEWAY_TEST = 'http://localhost:5000'
-const API_GATEWAY_RELEASE = 'http://api.ilotusland.vn'
+const API_GATEWAY_RELEASE = 'http://192.168.252.121:5000'
 
 // const API_GATEWAY_MEDIA_TEST = 'http://localhost:1234'
 const API_GATEWAY_MEDIA_RELEASE = 'http://192.168.252.121:1234'

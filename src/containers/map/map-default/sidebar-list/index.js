@@ -43,8 +43,17 @@ export default class SidebarList extends React.PureComponent {
     this.setState({ filterText: e.target.value })
   }
 
+  // componentWillReceiveProps(nextProps) {
+  //   debugger
+  //   if (nextProps.stationsAuto.length != this.props.stationsAuto.length) // Check if it's a new user, you can also use some unique, like the ID
+  //   {
+
+  //     this.getStationGroups()
+  //   }
+  // }
+
   getStationGroups() {
-    let stationsAuto = this.props.stationsAuto
+    let stationsAuto = this.props.stationsAuto.filter(item => item.visible)
     if (this.state.filterText !== '') {
       stationsAuto = stationsAuto.filter(
         sAuto =>

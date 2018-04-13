@@ -10,7 +10,11 @@ import { Icon } from 'antd'
 
 const Wrapper = styled.div`
   height: ${props => props.height}px;
-  overflow-y: scroll;
+  overflow-y: ${this.state &&
+  this.state.notifications &&
+  this.state.notifications.length > 0
+    ? 'scroll'
+    : 'inherit'};
 `
 const Nodata = styled.div`
   height: 100%;

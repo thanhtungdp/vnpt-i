@@ -3,6 +3,7 @@ import { autobind } from 'core-decorators'
 import styled from 'styled-components'
 import BoxAnalyticList from './BoxAnalyticList'
 import BoxNotifications from './BoxNotifications'
+import PropTypes from 'prop-types'
 
 const SidebarListWrapper = styled.div`
   flex: 1;
@@ -16,10 +17,17 @@ const Clearfix = styled.div`
 
 @autobind
 export default class SidebarList extends React.PureComponent {
+  static propTypes = {
+    fillStatusChange: PropTypes.func
+  }
+
   render() {
     return (
       <SidebarListWrapper>
-        <BoxAnalyticList />
+        <BoxAnalyticList
+          stationsAutoList={this.props.stationsAutoList}
+          fillStatusChange={this.props.fillStatusChange}
+        />
         <Clearfix />
         <BoxNotifications />
       </SidebarListWrapper>

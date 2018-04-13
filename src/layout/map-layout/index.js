@@ -12,6 +12,8 @@ const Wrapper = styled.div`
   .iMoAjM {
     display: flex;
     flex-direction: column;
+    position: reative;
+    z-index: 2;
   }
   background-color: #fafbfb;
 `
@@ -19,9 +21,7 @@ const Wrapper = styled.div`
 const Clearfix = styled.div`
   height: 8px;
 `
-const PaddingWrapper = styled.div`
-  // padding: 16px 16px;
-`
+const PaddingWrapper = styled.div``
 
 @createProtectedAuth
 export default class PageWrapperMapLayout extends Component {
