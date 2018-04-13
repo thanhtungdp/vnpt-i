@@ -5,6 +5,8 @@ import UserList from './user-list'
 import UserCreate from './user-create'
 import UserEdit from './user-edit'
 import UserRule from './user-rule'
+import ChangePassword from 'containers/auth/change-password'
+import ProfileUser from 'containers/auth/profile-user'
 
 export default props => (
   <Switch>
@@ -18,6 +20,12 @@ export default props => (
       render={matchProps => <UserCreate {...matchProps} {...props} />}
     />
     <Route path={slug.user.edit} component={UserEdit} />
-    <Route path={slug.user.rule} component={UserRule} />
+
+    <Route path={slug.user.rule}  component={UserRule} />
+    <Route
+        path={slug.user.changePassword}
+        component={ChangePassword}
+    />
+    <Route path={slug.user.profile} component={ProfileUser} />
   </Switch>
 )
