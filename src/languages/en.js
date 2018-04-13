@@ -135,7 +135,15 @@ export default {
       auto: {
         label: 'Auto'
       },
-      error: 'Error!'
+      error: 'Error!',
+      color: {
+        label: 'color',
+        placeholder: 'color'
+      },
+      numericalOrder: {
+        label: 'numericalOrder',
+        placeholder: 'numericalOrder'
+      }
     }
   },
   stationAutoManager: {

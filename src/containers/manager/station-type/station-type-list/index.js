@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
-import { Table, Divider, Button, Icon } from 'antd'
+import { Table, Divider, Button, Icon, Avatar, Checkbox } from 'antd'
 import CategoryApi from 'api/CategoryApi'
 import PageContainer from 'layout/default-sidebar-layout/PageContainer'
 import slug from 'constants/slug'
@@ -63,27 +63,37 @@ export default class StationTypeList extends React.Component {
         dataIndex: 'icon',
         key: 'icon',
         render: (text, record) => (
-          <img src={path + record.icon} alt={record.key} />
+          <Avatar
+            shape="square"
+            size="large"
+            style={{ backgroundColor: record.color }}
+            src={text}
+          >
+            Icon
+          </Avatar>
         )
       },
       {
         title: t('stationTypeManager.form.auto.label'),
         dataIndex: 'isAuto',
-        key: 'isAuto'
+        key: 'isAuto',
+        render: (text, record) => (
+          <Checkbox disabled={true} checked={record.isAuto} />
+        )
       },
       {
         title: '',
         key: 'action',
         render: (text, record) => (
           <span>
-            <Link to={slug.stationType.editWithKey + '/' + record.key}>
+            <Link to={slug.stationType.editWithKey + '/' + record._id}>
               {' '}
               Edit{' '}
             </Link>
             <Divider type="vertical" />
             <a
               onClick={() =>
-                this.props.onDeleteItem(record.key, this.props.fetchData)
+                this.props.onDeleteItem(record._id, this.props.fetchData)
               }
             >
               Delete

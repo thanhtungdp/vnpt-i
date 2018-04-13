@@ -8,7 +8,9 @@ import {
   Checkbox,
   Upload,
   Icon,
-  Modal
+  Modal,
+  Avatar,
+  Popover
 } from 'antd'
 import PropTypes from 'prop-types'
 import { autobind } from 'core-decorators'
@@ -16,8 +18,39 @@ import { mapPropsToFields } from 'utils/form'
 import createLanguageHoc, { langPropTypes } from 'hoc/create-lang'
 import swal from 'sweetalert2'
 import MediaApi from 'api/MediaApi'
+import Clearfix from 'components/elements/clearfix'
+import styled from 'styled-components'
+import SelectIcon from 'components/elements/select-icon-station-type'
+import InputNumberCell from 'components/elements/input-number-cell'
 
 const FormItem = Form.Item
+
+const HeaderWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  width: 250px;
+`
+
+const AvatarWrapper = styled.div`
+  padding: 4px;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  .ant-avatar-square {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 4px;
+    > img {
+      width: 100%;
+      height: auto !important;
+    }
+  }
+`
 
 @Form.create({
   mapPropsToFields: mapPropsToFields
@@ -33,11 +66,8 @@ export default class StationTypeForm extends React.PureComponent {
   constructor(props) {
     super(props)
     this.state = {
-      previewVisible: false,
-      previewImage: '',
-      largeImgList: [],
-      normalImgList: [],
-      smallImgList: []
+      urlIcon: '',
+      color: ''
     }
   }
 
@@ -49,56 +79,13 @@ export default class StationTypeForm extends React.PureComponent {
         key: values.key,
         name: values.name,
         isAuto: values.isAuto,
-        files: {},
-        icon: {
-          large:
-            this.state.largeImgList.length > 0
-              ? this.state.largeImgList[0].response
-              : null,
-          normal:
-            this.state.normalImgList.length > 0
-              ? this.state.normalImgList[0].response
-              : null,
-          small:
-            this.state.smallImgList.length > 0
-              ? this.state.smallImgList[0].response
-              : null
-        }
+        icon: this.state.urlIcon,
+        color: this.state.color,
+        numericalOrder: values.numericalOrder
       }
-
       // Callback submit form Container Component
       this.props.onSubmit(data)
     })
-  }
-
-  handlePreview = file => {
-    this.setState({
-      previewImage: file.url || file.thumbUrl,
-      previewVisible: true
-    })
-  }
-
-  handleCancel = () => {
-    this.setState({ previewVisible: false })
-  }
-
-  handleImageChange(type, fileList, file, event) {
-    for (var i = 0; i < fileList.length; i++) {
-      if (fileList[i].thumbUrl !== '') {
-        fileList[i].status = 'done'
-      }
-    }
-
-    //error
-    if (file.status === 'error') {
-      fileList = []
-      swal({
-        title: 'upload image fail',
-        type: 'error'
-      })
-    }
-
-    this.setState({ [type + 'ImgList']: fileList })
   }
 
   renderButtonUpload(name) {
@@ -111,51 +98,20 @@ export default class StationTypeForm extends React.PureComponent {
   }
 
   async componentWillMount() {
-    if (this.props.initialValues == null) return
-    if (this.props.initialValues.icon == null) return
+    if (this.props.initialValues) {
+      let updateState = {}
+      if (this.props.initialValues.icon && this.props.initialValues.icon !== '')
+        updateState.urlIcon = this.props.initialValues.icon
+      if (this.props.initialValues.color)
+        updateState.color = this.props.initialValues.color
+      this.setState(updateState)
+    }
+  }
 
-    //Set image Icon
-    let largeImgList = []
-    let normalImgList = []
-    let smallImgList = []
-    if (
-      this.props.initialValues.icon.large != null &&
-      this.props.initialValues.icon.large.file
-    )
-      largeImgList.push({
-        uid: -1,
-        url: this.props.initialValues.icon.large.url,
-        name: this.props.initialValues.icon.large.file.originalname,
-        status: 'done',
-        response: this.props.initialValues.icon.large
-      })
-    if (
-      this.props.initialValues.icon.normal != null &&
-      this.props.initialValues.icon.normal.file
-    )
-      normalImgList.push({
-        uid: -1,
-        url: this.props.initialValues.icon.normal.url,
-        name: this.props.initialValues.icon.normal.file.originalname,
-        status: 'done',
-        response: this.props.initialValues.icon.normal
-      })
-    if (
-      this.props.initialValues.icon.small != null &&
-      this.props.initialValues.icon.small.file
-    )
-      smallImgList.push({
-        uid: -1,
-        url: this.props.initialValues.icon.small.url,
-        name: this.props.initialValues.icon.small.file.originalname,
-        status: 'done',
-        response: this.props.initialValues.icon.small
-      })
-
+  onChangeIcon(iconObject) {
     this.setState({
-      largeImgList: largeImgList,
-      normalImgList: normalImgList,
-      smallImgList: smallImgList
+      urlIcon: iconObject.urlIcon,
+      color: iconObject.color
     })
   }
 
@@ -164,6 +120,17 @@ export default class StationTypeForm extends React.PureComponent {
     const { t } = this.props.lang
     const { previewVisible, previewImage } = this.state
     const urlPhotoUpload = MediaApi.urlPhotoUploadWithDirectory('station-types')
+    const formItemLayout = {
+      labelCol: {
+        xs: { span: 24, offset: 0 },
+        sm: { span: 2, offset: 0 }
+      },
+      wrapperCol: {
+        xs: { span: 24 },
+        sm: { span: 12 }
+      }
+    }
+
     return (
       <Form onSubmit={this.handleSubmit}>
         <Row gutter={16}>
@@ -198,74 +165,34 @@ export default class StationTypeForm extends React.PureComponent {
         </Row>
         <Row gutter={16}>
           <Col span={12}>
-            <FormItem label={t('stationTypeManager.form.icon.label')}>
-              <Col span={6}>
-                <div className="dropbox">
-                  <Upload
-                    action={urlPhotoUpload}
-                    listType="picture-card"
-                    fileList={this.state.largeImgList}
-                    onPreview={this.handlePreview}
-                    onChange={({ fileList, file, event }) => {
-                      this.handleImageChange('large', fileList, file, event)
-                    }}
-                  >
-                    {this.state.largeImgList.length >= 1
-                      ? null
-                      : this.renderButtonUpload('Large')}
-                  </Upload>
-                  <Modal
-                    visible={previewVisible}
-                    footer={null}
-                    onCancel={this.handleCancel}
-                  >
-                    <img
-                      alt="example"
-                      style={{ width: '100%' }}
-                      src={previewImage}
-                    />
-                  </Modal>
-                </div>
-              </Col>
-              <Col span={6}>
-                <div className="dropbox">
-                  <Upload
-                    action={urlPhotoUpload}
-                    listType="picture-card"
-                    fileList={this.state.normalImgList}
-                    onPreview={this.handlePreview}
-                    onChange={({ fileList, file, event }) => {
-                      this.handleImageChange('normal', fileList, file, event)
-                    }}
-                  >
-                    {this.state.normalImgList.length >= 1
-                      ? null
-                      : this.renderButtonUpload('Normal')}
-                  </Upload>
-                </div>
-              </Col>
-              <Col span={6}>
-                <div className="dropbox">
-                  <Upload
-                    action={urlPhotoUpload}
-                    listType="picture-card"
-                    fileList={this.state.smallImgList}
-                    onPreview={this.handlePreview}
-                    onChange={({ fileList, file, event }) => {
-                      this.handleImageChange('small', fileList, file, event)
-                    }}
-                  >
-                    {this.state.smallImgList.length >= 1
-                      ? null
-                      : this.renderButtonUpload('Small')}
-                  </Upload>
-                </div>
-              </Col>
+            <FormItem
+              {...formItemLayout}
+              label={t('stationTypeManager.form.icon.label')}
+            >
+              <SelectIcon
+                initialValues={this.state}
+                onChangeValue={this.onChangeIcon}
+              />
             </FormItem>
           </Col>
-          <Col span={12}>
-            <FormItem label={t('stationTypeManager.form.auto.label')}>
-              {getFieldDecorator('isAuto')(<Checkbox />)}
+          <Col span={4}>
+            <FormItem>
+              {getFieldDecorator('isAuto', {
+                valuePropName: 'checked'
+              })(
+                <Checkbox>{t('stationTypeManager.form.auto.label')}</Checkbox>
+              )}
+            </FormItem>
+          </Col>
+          <Col span={8}>
+            <FormItem
+              {...formItemLayout}
+              labelCol={{ span: 12 }}
+              label={t('stationTypeManager.form.numericalOrder.label')}
+            >
+              {getFieldDecorator('numericalOrder', {
+                rules: [{ required: true }]
+              })(<InputNumberCell editable={true} />)}
             </FormItem>
           </Col>
         </Row>
