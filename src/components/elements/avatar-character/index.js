@@ -12,6 +12,9 @@ const View = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  height: 35px;
+  width: 35px;
+  border-radius: 17.5px;
 `
 
 const Span = styled.span`
@@ -22,7 +25,7 @@ const Span = styled.span`
 
 const LogoUser = styled.img`
   height: 35px;
-  width: auto;
+  width: 35px;
   border-radius: 17.5px;
 `
 
