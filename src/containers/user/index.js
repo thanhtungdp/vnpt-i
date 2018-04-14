@@ -27,5 +27,6 @@ export default props => (
         component={ChangePassword}
     />
     <Route path={slug.user.profile} component={ProfileUser} />
+
   </Switch>
 )
