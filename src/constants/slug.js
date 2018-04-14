@@ -48,6 +48,11 @@ export default {
   avgSearch: {
     base: '/avg-search'
   },
+  password:{
+    emailConfirm: '/password/email-confirm',
+    codeConfirm: '/password/code-confirm/:key',
+    codeConfirmWithKey: '/password/code-confirm',
+  },
   user: {
     list: '/user',
     base: '/user',
@@ -56,9 +61,6 @@ export default {
     editWithKey: '/user/edit',
     changePassword: '/user/change-password',
     profile: '/user/profile',
-    emailConfirm: '/user/email-confirm',
-    codeConfirm: '/user/code-confirm/:key',
-    codeConfirmWithKey: '/user/code-confirm',
     resetPassword: '/user/reset-password',
     rule: '/user/rule/:key',
     ruleWithKey: '/user/rule'

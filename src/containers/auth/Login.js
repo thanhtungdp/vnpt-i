@@ -118,7 +118,7 @@ export default class Login extends PureComponent {
           </Button>
           <Clearfix height={16} />
           <FloatRight>
-            <Link to={slug.user.emailConfirm}>
+            <Link to={slug.password.emailConfirm}>
               {translate('resetPassword.key')}
             </Link>
           </FloatRight>
