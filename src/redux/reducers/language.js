@@ -3,7 +3,7 @@
 import update from 'react-addons-update'
 import { CHANGE_LANGUAGE } from '../actions/languageAction'
 import languages from 'languages'
-import {getLanguage} from 'utils/localStorage'
+import { getLanguage } from 'utils/localStorage'
 
 const initialState = {
   locale: getLanguage(),

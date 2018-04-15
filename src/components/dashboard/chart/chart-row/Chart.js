@@ -5,7 +5,6 @@ import {
   withHighcharts,
   HighchartsStockChart,
   Chart,
-  Title,
   Legend,
   XAxis,
   YAxis,

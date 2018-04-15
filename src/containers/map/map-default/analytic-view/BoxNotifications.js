@@ -2,7 +2,7 @@ import React from 'react'
 import { autobind } from 'core-decorators'
 import BoxLayout from 'components/map/box-white-layout'
 import NotificationList from 'components/map/notification-list'
-import notifications from 'fake-data/notifications'
+// import notifications from 'fake-data/notifications'
 import NotificationsApi from 'api/NotificationApi'
 import styled from 'styled-components'
 import connectWindowHeight from '../../hoc-window-height'
@@ -77,7 +77,7 @@ export default class BoxNotifications extends React.PureComponent {
     return (
       <BoxLayout noPadding style={{ flex: 1 }} title="Notifications">
         <Wrapper height={height}>
-          {this.state.notifications.length == 0 && (
+          {this.state.notifications.length === 0 && (
             <Nodata>
               <span>
                 {' '}

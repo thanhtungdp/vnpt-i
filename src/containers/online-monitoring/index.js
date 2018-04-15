@@ -1,17 +1,14 @@
 import React from 'react'
-import { Divider, Table, Modal, Button, Tabs } from 'antd'
+import { Divider, Table, Button, Tabs } from 'antd'
 import Breadcrumb from './breadcrumb'
 import createLanguageHoc, { langPropTypes } from '../../hoc/create-lang'
 import { autobind } from 'core-decorators'
 import PageContainer from 'layout/default-sidebar-layout/PageContainer'
 import StationAutoApi from 'api/StationAuto'
 import CategoriesApi from 'api/CategoryApi'
-import DataSearch from './data-search'
-import ControlStation from 'containers/control-station'
 import styled from 'styled-components'
 // import playSound from 'utils/audio'
 import dateFormat from 'dateformat'
-import Clearfix from 'components/elements/clearfix'
 
 const StyledTabs = styled(Tabs)`
   .ant-tabs-tab {

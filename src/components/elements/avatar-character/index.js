@@ -30,7 +30,7 @@ const LogoUser = styled.img`
 `
 
 export default function AvatarCharacter({ size = 30, username, avatarUrl }) {
-  if (avatarUrl && avatarUrl.indexOf('http:/') != -1) {
+  if (avatarUrl && avatarUrl.indexOf('http:/') !== -1) {
     avatarUrl = avatarUrl.replace('http:/', 'http://')
   }
 

@@ -14,6 +14,7 @@ const View = styled.div``
 export default class CheckBoxRole extends PureComponent {
   static propTypes = {
     onChange: PropTypes.func,
+    lang: langPropTypes,
     dataItems: PropTypes.object
   }
 
@@ -168,12 +169,10 @@ export default class CheckBoxRole extends PureComponent {
   }
 
   render() {
-    const { lang: { t } } = this.props
-    const { props } = this.props
     return (
       <View>
         <Table
-          {...props}
+          {...this.props}
           loading={this.props.isLoading}
           columns={this.getColumns()}
           dataSource={this.state.dataMenus}

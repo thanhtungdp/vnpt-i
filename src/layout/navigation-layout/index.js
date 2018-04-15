@@ -15,7 +15,6 @@ import LogoSubIcon from './LogoSubIcon'
 import CreateDrawer from './CreateDrawer'
 import ChangeLanguage from './ChangeLanguage'
 
-
 import Navigation, {
 // AkContainerTitle,
   AkNavigationItem,
@@ -136,7 +135,7 @@ export default class BasicNestedNavigation extends React.Component {
           <DropdownItem onClick={this.handleLogout}>Log out</DropdownItem>
         </DropdownItemGroup>
       </AkDropdownMenu>,
-      <ChangeLanguage/>
+      <ChangeLanguage />
     ]
   }
 

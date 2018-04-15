@@ -14,8 +14,8 @@ import { translate } from 'hoc/create-lang'
 import PageContainer from 'layout/default-sidebar-layout/PageContainer'
 import { autobind } from 'core-decorators'
 import Breadcrumb from 'containers/auth/breadcrumb'
-import {fetchUserMe} from "redux/actions/authAction"
-import {connectAutoDispatch} from "redux/connect"
+import { fetchUserMe } from 'redux/actions/authAction'
+import { connectAutoDispatch } from 'redux/connect'
 import moment from 'moment'
 
 const FInput = createValidateComponent(InputLabel)
@@ -134,7 +134,13 @@ export class ProfileUserForm extends PureComponent {
           </Col>
         </Row>
         <Clearfix />
-        <Button disabled={this.props.submitting}  isLoading={this.props.submitting} controtertype="submit" block color="primary">
+        <Button
+          disabled={this.props.submitting}
+          isLoading={this.props.submitting}
+          controtertype="submit"
+          block
+          color="primary"
+        >
           Save
         </Button>
       </form>
@@ -142,7 +148,7 @@ export class ProfileUserForm extends PureComponent {
   }
 }
 
-@connectAutoDispatch((state) => ({}), {fetchUserMe})
+@connectAutoDispatch(state => ({}), { fetchUserMe })
 @autobind
 export default class ProfileUser extends PureComponent {
   static propTypes = {

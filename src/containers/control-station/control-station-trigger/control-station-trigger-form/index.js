@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Row, Col, Progress } from 'antd'
+import { Row, Col } from 'antd'
 import LoaderCircle from 'components/elements/loader-circle'
 import PropTypes from 'prop-types'
 import Button from 'components/elements/button/index'

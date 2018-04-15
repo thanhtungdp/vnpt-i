@@ -1,7 +1,5 @@
 import React from 'react'
-import PropTypes from 'prop-types'
-import { Menu, Dropdown, Icon, Divider } from 'antd'
-import Button from 'components/elements/button/index'
+import { Menu, Dropdown, Icon } from 'antd'
 import styled from 'styled-components'
 import { autobind } from 'core-decorators'
 import { Link } from 'react-router-dom'

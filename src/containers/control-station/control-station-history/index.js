@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react'
 import { Table } from 'antd'
-import PropTypes from 'prop-types'
 import { withRouter } from 'react-router-dom'
 import Breadcrumb from 'containers/control-station/breadcrumb'
 import PageContainer from 'layout/default-sidebar-layout/PageContainer'
@@ -42,10 +41,8 @@ export default class ControlStationHistory extends PureComponent {
   }
   async componentDidMount() {
     this.setState({ isLoaded: false })
-    const name = this.props.match.params.name
     const key = this.props.match.params.key
     const record = await StationControl.getHistory_StationControl(key)
-    console.log(record)
     if (record.success) {
       record.data = record.data.map(item => ({
         ...item,

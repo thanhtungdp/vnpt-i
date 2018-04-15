@@ -52,7 +52,7 @@ export default class BoxAnalyticList extends React.PureComponent {
 
   componentWillReceiveProps(nextProps) {
     if (
-      nextProps.stationsAutoList.length != this.state.stationsAutoList.length
+      nextProps.stationsAutoList.length !== this.state.stationsAutoList.length
     ) {
       // Check if it's a new user, you can also use some unique, like the ID
       this.rendermap(nextProps.stationsAutoList)

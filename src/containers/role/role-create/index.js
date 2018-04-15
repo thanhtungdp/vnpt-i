@@ -7,8 +7,6 @@ import slug from 'constants/slug'
 import RoleForm from 'containers/role/role-form'
 import Breadcrumb from 'containers/role/breadcrumb'
 import RoleApi from 'api/RoleApi'
-import AuthApi from 'api/AuthApi'
-import PropTypes from 'prop-types'
 
 @withRouter
 @autobind

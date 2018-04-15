@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import { Row, Col, message } from 'antd'
+import { Row, Col } from 'antd'
 import PropTypes from 'prop-types'
 import Button from 'components/elements/button/index'
 import { reduxForm, Field } from 'redux-form'
@@ -38,6 +38,7 @@ function validate(values) {
 @autobind
 export class ControlStationConfigForm extends PureComponent {
   static propTypes = {
+    lang: langPropTypes,
     onSubmit: PropTypes.func,
     handleReset: PropTypes.func,
     initialValues: PropTypes.object

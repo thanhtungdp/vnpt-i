@@ -6,10 +6,7 @@ import connectWindowHeight from '../hoc-window-height'
 import SidebarList from './sidebar-list'
 import AnalyticView from './analytic-view'
 import MapView from './map-view'
-import {
-  resolveMapLocationObject,
-  resolveMapLocation
-} from 'utils/resolveMapLocation'
+import { resolveMapLocation } from 'utils/resolveMapLocation'
 import BoxHideLayout from 'components/map/box-hide-layout'
 import stationStatus from 'constants/stationStatus'
 import { warningLevelsNumber, warningLevels } from 'constants/warningLevels'

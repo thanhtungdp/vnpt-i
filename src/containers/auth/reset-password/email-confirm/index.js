@@ -62,7 +62,6 @@ function validate(values) {
 @withRouter
 @autobind
 export default class EmailConfirm extends PureComponent {
-
   async handleResetPassword(values) {
     const email = values.email
     const record = await AuthApi.GetForgotSendCode(email)
