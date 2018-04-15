@@ -2,10 +2,11 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { autobind } from 'core-decorators'
 import styled from 'styled-components'
+import { connect } from 'react-redux'
 import MeasuringItem from '../measuring-item'
 
 const MeasuringListWrapper = styled.div`
-  padding: 16px 0 0px 0px;
+  padding: 8px 0 0px 0px;
   display: flex;
   flex-wrap: wrap;
   margin-left: -8px;
@@ -14,9 +15,12 @@ const MeasuringListWrapper = styled.div`
 
 const MeasuringItemWrapper = styled.div`
   padding: 0px 8px;
-  width: 20%;
+  width: ${props => (props.navigationIsOpen ? '20%' : '12.5%')};
 `
 
+@connect(state => ({
+  navigationIsOpen: state.theme.navigation.isOpen
+}))
 @autobind
 export default class MeasuringList extends React.PureComponent {
   static propTypes = {
@@ -28,7 +32,10 @@ export default class MeasuringList extends React.PureComponent {
         {this.props.data &&
           this.props.data.length !== 0 &&
           this.props.data.map(item => (
-            <MeasuringItemWrapper key={item.key}>
+            <MeasuringItemWrapper
+              navigationIsOpen={this.props.navigationIsOpen}
+              key={item.key}
+            >
               <MeasuringItem {...item} />
             </MeasuringItemWrapper>
           ))}

@@ -2,30 +2,12 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { autobind } from 'core-decorators'
 import styled from 'styled-components'
-import { Input } from 'antd'
-import Clearfix from 'components/elements/clearfix'
 import { colorLevels } from 'constants/warningLevels'
 
 const HeaderWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-`
-const TitleWrapper = styled.div`
-  display: flex;
-`
-const Title = styled.h1`
-  font-size: 22px;
-  margin-top: 0px;
-  line-height: 1.6em;
-  margin-bottom: 0px;
-`
-const InputText = styled(Input)`
-  width: 230px;
-  height: 36px;
-  border-radius: 4px;
-  background-color: #ffffff;
-  border: solid 1px #eeeeee;
 `
 const WarningWrapper = styled.div`
   display: flex;
@@ -71,11 +53,7 @@ export default class Header extends React.PureComponent {
   render() {
     return (
       <HeaderWrapper>
-        <TitleWrapper>
-          <Title>Monitoring</Title>
-          <Clearfix width={24} />
-          <InputText />
-        </TitleWrapper>
+        {this.props.children}
         <WarningWrapper>
           <WarningTitle>WARNING LEVELS</WarningTitle>
           <WrapperColor>

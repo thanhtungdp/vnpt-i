@@ -7,8 +7,8 @@ import PropTypes from 'prop-types'
 import moment from 'moment'
 
 const StationAutoWrapper = styled.div`
-  padding: 16px;
   background-color: #ffffff;
+  padding: 8px 16px;
   box-shadow: 0 4px 10px 0 rgba(241, 241, 241, 0.5);
 `
 
@@ -46,7 +46,7 @@ export default class StationAutoItem extends React.PureComponent {
         .toString()
     }
     return (
-      <StationAutoWrapper>
+      <StationAutoWrapper className="stationAutoWrapper">
         <StationAutoHead
           name={name}
           receivedAt={receivedAt}

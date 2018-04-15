@@ -12,16 +12,16 @@ import HipchatIcon from '@atlaskit/icon/glyph/hipchat'
 import PersonIcon from '@atlaskit/icon/glyph/person'
 import PeopleGroupIcon from '@atlaskit/icon/glyph/people-group'
 export default {
-  quizLists: <QuizListIcon label={''} />,
-  users: <UserIcon label={''} />,
-  gallerySlider: <ImageIcon label={''} />,
-  location: <LocationIcon label={''} />,
-  screen: <ScreenIcon label={''} />,
-  dashboard: <DashboardIcon label={''} />,
-  graphBar: <GraphBarIcon label={''} />,
-  graphLine: <GraphLineIcon label={''} />,
-  book: <BookIcon label={''} />,
-  hipchat: <HipchatIcon label={''} />,
-  person: <PersonIcon label={''} />,
-  peopleGroup: <PeopleGroupIcon label={''} />
+  quizLists: <QuizListIcon label={''} size={'medium'} />,
+  users: <UserIcon label={''} size={'medium'} />,
+  gallerySlider: <ImageIcon label={''} size={'medium'} />,
+  location: <LocationIcon label={''} size={'medium'} />,
+  screen: <ScreenIcon label={''} size={'medium'} />,
+  dashboard: <DashboardIcon label={''} size={'medium'} />,
+  graphBar: <GraphBarIcon label={''} size={'medium'} />,
+  graphLine: <GraphLineIcon label={''} size={'medium'} />,
+  book: <BookIcon label={''} size={'medium'} />,
+  hipchat: <HipchatIcon label={''} size={'medium'} />,
+  person: <PersonIcon label={''} size={'medium'} />,
+  peopleGroup: <PeopleGroupIcon label={''} size={'medium'} />
 }

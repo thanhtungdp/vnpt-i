@@ -43,7 +43,9 @@ export default class DefaultSidebarNavigation extends React.Component {
   shouldComponentUpdate(nextProps, nextState) {
     return (
       this.props.location.pathname !== nextProps.location.pathname ||
-      this.state.stack.length !== nextState.stack.length
+      this.state.stack.length !== nextState.stack.length ||
+      this.props.navigation.isOpen !== nextProps.navigation.isOpen ||
+      this.props.navigation.width !== nextProps.navigation.width
     )
   }
 
@@ -92,8 +94,10 @@ export default class DefaultSidebarNavigation extends React.Component {
   render() {
     return (
       <NavigationLayout
+        onChangeSize={this.props.onChangeSize}
         isShowBack={this.state.stack.length > 1}
         onBack={this.stackPop}
+        navigation={this.props.navigation}
       >
         <AkContainerNavigationNested stack={this.renderStack()} />
       </NavigationLayout>

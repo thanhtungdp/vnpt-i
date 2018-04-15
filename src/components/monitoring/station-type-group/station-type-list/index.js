@@ -11,7 +11,7 @@ const StationTypeListWrapper = styled.div`
   margin-left: -8px;
   margin-right: -8px;
   .stationTypeItem {
-    margin-bottom: 24px;
+    margin-bottom: 16px;
   }
 `
 
@@ -30,11 +30,13 @@ export default class StationTypeList extends React.PureComponent {
     return (
       <StationTypeListWrapper>
         <StationTypeContainer>
-          {this.props.data.map((item, index) => (
-            <div key={index} className="stationTypeItem">
-              <StationTypeItem {...item} />
-            </div>
-          ))}
+          {this.props.data
+            .filter(item => item.stationAutoList.length > 0)
+            .map((item, index) => (
+              <div key={index} className="stationTypeItem">
+                <StationTypeItem {...item} />
+              </div>
+            ))}
         </StationTypeContainer>
       </StationTypeListWrapper>
     )

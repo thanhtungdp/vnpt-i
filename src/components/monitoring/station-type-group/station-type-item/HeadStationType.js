@@ -37,6 +37,10 @@ export default class HeadStypeType extends React.Component {
         isBackground
         textColor="#ffffff"
         rightChildren={this.rightChildren()}
+        fontSize={14}
+        style={{
+          padding: '8px 16px'
+        }}
       >
         {this.props.children}
       </Heading>

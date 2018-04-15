@@ -1,6 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Divider } from 'antd'
 import { Link } from 'react-router-dom'
 import slug from 'constants/slug'
 import { autobind } from 'core-decorators'
@@ -21,9 +20,9 @@ const OrderNumber = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 29px;
-  height: 29px;
-  border-radius: 7px;
+  width: 20px;
+  height: 20px;
+  border-radius: 5px;
   text-align: center;
   vertical-align: middle;
   background: linear-gradient(
@@ -36,7 +35,7 @@ const OrderNumber = styled.div`
 `
 const StationName = styled.h4`
   font-weight: 600;
-  font-size: 18px;
+  font-size: 14px;
   margin-top: 0px;
   margin-bottom: 0px;
 `
@@ -46,6 +45,15 @@ const ReceivedAt = styled.span`
 
 const ActionWrapper = styled.div`
   display: flex;
+  align-items: center;
+`
+
+const Divider = styled.div`
+  width: 1px;
+  height: 13px;
+  margin-left: 4px;
+  margin-right: 4px;
+  background-color: ${SHAPE.GRAYBOLD};
 `
 
 @autobind
@@ -75,7 +83,7 @@ export default class StationAutoHead extends React.PureComponent {
           >
             Control
           </Link>
-          <Divider type="vertical" />
+          <Divider />
           <Link to={'/'}>Camera</Link>
         </ActionWrapper>
       </StationHeadItemWrapper>

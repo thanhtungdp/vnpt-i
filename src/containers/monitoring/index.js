@@ -6,15 +6,56 @@ import PageContainer from 'layout/default-sidebar-layout/PageContainer'
 import StationAutoApi from 'api/StationAuto'
 import CategoriesApi from 'api/CategoryApi'
 import Header from 'components/monitoring/head'
+import objectPath from 'object-path'
+import HeaderFilter from 'components/monitoring/filter'
 import StationTypeList from 'components/monitoring/station-type-group/station-type-list'
+import monitoringFilter from 'constants/monitoringFilter'
 import Clearfix from 'components/elements/clearfix'
+import { getMonitoringFilter, setMonitoringFilter } from 'utils/localStorage'
+import {
+  GROUP_OPTIONS,
+  ORDER_OPTIONS
+} from 'components/monitoring/filter/options'
+
+export const defaultFilter = {
+  group: GROUP_OPTIONS[0].value,
+  order: ORDER_OPTIONS[0].value,
+  stationType: ''
+}
 
 @withRouter
 @autobind
 export default class Monitoring extends React.Component {
   state = {
     isLoading: false,
+    filter: getMonitoringFilter() ? getMonitoringFilter() : defaultFilter,
     data: []
+  }
+
+  appendWarningLevelStationAuto(stationAutoList) {
+    return stationAutoList.map(stationAuto => {
+      let totalWarning = 0
+      if (stationAuto.lastLog && stationAuto.lastLog.measuringLogs) {
+        const measuringLogs = stationAuto.lastLog.measuringLogs
+        Object.keys(measuringLogs).forEach(key => {
+          if (measuringLogs[key].warningLevel) {
+            totalWarning++
+          }
+        })
+      }
+      return {
+        ...stationAuto,
+        totalWarning
+      }
+    })
+  }
+
+  getTotalWarning(stationAutoList) {
+    let totalWarning = 0
+    stationAutoList.forEach(item => {
+      totalWarning += item.totalWarning
+    })
+    return totalWarning
   }
 
   async loadData() {
@@ -42,7 +83,10 @@ export default class Monitoring extends React.Component {
       )
       return {
         stationType,
-        stationAutoList
+        stationAutoList: this.appendWarningLevelStationAuto(stationAutoList),
+        totalWarning: this.getTotalWarning(
+          this.appendWarningLevelStationAuto(stationAutoList)
+        )
       }
     })
     this.setState({
@@ -69,10 +113,118 @@ export default class Monitoring extends React.Component {
     this.stopTimer()
   }
 
+  handleChangeFilter(filter) {
+    console.log(filter)
+    this.setState({ filter })
+    setMonitoringFilter(filter)
+  }
+
+  renderHeader() {
+    return (
+      <Header>
+        <HeaderFilter
+          filter={this.state.filter}
+          onChange={this.handleChangeFilter}
+        />
+      </Header>
+    )
+  }
+
+  sortNameList(data, key, asc = true) {
+    return data.sort(function(a, b) {
+      const last = objectPath.get(a, key)
+      const after = objectPath.get(b, key)
+      if (asc) {
+        if (last < after) return -1
+        if (last > after) return 1
+      } else {
+        if (last < after) return 1
+        if (last > after) return -1
+      }
+      return 0
+    })
+  }
+
+  unGroupStation(stationTypeList) {
+    if (stationTypeList.length === 0) return []
+    let newStationAutoList = []
+    stationTypeList.forEach(stationType => {
+      stationType.stationAutoList.forEach(stationAuto => {
+        newStationAutoList = [...newStationAutoList, stationAuto]
+      })
+    })
+    if (this.state.filter.order === monitoringFilter.ORDER.NAME) {
+      newStationAutoList = this.sortNameList(newStationAutoList, 'name')
+    }
+    return [
+      {
+        stationType: {
+          ...stationTypeList[0],
+          name: 'All'
+        },
+        stationAutoList: newStationAutoList
+      }
+    ]
+  }
+
+  getData() {
+    let stationTypeList = this.state.data
+    // filter by STATION TYPE
+    if (this.state.filter.stationType) {
+      stationTypeList = stationTypeList.filter(
+        stationType =>
+          stationType.stationType.key === this.state.filter.stationType
+      )
+    }
+    // filter by UNGROUP
+    if (this.state.filter.group === monitoringFilter.GROUP.UNGROUP) {
+      stationTypeList = this.unGroupStation(stationTypeList)
+    }
+
+    // filter by ORDER NAME
+    if (this.state.filter.order === monitoringFilter.ORDER.NAME) {
+      stationTypeList = this.sortNameList(
+        stationTypeList,
+        'stationType.name'
+      ).map(stationType => {
+        return {
+          ...stationType,
+          stationType: stationType.stationType,
+          stationAutoList: this.sortNameList(
+            stationType.stationAutoList,
+            'name'
+          )
+        }
+      })
+    }
+
+    // filter by ABC
+    if (this.state.filter.order === monitoringFilter.ORDER.NUMBER) {
+      stationTypeList = this.sortNameList(stationTypeList, 'totalWarning').map(
+        stationType => {
+          return {
+            ...stationType,
+            stationType: stationType.stationType,
+            stationAutoList: this.sortNameList(
+              stationType.stationAutoList,
+              'totalWarning',
+              false
+            )
+          }
+        }
+      )
+    }
+
+    return stationTypeList
+  }
+
   render() {
     return (
-      <PageContainer backgroundColor="#fafbfb" headerCustom={<Header />}>
-        <StationTypeList data={this.state.data} />
+      <PageContainer
+        backgroundColor="#fafbfb"
+        headerCustom={this.renderHeader()}
+      >
+        <StationTypeList filter={this.state.filter} data={this.getData()} />
         <Clearfix height={64} />
       </PageContainer>
     )

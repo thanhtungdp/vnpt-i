@@ -49,7 +49,16 @@ export default class BasicNestedNavigation extends React.Component {
     isShowBack: PropTypes.bool,
     hide: PropTypes.bool,
     onBack: PropTypes.func,
-    logout: PropTypes.func
+    onChangeSize: PropTypes.func,
+    logout: PropTypes.func,
+    navigation: PropTypes.object
+  }
+
+  static defaultProps = {
+    navigation: {
+      isOpen: true,
+      width: 280
+    }
   }
 
   state = {
@@ -78,6 +87,7 @@ export default class BasicNestedNavigation extends React.Component {
     ) : null
 
     /* eslint-disable jsx-a11y/no-static-element-interactions */
+    if (!this.props.navigation.isOpen) return []
     return [
       <Tooltip key="1" position="right" content="Admin system">
         <WrapperTitle>
@@ -139,14 +149,22 @@ export default class BasicNestedNavigation extends React.Component {
     ]
   }
 
+  handleResize(e) {
+    if (this.props.onChangeSize) {
+      this.props.onChangeSize(e)
+    }
+  }
+
   render() {
     return (
       <StyleWrapper>
         <Navigation
           globalTheme={globalTheme}
-          width={this.props.hide ? 0 : 320}
+          width={this.props.hide ? 0 : this.props.navigation.width}
           globalPrimaryIcon={<LogoSubIcon />}
           containerHeaderComponent={() => this.getContainerHeaderComponent()}
+          onResize={this.handleResize}
+          isOpen={this.props.navigation.isOpen}
           drawers={[
             <CreateDrawer
               key="create"

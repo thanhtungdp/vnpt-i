@@ -6,7 +6,7 @@ import { colorLevels } from 'constants/warningLevels'
 
 const MeasuringItemWrapper = styled.div`
   display: flex;
-  padding: 16px 16px;
+  padding: 8px 16px;
   flex-direction: column;
   justify-content: space-between;
   border-radius: 8px;
@@ -27,11 +27,21 @@ const MeasuringName = styled.span`
   border-radius: 3px;
   background-color: ${props => props.color};
 `
-const MeasuringValue = styled.span`
+
+const MeasuringUnit = styled.span`
+  position: relative;
+  top: -10px;
+  font-size: 8px;
+  color: ${props => props.color};
+`
+
+const MeasuringValue = styled.div`
   font-size: 16px;
   text-align: left;
   color: ${props => props.color};
+  position: relative;
 `
+
 const MeasuringLimit = styled.span`
   font-size: 10px;
   color: #b9b9b9;
@@ -74,8 +84,16 @@ export default class MeasuringItem extends React.PureComponent {
       <MeasuringItemWrapper>
         <MeasuringItemText>
           <MeasuringValue color={this.getColorLevel()}>
-            {value} {unit ? unit : ''}
+            {value}{' '}
+            {unit ? (
+              <MeasuringUnit color={this.getColorLevel()} className="unit">
+                {unit}
+              </MeasuringUnit>
+            ) : (
+              ''
+            )}
           </MeasuringValue>
+
           <MeasuringName color={this.getColorLevel()}>{name}</MeasuringName>
         </MeasuringItemText>
         <MeasuringLimit>{this.getLimitText()}</MeasuringLimit>

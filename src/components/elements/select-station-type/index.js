@@ -10,7 +10,8 @@ export default class SelectStationType extends PureComponent {
     query: PropTypes.object,
     label: PropTypes.string,
     onChange: PropTypes.func,
-    value: PropTypes.string
+    value: PropTypes.string,
+    isShowAll: PropTypes.bool
   }
 
   state = {
@@ -34,6 +35,7 @@ export default class SelectStationType extends PureComponent {
       value: value
     })
     if (this.props.onHandleChange) this.props.onHandleChange(res, this)
+    if (this.props.onChange) this.props.onChange(value)
   }
 
   render() {
@@ -44,6 +46,7 @@ export default class SelectStationType extends PureComponent {
         onChange={this.onChange}
         value={this.state.value}
       >
+        {this.props.isShowAll && <Select.Option value={''}>All</Select.Option>}
         {this.state.stationTypes.map(stationType => (
           <Select.Option key={stationType.key} value={stationType.key}>
             {stationType.name}
