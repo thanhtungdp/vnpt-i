@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import stationStatus from 'constants/stationStatus'
 
 const Status = styled.div`
   width: 8px;
@@ -63,6 +64,16 @@ export default class TableListCustom extends React.PureComponent {
       key: PropTypes.string
     }),
     onChangeItem: PropTypes.func
+  }
+
+  state={
+    stationStatus: stationStatus.GOOD
+  }
+
+  async componentWillMount() {
+    console.log('componentWillMount')
+    console.log(this.props.data)
+    console.log(this.props.currentItem)
   }
 
   render() {
