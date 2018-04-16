@@ -19,7 +19,7 @@ export function putProfile(_id, data) {
 
 //Send Code
 export function GetForgotSendCode(email) {
-  return getFetch(AUTH_API + `/auth/forgot-password?usernameOrEmail=${email}`)
+  return getFetch(AUTH_API + `/auth/forgot-password?email=${email}`)
 }
 
 //confirm Code

@@ -26,7 +26,7 @@ export function trigger_StationControl(data) {
 
 //Kích hoạt lấy mẫu vượt ngưỡng
 export function triggerExceeded_StationControl(data) {
-  return postFetch(STATION_CONTROL_API + `/sampling-api/samling-exceeded`, data)
+  return postFetch(STATION_CONTROL_API + `/sampling-api/sampling-exceeded`, data)
 }
 export default {
   getStationControl,
