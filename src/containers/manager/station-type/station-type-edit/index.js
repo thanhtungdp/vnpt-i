@@ -1,6 +1,6 @@
 import React from 'react'
 import PageContainer from 'layout/default-sidebar-layout/PageContainer'
-import { Button, Icon } from 'antd'
+import { Button, Icon, Spin } from 'antd'
 import { autobind } from 'core-decorators'
 import CategoryApi from 'api/CategoryApi'
 import StationTypeFrom from '../station-type-form'
@@ -37,12 +37,6 @@ export default class StationTypeEdit extends React.PureComponent {
     this.props.getItem()
   }
 
-  cleanData() {
-    return {
-      ...this.props.data
-    }
-  }
-
   // Su kien xoa measuring
   deleteStationType() {
     const key = this.props.match.params.key
@@ -64,21 +58,23 @@ export default class StationTypeEdit extends React.PureComponent {
   render() {
     return (
       <PageContainer button={this.buttonDelete()} {...this.props.wrapperProps}>
-        <Breadcrumb
-          items={[
-            'list',
-            {
-              id: 'edit',
-              name: this.props.isLoaded ? this.cleanData().name : null
-            }
-          ]}
-        />
-        {this.props.isLoaded && (
-          <StationTypeFrom
-            initialValues={this.cleanData()}
-            onSubmit={this.handleSubmit}
+        <Spin spinning={!this.props.isLoaded}>
+          <Breadcrumb
+            items={[
+              'list',
+              {
+                id: 'edit',
+                name: this.props.isLoaded ? this.props.data.name : null
+              }
+            ]}
           />
-        )}
+          {this.props.isLoaded && (
+            <StationTypeFrom
+              initialValues={this.props.data}
+              onSubmit={this.handleSubmit}
+            />
+          )}
+        </Spin>
       </PageContainer>
     )
   }
