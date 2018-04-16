@@ -1,13 +1,26 @@
 import React from 'react'
-import { Form, Input, Button, Row, Col, Icon } from 'antd'
+import { Form as FormStyle, Input, Button, Row, Col, Icon } from 'antd'
 import PropTypes from 'prop-types'
 import { autobind } from 'core-decorators'
 import { mapPropsToFields } from 'utils/form'
 import createLanguage, { langPropTypes } from 'hoc/create-lang'
+import styled from 'styled-components'
 
-const FormItem = Form.Item
+const FormItem = FormStyle.Item
+const Form = styled(FormStyle)`
+  display: flex;
+  .ant-form-item-control {
+    line-height: 0px;
+  }
+  .ant-form-item {
+    margin-bottom: 0px;
+  }
+`
+const Clearfix = styled.div`
+  width: 8px;
+`
 
-@Form.create({
+@FormStyle.create({
   mapPropsToFields: mapPropsToFields
 })
 @createLanguage
@@ -42,30 +55,22 @@ export default class StationTypeSearchForm extends React.PureComponent {
     const { getFieldDecorator } = this.props.form
     const { lang: { t } } = this.props
     return (
-      <Form className="ant-advanced-search-form" onSubmit={this.changeSearch}>
-        <Row gutter={24}>
-          <Col span={10} key="key">
-            <FormItem label={t('stationTypeManager.form.key.label')}>
-              {getFieldDecorator(`key`)(
-                <Input placeholder={t('stationTypeManager.form.key.label')} />
-              )}
-            </FormItem>
-          </Col>
-          <Col span={10} key="name">
-            <FormItem label={t('stationTypeManager.form.name.label')}>
-              {getFieldDecorator(`name`)(
-                <Input placeholder={t('stationTypeManager.form.label.name')} />
-              )}
-            </FormItem>
-          </Col>
-          <Col span={4} style={{ textAlign: 'right', marginTop: '42px' }}>
-            <Button type="primary" htmlType="submit">
-              <Icon type="search" />
-              {t('addon.search')}
-            </Button>
-          </Col>
-        </Row>
-        <Row />
+      <Form className="fadeIn animated" onSubmit={this.changeSearch}>
+        <FormItem>
+          {getFieldDecorator(`key`)(
+            <Input placeholder={t('stationTypeManager.form.key.label')} />
+          )}
+        </FormItem>
+        <Clearfix />
+        <FormItem>
+          {getFieldDecorator(`name`)(
+            <Input placeholder={t('stationTypeManager.form.name.label')} />
+          )}
+        </FormItem>
+        <Clearfix />
+        <Button shape="circle" htmlType="submit">
+          <Icon type="search" />
+        </Button>
       </Form>
     )
   }

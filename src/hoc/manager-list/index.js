@@ -6,7 +6,7 @@ import { autobind } from 'core-decorators'
  * @param apiList
  * @param apiDelete
  */
-const createManagerList = ({ apiList, itemPerPage = 20 }) => Component => {
+const createManagerList = ({ apiList, itemPerPage = 4 }) => Component => {
   @autobind
   class ManagerListHoc extends React.Component {
     state = {
@@ -14,7 +14,9 @@ const createManagerList = ({ apiList, itemPerPage = 20 }) => Component => {
       isLoading: false,
       pagination: {
         itemPerPage: itemPerPage,
-        page: 1
+        page: 1,
+        current: 1,
+        total: 0
       },
       pathImg: '',
       data: {}
@@ -32,7 +34,10 @@ const createManagerList = ({ apiList, itemPerPage = 20 }) => Component => {
 
       this.setState({
         dataSource: res.data,
-        pagination: res.pagination,
+        pagination: {
+          ...res.pagination,
+          total: res.pagination.totalItem
+        },
         isLoading: false,
         pathImg: res.path
       })
@@ -51,10 +56,12 @@ const createManagerList = ({ apiList, itemPerPage = 20 }) => Component => {
     onChangePage(page, pageSize) {
       this.setState(
         {
+          isLoading: true,
           pagination: {
             ...this.state.pagination,
             page: page,
-            itemPerPage: pageSize
+            current: page,
+            itemPerPage: pageSize ? pageSize : itemPerPage
           }
         },
         () => {
@@ -63,12 +70,15 @@ const createManagerList = ({ apiList, itemPerPage = 20 }) => Component => {
       )
     }
 
-    onChangeSearch(pagination, dataSearch) {
+    onChangeSearch(dataSearch) {
+      console.log(dataSearch)
       this.setState(
         {
+          isLoading: true,
           pagination: {
             ...this.state.pagination,
-            pagination
+            current: 1,
+            page: 1
           },
           data: { ...dataSearch }
         },
@@ -88,11 +98,11 @@ const createManagerList = ({ apiList, itemPerPage = 20 }) => Component => {
         {
           pagination: {
             page: 1,
-            itemPerPage: pageSize
+            current: 1,
+            itemPerPage: pageSize ? pageSize : itemPerPage
           }
         },
         () => {
-          console.log(this.state.pagination)
           this.fetchData()
         }
       )

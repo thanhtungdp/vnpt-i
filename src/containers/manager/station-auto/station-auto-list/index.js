@@ -171,6 +171,10 @@ export default class StationAutoList extends React.Component {
         <Breadcrumb items={['list']} />
         <DynamicTable
           isFixedSize
+          isLoading={this.props.isLoading}
+          paginationOptions={{
+            isSticky: true
+          }}
           head={this.getHead()}
           rows={this.getRows()}
           pagination={this.props.pagination}

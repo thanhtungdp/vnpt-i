@@ -1,17 +1,32 @@
 import React from 'react'
-import { Form, Input, Button, Row, Col, Icon } from 'antd'
+import { Form as FormStyle, Input, Button, Row, Col, Icon } from 'antd'
 import PropTypes from 'prop-types'
 import { autobind } from 'core-decorators'
 import { mapPropsToFields } from 'utils/form'
 import createLanguage, { langPropTypes } from 'hoc/create-lang'
 import ReactTelephoneInput from 'react-telephone-input/lib/withStyles'
+import styled from 'styled-components'
 // import { getOrganizations } from 'api/OrganizationApi'
 
 require('./index.css')
 
-const FormItem = Form.Item
+const FormItem = FormStyle.Item
+const Form = styled(FormStyle)`
+  display: flex;
+  align-items: flex-end;
+  .ant-form-item-control {
+    line-height: 0px;
+  }
+  .ant-form-item {
+    margin-bottom: 0px;
+    max-width: 140px;
+  }
+`
+const Clearfix = styled.div`
+  width: 8px;
+`
 
-@Form.create({
+@FormStyle.create({
   mapPropsToFields: mapPropsToFields
 })
 @createLanguage
@@ -67,71 +82,59 @@ export default class UserSearchForm extends React.PureComponent {
   render() {
     const { getFieldDecorator } = this.props.form
     const { lang: { t } } = this.props
+    const formItemLayout = {
+      // wrapperCol: {
+      //   xs: { span: 16 },
+      //   sm: { span: 16 },
+      // },
+    }
 
     return (
-      <Form className="ant-advanced-search-form" onSubmit={this.changeSearch}>
-        <Row gutter={24}>
-          <Col span={8} key="email">
-            <FormItem label={t('userSearchFrom.form.email.label')}>
-              {getFieldDecorator(`email`)(
-                <Input
-                  placeholder={t('userSearchFrom.form.email.placeholder')}
-                />
-              )}
-            </FormItem>
-          </Col>
-
-          <Col span={8} key="firstName">
-            <FormItem label={t('userSearchFrom.form.firstName.label')}>
-              {getFieldDecorator(`firstName`)(
-                <Input
-                  placeholder={t('userSearchFrom.form.firstName.placeholder')}
-                />
-              )}
-            </FormItem>
-          </Col>
-          <Col span={8} key="lastName">
-            <FormItem label={t('userSearchFrom.form.lastName.label')}>
-              {getFieldDecorator(`lastName`)(
-                <Input
-                  placeholder={t('userSearchFrom.form.lastName.placeholder')}
-                />
-              )}
-            </FormItem>
-          </Col>
-        </Row>
-
-        <Row gutter={24}>
-          <Col span={12} key="country">
-            <FormItem label={t('userSearchFrom.form.phone.label')}>
-              {getFieldDecorator(`phone`, {
-                initialValue: this.props.initialValues.type,
-                rules: [
-                  {
-                    //required: true,
-                    message: t('userSearchFrom.form.phone.label')
-                  }
-                ]
-              })(
-                <ReactTelephoneInput
-                  defaultCountry="vn"
-                  flagsImagePath="./images/flags.png"
-                  onChange={this.handleInputChange}
-                  // onBlur={this.handleInputBlur}
-                />
-              )}
-            </FormItem>
-          </Col>
-        </Row>
-
-        <Row gutter={24}>
-          <Col span={24} style={{ textAlign: 'right', marginBottom: '24px' }}>
-            <Button type="primary" htmlType="submit">
-              <Icon type="search" />
-              {t('addon.search')}
-            </Button>
-          </Col>
-        </Row>
+      <Form className="fadeIn animated" onSubmit={this.changeSearch}>
+        <FormItem {...formItemLayout}>
+          {getFieldDecorator(`email`)(
+            <Input placeholder={t('userSearchFrom.form.email.placeholder')} />
+          )}
+        </FormItem>
+        <Clearfix />
+        <FormItem {...formItemLayout}>
+          {getFieldDecorator(`firstName`)(
+            <Input
+              placeholder={t('userSearchFrom.form.firstName.placeholder')}
+            />
+          )}
+        </FormItem>
+        <Clearfix />
+        <FormItem {...formItemLayout}>
+          {getFieldDecorator(`lastName`)(
+            <Input
+              placeholder={t('userSearchFrom.form.lastName.placeholder')}
+            />
+          )}
+        </FormItem>
+        <Clearfix />
+        <FormItem {...formItemLayout}>
+          {getFieldDecorator(`phone`, {
+            initialValue: this.props.initialValues.type,
+            rules: [
+              {
+                //required: true,
+                message: t('userSearchFrom.form.phone.label')
+              }
+            ]
+          })(
+            <ReactTelephoneInput
+              defaultCountry="vn"
+              flagsImagePath="./images/flags.png"
+              onChange={this.handleInputChange}
+              // onBlur={this.handleInputBlur}
+            />
+          )}
+        </FormItem>
+        <Clearfix />
+        <Button shape="circle" htmlType="submit">
+          <Icon type="search" />
+        </Button>
       </Form>
     )
   }

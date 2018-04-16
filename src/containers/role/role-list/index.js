@@ -11,7 +11,7 @@ import createManagerList from 'hoc/manager-list'
 import createManagerDelete from 'hoc/manager-delete'
 import createLanguageHoc, { langPropTypes } from 'hoc/create-lang'
 import DynamicTable from 'components/elements/dynamic-table'
-import Breadcrumb from 'containers/manager/measuring/breadcrumb'
+import Breadcrumb from 'containers/role/breadcrumb'
 
 const FloatRight = styled.div`
   text-align: right;

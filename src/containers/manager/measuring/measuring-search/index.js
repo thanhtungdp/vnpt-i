@@ -75,13 +75,13 @@ export default class MeasuringSearchForm extends React.PureComponent {
           <Icon type="search" />
         </Button>
         &nbsp;
-        <Button
+        {/* <Button
           onClick={this.props.onAdvanced}
           shape="circle"
           htmlType="button"
         >
           <Icon type="arrows-alt" />
-        </Button>
+        </Button> */}
       </Form>
     )
   }
