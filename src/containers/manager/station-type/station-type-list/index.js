@@ -11,6 +11,18 @@ import createManagerDelete from 'hoc/manager-delete'
 import Breadcrumb from '../breadcrumb'
 import StationTypeSearchForm from '../station-type-search-form'
 import createLanguageHoc, { langPropTypes } from '../../../../hoc/create-lang'
+import styled from 'styled-components'
+
+const AvatarWrapper = styled.div`
+  .ant-avatar {
+    height: 40px;
+    width: 40px;
+  }
+  .ant-avatar > img {
+    padding: 4px;
+    height: auto;
+  }
+`
 
 @createManagerList({
   apiList: CategoryApi.getStationTypes
@@ -63,14 +75,21 @@ export default class StationTypeList extends React.Component {
         dataIndex: 'icon',
         key: 'icon',
         render: (text, record) => (
-          <Avatar
-            shape="square"
-            size="large"
-            style={{ backgroundColor: record.color }}
-            src={text}
-          >
-            Icon
-          </Avatar>
+          <AvatarWrapper>
+            <Avatar
+              shape="square"
+              size="large"
+              style={{
+                backgroundColor: record.color,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}
+              src={text}
+            >
+              Icon
+            </Avatar>
+          </AvatarWrapper>
         )
       },
       {

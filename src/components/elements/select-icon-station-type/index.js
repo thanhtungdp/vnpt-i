@@ -30,6 +30,7 @@ const AvatarWrapper = styled.div`
     align-items: center;
     padding: 4px;
     > img {
+      padding: 4px
       width: 100%;
       height: auto !important;
     }
@@ -62,11 +63,13 @@ export default class SelectImage extends PureComponent {
     ]
   }
   setIcon(urlIcon) {
+    console.log(urlIcon)
     this.setState(
       {
         urlIcon
       },
       () => {
+        console.log(this.state)
         if (this.props.onChangeValue) this.props.onChangeValue(this.state)
       }
     )
@@ -94,6 +97,7 @@ export default class SelectImage extends PureComponent {
         updateState.urlIcon = this.props.initialValues.urlIcon
       if (this.props.initialValues.color)
         updateState.color = this.props.initialValues.color
+      console.log(updateState)
       this.setState(updateState)
     }
   }
@@ -165,14 +169,20 @@ export default class SelectImage extends PureComponent {
           title="Choose Color"
           trigger="click"
         >
-          <Avatar
-            shape="square"
-            size="large"
-            style={{ cursor: 'pointer', backgroundColor: this.state.color }}
-            src={this.state.urlIcon}
-          >
-            Icon
-          </Avatar>
+          <AvatarWrapper>
+            <Avatar
+              shape="square"
+              size="large"
+              style={{
+                cursor: 'pointer',
+                backgroundColor: this.state.color,
+                display: 'flex'
+              }}
+              src={this.state.urlIcon}
+            >
+              Icon
+            </Avatar>
+          </AvatarWrapper>
         </Popover>
       </Popover>
     )
