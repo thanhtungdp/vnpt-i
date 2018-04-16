@@ -109,6 +109,7 @@ export default class StationTypeForm extends React.PureComponent {
   }
 
   onChangeIcon(iconObject) {
+    console.log(iconObject)
     this.setState({
       urlIcon: iconObject.urlIcon,
       color: iconObject.color
