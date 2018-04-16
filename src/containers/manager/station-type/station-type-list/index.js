@@ -104,20 +104,27 @@ export default class StationTypeList extends React.Component {
     ]
   }
 
+  renderSearchForm() {
+    return (
+      <StationTypeSearchForm
+        onChangeSearch={this.props.onChangeSearch}
+        initialValues={this.props.data}
+      />
+    )
+  }
+
   render() {
     return (
-      <PageContainer right={this.buttonAdd()}>
+      <PageContainer center={this.renderSearchForm()} right={this.buttonAdd()}>
         <Breadcrumb items={['list']} />
-        <StationTypeSearchForm
-          onChangeSearch={this.props.onChangeSearch}
-          initialValues={this.props.data}
-        />
         <Table
           loading={this.props.isLoading}
           columns={this.getColumns(this.props.pathImg)}
           dataSource={this.props.dataSource}
           pagination={{
             showSizeChanger: true,
+            ...this.props.pagination,
+            pageSize: this.props.itemPerPage,
             onChange: this.props.onChangePage,
             onShowSizeChange: this.props.onChangePageSize,
             total: this.props.pagination.totalItem

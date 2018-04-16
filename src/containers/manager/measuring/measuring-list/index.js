@@ -16,7 +16,7 @@ import MeasuringSearchAdvancedForm from '../measuring-search/advanced'
 
 @createManagerList({
   apiList: CategoryApi.getMeasurings,
-  itemPerPage: 20
+  itemPerPage: 10
 })
 @createManagerDelete({
   apiDelete: CategoryApi.deleteMeasuring
@@ -138,6 +138,7 @@ export default class MeasuringList extends React.Component {
       >
         <Breadcrumb items={['list']} />
         <DynamicTable
+          isLoading={this.props.isLoading}
           rows={this.getRows()}
           head={this.getHead()}
           paginationOptions={{

@@ -96,16 +96,21 @@ export default class UserList extends React.Component {
     ]
   }
 
+  renderSearchForm() {
+    return (
+      <UserSearchForm
+        onChangeSearch={query => {
+          this.props.onChangeSearch(query)
+        }}
+        initialValues={this.props.data}
+      />
+    )
+  }
+
   render() {
     return (
-      <PageContainer right={this.buttonAdd()}>
+      <PageContainer center={this.renderSearchForm()} right={this.buttonAdd()}>
         <Breadcrumb items={['list']} />
-        <UserSearchForm
-          onChangeSearch={query => {
-            this.props.onChangeSearch({}, query)
-          }}
-          initialValues={this.props.data}
-        />
         <Table
           rowKey="_id"
           loading={this.props.isLoading}
