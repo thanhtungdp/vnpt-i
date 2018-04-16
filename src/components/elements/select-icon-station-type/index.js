@@ -56,10 +56,12 @@ export default class SelectImage extends PureComponent {
     visiblePop: false,
     color: '',
     urlIconList: [
-      '/images/dashboard/cloud.png',
-      '/images/dashboard/groundwater.png',
-      '/images/dashboard/surfaceWater.png',
-      '/images/dashboard/wasteWater.png'
+      'http://media.ilotusland.vn/icon-station-type/air.png',
+      'http://media.ilotusland.vn/icon-station-type/noise.png',
+      'http://media.ilotusland.vn/icon-station-type/stack.png',
+      'http://media.ilotusland.vn/icon-station-type/surface.png',
+      'http://media.ilotusland.vn/icon-station-type/underground.png',
+      'http://media.ilotusland.vn/icon-station-type/waste.png'
     ]
   }
   setIcon(urlIcon) {
