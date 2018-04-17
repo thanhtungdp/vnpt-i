@@ -494,5 +494,13 @@ export default {
       exceededPreparing: 'Exceeded preparing',
       exceededTendency: 'Exceeded tendency'
     }
+  },
+  dashboard: {
+    good: 'Good',
+    dataLoss: 'data loss',
+    notUse: 'not use',
+    exceeded: 'Exceeded',
+    exceededPreparing: 'Exceeded preparing',
+    exceededTendency: 'Exceeded tendency'
   }
 }

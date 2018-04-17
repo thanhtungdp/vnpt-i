@@ -155,7 +155,7 @@ export default class BoxAnalyticList extends React.PureComponent {
             }}
           >
             <BoxNumberView
-              color={SHAPE.GREEN}
+              color={SHAPE.BLACK}
               type={t(pfKey + 'dataLoss')}
               number={this.state.dataLoss}
               focusStatus={stationStatus.DATA_LOSS}
@@ -168,7 +168,7 @@ export default class BoxAnalyticList extends React.PureComponent {
             }}
           >
             <BoxNumberView
-              color={SHAPE.RED}
+              color={SHAPE.BLACK}
               type={t(pfKey + 'notUse')}
               number={this.state.notUse}
               focusStatus={stationStatus.NOT_USE}

@@ -3,7 +3,8 @@ import PageContainer from 'layout/default-sidebar-layout/PageContainer'
 import SummaryList from 'components/dashboard/summary/summary-list'
 import ChartList from 'components/dashboard/chart/chart-row-list'
 import { getStationTypes } from 'api/CategoryApi'
-import { getStationAutos } from 'api/StationAuto'
+import { getStationAutos, getLastLog } from 'api/StationAuto'
+import { Spin } from 'antd'
 
 export default class OverviewDashboard extends Component {
   state = {
@@ -25,6 +26,8 @@ export default class OverviewDashboard extends Component {
       rows[item.key] = []
       lineSeries[item.key] = []
     })
+
+    let stationLastLog = await getLastLog()
     this.setState({
       stationTypeList,
       stationCount,
@@ -32,19 +35,23 @@ export default class OverviewDashboard extends Component {
       lineSeries,
       isLoaded: true
     })
+
     for (var i = 0; i < stationTypeList.length; i++) {
-      let stationAutos = await getStationAutos(
-        {},
-        { stationType: stationTypeList[i].key }
-      )
+
+      let stationAutos = stationLastLog.data.filter(item => {
+        if (!item.stationType) return false
+        return item.stationType.key === stationTypeList[i].key
+      })
+
+      console.log(stationAutos)
       this.setState({
         stationCount: {
           ...this.state.stationCount,
-          [stationTypeList[i].key]: stationAutos.data.length
+          [stationTypeList[i].key]: stationAutos.length
         },
         rows: {
           ...this.state.rows,
-          [stationTypeList[i].key]: stationAutos.data
+          [stationTypeList[i].key]: stationAutos
         }
       })
     }
@@ -71,7 +78,6 @@ export default class OverviewDashboard extends Component {
       '/images/dashboard/surfaceWater.png',
       '/images/dashboard/wasteWater.png'
     ]
-    console.log(this.state.stationTypeList)
     return this.state.stationTypeList.map((item, index) => ({
       color: item.color ? item.color : arrayColor[index], //arrayColor[index],
       name: item.name,
@@ -91,10 +97,12 @@ export default class OverviewDashboard extends Component {
 
   render() {
     return (
-      <PageContainer backgroundColor="#fafbfb" hideTitle>
-        <SummaryList data={this.getSummaryList()} />
-        <ChartList data={this.getChartList()} />
-      </PageContainer>
+      <Spin spinning={!this.state.isLoaded}>
+        <PageContainer backgroundColor="#fafbfb" hideTitle>
+          <SummaryList data={this.getSummaryList()} />
+          <ChartList data={this.getChartList()} />
+        </PageContainer>
+      </Spin>
     )
   }
 }
