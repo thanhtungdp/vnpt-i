@@ -107,6 +107,8 @@ export default class UserList extends React.Component {
             >
               Delete
             </a>
+            <Divider type="vertical" />
+            <Link to={slug.user.ruleWithKey + '/' + row._id}> Rule </Link>
           </span>
         )
       }
