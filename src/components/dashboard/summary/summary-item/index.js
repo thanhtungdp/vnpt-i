@@ -15,7 +15,7 @@ const SummaryItemWrapper = styled.div`
 
 const StationTypeImg = styled.img`
   width: 40px;
-  height: 28.4px;
+  height: auto;
 `
 
 const Text = styled.span`

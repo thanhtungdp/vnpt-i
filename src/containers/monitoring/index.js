@@ -106,6 +106,11 @@ export default class Monitoring extends React.Component {
   }
 
   async componentWillMount() {
+    if (this.props.location) {
+      const query = queryString.parse(this.props.location.search)
+      if (query)
+        this.handleChangeFilter({ ...this.state.filter, stationType: query.Id })
+    }
     this.startTimer()
   }
 
@@ -131,7 +136,7 @@ export default class Monitoring extends React.Component {
   }
 
   sortNameList(data, key, asc = true) {
-    return data.sort(function(a, b) {
+    return data.sort(function (a, b) {
       const last = objectPath.get(a, key)
       const after = objectPath.get(b, key)
       if (asc) {

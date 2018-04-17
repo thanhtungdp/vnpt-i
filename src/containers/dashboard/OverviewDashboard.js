@@ -4,6 +4,7 @@ import SummaryList from 'components/dashboard/summary/summary-list'
 import ChartList from 'components/dashboard/chart/chart-row-list'
 import { getStationTypes } from 'api/CategoryApi'
 import { getStationAutos, getLastLog } from 'api/StationAuto'
+import { Spin } from 'antd'
 
 export default class OverviewDashboard extends Component {
   state = {
@@ -25,6 +26,8 @@ export default class OverviewDashboard extends Component {
       rows[item.key] = []
       lineSeries[item.key] = []
     })
+
+    let stationLastLog = await getLastLog()
     this.setState({
       stationTypeList,
       stationCount,
@@ -32,14 +35,14 @@ export default class OverviewDashboard extends Component {
       lineSeries,
       isLoaded: true
     })
-    let stationLastLog = await getLastLog()
+
     for (var i = 0; i < stationTypeList.length; i++) {
-      
-      let stationAutos = stationLastLog.data.filter(item=> {
-        if(!item.stationType) return false
+
+      let stationAutos = stationLastLog.data.filter(item => {
+        if (!item.stationType) return false
         return item.stationType.key === stationTypeList[i].key
       })
-    
+
       console.log(stationAutos)
       this.setState({
         stationCount: {
@@ -94,10 +97,12 @@ export default class OverviewDashboard extends Component {
 
   render() {
     return (
-      <PageContainer backgroundColor="#fafbfb" hideTitle>
-        <SummaryList data={this.getSummaryList()} />
-        <ChartList data={this.getChartList()} />
-      </PageContainer>
+      <Spin spinning={!this.state.isLoaded}>
+        <PageContainer backgroundColor="#fafbfb" hideTitle>
+          <SummaryList data={this.getSummaryList()} />
+          <ChartList data={this.getChartList()} />
+        </PageContainer>
+      </Spin>
     )
   }
 }
