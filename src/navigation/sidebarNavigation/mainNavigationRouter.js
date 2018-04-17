@@ -7,9 +7,11 @@ import {
 import slug from '../../constants/slug'
 import Icon from '../../themes/icon'
 import NavigationWrapper from './NavigationWrapper'
+import protectRole from 'hoc/protect-role'
+import ROLE from 'constants/role'
 
 const dashboardMenu = {
-  component: (
+  component: protectRole(ROLE.DASHBOARD.VIEW)(
     <AkNavigationItem
       linkComponent={WrapperLinkComponent}
       href={slug.dashboard}
@@ -72,7 +74,7 @@ const avgDataMenu = {
 }
 
 const groupManager = {
-  component: (
+  component: protectRole('', [ROLE.MEASURING.VIEW], 'group')(
     <NavigationWrapper text="Manage">
       <AkNavigationItemGroup title="Manage" />
     </NavigationWrapper>
@@ -80,7 +82,7 @@ const groupManager = {
 }
 
 const measuringMenu = {
-  component: (
+  component: protectRole(ROLE.MEASURING.VIEW)(
     <AkNavigationItem
       linkComponent={WrapperLinkComponent}
       href={slug.measuring.base}

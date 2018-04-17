@@ -8,12 +8,14 @@ import slug from 'constants/slug'
 import { autobind } from 'core-decorators'
 import createManagerList from 'hoc/manager-list'
 import createManagerDelete from 'hoc/manager-delete'
+import protectRole from 'hoc/protect-role'
 import createLanguage, { langPropTypes } from 'hoc/create-lang'
 import DynamicTable from 'components/elements/dynamic-table'
 import Breadcrumb from '../breadcrumb'
 import MeasuringSearchForm from '../measuring-search'
 import MeasuringSearchAdvancedForm from '../measuring-search/advanced'
 
+@protectRole('menu.measuring.actions.view')
 @createManagerList({
   apiList: CategoryApi.getMeasurings,
   itemPerPage: 10
