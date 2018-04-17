@@ -14,6 +14,7 @@ import DynamicTable from 'components/elements/dynamic-table'
 import Breadcrumb from '../breadcrumb'
 import MeasuringSearchForm from '../measuring-search'
 import MeasuringSearchAdvancedForm from '../measuring-search/advanced'
+import ROLE from 'constants/role'
 
 @protectRole('menu.measuring.actions.view')
 @createManagerList({
@@ -51,6 +52,7 @@ export default class MeasuringList extends React.Component {
     const { lang: { t } } = this.props
     return (
       <div>
+        {protectRole('', [ROLE.MEASURING.EDIT], 'item')}
         <Link to={slug.measuring.create}>
           <Button type="primary">
             <Icon type="plus" /> {t('addon.create')}
