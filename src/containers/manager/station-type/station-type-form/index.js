@@ -6,52 +6,16 @@ import {
   Row,
   Col,
   Checkbox,
-  Upload,
   Icon,
-  Modal,
-  Avatar,
-  Popover
 } from 'antd'
 import PropTypes from 'prop-types'
 import { autobind } from 'core-decorators'
 import { mapPropsToFields } from 'utils/form'
 import createLanguageHoc, { langPropTypes } from 'hoc/create-lang'
-import swal from 'sweetalert2'
-import MediaApi from 'api/MediaApi'
-import Clearfix from 'components/elements/clearfix'
-import styled from 'styled-components'
 import SelectIcon from 'components/elements/select-icon-station-type'
 import InputNumberCell from 'components/elements/input-number-cell'
 
 const FormItem = Form.Item
-
-const HeaderWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  flex-wrap: wrap;
-  width: 250px;
-`
-
-const AvatarWrapper = styled.div`
-  padding: 4px;
-  width: 50px;
-  height: 50px;
-  cursor: pointer;
-  .ant-avatar-square {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 4px;
-    > img {
-      width: 100%;
-      height: auto !important;
-    }
-  }
-`
-
 @Form.create({
   mapPropsToFields: mapPropsToFields
 })
@@ -109,7 +73,6 @@ export default class StationTypeForm extends React.PureComponent {
   }
 
   onChangeIcon(iconObject) {
-    console.log(iconObject)
     this.setState({
       urlIcon: iconObject.urlIcon,
       color: iconObject.color
@@ -119,8 +82,6 @@ export default class StationTypeForm extends React.PureComponent {
   render() {
     const { getFieldDecorator } = this.props.form
     const { t } = this.props.lang
-    const { previewVisible, previewImage } = this.state
-    const urlPhotoUpload = MediaApi.urlPhotoUploadWithDirectory('station-types')
     const formItemLayout = {
       labelCol: {
         xs: { span: 24, offset: 0 },

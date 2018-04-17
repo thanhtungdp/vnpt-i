@@ -1,12 +1,8 @@
 import React, { PureComponent } from 'react'
-import { Button, Icon, Avatar, Popover, Upload, message } from 'antd'
+import { Avatar, Popover, Upload, message } from 'antd'
 import PropTypes from 'prop-types'
 import { autobind } from 'core-decorators'
-import { mapPropsToFields } from 'utils/form'
-import createLanguageHoc, { langPropTypes } from 'hoc/create-lang'
-import swal from 'sweetalert2'
 import MediaApi from 'api/MediaApi'
-import Clearfix from 'components/elements/clearfix'
 import styled from 'styled-components'
 import { SketchPicker } from 'react-color'
 

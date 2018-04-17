@@ -16,7 +16,6 @@ import MeasuringSearchAdvancedForm from '../measuring-search/advanced'
 
 @createManagerList({
   apiList: CategoryApi.getMeasurings,
-  itemPerPage: 10
 })
 @createManagerDelete({
   apiDelete: CategoryApi.deleteMeasuring
@@ -60,7 +59,7 @@ export default class MeasuringList extends React.Component {
 
   getHead() {
     return [
-      { content: 'TT', width: 2 },
+      { content: '#', width: 2 },
       { content: 'Key', width: 30 },
       { content: 'Name', width: 10 },
       { content: 'Unit', width: 10 },

@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
-import { Table, Divider, Button, Icon } from 'antd'
+import { Divider, Button, Icon } from 'antd'
 import PageContainer from 'layout/default-sidebar-layout/PageContainer'
 import slug from 'constants/slug'
 import { autobind } from 'core-decorators'
@@ -12,6 +12,7 @@ import UserSearchForm from '../user-search-form'
 import createLanguageHoc, { langPropTypes } from '../../../hoc/create-lang'
 import UserApi from 'api/UserApi'
 import ReactCountryFlag from 'react-country-flag'
+import DynamicTable from 'components/elements/dynamic-table'
 
 @createManagerList({
   apiList: UserApi.searchUser
@@ -32,7 +33,7 @@ export default class UserList extends React.Component {
     lang: langPropTypes
   }
 
-  async componentWillMount() {}
+  async componentWillMount() { }
 
   buttonAdd() {
     return (
@@ -46,56 +47,6 @@ export default class UserList extends React.Component {
     )
   }
 
-  getColumns() {
-    const { lang: { t } } = this.props
-    return [
-      {
-        title: t('userSearchFrom.form.email.label'),
-        dataIndex: 'email',
-        key: 'email',
-        render: (text, record) => (
-          <div>
-            {record.phone &&
-              record.phone.iso2 && (
-                <span style={{ fontSize: 20 }}>
-                  {' '}
-                  <ReactCountryFlag code={record.phone.iso2} />
-                </span>
-              )}
-            <span>{text}</span>
-          </div>
-        )
-      },
-      {
-        title: t('userSearchFrom.form.organization.label'),
-        dataIndex: 'organization',
-        key: 'organization',
-        render: (text, record) => (
-          <span> {record.organization ? record.organization.name : ''}</span>
-        )
-      },
-      {
-        title: '',
-        key: 'action',
-        render: (text, record) => (
-          <span>
-            <Link to={slug.user.editWithKey + '/' + record._id}> Edit </Link>
-            <Divider type="vertical" />
-            <a
-              onClick={() =>
-                this.props.onDeleteItem(record._id, this.props.fetchData)
-              }
-            >
-              Delete
-            </a>
-            <Divider type="vertical" />
-            <Link to={slug.user.ruleWithKey + '/' + record._id}> Rule </Link>
-          </span>
-        )
-      }
-    ]
-  }
-
   renderSearchForm() {
     return (
       <UserSearchForm
@@ -107,22 +58,75 @@ export default class UserList extends React.Component {
     )
   }
 
+  getHead() {
+    const { lang: { t } } = this.props
+    return [
+      { content: '#', width: 2 },
+      { content: t('userSearchFrom.form.email.label'), width: 20 },
+      { content: t('userSearchFrom.form.organization.label'), width: 30 },
+      { content: 'Action', width: 10 }
+    ]
+  }
+
+  getRows() {
+    return this.props.dataSource.map((row, index) => [
+      {
+        content: (
+          <strong>
+            {(this.props.pagination.page - 1) *
+              this.props.pagination.itemPerPage +
+              index +
+              1}
+          </strong>
+        )
+      },
+      {
+        content: <div>
+          {row.phone &&
+            row.phone.iso2 && (
+              <span style={{ fontSize: 20 }}>
+                {' '}
+                <ReactCountryFlag code={row.phone.iso2} />
+              </span>
+            )}
+          <span>{row.email}</span>
+        </div>
+      },
+      {
+        content: row.organization ? row.organization.name : ''
+      },
+      {
+        content: (
+          <span>
+            <Link to={slug.user.editWithKey + '/' + row._id}> Edit </Link>
+            <Divider type="vertical" />
+            <a
+              onClick={() =>
+                this.props.onDeleteItem(row._id, this.props.fetchData)
+              }
+            >
+              Delete
+            </a>
+          </span>
+        )
+      }
+    ])
+  }
+
+
   render() {
     return (
       <PageContainer center={this.renderSearchForm()} right={this.buttonAdd()}>
         <Breadcrumb items={['list']} />
-        <Table
-          rowKey="_id"
+        <DynamicTable
           loading={this.props.isLoading}
-          columns={this.getColumns()}
-          dataSource={this.props.dataSource}
-          pagination={{
-            showSizeChanger: true,
-            onChange: this.props.onChangePage,
-            onShowSizeChange: this.props.onChangePageSize,
-            total: this.props.pagination.totalItem,
-            current: this.props.pagination.page
+          rows={this.getRows()}
+          head={this.getHead()}
+          paginationOptions={{
+            isSticky: true
           }}
+          onSetPage={this.props.onChangePage}
+          pagination={this.props.pagination}
         />
       </PageContainer>
     )

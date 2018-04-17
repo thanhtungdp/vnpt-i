@@ -3,7 +3,7 @@ import PageContainer from 'layout/default-sidebar-layout/PageContainer'
 import SummaryList from 'components/dashboard/summary/summary-list'
 import ChartList from 'components/dashboard/chart/chart-row-list'
 import { getStationTypes } from 'api/CategoryApi'
-import { getStationAutos, getLastLog } from 'api/StationAuto'
+import { getLastLog } from 'api/StationAuto'
 import { Spin } from 'antd'
 
 export default class OverviewDashboard extends Component {
@@ -36,6 +36,7 @@ export default class OverviewDashboard extends Component {
       isLoaded: true
     })
 
+    /*eslint-disable */
     for (var i = 0; i < stationTypeList.length; i++) {
 
       let stationAutos = stationLastLog.data.filter(item => {
@@ -43,7 +44,6 @@ export default class OverviewDashboard extends Component {
         return item.stationType.key === stationTypeList[i].key
       })
 
-      console.log(stationAutos)
       this.setState({
         stationCount: {
           ...this.state.stationCount,
@@ -55,6 +55,7 @@ export default class OverviewDashboard extends Component {
         }
       })
     }
+    /*eslint-enable */
   }
 
   getSummaryList() {
