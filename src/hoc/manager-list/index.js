@@ -6,7 +6,7 @@ import { autobind } from 'core-decorators'
  * @param apiList
  * @param apiDelete
  */
-const createManagerList = ({ apiList, itemPerPage = 4 }) => Component => {
+const createManagerList = ({ apiList, itemPerPage = 20 }) => Component => {
   @autobind
   class ManagerListHoc extends React.Component {
     state = {

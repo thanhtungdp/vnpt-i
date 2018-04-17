@@ -89,8 +89,6 @@ export default class TableListCustom extends React.PureComponent {
 
   renderStatusColor(item) {
     if (item.lastLog) {
-      let isFind = false
-
       let warLevel = warningLevels.GOOD
       let measuringLogs = item.lastLog.measuringLogs
       for (var key in measuringLogs) {

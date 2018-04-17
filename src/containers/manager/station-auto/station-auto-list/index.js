@@ -67,6 +67,7 @@ export default class StationAutoList extends React.Component {
   getHead() {
     const { t } = this.props.lang
     return [
+      { content: '#', width: 2 },
       { content: t('stationAutoManager.form.key.label'), width: 15 },
       { content: t('stationAutoManager.form.name.label'), width: 30 },
       { content: t('stationAutoManager.form.address.label'), width: 30 },
@@ -77,7 +78,7 @@ export default class StationAutoList extends React.Component {
   getRows() {
     let stationTypeArr = []
     //sort dataSource
-    let sourceSorted = this.props.dataSource.sort(function(a, b) {
+    let sourceSorted = this.props.dataSource.sort(function (a, b) {
       if (!a.stationType)
         a.stationType = { key: 'NOT SETUP', name: 'NOT SETUP' }
       if (!b.stationType)
@@ -102,6 +103,16 @@ export default class StationAutoList extends React.Component {
       sourceSorted.map((row, index) => {
         //content Row
         let resultRow = [
+          {
+            content: (
+              <strong>
+                {(this.props.pagination.page - 1) *
+                  this.props.pagination.itemPerPage +
+                  index +
+                  1}
+              </strong>
+            )
+          },
           {
             content: <span>&emsp;{row.key}</span>
           },
@@ -143,19 +154,19 @@ export default class StationAutoList extends React.Component {
         else {
           stationTypeArr.push(row.stationType.key)
           return [
-            [
-              {
-                content: (
-                  <div>
-                    <strong>
-                      {row.stationType.name}{' '}
-                      {stationCount[row.stationType.key]
-                        ? '(' + stationCount[row.stationType.key] + ')'
-                        : ''}
-                    </strong>
-                  </div>
-                )
-              }
+            [{ content: '' },
+            {
+              content: (
+                <div>
+                  <strong>
+                    {row.stationType.name}{' '}
+                    {stationCount[row.stationType.key]
+                      ? '(' + stationCount[row.stationType.key] + ')'
+                      : ''}
+                  </strong>
+                </div>
+              )
+            }
             ],
             resultRow
           ]
@@ -179,7 +190,6 @@ export default class StationAutoList extends React.Component {
           rows={this.getRows()}
           pagination={this.props.pagination}
           onSetPage={this.props.onChangePage}
-          isLoading={this.props.isLoading}
         />
       </PageContainer>
     )
