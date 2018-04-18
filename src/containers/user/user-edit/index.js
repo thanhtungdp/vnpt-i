@@ -8,7 +8,10 @@ import slug from '/constants/slug'
 import createManagerEdit from 'hoc/manager-edit'
 import PropTypes from 'prop-types'
 import Breadcrumb from '../breadcrumb'
+import ROLE from 'constants/role'
+import protectRole from 'hoc/protect-role'
 
+@protectRole(ROLE.USER.EDIT)
 @createManagerEdit({
   apiUpdate: UserApi.updateOne,
   apiGetByKey: UserApi.getOne

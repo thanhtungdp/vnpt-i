@@ -12,12 +12,15 @@ import { mapPropsToFields } from 'utils/form'
 import createLanguageHoc, { langPropTypes } from 'hoc/create-lang'
 import StationAutoSearchForm from '../station-auto-search'
 import Breadcrumb from '../breadcrumb'
+import ROLE from 'constants/role'
+import protectRole from 'hoc/protect-role'
 // import Heading from 'components/elements/heading'
 // import { getStationTypes } from 'api/CategoryApi'
 // import { getStationAutos } from 'api/StationAuto'
 
 import DynamicTable from 'components/elements/dynamic-table'
 
+@protectRole(ROLE.STATION_AUTO.VIEW)
 @createManagerList({
   apiList: StationAutoApi.getStationAutos
 })
@@ -46,11 +49,13 @@ export default class StationAutoList extends React.Component {
   buttonAdd() {
     return (
       <div>
-        <Link to={slug.stationAuto.create}>
-          <Button type="primary">
-            <Icon type="plus" />Create
-          </Button>
-        </Link>
+        {protectRole('', [ROLE.STATION_AUTO.CREATE], 'item')(
+          <Link to={slug.stationAuto.create}>
+            <Button type="primary">
+              <Icon type="plus" />Create
+                </Button>
+          </Link>
+        )}
       </div>
     )
   }
@@ -126,23 +131,29 @@ export default class StationAutoList extends React.Component {
             content: (
               <div>
                 <span>
-                  <Link to={slug.stationAuto.editWithKey + '/' + row._id}>
-                    {' '}
-                    Edit{' '}
-                  </Link>
+                  {protectRole('', [ROLE.STATION_AUTO.EDIT], 'item')(
+                    <Link to={slug.stationAuto.editWithKey + '/' + row._id}>
+                      {' '}
+                      Edit{' '}
+                    </Link>
+                  )}
                   <Divider type="vertical" />
-                  <a
-                    onClick={() =>
-                      this.props.onDeleteItem(row._id, this.props.fetchData)
-                    }
-                  >
-                    Delete
+                  {protectRole('', [ROLE.STATION_AUTO.DELETE], 'item')(
+                    <a
+                      onClick={() =>
+                        this.props.onDeleteItem(row._id, this.props.fetchData)
+                      }
+                    >
+                      Delete
                   </a>
+                  )}
                   <Divider type="vertical" />
-                  <Link to={slug.stationAuto.configWithKey + '/' + row._id}>
-                    {' '}
-                    Config{' '}
-                  </Link>
+                  {protectRole('', [ROLE.STATION_AUTO.CONFIG], 'item')(
+                    <Link to={slug.stationAuto.configWithKey + '/' + row._id}>
+                      {' '}
+                      Config{' '}
+                    </Link>
+                  )}
                 </span>
               </div>
             )

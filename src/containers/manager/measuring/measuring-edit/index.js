@@ -10,7 +10,10 @@ import createManagerEdit from 'hoc/manager-edit'
 import createLanguage, { langPropTypes } from 'hoc/create-lang'
 import PropTypes from 'prop-types'
 import Breadcrumb from '../breadcrumb'
+import ROLE from 'constants/role'
+import protectRole from 'hoc/protect-role'
 
+@protectRole(ROLE.MEASURING.EDIT)
 @createManagerDelete({
   apiDelete: CategoryApi.deleteMeasuring
 })

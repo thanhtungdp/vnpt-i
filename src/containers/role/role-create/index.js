@@ -7,7 +7,10 @@ import slug from 'constants/slug'
 import RoleForm from 'containers/role/role-form'
 import Breadcrumb from 'containers/role/breadcrumb'
 import RoleApi from 'api/RoleApi'
+import ROLE from 'constants/role'
+import protectRole from 'hoc/protect-role'
 
+@protectRole(ROLE.ROLE.CREATE)
 @withRouter
 @autobind
 export default class RoleCreate extends PureComponent {

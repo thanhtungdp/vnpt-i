@@ -10,10 +10,14 @@ import createManagerEdit from 'hoc/manager-edit'
 import PropTypes from 'prop-types'
 import Breadcrumb from '../breadcrumb'
 import { mapPropsToFields } from 'utils/form'
+import ROLE from 'constants/role'
+import protectRole from 'hoc/protect-role'
 
 const FormItem = Form.Item
 
 const Panel = Collapse.Panel
+
+@protectRole(ROLE.STATION_AUTO.CONFIG)
 @createManagerDelete({
   apiDelete: StationAutoApi.deleteStationAuto
 })

@@ -6,6 +6,8 @@ import styled from 'styled-components'
 import BoxShadow from 'components/elements/box-shadow/index'
 import TabTableDataList from './tab-table-data-list/index'
 import TabChart from './tab-chart/index'
+import ROLE from 'constants/role'
+import protectRole from 'hoc/protect-role'
 
 const TabeListWrapper = BoxShadow.extend`
   padding: 0px 16px 16px 16px;
@@ -37,15 +39,17 @@ export default class TabeList extends React.PureComponent {
     return (
       <TabeListWrapper>
         <ButtonAbsolute>
-          <Button
-            type="primary"
-            icon="file-excel"
-            style={{ float: 'right', margin: '5px' }}
-            onClick={this.props.onExportExcel}
-            loading={this.props.isExporting}
-          >
-            Export to excel
+          {protectRole('', [ROLE.DATA_SEARCH.EXPORT], 'item')(
+            <Button
+              type="primary"
+              icon="file-excel"
+              style={{ float: 'right', margin: '5px' }}
+              onClick={this.props.onExportExcel}
+              loading={this.props.isExporting}
+            >
+              Export to excel
           </Button>
+          )}
         </ButtonAbsolute>
         <Tabs defaultActiveKey="1">
           <Tabs.TabPane tab="Data" key="1">

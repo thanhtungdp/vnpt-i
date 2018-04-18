@@ -6,7 +6,10 @@ import CategoryApi from 'api/CategoryApi'
 import slug from 'constants/slug'
 import StationTypeForm from '../station-type-form'
 import Breadcrumb from '../breadcrumb'
+import ROLE from 'constants/role'
+import protectRole from 'hoc/protect-role'
 
+@protectRole(ROLE.STATION_TYPE.CREATE)
 @autobind
 export default class StationTypeCreate extends React.PureComponent {
   async handleSubmit(data) {

@@ -16,7 +16,7 @@ import MeasuringSearchForm from '../measuring-search'
 import MeasuringSearchAdvancedForm from '../measuring-search/advanced'
 import ROLE from 'constants/role'
 
-@protectRole('menu.measuring.actions.view')
+@protectRole(ROLE.MEASURING.VIEW)
 @createManagerList({
   apiList: CategoryApi.getMeasurings,
 })
@@ -51,12 +51,13 @@ export default class MeasuringList extends React.Component {
     const { lang: { t } } = this.props
     return (
       <div>
-        {protectRole('', [ROLE.MEASURING.EDIT], 'item')}
-        <Link to={slug.measuring.create}>
-          <Button type="primary">
-            <Icon type="plus" /> {t('addon.create')}
-          </Button>
-        </Link>
+        {protectRole('', [ROLE.MEASURING.CREATE], 'item')(
+          <Link to={slug.measuring.create}>
+            <Button type="primary">
+              <Icon type="plus" /> {t('addon.create')}
+            </Button>
+          </Link>
+        )}
       </div>
     )
   }
@@ -95,15 +96,20 @@ export default class MeasuringList extends React.Component {
       {
         content: (
           <span>
-            <Link to={slug.measuring.editWithKey + '/' + row._id}> Edit </Link>
+             {protectRole('', [ROLE.MEASURING.EDIT], 'item')(
+               <Link to={slug.measuring.editWithKey + '/' + row._id}> Edit </Link>
+            )}
             <Divider type="vertical" />
-            <a
-              onClick={() =>
-                this.props.onDeleteItem(row._id, this.props.fetchData)
-              }
-            >
-              Delete
+            {protectRole('', [ROLE.MEASURING.DELETE], 'item')(
+              <a
+                onClick={() =>
+                  this.props.onDeleteItem(row._id, this.props.fetchData)
+                }
+              >
+                Delete
             </a>
+            )}
+
           </span>
         )
       }

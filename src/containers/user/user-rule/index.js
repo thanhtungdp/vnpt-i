@@ -9,10 +9,14 @@ import { message } from 'antd'
 import StationAutoApi from 'api/StationAuto'
 import RoleApi from 'api/RoleApi'
 import UserApi from 'api/UserApi'
+import ROLE from 'constants/role'
+import protectRole from 'hoc/protect-role'
+
 
 const FormItem = Form.Item
 const Option = Select.Option
 
+@protectRole(ROLE.USER.ROLE)
 @createLanguage
 @autobind
 export default class RoleList extends React.Component {

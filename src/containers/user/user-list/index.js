@@ -13,7 +13,10 @@ import createLanguageHoc, { langPropTypes } from '../../../hoc/create-lang'
 import UserApi from 'api/UserApi'
 import ReactCountryFlag from 'react-country-flag'
 import DynamicTable from 'components/elements/dynamic-table'
+import ROLE from 'constants/role'
+import protectRole from 'hoc/protect-role'
 
+@protectRole(ROLE.USER.VIEW)
 @createManagerList({
   apiList: UserApi.searchUser
 })
@@ -38,11 +41,13 @@ export default class UserList extends React.Component {
   buttonAdd() {
     return (
       <div>
-        <Link to={slug.user.create}>
-          <Button type="primary">
-            <Icon type="plus" />Create
-          </Button>
-        </Link>
+        {protectRole('', [ROLE.USER.CREATE], 'item')(
+          <Link to={slug.user.create}>
+            <Button type="primary">
+              <Icon type="plus" />Create
+               </Button>
+          </Link>
+        )}
       </div>
     )
   }
@@ -98,17 +103,23 @@ export default class UserList extends React.Component {
       {
         content: (
           <span>
-            <Link to={slug.user.editWithKey + '/' + row._id}> Edit </Link>
+            {protectRole('', [ROLE.USER.EDIT], 'item')(
+              <Link to={slug.user.editWithKey + '/' + row._id}> Edit </Link>
+            )}
             <Divider type="vertical" />
-            <a
-              onClick={() =>
-                this.props.onDeleteItem(row._id, this.props.fetchData)
-              }
-            >
-              Delete
+            {protectRole('', [ROLE.USER.DELETE], 'item')(
+              <a
+                onClick={() =>
+                  this.props.onDeleteItem(row._id, this.props.fetchData)
+                }
+              >
+                Delete
             </a>
+            )}
             <Divider type="vertical" />
-            <Link to={slug.user.ruleWithKey + '/' + row._id}> Rule </Link>
+            {protectRole('', [ROLE.USER.ROLE], 'item')(
+              <Link to={slug.user.ruleWithKey + '/' + row._id}> Role </Link>
+            )}
           </span>
         )
       }

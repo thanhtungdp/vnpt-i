@@ -9,7 +9,10 @@ import slug from 'constants/slug'
 import { message } from 'antd'
 import createManagerCreate from 'hoc/manager-create'
 import createLanguage, { langPropTypes } from 'hoc/create-lang'
+import ROLE from 'constants/role'
+import protectRole from 'hoc/protect-role'
 
+@protectRole(ROLE.MEASURING.CREATE)
 @createManagerCreate({
   apiCreate: CategoryApi.createMeasuring
 })

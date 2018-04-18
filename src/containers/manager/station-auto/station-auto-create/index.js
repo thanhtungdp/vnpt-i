@@ -6,7 +6,11 @@ import StationAutoApi from 'api/StationAuto'
 import slug from 'constants/slug'
 import StationAutoForm from '../station-auto-form'
 import Breadcrumb from '../breadcrumb'
+import ROLE from 'constants/role'
+import protectRole from 'hoc/protect-role'
 
+
+@protectRole(ROLE.STATION_AUTO.CREATE)
 @autobind
 export default class StationAutoCreate extends React.PureComponent {
   async handleSubmit(data) {
