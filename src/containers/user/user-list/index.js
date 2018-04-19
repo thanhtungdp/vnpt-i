@@ -36,7 +36,7 @@ export default class UserList extends React.Component {
     lang: langPropTypes
   }
 
-  async componentWillMount() { }
+  async componentWillMount() {}
 
   buttonAdd() {
     return (
@@ -86,16 +86,18 @@ export default class UserList extends React.Component {
         )
       },
       {
-        content: <div>
-          {row.phone &&
-            row.phone.iso2 && (
-              <span style={{ fontSize: 20 }}>
-                {' '}
-                <ReactCountryFlag code={row.phone.iso2} />
-              </span>
-            )}
-          <span>{row.email}</span>
-        </div>
+        content: (
+          <div>
+            {row.phone &&
+              row.phone.iso2 && (
+                <span style={{ fontSize: 20 }}>
+                  {' '}
+                  <ReactCountryFlag code={row.phone.iso2} />
+                </span>
+              )}
+            <span>{row.email}</span>
+          </div>
+        )
       },
       {
         content: row.organization ? row.organization.name : ''
@@ -125,7 +127,6 @@ export default class UserList extends React.Component {
       }
     ])
   }
-
 
   render() {
     return (

@@ -18,7 +18,7 @@ import ROLE from 'constants/role'
 
 @protectRole(ROLE.MEASURING.VIEW)
 @createManagerList({
-  apiList: CategoryApi.getMeasurings,
+  apiList: CategoryApi.getMeasurings
 })
 @createManagerDelete({
   apiDelete: CategoryApi.deleteMeasuring

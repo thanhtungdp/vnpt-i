@@ -71,5 +71,10 @@ export default {
     create: '/role/create',
     edit: '/role/edit/:_id',
     editWithKey: '/role/edit'
+  },
+  camera: {
+    base: '/camera',
+    camera: '/camera/:key',
+    cameraWithKey: '/camera'
   }
 }

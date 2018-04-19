@@ -3,7 +3,11 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import stationStatus from 'constants/stationStatus'
 import { translate } from 'hoc/create-lang'
-import { warningLevelsNumber, warningLevels, colorLevels } from 'constants/warningLevels'
+import {
+  warningLevelsNumber,
+  warningLevels,
+  colorLevels
+} from 'constants/warningLevels'
 
 const Status = styled.div`
   width: 8px;
@@ -76,7 +80,6 @@ export default class TableListCustom extends React.PureComponent {
     console.log('componentWillMount')
     console.log(this.props)
     console.log(this.props.currentItem)
-
   }
 
   renderStationStatus(station) {
@@ -118,12 +121,16 @@ export default class TableListCustom extends React.PureComponent {
             isActive={this.props.currentItem.key === item.key}
           >
             <IndexColumn>{index + 1}</IndexColumn>
-            <NameColumn className="name">{item.name} {this.renderStationStatus(item)} </NameColumn>
+            <NameColumn className="name">
+              {item.name} {this.renderStationStatus(item)}{' '}
+            </NameColumn>
             <StatusColumn>
               {' '}
-              <Status style={{
-                backgroundColor: this.renderStatusColor(item)
-              }} />
+              <Status
+                style={{
+                  backgroundColor: this.renderStatusColor(item)
+                }}
+              />
             </StatusColumn>
           </Row>
         ))}

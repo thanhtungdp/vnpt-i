@@ -38,7 +38,7 @@ export default class StationAutoItem extends React.PureComponent {
     return measuringList
   }
   render() {
-    let { stationID, name, lastLog, orderNumber } = this.props
+    let { stationID, name, lastLog, orderNumber, options, _id } = this.props
     let receivedAt = ''
     if (lastLog && lastLog.receivedAt) {
       receivedAt = moment(lastLog.receivedAt)
@@ -52,6 +52,8 @@ export default class StationAutoItem extends React.PureComponent {
           receivedAt={receivedAt}
           orderNumber={orderNumber}
           stationID={stationID}
+          options={options}
+          _id={_id}
         />
         <MeasuringList data={this.measuringLastLog()} />
       </StationAutoWrapper>

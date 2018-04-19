@@ -29,7 +29,7 @@ const AvatarWrapper = styled.div`
 
 @protectRole(ROLE.STATION_TYPE.VIEW)
 @createManagerList({
-  apiList: CategoryApi.getStationTypes,
+  apiList: CategoryApi.getStationTypes
 })
 @createManagerDelete({
   apiDelete: CategoryApi.deleteStationType
@@ -62,7 +62,6 @@ export default class StationTypeList extends React.Component {
       </div>
     )
   }
-
 
   renderSearchForm() {
     return (
@@ -104,21 +103,23 @@ export default class StationTypeList extends React.Component {
         content: row.name
       },
       {
-        content: <AvatarWrapper>
-          <Avatar
-            shape="square"
-            size="large"
-            style={{
-              backgroundColor: row.color,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center'
-            }}
-            src={row.icon}
-          >
-            Icon
-        </Avatar>
-        </AvatarWrapper>
+        content: (
+          <AvatarWrapper>
+            <Avatar
+              shape="square"
+              size="large"
+              style={{
+                backgroundColor: row.color,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}
+              src={row.icon}
+            >
+              Icon
+            </Avatar>
+          </AvatarWrapper>
+        )
       },
       {
         content: <Checkbox disabled={true} checked={row.isAuto} />
@@ -130,6 +131,10 @@ export default class StationTypeList extends React.Component {
               <Link to={slug.stationType.editWithKey + '/' + row._id}> Edit </Link>
             )}
 
+            <Link to={slug.stationType.editWithKey + '/' + row._id}>
+              {' '}
+              Edit{' '}
+            </Link>
             <Divider type="vertical" />
             {protectRole('', [ROLE.STATION_TYPE.DELETE], 'item')(
               <a

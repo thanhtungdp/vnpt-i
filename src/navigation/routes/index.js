@@ -21,6 +21,7 @@ import ResetPassword from 'containers/auth/reset-password'
 import UserRoute from 'containers/user'
 import RoleRoute from 'containers/role'
 import ControlStation from 'containers/control-station'
+import Camera from 'containers/camera'
 
 @autobind
 export default class RouteDefault extends React.Component {
@@ -56,6 +57,7 @@ export default class RouteDefault extends React.Component {
         <Route path={slug.password.emailConfirm} component={EmailConfirm} />
         <Route path={slug.password.codeConfirm} component={CodeConfirm} />
         <Route path={slug.user.resetPassword} component={ResetPassword} />
+        <LayoutRoute path={slug.camera.base} component={Camera} />
       </div>
     )
   }
