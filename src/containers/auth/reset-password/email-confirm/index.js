@@ -71,7 +71,7 @@ export default class EmailConfirm extends PureComponent {
         title: record.message
       })
     } else {
-      this.props.history.push(`${slug.user.codeConfirmWithKey}/${email}`)
+      this.props.history.push(`${slug.password.codeConfirmWithKey}/${email}`)
     }
   }
 
