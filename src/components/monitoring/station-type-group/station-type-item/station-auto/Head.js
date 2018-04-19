@@ -62,12 +62,22 @@ export default class StationAutoHead extends React.PureComponent {
     name: PropTypes.string,
     receivedAt: PropTypes.string,
     orderNumber: PropTypes.number,
-    stationID: PropTypes.string
+    stationID: PropTypes.string,
+    options: PropTypes.object
   }
+  componentWillMount() {}
 
   render() {
     //console.log(this.props)
-    const { name, receivedAt, orderNumber, stationID } = this.props
+    const {
+      name,
+      receivedAt,
+      orderNumber,
+      stationID,
+      options,
+      _id
+    } = this.props
+    const isCamera = options && options.camera && options.camera.allowed
     return (
       <StationHeadItemWrapper>
         <TitleWrapper>
@@ -81,10 +91,12 @@ export default class StationAutoHead extends React.PureComponent {
           <Link
             to={slug.controlStation.triggerWithKey + `/${stationID}/${name}`}
           >
-            Control
+            Sampling
           </Link>
-          <Divider />
-          <Link to={'/'}>Camera</Link>
+          {isCamera && <Divider />}
+          {isCamera && (
+            <Link to={slug.camera.cameraWithKey + '/' + _id}>Camera</Link>
+          )}
         </ActionWrapper>
       </StationHeadItemWrapper>
     )

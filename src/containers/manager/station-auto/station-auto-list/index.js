@@ -78,7 +78,7 @@ export default class StationAutoList extends React.Component {
   getRows() {
     let stationTypeArr = []
     //sort dataSource
-    let sourceSorted = this.props.dataSource.sort(function (a, b) {
+    let sourceSorted = this.props.dataSource.sort(function(a, b) {
       if (!a.stationType)
         a.stationType = { key: 'NOT SETUP', name: 'NOT SETUP' }
       if (!b.stationType)
@@ -154,19 +154,20 @@ export default class StationAutoList extends React.Component {
         else {
           stationTypeArr.push(row.stationType.key)
           return [
-            [{ content: '' },
-            {
-              content: (
-                <div>
-                  <strong>
-                    {row.stationType.name}{' '}
-                    {stationCount[row.stationType.key]
-                      ? '(' + stationCount[row.stationType.key] + ')'
-                      : ''}
-                  </strong>
-                </div>
-              )
-            }
+            [
+              { content: '' },
+              {
+                content: (
+                  <div>
+                    <strong>
+                      {row.stationType.name}{' '}
+                      {stationCount[row.stationType.key]
+                        ? '(' + stationCount[row.stationType.key] + ')'
+                        : ''}
+                    </strong>
+                  </div>
+                )
+              }
             ],
             resultRow
           ]
