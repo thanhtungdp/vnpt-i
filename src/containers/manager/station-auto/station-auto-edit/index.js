@@ -10,7 +10,10 @@ import createManagerEdit from 'hoc/manager-edit'
 import PropTypes from 'prop-types'
 import Breadcrumb from '../breadcrumb'
 import { message } from 'antd'
+import ROLE from 'constants/role'
+import protectRole from 'hoc/protect-role'
 
+@protectRole(ROLE.STATION_AUTO.EDIT)
 @createManagerDelete({
   apiDelete: StationAutoApi.deleteStationAuto
 })

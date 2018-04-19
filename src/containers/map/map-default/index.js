@@ -10,6 +10,8 @@ import { resolveMapLocation } from 'utils/resolveMapLocation'
 import BoxHideLayout from 'components/map/box-hide-layout'
 import stationStatus from 'constants/stationStatus'
 import { warningLevelsNumber, warningLevels } from 'constants/warningLevels'
+import ROLE from 'constants/role'
+import protectRole from 'hoc/protect-role'
 
 const MapDefaultWrapper = styled.div`
   display: flex;
@@ -32,6 +34,7 @@ const ColRight = styled.div`
   display: flex;
 `
 
+@protectRole(ROLE.MAP.VIEW)
 @connectWindowHeight
 @autobind
 export default class MapDefault extends React.PureComponent {

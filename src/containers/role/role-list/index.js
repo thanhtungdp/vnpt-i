@@ -12,11 +12,15 @@ import createManagerDelete from 'hoc/manager-delete'
 import createLanguageHoc, { langPropTypes } from 'hoc/create-lang'
 import DynamicTable from 'components/elements/dynamic-table'
 import Breadcrumb from 'containers/role/breadcrumb'
+import ROLE from 'constants/role'
+import protectRole from 'hoc/protect-role'
+
 
 const FloatRight = styled.div`
   text-align: right;
 `
 
+@protectRole(ROLE.ROLE.VIEW)
 @createManagerList({
   apiList: RoleApi.getRoles,
   itemPerPage: 2
@@ -46,11 +50,13 @@ export default class RoleList extends React.Component {
     const { lang: { t } } = this.props
     return (
       <div>
-        <Link to={slug.role.create}>
-          <Button type="primary">
-            <Icon type="plus" /> {t('addon.create')}
-          </Button>
-        </Link>
+        {protectRole('', [ROLE.ROLE.CREATE], 'item')(
+          <Link to={slug.role.create}>
+            <Button type="primary">
+              <Icon type="plus" /> {t('addon.create')}
+            </Button>
+          </Link>
+        )}
       </div>
     )
   }
@@ -85,15 +91,19 @@ export default class RoleList extends React.Component {
       {
         content: (
           <FloatRight>
-            <Link to={slug.role.editWithKey + '/' + row._id}> Edit </Link>
+            {protectRole('', [ROLE.ROLE.EDIT], 'item')(
+              <Link to={slug.role.editWithKey + '/' + row._id}> Edit </Link>
+            )}
             <Divider type="vertical" />
-            <a
-              onClick={() =>
-                this.props.onDeleteItem(row._id, this.props.fetchData)
-              }
-            >
-              Delete
-            </a>
+            {protectRole('', [ROLE.ROLE.DELETE], 'item')(
+              <a
+                onClick={() =>
+                  this.props.onDeleteItem(row._id, this.props.fetchData)
+                }
+              >
+                Delete
+       </a>
+            )}
           </FloatRight>
         )
       }

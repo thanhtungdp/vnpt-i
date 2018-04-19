@@ -13,6 +13,8 @@ import StationTypeSearchForm from '../station-type-search-form'
 import createLanguageHoc, { langPropTypes } from '../../../../hoc/create-lang'
 import styled from 'styled-components'
 import DynamicTable from 'components/elements/dynamic-table'
+import ROLE from 'constants/role'
+import protectRole from 'hoc/protect-role'
 
 const AvatarWrapper = styled.div`
   .ant-avatar {
@@ -25,6 +27,7 @@ const AvatarWrapper = styled.div`
   }
 `
 
+@protectRole(ROLE.STATION_TYPE.VIEW)
 @createManagerList({
   apiList: CategoryApi.getStationTypes,
 })
@@ -49,16 +52,18 @@ export default class StationTypeList extends React.Component {
   buttonAdd() {
     return (
       <div>
-        <Link to={slug.stationType.create}>
-          <Button type="primary">
-            <Icon type="plus" />Create
-          </Button>
-        </Link>
+        {protectRole('', [ROLE.STATION_TYPE.CREATE], 'item')(
+          <Link to={slug.stationType.create}>
+            <Button type="primary">
+              <Icon type="plus" />Create
+              </Button>
+          </Link>
+        )}
       </div>
     )
   }
 
- 
+
   renderSearchForm() {
     return (
       <StationTypeSearchForm
@@ -121,15 +126,21 @@ export default class StationTypeList extends React.Component {
       {
         content: (
           <span>
-            <Link to={slug.stationType.editWithKey + '/' + row._id}> Edit </Link>
+            {protectRole('', [ROLE.STATION_TYPE.EDIT], 'item')(
+              <Link to={slug.stationType.editWithKey + '/' + row._id}> Edit </Link>
+            )}
+
             <Divider type="vertical" />
-            <a
-              onClick={() =>
-                this.props.onDeleteItem(row._id, this.props.fetchData)
-              }
-            >
-              Delete
-            </a>
+            {protectRole('', [ROLE.STATION_TYPE.DELETE], 'item')(
+              <a
+                onClick={() =>
+                  this.props.onDeleteItem(row._id, this.props.fetchData)
+                }
+              >
+                Delete
+           </a>
+            )}
+
           </span>
         )
       }

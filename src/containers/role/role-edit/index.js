@@ -6,7 +6,10 @@ import swal from 'sweetalert2'
 import RoleForm from 'containers/role/role-form'
 import Breadcrumb from 'containers/role/breadcrumb'
 import RoleApi from 'api/RoleApi'
+import ROLE from 'constants/role'
+import protectRole from 'hoc/protect-role'
 
+@protectRole(ROLE.ROLE.EDIT)
 @withRouter
 @autobind
 export default class RoleEdit extends PureComponent {
