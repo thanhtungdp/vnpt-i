@@ -14,10 +14,10 @@ export const GROUP_OPTIONS = [
 export const ORDER_OPTIONS = [
   {
     value: monitoringFilter.ORDER.NAME,
-    name: monitoringFilter.ORDER.NAME
+    name: monitoringFilter.ORDER.LABEL_NAME
   },
   {
     value: monitoringFilter.ORDER.NUMBER,
-    name: monitoringFilter.ORDER.NUMBER
+    name: monitoringFilter.ORDER.LABEL_NUMBER
   }
 ]
