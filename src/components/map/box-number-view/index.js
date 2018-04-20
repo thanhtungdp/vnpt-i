@@ -69,6 +69,10 @@ export default class BoxView extends React.PureComponent {
       })
   }
 
+  componentWillMount(){
+    console.log(this.props)
+  }
+
   render() {
     return (
       <Layout onClick={this.handleClickBox}>

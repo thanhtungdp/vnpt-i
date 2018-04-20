@@ -39,7 +39,7 @@ export default class TableDataList extends React.PureComponent {
       key: 'receivedAt',
       render(value) {
         return (
-          <div>{moment(value).format('dddd, MMMM Do YYYY, h:mm:ss a')}</div>
+          <div>{moment(value).format('DD/MM/YYYY HH:mm')}</div>
         )
       }
     }

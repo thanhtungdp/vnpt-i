@@ -5,6 +5,8 @@ export default {
   },
   ORDER: {
     NAME: 'name',
-    NUMBER: 'number'
+    LABEL_NAME: 'Sort by Station name',
+    NUMBER: 'number',
+    LABEL_NUMBER: 'Sort by Values'
   }
 }

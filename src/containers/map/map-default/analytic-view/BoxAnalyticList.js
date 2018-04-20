@@ -48,7 +48,9 @@ export default class BoxAnalyticList extends React.PureComponent {
       warningLevels.EXCEEDED_TENDENCY
     ]
   }
-  async componentWillMount() {}
+  async componentWillMount() {
+    this.rendermap(this.props.stationsAutoList)
+  }
 
   componentWillReceiveProps(nextProps) {
     if (
