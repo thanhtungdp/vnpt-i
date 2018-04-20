@@ -33,7 +33,8 @@ const PANEL_HEIGHT_FULL = '500px'
 export default class CameraForm extends PureComponent {
   state = {
     isLoaded: false,
-    cameraList: []
+    cameraList: [],
+    name: ''
   }
 
   async componentWillMount() {
@@ -43,6 +44,7 @@ export default class CameraForm extends PureComponent {
       const cameraList = res.data.options.camera.list || []
       this.setState({
         cameraList: cameraList,
+        name: res.data.name,
         isLoaded: true
       })
     } else {
@@ -89,9 +91,7 @@ export default class CameraForm extends PureComponent {
             'list',
             {
               id: '_id',
-              name: this.props.match.params.key
-                ? this.props.match.params.key
-                : ''
+              name: this.state.name
             }
           ]}
         />
