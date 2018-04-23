@@ -25,28 +25,6 @@ export default class CheckBoxRole extends PureComponent {
 
   async componentWillMount() {
     let record = await AuthApi.getMe()
-    record.data.organization.menu = {
-      dashboard: {
-        actions: {
-          view: true
-        },
-        description: 'dashboard'
-      },
-      monitoring: {
-        actions: {
-          view: true,
-          camera: true,
-          control: true
-        },
-        description: 'monitoring'
-      },
-      map: {
-        actions: {
-          view: true
-        },
-        description: 'map'
-      }
-    }
     let initialValues
     if (this.props.value) {
       initialValues = Object.assign({}, this.props.value[0])
