@@ -56,7 +56,9 @@ export default class CheckBoxRole extends PureComponent {
           ...this.state.menu,
           [menuName]: e.target.checked
             ? {
-                actions: {},
+                actions: {
+                  view: e.target.checked
+                },
                 description: menuName
               }
             : undefined
@@ -124,6 +126,7 @@ export default class CheckBoxRole extends PureComponent {
               : {}
 
           return arrActions.map((actionName, index) => {
+            if(actionName === 'view') return <div/>
             return (
               record.actions[actionName] && (
                 <Checkbox
