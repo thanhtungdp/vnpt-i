@@ -92,24 +92,31 @@ export default class StationAutoHead extends React.PureComponent {
           <ReceivedAt>{receivedAt ? ' - ' + receivedAt : ''}</ReceivedAt>
         </TitleWrapper>
         <ActionWrapper>
-          {isSampling && protectRole(ROLE.MONITORING.CONTROL)(
-            <Link
-              to={slug.controlStation.triggerWithKey + `/${stationID}/${name}`}
-            >
-              <Tooltip title="Sampling">
-                <Icon type="rocket" size={15} />
-              </Tooltip>
-            </Link>
-          )}
+          {isSampling &&
+            protectRole(ROLE.MONITORING.CONTROL)(
+              <Link
+                to={
+                  slug.controlStation.triggerWithKey + `/${stationID}/${name}`
+                }
+              >
+                <Tooltip title="Sampling">
+                  <Icon type="weibo" style={{ fontSize: 16 }} />
+                </Tooltip>
+              </Link>
+            )}
           {isCamera && protectRole(ROLE.MONITORING.CAMERA)(<Divider />)}
 
-          {isCamera && protectRole(ROLE.MONITORING.CAMERA)(
-            <Link to={slug.camera.cameraWithKey+'/'+_id} style={{ display: 'flex' }}>
-              <Tooltip title="Camera">
-                <img src="/images/camera.png" />
-              </Tooltip>
-            </Link>
-          )}
+          {isCamera &&
+            protectRole(ROLE.MONITORING.CAMERA)(
+              <Link
+                to={slug.camera.cameraWithKey + '/' + _id}
+                style={{ display: 'flex' }}
+              >
+                <Tooltip title="Camera">
+                  <img src="/images/camera.png" />
+                </Tooltip>
+              </Link>
+            )}
         </ActionWrapper>
       </StationHeadItemWrapper>
     )
