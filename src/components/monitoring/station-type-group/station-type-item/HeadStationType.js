@@ -23,11 +23,12 @@ export default class HeadStypeType extends React.Component {
       </Menu>
     )
     return (
-      <Dropdown overlay={dropdown} trigger={['click']}>
-        <LinkSpan className="ant-dropdown-link">
-          <Icon type="right" /> View more
-        </LinkSpan>
-      </Dropdown>
+      // <Dropdown overlay={dropdown} trigger={['click']}>
+      //   <LinkSpan className="ant-dropdown-link">
+      //     <Icon type="right" /> View more
+      //   </LinkSpan>
+      // </Dropdown>
+      <div />
     )
   }
 

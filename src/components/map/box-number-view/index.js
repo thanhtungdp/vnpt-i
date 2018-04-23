@@ -69,7 +69,7 @@ export default class BoxView extends React.PureComponent {
       })
   }
 
-  componentWillMount(){
+  componentWillMount() {
     console.log(this.props)
   }
 

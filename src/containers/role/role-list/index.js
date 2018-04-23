@@ -15,7 +15,6 @@ import Breadcrumb from 'containers/role/breadcrumb'
 import ROLE from 'constants/role'
 import protectRole from 'hoc/protect-role'
 
-
 const FloatRight = styled.div`
   text-align: right;
 `
@@ -102,7 +101,7 @@ export default class RoleList extends React.Component {
                 }
               >
                 Delete
-       </a>
+              </a>
             )}
           </FloatRight>
         )

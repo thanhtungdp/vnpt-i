@@ -48,7 +48,7 @@ export default class TabeList extends React.PureComponent {
               loading={this.props.isExporting}
             >
               Export to excel
-          </Button>
+            </Button>
           )}
         </ButtonAbsolute>
         <Tabs defaultActiveKey="1">

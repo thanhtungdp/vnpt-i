@@ -38,9 +38,7 @@ export default class TableDataList extends React.PureComponent {
       dataIndex: 'receivedAt',
       key: 'receivedAt',
       render(value) {
-        return (
-          <div>{moment(value).format('DD/MM/YYYY HH:mm')}</div>
-        )
+        return <div>{moment(value).format('DD/MM/YYYY HH:mm')}</div>
       }
     }
     const columnsMeasurings = this.props.measuringData

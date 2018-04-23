@@ -18,7 +18,7 @@ import ROLE from 'constants/role'
 
 @protectRole(ROLE.MEASURING.VIEW)
 @createManagerList({
-  apiList: CategoryApi.getMeasurings,
+  apiList: CategoryApi.getMeasurings
 })
 @createManagerDelete({
   apiDelete: CategoryApi.deleteMeasuring
@@ -96,8 +96,11 @@ export default class MeasuringList extends React.Component {
       {
         content: (
           <span>
-             {protectRole('', [ROLE.MEASURING.EDIT], 'item')(
-               <Link to={slug.measuring.editWithKey + '/' + row._id}> Edit </Link>
+            {protectRole('', [ROLE.MEASURING.EDIT], 'item')(
+              <Link to={slug.measuring.editWithKey + '/' + row._id}>
+                {' '}
+                Edit{' '}
+              </Link>
             )}
             <Divider type="vertical" />
             {protectRole('', [ROLE.MEASURING.DELETE], 'item')(
@@ -107,9 +110,8 @@ export default class MeasuringList extends React.Component {
                 }
               >
                 Delete
-            </a>
+              </a>
             )}
-
           </span>
         )
       }

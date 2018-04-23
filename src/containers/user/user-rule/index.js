@@ -12,7 +12,6 @@ import UserApi from 'api/UserApi'
 import ROLE from 'constants/role'
 import protectRole from 'hoc/protect-role'
 
-
 const FormItem = Form.Item
 const Option = Select.Option
 
