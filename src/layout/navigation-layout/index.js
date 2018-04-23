@@ -137,8 +137,6 @@ export default class BasicNestedNavigation extends React.Component {
           }`}
         >
           <DropdownItem onClick={this.handleProfile}>View profile</DropdownItem>
-          <DropdownItem>Integrations</DropdownItem>
-          <DropdownItem>Bitbucket labs</DropdownItem>
           <DropdownItem onClick={this.handleChangePassword}>
             Change password
           </DropdownItem>

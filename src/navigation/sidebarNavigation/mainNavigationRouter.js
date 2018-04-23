@@ -11,7 +11,7 @@ import protectRole from 'hoc/protect-role'
 import ROLE from 'constants/role'
 
 const dashboardMenu = {
-  component: protectRole(ROLE.DASHBOARD.VIEW)(
+  component: (
     <AkNavigationItem
       linkComponent={WrapperLinkComponent}
       href={slug.dashboard}
@@ -22,7 +22,7 @@ const dashboardMenu = {
 }
 
 const monitoringMenu = {
-  component: (
+  component: protectRole(ROLE.MONITORING.VIEW)(
     <AkNavigationItem
       linkComponent={WrapperLinkComponent}
       href={slug.monitoring.base}
@@ -33,7 +33,7 @@ const monitoringMenu = {
 }
 
 const mapMenu = {
-  component: (
+  component: protectRole(ROLE.MAP.VIEW)(
     <AkNavigationItem
       linkComponent={WrapperLinkComponent}
       href={slug.map.base}
@@ -52,7 +52,7 @@ const groupData = {
 }
 
 const dataSearchMenu = {
-  component: (
+  component: protectRole(ROLE.DATA_SEARCH.VIEW)(
     <AkNavigationItem
       linkComponent={WrapperLinkComponent}
       icon={Icon.graphBar}
@@ -63,7 +63,7 @@ const dataSearchMenu = {
 }
 
 const avgDataMenu = {
-  component: (
+  component: protectRole(ROLE.AVG_SEARCH.VIEW)(
     <AkNavigationItem
       linkComponent={WrapperLinkComponent}
       icon={Icon.graphLine}
@@ -74,7 +74,7 @@ const avgDataMenu = {
 }
 
 const groupManager = {
-  component: protectRole('', [ROLE.MEASURING.VIEW], 'group')(
+  component: protectRole(ROLE.MEASURING.VIEW)(
     <NavigationWrapper text="Manage">
       <AkNavigationItemGroup title="Manage" />
     </NavigationWrapper>
@@ -93,7 +93,7 @@ const measuringMenu = {
 }
 
 const stationTypeMenu = {
-  component: (
+  component: protectRole(ROLE.STATION_TYPE.VIEW)(
     <AkNavigationItem
       linkComponent={WrapperLinkComponent}
       href={slug.stationType.base}
@@ -104,7 +104,7 @@ const stationTypeMenu = {
 }
 
 const stationAutoMenu = {
-  component: (
+  component: protectRole(ROLE.STATION_AUTO.VIEW)(
     <AkNavigationItem
       linkComponent={WrapperLinkComponent}
       href={slug.stationAuto.base}
@@ -123,7 +123,7 @@ const groupAdmin = {
 }
 
 const userMenu = {
-  component: (
+  component: protectRole(ROLE.USER.VIEW)(
     <AkNavigationItem
       linkComponent={WrapperLinkComponent}
       href={slug.user.base}
@@ -134,7 +134,7 @@ const userMenu = {
 }
 
 const roleMenu = {
-  component: (
+  component: protectRole(ROLE.ROLE.VIEW)(
     <AkNavigationItem
       linkComponent={WrapperLinkComponent}
       href={slug.role.base}

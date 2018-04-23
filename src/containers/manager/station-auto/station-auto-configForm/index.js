@@ -28,12 +28,17 @@ export default class StationAutoForm extends React.PureComponent {
     }
     const { t } = this.props.lang
     const { getFieldDecorator } = this.props.form
+    const styleFormItem = {
+      style: {
+        marginBottom: 0
+      }
+    }
     this.columns = [
       {
         dataIndex: 'key',
         title: t('stationAutoManager.config.measuringDes.label'),
         render: (text, record, index) => (
-          <FormItem>
+          <FormItem {...styleFormItem}>
             {getFieldDecorator(`measuringList[${index}].measuringDes`, {
               initialValue: text,
               rules: [
@@ -51,7 +56,7 @@ export default class StationAutoForm extends React.PureComponent {
         dataIndex: 'measuringSrc',
         title: t('stationAutoManager.config.measuringSrc.label'),
         render: (text, record, index) => (
-          <FormItem>
+          <FormItem {...styleFormItem}>
             {getFieldDecorator(`measuringList[${index}].measuringSrc`, {
               initialValue: this.initialValueMeasuringSrc(record.key),
               rules: [
@@ -75,7 +80,7 @@ export default class StationAutoForm extends React.PureComponent {
         dataIndex: 'ratio',
         title: t('stationAutoManager.config.ratio.label'),
         render: (text, record, index) => (
-          <FormItem>
+          <FormItem {...styleFormItem}>
             {getFieldDecorator(`measuringList[${index}].ratio`, {
               initialValue: this.initialValueRatio(record.key),
               rules: [

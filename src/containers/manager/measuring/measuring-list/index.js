@@ -51,7 +51,7 @@ export default class MeasuringList extends React.Component {
     const { lang: { t } } = this.props
     return (
       <div>
-        {protectRole('', [ROLE.MEASURING.CREATE], 'item')(
+        {protectRole(ROLE.MEASURING.CREATE)(
           <Link to={slug.measuring.create}>
             <Button type="primary">
               <Icon type="plus" /> {t('addon.create')}
@@ -96,14 +96,14 @@ export default class MeasuringList extends React.Component {
       {
         content: (
           <span>
-            {protectRole('', [ROLE.MEASURING.EDIT], 'item')(
+            {protectRole(ROLE.MEASURING.EDIT)(
               <Link to={slug.measuring.editWithKey + '/' + row._id}>
                 {' '}
                 Edit{' '}
               </Link>
             )}
             <Divider type="vertical" />
-            {protectRole('', [ROLE.MEASURING.DELETE], 'item')(
+            {protectRole(ROLE.MEASURING.DELETE)(
               <a
                 onClick={() =>
                   this.props.onDeleteItem(row._id, this.props.fetchData)

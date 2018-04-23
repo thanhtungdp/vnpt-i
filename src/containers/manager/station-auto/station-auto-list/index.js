@@ -49,7 +49,7 @@ export default class StationAutoList extends React.Component {
   buttonAdd() {
     return (
       <div>
-        {protectRole('', [ROLE.STATION_AUTO.CREATE], 'item')(
+        {protectRole(ROLE.STATION_AUTO.CREATE)(
           <Link to={slug.stationAuto.create}>
             <Button type="primary">
               <Icon type="plus" />Create
@@ -131,14 +131,14 @@ export default class StationAutoList extends React.Component {
             content: (
               <div>
                 <span>
-                  {protectRole('', [ROLE.STATION_AUTO.EDIT], 'item')(
+                  {protectRole(ROLE.STATION_AUTO.EDIT)(
                     <Link to={slug.stationAuto.editWithKey + '/' + row._id}>
                       {' '}
                       Edit{' '}
                     </Link>
                   )}
                   <Divider type="vertical" />
-                  {protectRole('', [ROLE.STATION_AUTO.DELETE], 'item')(
+                  {protectRole(ROLE.STATION_AUTO.DELETE)(
                     <a
                       onClick={() =>
                         this.props.onDeleteItem(row._id, this.props.fetchData)
@@ -148,7 +148,7 @@ export default class StationAutoList extends React.Component {
                     </a>
                   )}
                   <Divider type="vertical" />
-                  {protectRole('', [ROLE.STATION_AUTO.CONFIG], 'item')(
+                  {protectRole(ROLE.STATION_AUTO.CONFIG)(
                     <Link to={slug.stationAuto.configWithKey + '/' + row._id}>
                       {' '}
                       Config{' '}

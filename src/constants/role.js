@@ -44,5 +44,10 @@ export default {
   AVG_SEARCH: {
     VIEW: 'menu.avgSearch.actions.view',
     EXPORT: 'menu.avgSearch.actions.export'
+  },
+  MONITORING: {
+    VIEW: 'menu.monitoring.actions.view',
+    CONTROL: 'menu.monitoring.actions.control',
+    CAMERA: 'menu.monitoring.actions.camera'
   }
 }

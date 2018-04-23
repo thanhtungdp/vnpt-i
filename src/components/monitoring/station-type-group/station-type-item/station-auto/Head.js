@@ -7,6 +7,8 @@ import styled from 'styled-components'
 import Clearfix from 'components/elements/clearfix'
 import { SHAPE } from 'themes/color'
 import { Icon, Tooltip } from 'antd'
+import ROLE from 'constants/role'
+import protectRole from 'hoc/protect-role'
 
 const StationHeadItemWrapper = styled.div`
   display: flex;
@@ -89,20 +91,24 @@ export default class StationAutoHead extends React.PureComponent {
           <ReceivedAt>{receivedAt ? ' - ' + receivedAt : ''}</ReceivedAt>
         </TitleWrapper>
         <ActionWrapper>
-          <Link
-            to={slug.controlStation.triggerWithKey + `/${stationID}/${name}`}
-          >
-            <Tooltip title="Sampling">
-              <Icon type="rocket" size={15} />
-            </Tooltip>
-          </Link>
-          <Divider />
+          {protectRole(ROLE.MONITORING.CONTROL)(
+            <Link
+              to={slug.controlStation.triggerWithKey + `/${stationID}/${name}`}
+            >
+              <Tooltip title="Sampling">
+                <Icon type="rocket" size={15} />
+              </Tooltip>
+            </Link>
+          )}
+          {protectRole(ROLE.MONITORING.CONTROL)(<Divider />)}
 
-          <Link to={'/'} style={{ display: 'flex' }}>
-            <Tooltip title="Camera">
-              <img src="/images/camera.png" />
-            </Tooltip>
-          </Link>
+          {protectRole(ROLE.MONITORING.CAMERA)(
+            <Link to={'/'} style={{ display: 'flex' }}>
+              <Tooltip title="Camera">
+                <img src="/images/camera.png" />
+              </Tooltip>
+            </Link>
+          )}
         </ActionWrapper>
       </StationHeadItemWrapper>
     )

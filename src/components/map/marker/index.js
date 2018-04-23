@@ -76,7 +76,9 @@ export default class MarkerStation extends PureComponent {
           <td>{item.name}</td>
           <td
             style={{
-              color: colorLevels[lastLog.measuringLogs[item.key].warningLevel]
+              color: lastLog.measuringLogs[item.key]
+                ? colorLevels[lastLog.measuringLogs[item.key].warningLevel]
+                : colorLevels.DEFAULT
             }}
           >
             {lastLog.measuringLogs[item.key]
