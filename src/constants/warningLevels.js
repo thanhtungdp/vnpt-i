@@ -8,7 +8,7 @@ export const warningLevels = {
 
 export const colorLevels = {
   GOOD: '#1dce6c',
-  EXCEEDED_TENDENCY: '#FFF954',
+  EXCEEDED_TENDENCY: '#F1D748',
   EXCEEDED_PREPARING: '#F08432',
   EXCEEDED: '#EA3223'
 }

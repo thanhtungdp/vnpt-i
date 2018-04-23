@@ -5,9 +5,12 @@ import BoxNumberView from 'components/map/box-number-view'
 import { SHAPE } from 'themes/color'
 import { translate as t } from 'hoc/create-lang'
 import stationStatus from 'constants/stationStatus'
-import { warningLevelsNumber, warningLevels } from 'constants/warningLevels'
+import {
+  warningLevelsNumber,
+  warningLevels,
+  colorLevels
+} from 'constants/warningLevels'
 import PropTypes from 'prop-types'
-
 const BoxAnalyticListWrapper = styled.div``
 
 const Row = styled.div`
@@ -144,7 +147,7 @@ export default class BoxAnalyticList extends React.PureComponent {
             }}
           >
             <BoxNumberView
-              color={SHAPE.GREEN}
+              color={colorLevels.GOOD}
               type={t(pfKey + 'good')}
               number={this.state.good}
               focusStatus={warningLevels.GOOD}
@@ -186,7 +189,7 @@ export default class BoxAnalyticList extends React.PureComponent {
             }}
           >
             <BoxNumberView
-              color={SHAPE.ORANGE}
+              color={colorLevels.EXCEEDED}
               type={t(pfKey + 'exceeded')}
               number={this.state.exceeded}
               focusStatus={warningLevels.EXCEEDED}
@@ -199,7 +202,7 @@ export default class BoxAnalyticList extends React.PureComponent {
             }}
           >
             <BoxNumberView
-              color={SHAPE.YELLOW}
+              color={colorLevels.EXCEEDED_PREPARING}
               type={t(pfKey + 'exceededPreparing')}
               number={this.state.exceededPreparing}
               focusStatus={warningLevels.EXCEEDED_PREPARING}
@@ -212,7 +215,7 @@ export default class BoxAnalyticList extends React.PureComponent {
             }}
           >
             <BoxNumberView
-              color={SHAPE.YELLOW}
+              color={colorLevels.EXCEEDED_TENDENCY}
               type={t(pfKey + 'exceededTendency')}
               number={this.state.exceededTendency}
               focusStatus={warningLevels.EXCEEDED_TENDENCY}
