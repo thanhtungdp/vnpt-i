@@ -44,7 +44,11 @@ const mapMenu = {
 }
 
 const groupData = {
-  component: (
+  component: protectRole(
+    '',
+    [ROLE.DATA_SEARCH.VIEW, ROLE.AVG_SEARCH.VIEW],
+    'group'
+  )(
     <NavigationWrapper text="Data">
       <AkNavigationItemGroup title="Data" />
     </NavigationWrapper>
@@ -74,7 +78,11 @@ const avgDataMenu = {
 }
 
 const groupManager = {
-  component: protectRole(ROLE.MEASURING.VIEW)(
+  component: protectRole(
+    '',
+    [ROLE.MEASURING.VIEW, ROLE.STATION_TYPE.VIEW, ROLE.STATION_AUTO.VIEW],
+    'group'
+  )(
     <NavigationWrapper text="Manage">
       <AkNavigationItemGroup title="Manage" />
     </NavigationWrapper>
@@ -115,7 +123,7 @@ const stationAutoMenu = {
 }
 
 const groupAdmin = {
-  component: (
+  component: protectRole('', [ROLE.USER.VIEW, ROLE.ROLE.VIEW], 'group')(
     <NavigationWrapper text="Admin management">
       <AkNavigationItemGroup title="Admin management" />
     </NavigationWrapper>

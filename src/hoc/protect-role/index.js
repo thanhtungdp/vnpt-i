@@ -17,7 +17,17 @@ const createProtectRole = (
     // check nested keyRole in object
     // Ex: menu.dashboard.view
     checkRole(role) {
-      return objectPath.get(this.props.authRole, role)
+      // check role in organization first
+      let isRole = objectPath.get(this.props.organization, role)
+      if (!isRole) return isRole
+      else {
+        // and then check role in user
+        if (this.props.isAdmin) {
+          return true
+        } else {
+          return objectPath.get(this.props.authRole, role)
+        }
+      }
     }
 
     getRoleForItem() {
@@ -43,17 +53,10 @@ const createProtectRole = (
       }
     }
 
-    getRoleInOrganization() {
-      return objectPath.get(this.props.organization, keyRole)
-    }
-
     render() {
       //if role undefined||false return empty
       //if (!this.getRole()) return null
-      if (
-        this.getRoleInOrganization() &&
-        (this.props.isAdmin || this.getRole())
-      ) {
+      if (this.getRole()) {
         if (isReact.component(Component)) {
           return <Component {...this.props} />
         } else return React.cloneElement(Component, this.props)

@@ -41,7 +41,7 @@ export default class RoleEdit extends PureComponent {
     const data = {
       name: values.name,
       description: values.description,
-      menu: values.menu
+      menu: values.menu[0]
     }
     const _id = this.props.match.params._id
     const record = await RoleApi.updateRole(_id, data)

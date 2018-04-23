@@ -29,11 +29,15 @@ export default class CheckBoxRole extends PureComponent {
     if (this.props.value) {
       initialValues = Object.assign({}, this.props.value[0])
     }
-    const arr = Object.keys(record.data.organization.menu).map(key => ({
+    let arr = Object.keys(record.data.organization.menu).map(key => ({
       key: key,
       ...record.data.organization.menu[key]
     }))
-
+    arr.sort(function(a, b) {
+      if (a.numericalOrder && b.numericalOrder)
+        return a.numericalOrder - b.numericalOrder
+      else return 0
+    })
     this.setState(
       {
         menu: this.props.value ? initialValues : record.data.organization.menu,
