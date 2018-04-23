@@ -2,7 +2,8 @@ export const warningLevels = {
   GOOD: 'GOOD',
   EXCEEDED_TENDENCY: 'EXCEEDED_TENDENCY',
   EXCEEDED_PREPARING: 'EXCEEDED_PREPARING',
-  EXCEEDED: 'EXCEEDED'
+  EXCEEDED: 'EXCEEDED',
+  DEFAULT: 'GOOD'
 }
 
 export const colorLevels = {

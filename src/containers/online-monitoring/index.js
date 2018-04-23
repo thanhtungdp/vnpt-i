@@ -9,6 +9,8 @@ import CategoriesApi from 'api/CategoryApi'
 import styled from 'styled-components'
 // import playSound from 'utils/audio'
 import dateFormat from 'dateformat'
+import ROLE from 'constants/role'
+import protectRole from 'hoc/protect-role'
 
 const StyledTabs = styled(Tabs)`
   .ant-tabs-tab {
@@ -19,7 +21,7 @@ const StyledTabs = styled(Tabs)`
 const FlexStyle = styled.div`
   display: flex;
 `
-
+@protectRole(ROLE.MONITORING.VIEW)
 @createLanguageHoc
 @autobind
 export default class OnlineMonitoring extends React.Component {

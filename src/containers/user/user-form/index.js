@@ -115,6 +115,34 @@ export default class UserForm extends React.PureComponent {
               )}
             </FormItem>
           </Col>
+          <Col span={12}>
+            <FormItem label={t('userForm.form.phone.label')}>
+              {getFieldDecorator(`phone`, {
+                valuePropName: 'telNumber',
+                rules: [
+                  {
+                    required: true,
+                    message: t('userForm.form.phone.label')
+                  }
+                ]
+              })(
+                <ReactTelephoneInput
+                  defaultCountry="vn"
+                  flagsImagePath={
+                    !this.props.isEdit
+                      ? '../images/flags.png'
+                      : '../../images/flags.png'
+                  }
+                  initialValue={
+                    this.props.initialValues &&
+                    this.props.initialValues.phone &&
+                    this.props.initialValues.phone.phoneNumber
+                  }
+                  onChange={this.handleTelChange}
+                />
+              )}
+            </FormItem>
+          </Col>
         </Row>
 
         {!this.props.isEdit && (
@@ -195,37 +223,6 @@ export default class UserForm extends React.PureComponent {
                   }
                 ]
               })(<Input placeholder={t('userForm.form.lastName.label')} />)}
-            </FormItem>
-          </Col>
-        </Row>
-
-        <Row gutter={16}>
-          <Col span={12}>
-            <FormItem label={t('userForm.form.phone.label')}>
-              {getFieldDecorator(`phone`, {
-                valuePropName: 'telNumber',
-                rules: [
-                  {
-                    required: true,
-                    message: t('userForm.form.phone.label')
-                  }
-                ]
-              })(
-                <ReactTelephoneInput
-                  defaultCountry="vn"
-                  flagsImagePath={
-                    !this.props.isEdit
-                      ? '../images/flags.png'
-                      : '../../images/flags.png'
-                  }
-                  initialValue={
-                    this.props.initialValues &&
-                    this.props.initialValues.phone &&
-                    this.props.initialValues.phone.phoneNumber
-                  }
-                  onChange={this.handleTelChange}
-                />
-              )}
             </FormItem>
           </Col>
         </Row>

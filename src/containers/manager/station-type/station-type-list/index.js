@@ -51,7 +51,7 @@ export default class StationTypeList extends React.Component {
   buttonAdd() {
     return (
       <div>
-        {protectRole('', [ROLE.STATION_TYPE.CREATE], 'item')(
+        {protectRole(ROLE.STATION_TYPE.CREATE)(
           <Link to={slug.stationType.create}>
             <Button type="primary">
               <Icon type="plus" />Create
@@ -126,7 +126,7 @@ export default class StationTypeList extends React.Component {
       {
         content: (
           <span>
-            {protectRole('', [ROLE.STATION_TYPE.EDIT], 'item')(
+            {protectRole(ROLE.STATION_TYPE.EDIT)(
               <Link to={slug.stationType.editWithKey + '/' + row._id}>
                 {' '}
                 Edit{' '}
@@ -134,7 +134,7 @@ export default class StationTypeList extends React.Component {
             )}
 
             <Divider type="vertical" />
-            {protectRole('', [ROLE.STATION_TYPE.DELETE], 'item')(
+            {protectRole(ROLE.STATION_TYPE.DELETE)(
               <a
                 onClick={() =>
                   this.props.onDeleteItem(row._id, this.props.fetchData)

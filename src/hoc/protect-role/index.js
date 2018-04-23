@@ -10,7 +10,8 @@ const createProtectRole = (
 ) => Component => {
   @connect(state => ({
     authRole: state.auth.userInfo.role,
-    isAdmin: state.auth.userInfo.isAdmin
+    isAdmin: state.auth.userInfo.isAdmin,
+    organization: state.auth.userInfo.organization
   }))
   class ProtectRole extends React.Component {
     // check nested keyRole in object
@@ -42,10 +43,17 @@ const createProtectRole = (
       }
     }
 
+    getRoleInOrganization() {
+      return objectPath.get(this.props.organization, keyRole)
+    }
+
     render() {
       //if role undefined||false return empty
       //if (!this.getRole()) return null
-      if (this.props.isAdmin || this.getRole()) {
+      if (
+        this.getRoleInOrganization() &&
+        (this.props.isAdmin || this.getRole())
+      ) {
         if (isReact.component(Component)) {
           return <Component {...this.props} />
         } else return React.cloneElement(Component, this.props)

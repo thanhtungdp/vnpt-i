@@ -256,11 +256,11 @@ export default {
     },
     options: {
       allowSendWarning: {
-        label: 'allow Send Warning',
+        label: 'Allow Send Warning',
         placeholder: 'allowSendWarning'
       },
       allowSampling: {
-        label: 'allow Sampling',
+        label: 'Allow Sampling',
         placeholder: 'allowSendWarning'
       },
       apiAddress: {
@@ -268,7 +268,7 @@ export default {
         placeholder: 'allowSendWarning'
       },
       allowCamera: {
-        label: 'allow Camera',
+        label: 'Allow Camera',
         placeholder: 'allow Camera'
       },
       name: {

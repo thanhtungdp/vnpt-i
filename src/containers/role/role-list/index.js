@@ -49,7 +49,7 @@ export default class RoleList extends React.Component {
     const { lang: { t } } = this.props
     return (
       <div>
-        {protectRole('', [ROLE.ROLE.CREATE], 'item')(
+        {protectRole(ROLE.ROLE.CREATE)(
           <Link to={slug.role.create}>
             <Button type="primary">
               <Icon type="plus" /> {t('addon.create')}
@@ -90,11 +90,11 @@ export default class RoleList extends React.Component {
       {
         content: (
           <FloatRight>
-            {protectRole('', [ROLE.ROLE.EDIT], 'item')(
+            {protectRole(ROLE.ROLE.EDIT)(
               <Link to={slug.role.editWithKey + '/' + row._id}> Edit </Link>
             )}
             <Divider type="vertical" />
-            {protectRole('', [ROLE.ROLE.DELETE], 'item')(
+            {protectRole(ROLE.ROLE.DELETE)(
               <a
                 onClick={() =>
                   this.props.onDeleteItem(row._id, this.props.fetchData)

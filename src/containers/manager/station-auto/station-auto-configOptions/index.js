@@ -39,12 +39,17 @@ export default class StationAutoForm extends React.PureComponent {
     }
     const { t } = this.props.lang
     const { getFieldDecorator } = this.props.form
+    const styleFormItem = {
+      style: {
+        marginBottom: 0
+      }
+    }
     this.columns = [
       {
         dataIndex: 'name',
         title: t('stationAutoManager.options.name.label'),
         render: (text, record, index) => (
-          <FormItem>
+          <FormItem {...styleFormItem}>
             {getFieldDecorator(`list[${index}].name`, {
               initialValue: record.name,
               rules: [
@@ -64,7 +69,7 @@ export default class StationAutoForm extends React.PureComponent {
         dataIndex: 'rtspUrl',
         title: t('stationAutoManager.options.RTSP.label'),
         render: (text, record, index) => (
-          <FormItem>
+          <FormItem {...styleFormItem}>
             {getFieldDecorator(`list[${index}].rtspUrl`, {
               initialValue: record.rtspUrl,
               rules: [

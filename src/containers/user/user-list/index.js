@@ -41,7 +41,7 @@ export default class UserList extends React.Component {
   buttonAdd() {
     return (
       <div>
-        {protectRole('', [ROLE.USER.CREATE], 'item')(
+        {protectRole(ROLE.USER.CREATE)(
           <Link to={slug.user.create}>
             <Button type="primary">
               <Icon type="plus" />Create
@@ -105,11 +105,11 @@ export default class UserList extends React.Component {
       {
         content: (
           <span>
-            {protectRole('', [ROLE.USER.EDIT], 'item')(
+            {protectRole(ROLE.USER.EDIT)(
               <Link to={slug.user.editWithKey + '/' + row._id}> Edit </Link>
             )}
             <Divider type="vertical" />
-            {protectRole('', [ROLE.USER.DELETE], 'item')(
+            {protectRole(ROLE.USER.DELETE)(
               <a
                 onClick={() =>
                   this.props.onDeleteItem(row._id, this.props.fetchData)
@@ -119,7 +119,7 @@ export default class UserList extends React.Component {
               </a>
             )}
             <Divider type="vertical" />
-            {protectRole('', [ROLE.USER.ROLE], 'item')(
+            {protectRole(ROLE.USER.ROLE)(
               <Link to={slug.user.ruleWithKey + '/' + row._id}> Role </Link>
             )}
           </span>

@@ -49,7 +49,8 @@ export default class RoleList extends React.Component {
       { itemPerPage: MAX_VALUE },
       {}
     )
-    let roles = await RoleApi.getRole({ itemPerPage: MAX_VALUE }, {})
+    let roles = await RoleApi.getRoles({ itemPerPage: MAX_VALUE })
+    if (roles.error) message.error(roles.message)
     let user = await UserApi.getOne(key)
 
     this.setState({
