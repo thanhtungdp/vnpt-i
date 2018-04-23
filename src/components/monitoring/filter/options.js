@@ -3,11 +3,11 @@ import monitoringFilter from 'constants/monitoringFilter'
 export const GROUP_OPTIONS = [
   {
     value: monitoringFilter.GROUP.GROUP,
-    name: monitoringFilter.GROUP.GROUP
+    name: monitoringFilter.GROUP.GROUP_LABEL
   },
   {
     value: monitoringFilter.GROUP.UNGROUP,
-    name: monitoringFilter.GROUP.UNGROUP
+    name: monitoringFilter.GROUP.UNGROUP_LABEL
   }
 ]
 

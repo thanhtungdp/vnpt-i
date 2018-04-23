@@ -81,7 +81,7 @@ export default class BoxNotifications extends React.PureComponent {
             <Nodata>
               <span>
                 {' '}
-                <Icon type="warning" />Nodata
+                <img src="/images/align-center.png" /> Nodata
               </span>
             </Nodata>
           )}

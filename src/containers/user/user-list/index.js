@@ -45,7 +45,7 @@ export default class UserList extends React.Component {
           <Link to={slug.user.create}>
             <Button type="primary">
               <Icon type="plus" />Create
-               </Button>
+            </Button>
           </Link>
         )}
       </div>
@@ -116,7 +116,7 @@ export default class UserList extends React.Component {
                 }
               >
                 Delete
-            </a>
+              </a>
             )}
             <Divider type="vertical" />
             {protectRole('', [ROLE.USER.ROLE], 'item')(

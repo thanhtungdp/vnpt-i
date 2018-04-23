@@ -9,7 +9,6 @@ import Breadcrumb from '../breadcrumb'
 import ROLE from 'constants/role'
 import protectRole from 'hoc/protect-role'
 
-
 @protectRole(ROLE.STATION_AUTO.CREATE)
 @autobind
 export default class StationAutoCreate extends React.PureComponent {

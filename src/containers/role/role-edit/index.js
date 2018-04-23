@@ -9,8 +9,8 @@ import RoleApi from 'api/RoleApi'
 import ROLE from 'constants/role'
 import protectRole from 'hoc/protect-role'
 
-@protectRole(ROLE.ROLE.EDIT)
 @withRouter
+@protectRole(ROLE.ROLE.EDIT)
 @autobind
 export default class RoleEdit extends PureComponent {
   static propTypes = {}

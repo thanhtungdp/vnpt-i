@@ -53,7 +53,7 @@ export default class StationAutoList extends React.Component {
           <Link to={slug.stationAuto.create}>
             <Button type="primary">
               <Icon type="plus" />Create
-                </Button>
+            </Button>
           </Link>
         )}
       </div>
@@ -145,7 +145,7 @@ export default class StationAutoList extends React.Component {
                       }
                     >
                       Delete
-                  </a>
+                    </a>
                   )}
                   <Divider type="vertical" />
                   {protectRole('', [ROLE.STATION_AUTO.CONFIG], 'item')(

@@ -6,6 +6,7 @@ import { autobind } from 'core-decorators'
 import styled from 'styled-components'
 import Clearfix from 'components/elements/clearfix'
 import { SHAPE } from 'themes/color'
+import { Icon, Tooltip } from 'antd'
 
 const StationHeadItemWrapper = styled.div`
   display: flex;
@@ -91,12 +92,17 @@ export default class StationAutoHead extends React.PureComponent {
           <Link
             to={slug.controlStation.triggerWithKey + `/${stationID}/${name}`}
           >
-            Sampling
+            <Tooltip title="Sampling">
+              <Icon type="rocket" size={15} />
+            </Tooltip>
           </Link>
-          {isCamera && <Divider />}
-          {isCamera && (
-            <Link to={slug.camera.cameraWithKey + '/' + _id}>Camera</Link>
-          )}
+          <Divider />
+
+          <Link to={'/'} style={{ display: 'flex' }}>
+            <Tooltip title="Camera">
+              <img src="/images/camera.png" />
+            </Tooltip>
+          </Link>
         </ActionWrapper>
       </StationHeadItemWrapper>
     )

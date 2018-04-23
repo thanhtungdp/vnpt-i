@@ -1,7 +1,9 @@
 export default {
   GROUP: {
     GROUP: 'group',
-    UNGROUP: 'ungroup'
+    GROUP_LABEL: 'Group',
+    UNGROUP: 'ungroup',
+    UNGROUP_LABEL: 'Ungroup'
   },
   ORDER: {
     NAME: 'name',
