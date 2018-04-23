@@ -81,6 +81,7 @@ export default class StationAutoHead extends React.PureComponent {
       _id
     } = this.props
     const isCamera = options && options.camera && options.camera.allowed
+    const isSampling = options && options.camera && options.sampling.allowed
     return (
       <StationHeadItemWrapper>
         <TitleWrapper>
@@ -91,7 +92,7 @@ export default class StationAutoHead extends React.PureComponent {
           <ReceivedAt>{receivedAt ? ' - ' + receivedAt : ''}</ReceivedAt>
         </TitleWrapper>
         <ActionWrapper>
-          {protectRole(ROLE.MONITORING.CONTROL)(
+          {isSampling && protectRole(ROLE.MONITORING.CONTROL)(
             <Link
               to={slug.controlStation.triggerWithKey + `/${stationID}/${name}`}
             >
@@ -100,10 +101,10 @@ export default class StationAutoHead extends React.PureComponent {
               </Tooltip>
             </Link>
           )}
-          {protectRole(ROLE.MONITORING.CONTROL)(<Divider />)}
+          {isCamera && protectRole(ROLE.MONITORING.CAMERA)(<Divider />)}
 
-          {protectRole(ROLE.MONITORING.CAMERA)(
-            <Link to={'/'} style={{ display: 'flex' }}>
+          {isCamera && protectRole(ROLE.MONITORING.CAMERA)(
+            <Link to={slug.camera.cameraWithKey+'/'+_id} style={{ display: 'flex' }}>
               <Tooltip title="Camera">
                 <img src="/images/camera.png" />
               </Tooltip>
