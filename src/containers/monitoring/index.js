@@ -77,20 +77,22 @@ export default class Monitoring extends React.Component {
     let dataStationAutos = await StationAutoApi.getLastLog()
 
     // Caculate data
-    let dataMonitoring = dataStationTypes.data.map(stationType => {
-      const stationAutoList = dataStationAutos.data.filter(
-        stationAuto => stationAuto.stationType.key === stationType.key
-      )
-      return {
-        stationType,
-        stationAutoList: this.appendWarningLevelStationAuto(stationAutoList),
-        totalWarning: this.getTotalWarning(
-          this.appendWarningLevelStationAuto(stationAutoList)
+    let dataMonitoring = []
+    if (dataStationAutos.success)
+      dataMonitoring = dataStationTypes.data.map(stationType => {
+        const stationAutoList = dataStationAutos.data.filter(
+          stationAuto => stationAuto.stationType.key === stationType.key
         )
-      }
-    })
+        return {
+          stationType,
+          stationAutoList: this.appendWarningLevelStationAuto(stationAutoList),
+          totalWarning: this.getTotalWarning(
+            this.appendWarningLevelStationAuto(stationAutoList)
+          )
+        }
+      })
     this.setState({
-      data: dataMonitoring,
+      data: (dataMonitoring.length > 0) ? dataMonitoring : this.state.data,
       isLoading: true
     })
   }
@@ -135,7 +137,7 @@ export default class Monitoring extends React.Component {
   }
 
   sortNameList(data, key, asc = true) {
-    return data.sort(function(a, b) {
+    return data.sort(function (a, b) {
       const last = objectPath.get(a, key)
       const after = objectPath.get(b, key)
       if (asc) {

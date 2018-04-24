@@ -1,6 +1,6 @@
 import React from 'react'
 import PageContainer from 'layout/default-sidebar-layout/PageContainer'
-import { Button, Icon } from 'antd'
+import { Button, Icon, Spin } from 'antd'
 import { autobind } from 'core-decorators'
 import StationAutoApi from 'api/StationAuto'
 import StationAutoForm from '../station-auto-form'
@@ -86,14 +86,16 @@ export default class StationAutoEdit extends React.PureComponent {
             }
           ]}
         />
-        {this.props.isLoaded &&
-          this.props.success && (
-            <StationAutoForm
-              initialValues={this.cleanData()}
-              onSubmit={this.handleSubmit}
-              isEdit={true}
-            />
-          )}
+        <Spin style={{width: '100%'}} spinning={!this.props.isLoaded}>
+          {this.props.isLoaded &&
+            this.props.success && (
+              <StationAutoForm
+                initialValues={this.cleanData()}
+                onSubmit={this.handleSubmit}
+                isEdit={true}
+              />
+            )}
+        </Spin>
       </PageContainer>
     )
   }
