@@ -11,7 +11,13 @@ require('../user-search-form/index.css')
 const FormItem = Form.Item
 
 @Form.create({
-  mapPropsToFields: mapPropsToFields
+  mapPropsToFields: ({ initialValues }) => {
+    if (!initialValues) return
+    if (initialValues.phone) {
+      initialValues.phone = initialValues.phone.phoneNumber
+    }
+    return mapPropsToFields({ initialValues })
+  }
 })
 @createLanguage
 @autobind
@@ -88,11 +94,20 @@ export default class UserForm extends React.PureComponent {
 
   render() {
     const { form: { getFieldDecorator }, lang: { t } } = this.props
+    const formItemLayout = {
+      labelCol: {
+        sm: { span: 7, offset: 0 },
+      },
+      wrapperCol: {
+        sm: { span: 17, offset: 0 },
+      },
+    };
+
     return (
       <Form onSubmit={this.handleSubmit}>
         <Row gutter={16}>
           <Col span={12}>
-            <FormItem label={t('userForm.form.email.label')}>
+            <FormItem {...formItemLayout} label={t('userForm.form.email.label')}>
               {getFieldDecorator('email', {
                 initialValue: this.props.initialValues
                   ? this.props.initialValues.email
@@ -116,9 +131,8 @@ export default class UserForm extends React.PureComponent {
             </FormItem>
           </Col>
           <Col span={12}>
-            <FormItem label={t('userForm.form.phone.label')}>
+            <FormItem {...formItemLayout} label={t('userForm.form.phone.label')}>
               {getFieldDecorator(`phone`, {
-                valuePropName: 'telNumber',
                 rules: [
                   {
                     required: true,
@@ -133,11 +147,6 @@ export default class UserForm extends React.PureComponent {
                       ? '../images/flags.png'
                       : '../../images/flags.png'
                   }
-                  initialValue={
-                    this.props.initialValues &&
-                    this.props.initialValues.phone &&
-                    this.props.initialValues.phone.phoneNumber
-                  }
                   onChange={this.handleTelChange}
                 />
               )}
@@ -148,7 +157,7 @@ export default class UserForm extends React.PureComponent {
         {!this.props.isEdit && (
           <Row gutter={16}>
             <Col span={12}>
-              <FormItem label={t('userForm.form.password.label')}>
+              <FormItem {...formItemLayout} label={t('userForm.form.password.label')}>
                 {getFieldDecorator('password', {
                   rules: [
                     {
@@ -169,7 +178,7 @@ export default class UserForm extends React.PureComponent {
               </FormItem>
             </Col>
             <Col span={12}>
-              <FormItem label={t('userForm.form.confirmPassword.label')}>
+              <FormItem {...formItemLayout} label={t('userForm.form.confirmPassword.label')}>
                 {getFieldDecorator('confirmPassword', {
                   rules: [
                     {
@@ -194,7 +203,7 @@ export default class UserForm extends React.PureComponent {
 
         <Row gutter={16}>
           <Col span={12}>
-            <FormItem label={t('userForm.form.firstName.label')}>
+            <FormItem {...formItemLayout} label={t('userForm.form.firstName.label')}>
               {getFieldDecorator('firstName', {
                 initialValue: this.props.initialValues
                   ? this.props.initialValues.firstName
@@ -211,7 +220,7 @@ export default class UserForm extends React.PureComponent {
             </FormItem>
           </Col>
           <Col span={12}>
-            <FormItem label={t('userForm.form.lastName.label')}>
+            <FormItem {...formItemLayout} label={t('userForm.form.lastName.label')}>
               {getFieldDecorator('lastName', {
                 initialValue: this.props.initialValues
                   ? this.props.initialValues.lastName
