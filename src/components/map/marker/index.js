@@ -11,6 +11,7 @@ import { Table } from 'react-bootstrap'
 import DateFormat from 'dateformat'
 import { colorLevels } from 'constants/warningLevels'
 import stStatus from 'constants/stationStatus'
+import moment from 'moment'
 const MIN_WIDTH_INFO = '150px'
 
 @autobind
@@ -102,7 +103,8 @@ export default class MarkerStation extends PureComponent {
           {this.props.stationStatus !== stStatus.DATA_LOSS
             ? 'Received at:'
             : 'Data loss at:'}{' '}
-          {DateFormat(new Date(lastLog.receivedAt), 'dd/mm/yyyy hh:mm:ss')}
+          {/* {DateFormat(new Date(lastLog.receivedAt), 'dd/mm/yyyy hh:mm:ss')} */}
+          {moment(lastLog.receivedAt, "YYYY-MM-DD hh:mm").format('DD/MM/YYYY hh:mm')}
         </span>
         <Table striped={true} bordered condensed hover responsive={true}>
           <thead>
