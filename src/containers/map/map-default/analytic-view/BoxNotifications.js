@@ -14,7 +14,7 @@ const Wrapper = styled.div`
   this.state.notifications &&
   this.state.notifications.length > 0
     ? 'scroll'
-    : 'inherit'};
+    : 'auto'};
 `
 const Nodata = styled.div`
   height: 100%;
