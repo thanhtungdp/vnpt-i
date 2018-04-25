@@ -104,7 +104,9 @@ export default class MarkerStation extends PureComponent {
             ? 'Received at:'
             : 'Data loss at:'}{' '}
           {/* {DateFormat(new Date(lastLog.receivedAt), 'dd/mm/yyyy hh:mm:ss')} */}
-          {moment(lastLog.receivedAt, "YYYY-MM-DD hh:mm").format('DD/MM/YYYY hh:mm')}
+          {moment(lastLog.receivedAt, 'YYYY-MM-DD hh:mm').format(
+            'DD/MM/YYYY hh:mm'
+          )}
         </span>
         <Table striped={true} bordered condensed hover responsive={true}>
           <thead>

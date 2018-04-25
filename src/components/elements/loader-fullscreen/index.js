@@ -9,10 +9,8 @@ const LoaderFullScreenWrapper = styled.div`
 `
 
 @autobind
-export default class LoaderFullScreen extends React.PureComponent{
-  render(){
-    return <LoaderFullScreenWrapper>
-
-    </LoaderFullScreenWrapper>
+export default class LoaderFullScreen extends React.PureComponent {
+  render() {
+    return <LoaderFullScreenWrapper />
   }
 }

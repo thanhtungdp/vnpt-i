@@ -120,7 +120,7 @@ export default class SearchAvgForm extends React.Component {
           textColor="#ffffff"
           isBackground
           fontSize={14}
-          style={{padding: '8px 16px'}}
+          style={{ padding: '8px 16px' }}
         >
           {this.props.lang.t('addon.search')}
         </Heading>

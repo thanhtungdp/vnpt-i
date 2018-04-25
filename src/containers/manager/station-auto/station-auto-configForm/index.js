@@ -134,18 +134,21 @@ export default class StationAutoForm extends React.PureComponent {
     const { t } = this.props.lang
     const formItemLayout = {
       labelCol: {
-        sm: { span: 4, offset: 0 },
+        sm: { span: 4, offset: 0 }
       },
       wrapperCol: {
-        sm: { span: 19, offset: 0 },
-      },
-    };
+        sm: { span: 19, offset: 0 }
+      }
+    }
 
     return (
       <Form onSubmit={this.handleSubmit}>
         <Row gutter={8}>
           <Col span={12}>
-            <FormItem {...formItemLayout} label={t('stationAutoManager.config.fileName.label')}>
+            <FormItem
+              {...formItemLayout}
+              label={t('stationAutoManager.config.fileName.label')}
+            >
               {getFieldDecorator('fileName', {
                 initialValue: this.props.initialValues
                   ? this.props.initialValues.fileName
@@ -167,7 +170,10 @@ export default class StationAutoForm extends React.PureComponent {
             </FormItem>
           </Col>
           <Col span={12}>
-            <FormItem {...formItemLayout} label={t('stationAutoManager.config.path.label')}>
+            <FormItem
+              {...formItemLayout}
+              label={t('stationAutoManager.config.path.label')}
+            >
               {getFieldDecorator('path', {
                 initialValue: this.props.initialValues
                   ? this.props.initialValues.path

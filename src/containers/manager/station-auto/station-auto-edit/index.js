@@ -86,7 +86,7 @@ export default class StationAutoEdit extends React.PureComponent {
             }
           ]}
         />
-        <Spin style={{width: '100%'}} spinning={!this.props.isLoaded}>
+        <Spin style={{ width: '100%' }} spinning={!this.props.isLoaded}>
           {this.props.isLoaded &&
             this.props.success && (
               <StationAutoForm

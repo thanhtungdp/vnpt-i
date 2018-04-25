@@ -37,18 +37,21 @@ export default class MeasuringForm extends React.PureComponent {
     const { form: { getFieldDecorator }, lang: { t } } = this.props
     const formItemLayout = {
       labelCol: {
-        sm: { span: 4, offset: 0 },
+        sm: { span: 4, offset: 0 }
       },
       wrapperCol: {
-        sm: { span: 19, offset: 0 },
-      },
-    };
+        sm: { span: 19, offset: 0 }
+      }
+    }
 
     return (
       <Form onSubmit={this.handleSubmit}>
         <Row gutter={16}>
           <Col span={12}>
-            <FormItem {...formItemLayout} label={t('measuringManager.form.key.label')}>
+            <FormItem
+              {...formItemLayout}
+              label={t('measuringManager.form.key.label')}
+            >
               {getFieldDecorator('key', {
                 rules: [
                   {
@@ -61,11 +64,14 @@ export default class MeasuringForm extends React.PureComponent {
                   disabled={this.props.isEdit}
                   placeholder={t('measuringManager.form.key.placeholder')}
                 />
-                )}
+              )}
             </FormItem>
           </Col>
           <Col span={12}>
-            <FormItem {...formItemLayout} label={t('measuringManager.form.name.label')}>
+            <FormItem
+              {...formItemLayout}
+              label={t('measuringManager.form.name.label')}
+            >
               {getFieldDecorator('name', {
                 rules: [
                   {
@@ -77,16 +83,21 @@ export default class MeasuringForm extends React.PureComponent {
                 <Input
                   placeholder={t('measuringManager.form.name.placeholder')}
                 />
-                )}
+              )}
             </FormItem>
           </Col>
         </Row>
 
         <Row gutter={16}>
           <Col span={12}>
-            <FormItem {...formItemLayout} label={t('measuringManager.form.unit.label')}>
+            <FormItem
+              {...formItemLayout}
+              label={t('measuringManager.form.unit.label')}
+            >
               {getFieldDecorator('unit')(
-                <Input placeholder={t('measuringManager.form.unit.placeholder')} />
+                <Input
+                  placeholder={t('measuringManager.form.unit.placeholder')}
+                />
               )}
             </FormItem>
           </Col>

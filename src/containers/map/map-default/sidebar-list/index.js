@@ -36,7 +36,9 @@ export default class SidebarList extends React.PureComponent {
   }
 
   handleChangeStationType(stationType) {
-    this.setState({ stationType })
+    if (typeof stationType !== 'undefined') {
+      this.setState({ stationType })
+    }
   }
 
   handleChangeSearch(e) {
@@ -77,12 +79,6 @@ export default class SidebarList extends React.PureComponent {
   }
 
   render() {
-    /**
-     * <SelectStationType
-     onChange={this.handleChangeStationType}
-     value={this.state.stationType}
-     />
-     */
     return (
       <BoxLayout
         style={{ flex: 1 }}

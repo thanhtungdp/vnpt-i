@@ -40,7 +40,9 @@ export default class CameraItem extends React.PureComponent {
     return (
       <CameraItemWrapper innerRef={ref => (this.cameraRef = ref)}>
         <Card>
-          <CardHeader><strong>{this.props.name}</strong></CardHeader>
+          <CardHeader>
+            <strong>{this.props.name}</strong>
+          </CardHeader>
           {this.state.width ? (
             <iframe
               style={{ border: '0px', overflow: 'hidden' }}

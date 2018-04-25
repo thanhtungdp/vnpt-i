@@ -6,25 +6,26 @@ import Clearfix from 'components/elements/clearfix'
 import { Spin, Checkbox } from 'antd'
 
 const BoxViewWrapper = styled.div`
-  padding: 16px 16px;
+  padding: 8px 8px;
   background-color: #ffffff;
   //border: 1px solid #eeeeee;
   display: flex;
   align-items: center;
   flex-direction: column;
   color: ${props => props.color};
-  height: 100px;
+  height: 85.9px;
 `
 
 const Number = styled.span`
   font-size: 25px;
   line-height: normal;
-  font-weight: 200;
+  font-weight: 600;
 `
 
 const Type = styled.span`
   line-height: normal;
   font-size: 12px;
+  text-align: center;
 `
 
 const Layout = styled.div`
@@ -32,7 +33,6 @@ const Layout = styled.div`
   border: 1px solid #eeeeee;
   display: flex;
   flex-direction: column;
-  height: 100px;
   cursor: pointer;
 `
 

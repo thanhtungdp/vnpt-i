@@ -93,7 +93,7 @@ export default class Monitoring extends React.Component {
         }
       })
     this.setState({
-      data: (dataMonitoring.length > 0) ? dataMonitoring : this.state.data,
+      data: dataMonitoring.length > 0 ? dataMonitoring : this.state.data,
       isLoading: true
     })
   }
@@ -141,7 +141,7 @@ export default class Monitoring extends React.Component {
   }
 
   sortNameList(data, key, asc = true) {
-    return data.sort(function (a, b) {
+    return data.sort(function(a, b) {
       const last = objectPath.get(a, key)
       const after = objectPath.get(b, key)
       if (asc) {

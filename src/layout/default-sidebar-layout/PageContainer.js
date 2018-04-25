@@ -98,12 +98,16 @@ export default class PageContainer extends React.PureComponent {
           {!this.props.hideTitle ? this.renderHeader() : null}
           {this.props.headerBottom}
           <Clearfix height={16} />
-          {!this.props.isLoading &&<Grid>
-            <div className="animated fadeIn">{this.props.children}</div>
-          </Grid>}
-          {this.props.isLoading && <AbsoluteLoading>
-            <LoaderCircle/>
-          </AbsoluteLoading>}
+          {!this.props.isLoading && (
+            <Grid>
+              <div className="animated fadeIn">{this.props.children}</div>
+            </Grid>
+          )}
+          {this.props.isLoading && (
+            <AbsoluteLoading>
+              <LoaderCircle />
+            </AbsoluteLoading>
+          )}
         </PageBodyWrapper>
       </StickyContainer>
     )

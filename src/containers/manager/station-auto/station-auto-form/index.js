@@ -209,18 +209,21 @@ export default class StationAutoForm extends React.PureComponent {
     const { t } = this.props.lang
     const formItemLayout = {
       labelCol: {
-        sm: { span: 4, offset: 0 },
+        sm: { span: 4, offset: 0 }
       },
       wrapperCol: {
-        sm: { span: 19, offset: 0 },
-      },
+        sm: { span: 19, offset: 0 }
+      }
     }
 
     return (
       <Form onSubmit={this.handleSubmit}>
         <Row gutter={8}>
           <Col span={12}>
-            <FormItem {...formItemLayout} label={t('stationAutoManager.form.key.label')}>
+            <FormItem
+              {...formItemLayout}
+              label={t('stationAutoManager.form.key.label')}
+            >
               {getFieldDecorator('key', {
                 rules: [
                   {
@@ -233,48 +236,60 @@ export default class StationAutoForm extends React.PureComponent {
                   disabled={this.props.isEdit}
                   placeholder={t('stationAutoManager.form.key.placeholder')}
                 />
-                )}
+              )}
             </FormItem>
           </Col>
           <Col span={12}>
-            <FormItem {...formItemLayout} label={t('stationAutoManager.form.name.label')}>
+            <FormItem
+              {...formItemLayout}
+              label={t('stationAutoManager.form.name.label')}
+            >
               {getFieldDecorator('name', {
                 rules: [{ required: true, message: 'Please enter value!' }]
               })(
                 <Input
                   placeholder={t('stationAutoManager.form.name.placeholder')}
                 />
-                )}
+              )}
             </FormItem>
           </Col>
         </Row>
         <Row gutter={8}>
           <Col span={12}>
-            <FormItem {...formItemLayout} label={t('stationAutoManager.form.long.label')}>
+            <FormItem
+              {...formItemLayout}
+              label={t('stationAutoManager.form.long.label')}
+            >
               {getFieldDecorator('long', {
                 rules: [{ required: true, message: 'please enter value!' }]
               })(
                 <Input
                   placeholder={t('stationAutoManager.form.long.placeholder')}
                 />
-                )}
+              )}
             </FormItem>
           </Col>
           <Col span={12}>
-            <FormItem {...formItemLayout} label={t('stationAutoManager.form.lat.label')}>
+            <FormItem
+              {...formItemLayout}
+              label={t('stationAutoManager.form.lat.label')}
+            >
               {getFieldDecorator('lat', {
                 rules: [{ required: true, message: 'please enter value!' }]
               })(
                 <Input
                   placeholder={t('stationAutoManager.form.lat.placeholder')}
                 />
-                )}
+              )}
             </FormItem>
           </Col>
         </Row>
         <Row gutter={8}>
           <Col span={12}>
-            <FormItem {...formItemLayout} label={t('stationAutoManager.form.address.label')}>
+            <FormItem
+              {...formItemLayout}
+              label={t('stationAutoManager.form.address.label')}
+            >
               {getFieldDecorator('address')(
                 <Input
                   placeholder={t('stationAutoManager.form.address.placeholder')}
@@ -283,7 +298,10 @@ export default class StationAutoForm extends React.PureComponent {
             </FormItem>
           </Col>
           <Col span={12}>
-            <FormItem {...formItemLayout} label={t('stationAutoManager.form.stationType.label')}>
+            <FormItem
+              {...formItemLayout}
+              label={t('stationAutoManager.form.stationType.label')}
+            >
               {getFieldDecorator('stationType', {
                 rules: [{ required: true }]
               })(
@@ -294,21 +312,23 @@ export default class StationAutoForm extends React.PureComponent {
                   )}
                   onHandleChange={this.changeStationType}
                 />
-                )}
+              )}
             </FormItem>
           </Col>
         </Row>
         <Row gutter={8}>
           <Col span={12}>
-            <FormItem {...formItemLayout} label={t('stationAutoManager.form.emails.label')}>
-              {getFieldDecorator('emails', {
-              })(
+            <FormItem
+              {...formItemLayout}
+              label={t('stationAutoManager.form.emails.label')}
+            >
+              {getFieldDecorator('emails', {})(
                 <Select
                   mode="tags"
                   placeholder={t('stationAutoManager.form.emails.placeholder')}
                   onChange={this.handleEmailsChange}
                 />
-                )}
+              )}
             </FormItem>
 
             {/* <div className={'ant-row ant-form-item'}>
@@ -330,15 +350,17 @@ export default class StationAutoForm extends React.PureComponent {
             </div> */}
           </Col>
           <Col span={12}>
-            <FormItem {...formItemLayout} label={t('stationAutoManager.form.phones.label')}>
-              {getFieldDecorator('phones', {
-              })(
+            <FormItem
+              {...formItemLayout}
+              label={t('stationAutoManager.form.phones.label')}
+            >
+              {getFieldDecorator('phones', {})(
                 <Select
                   mode="tags"
                   placeholder={t('stationAutoManager.form.phones.placeholder')}
                   onChange={this.handlePhonesChange}
                 />
-                )}
+              )}
             </FormItem>
             {/* <div className={'ant-row ant-form-item'}>
               <div className="ant-form-item-label">
@@ -390,12 +412,12 @@ export default class StationAutoForm extends React.PureComponent {
             this.props.initialValues
               ? this.props.initialValues.measuringList
               : [
-                {
-                  key: '',
-                  name: '',
-                  unit: ''
-                }
-              ]
+                  {
+                    key: '',
+                    name: '',
+                    unit: ''
+                  }
+                ]
           }
           measuringListSource={this.state.measuringListSource}
         />

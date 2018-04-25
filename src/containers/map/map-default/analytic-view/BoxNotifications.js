@@ -2,19 +2,16 @@ import React from 'react'
 import { autobind } from 'core-decorators'
 import BoxLayout from 'components/map/box-white-layout'
 import NotificationList from 'components/map/notification-list'
-// import notifications from 'fake-data/notifications'
+import { Icon } from 'antd'
 import NotificationsApi from 'api/NotificationApi'
 import styled from 'styled-components'
 import connectWindowHeight from '../../hoc-window-height'
 
 const Wrapper = styled.div`
   height: ${props => props.height}px;
-  overflow-y: ${this.state &&
-  this.state.notifications &&
-  this.state.notifications.length > 0
-    ? 'scroll'
-    : 'auto'};
+  ${props => (props.isOverflow ? `overflow-y: scroll;` : '')};
 `
+
 const Nodata = styled.div`
   height: 100%;
   flex: 1;
@@ -72,19 +69,20 @@ export default class BoxNotifications extends React.PureComponent {
   }
 
   render() {
-    const height = this.props.windowHeight - 270
+    const height = this.props.windowHeight - 230
     return (
       <BoxLayout noPadding style={{ flex: 1 }} title="Notifications">
-        <Wrapper height={height}>
+        <Wrapper
+          height={height}
+          isOverflow={this.state.notifications.length > 0}
+        >
           {this.state.notifications.length === 0 && (
             <Nodata>
               <span>
-                {' '}
-                <img alt="no data" src="/images/align-center.png" /> No data
+                <Icon type="bell" /> No data
               </span>
             </Nodata>
           )}
-
           {this.state.notifications.length > 0 && (
             <NotificationList notifications={this.state.notifications} />
           )}

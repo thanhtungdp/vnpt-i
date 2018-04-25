@@ -126,7 +126,7 @@ export default class CheckBoxRole extends PureComponent {
               : {}
 
           return arrActions.map((actionName, index) => {
-            if(actionName === 'view') return <div/>
+            if (actionName === 'view') return <div />
             return (
               record.actions[actionName] && (
                 <Checkbox
