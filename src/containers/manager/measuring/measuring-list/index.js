@@ -146,6 +146,7 @@ export default class MeasuringList extends React.Component {
         center={this.renderSearchForm()}
         headerBottom={this.renderSearchAdvanced()}
         right={this.buttonAdd()}
+        backgroundColor={'#fff'}
       >
         <Breadcrumb items={['list']} />
         <DynamicTable

@@ -3,7 +3,6 @@ export const UPDATE_BREADCRUMB = 'BREADCRUMB/update-breadcrumb'
 export const DELETE_BREADCRUMB = 'BREADCRUMB/delete-breadcrumb'
 
 export function addBreadcrumb(breadcrumb) {
-  console.log(breadcrumb)
   return {
     type: ADD_BREADCRUMB,
     breadcrumb

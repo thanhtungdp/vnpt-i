@@ -2,9 +2,16 @@ import React, { Component } from 'react'
 import Page from '@atlaskit/page'
 import SidebarNavigation from './SidebarNavigation'
 import createProtectedAuth from 'hoc/protected-auth'
+import styled from 'styled-components'
 import { connectAutoDispatch } from 'redux/connect'
 import { toggleNavigation } from 'redux/actions/themeAction'
 import { autobind } from 'core-decorators'
+
+const Wrapper = styled.div`
+  .zJwEi {
+    min-height: 100vh;
+  }
+`
 
 @createProtectedAuth
 @connectAutoDispatch(
@@ -35,16 +42,18 @@ export default class PageWrapper extends Component {
 
   render() {
     return (
-      <Page
-        navigation={
-          <SidebarNavigation
-            onChangeSize={this.handleResizeNavigation}
-            navigation={this.getNavigation()}
-          />
-        }
-      >
-        <div>{this.props.children}</div>
-      </Page>
+      <Wrapper>
+        <Page
+          navigation={
+            <SidebarNavigation
+              onChangeSize={this.handleResizeNavigation}
+              navigation={this.getNavigation()}
+            />
+          }
+        >
+          <div>{this.props.children}</div>
+        </Page>
+      </Wrapper>
     )
   }
 }
