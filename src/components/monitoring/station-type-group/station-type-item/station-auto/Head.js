@@ -109,7 +109,7 @@ export default class StationAutoHead extends React.PureComponent {
           {isCamera &&
             protectRole(ROLE.MONITORING.CAMERA)(
               <Link
-                to={slug.camera.cameraWithKey + '/' + _id}
+                to={slug.monitoring.viewCameraWithKey + '/' + _id}
                 style={{ display: 'flex' }}
               >
                 <Tooltip title="Camera">

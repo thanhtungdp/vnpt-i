@@ -3,7 +3,6 @@ import { message } from 'antd'
 import { autobind } from 'core-decorators'
 import { withRouter } from 'react-router-dom'
 import PageContainer from 'layout/default-sidebar-layout/PageContainer'
-import Breadcrumb from 'containers/camera/breadcrumb'
 import StationAutoApi from 'api/StationAuto'
 import styled from 'styled-components'
 import Clearfix from 'components/elements/clearfix'
@@ -69,15 +68,7 @@ export default class CameraForm extends PureComponent {
   render() {
     return (
       <PageContainer isLoading={!this.state.isLoaded}>
-        <Breadcrumb
-          items={[
-            'list',
-            {
-              id: '_id',
-              name: this.state.name
-            }
-          ]}
-        />
+        {this.props.breadcrumb(this.state.name)}
         <Wrapper>
           {this.state.cameraList.map((item, index) => {
             return this.renderPanel(item, index)
