@@ -95,6 +95,7 @@ export default class UserList extends React.Component {
                   <ReactCountryFlag code={row.phone.iso2} />
                 </span>
               )}
+            &nbsp;
             <span>{row.email}</span>
           </div>
         )
