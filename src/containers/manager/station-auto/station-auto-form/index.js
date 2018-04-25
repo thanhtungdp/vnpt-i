@@ -7,7 +7,6 @@ import {
   Col,
   Select,
   Icon,
-  Checkbox,
   Upload,
   Modal
 } from 'antd'

@@ -6,7 +6,6 @@ import NotificationList from 'components/map/notification-list'
 import NotificationsApi from 'api/NotificationApi'
 import styled from 'styled-components'
 import connectWindowHeight from '../../hoc-window-height'
-import { Icon } from 'antd'
 
 const Wrapper = styled.div`
   height: ${props => props.height}px;
@@ -81,7 +80,7 @@ export default class BoxNotifications extends React.PureComponent {
             <Nodata>
               <span>
                 {' '}
-                <img src="/images/align-center.png" /> Nodata
+                <img alt="no data" src="/images/align-center.png" /> No data
               </span>
             </Nodata>
           )}

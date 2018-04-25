@@ -1,27 +1,27 @@
 import React from 'react'
 import Heading from 'components/elements/heading'
-import { Menu, Dropdown, Icon } from 'antd'
-import styled from 'styled-components'
+// import { Menu} from 'antd'
+// import styled from 'styled-components'
 
-const LinkSpan = styled.span`
-  color: #ffffff;
-  &:hover {
-    cursor: pointer;
-  }
-`
+// const LinkSpan = styled.span`
+//   color: #ffffff;
+//   &:hover {
+//     cursor: pointer;
+//   }
+// `
 
 export default class HeadStypeType extends React.Component {
   rightChildren() {
-    const dropdown = (
-      <Menu>
-        <Menu.Item key="0">
-          <a> Realtime Tracking</a>
-        </Menu.Item>
-        <Menu.Item key="1">
-          <a>View in map</a>
-        </Menu.Item>
-      </Menu>
-    )
+    // const dropdown = (
+    //   <Menu>
+    //     <Menu.Item key="0">
+    //       <a> Realtime Tracking</a>
+    //     </Menu.Item>
+    //     <Menu.Item key="1">
+    //       <a>View in map</a>
+    //     </Menu.Item>
+    //   </Menu>
+    // )
     return (
       // <Dropdown overlay={dropdown} trigger={['click']}>
       //   <LinkSpan className="ant-dropdown-link">
