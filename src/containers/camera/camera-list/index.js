@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import { Collapse, message, Spin } from 'antd'
+import { message } from 'antd'
 import { autobind } from 'core-decorators'
 import { withRouter } from 'react-router-dom'
 import PageContainer from 'layout/default-sidebar-layout/PageContainer'
@@ -7,8 +7,7 @@ import Breadcrumb from 'containers/camera/breadcrumb'
 import StationAutoApi from 'api/StationAuto'
 import styled from 'styled-components'
 import Clearfix from 'components/elements/clearfix'
-
-const Panel = Collapse.Panel
+import CameraItem from './CameraItem'
 
 const Wrapper = styled.div`
   .ant-collapse {
@@ -25,8 +24,9 @@ const Wrapper = styled.div`
   }
 `
 
-const PANEL_HEIGHT = '250px'
-const PANEL_HEIGHT_FULL = '500px'
+const WrapperItem = styled.div`
+  width: ${props => (props.isFullWidth ? '100%' : '50%')};
+`
 
 @withRouter
 @autobind
@@ -56,36 +56,19 @@ export default class CameraForm extends PureComponent {
   }
 
   renderPanel(item, index) {
-    const isHaveFullWidth =
+    const isFullWidth =
       this.state.cameraList.length % 2 === 1 &&
       index === this.state.cameraList.length - 1
-    const WrapperItem = styled.div`
-      height: ${isHaveFullWidth ? PANEL_HEIGHT_FULL : PANEL_HEIGHT};
-    `
     return (
-      <Panel
-        header={item.name}
-        key={index}
-        showArrow={false}
-        style={{
-          width: isHaveFullWidth ? '100%' : '50%'
-        }}
-      >
-        <WrapperItem>
-          <iframe
-            src={item.rtspUrl}
-            title={item.name + item.index}
-            width={'100%'}
-            height={'1440px'}
-          />
-        </WrapperItem>
-      </Panel>
+      <WrapperItem key={item.name} isFullWidth={isFullWidth}>
+        <CameraItem {...item} index={index} />
+      </WrapperItem>
     )
   }
 
   render() {
     return (
-      <PageContainer>
+      <PageContainer isLoading={!this.state.isLoaded}>
         <Breadcrumb
           items={[
             'list',
@@ -95,17 +78,11 @@ export default class CameraForm extends PureComponent {
             }
           ]}
         />
-        <Spin spinning={!this.state.isLoaded}>
-          <Wrapper>
-            <Collapse
-              activeKey={this.state.cameraList.map((item, index) => index + '')}
-            >
-              {this.state.cameraList.map((item, index) => {
-                return this.renderPanel(item, index)
-              })}
-            </Collapse>
-          </Wrapper>
-        </Spin>
+        <Wrapper>
+          {this.state.cameraList.map((item, index) => {
+            return this.renderPanel(item, index)
+          })}
+        </Wrapper>
         <Clearfix height={50} />
       </PageContainer>
     )

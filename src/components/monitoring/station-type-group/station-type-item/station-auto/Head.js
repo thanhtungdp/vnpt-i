@@ -113,7 +113,7 @@ export default class StationAutoHead extends React.PureComponent {
                 style={{ display: 'flex' }}
               >
                 <Tooltip title="Camera">
-                  <img alt="camera" src="/images/camera.png" />
+                  <Icon type="camera" style={{ fontSize: 16 }} />
                 </Tooltip>
               </Link>
             )}

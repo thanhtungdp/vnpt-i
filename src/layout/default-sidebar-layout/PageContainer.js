@@ -5,6 +5,7 @@ import BreadcrumbBar from 'shared/breadcrumb/BreadcrumbBar'
 import { SHAPE } from 'themes/color'
 import Clearfix from 'components/elements/clearfix'
 import { StickyContainer, Sticky } from 'react-sticky'
+import LoaderCircle from 'components/elements/loader-circle'
 
 const HeaderFlex = styled.div`
   display: flex;
@@ -31,11 +32,24 @@ const PageBodyWrapper = styled.div`
   z-index: 1;
 `
 
+const AbsoluteLoading = styled.div`
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+`
+
 export default class PageContainer extends React.PureComponent {
   static propTypes = {
     title: PropTypes.string,
     backgroundColor: PropTypes.string,
     hideTitle: PropTypes.bool,
+    isLoading: PropTypes.bool,
     headerCustom: PropTypes.any,
     right: PropTypes.any
   }
@@ -84,9 +98,12 @@ export default class PageContainer extends React.PureComponent {
           {!this.props.hideTitle ? this.renderHeader() : null}
           {this.props.headerBottom}
           <Clearfix height={16} />
-          <Grid>
+          {!this.props.isLoading &&<Grid>
             <div className="animated fadeIn">{this.props.children}</div>
-          </Grid>
+          </Grid>}
+          {this.props.isLoading && <AbsoluteLoading>
+            <LoaderCircle/>
+          </AbsoluteLoading>}
         </PageBodyWrapper>
       </StickyContainer>
     )

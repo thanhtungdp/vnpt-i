@@ -122,6 +122,7 @@ export default class SearchForm extends React.Component {
             <Button
               type="primary"
               icon="search"
+              size="small"
               onClick={this.props.handleSubmit(this.handleSubmit)}
             >
               {this.props.lang.t('addon.search')}
@@ -129,6 +130,7 @@ export default class SearchForm extends React.Component {
           }
           textColor="#ffffff"
           isBackground
+          fontSize={14}
           style={{ padding: '8px 16px' }}
         >
           {this.props.lang.t('addon.search')}

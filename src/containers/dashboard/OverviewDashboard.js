@@ -4,7 +4,6 @@ import SummaryList from 'components/dashboard/summary/summary-list'
 import ChartList from 'components/dashboard/chart/chart-row-list'
 import { getStationTypes } from 'api/CategoryApi'
 import { getLastLog } from 'api/StationAuto'
-import { Spin } from 'antd'
 
 export default class OverviewDashboard extends Component {
   state = {
@@ -97,12 +96,14 @@ export default class OverviewDashboard extends Component {
 
   render() {
     return (
-      <Spin spinning={!this.state.isLoaded}>
-        <PageContainer backgroundColor="#fafbfb" hideTitle>
-          <SummaryList data={this.getSummaryList()} />
-          <ChartList data={this.getChartList()} />
-        </PageContainer>
-      </Spin>
+      <PageContainer
+        isLoading={!this.state.isLoaded}
+        backgroundColor="#fafbfb"
+        hideTitle
+      >
+        <SummaryList data={this.getSummaryList()} />
+        <ChartList data={this.getChartList()} />
+      </PageContainer>
     )
   }
 }

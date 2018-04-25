@@ -28,6 +28,7 @@ export const defaultFilter = {
 export default class Monitoring extends React.Component {
   state = {
     isLoading: false,
+    isLoadedFirst: false,
     filter: getMonitoringFilter() ? getMonitoringFilter() : defaultFilter,
     data: []
   }
@@ -100,7 +101,6 @@ export default class Monitoring extends React.Component {
   startTimer() {
     clearInterval(this.timer)
     this.timer = setInterval(this.loadData.bind(this), 60000)
-    this.loadData()
   }
 
   stopTimer() {
@@ -113,6 +113,10 @@ export default class Monitoring extends React.Component {
       if (query)
         this.handleChangeFilter({ ...this.state.filter, stationType: query.Id })
     }
+    await this.loadData()
+    this.setState({
+      isLoadedFirst: true
+    })
     this.startTimer()
   }
 
@@ -227,6 +231,7 @@ export default class Monitoring extends React.Component {
   render() {
     return (
       <PageContainer
+        isLoading={!this.state.isLoadedFirst}
         backgroundColor="#fafbfb"
         headerCustom={this.renderHeader()}
       >
