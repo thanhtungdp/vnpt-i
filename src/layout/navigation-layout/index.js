@@ -2,7 +2,6 @@ import PropTypes from 'prop-types'
 import React from 'react'
 
 import { autobind } from 'core-decorators'
-import AddItem from '@atlaskit/icon/glyph/editor/add'
 import ArrowLeftIcon from '@atlaskit/icon/glyph/arrow-left'
 import Tooltip from '@atlaskit/tooltip'
 import { withRouter } from 'react-router-dom'
@@ -12,7 +11,10 @@ import slug from 'constants/slug'
 import StyleWrapper from './StyleWrapper'
 import Logo from './Logo'
 import LogoSubIcon from './LogoSubIcon'
-import CreateDrawer from './CreateDrawer'
+import DocumentIcon from '@atlaskit/icon/glyph/question-circle'
+import AppIcon from '@atlaskit/icon/glyph/media-services/grid'
+import DocumentDrawer from './DocumentDrawer'
+import AppDrawer from './AppDrawer'
 import ChangeLanguage from './ChangeLanguage'
 
 import Navigation, {
@@ -153,6 +155,30 @@ export default class BasicNestedNavigation extends React.Component {
     }
   }
 
+  renderDrawer(Component, key) {
+    return (
+      <Component
+        key={key}
+        onBackButton={() => this.toggleDrawer(key)}
+        isOpen={this.state.drawers[key]}
+      />
+    )
+  }
+
+  renderIconDrawer(IconComponent, key, content) {
+    return (
+      <AkGlobalItem size="medium" onClick={() => this.toggleDrawer(key)}>
+        <Tooltip position="right" content={content}>
+          <IconComponent
+            label={content}
+            secondaryColor="inherit"
+            size="medium"
+          />
+        </Tooltip>
+      </AkGlobalItem>
+    )
+  }
+
   render() {
     return (
       <StyleWrapper>
@@ -164,25 +190,12 @@ export default class BasicNestedNavigation extends React.Component {
           onResize={this.handleResize}
           isOpen={this.props.navigation.isOpen}
           drawers={[
-            <CreateDrawer
-              key="create"
-              onBackButton={() => this.toggleDrawer('create')}
-              isOpen={this.state.drawers.create}
-            />
+            this.renderDrawer(DocumentDrawer, 'document'),
+            this.renderDrawer(AppDrawer, 'app')
           ]}
           globalPrimaryActions={[
-            <AkGlobalItem
-              size="medium"
-              onClick={() => this.toggleDrawer('create')}
-            >
-              <Tooltip position="right" content="Create">
-                <AddItem
-                  label="Create icon"
-                  secondaryColor="inherit"
-                  size="medium"
-                />
-              </Tooltip>
-            </AkGlobalItem>
+            this.renderIconDrawer(DocumentIcon, 'document', 'Document'),
+            this.renderIconDrawer(AppIcon, 'app', 'Other Apps')
           ]}
           globalSecondaryActions={this.globalSecondaryActions()}
         >

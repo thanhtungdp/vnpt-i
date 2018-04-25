@@ -10,24 +10,30 @@ import Icon from 'themes/icon'
 import slug from 'constants/slug'
 import { WrapperLinkComponent } from 'utils/sidebarNavigation'
 
-export default class CreateDrawer extends PureComponent {
+export default class DocumentDrawer extends PureComponent {
   render() {
     return (
       <AkCreateDrawer
         heading={null}
         key="drawler"
         backIcon={<ArrowLeftIcon label="" />}
-        primaryIcon={<ArrowLeftIcon label="" />}
         {...this.props}
       >
         <div key="drawler" style={{ marginTop: -64 }}>
-          <AkNavigationItemGroup title="Thêm cấu hình">
+          <AkNavigationItemGroup title="Documents helpdesk">
             <AkNavigationItem
               href={slug.measuring.create}
               linkComponent={WrapperLinkComponent}
               onClick={this.props.onBackButton}
               icon={Icon.car}
-              text="Tạo mới"
+              text="Guide install 1"
+            />
+            <AkNavigationItem
+              href={slug.measuring.create}
+              linkComponent={WrapperLinkComponent}
+              onClick={this.props.onBackButton}
+              icon={Icon.car}
+              text="Guide install 2"
             />
           </AkNavigationItemGroup>
         </div>
