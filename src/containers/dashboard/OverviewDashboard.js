@@ -36,7 +36,7 @@ export default class OverviewDashboard extends Component {
     })
 
     /*eslint-disable */
-    for (var i = 0; i < stationTypeList.length; i++) {
+    for (let i = 0; i < stationTypeList.length; i++) {
       let stationAutos = stationLastLog.data.filter(item => {
         if (!item.stationType) return false
         return item.stationType.key === stationTypeList[i].key

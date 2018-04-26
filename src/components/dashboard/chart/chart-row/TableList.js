@@ -51,7 +51,7 @@ const NameColumn = Column.extend`
 `
 
 const StatusColumn = Column.extend`
-  width: 55px;
+  width: 85px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -94,7 +94,7 @@ export default class TableListCustom extends React.PureComponent {
     if (item.lastLog) {
       let warLevel = warningLevels.GOOD
       let measuringLogs = item.lastLog.measuringLogs
-      for (var key in measuringLogs) {
+      for (let key in measuringLogs) {
         if (
           warningLevelsNumber[warLevel] <
           warningLevelsNumber[measuringLogs[key].warningLevel]
@@ -112,7 +112,7 @@ export default class TableListCustom extends React.PureComponent {
         <Row>
           <IndexColumn isTh>#</IndexColumn>
           <NameColumn isTh>Name</NameColumn>
-          <StatusColumn isTh>Status</StatusColumn>
+          <StatusColumn isTh>Data status</StatusColumn>
         </Row>
         {this.props.data.map((item, index) => (
           <Row

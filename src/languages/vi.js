@@ -1,4 +1,12 @@
 export default {
+  dashboard: {
+    good: 'Good',
+    dataLoss: 'Mất dữ liệu',
+    notUse: 'Chưa hoạt động',
+    exceeded: 'Vượt ngưỡng',
+    exceededPreparing: 'Chuẩn bị vượt',
+    exceededTendency: 'Xu hướng vượt'
+  },
   error: {
     require: 'Require',
     email: 'Invalid email address'

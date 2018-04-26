@@ -1,12 +1,13 @@
 export default {
-  error: {
-    require: 'Require',
-    email: 'Invalid email address'
+  dashboard: {
+    good: 'Good',
+    dataLoss: 'data loss',
+    notUse: 'not use',
+    exceeded: 'Exceeded',
+    exceededPreparing: 'Exceeded preparing',
+    exceededTendency: 'Exceeded tendency'
   },
-  form: {
-    save: 'Save',
-    update: 'Update'
-  },
+  monitoring: {},
   controlStation: {
     trigger: {
       base: 'Trigger',
@@ -23,60 +24,103 @@ export default {
       success: 'Config success'
     }
   },
-  Role: {
+  map: {
+    menuRight: {
+      good: 'Good',
+      dataLoss: 'Data loss',
+      notUse: 'Not use',
+      exceeded: 'Exceeded',
+      exceededPreparing: 'Exceeded preparing',
+      exceededTendency: 'Exceeded tendency'
+    }
+  },
+  dataSearchFrom: {
     form: {
-      name: {
-        label: 'Name',
-        placeholder: 'Input Name',
-        error: 'Please input Name'
+      stationType: {
+        label: 'Station type',
+        placeholder: 'Select station type'
       },
-      description: {
-        label: 'Description',
-        placeholder: 'Input description',
-        error: 'Please input description'
+      stationAuto: {
+        label: 'Station auto',
+        placeholder: 'Select station auto'
+      },
+      fromDate: {
+        label: 'From',
+        placeholder: 'Select from date'
+      },
+      toDate: {
+        label: 'To',
+        placeholder: 'Select to date'
+      },
+      measuringList: {
+        label: 'Measuring',
+        placeholder: 'Select measuring',
+        require: 'choose at least 1 measuring'
+      },
+      isExceeded: {
+        label: 'Is exceeded'
+      },
+      operator: {
+        label: 'Operator'
+      },
+      value: {
+        label: 'Value'
+      },
+      type: {
+        label: 'Report type'
+      },
+      advanced: {
+        label: 'Advanced'
       }
     }
   },
-  login: {
-    title: 'Login',
+  avgSearchFrom: {
     form: {
-      email: {
-        label: 'Email',
-        placeholder: 'user@example.com'
+      stationType: {
+        label: 'Station type',
+        placeholder: 'Select station type',
+        error: 'Please choose station type'
       },
-      password: {
-        label: 'Password',
-        placeholder: '********'
+      stationAuto: {
+        label: 'Station auto',
+        placeholder: 'Select station auto',
+        error: 'Please choose station auto'
       },
-      buttonLogin: 'Login'
+      fromDate: {
+        label: 'From',
+        placeholder: 'Select from date'
+      },
+      toDate: {
+        label: 'To',
+        placeholder: 'Select to date'
+      },
+      measuringList: {
+        label: 'Measuring',
+        placeholder: 'Select measuring',
+        require: 'choose at least 1 measuring'
+      },
+      isExceeded: {
+        label: 'Is exceeded'
+      },
+      operator: {
+        label: 'Operator'
+      },
+      value: {
+        label: 'Value'
+      },
+      type: {
+        label: 'Report type',
+        error: 'Please choose report type'
+      },
+      advanced: {
+        label: 'Advanced'
+      }
+    },
+    list: {
+      receivedAt: {
+        label: 'Received at'
+      }
     }
-  },
-  changePassword: {
-    form: {
-      oldPassword: {
-        error: 'Please input old password!'
-      },
-      newPassword: {
-        error: 'Please input new password!'
-      },
-      newPasswordConfirmation: {
-        error: 'Please input new password confirmation!',
-        error1: "Password confirmation doesn't match Password"
-      },
-      Success: 'Change password successfully'
-    }
-  },
-  resetPassword: {
-    key: 'I forgot my password',
-    key2:
-      "Enter your email address and we'll send you an email with introduction to reset your password",
-    key3: 'Reset password',
-    key4: 'Resend code',
-    key5: 'Confirm',
-    key6: 'Send code'
-  },
-  profileUser: {
-    success: 'Change infomation successfully'
   },
   measuringManager: {
     list: {
@@ -281,148 +325,6 @@ export default {
       }
     }
   },
-  dataSearchFrom: {
-    form: {
-      stationType: {
-        label: 'Station type',
-        placeholder: 'Select station type'
-      },
-      stationAuto: {
-        label: 'Station auto',
-        placeholder: 'Select station auto'
-      },
-      fromDate: {
-        label: 'From',
-        placeholder: 'Select from date'
-      },
-      toDate: {
-        label: 'To',
-        placeholder: 'Select to date'
-      },
-      measuringList: {
-        label: 'Measuring',
-        placeholder: 'Select measuring',
-        require: 'choose at least 1 measuring'
-      },
-      isExceeded: {
-        label: 'Is exceeded'
-      },
-      operator: {
-        label: 'Operator'
-      },
-      value: {
-        label: 'Value'
-      },
-      type: {
-        label: 'Report type'
-      },
-      advanced: {
-        label: 'Advanced'
-      }
-    }
-  },
-  avgSearchFrom: {
-    form: {
-      stationType: {
-        label: 'Station type',
-        placeholder: 'Select station type',
-        error: 'Please choose station type'
-      },
-      stationAuto: {
-        label: 'Station auto',
-        placeholder: 'Select station auto',
-        error: 'Please choose station auto'
-      },
-      fromDate: {
-        label: 'From',
-        placeholder: 'Select from date'
-      },
-      toDate: {
-        label: 'To',
-        placeholder: 'Select to date'
-      },
-      measuringList: {
-        label: 'Measuring',
-        placeholder: 'Select measuring',
-        require: 'choose at least 1 measuring'
-      },
-      isExceeded: {
-        label: 'Is exceeded'
-      },
-      operator: {
-        label: 'Operator'
-      },
-      value: {
-        label: 'Value'
-      },
-      type: {
-        label: 'Report type',
-        error: 'Please choose report type'
-      },
-      advanced: {
-        label: 'Advanced'
-      }
-    },
-    list: {
-      receivedAt: {
-        label: 'Received at'
-      }
-    }
-  },
-  addon: {
-    create: 'Create',
-    edit: 'Edit',
-    delete: 'Delete',
-    save: 'Save',
-    onSave: {
-      add: {
-        success: 'Add success!',
-        error: 'Add error!'
-      },
-      update: {
-        success: 'Update success!',
-        error: 'Update error'
-      }
-    },
-    onDelete: {
-      success: 'Delete success!',
-      error: 'Delete error!'
-    },
-    search: 'Search',
-    error: 'Something went wrong!!!'
-  },
-  userSearchFrom: {
-    form: {
-      userName: {
-        label: 'Username',
-        placeholder: 'Username'
-      },
-      email: {
-        label: 'Email',
-        placeholder: 'Email'
-      },
-      firstName: {
-        label: 'FirstName',
-        placeholder: 'FirstName'
-      },
-      lastName: {
-        label: 'LastName',
-        placeholder: 'LastName'
-      },
-      country: {
-        label: 'Country',
-        placeholder: 'Select Country'
-      },
-      organization: {
-        label: 'Organization',
-        placeholder: 'Select Organization'
-      },
-      phone: {
-        label: 'Phone',
-        placeholder: 'Phone'
-      }
-    }
-  },
   userForm: {
     form: {
       userName: {
@@ -467,6 +369,38 @@ export default {
       }
     }
   },
+  userSearchFrom: {
+    form: {
+      userName: {
+        label: 'Username',
+        placeholder: 'Username'
+      },
+      email: {
+        label: 'Email',
+        placeholder: 'Email'
+      },
+      firstName: {
+        label: 'FirstName',
+        placeholder: 'FirstName'
+      },
+      lastName: {
+        label: 'LastName',
+        placeholder: 'LastName'
+      },
+      country: {
+        label: 'Country',
+        placeholder: 'Select Country'
+      },
+      organization: {
+        label: 'Organization',
+        placeholder: 'Select Organization'
+      },
+      phone: {
+        label: 'Phone',
+        placeholder: 'Phone'
+      }
+    }
+  },
   userRule: {
     name: {
       label: 'name',
@@ -485,22 +419,89 @@ export default {
       error: 'Update Rule User fail!'
     }
   },
-  map: {
-    menuRight: {
-      good: 'Good',
-      dataLoss: 'Data loss',
-      notUse: 'Not use',
-      exceeded: 'Exceeded',
-      exceededPreparing: 'Exceeded preparing',
-      exceededTendency: 'Exceeded tendency'
+  Role: {
+    form: {
+      name: {
+        label: 'Name',
+        placeholder: 'Input Name',
+        error: 'Please input Name'
+      },
+      description: {
+        label: 'Description',
+        placeholder: 'Input description',
+        error: 'Please input description'
+      }
     }
   },
-  dashboard: {
-    good: 'Good',
-    dataLoss: 'data loss',
-    notUse: 'not use',
-    exceeded: 'Exceeded',
-    exceededPreparing: 'Exceeded preparing',
-    exceededTendency: 'Exceeded tendency'
+  profileUser: {
+    success: 'Change infomation successfully'
+  },
+  changePassword: {
+    form: {
+      oldPassword: {
+        error: 'Please input old password!'
+      },
+      newPassword: {
+        error: 'Please input new password!'
+      },
+      newPasswordConfirmation: {
+        error: 'Please input new password confirmation!',
+        error1: "Password confirmation doesn't match Password"
+      },
+      Success: 'Change password successfully'
+    }
+  },
+  resetPassword: {
+    key: 'I forgot my password',
+    key2:
+      "Enter your email address and we'll send you an email with introduction to reset your password",
+    key3: 'Reset password',
+    key4: 'Resend code',
+    key5: 'Confirm',
+    key6: 'Send code'
+  },
+  login: {
+    title: 'Login',
+    form: {
+      email: {
+        label: 'Email',
+        placeholder: 'user@example.com'
+      },
+      password: {
+        label: 'Password',
+        placeholder: '********'
+      },
+      buttonLogin: 'Login'
+    }
+  },
+  addon: {
+    create: 'Create',
+    edit: 'Edit',
+    delete: 'Delete',
+    save: 'Save',
+    onSave: {
+      add: {
+        success: 'Add success!',
+        error: 'Add error!'
+      },
+      update: {
+        success: 'Update success!',
+        error: 'Update error'
+      }
+    },
+    onDelete: {
+      success: 'Delete success!',
+      error: 'Delete error!'
+    },
+    search: 'Search',
+    error: 'Something went wrong!!!'
+  },
+  error: {
+    require: 'Require',
+    email: 'Invalid email address'
+  },
+  form: {
+    save: 'Save',
+    update: 'Update'
   }
 }
