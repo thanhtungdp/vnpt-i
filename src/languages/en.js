@@ -1,13 +1,30 @@
 export default {
+  chart: {
+    all: 'All',
+    time: 'Time'
+  },
   dashboard: {
     good: 'Good',
     dataLoss: 'data loss',
     notUse: 'not use',
     exceeded: 'Exceeded',
     exceededPreparing: 'Exceeded preparing',
-    exceededTendency: 'Exceeded tendency'
+    exceededTendency: 'Exceeded tendency',
+    realtimeTracking: 'Realtime Tracking',
+    viewInMap: 'View in map',
+    viewMore: 'View More',
+    tableList: {
+      name: 'Name',
+      dataStatus: 'Data status'
+    }
   },
-  monitoring: {},
+  monitoring: {
+    group: 'Group',
+    ungroup: 'Ungroup',
+    sortByStationName: 'Sort by Station name',
+    sortByValues: 'Sort by Values',
+    limit: 'Limit'
+  },
   controlStation: {
     trigger: {
       base: 'Trigger',

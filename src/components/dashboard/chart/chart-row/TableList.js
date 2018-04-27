@@ -76,11 +76,7 @@ export default class TableListCustom extends React.PureComponent {
     stationStatus: stationStatus.GOOD
   }
 
-  async componentWillMount() {
-    console.log('componentWillMount')
-    console.log(this.props)
-    console.log(this.props.currentItem)
-  }
+  async componentWillMount() {}
 
   renderStationStatus(station) {
     if (station.status === stationStatus.DATA_LOSS)
@@ -111,8 +107,10 @@ export default class TableListCustom extends React.PureComponent {
       <div>
         <Row>
           <IndexColumn isTh>#</IndexColumn>
-          <NameColumn isTh>Name</NameColumn>
-          <StatusColumn isTh>Data status</StatusColumn>
+          <NameColumn isTh>{translate('dashboard.tableList.name')}</NameColumn>
+          <StatusColumn isTh>
+            {translate('dashboard.tableList.dataStatus')}
+          </StatusColumn>
         </Row>
         {this.props.data.map((item, index) => (
           <Row

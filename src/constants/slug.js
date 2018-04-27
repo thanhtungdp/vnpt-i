@@ -39,7 +39,7 @@ export default {
   monitoring: {
     base: '/monitoring',
     viewCamera: '/monitoring/camera/:key',
-    viewCameraWithKey: '/monitoring/camera',
+    viewCameraWithKey: '/monitoring/camera'
   },
   map: {
     base: '/map'
