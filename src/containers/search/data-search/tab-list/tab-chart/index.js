@@ -16,6 +16,7 @@ import {
 import PropTypes from 'prop-types'
 import Highcharts from 'highcharts/highstock'
 import moment from 'moment/moment'
+import { translate } from 'hoc/create-lang'
 
 const TabChartWrapper = styled.div`
   display: flex;
@@ -80,7 +81,9 @@ export class TabChart extends React.PureComponent {
           <Legend layout="horizontal" align="center" verticalAlign="bottom" />
 
           <RangeSelector>
-            <RangeSelector.Button type="all">All</RangeSelector.Button>
+            <RangeSelector.Button type="all">
+              {translate('chart.all')}
+            </RangeSelector.Button>
             <RangeSelector.Input
               boxBorderColor="#7cb5ec"
               boxWidth={150}
@@ -99,7 +102,7 @@ export class TabChart extends React.PureComponent {
               minute: '%e. %b %H:%M'
             }}
           >
-            <XAxis.Title>Time</XAxis.Title>
+            <XAxis.Title>{translate('chart.time')}</XAxis.Title>
           </XAxis>
 
           <YAxis id="number">

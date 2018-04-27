@@ -15,6 +15,7 @@ import {
 import PropTypes from 'prop-types'
 import Highcharts from 'highcharts/highstock'
 import moment from 'moment/moment'
+import { translate } from 'hoc/create-lang'
 
 const ChartWrapper = styled.div``
 
@@ -48,7 +49,9 @@ export class ChartRowToChart extends React.PureComponent {
           <Chart height={250} zoomType="x" />
           <Legend layout="horizontal" align="center" verticalAlign="bottom" />
           <RangeSelector>
-            <RangeSelector.Button type="all">All</RangeSelector.Button>
+            <RangeSelector.Button type="all">
+              {translate('chart.all')}
+            </RangeSelector.Button>
             <RangeSelector.Input
               boxBorderColor="#7cb5ec"
               boxWidth={150}

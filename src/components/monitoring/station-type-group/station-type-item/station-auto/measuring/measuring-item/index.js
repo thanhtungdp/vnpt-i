@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { autobind } from 'core-decorators'
 import styled from 'styled-components'
 import { colorLevels } from 'constants/warningLevels'
+import { translate } from 'hoc/create-lang'
 
 const MeasuringItemWrapper = styled.div`
   display: flex;
@@ -62,10 +63,11 @@ export default class MeasuringItem extends React.PureComponent {
     const { unit, minLimit, maxLimit } = this.props
     let limitText = ''
     if (minLimit || maxLimit) {
-      if (minLimit) limitText = 'Limit: > ' + minLimit
+      if (minLimit)
+        limitText = translate('monitoring.limit') + ': > ' + minLimit
       if (maxLimit) {
         if (limitText) limitText = limitText + ' & < ' + maxLimit
-        else limitText = 'Limit: < ' + maxLimit
+        else limitText = translate('monitoring.limit') + ': < ' + maxLimit
       }
     }
     return limitText ? `${limitText} ${unit}` : <span>&nbsp;</span>

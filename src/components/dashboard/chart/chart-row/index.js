@@ -12,6 +12,7 @@ import slug from 'constants/slug'
 import { withHighcharts } from 'react-jsx-highstock'
 import Highcharts from 'highcharts'
 import { getDataStationAutos } from 'api/DataStationAutoApi'
+import { translate } from 'hoc/create-lang'
 
 const ChartSummaryWrapper = styled.div``
 
@@ -105,18 +106,20 @@ export class ChartSummary extends React.Component {
       <Menu>
         <Menu.Item key="0">
           <Link to={slug.monitoring.base + `?Id=${stationType.key}`}>
-            Realtime Tracking
+            {translate('dashboard.realtimeTracking')}
           </Link>
         </Menu.Item>
         <Menu.Item key="1">
-          <Link to={slug.map.base + `?Id=${stationType.key}`}>View in map</Link>
+          <Link to={slug.map.base + `?Id=${stationType.key}`}>
+            {translate('dashboard.viewInMap')}
+          </Link>
         </Menu.Item>
       </Menu>
     )
     return (
       <Dropdown overlay={dropdown} trigger={['click']}>
         <LinkSpan className="ant-dropdown-link">
-          <Icon type="right" /> View more
+          <Icon type="right" /> {translate('dashboard.viewMore')}
         </LinkSpan>
       </Dropdown>
     )
