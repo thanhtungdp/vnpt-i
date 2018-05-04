@@ -5,6 +5,7 @@ import PropTypes from 'prop-types'
 import { autobind } from 'core-decorators'
 import styled from 'styled-components'
 import Heading from 'components/elements/heading'
+import { Collapse } from 'reactstrap'
 import { Menu, Dropdown, Icon } from 'antd'
 import TableList from './TableList'
 import Chart from './Chart'
@@ -31,8 +32,25 @@ const ChartWidth = styled.div`
   padding: 16px 16px 0px;
 `
 
+const IconToggle = styled.span`
+  transition: all 0.3s linear;
+  transform: rotate(-0deg);
+  display: inline-block;
+  margin-right: 4px;
+  font-size: 10px;
+  position: relative;
+  top: -3px;
+  ${props => (props.isOpen ? `transform: rotate(90deg);` : ``)};
+`
+
+const TextSpan = styled.span`
+  &:hover {
+    cursor: pointer;
+  }
+`
+
 const LinkSpan = styled.span`
-  color: #d4d4d4;
+  color: #8e8e8e;
   &:hover {
     cursor: pointer;
   }
@@ -50,12 +68,17 @@ export class ChartSummary extends React.Component {
   state = {
     currentItem: {},
     dataLines: {},
-    isFirstLoad: true
+    isFirstLoad: true,
+    isOpen: true
   }
 
   handleChangeItem(e, item) {
     e.preventDefault()
     this.changeItem(item)
+  }
+
+  toggleOpen() {
+    this.setState({ isOpen: !this.state.isOpen })
   }
 
   async changeItem(stationAuto) {
@@ -142,20 +165,32 @@ export class ChartSummary extends React.Component {
       return (
         <ChartSummaryWrapper>
           <Heading rightChildren={this.rightChilren(this.props.stationList)}>
-            {this.props.title} ({this.props.totalStation})
+            <TextSpan onClick={this.toggleOpen}>
+              <IconToggle isOpen={this.state.isOpen}>
+                {' '}
+                <Icon type="caret-right" />
+              </IconToggle>
+              {this.props.title}
+            </TextSpan>
+            ({this.props.totalStation})
           </Heading>
-          <ChartWrapper>
-            <TableWidth>
-              <TableList
-                onChangeItem={this.handleChangeItem}
-                currentItem={this.state.currentItem}
-                data={this.props.stationList}
-              />
-            </TableWidth>
-            <ChartWidth>
-              <Chart dataLines={this.state.dataLines} />
-            </ChartWidth>
-          </ChartWrapper>
+          <Collapse isOpen={this.state.isOpen}>
+            <ChartWrapper>
+              <TableWidth>
+                <TableList
+                  filter={this.state.filter}
+                  filterType={this.state.filterType}
+                  onFilter={this.handleFilter}
+                  onChangeItem={this.handleChangeItem}
+                  currentItem={this.state.currentItem}
+                  data={this.props.stationList}
+                />
+              </TableWidth>
+              <ChartWidth>
+                <Chart dataLines={this.state.dataLines} />
+              </ChartWidth>
+            </ChartWrapper>
+          </Collapse>
         </ChartSummaryWrapper>
       )
     return null
