@@ -72,7 +72,7 @@ export default class TableDataList extends React.PureComponent {
     return (
       <TableDataListWrapper>
         <Table
-          size="large"
+          size="small"
           rowKey="_id"
           columns={this.getColumns()}
           {...this.props}

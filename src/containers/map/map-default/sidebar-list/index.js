@@ -82,8 +82,8 @@ export default class SidebarList extends React.PureComponent {
     return (
       <BoxLayout
         style={{ flex: 1 }}
-        title="Search"
-        right={
+        onlyTitle
+        title={
           <SelectStationType
             onChange={this.handleChangeStationType}
             value={this.state.stationType}

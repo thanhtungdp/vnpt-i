@@ -6,7 +6,7 @@ import { autobind } from 'core-decorators'
 import styled from 'styled-components'
 
 const SelectWrapper = styled.div`
-  min-width: 110px;
+  width: 100%;
   .ant-select {
     width: 100%;
   }

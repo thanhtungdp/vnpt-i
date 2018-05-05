@@ -69,6 +69,7 @@ class CustomGoogleMap extends PureComponent {
 
   render() {
     const defaultCenter = { lat: 10.7607494, lng: 106.6954122 }
+    console.log(this.props.stationAutoMarker)
     return (
       <GoogleMap
         ref={map => {
@@ -97,6 +98,10 @@ class CustomGoogleMap extends PureComponent {
                   <MarkerStation
                     code={item.key}
                     visible={false}
+                    stationKey={item.key}
+                    stationId={item._id}
+                    stationTypeKey={item.stationType.key}
+                    stationType={item.stationType}
                     getRef={this.getRefMarker.bind(this)}
                     mapLocation={item.mapLocation}
                     visible={item.visible}
@@ -110,6 +115,7 @@ class CustomGoogleMap extends PureComponent {
                     stationStatus={item.status}
                     address={item.address}
                     lastLog={item.lastLog}
+                    options={item.options}
                     measuringList={item.measuringList}
                   />
                 )
