@@ -10,12 +10,20 @@ import objectPath from 'object-path'
 import HeaderFilter from 'components/monitoring/filter'
 import StationTypeList from 'components/monitoring/station-type-group/station-type-list'
 import monitoringFilter from 'constants/monitoringFilter'
+import ListLoaderCp from 'components/content-loader/list-loader'
 import Clearfix from 'components/elements/clearfix'
 import { getMonitoringFilter, setMonitoringFilter } from 'utils/localStorage'
 import {
   GROUP_OPTIONS,
   ORDER_OPTIONS
 } from 'components/monitoring/filter/options'
+import createContentLoader from 'hoc/content-loader'
+
+const ListLoader = createContentLoader({
+  component: <ListLoaderCp />,
+  isAutoLoader: true,
+  items: 5
+})(null)
 
 export const defaultFilter = {
   group: GROUP_OPTIONS[0].value,
@@ -234,6 +242,11 @@ export default class MonitoringGeneral extends React.Component {
         isLoading={!this.state.isLoadedFirst}
         backgroundColor="#fafbfb"
         headerCustom={this.renderHeader()}
+        componentLoading={
+          <div>
+            <ListLoader />
+          </div>
+        }
       >
         <StationTypeList filter={this.state.filter} data={this.getData()} />
         <Clearfix height={64} />

@@ -1,9 +1,26 @@
 import React, { Component } from 'react'
+import createContentLoader from 'hoc/content-loader'
+import ListLoaderCp from 'components/content-loader/list-loader'
+import BoxLoaderCp from 'components/content-loader/box-loader'
 import PageContainer from 'layout/default-sidebar-layout/PageContainer'
 import SummaryList from 'components/dashboard/summary/summary-list'
 import ChartList from 'components/dashboard/chart/chart-row-list'
+import Clearfix from 'components/elements/clearfix'
 import { getStationTypes } from 'api/CategoryApi'
 import { getLastLog } from 'api/StationAuto'
+
+const ListLoader = createContentLoader({
+  component: <ListLoaderCp />,
+  isAutoLoader: true,
+  items: 5,
+})(null)
+
+const BoxLoader = createContentLoader({
+  component: <BoxLoaderCp />,
+  isAutoLoader: true,
+  items: 4,
+  colSize: 3
+})(null)
 
 export default class OverviewDashboard extends Component {
   state = {
@@ -99,6 +116,11 @@ export default class OverviewDashboard extends Component {
       <PageContainer
         isLoading={!this.state.isLoaded}
         backgroundColor="#fafbfb"
+        componentLoading={<div>
+          <BoxLoader/>
+          <Clearfix height={24}/>
+          <ListLoader/>
+        </div>}
         hideTitle
       >
         <SummaryList data={this.getSummaryList()} />
