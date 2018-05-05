@@ -16,6 +16,7 @@ import AppIcon from '@atlaskit/icon/glyph/media-services/grid'
 import DocumentDrawer from './DocumentDrawer'
 import AppDrawer from './AppDrawer'
 import ChangeLanguage from './ChangeLanguage'
+import LogoBrandName from './LogoBrandName'
 
 import Navigation, {
 // AkContainerTitle,
@@ -94,7 +95,7 @@ export default class BasicNestedNavigation extends React.Component {
       <Tooltip key="1" position="right" content="Admin system">
         <WrapperTitle>
           <Link to="/">
-            <Logo src="/images/logo/logo-text-icon.png" />
+            <LogoBrandName />
           </Link>
         </WrapperTitle>
       </Tooltip>,

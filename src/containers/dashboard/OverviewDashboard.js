@@ -12,7 +12,7 @@ import { getLastLog } from 'api/StationAuto'
 const ListLoader = createContentLoader({
   component: <ListLoaderCp />,
   isAutoLoader: true,
-  items: 5,
+  items: 5
 })(null)
 
 const BoxLoader = createContentLoader({
@@ -116,11 +116,13 @@ export default class OverviewDashboard extends Component {
       <PageContainer
         isLoading={!this.state.isLoaded}
         backgroundColor="#fafbfb"
-        componentLoading={<div>
-          <BoxLoader/>
-          <Clearfix height={24}/>
-          <ListLoader/>
-        </div>}
+        componentLoading={
+          <div>
+            <BoxLoader />
+            <Clearfix height={24} />
+            <ListLoader />
+          </div>
+        }
         hideTitle
       >
         <SummaryList data={this.getSummaryList()} />

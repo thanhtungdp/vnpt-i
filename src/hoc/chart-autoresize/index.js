@@ -6,7 +6,7 @@ import ListLoaderCp from 'components/content-loader/list-loader'
 import createLoader from 'hoc/content-loader'
 
 const ListLoader = createLoader({
-  component: <ListLoaderCp/>,
+  component: <ListLoaderCp />,
   items: 1
 })(null)
 

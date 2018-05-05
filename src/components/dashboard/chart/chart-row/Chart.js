@@ -44,7 +44,7 @@ export class ChartRowToChart extends React.PureComponent {
     this.chart = chart
   }
 
-  getCurrentChart(){
+  getCurrentChart() {
     return this.chart
   }
 
