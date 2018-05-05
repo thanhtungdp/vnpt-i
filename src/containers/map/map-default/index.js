@@ -12,6 +12,7 @@ import stationStatus from 'constants/stationStatus'
 import { warningLevelsNumber, warningLevels } from 'constants/warningLevels'
 import ROLE from 'constants/role'
 import protectRole from 'hoc/protect-role'
+import queryFormDataBrowser from 'hoc/query-formdata-browser'
 
 const MapDefaultWrapper = styled.div`
   display: flex;
@@ -34,6 +35,7 @@ const ColRight = styled.div`
   display: flex;
 `
 
+@queryFormDataBrowser([])
 @protectRole(ROLE.MAP.VIEW)
 @connectWindowHeight
 @autobind
@@ -50,6 +52,7 @@ export default class MapDefault extends React.PureComponent {
   }
 
   handleSelectStation(stationSelected) {
+    console.log(stationSelected)
     const defaultZoom = 12
     let updateState = { stationSelected }
     if (this.state.map && this.state.map.getZoom() !== defaultZoom)
@@ -57,11 +60,24 @@ export default class MapDefault extends React.PureComponent {
     updateState.timeUpdate = new Date()
     this.setState(updateState, () => {
       if (this.state.map) {
-        this.state.map.panTo(stationSelected.mapLocation)
+        const panToMap = {
+          lat: parseFloat(stationSelected.mapLocation.lat),
+          lng: parseFloat(stationSelected.mapLocation.lng)
+        }
+        // console.log(panToMap)
+        this.state.map.panTo(panToMap)
       }
       //this.mapView.closeInfoMarker()
       this.mapView.openInfoMarkerByKey(stationSelected.key)
     })
+  }
+
+  componentDidMount() {
+    if (this.props.formData.stationAuto) {
+      setTimeout(() => {
+        this.handleSelectStation(this.props.formData.stationAuto)
+      }, 1000)
+    }
   }
 
   async componentWillMount() {

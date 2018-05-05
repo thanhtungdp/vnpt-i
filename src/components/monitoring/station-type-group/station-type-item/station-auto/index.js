@@ -1,10 +1,12 @@
 import React from 'react'
 import { autobind } from 'core-decorators'
 import styled from 'styled-components'
+import { withRouter } from 'react-router'
 import StationAutoHead from './Head'
 import MeasuringList from './measuring/measuring-list'
 import PropTypes from 'prop-types'
 import moment from 'moment'
+import slug from 'constants/slug'
 
 const StationAutoWrapper = styled.div`
   background-color: #ffffff;
@@ -12,6 +14,7 @@ const StationAutoWrapper = styled.div`
   box-shadow: 0 4px 10px 0 rgba(241, 241, 241, 0.5);
 `
 
+@withRouter
 @autobind
 export default class StationAutoItem extends React.PureComponent {
   static propTypes = {
@@ -25,6 +28,48 @@ export default class StationAutoItem extends React.PureComponent {
     stationType: PropTypes.shape({
       name: PropTypes.string
     })
+  }
+
+  handleClickDataSearchWithMeasuring(measuringItem) {
+    const formSearch = {
+      stationType: this.props.stationType.key,
+      stationAuto: this.props.stationID,
+      measuringList: [measuringItem.key],
+      measuringData: this.props.measuringList,
+      searchNow: true
+    }
+    this.props.history.push(
+      slug.dataSearch.base + '?formData=' + JSON.stringify(formSearch)
+    )
+  }
+
+  handleClickDataSearch() {
+    const formSearch = {
+      stationType: this.props.stationType.key,
+      stationAuto: this.props.stationID,
+      measuringList: this.props.measuringList.map(m => m.key),
+      measuringData: this.props.measuringList,
+      searchNow: true
+    }
+    this.props.history.push(
+      slug.dataSearch.base + '?formData=' + JSON.stringify(formSearch)
+    )
+  }
+
+  handleClickViewMap() {
+    const formSearch = {
+      stationAuto: {
+        ...this.props,
+        mapLocation: {
+          lat: this.props.mapLocation.lat,
+          lng: this.props.mapLocation.long
+        },
+        key: this.props.stationID
+      }
+    }
+    this.props.history.push(
+      slug.map.base + '?formData=' + JSON.stringify(formSearch)
+    )
   }
 
   measuringLastLog() {
@@ -67,9 +112,14 @@ export default class StationAutoItem extends React.PureComponent {
           orderNumber={orderNumber}
           stationID={stationID}
           options={options}
+          onClickDataSearch={this.handleClickDataSearch}
+          onClickViewMap={this.handleClickViewMap}
           _id={_id}
         />
-        <MeasuringList data={this.measuringLastLog()} />
+        <MeasuringList
+          onClickItem={this.handleClickDataSearchWithMeasuring}
+          data={this.measuringLastLog()}
+        />
       </StationAutoWrapper>
     )
   }

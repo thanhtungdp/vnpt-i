@@ -11,7 +11,7 @@ const MeasuringItemWrapper = styled.div`
   flex-direction: column;
   justify-content: space-between;
   border-radius: 8px;
-  border: solid 1px #f1f1f1;
+  border: solid 1px ${props => props.color};
 `
 const MeasuringItemText = styled.div`
   display: flex;
@@ -21,7 +21,7 @@ const MeasuringItemText = styled.div`
 const MeasuringName = styled.span`
   padding: 0 5px 0 5px;
   display: flex;
-  font-size: 12px;
+  font-size: 10px;
   color: #ffffff;
   align-items: center;
   justify-content: center;
@@ -39,6 +39,7 @@ const MeasuringUnit = styled.span`
 const MeasuringValue = styled.div`
   font-size: 16px;
   text-align: left;
+  font-weight: 600;
   color: ${props => props.color};
   position: relative;
 `
@@ -51,6 +52,7 @@ const MeasuringLimit = styled.span`
 @autobind
 export default class MeasuringItem extends React.PureComponent {
   static propTypes = {
+    onClick: PropTypes.func,
     value: PropTypes.number,
     unit: PropTypes.string,
     name: PropTypes.string,
@@ -83,7 +85,10 @@ export default class MeasuringItem extends React.PureComponent {
   render() {
     const { value, unit, name } = this.props
     return (
-      <MeasuringItemWrapper>
+      <MeasuringItemWrapper
+        onClick={this.props.onClick}
+        color={this.getColorLevel()}
+      >
         <MeasuringItemText>
           <MeasuringValue color={this.getColorLevel()}>
             {value}{' '}
@@ -95,7 +100,6 @@ export default class MeasuringItem extends React.PureComponent {
               ''
             )}
           </MeasuringValue>
-
           <MeasuringName color={this.getColorLevel()}>{name}</MeasuringName>
         </MeasuringItemText>
         <MeasuringLimit>{this.getLimitText()}</MeasuringLimit>

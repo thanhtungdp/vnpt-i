@@ -48,5 +48,4 @@ export default function LogoBrandName(props) {
       </InfoWrapper>
     </LogoContainer>
   )
-  return <LogoContainer src="/images/logo/logo-icon.png" />
 }
