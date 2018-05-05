@@ -13,8 +13,10 @@ const StationListWrapper = styled.div`
 @autobind
 export default class StationAutoList extends React.PureComponent {
   static propTypes = {
-    stationAutoList: PropTypes.arrayOf(PropTypes.shape(StationAuto.props))
+    stationAutoList: PropTypes.arrayOf(PropTypes.shape(StationAuto.props)),
+    isShowStationName: PropTypes.bool
   }
+
   render() {
     return (
       <StationListWrapper>
@@ -26,6 +28,7 @@ export default class StationAutoList extends React.PureComponent {
               <div className="stationAutoItem" key={key}>
                 <StationAuto
                   {...otherProps}
+                  isShowStationName={this.props.isShowStationName}
                   stationID={key}
                   orderNumber={index + 1}
                 />

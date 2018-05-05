@@ -483,6 +483,8 @@ export default {
   },
   login: {
     title: 'Login',
+    twoFactorAlert:
+      '2 Factor Auth - Your code verify login send to {{=it.email}}!',
     form: {
       email: {
         label: 'Email',
@@ -492,7 +494,12 @@ export default {
         label: 'Password',
         placeholder: '********'
       },
-      buttonLogin: 'Login'
+      twoFactor: {
+        label: 'Verify code',
+        placeholder: 'xxxx'
+      },
+      buttonLogin: 'Login',
+      buttonTwoFactor: 'Verify'
     }
   },
   addon: {

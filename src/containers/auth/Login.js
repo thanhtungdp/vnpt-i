@@ -14,7 +14,7 @@ import createLang from 'hoc/create-lang'
 import { InputLabel, createValidateComponent } from 'components/elements'
 import Button from 'components/elements/button'
 import Clearfix from 'components/elements/clearfix'
-import { userLogin } from 'redux/actions/authAction'
+import { userLogin, userLogin2Factor } from 'redux/actions/authAction'
 
 const FInput = createValidateComponent(InputLabel)
 
@@ -59,29 +59,58 @@ const bodyStyle = `
     isAuthenticated: state.auth.isAuthenticated,
     userInfo: state.auth.userInfo
   }),
-  { userLogin }
+  { userLogin, userLogin2Factor }
 )
 export default class Login extends PureComponent {
   static propTypes = {
     submitting: PropTypes.bool,
     handleSubmit: PropTypes.func,
-    userLogin: PropTypes.func
+    userLogin: PropTypes.func,
+    userLogin2Factor: PropTypes.func
+  }
+
+  state = {
+    formData: {},
+    isTwoFactorAuth: false
+  }
+
+  userError(user) {
+    swal({
+      title: user.message,
+      type: 'error'
+    })
+  }
+
+  userSuccess(user) {
+    swal({
+      type: 'success',
+      text: 'Welcome ' + user.data.email
+    })
+    this.props.history.push('/')
   }
 
   async handleLogin(values) {
-    if (values.email) {
+    if (!this.state.isTwoFactorAuth) {
       const user = await this.props.userLogin(values)
       if (user.error) {
-        swal({
-          title: user.message,
-          type: 'error'
-        })
+        this.userError(user)
       } else {
-        this.props.history.push('/')
-        swal({
-          type: 'success',
-          text: 'Chào mừng ' + user.data.email
-        })
+        console.log(user.data.twoFactorAuth)
+        if (user.data.twoFactorAuth && user.data.twoFactorAuth.enable) {
+          this.setState({
+            isTwoFactorAuth: true,
+            formData: values
+          })
+        } else {
+          this.userSuccess(user)
+        }
+      }
+    } else {
+      const user = await this.props.userLogin2Factor(values)
+      if (user.error) {
+        this.userError(user)
+      } else {
+        this.userSuccess(user)
       }
     }
   }
@@ -97,24 +126,44 @@ export default class Login extends PureComponent {
             <Header.Logo src="/images/logo/logo-text-enviro.png" />
           </Header.Wrapper>
           <Clearfix height={8} />
-          <Field
-            label={t('login.form.email.label')}
-            placeholder={t('login.form.email.placeholder')}
-            name="email"
-            icon="fa fa-user"
-            component={FInput}
-          />
-          <Clearfix height={16} />
-          <Field
-            label={t('login.form.password.label')}
-            placeholder={t('login.form.password.placeholder')}
-            type="password"
-            name="password"
-            component={FInput}
-          />
+          {!this.state.isTwoFactorAuth ? (
+            <div>
+              <Field
+                label={t('login.form.email.label')}
+                placeholder={t('login.form.email.placeholder')}
+                name="email"
+                icon="fa fa-user"
+                component={FInput}
+              />
+              <Clearfix height={16} />
+              <Field
+                label={t('login.form.password.label')}
+                placeholder={t('login.form.password.placeholder')}
+                type="password"
+                name="password"
+                component={FInput}
+              />
+            </div>
+          ) : (
+            <div>
+              <p>
+                {t('login.twoFactorAlert', {
+                  email: this.state.formData.email
+                })}
+              </p>
+              <Field
+                label={t('login.form.twoFactor.label')}
+                placeholder={t('login.form.twoFactor.placeholder')}
+                name="code"
+                component={FInput}
+              />
+            </div>
+          )}
           <Clearfix height={16} />
           <Button isLoading={this.props.submitting} block color="primary">
-            {t('login.form.buttonLogin')}
+            {!this.state.isTwoFactorAuth
+              ? t('login.form.buttonLogin')
+              : t('login.form.buttonTwoFactor')}
           </Button>
           <Clearfix height={16} />
           <FloatRight>

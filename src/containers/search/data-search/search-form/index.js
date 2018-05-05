@@ -3,6 +3,7 @@ import { autobind } from 'core-decorators'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
 import { reduxForm, Field } from 'redux-form'
+import PropTypes from 'prop-types'
 import { Row, Col, Button, Switch } from 'antd'
 import DatePicker from 'components/elements/datetime-picker'
 import createLang from 'hoc/create-lang'
@@ -42,10 +43,12 @@ function validate(values) {
 
   return errors
 }
-@connect(state => ({
+
+@connect((state, ownProps) => ({
   initialValues: {
     fromDate: moment(new Date().setMonth(new Date().getMonth() - 1)),
-    toDate: moment()
+    toDate: moment(),
+    ...(ownProps.initialValues ? ownProps.initialValues : {})
   }
 }))
 @reduxForm({
@@ -55,11 +58,40 @@ function validate(values) {
 @createLang
 @autobind
 export default class SearchForm extends React.Component {
-  state = {
-    stationTypeKey: '',
-    stationAutoKey: '',
-    measuringData: [],
-    measuringList: []
+  static propTypes = {
+    measuringData: PropTypes.array,
+    searchNow: PropTypes.bool
+  }
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      stationTypeKey: props.initialValues.stationType,
+      stationAutoKey: props.initialValues.stationAuto,
+      measuringData: props.measuringData ? props.measuringData : [],
+      measuringList: props.measuringData
+        ? props.measuringData.map(measuring => ({
+            value: measuring.key,
+            name: measuring.name
+          }))
+        : []
+    }
+  }
+
+  componentDidMount() {
+    if (this.props.searchNow) {
+      setTimeout(() => {
+        this.props.handleSubmit(this.handleSubmit)()
+      }, 100)
+    }
+
+    // if(this.props.initialValuesOther){
+    //   const {stationAuto, stationType, measuringList} = this.props.initialValuesOther
+    //   this.props.change('stationType', stationType)
+    //   this.props.change('stationAuto', stationAuto)
+    //   this.props.change('measuringList', measuringList)
+    //
+    // }
   }
 
   handleChangeStationType(stationTypeKey, e) {

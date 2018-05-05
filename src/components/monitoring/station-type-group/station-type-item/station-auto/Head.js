@@ -36,12 +36,27 @@ const OrderNumber = styled.div`
   font-weight: 700;
   color: #ffffff;
 `
+
 const StationName = styled.h4`
   font-weight: 600;
   font-size: 14px;
   margin-top: 0px;
   margin-bottom: 0px;
 `
+
+const WrapperNameStationTypeName = styled.div`
+  flex-direction: column;
+  .stationName {
+    font-size: 12px;
+  }
+  .stationTypeName {
+    font-size: 10px;
+    display: block;
+    color: ${SHAPE.PRIMARY};
+    opacity: 0.7;
+  }
+`
+
 const ReceivedAt = styled.span`
   color: ${SHAPE.GRAYTEXT};
 `
@@ -49,24 +64,32 @@ const ReceivedAt = styled.span`
 const ActionWrapper = styled.div`
   display: flex;
   align-items: center;
-`
-
-const Divider = styled.div`
-  width: 1px;
-  height: 13px;
-  margin-left: 4px;
-  margin-right: 4px;
-  background-color: ${SHAPE.GRAYBOLD};
+  margin-left: -8px;
+  margin-right: -8px;
+  .actionItem {
+    padding: 0px 8px;
+    color: #1890ff;
+    border-right: 1px solid ${SHAPE.GRAYBOLD};
+    &:hover {
+      cursor: pointer;
+    }
+  }
+  .actionItem:last-child {
+    border-right: 0px;
+  }
 `
 
 @autobind
 export default class StationAutoHead extends React.PureComponent {
   static propTypes = {
     name: PropTypes.string,
+    stationTypeName: PropTypes.string,
     receivedAt: PropTypes.string,
     orderNumber: PropTypes.number,
     stationID: PropTypes.string,
-    options: PropTypes.object
+    options: PropTypes.object,
+    onClickDataSearch: PropTypes.func,
+    onClickViewMap: PropTypes.func
   }
   componentWillMount() {}
 
@@ -74,6 +97,7 @@ export default class StationAutoHead extends React.PureComponent {
     //console.log(this.props)
     const {
       name,
+      stationTypeName,
       receivedAt,
       orderNumber,
       stationID,
@@ -87,14 +111,32 @@ export default class StationAutoHead extends React.PureComponent {
         <TitleWrapper>
           <OrderNumber>{orderNumber}</OrderNumber>
           <Clearfix width={8} />
-          <StationName>{name}</StationName>
+          {stationTypeName ? (
+            <WrapperNameStationTypeName>
+              <StationName className="stationName">{name}</StationName>
+              <span className="stationTypeName">{stationTypeName}</span>
+            </WrapperNameStationTypeName>
+          ) : (
+            <StationName>{name}</StationName>
+          )}
           <Clearfix width={8} />
           <ReceivedAt>{receivedAt ? ' - ' + receivedAt : ''}</ReceivedAt>
         </TitleWrapper>
         <ActionWrapper>
+          <div onClick={this.props.onClickDataSearch} className="actionItem">
+            <Tooltip title="Data search">
+              <Icon type="area-chart" />
+            </Tooltip>
+          </div>
+          <div onClick={this.props.onClickViewMap} className="actionItem">
+            <Tooltip title="View in map">
+              <i className="fa fa-map-marker" />
+            </Tooltip>
+          </div>
           {isSampling &&
             protectRole(ROLE.MONITORING.CONTROL)(
               <Link
+                className="actionItem"
                 to={
                   slug.controlStation.triggerWithKey + `/${stationID}/${name}`
                 }
@@ -104,11 +146,10 @@ export default class StationAutoHead extends React.PureComponent {
                 </Tooltip>
               </Link>
             )}
-          {isCamera && protectRole(ROLE.MONITORING.CAMERA)(<Divider />)}
-
           {isCamera &&
             protectRole(ROLE.MONITORING.CAMERA)(
               <Link
+                className="actionItem"
                 to={slug.monitoring.viewCameraWithKey + '/' + _id}
                 style={{ display: 'flex' }}
               >

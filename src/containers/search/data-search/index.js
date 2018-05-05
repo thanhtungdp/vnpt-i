@@ -9,8 +9,10 @@ import SearchFrom from './search-form/index'
 import { message, Spin } from 'antd'
 import ROLE from 'constants/role'
 import protectRole from 'hoc/protect-role'
+import queryFormDataBrowser from 'hoc/query-formdata-browser'
 
 @protectRole(ROLE.DATA_SEARCH.VIEW)
+@queryFormDataBrowser(['submit'])
 @autobind
 export default class MinutesDataSearch extends React.Component {
   state = {
@@ -77,11 +79,18 @@ export default class MinutesDataSearch extends React.Component {
   }
 
   render() {
+    console.log(this.props.formData)
+    console.log(this.props.query)
     return (
       <PageContainer {...this.props.wrapperProps} backgroundColor={'#fafbfb'}>
         <Spin size="large" tip="Exporting..." spinning={this.state.isExporting}>
           <Breadcrumb items={['list']} />
-          <SearchFrom onSubmit={this.handleSubmitSearch} />
+          <SearchFrom
+            initialValues={this.props.formData}
+            measuringData={this.props.formData.measuringData}
+            onSubmit={this.handleSubmitSearch}
+            searchNow={this.props.formData.searchNow}
+          />
           <Clearfix height={16} />
           {this.state.isHaveData ? (
             <TabList

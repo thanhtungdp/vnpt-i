@@ -51,6 +51,7 @@ export default class PageContainer extends React.PureComponent {
     hideTitle: PropTypes.bool,
     isLoading: PropTypes.bool,
     headerCustom: PropTypes.any,
+    componentLoading: PropTypes.any,
     right: PropTypes.any
   }
 
@@ -103,11 +104,18 @@ export default class PageContainer extends React.PureComponent {
               <div className="animated fadeIn">{this.props.children}</div>
             </Grid>
           )}
-          {this.props.isLoading && (
-            <AbsoluteLoading>
-              <LoaderCircle />
-            </AbsoluteLoading>
-          )}
+          {this.props.isLoading &&
+            (this.props.componentLoading ? (
+              <Grid>
+                <div className="animated fadeIn">
+                  {this.props.componentLoading}
+                </div>
+              </Grid>
+            ) : (
+              <AbsoluteLoading>
+                <LoaderCircle />
+              </AbsoluteLoading>
+            ))}
         </PageBodyWrapper>
       </StickyContainer>
     )

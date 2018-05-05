@@ -12,6 +12,7 @@ export default class SelectStationAuto extends React.PureComponent {
   }
 
   state = {
+    isLoaded: false,
     stationAutoSelects: []
   }
 
@@ -21,7 +22,8 @@ export default class SelectStationAuto extends React.PureComponent {
       itemPerPage: 10000000
     })
     this.setState({
-      stationAutoSelects: responseStationAuto.data
+      stationAutoSelects: responseStationAuto.data,
+      isLoaded: true
     })
   }
 
@@ -45,6 +47,7 @@ export default class SelectStationAuto extends React.PureComponent {
   }
 
   render() {
+    if (!this.state.isLoaded) return <div />
     return (
       <Select
         {...this.props}

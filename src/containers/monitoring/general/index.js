@@ -10,17 +10,27 @@ import objectPath from 'object-path'
 import HeaderFilter from 'components/monitoring/filter'
 import StationTypeList from 'components/monitoring/station-type-group/station-type-list'
 import monitoringFilter from 'constants/monitoringFilter'
+import ListLoaderCp from 'components/content-loader/list-loader'
 import Clearfix from 'components/elements/clearfix'
 import { getMonitoringFilter, setMonitoringFilter } from 'utils/localStorage'
+import { replaceVietnameseStr } from 'utils/string'
 import {
   GROUP_OPTIONS,
   ORDER_OPTIONS
 } from 'components/monitoring/filter/options'
+import createContentLoader from 'hoc/content-loader'
+
+const ListLoader = createContentLoader({
+  component: <ListLoaderCp />,
+  isAutoLoader: true,
+  items: 5
+})(null)
 
 export const defaultFilter = {
   group: GROUP_OPTIONS[0].value,
   order: ORDER_OPTIONS[0].value,
-  stationType: ''
+  stationType: '',
+  search: ''
 }
 
 @withRouter
@@ -177,8 +187,25 @@ export default class MonitoringGeneral extends React.Component {
     ]
   }
 
+  getFuseFilter(dataList) {
+    if (!this.state.filter.search) return dataList
+    return dataList.map(station => {
+      return {
+        ...station,
+        stationAutoList: station.stationAutoList.filter(
+          stationAuto =>
+            replaceVietnameseStr(stationAuto.name)
+              .toLowerCase()
+              .indexOf(
+                replaceVietnameseStr(this.state.filter.search).toLowerCase()
+              ) > -1
+        )
+      }
+    })
+  }
+
   getData() {
-    let stationTypeList = this.state.data
+    let stationTypeList = this.getFuseFilter(this.state.data)
     // filter by STATION TYPE
     if (this.state.filter.stationType) {
       stationTypeList = stationTypeList.filter(
@@ -234,6 +261,11 @@ export default class MonitoringGeneral extends React.Component {
         isLoading={!this.state.isLoadedFirst}
         backgroundColor="#fafbfb"
         headerCustom={this.renderHeader()}
+        componentLoading={
+          <div>
+            <ListLoader />
+          </div>
+        }
       >
         <StationTypeList filter={this.state.filter} data={this.getData()} />
         <Clearfix height={64} />

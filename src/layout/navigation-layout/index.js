@@ -9,13 +9,13 @@ import AvatarCharacter from 'components/elements/avatar-character'
 import Link from 'components/elements/link'
 import slug from 'constants/slug'
 import StyleWrapper from './StyleWrapper'
-import Logo from './Logo'
 import LogoSubIcon from './LogoSubIcon'
 import DocumentIcon from '@atlaskit/icon/glyph/question-circle'
 import AppIcon from '@atlaskit/icon/glyph/media-services/grid'
 import DocumentDrawer from './DocumentDrawer'
 import AppDrawer from './AppDrawer'
 import ChangeLanguage from './ChangeLanguage'
+import LogoBrandName from './LogoBrandName'
 
 import Navigation, {
 // AkContainerTitle,
@@ -94,7 +94,7 @@ export default class BasicNestedNavigation extends React.Component {
       <Tooltip key="1" position="right" content="Admin system">
         <WrapperTitle>
           <Link to="/">
-            <Logo src="/images/logo/logo-text-icon.png" />
+            <LogoBrandName />
           </Link>
         </WrapperTitle>
       </Tooltip>,
