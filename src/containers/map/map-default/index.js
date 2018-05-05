@@ -52,7 +52,6 @@ export default class MapDefault extends React.PureComponent {
   }
 
   handleSelectStation(stationSelected) {
-    console.log(stationSelected)
     const defaultZoom = 12
     let updateState = { stationSelected }
     if (this.state.map && this.state.map.getZoom() !== defaultZoom)
@@ -105,6 +104,15 @@ export default class MapDefault extends React.PureComponent {
     this.setState({
       isRight: isRight
     })
+  }
+
+  handleClickNotification(nf) {
+    const stationAuto = this.state.stationsAuto.find(
+      s => s.key === nf.stationKey
+    )
+    if (stationAuto) {
+      this.handleSelectStation(stationAuto)
+    }
   }
 
   fillStatusChange(focusStatus) {
@@ -180,6 +188,7 @@ export default class MapDefault extends React.PureComponent {
             <AnalyticView
               stationsAutoList={this.state.stationsAuto}
               fillStatusChange={this.fillStatusChange}
+              onClickNotification={this.handleClickNotification}
             />
           </ColRight>
         )}

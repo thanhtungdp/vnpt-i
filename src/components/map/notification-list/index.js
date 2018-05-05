@@ -21,7 +21,8 @@ export default class NotficationList extends React.PureComponent {
   static propTypes = {
     notifications: PropTypes.arrayOf(
       PropTypes.shape(NotificationItem.propTypes)
-    )
+    ),
+    onClickNotification: PropTypes.func
   }
 
   render() {
@@ -29,7 +30,11 @@ export default class NotficationList extends React.PureComponent {
       <NotficationListWrapper>
         {this.props.notifications.map((nf, index) => (
           <div className="notificationItem">
-            <NotificationItem {...nf} key={index} />
+            <NotificationItem
+              onClick={() => this.props.onClickNotification(nf)}
+              {...nf}
+              key={index}
+            />
           </div>
         ))}
       </NotficationListWrapper>
