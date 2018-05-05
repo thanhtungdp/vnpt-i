@@ -36,12 +36,27 @@ const OrderNumber = styled.div`
   font-weight: 700;
   color: #ffffff;
 `
+
 const StationName = styled.h4`
   font-weight: 600;
   font-size: 14px;
   margin-top: 0px;
   margin-bottom: 0px;
 `
+
+const WrapperNameStationTypeName = styled.div`
+  flex-direction: column;
+  .stationName {
+    font-size: 12px;
+  }
+  .stationTypeName {
+    font-size: 10px;
+    display: block;
+    color: ${SHAPE.PRIMARY};
+    opacity: 0.7;
+  }
+`
+
 const ReceivedAt = styled.span`
   color: ${SHAPE.GRAYTEXT};
 `
@@ -63,6 +78,7 @@ const Divider = styled.div`
 export default class StationAutoHead extends React.PureComponent {
   static propTypes = {
     name: PropTypes.string,
+    stationTypeName: PropTypes.string,
     receivedAt: PropTypes.string,
     orderNumber: PropTypes.number,
     stationID: PropTypes.string,
@@ -74,6 +90,7 @@ export default class StationAutoHead extends React.PureComponent {
     //console.log(this.props)
     const {
       name,
+      stationTypeName,
       receivedAt,
       orderNumber,
       stationID,
@@ -87,7 +104,14 @@ export default class StationAutoHead extends React.PureComponent {
         <TitleWrapper>
           <OrderNumber>{orderNumber}</OrderNumber>
           <Clearfix width={8} />
-          <StationName>{name}</StationName>
+          {stationTypeName ? (
+            <WrapperNameStationTypeName>
+              <StationName className="stationName">{name}</StationName>
+              <span className="stationTypeName">{stationTypeName}</span>
+            </WrapperNameStationTypeName>
+          ) : (
+            <StationName>{name}</StationName>
+          )}
           <Clearfix width={8} />
           <ReceivedAt>{receivedAt ? ' - ' + receivedAt : ''}</ReceivedAt>
         </TitleWrapper>

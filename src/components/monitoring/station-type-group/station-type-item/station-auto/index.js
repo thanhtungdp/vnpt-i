@@ -16,11 +16,15 @@ const StationAutoWrapper = styled.div`
 export default class StationAutoItem extends React.PureComponent {
   static propTypes = {
     orderNumber: PropTypes.number,
+    isShowStationName: PropTypes.bool,
     key: PropTypes.string,
     name: PropTypes.string,
     measuringList: PropTypes.array,
     lastLog: PropTypes.object,
-    stationID: PropTypes.string
+    stationID: PropTypes.string,
+    stationType: PropTypes.shape({
+      name: PropTypes.string
+    })
   }
 
   measuringLastLog() {
@@ -38,7 +42,16 @@ export default class StationAutoItem extends React.PureComponent {
     return measuringList
   }
   render() {
-    let { stationID, name, lastLog, orderNumber, options, _id } = this.props
+    let {
+      stationID,
+      name,
+      lastLog,
+      orderNumber,
+      isShowStationName,
+      stationType,
+      options,
+      _id
+    } = this.props
     let receivedAt = ''
     if (lastLog && lastLog.receivedAt) {
       receivedAt = moment(lastLog.receivedAt)
@@ -49,6 +62,7 @@ export default class StationAutoItem extends React.PureComponent {
       <StationAutoWrapper className="stationAutoWrapper">
         <StationAutoHead
           name={name}
+          stationTypeName={isShowStationName ? stationType.name : null}
           receivedAt={receivedAt}
           orderNumber={orderNumber}
           stationID={stationID}
