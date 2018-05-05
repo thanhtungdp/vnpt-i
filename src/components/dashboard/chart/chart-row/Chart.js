@@ -48,25 +48,28 @@ export class ChartRowToChart extends React.PureComponent {
         <HighchartsStockChart callback={this.getChart}>
           <Chart height={250} zoomType="x" />
           <Legend layout="horizontal" align="center" verticalAlign="bottom" />
-          <RangeSelector>
-            <RangeSelector.Button type="all">
-              {translate('chart.all')}
-            </RangeSelector.Button>
+          <RangeSelector allButtonsEnabled={true}>
+            {
+              <RangeSelector.Button type="all">
+                {translate('chart.all')}
+              </RangeSelector.Button>
+            }
             <RangeSelector.Input
               boxBorderColor="#7cb5ec"
               boxWidth={150}
               inputDateParser={value => {
-                return moment.utc(value, 'DD. MMM hh:mm').valueOf()
+                //  return moment.utc(value, 'DD. MMM hh:mm').valueOf()
+                return moment.utc(value, 'YYYY/mm/dd hh:mm').valueOf()
               }}
-              editDateFormat="%e. %b %H:%M"
-              dateFormat="%e. %b %H:%M"
+              editDateFormat="%Y/%m/%d:%k:%M"
+              dateFormat="%Y/%m/%d %k:%M"
             />
           </RangeSelector>
           <XAxis
             type="datetime"
             dateTimeLabelFormats={{
-              hour: '%e. %b %H:%M',
-              minute: '%e. %b %H:%M'
+              hour: '%Y/%m/%d %k:%M',
+              minute: '%Y/%m/%d %k:%M'
             }}
           >
             <XAxis.Title />
@@ -78,4 +81,17 @@ export class ChartRowToChart extends React.PureComponent {
     )
   }
 }
+// disable button Zoom
+Highcharts.setOptions({
+  lang: { rangeSelectorZoom: '' }
+})
+// ReadOnly input text
+Highcharts.wrap(Highcharts.RangeSelector.prototype, 'drawInput', function(
+  proceed,
+  name
+) {
+  proceed.call(this, name)
+  this[name + 'DateBox'].on('click', function() {})
+})
+
 export default withHighcharts(ChartRowToChart, Highcharts)

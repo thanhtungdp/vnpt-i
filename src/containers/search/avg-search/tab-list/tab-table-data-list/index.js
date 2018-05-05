@@ -23,7 +23,8 @@ export default class TableDataList extends React.PureComponent {
       render(value, record) {
         return (
           <div>
-            {moment(record._id).format('dddd, MMMM Do YYYY, h:mm:ss a')}
+            {moment(record._id).format('DD/MM/YYYY HH:mm')}
+            {/* {moment(record._id).format('dddd, MMMM Do YYYY, h:mm:ss a')} */}
           </div>
         )
       }
@@ -34,7 +35,14 @@ export default class TableDataList extends React.PureComponent {
         title: `${measuring.name}(${measuring.unit})`,
         dataIndex: `${measuring.key}`,
         key: measuring.key,
-        render: value => <div>{value && value !== '' && roundTo(value, 2)}</div>
+        // format number to LocaleString(language bowser)
+        render: value => (
+          <div>
+            {value.toLocaleString(navigator.language) &&
+              value.toLocaleString(navigator.language) !== '' &&
+              roundTo(value, 2).toLocaleString(navigator.language)}
+          </div>
+        )
       }))
     return [columnReceivedAt, ...columnsMeasurings]
   }

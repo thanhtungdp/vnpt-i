@@ -79,27 +79,32 @@ export class TabChart extends React.PureComponent {
           <Chart width={800} zoomType="x" />
           <Title>{this.props.nameChart ? this.props.nameChart : 'Chart'}</Title>
           <Legend layout="horizontal" align="center" verticalAlign="bottom" />
-
           <RangeSelector>
-            <RangeSelector.Button type="all">
-              {translate('chart.all')}
-            </RangeSelector.Button>
+            {
+              <RangeSelector.Button type="all">
+                {translate('chart.all')}
+              </RangeSelector.Button>
+            }
             <RangeSelector.Input
               boxBorderColor="#7cb5ec"
               boxWidth={150}
               inputDateParser={value => {
                 return moment.utc(value, 'DD. MMM hh:mm').valueOf()
               }}
-              editDateFormat="%e. %b %H:%M"
-              dateFormat="%e. %b %H:%M"
+              editDateFormat="%Y/%m/%d:%k:%M"
+              dateFormat="%Y/%m/%d:%k:%M"
+              // editDateFormat="%e. %b %H:%M"
+              // dateFormat="%e. %b %H:%M"
             />
           </RangeSelector>
 
           <XAxis
             type="datetime"
             dateTimeLabelFormats={{
-              hour: '%e. %b %H:%M',
-              minute: '%e. %b %H:%M'
+              hour: '%Y/%m/%d:%k:%M',
+              minute: '%Y/%m/%d:%k:%M'
+              // hour: '%e. %b %H:%M',
+              // minute: '%e. %b %H:%M'
             }}
           >
             <XAxis.Title>{translate('chart.time')}</XAxis.Title>
@@ -121,5 +126,4 @@ export class TabChart extends React.PureComponent {
     )
   }
 }
-
 export default withHighcharts(TabChart, Highcharts)

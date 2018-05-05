@@ -165,6 +165,10 @@ export default {
         label: 'Unit',
         placeholder: 'Input unit of measuring'
       },
+      numericalOrder: {
+        label: 'numericalOrder',
+        placeholder: 'numericalOrder'
+      },
       error: 'Error!'
     }
   },

@@ -75,7 +75,7 @@ export class ChartSummary extends React.Component {
       }
     })
     let dataSources = await getDataStationAutos(
-      { page: 1, itemPerPage: 200 },
+      { page: 1, itemPerPage: 500 },
       { key: stationAuto.key, measuringList: measuringArray }
     )
     if (dataSources) {

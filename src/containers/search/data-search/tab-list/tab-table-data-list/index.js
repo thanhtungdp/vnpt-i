@@ -62,7 +62,13 @@ export default class TableDataList extends React.PureComponent {
           ) {
             color = SHAPE.RED
           }
-          return <div style={{ color: color }}>{value.value}</div>
+          // Format number toLocalString(national)
+          return (
+            <div style={{ color: color }}>
+              {value.value.toLocaleString(navigator.language)}
+            </div>
+          )
+          //  return <div style={{ color: color }}>{value.value}</div>
         }
       }))
     return [columnIndex, columnReceivedAt, ...columnsMeasurings]
