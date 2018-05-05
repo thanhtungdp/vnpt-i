@@ -137,12 +137,11 @@ export default class OnlineMonitoring extends React.Component {
                   }
                   return (
                     <div style={{ color: color }}>
-                      {value.value.toLocaleString('vi-VN')}
+                      {value.value}
                     </div>
                   )
                 }
-                //  return value.toLocalString(navigator.language)
-                return value.toLocaleString('vi-VN')
+                return value
               }
             })
         })
