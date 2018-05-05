@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { SHAPE } from 'themes/color'
+import { connect } from 'react-redux'
 
 const LogoContainer = styled.div`
   display: flex;
@@ -36,7 +37,7 @@ const BrandName = styled.span`
   color: ${SHAPE.BLACK};
 `
 
-export default function LogoBrandName(props) {
+export function LogoBrandName(props) {
   return (
     <LogoContainer>
       <LogoIcon src="/images/logo/icon/enviroment.png" />
@@ -44,8 +45,12 @@ export default function LogoBrandName(props) {
         <TextPlaceholder>
           iLotusLand for Enviroment <RegisterBrand>&trade;</RegisterBrand>
         </TextPlaceholder>
-        <BrandName>TungTung</BrandName>
+        <BrandName>{props.name}</BrandName>
       </InfoWrapper>
     </LogoContainer>
   )
 }
+
+export default connect(state => ({
+  name: state.auth.userInfo.organization.name
+}))(LogoBrandName)
