@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import { autobind } from 'core-decorators'
 import { mapPropsToFields } from 'utils/form'
 import createLanguage, { langPropTypes } from 'hoc/create-lang'
+import InputNumberCell from 'components/elements/input-number-cell'
 
 const FormItem = Form.Item
 
@@ -26,7 +27,8 @@ export default class MeasuringForm extends React.PureComponent {
       const data = {
         key: values.key,
         name: values.name,
-        unit: values.unit ? values.unit : ''
+        unit: values.unit ? values.unit : '',
+        numericalOrder: values.numericalOrder
       }
       // Callback submit form Container Component
       this.props.onSubmit(data)
@@ -99,6 +101,17 @@ export default class MeasuringForm extends React.PureComponent {
                   placeholder={t('measuringManager.form.unit.placeholder')}
                 />
               )}
+            </FormItem>
+          </Col>
+          <Col span={12}>
+            <FormItem
+              {...formItemLayout}
+              labelCol={{ span: 0 }}
+              label={t('measuringManager.form.numericalOrder.label')}
+            >
+              {getFieldDecorator('numericalOrder', {
+                rules: [{ required: true }]
+              })(<InputNumberCell editable={true} />)}
             </FormItem>
           </Col>
         </Row>

@@ -86,7 +86,7 @@ export default class MeasuringItem extends React.PureComponent {
       <MeasuringItemWrapper>
         <MeasuringItemText>
           <MeasuringValue color={this.getColorLevel()}>
-            {value}{' '}
+            {value.toLocaleString(navigator.language)}{' '}
             {unit ? (
               <MeasuringUnit color={this.getColorLevel()} className="unit">
                 {unit}
