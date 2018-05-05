@@ -92,7 +92,10 @@ class CustomGoogleMap extends PureComponent {
             maxZoom={11}
           >
             {this.props.stationAutoMarker.map((item, index) => {
-              if (item.visible)
+              if (item.visible) {
+                item.measuringList.sort(function(a, b) {
+                  return a.numericalOrder - b.numericalOrder
+                })
                 return (
                   <MarkerStation
                     code={item.key}
@@ -113,7 +116,7 @@ class CustomGoogleMap extends PureComponent {
                     measuringList={item.measuringList}
                   />
                 )
-              else return <div key={item.key} />
+              } else return <div key={item.key} />
             })}
           </MarkerClusterer>
         </div>
