@@ -72,7 +72,9 @@ export default class SearchAvgForm extends React.Component {
   }
 
   handleChangeStationAuto(stationAuto) {
-    const measuringData = stationAuto.measuringList
+    const measuringData = stationAuto.measuringList.sort(function(a, b) {
+      return a.numericalOrder - b.numericalOrder
+    })
     this.setState({
       measuringList: measuringData.map(measuring => ({
         value: measuring.key,

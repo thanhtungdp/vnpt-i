@@ -5,6 +5,10 @@ export function loginUser(data = {}) {
   return postFetch(AUTH_API + '/auth/login', data)
 }
 
+export function loginUser2Factor(data = {}) {
+  return postFetch(AUTH_API + '/auth/security-2fa', data)
+}
+
 export function getMe() {
   return getFetch(AUTH_API + '/auth/me')
 }
@@ -34,6 +38,7 @@ export function PutResetPassword(_id, data) {
 
 export default {
   loginUser,
+  loginUser2Factor,
   getMe,
   changePassword,
   putProfile,

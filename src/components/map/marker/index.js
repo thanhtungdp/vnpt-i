@@ -1,28 +1,52 @@
 /* eslint-disable */
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import Icon from 'themes/markerIcon'
+// import Icon from 'themes/markerIcon'
+import { Menu, Dropdown, Icon } from 'antd'
+import LinkA from 'components/elements/link-a'
 import { autobind } from 'core-decorators'
-import stationStatus from 'constants/stationStatus'
+import styled from 'styled-components'
+import { SHAPE } from 'themes/color'
+import Clearfix from 'components/elements/clearfix'
+import Viewmore from './info-window-viewmore'
+// import stationStatus from 'constants/stationStatus'
 
 const { InfoWindow, Circle } = require('react-google-maps')
 import Marker from '../utils/marker-with-label-animate'
 import { Table } from 'react-bootstrap'
-import DateFormat from 'dateformat'
+// import DateFormat from 'dateformat'
 import { colorLevels } from 'constants/warningLevels'
 import stStatus from 'constants/stationStatus'
 import moment from 'moment'
-const MIN_WIDTH_INFO = '150px'
+
+const MIN_WIDTH_INFO = 150
+
+const InfoTitle = styled.div`
+  color: #37b44c;
+  font-size: 14px;
+  font-weight: 600;
+`
+
+const WrapperInfoWindow = styled.div`
+  min-width: ${MIN_WIDTH_INFO}px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+`
 
 @autobind
 export default class MarkerStation extends PureComponent {
   static propTypes = {
     mapLocation: PropTypes.object,
     name: PropTypes.string,
+    stationId: PropTypes.string,
     status: PropTypes.string,
     address: PropTypes.string,
+    stationKey: PropTypes.string,
+    stationTypeKey: PropTypes.string,
     lastLog: PropTypes.object,
     measuringList: PropTypes.array,
+    options: PropTypes.array,
     visible: PropTypes.bool,
     stationStatus: PropTypes.string
   }
@@ -108,6 +132,7 @@ export default class MarkerStation extends PureComponent {
             'DD/MM/YYYY hh:mm'
           )}
         </span>
+        <Clearfix height={8} />
         <Table striped={true} bordered condensed hover responsive={true}>
           <thead>
             <tr>
@@ -185,27 +210,28 @@ export default class MarkerStation extends PureComponent {
                   }}
                   onCloseClick={this.toggleOpen.bind(this)}
                 >
-                  <div style={{ minWidth: MIN_WIDTH_INFO }}>
-                    <b
-                      style={{
-                        color: '#37B44C',
-                        fontSize: 14,
-                        fontWeight: 'bold',
-                        paddingBottom: 4
-                      }}
-                    >
-                      {this.props.name}
-                    </b>
-                    <br />
-                    <span>
+                  <WrapperInfoWindow>
+                    <Viewmore
+                      measuringList={this.props.measuringList}
+                      stationId={this.props.stationId}
+                      stationName={this.props.name}
+                      stationKey={this.props.stationKey}
+                      stationTypeKey={this.props.stationTypeKey}
+                      options={this.props.options}
+                    />
+                    <InfoTitle>{this.props.name}</InfoTitle>
+                    <Clearfix height={8} />
+                    <div>
                       Longitude: {this.props.mapLocation.lng} - Latitude:{' '}
                       {this.props.mapLocation.lat}
-                    </span>
-                    <br />
-                    <span> Address: {this.props.address}</span>
-                    <br />
+                    </div>
+                    <Clearfix height={8} />
+                    {this.props.address && (
+                      <div> Address: {this.props.address}</div>
+                    )}
+                    <Clearfix height={8} />
                     {this.props.lastLog && this.state.tableData}
-                  </div>
+                  </WrapperInfoWindow>
                 </InfoWindow>
               )}
           </div>

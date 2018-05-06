@@ -135,11 +135,7 @@ export default class OnlineMonitoring extends React.Component {
                     } else if (value.status === 1)
                       color = currentState.config.trendExceededColor
                   }
-                  return (
-                    <div style={{ color: color }}>
-                      {value.value}
-                    </div>
-                  )
+                  return <div style={{ color: color }}>{value.value}</div>
                 }
                 return value
               }

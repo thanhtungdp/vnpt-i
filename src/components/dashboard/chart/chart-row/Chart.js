@@ -16,9 +16,11 @@ import PropTypes from 'prop-types'
 import Highcharts from 'highcharts/highstock'
 import moment from 'moment/moment'
 import { translate } from 'hoc/create-lang'
+import chartAutoResize from 'hoc/chart-autoresize'
 
 const ChartWrapper = styled.div``
 
+@chartAutoResize
 @autobind
 export class ChartRowToChart extends React.PureComponent {
   static propTypes = {
@@ -40,6 +42,10 @@ export class ChartRowToChart extends React.PureComponent {
 
   getChart(chart) {
     this.chart = chart
+  }
+
+  getCurrentChart() {
+    return this.chart
   }
 
   render() {

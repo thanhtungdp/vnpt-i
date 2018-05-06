@@ -22,12 +22,15 @@ export default class BoxWhiteLayout extends React.PureComponent {
     title: PropTypes.string,
     right: PropTypes.object,
     style: PropTypes.object,
+    onlyTitle: PropTypes.string,
     noPadding: PropTypes.bool
   }
   render() {
     return (
       <BoxWhiteLayoutWrapper style={this.props.style}>
-        <Heading right={this.props.right}>{this.props.title}</Heading>
+        <Heading onlyTitle={this.props.onlyTitle} right={this.props.right}>
+          {this.props.title}
+        </Heading>
         <WrapperWhite noPadding={this.props.noPadding}>
           {this.props.children}
         </WrapperWhite>

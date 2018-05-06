@@ -16,10 +16,13 @@ const HeadingWrapper = styled.div`
 @autobind
 export default class Heading extends React.PureComponent {
   static propTypes = {
-    right: PropTypes.any
+    right: PropTypes.any,
+    onlyTitle: PropTypes.bool
   }
 
   render() {
+    if (this.props.onlyTitle)
+      return <HeadingWrapper>{this.props.children}</HeadingWrapper>
     return (
       <HeadingWrapper>
         <span>{this.props.children}</span>

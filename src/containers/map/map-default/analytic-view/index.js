@@ -18,7 +18,8 @@ const Clearfix = styled.div`
 @autobind
 export default class SidebarList extends React.PureComponent {
   static propTypes = {
-    fillStatusChange: PropTypes.func
+    fillStatusChange: PropTypes.func,
+    onClickNotification: PropTypes.func
   }
 
   render() {
@@ -29,7 +30,9 @@ export default class SidebarList extends React.PureComponent {
           fillStatusChange={this.props.fillStatusChange}
         />
         <Clearfix />
-        <BoxNotifications />
+        <BoxNotifications
+          onClickNotification={this.props.onClickNotification}
+        />
       </SidebarListWrapper>
     )
   }

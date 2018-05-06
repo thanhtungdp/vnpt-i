@@ -52,6 +52,7 @@ export default class NotificationItem extends React.PureComponent {
     receivedAt: PropTypes.string,
     warningLevel: PropTypes.string,
     measuringList: PropTypes.array,
+    onClick: PropTypes.func,
     measuring: PropTypes.shape({
       name: PropTypes.string,
       contentLimit: PropTypes.string,
@@ -66,7 +67,7 @@ export default class NotificationItem extends React.PureComponent {
   render() {
     const { stationName, measuringList, receivedAt } = this.props
     return (
-      <NotificationItemWrapper>
+      <NotificationItemWrapper onClick={this.props.onClick}>
         <CircleIcon color={getMaxWarningLevel(measuringList)} />
         <Clearfix width={8} />
         <InfoWrapper>

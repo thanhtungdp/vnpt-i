@@ -9,7 +9,7 @@ import NavigationLayout from '../navigation-layout'
 
 @withRouter
 @autobind
-export default class DefaultSidebarNavigation extends React.Component {
+export default class DefaultSidebarNavigation extends React.PureComponent {
   static propTypes = {
     withtootips: PropTypes.bool
   }
@@ -40,14 +40,14 @@ export default class DefaultSidebarNavigation extends React.Component {
     return [navigationRouterStack]
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    return (
-      this.props.location.pathname !== nextProps.location.pathname ||
-      this.state.stack.length !== nextState.stack.length ||
-      this.props.navigation.isOpen !== nextProps.navigation.isOpen ||
-      this.props.navigation.width !== nextProps.navigation.width
-    )
-  }
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   return (
+  //     this.props.location.pathname !== nextProps.location.pathname ||
+  //     this.state.stack.length !== nextState.stack.length ||
+  //     this.props.navigation.isOpen !== nextProps.navigation.isOpen ||
+  //     this.props.navigation.width !== nextProps.navigation.width
+  //   )
+  // }
 
   stackPush(newPage) {
     const stack = [...this.state.stack, newPage]
@@ -74,19 +74,22 @@ export default class DefaultSidebarNavigation extends React.Component {
     const text = item.component.props.text
     const itemHref = item.component.props.href ? item.component.props.href : ''
     const pathname = this.props.location.pathname
+    const isSelected =
+      item.url === pathname ||
+      (pathname !== '/' &&
+        pathname.indexOf(itemHref) > -1 &&
+        itemHref !== '/') ||
+      // check navigation parent index
+      (navigationIndex > -1
+        ? navigationRouterStack[navigationIndex].component.props.text === text
+        : false)
     //        (pathname !== '/' && pathname.indexOf(itemHref) > -1)
+    // console.log(itemHref + ' vs ' + pathname)
+    // console.log(isSelected)
     return React.cloneElement(item.component, {
       key: text,
       onClick,
-      isSelected:
-        item.url === pathname ||
-        (pathname !== '/' &&
-          pathname.indexOf(itemHref) > -1 &&
-          itemHref !== '/') ||
-        // check navigation parent index
-        (navigationIndex > -1
-          ? navigationRouterStack[navigationIndex].component.props.text === text
-          : false)
+      isSelected: isSelected
     })
   }
 

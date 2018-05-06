@@ -8,6 +8,7 @@ import {
   warningLevels,
   colorLevels
 } from 'constants/warningLevels'
+import objectPath from 'object-path'
 
 const Status = styled.div`
   width: 8px;
@@ -57,8 +58,19 @@ const StatusColumn = Column.extend`
   align-items: center;
 `
 
+const FILTER = {
+  name: 'name',
+  status: 'status'
+}
+
+const FILTER_TYPE = {
+  desc: 'desc',
+  asc: 'asc'
+}
+
 export default class TableListCustom extends React.PureComponent {
   static propTypes = {
+    onFilter: PropTypes.func,
     data: PropTypes.arrayOf(
       PropTypes.shape({
         name: PropTypes.string,
@@ -73,7 +85,9 @@ export default class TableListCustom extends React.PureComponent {
   }
 
   state = {
-    stationStatus: stationStatus.GOOD
+    stationStatus: stationStatus.GOOD,
+    filter: '',
+    filterType: FILTER_TYPE.asc
   }
 
   async componentWillMount() {}
@@ -86,7 +100,7 @@ export default class TableListCustom extends React.PureComponent {
     return ''
   }
 
-  renderStatusColor(item) {
+  getColorItem(item) {
     if (item.lastLog) {
       let warLevel = warningLevels.GOOD
       let measuringLogs = item.lastLog.measuringLogs
@@ -102,17 +116,74 @@ export default class TableListCustom extends React.PureComponent {
     return colorLevels.GOOD
   }
 
+  sortNameList(data, key, asc = true) {
+    return data.sort(function(a, b) {
+      const last = objectPath.get(a, key)
+      const after = objectPath.get(b, key)
+      if (asc) {
+        if (last < after) return -1
+        if (last > after) return 1
+      } else {
+        if (last < after) return 1
+        if (last > after) return -1
+      }
+      return 0
+    })
+  }
+
+  handleFilter(filterColumn) {
+    if (!this.state.filter || this.state.filter !== filterColumn) {
+      this.setState({
+        filter: filterColumn,
+        filterType: FILTER_TYPE.asc
+      })
+    }
+    if (this.state.filter === filterColumn) {
+      this.setState({
+        filter: filterColumn,
+        filterType:
+          this.state.filterType === FILTER_TYPE.asc
+            ? FILTER_TYPE.desc
+            : FILTER_TYPE.asc
+      })
+    }
+  }
+
+  cleanData() {
+    return this.props.data.map(item => ({
+      ...item,
+      colorStatus: this.getColorItem(item)
+    }))
+  }
+
+  getData() {
+    let data = this.cleanData()
+    const filterAsc = this.state.filterType === FILTER_TYPE.asc
+    switch (this.state.filter) {
+      case FILTER.name:
+        data = this.sortNameList(data, 'name', filterAsc)
+        break
+      case FILTER.status:
+        data = this.sortNameList(data, 'colorStatus', filterAsc)
+        break
+      default:
+    }
+    return data
+  }
+
   render() {
     return (
       <div>
         <Row>
           <IndexColumn isTh>#</IndexColumn>
-          <NameColumn isTh>{translate('dashboard.tableList.name')}</NameColumn>
-          <StatusColumn isTh>
+          <NameColumn onClick={() => this.handleFilter('name')} isTh>
+            {translate('dashboard.tableList.name')}
+          </NameColumn>
+          <StatusColumn onClick={() => this.handleFilter('status')} isTh>
             {translate('dashboard.tableList.dataStatus')}
           </StatusColumn>
         </Row>
-        {this.props.data.map((item, index) => (
+        {this.getData().map((item, index) => (
           <Row
             onClick={e => this.props.onChangeItem(e, item)}
             key={item.key}
@@ -126,7 +197,7 @@ export default class TableListCustom extends React.PureComponent {
               {' '}
               <Status
                 style={{
-                  backgroundColor: this.renderStatusColor(item)
+                  backgroundColor: item.colorStatus
                 }}
               />
             </StatusColumn>

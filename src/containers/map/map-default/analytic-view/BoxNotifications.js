@@ -4,6 +4,7 @@ import BoxLayout from 'components/map/box-white-layout'
 import NotificationList from 'components/map/notification-list'
 import { Icon } from 'antd'
 import NotificationsApi from 'api/NotificationApi'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import connectWindowHeight from '../../hoc-window-height'
 
@@ -23,6 +24,10 @@ const Nodata = styled.div`
 @connectWindowHeight
 @autobind
 export default class BoxNotifications extends React.PureComponent {
+  static propTypes = {
+    onClickNotification: PropTypes.func
+  }
+
   state = {
     notifications: [],
     isLoading: false
@@ -84,7 +89,10 @@ export default class BoxNotifications extends React.PureComponent {
             </Nodata>
           )}
           {this.state.notifications.length > 0 && (
-            <NotificationList notifications={this.state.notifications} />
+            <NotificationList
+              onClickNotification={this.props.onClickNotification}
+              notifications={this.state.notifications}
+            />
           )}
         </Wrapper>
       </BoxLayout>

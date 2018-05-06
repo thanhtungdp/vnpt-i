@@ -41,9 +41,23 @@ export function logout() {
   }
 }
 
-export function userLogin(resData) {
+export function userLogin(reqData) {
   return async dispatch => {
-    const auth = await AuthApi.loginUser(resData)
+    const auth = await AuthApi.loginUser(reqData)
+    if (auth.success) {
+      setAuthToken(auth.token)
+      dispatch({
+        type: UPDATE_USER_INFO,
+        auth
+      })
+    }
+    return auth
+  }
+}
+
+export function userLogin2Factor(reqData) {
+  return async dispatch => {
+    const auth = await AuthApi.loginUser2Factor(reqData)
     if (auth.success) {
       setAuthToken(auth.token)
       dispatch({

@@ -12,6 +12,7 @@ import stationStatus from 'constants/stationStatus'
 import { warningLevelsNumber, warningLevels } from 'constants/warningLevels'
 import ROLE from 'constants/role'
 import protectRole from 'hoc/protect-role'
+import queryFormDataBrowser from 'hoc/query-formdata-browser'
 
 const MapDefaultWrapper = styled.div`
   display: flex;
@@ -34,6 +35,7 @@ const ColRight = styled.div`
   display: flex;
 `
 
+@queryFormDataBrowser([])
 @protectRole(ROLE.MAP.VIEW)
 @connectWindowHeight
 @autobind
@@ -57,11 +59,24 @@ export default class MapDefault extends React.PureComponent {
     updateState.timeUpdate = new Date()
     this.setState(updateState, () => {
       if (this.state.map) {
-        this.state.map.panTo(stationSelected.mapLocation)
+        const panToMap = {
+          lat: parseFloat(stationSelected.mapLocation.lat),
+          lng: parseFloat(stationSelected.mapLocation.lng)
+        }
+        // console.log(panToMap)
+        this.state.map.panTo(panToMap)
       }
       //this.mapView.closeInfoMarker()
       this.mapView.openInfoMarkerByKey(stationSelected.key)
     })
+  }
+
+  componentDidMount() {
+    if (this.props.formData.stationAuto) {
+      setTimeout(() => {
+        this.handleSelectStation(this.props.formData.stationAuto)
+      }, 1000)
+    }
   }
 
   async componentWillMount() {
@@ -89,6 +104,15 @@ export default class MapDefault extends React.PureComponent {
     this.setState({
       isRight: isRight
     })
+  }
+
+  handleClickNotification(nf) {
+    const stationAuto = this.state.stationsAuto.find(
+      s => s.key === nf.stationKey
+    )
+    if (stationAuto) {
+      this.handleSelectStation(stationAuto)
+    }
   }
 
   fillStatusChange(focusStatus) {
@@ -164,6 +188,7 @@ export default class MapDefault extends React.PureComponent {
             <AnalyticView
               stationsAutoList={this.state.stationsAuto}
               fillStatusChange={this.fillStatusChange}
+              onClickNotification={this.handleClickNotification}
             />
           </ColRight>
         )}

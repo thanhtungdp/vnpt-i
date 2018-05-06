@@ -12,6 +12,7 @@ const HeaderWrapper = styled.div`
 const WarningWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  padding-left: 8px;
 `
 const WarningTitle = styled.span`
   font-weight: 600;
@@ -22,7 +23,7 @@ const WrapperColor = styled.div`
   margin-top: 4px;
 `
 const ColorLevel = styled.span`
-  width: 100px;
+  width: 90px;
   height: 6px;
   background-color: ${props => props.color};
 `
@@ -31,7 +32,7 @@ const WrapperText = styled.div`
   margin-top: 4px;
 `
 const TextLevel = styled.span`
-  width: 100px;
+  width: 90px;
   font-size: 10px;
   font-style: normal;
   font-stretch: normal;

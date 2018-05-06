@@ -24,7 +24,8 @@ const MeasuringItemWrapper = styled.div`
 @autobind
 export default class MeasuringList extends React.PureComponent {
   static propTypes = {
-    data: PropTypes.arrayOf(PropTypes.shape(MeasuringItem.propTypes))
+    data: PropTypes.arrayOf(PropTypes.shape(MeasuringItem.propTypes)),
+    onClickItem: PropTypes.func
   }
   render() {
     return (
@@ -33,6 +34,7 @@ export default class MeasuringList extends React.PureComponent {
           this.props.data.length !== 0 &&
           this.props.data.map(item => (
             <MeasuringItemWrapper
+              onClick={() => this.props.onClickItem(item)}
               navigationIsOpen={this.props.navigationIsOpen}
               key={item.key}
             >

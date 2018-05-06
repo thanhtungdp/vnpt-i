@@ -38,6 +38,7 @@ export default class ControlStationTrigger extends React.PureComponent {
   async loadData() {
     const key = this.props.match.params.key
     const record = await StationControl.getStationControl(key)
+    const dataEmail = await AuthApi.getMe()
     if (record.error && record.message === 'NOT_CONFIG') {
       swal({
         title: 'Config?',
@@ -84,7 +85,7 @@ export default class ControlStationTrigger extends React.PureComponent {
           },
           isLoaded: true,
           isTriggerExceeded: record.data.LayMauVuotNguong,
-          user: await AuthApi.getMe().data
+          user: dataEmail
         },
         () => {}
       )
@@ -107,7 +108,7 @@ export default class ControlStationTrigger extends React.PureComponent {
       MaTram: key,
       ThuCong: typeControl,
       ChaiCanLay: values.amount_get,
-      Email: this.state.email
+      Email: this.state.user.data.email
     }
     if (typeControl === 0) {
       const datetime = moment(
@@ -147,7 +148,7 @@ export default class ControlStationTrigger extends React.PureComponent {
     let data = {
       Status: 0,
       MaTram: key,
-      Email: this.state.email
+      Email: this.state.user.data.email
     }
     const record = await StationControl.trigger_StationControl(data)
     if (record.success) {

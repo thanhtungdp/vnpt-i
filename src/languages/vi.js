@@ -31,6 +31,8 @@ export default {
   },
   login: {
     title: 'Đăng nhập',
+    twoFactorAlert:
+      '2 Factor Auth - Your code verify login send to {{=it.email}}!',
     form: {
       username: {
         label: 'Email',
@@ -40,7 +42,12 @@ export default {
         label: 'Mật khẩu',
         placeholder: '********'
       },
-      buttonLogin: 'Đăng nhập'
+      twoFactor: {
+        label: 'Verify code',
+        placeholder: 'xxxx'
+      },
+      buttonLogin: 'Login',
+      buttonTwoFactor: 'Verify'
     }
   },
   changePassword: {

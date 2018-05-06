@@ -69,6 +69,7 @@ class CustomGoogleMap extends PureComponent {
 
   render() {
     const defaultCenter = { lat: 10.7607494, lng: 106.6954122 }
+    console.log(this.props.stationAutoMarker)
     return (
       <GoogleMap
         ref={map => {
@@ -92,11 +93,18 @@ class CustomGoogleMap extends PureComponent {
             maxZoom={11}
           >
             {this.props.stationAutoMarker.map((item, index) => {
-              if (item.visible)
+              if (item.visible) {
+                item.measuringList.sort(function(a, b) {
+                  return a.numericalOrder - b.numericalOrder
+                })
                 return (
                   <MarkerStation
                     code={item.key}
                     visible={false}
+                    stationKey={item.key}
+                    stationId={item._id}
+                    stationTypeKey={item.stationType.key}
+                    stationType={item.stationType}
                     getRef={this.getRefMarker.bind(this)}
                     mapLocation={item.mapLocation}
                     visible={item.visible}
@@ -110,10 +118,11 @@ class CustomGoogleMap extends PureComponent {
                     stationStatus={item.status}
                     address={item.address}
                     lastLog={item.lastLog}
+                    options={item.options}
                     measuringList={item.measuringList}
                   />
                 )
-              else return <div key={item.key} />
+              } else return <div key={item.key} />
             })}
           </MarkerClusterer>
         </div>

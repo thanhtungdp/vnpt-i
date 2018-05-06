@@ -3,18 +3,43 @@ import PropTypes from 'prop-types'
 import { autobind } from 'core-decorators'
 import styled from 'styled-components'
 import { Sticky, StickyContainer } from 'react-sticky'
+import { Collapse } from 'reactstrap'
 import StationAutoList from './station-auto-list'
 import HeadStationType from './HeadStationType'
-// import Measuring from './Measuring'
-// import slug from 'constants/slug'
+import { Icon } from 'antd'
 
 const StationTypeWrapper = styled.div``
+
+const IconToggle = styled.span`
+  transition: all 0.3s linear;
+  transform: rotate(-0deg);
+  display: inline-block;
+  margin-right: 4px;
+  font-size: 10px;
+  position: relative;
+  top: -2px;
+  ${props => (props.isOpen ? `transform: rotate(90deg);` : ``)};
+`
+
+const TextSpan = styled.span`
+  &:hover {
+    cursor: pointer;
+  }
+`
 
 @autobind
 export default class StationTypeSummary extends React.PureComponent {
   static propTypes = {
     stationType: PropTypes.object,
     stationAutoList: PropTypes.array
+  }
+
+  state = {
+    isOpen: true
+  }
+
+  toggleOpen() {
+    this.setState({ isOpen: !this.state.isOpen })
   }
 
   render() {
@@ -33,12 +58,23 @@ export default class StationTypeSummary extends React.PureComponent {
                 }}
               >
                 <HeadStationType>
-                  {stationType.name} ({stationAutoList.length})
+                  <TextSpan onClick={this.toggleOpen}>
+                    <IconToggle isOpen={this.state.isOpen}>
+                      {' '}
+                      <Icon type="caret-right" />
+                    </IconToggle>
+                    {stationType.name} ({stationAutoList.length})
+                  </TextSpan>
                 </HeadStationType>
               </div>
             )}
           </Sticky>
-          <StationAutoList stationAutoList={stationAutoList} />
+          <Collapse isOpen={this.state.isOpen}>
+            <StationAutoList
+              isShowStationName={stationType.name === 'All'}
+              stationAutoList={stationAutoList}
+            />
+          </Collapse>
         </StationTypeWrapper>
       </StickyContainer>
     )
