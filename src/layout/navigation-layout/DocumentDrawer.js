@@ -5,12 +5,21 @@ import {
   AkNavigationItem,
   AkNavigationItemGroup
 } from '@atlaskit/navigation'
+import PropTypes from 'prop-types'
 import ArrowLeftIcon from '@atlaskit/icon/glyph/arrow-left'
 import Icon from 'themes/icon'
 import slug from 'constants/slug'
 import { WrapperLinkComponent } from 'utils/sidebarNavigation'
 
 export default class DocumentDrawer extends PureComponent {
+  static propTypes = {
+    isOpen: PropTypes.bool
+  }
+
+  static defaultProps = {
+    isOpen: false
+  }
+
   render() {
     return (
       <AkCreateDrawer

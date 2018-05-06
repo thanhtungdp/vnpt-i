@@ -11,6 +11,8 @@ import BookIcon from '@atlaskit/icon/glyph/book'
 import HipchatIcon from '@atlaskit/icon/glyph/hipchat'
 import PersonIcon from '@atlaskit/icon/glyph/person'
 import PeopleGroupIcon from '@atlaskit/icon/glyph/people-group'
+import CreditcardIcon from '@atlaskit/icon/glyph/creditcard'
+
 export default {
   quizLists: <QuizListIcon label={''} size={'medium'} />,
   users: <UserIcon label={''} size={'medium'} />,
@@ -23,5 +25,6 @@ export default {
   book: <BookIcon label={''} size={'medium'} />,
   hipchat: <HipchatIcon label={''} size={'medium'} />,
   person: <PersonIcon label={''} size={'medium'} />,
-  peopleGroup: <PeopleGroupIcon label={''} size={'medium'} />
+  peopleGroup: <PeopleGroupIcon label={''} size={'medium'} />,
+  creditCard: <CreditcardIcon label={''} size={'medium'} />
 }

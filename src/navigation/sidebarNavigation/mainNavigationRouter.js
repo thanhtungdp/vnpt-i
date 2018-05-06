@@ -151,6 +151,18 @@ const roleMenu = {
     />
   )
 }
+
+const subscriptionMenu = {
+  component: protectRole(ROLE.ROLE.VIEW)(
+    <AkNavigationItem
+      linkComponent={WrapperLinkComponent}
+      href={slug.subscription.base}
+      icon={Icon.creditCard}
+      text="Subscription"
+    />
+  )
+}
+
 export default [
   dashboardMenu,
   monitoringMenu,
@@ -164,5 +176,6 @@ export default [
   stationAutoMenu,
   groupAdmin,
   userMenu,
-  roleMenu
+  roleMenu,
+  subscriptionMenu
 ]

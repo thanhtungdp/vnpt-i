@@ -19,6 +19,7 @@ import EmailConfirm from 'containers/auth/reset-password/email-confirm'
 import CodeConfirm from 'containers/auth/reset-password/code-confirm'
 import ResetPassword from 'containers/auth/reset-password'
 import UserRoute from 'containers/user'
+import SubscriptionRoute from 'containers/subscription'
 import RoleRoute from 'containers/role'
 import ControlStation from 'containers/control-station'
 import Camera from 'containers/camera'
@@ -49,6 +50,10 @@ export default class RouteDefault extends React.Component {
         <Route path={slug.login} component={LoginRoute} />
         <LayoutRoute path={slug.user.base} component={UserRoute} />
         <LayoutRoute path={slug.role.base} component={RoleRoute} />
+        <LayoutRoute
+          path={slug.subscription.base}
+          component={SubscriptionRoute}
+        />
 
         <LayoutRoute
           path={slug.controlStation.base}
