@@ -78,5 +78,8 @@ export default {
     base: '/camera',
     camera: '/camera/:key',
     cameraWithKey: '/camera'
+  },
+  subscription: {
+    base: '/subscription'
   }
 }

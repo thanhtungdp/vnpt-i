@@ -12,6 +12,9 @@ const MeasuringItemWrapper = styled.div`
   justify-content: space-between;
   border-radius: 8px;
   border: solid 1px ${props => props.color};
+  &:hover {
+    cursor: pointer;
+  }
 `
 const MeasuringItemText = styled.div`
   display: flex;

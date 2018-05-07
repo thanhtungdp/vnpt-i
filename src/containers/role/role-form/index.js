@@ -9,9 +9,11 @@ import CheckBoxRole from 'components/elements/checkbox-role'
 import Button from 'components/elements/button/index'
 import Clearfix from 'components/elements/clearfix/index'
 import createLanguage, { langPropTypes } from 'hoc/create-lang'
+import RoleTableCheck from './role-table-check'
 
 const FInputLabel = createValidateComponent(InputLabel)
 const FCheckBoxRole = createValidateComponent(CheckBoxRole)
+const FRoleTableCheck = createValidateComponent(RoleTableCheck)
 
 function validate(values) {
   const errors = {}
@@ -60,6 +62,7 @@ export default class RoleForm extends PureComponent {
           </Col>
         </Row>
         <Clearfix height={16} />
+        <Field name="menu" component={FRoleTableCheck} />
         <Row>
           <Col>
             <Field name="menu" component={FCheckBoxRole} />

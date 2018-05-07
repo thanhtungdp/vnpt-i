@@ -160,7 +160,8 @@ export default class BasicNestedNavigation extends React.Component {
       <Component
         key={key}
         onBackButton={() => this.toggleDrawer(key)}
-        isOpen={this.state.drawers[key]}
+        isOpen={this.state.drawers[key] ? true : false}
+        primaryIcon={<span />}
       />
     )
   }
