@@ -39,10 +39,10 @@ export default class MeasuringForm extends React.PureComponent {
     const { form: { getFieldDecorator }, lang: { t } } = this.props
     const formItemLayout = {
       labelCol: {
-        sm: { span: 4, offset: 0 }
+        sm: { span: 6, offset: 0 }
       },
       wrapperCol: {
-        sm: { span: 19, offset: 0 }
+        sm: { span: 16, offset: 0 }
       }
     }
 
@@ -106,7 +106,7 @@ export default class MeasuringForm extends React.PureComponent {
           <Col span={12}>
             <FormItem
               {...formItemLayout}
-              labelCol={{ span: 0 }}
+             // labelCol={{ span: 7}}
               label={t('measuringManager.form.numericalOrder.label')}
             >
               {getFieldDecorator('numericalOrder', {
