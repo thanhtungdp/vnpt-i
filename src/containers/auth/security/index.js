@@ -46,7 +46,7 @@ export class SecurityForm extends PureComponent {
         />
         <div>
           <Note>
-            If you turn on Two Factor Authentication feature, The system will
+            If you turn on Two-Factor Authentication feature, The system will
             send the verify code to your email address every time you sign in to
             app iLotusLand.
           </Note>

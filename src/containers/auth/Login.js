@@ -95,7 +95,6 @@ export default class Login extends PureComponent {
       if (user.error) {
         this.userError(user)
       } else {
-        console.log(user.data.twoFactorAuth)
         if (user.data.twoFactorAuth && user.data.twoFactorAuth.enable) {
           this.setState({
             isTwoFactorAuth: true,

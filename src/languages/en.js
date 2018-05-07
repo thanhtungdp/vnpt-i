@@ -461,8 +461,8 @@ export default {
   },
   security: {
     breadcrumb: 'Security setting',
-    label: 'Two Factor Authentication',
-    success: 'Change Two factor authentication successfully'
+    label: 'Two-Factor Authentication',
+    success: 'Change Two-Factor Authentication successfully'
   },
   changePassword: {
     form: {
