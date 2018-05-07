@@ -24,8 +24,8 @@ export default {
     sortByStationName: 'Sort by Station name',
     sortByValues: 'Sort by Values',
     limit: 'Limit',
-		dataLoss: 'Data loss at',
-		notUse: 'Not use',
+    dataLoss: 'Data loss at',
+    notUse: 'Not use'
   },
   controlStation: {
     trigger: {
@@ -457,7 +457,12 @@ export default {
     }
   },
   profileUser: {
-    success: 'Change infomation successfully'
+    success: 'Change information successfully'
+  },
+  security: {
+    breadcrumb: 'Security setting',
+    label: 'Two Factor Authentication',
+    success: 'Change Two factor authentication successfully'
   },
   changePassword: {
     form: {

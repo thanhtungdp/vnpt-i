@@ -63,6 +63,7 @@ export default {
     editWithKey: '/user/edit',
     changePassword: '/user/change-password',
     profile: '/user/profile',
+    security: '/user/security',
     resetPassword: '/user/reset-password',
     rule: '/user/rule/:key',
     ruleWithKey: '/user/rule'

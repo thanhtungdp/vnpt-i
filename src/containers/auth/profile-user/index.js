@@ -65,16 +65,18 @@ export class ProfileUserForm extends PureComponent {
     return (
       <form onSubmit={this.props.handleSubmit(this.props.onSubmit.bind(this))}>
         <Row>
-          <Col md={6}>
+          <Col md={12}>
             <Field
-              disabled={true}
-              label="UserName"
-              name="username"
-              component={FInput}
+              label="Avatar"
+              name="avatar"
+              component={FUpdateLoadImage}
               size="small"
             />
           </Col>
-          <Col md={6}>
+        </Row>
+        <Clearfix />
+        <Row>
+          <Col md={12}>
             <Field
               disabled={true}
               label="Email"
@@ -119,17 +121,6 @@ export class ProfileUserForm extends PureComponent {
               name="phone"
               component={FInputPhoneNumber}
               size="large"
-            />
-          </Col>
-        </Row>
-        <Clearfix />
-        <Row>
-          <Col md={12}>
-            <Field
-              label="Avatar"
-              name="avatar"
-              component={FUpdateLoadImage}
-              size="small"
             />
           </Col>
         </Row>

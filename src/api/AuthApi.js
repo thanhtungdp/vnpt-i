@@ -21,6 +21,10 @@ export function putProfile(_id, data) {
   return putFetch(AUTH_API + '/user/organization/' + _id, data)
 }
 
+export function putSecurity(data) {
+  return putFetch(AUTH_API + '/user/organization/security/2fa', data)
+}
+
 //Send Code
 export function GetForgotSendCode(email) {
   return getFetch(AUTH_API + `/auth/forgot-password?email=${email}`)
@@ -42,6 +46,7 @@ export default {
   getMe,
   changePassword,
   putProfile,
+  putSecurity,
   GetForgotSendCode,
   PostConfirmCode,
   PutResetPassword
