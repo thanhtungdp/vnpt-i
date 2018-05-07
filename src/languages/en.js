@@ -23,7 +23,9 @@ export default {
     ungroup: 'Ungroup',
     sortByStationName: 'Sort by Station name',
     sortByValues: 'Sort by Values',
-    limit: 'Limit'
+    limit: 'Limit',
+		dataLoss: 'Data loss at',
+		notUse: 'Not use',
   },
   controlStation: {
     trigger: {

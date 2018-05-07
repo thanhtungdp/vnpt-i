@@ -8,6 +8,7 @@ import Clearfix from 'components/elements/clearfix'
 import { SHAPE } from 'themes/color'
 import { Icon, Tooltip } from 'antd'
 import ROLE from 'constants/role'
+import stationStatus from 'constants/stationStatus'
 import protectRole from 'hoc/protect-role'
 
 const StationHeadItemWrapper = styled.div`
@@ -58,7 +59,7 @@ const WrapperNameStationTypeName = styled.div`
 `
 
 const ReceivedAt = styled.span`
-  color: ${SHAPE.GRAYTEXT};
+  color: ${props => (props.status !== 'GOOD' ? SHAPE.PRIMARY : '#000')};
 `
 
 const ActionWrapper = styled.div`
@@ -88,6 +89,7 @@ export default class StationAutoHead extends React.PureComponent {
     orderNumber: PropTypes.number,
     stationID: PropTypes.string,
     options: PropTypes.object,
+    status: PropTypes.string,
     onClickDataSearch: PropTypes.func,
     onClickViewMap: PropTypes.func
   }
@@ -102,6 +104,7 @@ export default class StationAutoHead extends React.PureComponent {
       orderNumber,
       stationID,
       options,
+      status,
       _id
     } = this.props
     const isCamera = options && options.camera && options.camera.allowed
@@ -120,19 +123,11 @@ export default class StationAutoHead extends React.PureComponent {
             <StationName>{name}</StationName>
           )}
           <Clearfix width={8} />
-          <ReceivedAt>{receivedAt ? ' - ' + receivedAt : ''}</ReceivedAt>
+          <ReceivedAt status={status}>
+            {receivedAt ? ' | ' + receivedAt : ''}
+          </ReceivedAt>
         </TitleWrapper>
         <ActionWrapper>
-          <div onClick={this.props.onClickDataSearch} className="actionItem">
-            <Tooltip title="Data search">
-              <Icon type="area-chart" />
-            </Tooltip>
-          </div>
-          <div onClick={this.props.onClickViewMap} className="actionItem">
-            <Tooltip title="View in map">
-              <i className="fa fa-map-marker" />
-            </Tooltip>
-          </div>
           {isSampling &&
             protectRole(ROLE.MONITORING.CONTROL)(
               <Link
@@ -158,6 +153,16 @@ export default class StationAutoHead extends React.PureComponent {
                 </Tooltip>
               </Link>
             )}
+          <div onClick={this.props.onClickViewMap} className="actionItem">
+            <Tooltip title="View in map">
+              <i className="fa fa-map-marker" />
+            </Tooltip>
+          </div>
+          <div onClick={this.props.onClickDataSearch} className="actionItem">
+            <Tooltip title="Data search">
+              <Icon type="area-chart" />
+            </Tooltip>
+          </div>
         </ActionWrapper>
       </StationHeadItemWrapper>
     )

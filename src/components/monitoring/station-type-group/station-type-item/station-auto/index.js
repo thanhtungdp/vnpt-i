@@ -7,6 +7,8 @@ import MeasuringList from './measuring/measuring-list'
 import PropTypes from 'prop-types'
 import moment from 'moment'
 import slug from 'constants/slug'
+import stationStatus from 'constants/stationStatus'
+import { translate } from 'hoc/create-lang'
 
 const StationAutoWrapper = styled.div`
   background-color: #ffffff;
@@ -98,14 +100,21 @@ export default class StationAutoItem extends React.PureComponent {
       isShowStationName,
       stationType,
       options,
+      status,
       _id
     } = this.props
     let receivedAt = ''
     if (lastLog && lastLog.receivedAt) {
       receivedAt = moment(lastLog.receivedAt)
-        .format('DD/MM/YYYY HH:MM')
+        .format('YYYY-MM-DD HH:MM')
         .toString()
+      if (status === stationStatus.DATA_LOSS) {
+        receivedAt = `${translate('monitoring.dataLoss')}  ${receivedAt}`
+      }
+    } else {
+      receivedAt = translate('monitoring.notUse')
     }
+
     return (
       <StationAutoWrapper className="stationAutoWrapper">
         <StationAutoHead
@@ -115,6 +124,7 @@ export default class StationAutoItem extends React.PureComponent {
           orderNumber={orderNumber}
           stationID={stationID}
           options={options}
+          status={status}
           onClickDataSearch={this.handleClickDataSearch}
           onClickViewMap={this.handleClickViewMap}
           _id={_id}
