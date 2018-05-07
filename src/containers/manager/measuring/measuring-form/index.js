@@ -106,7 +106,7 @@ export default class MeasuringForm extends React.PureComponent {
           <Col span={12}>
             <FormItem
               {...formItemLayout}
-             // labelCol={{ span: 7}}
+              // labelCol={{ span: 7}}
               label={t('measuringManager.form.numericalOrder.label')}
             >
               {getFieldDecorator('numericalOrder', {
