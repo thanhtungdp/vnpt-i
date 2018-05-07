@@ -28,7 +28,7 @@ export default class SummaryList extends React.PureComponent {
       <SummaryListWrapper>
         {this.props.data.map(item => (
           <SummaryItemContainer key={item.name}>
-            <SummaryItem {...item} />
+            <SummaryItem {...item} stationTypeKey={item.key} />
           </SummaryItemContainer>
         ))}
       </SummaryListWrapper>

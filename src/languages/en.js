@@ -10,7 +10,7 @@ export default {
     exceeded: 'Exceeded',
     exceededPreparing: 'Exceeded preparing',
     exceededTendency: 'Exceeded tendency',
-    realtimeTracking: 'Realtime Tracking',
+    viewInMonitoring: 'View in monitoring',
     viewInMap: 'View in map',
     viewMore: 'View More',
     tableList: {

@@ -97,6 +97,7 @@ export default class OverviewDashboard extends Component {
     return this.state.stationTypeList.map((item, index) => ({
       color: item.color ? item.color : arrayColor[index], //arrayColor[index],
       name: item.name,
+      key: item.key,
       image: item.icon ? item.icon : arrayIcon[index],
       number: this.state.stationCount[item.key]
     }))

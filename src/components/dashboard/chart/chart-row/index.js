@@ -50,7 +50,7 @@ const TextSpan = styled.span`
 `
 
 const LinkSpan = styled.span`
-  color: #8e8e8e;
+  color: #000;
   &:hover {
     cursor: pointer;
   }
@@ -129,7 +129,7 @@ export class ChartSummary extends React.Component {
       <Menu>
         <Menu.Item key="0">
           <Link to={slug.monitoring.base + `?Id=${stationType.key}`}>
-            {translate('dashboard.realtimeTracking')}
+            {translate('dashboard.viewInMonitoring')}
           </Link>
         </Menu.Item>
         <Menu.Item key="1">
