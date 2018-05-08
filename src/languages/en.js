@@ -58,7 +58,13 @@ export default {
     amountToGet: 'Amount to get',
     timer: 'Timer',
     date: 'Date',
-    typeControl: 'Type control'
+    typeControl: 'Type control',
+    orderByBottle: 'Order by bottle',
+    dateTime: 'Datetime',
+    content: 'Content',
+    email: 'Email',
+    tagName: 'Tag name',
+    configTotal: 'Config Total'
   },
   map: {
     menuRight: {
@@ -539,6 +545,7 @@ export default {
     edit: 'Edit',
     delete: 'Delete',
     save: 'Save',
+    reset: 'Reset',
     onSave: {
       add: {
         success: 'Add success!',
@@ -556,7 +563,11 @@ export default {
     search: 'Search',
     error: 'Something went wrong!!!'
   },
+  success: {
+    text: 'Success'
+  },
   error: {
+    text: 'Erros',
     require: 'Require',
     email: 'Invalid email address'
   },

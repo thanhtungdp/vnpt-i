@@ -7,25 +7,26 @@ import moment from 'moment'
 import slug from 'constants/slug'
 import { autobind } from 'core-decorators'
 import StationControl from 'api/StationControl'
+import { translate } from 'hoc/create-lang'
 
 const columns = [
   {
-    title: 'Order By Bottle',
+    title: translate('controlStation.orderByBottle'),
     dataIndex: 'LayMauChai',
     width: 150,
     fixed: 'left'
   },
   {
-    title: 'DateTime',
+    title: translate('controlStation.dateTime'),
     dataIndex: 'ThoiGian',
     width: 150
   },
   {
-    title: 'Content',
+    title: translate('controlStation.content'),
     dataIndex: 'NoiDung'
   },
   {
-    title: 'Email',
+    title: translate('c.email'),
     dataIndex: 'Email'
   }
 ]

@@ -51,7 +51,7 @@ export class ControlStationConfigForm extends PureComponent {
           <Col span={24}>
             <Field
               disabled={false}
-              label={'Tag Name'}
+              label={translate('controlStation.tagName')}
               name={'tagName'}
               component={FInputLabel}
             />
@@ -64,7 +64,7 @@ export class ControlStationConfigForm extends PureComponent {
               name={'total'}
               editable={true}
               disabled={false}
-              label={'configTotal'}
+              label={translate('controlStation.configTotal')}
               component={FInputNumberCell}
             />
           </Col>
@@ -80,7 +80,7 @@ export class ControlStationConfigForm extends PureComponent {
               isLoading={this.props.submitting}
               onClick={this.props.handleSubmit(this.props.onSubmit.bind(this))}
             >
-              SAVE
+              {translate('addon.save')}
             </Button>
           </Col>
           <Col span={12}>
@@ -92,7 +92,7 @@ export class ControlStationConfigForm extends PureComponent {
                 this.props.handleReset.bind(this)
               )}
             >
-              RESET
+              {translate('addon.reset')}
             </Button>
           </Col>
         </Row>
@@ -152,13 +152,13 @@ export default class ControlStationConfig extends PureComponent {
           ? translate('controlStation.config.success')
           : translate('controlStation.config.reset')
       swal({
-        title: 'Success',
+        title: translate('controlStation.success.text'),
         type: 'success',
         text: message
       })
     } else {
       swal({
-        title: 'Error',
+        title: translate('controlStation.error.text'),
         type: 'error',
         text: record.message
       })
