@@ -1,9 +1,8 @@
 import { getFetch } from 'utils/fetch'
-
-const urlNotification = `http://192.168.252.121:5000/fcm-messages`
+import { FCM_API } from 'config'
 
 export function getNotification() {
-  let urlSearch = `${urlNotification}`
+  let urlSearch = `${FCM_API}/fcm-messages`
   return getFetch(urlSearch)
 }
 
