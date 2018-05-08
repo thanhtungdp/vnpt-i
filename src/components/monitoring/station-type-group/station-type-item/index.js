@@ -7,6 +7,7 @@ import { Collapse } from 'reactstrap'
 import StationAutoList from './station-auto-list'
 import HeadStationType from './HeadStationType'
 import { Icon } from 'antd'
+import { translate } from 'hoc/create-lang'
 
 const StationTypeWrapper = styled.div``
 

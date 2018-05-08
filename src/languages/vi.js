@@ -7,6 +7,21 @@ export default {
     exceededPreparing: 'Chuẩn bị vượt',
     exceededTendency: 'Xu hướng vượt'
   },
+  monitoring: {
+    group: 'Nhóm',
+    ungroup: 'Bỏ nhóm',
+    sortByStationName: 'Sắp xếp theo tên',
+    sortByValues: 'Sắp xếp theo giá trị',
+    limit: 'Giới hạn',
+    keywordSearch: 'Tìm kiếm từ khóa',
+    selectGroup: 'Sắp xếp',
+    selectOrder: 'Sắp xếp thứ tự theo',
+    selectSationType: 'Loại trạm',
+    dataSearch: 'Tra cứu số liệu',
+    viewInMap: 'Xem trên bản đồ',
+    samPling: 'Lấy mẫu',
+    camera: 'Camera theo dõi'
+  },
   error: {
     require: 'Require',
     email: 'Invalid email address'
@@ -244,7 +259,8 @@ export default {
       },
       advanced: {
         label: 'Advanced'
-      }
+      },
+      all: 'Tất cả'
     }
   },
   avgSearchFrom: {
@@ -290,6 +306,13 @@ export default {
         label: 'Received at'
       }
     }
+  },
+  warningLevels: {
+    title: 'CÁC MỰC ĐỘ CẢNH BÁO',
+    good: 'Tốt',
+    exceedTendency: 'Xu hướng vượt',
+    exceedPreparing: 'Chuẩn bị vượt',
+    exceed: 'Vượt quy chuẩn'
   },
   addon: {
     create: 'Create',

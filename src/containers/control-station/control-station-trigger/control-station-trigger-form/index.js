@@ -13,8 +13,12 @@ import Clearfix from 'components/elements/clearfix/index'
 import RadioGroupCustom from 'components/elements/radio-group/index'
 import TimerPicker from 'components/elements/time-picker/index'
 import CalendarCustom from 'components/elements/datetime-picker/index'
+import { translate } from 'hoc/create-lang'
 
-const items = [{ label: 'Bằng tay', value: 1 }, { label: 'Tự động', value: 0 }]
+const items = [
+  { label: translate('controlStation.handMade'), value: 1 },
+  { label: translate('controlStation.autoMatic'), value: 0 }
+]
 
 const FTimerPicker = createValidateComponent(TimerPicker)
 const FInputNumberCell = createValidateComponent(InputNumberCell)
@@ -71,7 +75,7 @@ export default class ControlStationTriggerForm extends React.PureComponent {
               name="total"
               editable={true}
               disabled={true}
-              label={'Total'}
+              label={translate('controlStation.total')}
               component={FInputNumberCell}
             />
           </Col>
@@ -80,7 +84,7 @@ export default class ControlStationTriggerForm extends React.PureComponent {
               name="totalTaken"
               editable={true}
               disabled={true}
-              label={'Total have taken'}
+              label={translate('controlStation.totalHaveTaken')}
               component={FInputNumberCell}
             />
           </Col>
@@ -90,7 +94,7 @@ export default class ControlStationTriggerForm extends React.PureComponent {
           <Col span={8}>
             <Field
               name="typeControl"
-              label={'Type control'}
+              label={translate('controlStation.typeControl')}
               onChange={items => this.changeTypeControl(items)}
               dataItems={items}
               component={FRadioGroupCustom}
@@ -103,7 +107,7 @@ export default class ControlStationTriggerForm extends React.PureComponent {
             <Field
               name="amount_get"
               editable={true}
-              label={'Amount to get'}
+              label={translate('controlStation.amountToGet')}
               component={FInputNumberCell}
             />
           </Col>
@@ -113,10 +117,18 @@ export default class ControlStationTriggerForm extends React.PureComponent {
             <Clearfix height={16} />
             <Row gutter={50} type="flex" justify="center">
               <Col span={12}>
-                <Field name="timer" label={'Timer'} component={FTimerPicker} />
+                <Field
+                  name="timer"
+                  label={translate('controlStation.timer')}
+                  component={FTimerPicker}
+                />
               </Col>
               <Col span={12}>
-                <Field name="date" label={'Date'} component={FCalendarCustom} />
+                <Field
+                  name="date"
+                  label={translate('controlStation.date')}
+                  component={FCalendarCustom}
+                />
               </Col>
             </Row>
             <Clearfix height={16} />

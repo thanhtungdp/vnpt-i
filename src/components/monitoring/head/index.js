@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { autobind } from 'core-decorators'
 import styled from 'styled-components'
 import { colorLevels } from 'constants/warningLevels'
+import { translate } from 'hoc/create-lang'
 
 const HeaderWrapper = styled.div`
   display: flex;
@@ -56,7 +57,7 @@ export default class Header extends React.PureComponent {
       <HeaderWrapper>
         {this.props.children}
         <WarningWrapper>
-          <WarningTitle>WARNING LEVELS</WarningTitle>
+          <WarningTitle> {translate('warningLevels.title')}</WarningTitle>
           <WrapperColor>
             <ColorLevel color={colorLevels.GOOD} />
             <ColorLevel color={colorLevels.EXCEEDED_TENDENCY} />
@@ -64,10 +65,10 @@ export default class Header extends React.PureComponent {
             <ColorLevel color={colorLevels.EXCEEDED} />
           </WrapperColor>
           <WrapperText>
-            <TextLevel>Good</TextLevel>
-            <TextLevel>Exceed tendency</TextLevel>
-            <TextLevel>Exceed preparing</TextLevel>
-            <TextLevel>Exceed</TextLevel>
+            <TextLevel>{translate('warningLevels.good')}</TextLevel>
+            <TextLevel>{translate('warningLevels.exceedTendency')}</TextLevel>
+            <TextLevel>{translate('warningLevels.exceedPreparing')}</TextLevel>
+            <TextLevel>{translate('warningLevels.exceed')}</TextLevel>
           </WrapperText>
         </WarningWrapper>
       </HeaderWrapper>

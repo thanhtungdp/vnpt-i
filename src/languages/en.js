@@ -23,7 +23,16 @@ export default {
     ungroup: 'Ungroup',
     sortByStationName: 'Sort by Station name',
     sortByValues: 'Sort by Values',
-    limit: 'Limit'
+    limit: 'Limit',
+    keywordSearch: 'Search key word',
+    selectGroup: 'Select group',
+    selectOrder: 'Order by',
+    selectSationType: 'Station type',
+    dataSearch: 'Data search',
+    viewInMap: 'View in map',
+    samPling: 'Sampling',
+    camera: 'Camera',
+    controlSationName: 'Control Sation'
   },
   controlStation: {
     trigger: {
@@ -39,7 +48,15 @@ export default {
       base: 'Config',
       reset: 'Reset success',
       success: 'Config success'
-    }
+    },
+    handMade: 'Handmade',
+    autoMatic: 'Automatic',
+    total: 'Total',
+    totalHaveTaken: 'Total have taken',
+    amountToGet: 'Amount to get',
+    timer: 'Timer',
+    date: 'Date',
+    typeControl: 'Type control'
   },
   map: {
     menuRight: {
@@ -88,7 +105,8 @@ export default {
       },
       advanced: {
         label: 'Advanced'
-      }
+      },
+      all: 'All'
     }
   },
   avgSearchFrom: {
@@ -501,6 +519,13 @@ export default {
       buttonLogin: 'Login',
       buttonTwoFactor: 'Verify'
     }
+  },
+  warningLevels: {
+    title: 'WARNING LEVELS',
+    good: 'Good',
+    exceedTendency: 'Exceed tendency',
+    exceedPreparing: 'Exceed preparing',
+    exceed: 'Exceed'
   },
   addon: {
     create: 'Create',

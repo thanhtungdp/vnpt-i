@@ -9,6 +9,7 @@ import { SHAPE } from 'themes/color'
 import { Icon, Tooltip } from 'antd'
 import ROLE from 'constants/role'
 import protectRole from 'hoc/protect-role'
+import { translate } from 'hoc/create-lang'
 
 const StationHeadItemWrapper = styled.div`
   display: flex;
@@ -124,12 +125,12 @@ export default class StationAutoHead extends React.PureComponent {
         </TitleWrapper>
         <ActionWrapper>
           <div onClick={this.props.onClickDataSearch} className="actionItem">
-            <Tooltip title="Data search">
+            <Tooltip title={translate('monitoring.dataSearch')}>
               <Icon type="area-chart" />
             </Tooltip>
           </div>
           <div onClick={this.props.onClickViewMap} className="actionItem">
-            <Tooltip title="View in map">
+            <Tooltip title={translate('monitoring.viewInMap')}>
               <i className="fa fa-map-marker" />
             </Tooltip>
           </div>
@@ -141,7 +142,7 @@ export default class StationAutoHead extends React.PureComponent {
                   slug.controlStation.triggerWithKey + `/${stationID}/${name}`
                 }
               >
-                <Tooltip title="Sampling">
+                <Tooltip title={translate('monitoring.samPling')}>
                   <Icon type="weibo" style={{ fontSize: 16 }} />
                 </Tooltip>
               </Link>
@@ -153,7 +154,7 @@ export default class StationAutoHead extends React.PureComponent {
                 to={slug.monitoring.viewCameraWithKey + '/' + _id}
                 style={{ display: 'flex' }}
               >
-                <Tooltip title="Camera">
+                <Tooltip title={translate('monitoring.camera')}>
                   <Icon type="camera" style={{ fontSize: 16 }} />
                 </Tooltip>
               </Link>

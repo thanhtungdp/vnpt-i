@@ -19,6 +19,7 @@ import {
   ORDER_OPTIONS
 } from 'components/monitoring/filter/options'
 import createContentLoader from 'hoc/content-loader'
+import { translate } from 'hoc/create-lang'
 
 const ListLoader = createContentLoader({
   component: <ListLoaderCp />,
@@ -180,7 +181,7 @@ export default class MonitoringGeneral extends React.Component {
       {
         stationType: {
           ...stationTypeList[0],
-          name: 'All'
+          name: translate('dataSearchFrom.form.all')
         },
         stationAutoList: newStationAutoList
       }
@@ -235,7 +236,7 @@ export default class MonitoringGeneral extends React.Component {
       })
     }
 
-    // filter by ABC
+    // filter by values
     if (this.state.filter.order === monitoringFilter.ORDER.NUMBER) {
       stationTypeList = this.sortNameList(stationTypeList, 'totalWarning').map(
         stationType => {
