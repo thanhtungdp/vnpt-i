@@ -20,7 +20,7 @@ export default {
   },
   monitoring: {
     group: 'Group',
-    ungroup: 'Ungroup',
+    unGroup: 'UnGroup',
     sortByStationName: 'Sort by Station name',
     sortByValues: 'Sort by Values',
     limit: 'Limit',
@@ -51,8 +51,8 @@ export default {
       reset: 'Reset success',
       success: 'Config success'
     },
-    handMade: 'Handmade',
-    autoMatic: 'Automatic',
+    handmade: 'Handmade',
+    automatic: 'Automatic',
     total: 'Total',
     totalHaveTaken: 'Total have taken',
     amountToGet: 'Amount to get',
