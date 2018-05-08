@@ -3,6 +3,7 @@ import { Select } from 'antd'
 import PropTypes from 'prop-types'
 import CategoryApi from 'api/CategoryApi'
 import { autobind } from 'core-decorators'
+import { translate } from 'hoc/create-lang'
 
 @autobind
 export default class SelectStationType extends PureComponent {
@@ -22,6 +23,7 @@ export default class SelectStationType extends PureComponent {
   async componentDidMount() {
     let query = {}
     const stationTypes = await CategoryApi.getStationTypes({}, query)
+    console.log(stationTypes)
     if (stationTypes.success)
       this.setState({
         stationTypes: stationTypes.data,
@@ -46,7 +48,11 @@ export default class SelectStationType extends PureComponent {
         onChange={this.onChange}
         value={this.state.value}
       >
-        {this.props.isShowAll && <Select.Option value={''}>All</Select.Option>}
+        {this.props.isShowAll && (
+          <Select.Option value={''}>
+            {translate('dataSearchFrom.form.all')}
+          </Select.Option>
+        )}
         {this.state.stationTypes.map(stationType => (
           <Select.Option key={stationType.key} value={stationType.key}>
             {stationType.name}

@@ -8,12 +8,12 @@ import SelectType from 'components/elements/select-station-type'
 import Clearfix from 'components/elements/clearfix'
 import update from 'react-addons-update'
 import { GROUP_OPTIONS, ORDER_OPTIONS } from './options'
+import { translate } from 'hoc/create-lang'
 
 const MonitoringHeaderFilterWrapper = styled.div`
   display: flex;
   flex: 1;
 `
-
 @autobind
 export default class MonitoringHeaderFilter extends React.PureComponent {
   static propTypes = {
@@ -44,27 +44,53 @@ export default class MonitoringHeaderFilter extends React.PureComponent {
         <div style={{ width: '25%' }}>
           <Input
             placeholder="Search"
-            {...this.getPropsSelect('search', 'Keyword search')}
+            {...this.getPropsSelect(
+              'search',
+              translate('monitoring.keywordSearch')
+            )}
           />
         </div>
         <Clearfix width={8} />
         <SelectAnt
           style={{ width: '25%' }}
-          options={GROUP_OPTIONS}
-          {...this.getPropsSelect('group', 'Select group')}
+          //  options={GROUP_OPTIONS}
+          options={[
+            {
+              value: 'group',
+              name: translate('monitoring.group')
+            },
+            {
+              value: 'ungroup',
+              name: translate('monitoring.ungroup')
+            }
+          ]}
+          {...this.getPropsSelect('group', translate('monitoring.selectGroup'))}
         />
         <Clearfix width={8} />
         <SelectAnt
           style={{ width: '25%' }}
-          options={ORDER_OPTIONS}
-          {...this.getPropsSelect('order', 'Select order')}
+          //  options={ORDER_OPTIONS}
+          options={[
+            {
+              value: 'name',
+              name: translate('monitoring.sortByStationName')
+            },
+            {
+              value: 'number',
+              name: translate('monitoring.sortByValues')
+            }
+          ]}
+          {...this.getPropsSelect('order', translate('monitoring.selectOrder'))}
         />
         <Clearfix width={8} />
         <SelectType
           style={{ width: '25%' }}
           placeholder="Select station type"
           isShowAll
-          {...this.getPropsSelect('stationType', 'Select stationtype')}
+          {...this.getPropsSelect(
+            'stationType',
+            translate('monitoring.selectSationType')
+          )}
         />
       </MonitoringHeaderFilterWrapper>
     )
