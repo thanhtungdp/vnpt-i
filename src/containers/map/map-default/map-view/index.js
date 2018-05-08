@@ -1,16 +1,17 @@
 /* eslint-disable */
 import React, { PureComponent } from 'react'
 import styled from 'styled-components'
-import { GoogleMap, withScriptjs, withGoogleMap } from 'react-google-maps'
+import {
+  GoogleMap,
+  withScriptjs,
+  withGoogleMap,
+  Polygon
+} from 'react-google-maps'
 import { getGoogleMapProps } from 'components/map/utils'
-import { getStationAutos } from 'api/StationAuto'
-import { resolveMapLocation } from 'utils/resolveMapLocation'
 import MarkerStation from 'components/map/marker'
 import MarkerClusterer from 'react-google-maps/lib/components/addons/MarkerClusterer'
-import withSizes from 'react-sizes'
 import LevelIntro from 'components/map/level-intro'
 import PropTypes from 'prop-types'
-import Marker from 'components/map/utils/marker-with-label-animate'
 import { autobind } from 'core-decorators'
 import { warningLevelsNumber, warningLevels } from 'constants/warningLevels'
 
@@ -44,6 +45,16 @@ class CustomGoogleMap extends PureComponent {
 
   async componentDidMount() {
     if (this.props.getMap) this.props.getMap(this.map)
+    const bounds = new window.google.maps.LatLngBounds()
+    this.props.stationAutoMarker.map(item => {
+      bounds.extend(
+        new window.google.maps.LatLng(
+          item.mapLocation.lat,
+          item.mapLocation.long
+        )
+      )
+    })
+    //this.map.fitBounds(bounds)
   }
 
   getRefMarker(marker) {
@@ -69,7 +80,6 @@ class CustomGoogleMap extends PureComponent {
 
   render() {
     const defaultCenter = { lat: 10.7607494, lng: 106.6954122 }
-    console.log(this.props.stationAutoMarker)
     return (
       <GoogleMap
         ref={map => {
@@ -124,6 +134,22 @@ class CustomGoogleMap extends PureComponent {
                 )
               } else return <div key={item.key} />
             })}
+            <Polygon
+              paths={[
+                { lat: 14.561882, lng: 112.208539 },
+                { lat: 16.33181, lng: 112.3315 },
+                { lat: 16.33181, lng: 116.446871 },
+                { lat: 14.453348, lng: 116.446871 }
+              ]}
+              options={{
+                fillColor: '#B3D9FB',
+                strokeColor: '#B3D9FB',
+                strokeOpacity: 1,
+                strokeWeight: 1,
+                fillColor: '#B3D9FB',
+                fillOpacity: 1
+              }}
+            />
           </MarkerClusterer>
         </div>
       </GoogleMap>
@@ -166,7 +192,9 @@ export default class MapStationAuto extends PureComponent {
     })
   }
 
-  async componentDidMount() {}
+  async componentDidMount() {
+    console.log(this.props.stationsAutoList)
+  }
 
   handelIsHidden() {
     this.setState(

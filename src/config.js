@@ -47,5 +47,5 @@ module.exports.default = {
   STATION_CONTROL_API,
   ROLE_API,
   USER_API,
-	FCM_API
+  FCM_API
 }
