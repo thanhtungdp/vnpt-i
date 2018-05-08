@@ -29,12 +29,12 @@ export default {
     keywordSearch: 'Search key word',
     selectGroup: 'Select group',
     selectOrder: 'Order by',
-    selectSationType: 'Station type',
+    selectStationType: 'Station type',
     dataSearch: 'Data search',
     viewInMap: 'View in map',
-    samPling: 'Sampling',
+    sampling: 'Sampling',
     camera: 'Camera',
-    controlSationName: 'Control Sation'
+    controlStationName: 'Control Station'
   },
   controlStation: {
     trigger: {
