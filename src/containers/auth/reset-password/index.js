@@ -87,7 +87,6 @@ export default class ResetPassword extends PureComponent {
   }
 
   async handleLogin(values) {
-    console.log(this.state.userInfo, 'user Data')
     if (values.newPassword !== values.newPasswordConfirmation) {
       swal({
         title: translate('changePassword.form.newPasswordConfirmation.error1'),
@@ -96,6 +95,7 @@ export default class ResetPassword extends PureComponent {
     } else {
       const data = {
         _id: this.state.userInfo._id,
+        code: this.state.userInfo.forgotPasswordCode,
         password: values.newPasswordConfirmation
       }
       const record = await AuthApi.PutResetPassword(data._id, data)
@@ -109,7 +109,7 @@ export default class ResetPassword extends PureComponent {
           type: 'success',
           title: translate('changePassword.form.Success')
         })
-        this.props.push('/')
+        this.props.history.push('/')
       }
     }
   }

@@ -53,7 +53,8 @@ export default {
   password: {
     emailConfirm: '/password/email-confirm',
     codeConfirm: '/password/code-confirm/:key',
-    codeConfirmWithKey: '/password/code-confirm'
+    codeConfirmWithKey: '/password/code-confirm',
+    resetPassword: '/password/reset-password'
   },
   user: {
     list: '/user',
@@ -64,7 +65,6 @@ export default {
     changePassword: '/user/change-password',
     profile: '/user/profile',
     security: '/user/security',
-    resetPassword: '/user/reset-password',
     rule: '/user/rule/:key',
     ruleWithKey: '/user/rule'
   },

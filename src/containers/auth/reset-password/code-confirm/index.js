@@ -100,7 +100,7 @@ export default class CodeConfirm extends PureComponent {
         title: record.message
       })
     } else {
-      this.props.history.push(slug.user.resetPassword, record)
+      this.props.history.push(slug.password.resetPassword, record)
     }
   }
 
