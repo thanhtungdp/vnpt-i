@@ -66,7 +66,8 @@ export default {
     profile: '/user/profile',
     security: '/user/security',
     rule: '/user/rule/:key',
-    ruleWithKey: '/user/rule'
+    ruleWithKey: '/user/rule',
+    accountActive: '/account/activate/:key'
   },
   role: {
     list: '/role',

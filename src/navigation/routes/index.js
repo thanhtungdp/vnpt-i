@@ -23,6 +23,7 @@ import SubscriptionRoute from 'containers/subscription'
 import RoleRoute from 'containers/role'
 import ControlStation from 'containers/control-station'
 import Camera from 'containers/camera'
+import AccountActive from 'containers/auth/account-active'
 
 @autobind
 export default class RouteDefault extends React.Component {
@@ -63,6 +64,7 @@ export default class RouteDefault extends React.Component {
         <Route path={slug.password.codeConfirm} component={CodeConfirm} />
         <Route path={slug.password.resetPassword} component={ResetPassword} />
         <LayoutRoute path={slug.camera.base} component={Camera} />
+        <Route path={slug.user.accountActive} component={AccountActive} />
       </div>
     )
   }

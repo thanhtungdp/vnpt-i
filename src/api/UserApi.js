@@ -41,11 +41,17 @@ export function updateRole(_id, data = {}) {
   return putFetch(urlFetch, data)
 }
 
+export function accountActivate(code) {
+  let urlFetch = USER_API + '/trial-register/account-activate/' + code
+  return putFetch(urlFetch)
+}
+
 export default {
   searchUser,
   registerUser,
   getOne,
   updateOne,
   deleteOne,
-  updateRole
+  updateRole,
+  accountActivate
 }
