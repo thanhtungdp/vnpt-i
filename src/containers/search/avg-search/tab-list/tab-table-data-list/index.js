@@ -5,6 +5,7 @@ import { Table } from 'antd'
 import styled from 'styled-components'
 import moment from 'moment/moment'
 import roundTo from 'round-to'
+import { translate } from 'hoc/create-lang'
 
 const TableDataListWrapper = styled.div``
 
@@ -55,6 +56,7 @@ export default class TableDataList extends React.PureComponent {
           rowKey="_id"
           columns={this.getColumns()}
           {...this.props}
+          locale={{ emptyText: translate('avgSearchFrom.table.emptyText') }}
         />
       </TableDataListWrapper>
     )

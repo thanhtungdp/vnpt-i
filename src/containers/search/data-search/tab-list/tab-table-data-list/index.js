@@ -5,13 +5,10 @@ import { Table } from 'antd'
 import styled from 'styled-components'
 import moment from 'moment/moment'
 import { SHAPE } from 'themes/color'
-
+import {} from 'hoc/create-lang'
+import { warningLevels, colorLevels } from 'constants/warningLevels'
+import { translate } from 'hoc/create-lang'
 const TableDataListWrapper = styled.div``
-
-const CONFIG = {
-  multiplicationTime: 1,
-  prepareExceeded: 0.9
-}
 
 @autobind
 export default class TableDataList extends React.PureComponent {
@@ -21,7 +18,7 @@ export default class TableDataList extends React.PureComponent {
   }
 
   getColumns() {
-    var me = this
+    let me = this
     const columnIndex = {
       title: '#',
       dataIndex: 'Index',
@@ -52,15 +49,13 @@ export default class TableDataList extends React.PureComponent {
         dataIndex: `measuringLogs.${measuring.key}`,
         key: measuring.key,
         render: value => {
-          if (value == null) return <div />
-          var color = SHAPE.BLACK
-          if (value.value >= value.maxLimit * CONFIG.prepareExceeded) {
-            color = SHAPE.ORANGE
-          } else if (
-            value.value <= value.minLimit ||
-            value.value >= value.maxLimit * CONFIG.multiplicationTime
+          if (value === null) return <div />
+          let color = SHAPE.BLACK
+          if (
+            value.warningLevel &&
+            value.warningLevels !== warningLevels.GOOD
           ) {
-            color = SHAPE.RED
+            color = colorLevels[value.warningLevel]
           }
           // Format number toLocalString(national)
           return (
@@ -82,6 +77,7 @@ export default class TableDataList extends React.PureComponent {
           rowKey="_id"
           columns={this.getColumns()}
           {...this.props}
+          locale={{ emptyText: translate('dataSearchFrom.table.emptyText') }}
         />
       </TableDataListWrapper>
     )

@@ -115,6 +115,9 @@ export default {
         label: 'Advanced'
       },
       all: 'All'
+    },
+    table: {
+      emptyText: 'There are no records to display'
     }
   },
   avgSearchFrom: {
@@ -163,6 +166,9 @@ export default {
       receivedAt: {
         label: 'Received at'
       }
+    },
+    table: {
+      emptyText: 'There are no records to display'
     }
   },
   measuringManager: {

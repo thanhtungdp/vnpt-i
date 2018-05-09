@@ -48,7 +48,7 @@ export default class ControlStationHistory extends PureComponent {
       record.data = record.data.map(item => ({
         ...item,
         ThoiGian: item.ThoiGian
-          ? moment(item.ThoiGian).format('DD/MM/YYYY HH:mm:ss')
+          ? moment(item.ThoiGian).format('YYYY/MM/DD HH:mm:ss')
           : ''
       }))
 
@@ -103,6 +103,7 @@ export default class ControlStationHistory extends PureComponent {
               dataSource={this.state.dataHistory}
               bordered
               size={'small'}
+              pagination={false}
             />
           </div>
         )}

@@ -9,6 +9,8 @@ import SearchFrom from './search-form/index'
 import { message, Spin } from 'antd'
 import ROLE from 'constants/role'
 import protectRole from 'hoc/protect-role'
+import swal from 'sweetalert2'
+import { translate } from 'hoc/create-lang'
 
 @protectRole(ROLE.AVG_SEARCH.VIEW)
 @autobind
@@ -44,8 +46,16 @@ export default class AvgSearch extends React.Component {
       },
       searchFormData
     )
-    if (dataStationAuto.error) message.error(dataStationAuto.message)
-
+    if (dataStationAuto.error) {
+      message.error(dataStationAuto.message)
+      return
+    }
+    if (dataStationAuto.data.length === 0) {
+      swal({
+        type: 'success',
+        title: translate('avgSearchFrom.table.emptyText')
+      })
+    }
     this.setState({
       isLoading: false,
       dataStationAuto: dataStationAuto.success ? dataStationAuto.data : [],

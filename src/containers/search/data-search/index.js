@@ -10,6 +10,8 @@ import { message, Spin } from 'antd'
 import ROLE from 'constants/role'
 import protectRole from 'hoc/protect-role'
 import queryFormDataBrowser from 'hoc/query-formdata-browser'
+import swal from 'sweetalert2'
+import { translate } from 'hoc/create-lang'
 
 @protectRole(ROLE.DATA_SEARCH.VIEW)
 @queryFormDataBrowser(['submit'])
@@ -47,7 +49,12 @@ export default class MinutesDataSearch extends React.Component {
       },
       searchFormData
     )
-
+    if (dataStationAuto.data.length === 0) {
+      swal({
+        type: 'success',
+        title: translate('dataSearchFrom.table.emptyText')
+      })
+    }
     this.setState({
       isLoading: false,
       dataStationAuto: dataStationAuto.data,
