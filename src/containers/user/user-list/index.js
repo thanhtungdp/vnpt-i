@@ -15,6 +15,30 @@ import ReactCountryFlag from 'react-country-flag'
 import DynamicTable from 'components/elements/dynamic-table'
 import ROLE from 'constants/role'
 import protectRole from 'hoc/protect-role'
+import AvatarCharacter from 'components/elements/avatar-character'
+import ClearFix from 'components/elements/clearfix'
+import styled from 'styled-components'
+import TimeAgo from 'react-timeago'
+
+const AccountWapper = styled.div`
+  display: flex;
+  align-items: center;
+`
+const AccountInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+  .email {
+    color: #000;
+    font-weight: bold;
+  }
+  .full-name {
+    color: #707070;
+  }
+`
+const SpanTimeAgo = styled.div`
+  font-size: 13px;
+  color: #707070;
+`
 
 @protectRole(ROLE.USER.VIEW)
 @createManagerList({
@@ -67,9 +91,10 @@ export default class UserList extends React.Component {
     const { lang: { t } } = this.props
     return [
       { content: '#', width: 2 },
-      { content: t('userSearchFrom.form.email.label'), width: 20 },
-      { content: t('userSearchFrom.form.organization.label'), width: 30 },
-      { content: 'Action', width: 10 }
+      { content: t('userSearchFrom.form.email.label'), width: 30 },
+      { content: t('userSearchFrom.form.country.label'), width: 20 },
+      { content: 'Action', width: 20 },
+      { content: 'Login', width: 10 }
     ]
   }
 
@@ -90,18 +115,36 @@ export default class UserList extends React.Component {
           <div>
             {row.phone &&
               row.phone.iso2 && (
-                <span style={{ fontSize: 20 }}>
-                  {' '}
-                  <ReactCountryFlag code={row.phone.iso2} />
-                </span>
+                <AccountWapper>
+                  <AvatarCharacter
+                    size={32}
+                    username={row.email}
+                    avatarUrl={row.avatar}
+                  />
+                  <ClearFix width={4} />
+                  <AccountInfo>
+                    <span className={'email'}>{row.email}</span>
+                    <span className={'full-name '}>{`${row.lastName} ${
+                      row.firstName
+                    }`}</span>
+                  </AccountInfo>
+                </AccountWapper>
               )}
-            &nbsp;
-            <span>{row.email}</span>
           </div>
         )
       },
       {
-        content: row.organization ? row.organization.name : ''
+        content: (
+          <div>
+            {row.phone &&
+              row.phone.iso2 && (
+                <div style={{ display: 'flex' }}>
+                  <ReactCountryFlag code={row.phone.iso2} />
+                  {row.phone ? row.phone.name : ''}
+                </div>
+              )}
+          </div>
+        )
       },
       {
         content: (
@@ -124,6 +167,13 @@ export default class UserList extends React.Component {
               <Link to={slug.user.ruleWithKey + '/' + row._id}> Role </Link>
             )}
           </span>
+        )
+      },
+      {
+        content: (
+          <SpanTimeAgo>
+            <TimeAgo date={row.lastLoginAt} />
+          </SpanTimeAgo>
         )
       }
     ])

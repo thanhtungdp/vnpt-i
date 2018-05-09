@@ -72,7 +72,7 @@ export default class UserEdit extends React.PureComponent {
             'list',
             {
               id: 'edit',
-              name: this.props.isLoaded ? this.props.data.username : null
+              name: this.props.isLoaded ? this.props.data.email : null
             }
           ]}
         />
