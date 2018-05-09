@@ -45,7 +45,7 @@ export default class AdvancedOperator extends React.PureComponent {
       <Wrapper>
         <ButtonAbsolute>
           <Button type="button" onClick={this.props.onReset}>
-            Reset
+            {t('reset')}
           </Button>
         </ButtonAbsolute>
         <Collapse>

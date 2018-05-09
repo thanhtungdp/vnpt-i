@@ -9,6 +9,7 @@ import styled from 'styled-components'
 import { SHAPE } from 'themes/color'
 import Clearfix from 'components/elements/clearfix'
 import Viewmore from './info-window-viewmore'
+import { translate } from 'hoc/create-lang'
 // import stationStatus from 'constants/stationStatus'
 
 const { InfoWindow, Circle } = require('react-google-maps')
@@ -125,8 +126,8 @@ export default class MarkerStation extends PureComponent {
           }}
         >
           {this.props.stationStatus !== stStatus.DATA_LOSS
-            ? 'Received at:'
-            : 'Data loss at:'}{' '}
+            ? translate('map.dataTable.dataReceived')
+            : translate('map.dataTable.dataLossAt')}{' '}
           {/* {DateFormat(new Date(lastLog.receivedAt), 'dd/mm/yyyy hh:mm:ss')} */}
           {moment(lastLog.receivedAt, 'YYYY-MM-DD hh:mm').format(
             'DD/MM/YYYY hh:mm'
@@ -137,9 +138,9 @@ export default class MarkerStation extends PureComponent {
           <thead>
             <tr>
               <th>#</th>
-              <th>Measuring</th>
-              <th>Value</th>
-              <th>Unit</th>
+              <th>{translate('map.dataTable.measuring')}</th>
+              <th>{translate('map.dataTable.value')}</th>
+              <th>{translate('map.dataTable.unit')}</th>
             </tr>
           </thead>
           <tbody>{measuringList}</tbody>
@@ -222,12 +223,18 @@ export default class MarkerStation extends PureComponent {
                     <InfoTitle>{this.props.name}</InfoTitle>
                     <Clearfix height={8} />
                     <div>
-                      Longitude: {this.props.mapLocation.lng} - Latitude:{' '}
+                      {translate('map.dataTable.longitude')}:{' '}
+                      {this.props.mapLocation.lng} -{' '}
+                      {translate('map.dataTable.latitude')}:{' '}
                       {this.props.mapLocation.lat}
                     </div>
                     <Clearfix height={8} />
                     {this.props.address && (
-                      <div> Address: {this.props.address}</div>
+                      <div>
+                        {' '}
+                        {translate('map.dataTable.address')}:{' '}
+                        {this.props.address}
+                      </div>
                     )}
                     <Clearfix height={8} />
                     {this.props.lastLog && this.state.tableData}

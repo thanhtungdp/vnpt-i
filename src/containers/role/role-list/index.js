@@ -61,14 +61,16 @@ export default class RoleList extends React.Component {
   }
 
   getHead() {
+    const { lang: { t } } = this.props
     return [
-      { content: 'TT', width: 5 },
-      { content: 'Name' },
-      { content: 'Description' }
+      { content: '#', width: 5 },
+      { content: t('Role.form.name.label') },
+      { content: t('Role.form.description.label') }
     ]
   }
 
   getRows() {
+    const { lang: { t } } = this.props
     return this.props.dataSource.map((row, index) => [
       {
         content: <strong>{index + 1}</strong>
@@ -91,7 +93,7 @@ export default class RoleList extends React.Component {
         content: (
           <FloatRight>
             {protectRole(ROLE.ROLE.EDIT)(
-              <Link to={slug.role.editWithKey + '/' + row._id}> Edit </Link>
+              <Link to={slug.role.editWithKey + '/' + row._id}> {t('addon.edit')} </Link>
             )}
             <Divider type="vertical" />
             {protectRole(ROLE.ROLE.DELETE)(
@@ -100,7 +102,7 @@ export default class RoleList extends React.Component {
                   this.props.onDeleteItem(row._id, this.props.fetchData)
                 }
               >
-                Delete
+                {t('addon.delete')}
               </a>
             )}
           </FloatRight>

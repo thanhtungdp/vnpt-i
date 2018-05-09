@@ -10,7 +10,7 @@ export default {
     exceeded: 'Exceeded',
     exceededPreparing: 'Exceeded preparing',
     exceededTendency: 'Exceeded tendency',
-    viewInMonitoring: 'View in monitoring',
+    realtimeTracking: 'Realtime Tracking',
     viewInMap: 'View in map',
     viewMore: 'View More',
     tableList: {
@@ -20,23 +20,22 @@ export default {
   },
   monitoring: {
     group: 'Group',
-    unGroup: 'UnGroup',
+    ungroup: 'Ungroup',
     sortByStationName: 'Sort by Station name',
     sortByValues: 'Sort by Values',
     limit: 'Limit',
-    dataLoss: 'Data loss at',
-    notUse: 'Not use',
     keywordSearch: 'Search key word',
     selectGroup: 'Select group',
     selectOrder: 'Order by',
-    selectStationType: 'Station type',
+    selectSationType: 'Station type',
     dataSearch: 'Data search',
     viewInMap: 'View in map',
-    sampling: 'Sampling',
+    samPling: 'Sampling',
     camera: 'Camera',
-    controlStationName: 'Control Station'
+    controlSationName: 'Control Sation'
   },
   controlStation: {
+    text: 'Control Satation',
     trigger: {
       base: 'Trigger',
       triggerSuccess: 'Trigger success',
@@ -51,8 +50,8 @@ export default {
       reset: 'Reset success',
       success: 'Config success'
     },
-    handmade: 'Handmade',
-    automatic: 'Automatic',
+    handMade: 'Handmade',
+    autoMatic: 'Automatic',
     total: 'Total',
     totalHaveTaken: 'Total have taken',
     amountToGet: 'Amount to get',
@@ -60,11 +59,18 @@ export default {
     date: 'Date',
     typeControl: 'Type control',
     orderByBottle: 'Order by bottle',
-    dateTime: 'Datetime',
+    dateTime: 'Date time',
     content: 'Content',
     email: 'Email',
     tagName: 'Tag name',
-    configTotal: 'Config Total'
+    configTotal: 'Config Total',
+    cycleSampling: 'Cycle of sampling',
+    buttonTrigger: 'TRIGGER',
+    cancelTrigger: 'CANCEL TRIGGER',
+    triggerExceeded: 'TRIGGER EXCEEDED',
+    cacelTriggerExceeded: 'CANCEL TRIGGER EXCEEDED',
+    statusSampling: 'Sampling...',
+    viewMore: 'View more'
   },
   map: {
     menuRight: {
@@ -73,10 +79,30 @@ export default {
       notUse: 'Not use',
       exceeded: 'Exceeded',
       exceededPreparing: 'Exceeded preparing',
-      exceededTendency: 'Exceeded tendency'
+      exceededTendency: 'Exceeded tendency',
+      notify: 'Notifications'
+    },
+    menuLeft: {
+      stationSearch: 'Search station'
+    },
+    dataTable: {
+      measuring: 'Measuring',
+      value: 'Value',
+      unit: 'Unit',
+      dataLossAt: 'Data loss at:',
+      dataReceived: 'Received at:',
+      longitude: 'Longitude',
+      latitude: 'Latitude',
+      address: 'Address',
+      viewMore: {
+        sampling: 'Sampling',
+        camera: 'Camera',
+        viewData: 'View Data'
+      }
     }
   },
   dataSearchFrom: {
+    titleText: 'Data Search',
     form: {
       stationType: {
         label: 'Station type',
@@ -114,10 +140,21 @@ export default {
       advanced: {
         label: 'Advanced'
       },
-      all: 'All'
+      all: 'All',
+      reset: 'Reset'
+    },
+    dataTable: {
+      receivedAt: 'Received At'
+    },
+    tab: {
+      data: 'Data',
+      chart: 'Chart',
+      exportExcel: 'Export to excel',
+      statusExport: 'Exporting...'
     }
   },
   avgSearchFrom: {
+    titleText: 'AVG Search',
     form: {
       stationType: {
         label: 'Station type',
@@ -163,6 +200,18 @@ export default {
       receivedAt: {
         label: 'Received at'
       }
+    },
+    selectTimeRange:{
+      minute: 'Minutes',
+      hour: 'Hour',
+      day: 'Day',
+      month: 'Month'
+    },
+    tab: {
+      data: 'Data',
+      chart: 'Chart',
+      exportExcel: 'Export to excel',
+      statusExport: 'Exporting...'
     }
   },
   measuringManager: {
@@ -174,7 +223,11 @@ export default {
       keyExisted: 'Measuring code is existed!'
     },
     edit: {
+      label:'Edit',
       success: 'Update measuring success!'
+    },
+    delete:{
+      label:'Delete'
     },
     form: {
       key: {
@@ -192,8 +245,11 @@ export default {
         placeholder: 'Input unit of measuring'
       },
       numericalOrder: {
-        label: 'numericalOrder',
-        placeholder: 'numericalOrder'
+        label: 'Numerical order',
+        placeholder: 'Numerical order'
+      },
+      action:{
+        label:'Action'
       },
       error: 'Error!'
     }
@@ -207,8 +263,13 @@ export default {
       keyExisted: 'Station type code is existed!'
     },
     edit: {
+      label:'Edit',
       success: 'Update station type success!'
     },
+    delete:{
+      label:'Delete'
+    },
+    
     form: {
       key: {
         label: 'Code',
@@ -226,14 +287,17 @@ export default {
       auto: {
         label: 'Auto'
       },
+      action:{
+        label:'Action'
+      },
       error: 'Error!',
       color: {
         label: 'color',
         placeholder: 'color'
       },
       numericalOrder: {
-        label: 'numericalOrder',
-        placeholder: 'numericalOrder'
+        label: 'Numerical order',
+        placeholder: 'Numerical order'
       }
     }
   },
@@ -242,11 +306,20 @@ export default {
       title: 'Station auto'
     },
     create: {
+      label:'Create',
       success: 'Add station auto success!',
       keyExisted: 'Station auto code is existed!'
     },
     edit: {
+      label: 'Edit',
       success: 'Update station auto success!'
+    },
+    delete:{
+      label:'Delete',
+      require:'Sure to delete?'
+    },
+    add:{
+      label:'Add'
     },
     form: {
       key: {
@@ -317,9 +390,11 @@ export default {
         isAllowWarning: 'Allow Warning',
         isAllowRemote: 'Allow Remote'
       },
-      error: 'Error!'
+      error: 'Error!',
+      require:'please enter value!'
     },
     config: {
+      label:'Config',
       fileName: {
         label: 'fileName',
         placeholder: 'fileName'
@@ -330,15 +405,18 @@ export default {
       },
       measuringSrc: {
         label: 'measuringSrc',
-        placeholder: 'measuringSrc'
+        placeholder: 'measuringSrc',
+        error:'Please enter measuringSrc'
       },
       measuringDes: {
         label: 'measuringDes',
-        placeholder: 'measuringDes'
+        placeholder: 'measuringDes',
+        error:'Please enter measuringDes'
       },
       ratio: {
         label: 'ratio',
-        placeholder: 'ratio'
+        placeholder: 'ratio',
+        error:'Please enter ratio'
       },
       message: {
         success: 'Update station auto config success!',
@@ -360,7 +438,8 @@ export default {
       },
       allowCamera: {
         label: 'Allow Camera',
-        placeholder: 'allow Camera'
+        placeholder: 'allow Camera',
+        add:'Add'
       },
       name: {
         label: 'Name',
@@ -368,9 +447,18 @@ export default {
       },
       RTSP: {
         label: 'RTSP URL',
-        placeholder: 'RTSP URL'
+        placeholder: 'RTSP URL',
+        error:'Please enter RTSP URL'
       }
-    }
+    },
+    header:{
+      option:'Options',
+      dataLogger:'DataLogger'
+    },
+    upload:{
+      label:'Upload',
+      error:'Upload image fail'
+    },
   },
   userForm: {
     form: {
@@ -380,7 +468,8 @@ export default {
       },
       email: {
         label: 'Email',
-        placeholder: 'Email'
+        placeholder: 'Email',
+        error:'The input is not valid E-mail!'
       },
       password: {
         label: 'Password',
@@ -445,7 +534,8 @@ export default {
       phone: {
         label: 'Phone',
         placeholder: 'Phone'
-      }
+      },
+      action:'Actions'
     }
   },
   userRule: {
@@ -459,7 +549,8 @@ export default {
     },
     role: {
       label: 'role',
-      placeholder: 'role'
+      placeholder: 'role',
+      isAdmin:'isAdmin'
     },
     message: {
       success: 'Update Rule User success!',
@@ -481,12 +572,7 @@ export default {
     }
   },
   profileUser: {
-    success: 'Change information successfully'
-  },
-  security: {
-    breadcrumb: 'Security setting',
-    label: 'Two-Factor Authentication',
-    success: 'Change Two-Factor Authentication successfully'
+    success: 'Change infomation successfully'
   },
   changePassword: {
     form: {
@@ -500,7 +586,8 @@ export default {
         error: 'Please input new password confirmation!',
         error1: "Password confirmation doesn't match Password"
       },
-      Success: 'Change password successfully'
+      Success: 'Change password successfully',
+      compare:'Two passwords that you enter is inconsistent!'
     }
   },
   resetPassword: {
@@ -574,5 +661,14 @@ export default {
   form: {
     save: 'Save',
     update: 'Update'
+  },
+  supscriptionStatus:{
+    Renew:'Renew',
+    renewAt:'Renew at',
+    currentSubscription:'Current subscription',
+    subscriptionHistory:'Subscription history',
+    expiredAt:'Expired at',
+    totalUsers:'Total users',
+    totalStation:'Total station'
   }
 }

@@ -9,28 +9,6 @@ import { autobind } from 'core-decorators'
 import StationControl from 'api/StationControl'
 import { translate } from 'hoc/create-lang'
 
-const columns = [
-  {
-    title: translate('controlStation.orderByBottle'),
-    dataIndex: 'LayMauChai',
-    width: 150,
-    fixed: 'left'
-  },
-  {
-    title: translate('controlStation.dateTime'),
-    dataIndex: 'ThoiGian',
-    width: 150
-  },
-  {
-    title: translate('controlStation.content'),
-    dataIndex: 'NoiDung'
-  },
-  {
-    title: translate('c.email'),
-    dataIndex: 'Email'
-  }
-]
-
 @withRouter
 @autobind
 export default class ControlStationHistory extends PureComponent {
@@ -66,6 +44,27 @@ export default class ControlStationHistory extends PureComponent {
   }
 
   render() {
+    const columns = [
+      {
+        title: translate('controlStation.orderByBottle'),
+        dataIndex: 'LayMauChai',
+        width: 150,
+        fixed: 'left'
+      },
+      {
+        title: translate('controlStation.dateTime'),
+        dataIndex: 'ThoiGian',
+        width: 150
+      },
+      {
+        title: translate('controlStation.content'),
+        dataIndex: 'NoiDung'
+      },
+      {
+        title: translate('controlStation.email'),
+        dataIndex: 'Email'
+      }
+    ]
     return (
       <PageContainer>
         <Breadcrumb

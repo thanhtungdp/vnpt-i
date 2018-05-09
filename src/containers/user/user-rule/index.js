@@ -74,6 +74,7 @@ export default class RoleList extends React.Component {
   }
 
   async handleSubmit(e) {
+    const { lang: { t } } = this.props
     e.preventDefault()
     this.setState({
       isLoading: true
@@ -92,7 +93,7 @@ export default class RoleList extends React.Component {
     this.setState({
       isLoading: false
     })
-    if (res.success) message.info('Update Rule User success!')
+    if (res.success) message.info(t('userRule.message.success'))
     else message.info(res.message)
   }
 
@@ -173,7 +174,7 @@ export default class RoleList extends React.Component {
                     checked={this.state.isAdmin}
                     onChange={this.onChangeIsAdmin}
                   >
-                    isAdmin
+                    {t('userRule.role.isAdmin')}
                   </Checkbox>
                 </FormItem>
               </Col>
@@ -197,7 +198,7 @@ export default class RoleList extends React.Component {
                 htmlType="submit"
                 loading={this.state.isLoading}
               >
-                Save
+                {t('addon.save')}
               </Button>
             </FormItem>
           </Spin>

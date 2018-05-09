@@ -39,10 +39,14 @@ export default class MeasuringForm extends React.PureComponent {
     const { form: { getFieldDecorator }, lang: { t } } = this.props
     const formItemLayout = {
       labelCol: {
-        sm: { span: 6, offset: 0 }
+       // sm: { span: 2, offset: 0 }
+       xs: { span: 0, offset: 0 },
+       sm: { span: 0, offset: 0 }
       },
       wrapperCol: {
-        sm: { span: 16, offset: 0 }
+       // sm: { span: 20, offset: 0 }
+       xs: { span: 12 },
+       sm: { span: 24 }
       }
     }
 
@@ -118,7 +122,7 @@ export default class MeasuringForm extends React.PureComponent {
 
         <FormItem>
           <Button style={{ width: '100%' }} type="primary" htmlType="submit">
-            Save
+            {t('addon.save')}
           </Button>
         </FormItem>
       </Form>

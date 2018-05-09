@@ -152,7 +152,7 @@ export default class StationTypeForm extends React.PureComponent {
         </Row>
         <FormItem>
           <Button style={{ width: '100%' }} type="primary" htmlType="submit">
-            Save
+          {t('addon.save')}
           </Button>
         </FormItem>
       </Form>

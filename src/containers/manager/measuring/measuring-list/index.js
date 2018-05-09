@@ -63,16 +63,23 @@ export default class MeasuringList extends React.Component {
   }
 
   getHead() {
+    const { lang: { t } } = this.props
     return [
+      // { content: '#', width: 2 },
+      // { content: 'Key', width: 30 },
+      // { content: 'Name', width: 10 },
+      // { content: 'Unit', width: 10 },
+      // { content: 'Action', width: 10 }
       { content: '#', width: 2 },
-      { content: 'Key', width: 30 },
-      { content: 'Name', width: 10 },
-      { content: 'Unit', width: 10 },
-      { content: 'Action', width: 10 }
+      { content: t('measuringManager.form.key.label'), width: 30 },
+      { content: t('measuringManager.form.name.label'), width: 10 },
+      { content: t('measuringManager.form.unit.label'), width: 10 },
+      { content: t('measuringManager.form.action.label'), width: 10 }
     ]
   }
 
   getRows() {
+    const { lang: { t } } = this.props
     return this.props.dataSource.map((row, index) => [
       {
         content: (
@@ -99,7 +106,7 @@ export default class MeasuringList extends React.Component {
             {protectRole(ROLE.MEASURING.EDIT)(
               <Link to={slug.measuring.editWithKey + '/' + row._id}>
                 {' '}
-                Edit{' '}
+                {t('measuringManager.edit.label')}{' '}
               </Link>
             )}
             <Divider type="vertical" />
@@ -109,7 +116,7 @@ export default class MeasuringList extends React.Component {
                   this.props.onDeleteItem(row._id, this.props.fetchData)
                 }
               >
-                Delete
+                {t('measuringManager.delete.label')}
               </a>
             )}
           </span>

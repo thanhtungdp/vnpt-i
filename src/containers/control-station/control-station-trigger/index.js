@@ -239,7 +239,7 @@ export default class ControlStationTrigger extends React.PureComponent {
     return (
       <Dropdown overlay={dropdown} trigger={['click']}>
         <LinkSpan className="ant-dropdown-link">
-          <Icon type="bars" /> View more
+          <Icon type="bars" /> {translate('controlStation.viewMore')}
         </LinkSpan>
       </Dropdown>
     )

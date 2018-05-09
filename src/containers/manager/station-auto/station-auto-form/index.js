@@ -174,9 +174,10 @@ export default class StationAutoForm extends React.PureComponent {
 
     //error
     if (file.status === 'error') {
+      const { t } = this.props.lang
       fileList = []
       swal({
-        title: 'upload image fail',
+        title: t('stationAutoManager.upload.error'),
         type: 'error'
       })
     }
@@ -196,17 +197,16 @@ export default class StationAutoForm extends React.PureComponent {
   }
 
   render() {
+    const { getFieldDecorator } = this.props.form
+    const { t } = this.props.lang
     const urlPhotoUpload = MediaApi.urlPhotoUploadWithDirectory('station-autos')
     const { previewVisible, previewImage, fileList } = this.state
     const uploadButton = (
       <div>
         <Icon type="plus" />
-        <div className="ant-upload-text">Upload</div>
+        <div className="ant-upload-text">{t('stationAutoManager.upload.label')}</div>
       </div>
     )
-
-    const { getFieldDecorator } = this.props.form
-    const { t } = this.props.lang
     const formItemLayout = {
       labelCol: {
         sm: { span: 4, offset: 0 }
@@ -228,7 +228,7 @@ export default class StationAutoForm extends React.PureComponent {
                 rules: [
                   {
                     required: true,
-                    message: t('stationManager.form.key.error')
+                    message: t('stationAutoManager.form.key.error')
                   }
                 ]
               })(
@@ -245,7 +245,7 @@ export default class StationAutoForm extends React.PureComponent {
               label={t('stationAutoManager.form.name.label')}
             >
               {getFieldDecorator('name', {
-                rules: [{ required: true, message: 'Please enter value!' }]
+                rules: [{ required: true, message: t('stationAutoManager.form.name.error') }]
               })(
                 <Input
                   placeholder={t('stationAutoManager.form.name.placeholder')}
@@ -261,7 +261,7 @@ export default class StationAutoForm extends React.PureComponent {
               label={t('stationAutoManager.form.long.label')}
             >
               {getFieldDecorator('long', {
-                rules: [{ required: true, message: 'please enter value!' }]
+                rules: [{ required: true, message: t('stationAutoManager.form.long.error') }]
               })(
                 <Input
                   placeholder={t('stationAutoManager.form.long.placeholder')}
@@ -275,7 +275,7 @@ export default class StationAutoForm extends React.PureComponent {
               label={t('stationAutoManager.form.lat.label')}
             >
               {getFieldDecorator('lat', {
-                rules: [{ required: true, message: 'please enter value!' }]
+                rules: [{ required: true, message: t('stationAutoManager.form.lat.error') }]
               })(
                 <Input
                   placeholder={t('stationAutoManager.form.lat.placeholder')}
@@ -303,7 +303,7 @@ export default class StationAutoForm extends React.PureComponent {
               label={t('stationAutoManager.form.stationType.label')}
             >
               {getFieldDecorator('stationType', {
-                rules: [{ required: true }]
+                rules: [{ required: true, message: t('stationAutoManager.form.stationType.error') }]
               })(
                 <SelectStationType
                   label={t('stationAutoManager.form.stationType.label')}

@@ -1,6 +1,7 @@
 import React from 'react'
 import { colorLevels } from 'constants/warningLevels'
 import styled from 'styled-components'
+import { translate } from 'hoc/create-lang'
 
 const WarningWrapper = styled.div`
   display: flex;
@@ -45,10 +46,10 @@ export default function LevelInfo() {
         <ColorLevel color={colorLevels.EXCEEDED} />
       </WrapperColor>
       <WrapperText>
-        <TextLevel>Good</TextLevel>
-        <TextLevel>Exceed tendency</TextLevel>
-        <TextLevel>Exceed preparing</TextLevel>
-        <TextLevel>Exceed</TextLevel>
+        <TextLevel>{translate('warningLevels.good')}</TextLevel>
+        <TextLevel>{translate('warningLevels.exceedTendency')}</TextLevel>
+        <TextLevel>{translate('warningLevels.exceedPreparing')}</TextLevel>
+        <TextLevel>{translate('warningLevels.exceed')}</TextLevel>
       </WrapperText>
     </WarningWrapper>
   )

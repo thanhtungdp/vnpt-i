@@ -27,7 +27,7 @@ export default class StationAutoFormTable extends React.PureComponent {
       {
         dataIndex: 'measuringKey',
         title: t('stationAutoManager.form.measuringKey.label'),
-        width: 150,
+        width: 140,
         render: (text, record, index) => (
           <FormItem>
             {getFieldDecorator(`measuringList[${index}].key`, {
@@ -103,14 +103,14 @@ export default class StationAutoFormTable extends React.PureComponent {
       },
       {
         dataIndex: 'name',
-        title: 'Action',
+        title: '',//Action
         render: (text, record, index) => {
           return (
             <div className="editable-row-operations">
               {index !== 0 && (
                 <span>
                   <Popconfirm
-                    title="Sure to delete?"
+                    title={t('stationAutoManager.delete.require')}
                     onConfirm={() => this.removeMeasuring(index)}
                   >
                     <a>
@@ -171,6 +171,7 @@ export default class StationAutoFormTable extends React.PureComponent {
   }
 
   render() {
+    const { t } = this.props.lang
     return (
       <div>
         <Button
@@ -178,7 +179,7 @@ export default class StationAutoFormTable extends React.PureComponent {
           type="primary"
           onClick={this.handleAddRow}
         >
-          add
+          {t('stationAutoManager.add.label')}
         </Button>
         <Table
           bordered

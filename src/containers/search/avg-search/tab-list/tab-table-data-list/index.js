@@ -5,6 +5,7 @@ import { Table } from 'antd'
 import styled from 'styled-components'
 import moment from 'moment/moment'
 import roundTo from 'round-to'
+import { translate } from 'hoc/create-lang'
 
 const TableDataListWrapper = styled.div``
 
@@ -17,7 +18,7 @@ export default class TableDataList extends React.PureComponent {
 
   getColumns() {
     const columnReceivedAt = {
-      title: 'Received At',
+      title: translate('avgSearchFrom.list.receivedAt.label'),
       dataIndex: 'receivedAt',
       key: 'receivedAt',
       render(value, record) {

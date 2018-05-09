@@ -129,16 +129,6 @@ export default class StationAutoHead extends React.PureComponent {
           </ReceivedAt>
         </TitleWrapper>
         <ActionWrapper>
-          <div onClick={this.props.onClickDataSearch} className="actionItem">
-            <Tooltip title={translate('monitoring.dataSearch')}>
-              <Icon type="area-chart" />
-            </Tooltip>
-          </div>
-          <div onClick={this.props.onClickViewMap} className="actionItem">
-            <Tooltip title={translate('monitoring.viewInMap')}>
-              <i className="fa fa-map-marker" />
-            </Tooltip>
-          </div>
           {isSampling &&
             protectRole(ROLE.MONITORING.CONTROL)(
               <Link
@@ -165,12 +155,12 @@ export default class StationAutoHead extends React.PureComponent {
               </Link>
             )}
           <div onClick={this.props.onClickViewMap} className="actionItem">
-            <Tooltip title="View in map">
+            <Tooltip title={translate('monitoring.viewInMap')}>
               <i className="fa fa-map-marker" />
             </Tooltip>
           </div>
           <div onClick={this.props.onClickDataSearch} className="actionItem">
-            <Tooltip title="Data search">
+            <Tooltip title={translate('monitoring.dataSearch')}>
               <Icon type="area-chart" />
             </Tooltip>
           </div>

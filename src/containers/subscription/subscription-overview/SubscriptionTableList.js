@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { autobind } from 'core-decorators'
 import { Table } from 'antd'
 import styled from 'styled-components'
+import { translate } from 'hoc/create-lang'
 
 const SubscriptionTableListWrapper = styled.div``
 
@@ -37,7 +38,7 @@ export default class SubscriptionTableList extends React.PureComponent {
         }
       },
       {
-        title: 'Renew at',
+        title: translate('supscriptionStatus.renewAt'),
         dataIndex: 'renewAt',
         key: 'renewAt',
         render(value) {
@@ -45,7 +46,7 @@ export default class SubscriptionTableList extends React.PureComponent {
         }
       },
       {
-        title: 'Expired at',
+        title: translate('supscriptionStatus.expiredAt'),
         dataIndex: 'expiredAt',
         key: 'expiredAt',
         render(value) {

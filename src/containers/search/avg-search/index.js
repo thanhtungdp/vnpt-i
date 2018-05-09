@@ -10,6 +10,7 @@ import { message, Spin } from 'antd'
 import ROLE from 'constants/role'
 import protectRole from 'hoc/protect-role'
 
+
 @protectRole(ROLE.AVG_SEARCH.VIEW)
 @autobind
 export default class AvgSearch extends React.Component {

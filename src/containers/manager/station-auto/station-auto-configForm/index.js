@@ -44,8 +44,7 @@ export default class StationAutoForm extends React.PureComponent {
               rules: [
                 {
                   message:
-                    'Please enter ' +
-                    t('stationAutoManager.config.measuringDes.label')
+                    t('stationAutoManager.config.measuringDes.error')
                 }
               ]
             })(<span>{text}</span>)}
@@ -62,8 +61,7 @@ export default class StationAutoForm extends React.PureComponent {
               rules: [
                 {
                   message:
-                    'Please enter ' +
-                    t('stationAutoManager.config.measuringSrc.label')
+                    t('stationAutoManager.config.measuringSrc.error')
                 }
               ]
             })(
@@ -87,7 +85,7 @@ export default class StationAutoForm extends React.PureComponent {
                 {
                   required: true,
                   message:
-                    'Please enter ' + t('stationAutoManager.config.ratio.label')
+                  t('stationAutoManager.config.ratio.error')
                 }
               ]
             })(<InputNumber min={1} />)}

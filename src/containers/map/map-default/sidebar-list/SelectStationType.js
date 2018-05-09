@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import CategoryApi from 'api/CategoryApi'
 import { autobind } from 'core-decorators'
 import styled from 'styled-components'
+import { translate } from 'hoc/create-lang'
 
 const SelectWrapper = styled.div`
   width: 100%;
@@ -49,7 +50,9 @@ export default class SelectStationType extends PureComponent {
     return (
       <SelectWrapper>
         <Select showSearch {...this.props}>
-          <Select.Option value={''}>All</Select.Option>
+          <Select.Option value={''}>
+            {translate('dataSearchFrom.form.all')}
+          </Select.Option>
           {this.state.stationTypes.map(stationType => (
             <Select.Option key={stationType.key} value={stationType.key}>
               {stationType.name}

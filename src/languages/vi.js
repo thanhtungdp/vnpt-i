@@ -89,6 +89,7 @@ export default {
       keyExisted: 'Measuring code is existed!'
     },
     edit: {
+      label:'Edit',
       success: 'Update measuring success!'
     },
     form: {
@@ -98,13 +99,16 @@ export default {
         error: 'Please input measuring code!'
       },
       name: {
-        label: 'Name',
+        label: 'Mã thông số',
         placeholder: 'Input measuring name',
         error: 'Please input measuring name!'
       },
       unit: {
-        label: 'Unit',
+        label: 'Đơn vị',
         placeholder: 'Input unit of measuring'
+      },
+      delete:{
+        label:'Delete'
       },
       error: 'Error!'
     }

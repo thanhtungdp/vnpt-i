@@ -37,7 +37,7 @@ export default class UserForm extends React.PureComponent {
       phone: {}
     }
   }
-
+  
   handleSubmit(e) {
     e.preventDefault()
     this.props.form.validateFields((err, values) => {
@@ -67,11 +67,12 @@ export default class UserForm extends React.PureComponent {
     }
     callback()
   }
-
+  
   compareToFirstPassword = (rule, value, callback) => {
+    const { lang: { t } } = this.props
     const form = this.props.form
     if (value && value !== form.getFieldValue('password')) {
-      callback('Two passwords that you enter is inconsistent!')
+      callback(t('changePassword.form.compare'))
     } else {
       callback()
     }
@@ -118,7 +119,7 @@ export default class UserForm extends React.PureComponent {
                 rules: [
                   {
                     type: 'email',
-                    message: 'The input is not valid E-mail!'
+                    message: t('userForm.form.email.error')
                   },
                   {
                     required: true,
@@ -261,7 +262,7 @@ export default class UserForm extends React.PureComponent {
             htmlType="submit"
             loading={this.props.isLoading}
           >
-            Save
+            {t('addon.save')}
           </Button>
         </FormItem>
       </Form>
