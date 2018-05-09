@@ -33,7 +33,8 @@ const LevelWrapper = styled.div`
 class CustomGoogleMap extends PureComponent {
   static propTypes = {
     getMap: PropTypes.func,
-    getRefMarker: PropTypes.func
+    getRefMarker: PropTypes.func,
+    stationAutoMarker: []
   }
   state = {
     zoom: 12
@@ -45,25 +46,27 @@ class CustomGoogleMap extends PureComponent {
 
   async componentDidMount() {
     if (this.props.getMap) this.props.getMap(this.map)
-    const bounds = new window.google.maps.LatLngBounds()
-    this.props.stationAutoMarker.map(item => {
-      bounds.extend(
-        new window.google.maps.LatLng(
-          item.mapLocation.lat,
-          item.mapLocation.long
-        )
-      )
-    })
-    //this.map.fitBounds(bounds)
   }
 
   getRefMarker(marker) {
     if (this.props.getRefMarker) this.props.getRefMarker(marker)
   }
+
   componentWillReceiveProps(nextProps) {
     this.setState({
       zoom: nextProps.zoom
     })
+  }
+
+  getBounds() {
+    if (this.props.stationAutoMarker.length > 0) {
+      const bounds = new window.google.maps.LatLngBounds()
+      this.props.stationAutoMarker.map(item => {
+        bounds.extend(item.mapLocation)
+      })
+      console.log(bounds)
+      this.map.fitBounds(bounds)
+    }
   }
 
   getStatusStation(measuringLogs) {
@@ -163,13 +166,11 @@ export default class MapStationAuto extends PureComponent {
     stationAutoMarker: PropTypes.array,
     getMap: PropTypes.func
   }
-
   state = {
     map: {},
     listStationMarker: [],
     isHidden: false
   }
-
   setMap(map) {
     this.setState({ map })
     if (this.props.getMap) this.props.getMap(map)
@@ -192,9 +193,7 @@ export default class MapStationAuto extends PureComponent {
     })
   }
 
-  async componentDidMount() {
-    console.log(this.props.stationsAutoList)
-  }
+  async componentDidMount() {}
 
   handelIsHidden() {
     this.setState(
