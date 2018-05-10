@@ -7,6 +7,7 @@ import PropTypes from 'prop-types'
 import { Upload, Icon } from 'antd'
 import update from 'react-addons-update'
 import MediaApi from 'api/MediaApi'
+import { translate } from 'hoc/create-lang'
 
 const View = styled.div``
 
@@ -63,7 +64,7 @@ export default class UpdateLoadImage extends React.PureComponent {
     let newFileList = fileList
     if (file.status === 'error') {
       swal({
-        title: 'upload image fail',
+        title: translate('profileUser.imageUpload.error'),
         type: 'error'
       })
       newFileList = []

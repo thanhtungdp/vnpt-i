@@ -73,6 +73,9 @@ export default {
     viewMore: 'View more'
   },
   map: {
+    mapOverview: 'Map overview',
+    AQI: 'AQI',
+    WQI: 'WQI',
     menuRight: {
       good: 'Good',
       dataLoss: 'Data loss',
@@ -80,7 +83,8 @@ export default {
       exceeded: 'Exceeded',
       exceededPreparing: 'Exceeded preparing',
       exceededTendency: 'Exceeded tendency',
-      notify: 'Notifications'
+      notify: 'Notifications',
+      noData: 'No data'
     },
     menuLeft: {
       stationSearch: 'Search station'
@@ -138,15 +142,14 @@ export default {
         label: 'Report type'
       },
       advanced: {
-        label: 'Advanced'
+        label: 'Advanced',
+        reset: 'Reset'
       }
     },
     table: {
       emptyText: 'There are no records to display',
       receivedAt: 'Received At',
-
-      all: 'All',
-      reset: 'Reset'
+      all: 'All'
     },
 
     tab: {
@@ -288,7 +291,8 @@ export default {
         error: 'Please input station type name!'
       },
       icon: {
-        label: 'Icon'
+        label: 'Icon',
+        placeholder: 'Choose Icon'
       },
       auto: {
         label: 'Auto'
@@ -299,7 +303,7 @@ export default {
       error: 'Error!',
       color: {
         label: 'color',
-        placeholder: 'color'
+        placeholder: 'Choose Color'
       },
       numericalOrder: {
         label: 'Numerical order',
@@ -464,6 +468,15 @@ export default {
     upload: {
       label: 'Upload',
       error: 'Upload image fail'
+    },
+    uploadFile: {
+      label: 'Upload file',
+      error: 'file upload failed.',
+      success: 'file uploaded successfully',
+      status: {
+        uploading: 'Uploading...',
+        finish: 'Done'
+      }
     }
   },
   userForm: {
@@ -578,22 +591,42 @@ export default {
     }
   },
   profileUser: {
-    success: 'Change infomation successfully'
+    title: 'User profile',
+    success: 'Change infomation successfully',
+    viewProfile: 'View profile',
+    security: 'Security',
+    logOut: 'Log out',
+    changePassword: 'Change password',
+    avatar: 'Avatar',
+    email: 'Email',
+    LastName: 'Last Name',
+    FirstName: 'First Name',
+    Birthday: 'Birthday',
+    Phone: 'Phone',
+    upload: 'Upload',
+    imageUpload: {
+      success: 'Done',
+      error: 'Upload image fail'
+    }
   },
   changePassword: {
     form: {
       oldPassword: {
+        label: 'Current password',
         error: 'Please input old password!'
       },
       newPassword: {
+        label: 'New password',
         error: 'Please input new password!'
       },
       newPasswordConfirmation: {
+        label: 'Password confirmation',
         error: 'Please input new password confirmation!',
         error1: "Password confirmation doesn't match Password"
       },
       Success: 'Change password successfully',
-      compare: 'Two passwords that you enter is inconsistent!'
+      compare: 'Two passwords that you enter is inconsistent!',
+      savePassword: 'Save Password'
     }
   },
   resetPassword: {
@@ -676,5 +709,26 @@ export default {
     expiredAt: 'Expired at',
     totalUsers: 'Total users',
     totalStation: 'Total station'
+  },
+  menuApp: {
+    dashboard: 'Dashboard',
+    monitoring: 'Monitoring',
+    map: 'Map',
+    data: 'Data',
+    dataSearch: 'Data Search',
+    avgData: 'AVG Data',
+    manage: 'Manage',
+    measuring: 'Measuring',
+    stationType: 'Station type',
+    stationAuto: 'Station auto',
+    adminManagement: 'Admin management',
+    user: 'User',
+    role: 'Role',
+    subScription: 'Subscription'
+  },
+  security: {
+    label:
+      'If you turn on Two-Factor Authentication feature, The system will send the verify code to your email address every time you sign in to app iLotusLand',
+    success: 'Success'
   }
 }

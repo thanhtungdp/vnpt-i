@@ -5,6 +5,7 @@ import { PRIMARY } from 'themes/color'
 import styled from 'styled-components'
 import { Icon } from 'antd'
 import Clearfix from 'components/elements/clearfix'
+import { translate } from 'hoc/create-lang'
 
 const HeaderWrapper = styled.div`
   display: flex;
@@ -65,12 +66,12 @@ export default class Header extends React.PureComponent {
             <Icon type="left" style={{ color: 'white', fontSize: 18 }} />
           </LinkB>
           <Clearfix width={8} />
-          <Title> Map overview</Title>
+          <Title> {translate('map.mapOverview')}</Title>
         </LeftTitle>
         <MenuList>
-          <LinkA to="/">AQI</LinkA>
+          <LinkA to="/">{translate('map.AQI')}</LinkA>
           <Line />
-          <LinkA to="/">WQI</LinkA>
+          <LinkA to="/">{translate('map.WQI')}</LinkA>
         </MenuList>
       </HeaderWrapper>
     )

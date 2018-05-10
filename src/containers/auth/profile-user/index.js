@@ -67,7 +67,7 @@ export class ProfileUserForm extends PureComponent {
         <Row>
           <Col md={12}>
             <Field
-              label="Avatar"
+              label={translate('profileUser.avatar')}
               name="avatar"
               component={FUpdateLoadImage}
               size="small"
@@ -79,7 +79,7 @@ export class ProfileUserForm extends PureComponent {
           <Col md={12}>
             <Field
               disabled={true}
-              label="Email"
+              label={translate('profileUser.email')}
               name="email"
               component={FInput}
               size="small"
@@ -90,7 +90,7 @@ export class ProfileUserForm extends PureComponent {
         <Row>
           <Col md={6}>
             <Field
-              label="Last Name"
+              label={translate('profileUser.LastName')}
               name="lastName"
               component={FInput}
               size="small"
@@ -98,7 +98,7 @@ export class ProfileUserForm extends PureComponent {
           </Col>
           <Col md={6}>
             <Field
-              label="First Name"
+              label={translate('profileUser.FirstName')}
               name="firstName"
               component={FInput}
               size="small"
@@ -109,7 +109,7 @@ export class ProfileUserForm extends PureComponent {
         <Row>
           <Col md={6}>
             <Field
-              label="Birthday"
+              label={translate('profileUser.Birthday')}
               name="birthday"
               component={FCalendar}
               size="large"
@@ -117,7 +117,7 @@ export class ProfileUserForm extends PureComponent {
           </Col>
           <Col md={6}>
             <Field
-              label="Phone"
+              label={translate('profileUser.Phone')}
               name="phone"
               component={FInputPhoneNumber}
               size="large"
@@ -132,7 +132,7 @@ export class ProfileUserForm extends PureComponent {
           block
           color="primary"
         >
-          Save
+          {translate('addon.save')}
         </Button>
       </form>
     )

@@ -96,7 +96,7 @@ export class TabChart extends React.PureComponent {
                 boxBorderColor="#7cb5ec"
                 boxWidth={150}
                 inputDateParser={value => {
-                  return moment.utc(value, 'DD. MMM hh:mm').valueOf()
+                  //  return moment.utc(value, 'DD. MMM hh:mm').valueOf()
                 }}
                 editDateFormat="%Y/%m/%d:%k:%M"
                 dateFormat="%Y/%m/%d:%k:%M"
@@ -109,7 +109,10 @@ export class TabChart extends React.PureComponent {
               type="datetime"
               dateTimeLabelFormats={{
                 hour: '%Y/%m/%d:%k:%M',
-                minute: '%Y/%m/%d:%k:%M'
+                minute: '%Y/%m/%d:%k:%M',
+                day: '%Y/%m/%d:%k:%M',
+                month: '%Y/%m/%d:%k:%M',
+                year: '%Y/%m/%d:%k:%M'
                 // hour: '%e. %b %H:%M',
                 // minute: '%e. %b %H:%M'
               }}

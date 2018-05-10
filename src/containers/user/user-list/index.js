@@ -95,8 +95,8 @@ export default class UserList extends React.Component {
       { content: '#', width: 2 },
       { content: t('userSearchFrom.form.email.label'), width: 30 },
       { content: t('userSearchFrom.form.country.label'), width: 20 },
-      { content: 'Action', width: 20 },
-      { content: 'Login', width: 10 }
+      { content: t('userSearchFrom.form.action'), width: 20 },
+      { content: t('login.title'), width: 10 }
     ]
   }
 

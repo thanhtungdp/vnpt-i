@@ -49,12 +49,14 @@ export default class StationTypeList extends React.Component {
   }
 
   buttonAdd() {
+    const { lang: { t } } = this.props
     return (
       <div>
         {protectRole(ROLE.STATION_TYPE.CREATE)(
           <Link to={slug.stationType.create}>
             <Button type="primary">
-              <Icon type="plus" />Create
+              <Icon type="plus" />
+              {t('addon.create')}
             </Button>
           </Link>
         )}

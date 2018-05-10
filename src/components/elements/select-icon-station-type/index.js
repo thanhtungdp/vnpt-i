@@ -5,6 +5,7 @@ import { autobind } from 'core-decorators'
 import MediaApi from 'api/MediaApi'
 import styled from 'styled-components'
 import { SketchPicker } from 'react-color'
+import createLanguageHoc, { langPropTypes } from 'hoc/create-lang'
 
 const AvatarWrapper = styled.div`
   padding: 4px;
@@ -40,7 +41,7 @@ const HeaderWrapper = styled.div`
   flex-wrap: wrap;
   width: 250px;
 `
-
+@createLanguageHoc
 @autobind
 export default class SelectImage extends PureComponent {
   static propTypes = {
@@ -101,6 +102,7 @@ export default class SelectImage extends PureComponent {
   }
 
   render() {
+    const { t } = this.props.lang
     const urlPhotoUpload = MediaApi.urlPhotoUploadWithDirectory(
       'icon-station-type'
     )
@@ -113,17 +115,26 @@ export default class SelectImage extends PureComponent {
         authorization: 'authorization-text'
       },
       onChange(info) {
-        if (info.file.status !== 'uploading') {
+        if (
+          info.file.status !==
+          t('stationAutoManager.uploadFile.status.uploading')
+        ) {
           console.log(info.file, info.fileList)
         }
-        if (info.file.status === 'done') {
+        if (
+          info.file.status === t('stationAutoManager.uploadFile.status.finish')
+        ) {
           console.log(info)
           me.setState({
             urlIconList: [...me.state.urlIconList, info.file.response.url]
           })
-          message.success(`${info.file.name} file uploaded successfully`)
+          message.success(
+            `${info.file.name} ${t('stationAutoManager.uploadFile.success')}`
+          )
         } else if (info.file.status === 'error') {
-          message.error(`${info.file.name} file upload failed.`)
+          message.error(
+            `${info.file.name} ${t('stationAutoManager.uploadFile.error')}`
+          )
         }
       }
     }
@@ -156,7 +167,7 @@ export default class SelectImage extends PureComponent {
       <Popover
         visible={this.state.visiblePop}
         content={content}
-        title="Choose Icon"
+        title={t('stationTypeManager.form.icon.placeholder')}
         onClick={this.handelPop}
         trigger="click"
       >
@@ -164,7 +175,7 @@ export default class SelectImage extends PureComponent {
           visible={this.state.visiblePop}
           placement="bottom"
           content={contentPicker}
-          title="Choose Color"
+          title={t('stationTypeManager.form.color.placeholder')}
           trigger="click"
         >
           <AvatarWrapper>
@@ -178,7 +189,7 @@ export default class SelectImage extends PureComponent {
               }}
               src={this.state.urlIcon}
             >
-              Icon
+              {t('stationTypeManager.form.icon.label')}
             </Avatar>
           </AvatarWrapper>
         </Popover>
