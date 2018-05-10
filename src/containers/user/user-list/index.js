@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
-import { Divider, Button, Icon } from 'antd'
+import { Divider, Button, Icon, Menu, Dropdown } from 'antd'
 import PageContainer from 'layout/default-sidebar-layout/PageContainer'
 import slug from 'constants/slug'
 import { autobind } from 'core-decorators'
@@ -19,6 +19,7 @@ import AvatarCharacter from 'components/elements/avatar-character'
 import ClearFix from 'components/elements/clearfix'
 import styled from 'styled-components'
 import TimeAgo from 'react-timeago'
+import { translate } from 'hoc/create-lang'
 
 const AccountWapper = styled.div`
   display: flex;
@@ -38,6 +39,12 @@ const AccountInfo = styled.div`
 const SpanTimeAgo = styled.div`
   font-size: 13px;
   color: #707070;
+`
+const LinkSpan = styled.span`
+  color: #000;
+  &:hover {
+    cursor: pointer;
+  }
 `
 
 @protectRole(ROLE.USER.VIEW)
@@ -86,6 +93,28 @@ export default class UserList extends React.Component {
         }}
         initialValues={this.props.data}
       />
+    )
+  }
+
+  actionGroup() {
+    const dropdown = (
+      <Menu>
+        <Menu.Item key="0">
+          <Link to={slug.monitoring.base}>
+            {translate('dashboard.viewInMonitoring')}
+          </Link>
+        </Menu.Item>
+        <Menu.Item key="1">
+          <Link to={slug.map.base}>{translate('dashboard.viewInMap')}</Link>
+        </Menu.Item>
+      </Menu>
+    )
+    return (
+      <Dropdown overlay={dropdown} trigger={['click']}>
+        <LinkSpan className="ant-dropdown-link">
+          <Icon type="right" /> {translate('dashboard.viewMore')}
+        </LinkSpan>
+      </Dropdown>
     )
   }
 
