@@ -9,6 +9,7 @@ import StationGroupList from 'components/map/station-group-list'
 import Clearfix from 'components/elements/clearfix'
 import _ from 'lodash'
 import SelectStationType from './SelectStationType'
+import { translate } from 'hoc/create-lang'
 
 @withRouter
 @autobind
@@ -91,7 +92,7 @@ export default class SidebarList extends React.PureComponent {
         }
       >
         <Input.Search
-          placeholder="Search station"
+          placeholder={translate('map.menuLeft.stationSearch')}
           onChange={this.handleChangeSearch}
           style={{ width: '100%' }}
           value={this.state.filterText}

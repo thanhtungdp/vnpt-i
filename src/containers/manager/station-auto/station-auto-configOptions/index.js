@@ -55,8 +55,7 @@ export default class StationAutoForm extends React.PureComponent {
               rules: [
                 {
                   required: true,
-                  message:
-                    'Please enter ' + t('stationAutoManager.options.name.label')
+                  message: t('stationAutoManager.form.name.error')
                 }
               ]
             })(
@@ -75,8 +74,7 @@ export default class StationAutoForm extends React.PureComponent {
               rules: [
                 {
                   required: true,
-                  message:
-                    'Please enter ' + t('stationAutoManager.options.RTSP.label')
+                  message: t('stationAutoManager.options.RTSP.error')
                 }
               ]
             })(
@@ -87,14 +85,14 @@ export default class StationAutoForm extends React.PureComponent {
       },
       {
         dataIndex: 'key',
-        title: 'Action',
+        title: '',
         render: (text, record, index) => {
           return (
             <div className="editable-row-operations">
               {index !== 0 && (
                 <span>
                   <Popconfirm
-                    title="Sure to delete?"
+                    title={t('stationAutoManager.delete.require')}
                     onConfirm={() => this.removeCamera(index)}
                   >
                     <a>
@@ -289,7 +287,7 @@ export default class StationAutoForm extends React.PureComponent {
               <Col span={12}>
                 <FormItem {...tailFormItemLayout}>
                   <Button type="primary" onClick={this.addCamera}>
-                    Add
+                    {t('stationAutoManager.options.allowCamera.add')}
                   </Button>
                 </FormItem>
               </Col>

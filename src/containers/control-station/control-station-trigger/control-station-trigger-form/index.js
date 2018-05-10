@@ -15,11 +15,6 @@ import TimerPicker from 'components/elements/time-picker/index'
 import CalendarCustom from 'components/elements/datetime-picker/index'
 import { translate } from 'hoc/create-lang'
 
-const items = [
-  { label: translate('controlStation.handMade'), value: 1 },
-  { label: translate('controlStation.autoMatic'), value: 0 }
-]
-
 const FTimerPicker = createValidateComponent(TimerPicker)
 const FInputNumberCell = createValidateComponent(InputNumberCell)
 const FRadioGroupCustom = createValidateComponent(RadioGroupCustom)
@@ -67,6 +62,10 @@ export default class ControlStationTriggerForm extends React.PureComponent {
   }
 
   render() {
+    const items = [
+      { label: translate('controlStation.handMade'), value: 1 },
+      { label: translate('controlStation.autoMatic'), value: 0 }
+    ]
     return (
       <form>
         <Row gutter={16}>
@@ -138,7 +137,7 @@ export default class ControlStationTriggerForm extends React.PureComponent {
                   name="periodic"
                   editable={true}
                   disabled={false}
-                  label={'Periodic'}
+                  label={translate('controlStation.cycleSampling')}
                   component={FInputNumberCell}
                 />
               </Col>
@@ -162,7 +161,7 @@ export default class ControlStationTriggerForm extends React.PureComponent {
                   this.props.onCancel.bind(this)
                 )}
               >
-                CANCEL TRIGGER
+                {translate('controlStation.cancelTrigger')}
               </Button>
             ) : (
               <Button
@@ -175,7 +174,7 @@ export default class ControlStationTriggerForm extends React.PureComponent {
                   this.props.onSubmit.bind(this)
                 )}
               >
-                TRIGGER
+                {translate('controlStation.buttonTrigger')}
               </Button>
             )}
 
@@ -188,8 +187,8 @@ export default class ControlStationTriggerForm extends React.PureComponent {
               onClick={this.props.handleSubmitExceeded.bind(this)}
             >
               {this.props.isTriggerExceeded
-                ? 'CANCEL TRIGGER EXCEEDED'
-                : 'TRIGGER EXCEEDED'}
+                ? translate('controlStation.cacelTriggerExceeded')
+                : translate('controlStation.triggerExceeded')}
             </Button>
           </Col>
         </Row>
@@ -201,7 +200,7 @@ export default class ControlStationTriggerForm extends React.PureComponent {
                 <LevelLayout>
                   <LoaderCircle />
                   <Clearfix width={10} />
-                  <span> Sampling ...</span>
+                  <span> {translate('controlStation.statusSampling')}</span>
                 </LevelLayout>
               </Col>
             </Row>

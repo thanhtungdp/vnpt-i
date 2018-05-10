@@ -43,9 +43,7 @@ export default class StationAutoForm extends React.PureComponent {
               initialValue: text,
               rules: [
                 {
-                  message:
-                    'Please enter ' +
-                    t('stationAutoManager.config.measuringDes.label')
+                  message: t('stationAutoManager.config.measuringDes.error')
                 }
               ]
             })(<span>{text}</span>)}
@@ -61,9 +59,7 @@ export default class StationAutoForm extends React.PureComponent {
               initialValue: this.initialValueMeasuringSrc(record.key),
               rules: [
                 {
-                  message:
-                    'Please enter ' +
-                    t('stationAutoManager.config.measuringSrc.label')
+                  message: t('stationAutoManager.config.measuringSrc.error')
                 }
               ]
             })(
@@ -86,8 +82,7 @@ export default class StationAutoForm extends React.PureComponent {
               rules: [
                 {
                   required: true,
-                  message:
-                    'Please enter ' + t('stationAutoManager.config.ratio.label')
+                  message: t('stationAutoManager.config.ratio.error')
                 }
               ]
             })(<InputNumber min={1} />)}

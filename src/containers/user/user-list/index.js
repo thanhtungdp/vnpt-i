@@ -63,12 +63,14 @@ export default class UserList extends React.Component {
   async componentWillMount() {}
 
   buttonAdd() {
+    const { lang: { t } } = this.props
     return (
       <div>
         {protectRole(ROLE.USER.CREATE)(
           <Link to={slug.user.create}>
             <Button type="primary">
-              <Icon type="plus" />Create
+              <Icon type="plus" />
+              {t('addon.create')}
             </Button>
           </Link>
         )}
@@ -99,6 +101,7 @@ export default class UserList extends React.Component {
   }
 
   getRows() {
+    const { lang: { t } } = this.props
     return this.props.dataSource.map((row, index) => [
       {
         content: (
@@ -150,7 +153,10 @@ export default class UserList extends React.Component {
         content: (
           <span>
             {protectRole(ROLE.USER.EDIT)(
-              <Link to={slug.user.editWithKey + '/' + row._id}> Edit </Link>
+              <Link to={slug.user.editWithKey + '/' + row._id}>
+                {' '}
+                {t('addon.edit')}{' '}
+              </Link>
             )}
             <Divider type="vertical" />
             {protectRole(ROLE.USER.DELETE)(
@@ -159,12 +165,15 @@ export default class UserList extends React.Component {
                   this.props.onDeleteItem(row._id, this.props.fetchData)
                 }
               >
-                Delete
+                {t('addon.delete')}
               </a>
             )}
             <Divider type="vertical" />
             {protectRole(ROLE.USER.ROLE)(
-              <Link to={slug.user.ruleWithKey + '/' + row._id}> Role </Link>
+              <Link to={slug.user.ruleWithKey + '/' + row._id}>
+                {' '}
+                {t('userRule.role.label')}{' '}
+              </Link>
             )}
           </span>
         )

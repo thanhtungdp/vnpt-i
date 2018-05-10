@@ -3,6 +3,7 @@ import { autobind } from 'core-decorators'
 import PageContainer from 'layout/default-sidebar-layout/PageContainer'
 import DataStationAutoApi from 'api/DataStationAutoApi'
 import Clearfix from 'components/elements/clearfix/index'
+import { translate } from 'hoc/create-lang'
 import TabList from './tab-list/index'
 import Breadcrumb from './breadcrumb'
 import SearchFrom from './search-form/index'
@@ -11,7 +12,6 @@ import ROLE from 'constants/role'
 import protectRole from 'hoc/protect-role'
 import queryFormDataBrowser from 'hoc/query-formdata-browser'
 import swal from 'sweetalert2'
-import { translate } from 'hoc/create-lang'
 
 @protectRole(ROLE.DATA_SEARCH.VIEW)
 @queryFormDataBrowser(['submit'])
@@ -90,7 +90,11 @@ export default class MinutesDataSearch extends React.Component {
     console.log(this.props.query)
     return (
       <PageContainer {...this.props.wrapperProps} backgroundColor={'#fafbfb'}>
-        <Spin size="large" tip="Exporting..." spinning={this.state.isExporting}>
+        <Spin
+          size="large"
+          tip={translate('dataSearchFrom.tab.statusExport')}
+          spinning={this.state.isExporting}
+        >
           <Breadcrumb items={['list']} />
           <SearchFrom
             initialValues={this.props.formData}

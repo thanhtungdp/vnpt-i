@@ -2,6 +2,7 @@ import React from 'react'
 import { autobind } from 'core-decorators'
 import { Tabs, Button } from 'antd'
 import PropTypes from 'prop-types'
+import { translate } from 'hoc/create-lang'
 import styled from 'styled-components'
 import BoxShadow from 'components/elements/box-shadow/index'
 import TabTableDataList from './tab-table-data-list/index'
@@ -47,12 +48,12 @@ export default class TabeList extends React.PureComponent {
               onClick={this.props.onExportExcel}
               loading={this.props.isExporting}
             >
-              Export to excel
+              {translate('dataSearchFrom.tab.exportExcel')}
             </Button>
           )}
         </ButtonAbsolute>
         <Tabs defaultActiveKey="1">
-          <Tabs.TabPane tab="Data" key="1">
+          <Tabs.TabPane tab={translate('dataSearchFrom.tab.data')} key="1">
             <TabTableDataList
               loading={this.props.isLoading}
               measuringList={this.props.measuringList}
@@ -62,7 +63,7 @@ export default class TabeList extends React.PureComponent {
               onChange={this.props.onChangePage}
             />
           </Tabs.TabPane>
-          <Tabs.TabPane tab="Chart" key="2">
+          <Tabs.TabPane tab={translate('dataSearchFrom.tab.chart')} key="2">
             <TabChart
               dataStationAuto={this.props.dataStationAuto}
               measuringData={this.props.measuringData.filter(item =>

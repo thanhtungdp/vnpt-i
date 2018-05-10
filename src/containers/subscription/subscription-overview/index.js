@@ -8,6 +8,7 @@ import SubscriptionFormInfo from './SubscriptionFormInfo'
 import SubscriptionTableList from './SubscriptionTableList'
 import { SHAPE } from 'themes/color'
 import { Row, Col } from 'reactstrap'
+import { translate } from 'hoc/create-lang'
 
 const SubscriptionOverviewWrapper = styled.div`
   padding: 0px 0px 24px 0px;
@@ -38,7 +39,9 @@ const subscriptions = [
 @autobind
 export default class SubscriptionOverview extends React.PureComponent {
   rightRenew() {
-    return <Button type="primary">Renew</Button>
+    return (
+      <Button type="primary">{translate('supscriptionStatus.Renew')}</Button>
+    )
   }
 
   render() {
@@ -52,7 +55,9 @@ export default class SubscriptionOverview extends React.PureComponent {
           <Breadcrumb items={['base']} />
           <Row>
             <Col md={4}>
-              <HeadingIntro>Current subscription</HeadingIntro>
+              <HeadingIntro>
+                {translate('supscriptionStatus.currentSubscription')}
+              </HeadingIntro>
               <SubscriptionFormInfo
                 expiredAt={new Date().toString()}
                 totalUser={10}
@@ -60,7 +65,9 @@ export default class SubscriptionOverview extends React.PureComponent {
               />
             </Col>
             <Col md={8}>
-              <HeadingIntro>Subscription history</HeadingIntro>
+              <HeadingIntro>
+                {translate('supscriptionStatus.subscriptionHistory')}
+              </HeadingIntro>
               <SubscriptionTableList dataSource={subscriptions} />
             </Col>
           </Row>

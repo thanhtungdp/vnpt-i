@@ -47,12 +47,14 @@ export default class StationAutoList extends React.Component {
   }
 
   buttonAdd() {
+    const { t } = this.props.lang
     return (
       <div>
         {protectRole(ROLE.STATION_AUTO.CREATE)(
           <Link to={slug.stationAuto.create}>
             <Button type="primary">
-              <Icon type="plus" />Create
+              <Icon type="plus" />
+              {t('stationAutoManager.create.label')}
             </Button>
           </Link>
         )}
@@ -81,6 +83,7 @@ export default class StationAutoList extends React.Component {
   }
 
   getRows() {
+    const { t } = this.props.lang
     let stationTypeArr = []
     //sort dataSource
     let sourceSorted = this.props.dataSource.sort(function(a, b) {
@@ -134,7 +137,7 @@ export default class StationAutoList extends React.Component {
                   {protectRole(ROLE.STATION_AUTO.EDIT)(
                     <Link to={slug.stationAuto.editWithKey + '/' + row._id}>
                       {' '}
-                      Edit{' '}
+                      {t('stationAutoManager.edit.label')}{' '}
                     </Link>
                   )}
                   <Divider type="vertical" />
@@ -144,14 +147,14 @@ export default class StationAutoList extends React.Component {
                         this.props.onDeleteItem(row._id, this.props.fetchData)
                       }
                     >
-                      Delete
+                      {t('stationAutoManager.delete.label')}
                     </a>
                   )}
                   <Divider type="vertical" />
                   {protectRole(ROLE.STATION_AUTO.CONFIG)(
                     <Link to={slug.stationAuto.configWithKey + '/' + row._id}>
                       {' '}
-                      Config{' '}
+                      {t('stationAutoManager.config.label')}{' '}
                     </Link>
                   )}
                 </span>

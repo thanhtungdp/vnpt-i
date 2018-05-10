@@ -58,7 +58,7 @@ export default class InfoWindowViewMore extends React.PureComponent {
       <Menu>
         <Menu.Item key="0">
           <LinkA onClick={this.handleClickDataSearch} target="_blank">
-            View Data
+            {translate('map.dataTable.viewMore.viewData')}
           </LinkA>
         </Menu.Item>
         {isCamera &&
@@ -71,7 +71,7 @@ export default class InfoWindowViewMore extends React.PureComponent {
                   slug.monitoring.viewCameraWithKey + '/' + this.props.stationId
                 }
               >
-                Camera
+                {translate('map.dataTable.viewMore.camera')}
               </LinkA>
             </Menu.Item>
           )}
@@ -89,7 +89,7 @@ export default class InfoWindowViewMore extends React.PureComponent {
                   this.props.stationName
                 }
               >
-                Sampling
+                {translate('map.dataTable.viewMore.sampling')}
               </LinkA>
             </Menu.Item>
           )}

@@ -7,6 +7,7 @@ import NotificationsApi from 'api/NotificationApi'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import connectWindowHeight from '../../hoc-window-height'
+import { translate } from 'hoc/create-lang'
 
 const Wrapper = styled.div`
   height: ${props => props.height}px;
@@ -76,7 +77,11 @@ export default class BoxNotifications extends React.PureComponent {
   render() {
     const height = this.props.windowHeight - 230
     return (
-      <BoxLayout noPadding style={{ flex: 1 }} title="Notifications">
+      <BoxLayout
+        noPadding
+        style={{ flex: 1 }}
+        title={translate('map.menuRight.notify')}
+      >
         <Wrapper
           height={height}
           isOverflow={this.state.notifications.length > 0}

@@ -132,7 +132,7 @@ export default class StationAutoEdit extends React.PureComponent {
             ]}
           />
           <Collapse defaultActiveKey={['1', '2']}>
-            <Panel header="Options" key="1">
+            <Panel header={t('stationAutoManager.header.option')} key="1">
               {this.props.isLoaded && (
                 <StationAutoConfigOptions
                   form={this.props.form}
@@ -145,7 +145,7 @@ export default class StationAutoEdit extends React.PureComponent {
                 />
               )}
             </Panel>
-            <Panel header="DataLogger" key="2">
+            <Panel header={t('stationAutoManager.header.dataLogger')} key="2">
               {this.props.isLoaded && (
                 <StationAutoConfigForm
                   form={this.props.form}

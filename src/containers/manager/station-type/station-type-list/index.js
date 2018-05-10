@@ -79,11 +79,12 @@ export default class StationTypeList extends React.Component {
       { content: t('stationTypeManager.form.name.label'), width: 30 },
       { content: t('stationTypeManager.form.icon.label'), width: 10 },
       { content: t('stationTypeManager.form.auto.label'), width: 10 },
-      { content: 'Action', width: 10 }
+      { content: t('stationTypeManager.form.action.label'), width: 10 }
     ]
   }
 
   getRows() {
+    const { lang: { t } } = this.props
     return this.props.dataSource.map((row, index) => [
       {
         content: (
@@ -115,7 +116,7 @@ export default class StationTypeList extends React.Component {
               }}
               src={row.icon}
             >
-              Icon
+              {t('stationTypeManager.form.icon.label')}
             </Avatar>
           </AvatarWrapper>
         )
@@ -129,7 +130,7 @@ export default class StationTypeList extends React.Component {
             {protectRole(ROLE.STATION_TYPE.EDIT)(
               <Link to={slug.stationType.editWithKey + '/' + row._id}>
                 {' '}
-                Edit{' '}
+                {t('stationTypeManager.edit.label')}{' '}
               </Link>
             )}
 
@@ -140,7 +141,7 @@ export default class StationTypeList extends React.Component {
                   this.props.onDeleteItem(row._id, this.props.fetchData)
                 }
               >
-                Delete
+                {t('stationTypeManager.delete.label')}
               </a>
             )}
           </span>

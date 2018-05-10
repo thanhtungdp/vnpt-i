@@ -18,7 +18,7 @@ export default class TableDataList extends React.PureComponent {
 
   getColumns() {
     const columnReceivedAt = {
-      title: 'Received At',
+      title: translate('avgSearchFrom.list.receivedAt.label'),
       dataIndex: 'receivedAt',
       key: 'receivedAt',
       render(value, record) {

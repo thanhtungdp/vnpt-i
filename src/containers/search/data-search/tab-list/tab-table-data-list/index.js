@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { translate } from 'hoc/create-lang'
 import { autobind } from 'core-decorators'
 import { Table } from 'antd'
 import styled from 'styled-components'
@@ -7,7 +8,6 @@ import moment from 'moment/moment'
 import { SHAPE } from 'themes/color'
 import {} from 'hoc/create-lang'
 import { warningLevels, colorLevels } from 'constants/warningLevels'
-import { translate } from 'hoc/create-lang'
 const TableDataListWrapper = styled.div``
 
 @autobind
@@ -31,7 +31,7 @@ export default class TableDataList extends React.PureComponent {
     }
 
     const columnReceivedAt = {
-      title: 'Received At',
+      title: translate('dataSearchFrom.dataTable.receivedAt'),
       dataIndex: 'receivedAt',
       key: 'receivedAt',
       render(value) {
