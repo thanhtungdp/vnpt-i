@@ -33,7 +33,8 @@ export default class TabeList extends React.PureComponent {
     onChangePage: PropTypes.func,
     onExportExcel: PropTypes.func,
     nameChart: PropTypes.string,
-    isExporting: PropTypes.bool
+    isExporting: PropTypes.bool,
+    typeReport: PropTypes.string
   }
 
   render() {
@@ -61,6 +62,7 @@ export default class TabeList extends React.PureComponent {
               dataSource={this.props.dataStationAuto}
               pagination={this.props.pagination}
               onChange={this.props.onChangePage}
+              typeReport={this.props.typeReport}
             />
           </Tabs.TabPane>
           <Tabs.TabPane tab={translate('avgSearchFrom.tab.chart')} key="2">
@@ -70,6 +72,7 @@ export default class TabeList extends React.PureComponent {
                 this.props.measuringList.includes(item.key)
               )}
               nameChart={this.props.nameChart}
+              typeReport={this.props.typeReport}
             />
           </Tabs.TabPane>
         </Tabs>

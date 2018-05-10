@@ -107,6 +107,7 @@ export default class AvgSearch extends React.Component {
               onChangePage={this.handleChangePage}
               onExportExcel={this.handleExportExcel}
               nameChart={this.state.searchFormData.name}
+              typeReport={this.state.searchFormData.type}
               isExporting={this.state.isExporting}
             />
           ) : null}

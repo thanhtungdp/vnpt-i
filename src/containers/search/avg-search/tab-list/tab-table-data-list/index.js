@@ -13,21 +13,23 @@ const TableDataListWrapper = styled.div``
 export default class TableDataList extends React.PureComponent {
   static propTypes = {
     measuringList: PropTypes.array,
-    measuringData: PropTypes.array
+    measuringData: PropTypes.array,
+    typeReport: PropTypes.string
   }
 
   getColumns() {
+    let formatDate = 'YYYY/MM/DD HH:mm'
+    if (this.props.typeReport === 'month') {
+      formatDate = 'YYYY/MM'
+    } else if (this.props.typeReport === 1440) {
+      formatDate = 'YYYY/MM/DD'
+    }
     const columnReceivedAt = {
       title: translate('avgSearchFrom.list.receivedAt.label'),
       dataIndex: 'receivedAt',
       key: 'receivedAt',
       render(value, record) {
-        return (
-          <div>
-            {moment(record._id).format('DD/MM/YYYY HH:mm')}
-            {/* {moment(record._id).format('dddd, MMMM Do YYYY, h:mm:ss a')} */}
-          </div>
-        )
+        return <div>{moment(record._id).format(formatDate)}</div>
       }
     }
     const columnsMeasurings = this.props.measuringData
