@@ -11,9 +11,9 @@ app.use(bodyParser.json())
 app.set('view engine', 'ejs')
 app.set('views', path.join(__dirname, ''))
 
-app.get('*', function(req, res, next) {
-  res.redirect('/')
-})
+app.get('/*', function (req, res) {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
 
 app.listen(config.PORT_DEPLOY, () => {
   console.log('App listen on ' + config.PORT_DEPLOY)
