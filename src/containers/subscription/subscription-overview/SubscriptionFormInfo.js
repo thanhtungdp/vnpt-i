@@ -13,59 +13,62 @@ const Label = styled.label`
   font-weight: 600;
   display: block;
   margin-bottom: 6px;
+  color:#000;
 `
 const ValueText = styled.span`
-  color: ${SHAPE.GRAYTEXT};
+    color:#45526B;
 `
 @createLanguageHoc
 @autobind
 export default class SubscriptionFormInfo extends React.PureComponent {
-  static propTypes = {
-    expiredAt: PropTypes.any,
-    totalUser: PropTypes.number,
-    totalStation: PropTypes.number,
-    lang: langPropTypes
-  }
+	static propTypes = {
+		expiredAt: PropTypes.any,
+		totalUser: PropTypes.number,
+		totalStation: PropTypes.number,
+		createdUser: PropTypes.number,
+		createdStation: PropTypes.number,
+		lang: langPropTypes
+	}
 
-  renderItem(icon, label, value) {
-    return (
+	renderItem(icon, label, value) {
+		return (
       <div>
         <Label>
-          {icon} {label}
+					{icon} {label}
         </Label>
         <ValueText>{value}</ValueText>
       </div>
-    )
-  }
+		)
+	}
 
-  render() {
-    const { lang: { t } } = this.props
-    return (
+	render() {
+		const { lang: { t } } = this.props
+		return (
       <SubscriptionFormInfoWrapper>
-        {this.renderItem(
+				{this.renderItem(
           <Icon type="calendar" />,
-          t('supscriptionStatus.expiredAt'),
-          this.props.expiredAt
-        )}
+					t('subscriptionStatus.expiredAt'),
+					this.props.expiredAt
+				)}
         <Clearfix height={8} />
         <Row>
           <Col md={6}>
-            {this.renderItem(
+						{this.renderItem(
               <Icon type="user" />,
-              t('supscriptionStatus.totalUsers'),
-              this.props.totalUser
-            )}
+							t('subscriptionStatus.totalUsers'),
+							`${this.props.createdUser} of ${this.props.totalUser}`
+						)}
           </Col>
           <Col md={6}>
-            {this.renderItem(
+						{this.renderItem(
               <Icon type="inbox" />,
-              t('supscriptionStatus.totalStation'),
-              this.props.totalStation
-            )}
+							t('subscriptionStatus.totalStation'),
+							`${this.props.createdStation} of ${this.props.totalStation}`
+						)}
           </Col>
         </Row>
         <Clearfix height={8} />
       </SubscriptionFormInfoWrapper>
-    )
-  }
+		)
+	}
 }
