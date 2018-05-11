@@ -9,6 +9,7 @@ import Icon from '../../themes/icon'
 import NavigationWrapper from './NavigationWrapper'
 import protectRole from 'hoc/protect-role'
 import ROLE from 'constants/role'
+import { translate } from 'hoc/create-lang'
 
 const dashboardMenu = {
   component: (
@@ -17,6 +18,7 @@ const dashboardMenu = {
       href={slug.dashboard}
       icon={Icon.dashboard}
       text="Dashboard"
+      //  text={translate('menuApp.dashboard')}
     />
   )
 }
@@ -28,6 +30,7 @@ const monitoringMenu = {
       href={slug.monitoring.base}
       icon={Icon.screen}
       text="Monitoring"
+      //  text={translate('menuApp.monitoring')}
     />
   )
 }
@@ -39,6 +42,7 @@ const mapMenu = {
       href={slug.map.base}
       icon={Icon.location}
       text="Map"
+      //  text={translate('menuApp.map')}
     />
   )
 }
@@ -62,6 +66,7 @@ const dataSearchMenu = {
       icon={Icon.graphBar}
       href={slug.dataSearch.base}
       text="Data Search"
+      //  text={translate('menuApp.dataSearch')}
     />
   )
 }
@@ -72,6 +77,7 @@ const avgDataMenu = {
       linkComponent={WrapperLinkComponent}
       icon={Icon.graphLine}
       href={slug.avgSearch.base}
+      //  text={translate('menuApp.avgData')}
       text="AVG Data"
     />
   )
@@ -95,6 +101,7 @@ const measuringMenu = {
       linkComponent={WrapperLinkComponent}
       href={slug.measuring.base}
       icon={Icon.quizLists}
+      //  text={translate('menuApp.measuring')}
       text="Measuring"
     />
   )
@@ -106,6 +113,7 @@ const stationTypeMenu = {
       linkComponent={WrapperLinkComponent}
       href={slug.stationType.base}
       icon={Icon.hipchat}
+      // text={translate('menuApp.stationType')}
       text="Station type"
     />
   )
@@ -117,6 +125,7 @@ const stationAutoMenu = {
       linkComponent={WrapperLinkComponent}
       href={slug.stationAuto.base}
       icon={Icon.book}
+      //  text={translate('menuApp.stationAuto')}
       text="Station auto"
     />
   )
@@ -136,6 +145,7 @@ const userMenu = {
       linkComponent={WrapperLinkComponent}
       href={slug.user.base}
       icon={Icon.person}
+      //  text={translate('menuApp.user')}
       text="User"
     />
   )
@@ -147,6 +157,7 @@ const roleMenu = {
       linkComponent={WrapperLinkComponent}
       href={slug.role.base}
       icon={Icon.peopleGroup}
+      //  text={translate('menuApp.role')}
       text="Role"
     />
   )
@@ -158,6 +169,7 @@ const subscriptionMenu = {
       linkComponent={WrapperLinkComponent}
       href={slug.subscription.base}
       icon={Icon.creditCard}
+      //  text={translate('menuApp.subScription')}
       text="Subscription"
     />
   )

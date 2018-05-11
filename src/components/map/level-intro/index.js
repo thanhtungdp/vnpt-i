@@ -38,7 +38,7 @@ const TextLevel = styled.span`
 export default function LevelInfo() {
   return (
     <WarningWrapper>
-      <WarningTitle>WARNING LEVELS</WarningTitle>
+      <WarningTitle>{translate('warningLevels.title')}</WarningTitle>
       <WrapperColor>
         <ColorLevel color={colorLevels.GOOD} />
         <ColorLevel color={colorLevels.EXCEEDED_TENDENCY} />

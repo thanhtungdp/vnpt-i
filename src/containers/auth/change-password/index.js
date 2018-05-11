@@ -81,8 +81,8 @@ export default class ChangePassword extends PureComponent {
         <Breadcrumb items={['changePassword']} />
         <Form onSubmit={this.props.handleSubmit(this.handleLogin.bind(this))}>
           <Field
-            label="Current password"
-            placeholder="Current password"
+            label={translate('changePassword.form.oldPassword.label')}
+            placeholder={translate('changePassword.form.oldPassword.label')}
             name="oldPassword"
             type="password"
             icon="fa fa-user"
@@ -91,18 +91,22 @@ export default class ChangePassword extends PureComponent {
           />
           <Clearfix />
           <Field
-            label="New password"
+            label={translate('changePassword.form.newPassword.label')}
             type="password"
-            placeholder="New password"
+            placeholder={translate('changePassword.form.newPassword.label')}
             name="newPassword"
             component={FInput}
             size="small"
           />
           <Clearfix />
           <Field
-            label="Password confirmation"
+            label={translate(
+              'changePassword.form.newPasswordConfirmation.label'
+            )}
             type="password"
-            placeholder="Password confirmation"
+            placeholder={translate(
+              'changePassword.form.newPasswordConfirmation.label'
+            )}
             name="newPasswordConfirmation"
             component={FInput}
             size="small"
@@ -114,7 +118,7 @@ export default class ChangePassword extends PureComponent {
             block
             color="primary"
           >
-            Save password
+            {translate('changePassword.form.savePassword')}
           </Button>
         </Form>
       </PageContainer>

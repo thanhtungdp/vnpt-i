@@ -23,7 +23,8 @@ export default class StationTypeForm extends React.PureComponent {
     super(props)
     this.state = {
       urlIcon: '',
-      color: ''
+      color: '',
+      name: ''
     }
   }
 

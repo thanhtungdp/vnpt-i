@@ -11,6 +11,7 @@ import PropTypes from 'prop-types'
 import Breadcrumb from '../breadcrumb'
 import ROLE from 'constants/role'
 import protectRole from 'hoc/protect-role'
+import { translate } from 'hoc/create-lang'
 
 @protectRole(ROLE.STATION_TYPE.EDIT)
 @createManagerDelete({
@@ -52,7 +53,8 @@ export default class StationTypeEdit extends React.PureComponent {
     return (
       <div>
         <Button type="primary" onClick={this.deleteStationType}>
-          <Icon type="delete" />Delete
+          <Icon type="delete" />
+          {translate('addon.delete')}
         </Button>
       </div>
     )

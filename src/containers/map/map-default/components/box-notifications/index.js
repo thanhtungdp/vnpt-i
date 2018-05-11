@@ -86,7 +86,7 @@ export default class BoxNotifications extends React.PureComponent {
           {this.state.notifications.length === 0 && (
             <Nodata>
               <span>
-                <Icon type="bell" /> No data
+                <Icon type="bell" /> {translate('map.menuRight.noData')}
               </span>
             </Nodata>
           )}

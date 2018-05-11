@@ -47,9 +47,7 @@ export default class SelectStationType extends PureComponent {
     return (
       <SelectWrapper>
         <Select showSearch {...this.props}>
-          <Select.Option value={''}>
-            {translate('dataSearchFrom.form.all')}
-          </Select.Option>
+          <Select.Option value={''}>{translate('chart.all')}</Select.Option>
           {this.state.stationTypes.map(stationType => (
             <Select.Option key={stationType.key} value={stationType.key}>
               {stationType.name}

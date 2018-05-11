@@ -49,7 +49,10 @@ export default class ControlStationHistory extends PureComponent {
         title: translate('controlStation.orderByBottle'),
         dataIndex: 'LayMauChai',
         width: 150,
-        fixed: 'left'
+        fixed: 'left',
+        render: function(data, type, row, meta) {
+          return translate('controlStation.bottle') + ' ' + data
+        }
       },
       {
         title: translate('controlStation.dateTime'),
@@ -58,7 +61,14 @@ export default class ControlStationHistory extends PureComponent {
       },
       {
         title: translate('controlStation.content'),
-        dataIndex: 'NoiDung'
+        dataIndex: 'NoiDung',
+        render: function(data, type, row, meta) {
+          if (data === 'HANDMADE') {
+            return translate('controlStation.handMade')
+          } else if (data === 'AUTOMATIC') {
+            return translate('controlStation.autoMatic')
+          }
+        }
       },
       {
         title: translate('controlStation.email'),

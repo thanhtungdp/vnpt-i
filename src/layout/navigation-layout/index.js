@@ -16,6 +16,7 @@ import DocumentDrawer from './DocumentDrawer'
 import AppDrawer from './AppDrawer'
 import ChangeLanguage from './ChangeLanguage'
 import LogoBrandName from './LogoBrandName'
+import { translate } from 'hoc/create-lang'
 
 import Navigation, {
 // AkContainerTitle,
@@ -125,7 +126,7 @@ export default class BasicNestedNavigation extends React.Component {
         position="right bottom"
         trigger={
           <AkGlobalItem>
-            <Tooltip position="right" content="User profile">
+            <Tooltip position="right" content={translate('profileUser.title')}>
               <AvatarCharacter
                 size={32}
                 username={this.props.authInfo.email}
@@ -140,12 +141,18 @@ export default class BasicNestedNavigation extends React.Component {
             this.props.authInfo.firstName
           }`}
         >
-          <DropdownItem onClick={this.handleProfile}>View profile</DropdownItem>
-          <DropdownItem onClick={this.handleChangePassword}>
-            Change password
+          <DropdownItem onClick={this.handleProfile}>
+            {translate('profileUser.viewProfile')}
           </DropdownItem>
-          <DropdownItem onClick={this.handleSecurity}>Security</DropdownItem>
-          <DropdownItem onClick={this.handleLogout}>Log out</DropdownItem>
+          <DropdownItem onClick={this.handleChangePassword}>
+            {translate('profileUser.changePassword')}
+          </DropdownItem>
+          <DropdownItem onClick={this.handleSecurity}>
+            {translate('profileUser.security')}
+          </DropdownItem>
+          <DropdownItem onClick={this.handleLogout}>
+            {translate('profileUser.logOut')}
+          </DropdownItem>
         </DropdownItemGroup>
       </AkDropdownMenu>,
       <ChangeLanguage />

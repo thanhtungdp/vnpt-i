@@ -15,7 +15,7 @@ const ROLE_API = API_GATEWAY_RELEASE
 const USER_API = API_GATEWAY_RELEASE
 const ORGANIZATION_API = API_GATEWAY_RELEASE
 const FCM_API = API_GATEWAY_RELEASE
-const STATION_CONTROL_API = 'http://118.69.55.217:92' //'http://192.168.1.41:8010' //
+const STATION_CONTROL_API = 'https://ilotusland.vietan-software.com' //'http://192.168.1.41:8010' //
 
 const GOOGLE_MAP = {
   KEY: 'AIzaSyB2-wp_CpzQQOkmacIaA2Xj90G8E_wiJiw'
