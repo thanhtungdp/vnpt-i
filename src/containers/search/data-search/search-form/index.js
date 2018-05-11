@@ -122,33 +122,6 @@ export default class SearchForm extends React.Component {
     return moment(date, 'YYYY-MM-DD HH:mm').toISOString()
   }
 
-  // handleSubmit(e) {
-  //   e.preventDefault()
-  //   this.props.SearchFormContainer.validate((err,values) => {
-  //     if(err) return
-  //     const data = {
-  //       fromDate: this.convertDateToString(values.fromDate),
-  //       toDate: this.convertDateToString(values.toDate),
-  //       key: values.stationAuto,
-  //       name: this.state.stationAutoName,
-  //       measuringList: values.measuringList,
-  //       measuringData: this.state.measuringData,
-  //       isExceeded: values.isExceeded,
-  //       advanced: values.advanced
-  //         ? values.advanced.filter(
-  //             item =>
-  //               item.measuringKey &&
-  //               item.operator &&
-  //               item.value !== null &&
-  //               typeof item.value !== 'undefined'
-  //           )
-  //         : []
-  //     }
-  //     this.props.onSubmit(data)
-  //   })
-
-  // }
-
   handleSubmit(values) {
     this.props.onSubmit({
       fromDate: this.convertDateToString(values.fromDate),

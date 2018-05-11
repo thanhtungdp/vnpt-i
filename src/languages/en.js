@@ -50,6 +50,7 @@ export default {
       reset: 'Reset success',
       success: 'Config success'
     },
+    bottle: 'Bottle number',
     handMade: 'Handmade',
     autoMatic: 'Automatic',
     total: 'Total',
