@@ -26,7 +26,8 @@ export default {
     CREATE: 'menu.user.actions.create',
     EDIT: 'menu.user.actions.edit',
     DELETE: 'menu.user.actions.delete',
-    ROLE: 'menu.user.actions.role'
+    ROLE: 'menu.user.actions.role',
+    ENABLE_ACCOUNT: 'menu.user.actions.enableAccount'
   },
   ROLE: {
     VIEW: 'menu.role.actions.view',
