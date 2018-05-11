@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
-import { Divider, Button, Icon } from 'antd'
+import { Divider, Button, Icon, Menu, Dropdown } from 'antd'
 import PageContainer from 'layout/default-sidebar-layout/PageContainer'
 import slug from 'constants/slug'
 import { autobind } from 'core-decorators'
@@ -19,6 +19,9 @@ import AvatarCharacter from 'components/elements/avatar-character'
 import ClearFix from 'components/elements/clearfix'
 import styled from 'styled-components'
 import TimeAgo from 'react-timeago'
+import { Modal, message } from 'antd'
+import format from 'string-format'
+import { translate } from 'hoc/create-lang'
 
 const AccountWapper = styled.div`
   display: flex;
@@ -38,6 +41,19 @@ const AccountInfo = styled.div`
 const SpanTimeAgo = styled.div`
   font-size: 13px;
   color: #707070;
+`
+const LinkSpan = styled.span`
+  color: #000;
+  &:hover {
+    cursor: pointer;
+  }
+`
+const SpanEnable = styled.span`
+  color: #fff;
+  background-color: ${props => (props.enable ? '#1890ff' : '#9CABB3')};
+  border-radius: 5px;
+  padding: 1px 5px;
+  font-size: 12px;
 `
 
 @protectRole(ROLE.USER.VIEW)
@@ -61,6 +77,29 @@ export default class UserList extends React.Component {
   }
 
   async componentWillMount() {}
+
+  async onEnableAccount(_id, enable, callback) {
+    Modal.confirm({
+      title: format(
+        translate('userForm.list.confirmEnableAccount'),
+        enable
+          ? translate('userForm.list.enable')
+          : translate('userForm.list.disable')
+      ),
+      onOk() {
+        return new Promise(async (resolve, reject) => {
+          const data = await UserApi.accountEnable(_id, { enable })
+          if (data.success) {
+            callback()
+          } else {
+            message.error(data.message)
+          }
+          resolve()
+        }).catch(() => console.log('Oops errors!'))
+      },
+      onCancel() {}
+    })
+  }
 
   buttonAdd() {
     const { lang: { t } } = this.props
@@ -89,12 +128,77 @@ export default class UserList extends React.Component {
     )
   }
 
+  actionGroup(row) {
+    const { lang: { t } } = this.props
+    let accountEnable = true
+    if (row.accountStatus && row.accountStatus.enable === false) {
+      accountEnable = false
+    }
+    const dropdown = (
+      <Menu>
+        {protectRole(ROLE.USER.EDIT)(
+          <Menu.Item key="0">
+            <Link to={slug.user.editWithKey + '/' + row._id}>
+              {t('addon.edit')}
+            </Link>
+          </Menu.Item>
+        )}
+        {protectRole(ROLE.USER.DELETE)(
+          <Menu.Item key="1">
+            <a
+              onClick={() =>
+                this.props.onDeleteItem(row._id, this.props.fetchData)
+              }
+            >
+              {t('addon.delete')}
+            </a>
+          </Menu.Item>
+        )}
+        {protectRole(ROLE.USER.ROLE)(
+          <Menu.Item key="2">
+            <Link to={slug.user.ruleWithKey + '/' + row._id}>
+              {t('userRule.role.label')}
+            </Link>
+          </Menu.Item>
+        )}
+        {protectRole(ROLE.USER.ENABLE_ACCOUNT)(
+          <Menu.Item key="3">
+            <a
+              onClick={() =>
+                this.onEnableAccount(
+                  row._id,
+                  !accountEnable,
+                  this.props.fetchData
+                )
+              }
+            >
+              {accountEnable
+                ? t('userForm.list.disableAccount')
+                : t('userForm.list.enableAccount')}
+            </a>
+          </Menu.Item>
+        )}
+      </Menu>
+    )
+    return (
+      <Dropdown overlay={dropdown} trigger={['click']}>
+        <LinkSpan className="ant-dropdown-link">
+          <Icon
+            type="down-square-o"
+            style={{ fontSize: 20, color: '#3E90F7' }}
+          />
+        </LinkSpan>
+      </Dropdown>
+    )
+  }
+
   getHead() {
     const { lang: { t } } = this.props
     return [
       { content: '#', width: 2 },
       { content: t('userSearchFrom.form.email.label'), width: 30 },
       { content: t('userSearchFrom.form.country.label'), width: 20 },
+      { content: 'Status', width: 10 },
       { content: 'Action', width: 20 },
       { content: 'Login', width: 10 }
     ]
@@ -151,32 +255,21 @@ export default class UserList extends React.Component {
       },
       {
         content: (
-          <span>
-            {protectRole(ROLE.USER.EDIT)(
-              <Link to={slug.user.editWithKey + '/' + row._id}>
-                {' '}
-                {t('addon.edit')}{' '}
-              </Link>
-            )}
-            <Divider type="vertical" />
-            {protectRole(ROLE.USER.DELETE)(
-              <a
-                onClick={() =>
-                  this.props.onDeleteItem(row._id, this.props.fetchData)
-                }
-              >
-                {t('addon.delete')}
-              </a>
-            )}
-            <Divider type="vertical" />
-            {protectRole(ROLE.USER.ROLE)(
-              <Link to={slug.user.ruleWithKey + '/' + row._id}>
-                {' '}
-                {t('userRule.role.label')}{' '}
-              </Link>
-            )}
-          </span>
+          <SpanEnable
+            enable={
+              row.accountStatus && row.accountStatus.enable == false
+                ? false
+                : true
+            }
+          >
+            {row.accountStatus && row.accountStatus.enable == false
+              ? 'Disable'
+              : 'Enable'}
+          </SpanEnable>
         )
+      },
+      {
+        content: <span>{this.actionGroup(row)}</span>
       },
       {
         content: (

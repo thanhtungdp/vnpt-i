@@ -51,6 +51,11 @@ export function accountActivate(code) {
   return putFetch(urlFetch)
 }
 
+export function accountEnable(_id, data = {}) {
+  let urlFetch = USER_API + '/user/organization/enable/' + _id
+  return putFetch(urlFetch, data)
+}
+
 export default {
   searchUser,
   registerUser,
@@ -59,5 +64,6 @@ export default {
   deleteOne,
   updateRole,
   accountActivate,
-  getTotalCount
+  getTotalCount,
+  accountEnable
 }

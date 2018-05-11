@@ -512,6 +512,14 @@ export default {
       isAdmin: {
         label: 'isAdmin'
       }
+    },
+    list: {
+      enableAccount: 'Enable account',
+      disableAccount: 'Disable account',
+      confirmEnableAccount: 'Do you want to {0} these account?',
+      enable: 'Enable',
+      disable: 'Disable',
+      deactivate: 'Deactivate'
     }
   },
   userSearchFrom: {
