@@ -13,7 +13,7 @@ const BoxViewWrapper = styled.div`
   align-items: center;
   flex-direction: column;
   color: ${props => props.color};
-  height: 85.9px;
+  height: 70px;
 `
 
 const Number = styled.span`

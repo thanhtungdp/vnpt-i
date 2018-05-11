@@ -8,8 +8,14 @@ import BoxLayout from 'components/map/box-white-layout'
 import StationGroupList from 'components/map/station-group-list'
 import Clearfix from 'components/elements/clearfix'
 import _ from 'lodash'
+import styled from 'styled-components'
 import SelectStationType from './SelectStationType'
 import { translate } from 'hoc/create-lang'
+
+const WrapperList = styled.div`
+  overflow: scroll;
+  flex: 1;
+`
 
 @withRouter
 @autobind
@@ -84,12 +90,19 @@ export default class SidebarList extends React.PureComponent {
       <BoxLayout
         style={{ flex: 1 }}
         onlyTitle
+        noPadding
+        noTitlePadding
         title={
           <SelectStationType
             onChange={this.handleChangeStationType}
             value={this.state.stationType}
           />
         }
+        containerStyle={{
+          display: 'flex',
+          flexDirection: 'column',
+          padding: '8px 8px'
+        }}
       >
         <Input.Search
           placeholder={translate('map.menuLeft.stationSearch')}
@@ -97,12 +110,14 @@ export default class SidebarList extends React.PureComponent {
           style={{ width: '100%' }}
           value={this.state.filterText}
         />
-        <Clearfix height={16} />
-        <StationGroupList
-          stationSelected={this.props.stationSelected}
-          stationGroups={this.getStationGroups()}
-          onSelectStation={this.props.onSelectStation}
-        />
+        <Clearfix height={8} />
+        <WrapperList>
+          <StationGroupList
+            stationSelected={this.props.stationSelected}
+            stationGroups={this.getStationGroups()}
+            onSelectStation={this.props.onSelectStation}
+          />
+        </WrapperList>
       </BoxLayout>
     )
   }

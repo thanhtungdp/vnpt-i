@@ -12,14 +12,11 @@ const SelectWrapper = styled.div`
     width: 100%;
   }
   .ant-select-selection--single {
-    height: 22px;
     width: 100%;
     background-color: #41aee4;
     border: 0px;
   }
   .ant-select-selection-selected-value {
-    line-height: 2;
-    font-size: 12px;
     color: #ffffff;
     padding-right: 15px;
   }

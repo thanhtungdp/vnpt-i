@@ -87,7 +87,7 @@ export default class NotificationItem extends React.PureComponent {
                   },
                   index
                 ) => (
-                  <InfoWrapper>
+                  <InfoWrapper key={index}>
                     {' '}
                     <SpanNumberMeta key={`${index}`}>
                       {name}:{' '}

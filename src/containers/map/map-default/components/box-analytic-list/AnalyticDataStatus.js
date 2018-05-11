@@ -1,8 +1,6 @@
 import React from 'react'
 import { autobind } from 'core-decorators'
 import styled from 'styled-components'
-import BoxNumberView from 'components/map/box-number-view'
-import { SHAPE } from 'themes/color'
 import { translate as t } from 'hoc/create-lang'
 import stationStatus from 'constants/stationStatus'
 import {
@@ -10,23 +8,10 @@ import {
   warningLevels,
   colorLevels
 } from 'constants/warningLevels'
+import { Row, Clearfix, Item, BoxNumberView } from './style'
 import PropTypes from 'prop-types'
+
 const BoxAnalyticListWrapper = styled.div``
-
-const Row = styled.div`
-  display: flex;
-  margin-left: -4px;
-  margin-right: -4px;
-`
-
-const Item = styled.div`
-  padding: 0px 4px;
-  width: 33.3%;
-`
-
-const Clearfix = styled.div`
-  height: 8px;
-`
 
 @autobind
 export default class BoxAnalyticList extends React.PureComponent {
@@ -43,8 +28,6 @@ export default class BoxAnalyticList extends React.PureComponent {
     good: -1,
     stationsAutoList: [],
     focusStatus: [
-      stationStatus.DATA_LOSS,
-      stationStatus.NOT_USE,
       warningLevels.GOOD,
       warningLevels.EXCEEDED,
       warningLevels.EXCEEDED_PREPARING,
@@ -66,8 +49,6 @@ export default class BoxAnalyticList extends React.PureComponent {
 
   rendermap(stationsAutoList) {
     let res = {
-      dataLoss: 0,
-      notUse: 0,
       exceeded: 0,
       exceededPreparing: 0,
       exceededTendency: 0,
@@ -122,18 +103,18 @@ export default class BoxAnalyticList extends React.PureComponent {
 
   handelFocusStatus(item) {
     let index = this.state.focusStatus.indexOf(item)
-    let res
-    if (index !== -1) res = this.state.focusStatus.filter(el => el !== item)
-    else res = [...this.state.focusStatus, item]
-    this.setState(
-      {
-        focusStatus: res
-      },
-      () => {
-        if (this.props.fillStatusChange)
-          this.props.fillStatusChange(this.state.focusStatus)
-      }
-    )
+    let focusStatus = []
+    if (index !== -1)
+      focusStatus = this.state.focusStatus.filter(el => el !== item)
+    else focusStatus = [...this.state.focusStatus, item]
+    this.setState({ focusStatus })
+    this.props.fillStatusChange(focusStatus, 'byDataStatus')
+  }
+
+  componentDidMount() {
+    setTimeout(() => {
+      this.props.fillStatusChange(this.state.focusStatus, 'byDataStatus')
+    }, 500)
   }
 
   render() {
@@ -156,35 +137,6 @@ export default class BoxAnalyticList extends React.PureComponent {
           </Item>
           <Item
             onClick={() => {
-              this.handelFocusStatus(stationStatus.DATA_LOSS)
-            }}
-          >
-            <BoxNumberView
-              color={SHAPE.BLACK}
-              type={t(pfKey + 'dataLoss')}
-              number={this.state.dataLoss}
-              focusStatus={stationStatus.DATA_LOSS}
-              focusParam={this.state.focusStatus}
-            />
-          </Item>
-          <Item
-            onClick={() => {
-              this.handelFocusStatus(stationStatus.NOT_USE)
-            }}
-          >
-            <BoxNumberView
-              color={SHAPE.BLACK}
-              type={t(pfKey + 'notUse')}
-              number={this.state.notUse}
-              focusStatus={stationStatus.NOT_USE}
-              focusParam={this.state.focusStatus}
-            />
-          </Item>
-        </Row>
-        <Clearfix height={8} />
-        <Row>
-          <Item
-            onClick={() => {
               this.handelFocusStatus(warningLevels.EXCEEDED)
             }}
           >
@@ -196,6 +148,9 @@ export default class BoxAnalyticList extends React.PureComponent {
               focusParam={this.state.focusStatus}
             />
           </Item>
+        </Row>
+        <Clearfix height={8} />
+        <Row>
           <Item
             onClick={() => {
               this.handelFocusStatus(warningLevels.EXCEEDED_PREPARING)

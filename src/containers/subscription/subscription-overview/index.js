@@ -26,70 +26,70 @@ const HeadingIntro = styled.h4`
 
 @autobind
 export default class SubscriptionOverview extends React.PureComponent {
-	constructor(props) {
-		super(props)
-		this.state = {
-			name: '',
-			expiredAt: '',
-			totalUser: 0,
-			totalStation: 0,
-			createdUser: 0,
-			createdStation: 0,
-			isLoaded: false
-		}
-	}
+  constructor(props) {
+    super(props)
+    this.state = {
+      name: '',
+      expiredAt: '',
+      totalUser: 0,
+      totalStation: 0,
+      createdUser: 0,
+      createdStation: 0,
+      isLoaded: false
+    }
+  }
 
-	rightRenew() {
-		return (
+  rightRenew() {
+    return (
       <Button type="primary">{translate('subscriptionStatus.Renew')}</Button>
-		)
-	}
+    )
+  }
 
-	async getStationCount() {
-		const record = await StationAutoApi.getTotalCount()
-		if (record.success) {
-			this.setState({
-				createdStation: record.data
-			})
-		}
-	}
+  async getStationCount() {
+    const record = await StationAutoApi.getTotalCount()
+    if (record.success) {
+      this.setState({
+        createdStation: record.data
+      })
+    }
+  }
 
-	async getUserCount() {
-		const record = await UserApi.getTotalCount()
-		if (record.success) {
-			this.setState({
-				createdUser: record.data
-			})
-		}
-	}
+  async getUserCount() {
+    const record = await UserApi.getTotalCount()
+    if (record.success) {
+      this.setState({
+        createdUser: record.data
+      })
+    }
+  }
 
-	async componentDidMount() {
-		const record = await OrganizationApi.getSubscription()
-		const { name, packageInfo } = record.data
-		this.setState({
-			name: name,
-			isLoaded: true
-		})
-		if (packageInfo) {
-			const { expiredAt, totalUser, totalStation } = packageInfo
-			this.setState({
-				expiredAt: moment(new Date(expiredAt)).format('YYYY-MM-DD HH:mm'),
-				totalUser: totalUser,
-				totalStation: totalStation
-			})
-		}
-		this.getUserCount()
-		this.getStationCount()
-	}
+  async componentDidMount() {
+    const record = await OrganizationApi.getSubscription()
+    const { name, packageInfo } = record.data
+    this.setState({
+      name: name,
+      isLoaded: true
+    })
+    if (packageInfo) {
+      const { expiredAt, totalUser, totalStation } = packageInfo
+      this.setState({
+        expiredAt: moment(new Date(expiredAt)).format('YYYY-MM-DD HH:mm'),
+        totalUser: totalUser,
+        totalStation: totalStation
+      })
+    }
+    this.getUserCount()
+    this.getStationCount()
+  }
 
-	render() {
-		return (
+  render() {
+    return (
       <PageContainer
         right={this.rightRenew()}
-				{...this.props.wrapperProps}
+        {...this.props.wrapperProps}
         backgroundColor="#fff"
       >
-				{this.state.isLoaded && (
+        {this.state.isLoaded && (
           <SubscriptionOverviewWrapper>
             <Breadcrumb items={['base']} />
             <Row>
@@ -105,9 +105,8 @@ export default class SubscriptionOverview extends React.PureComponent {
               </Col>
             </Row>
           </SubscriptionOverviewWrapper>
-				)}
+        )}
       </PageContainer>
-		)
-	}
+    )
+  }
 }
-

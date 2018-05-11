@@ -29,11 +29,10 @@ export default class NotficationList extends React.PureComponent {
     return (
       <NotficationListWrapper>
         {this.props.notifications.map((nf, index) => (
-          <div className="notificationItem">
+          <div className="notificationItem" key={index}>
             <NotificationItem
               onClick={() => this.props.onClickNotification(nf)}
               {...nf}
-              key={index}
             />
           </div>
         ))}

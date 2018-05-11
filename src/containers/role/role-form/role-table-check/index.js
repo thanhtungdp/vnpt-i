@@ -13,14 +13,14 @@ export default class RoleTableList extends React.PureComponent {
   getInfo() {
     let columns = []
     let pages = []
-    Object.keys(this.props.roleList).map(rolePageKey => {
-      pages.push(rolePageKey)
-      Object.keys(this.props.roleList[rolePageKey].actions).map(actionKey => {
-        if (columns.indexOf(actionKey) === -1) {
-          columns.push(actionKey)
-        }
-      })
-    })
+    // Object.keys(this.props.roleList).map(rolePageKey => {
+    //   pages.push(rolePageKey)
+    //   Object.keys(this.props.roleList[rolePageKey].actions).map(actionKey => {
+    //     if (columns.indexOf(actionKey) === -1) {
+    //       columns.push(actionKey)
+    //     }
+    //   })
+    // })
     return {
       pages,
       columns

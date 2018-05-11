@@ -95,54 +95,60 @@ export class TabChart extends React.PureComponent {
   render() {
     return (
       <TabChartWrapper>
-        <ChartWrapper innerRef={ref => this.chartWrapper = ref}>
-          {this.state.width && <HighchartsStockChart callback={this.getChart}>
-            <Chart width={this.state.width - 100} zoomType="x"/>
-            <Title>
-              {this.props.nameChart ? this.props.nameChart : 'Chart'}
-            </Title>
-            <Legend layout="horizontal" align="center" verticalAlign="bottom"/>
-            <RangeSelector>
-              {
-                <RangeSelector.Button type="all">
-                  {translate('chart.all')}
-                </RangeSelector.Button>
-              }
-              <RangeSelector.Input
-                boxBorderColor="#7cb5ec"
-                boxWidth={150}
-                inputDateParser={value => {
-                  return moment.utc(value, 'DD. MMM hh:mm').valueOf()
-                }}
-                editDateFormat="%Y/%m/%d:%k:%M"
-                dateFormat="%Y/%m/%d:%k:%M"
-                // editDateFormat="%e. %b %H:%M"
-                // dateFormat="%e. %b %H:%M"
+        <ChartWrapper innerRef={ref => (this.chartWrapper = ref)}>
+          {this.state.width && (
+            <HighchartsStockChart callback={this.getChart}>
+              <Chart width={this.state.width - 100} zoomType="x" />
+              <Title>
+                {this.props.nameChart ? this.props.nameChart : 'Chart'}
+              </Title>
+              <Legend
+                layout="horizontal"
+                align="center"
+                verticalAlign="bottom"
               />
-            </RangeSelector>
-            <XAxis
-              type="datetime"
-              dateTimeLabelFormats={{
-                hour: '%Y/%m/%d:%k:%M',
-                minute: '%Y/%m/%d:%k:%M'
-                // hour: '%e. %b %H:%M',
-                // minute: '%e. %b %H:%M'
-              }}
-            >
-              <XAxis.Title>{translate('chart.time')}</XAxis.Title>
-            </XAxis>
-            <YAxis id="number">
-              {this.getDataLines().map(dataLine => (
-                <LineSeries
-                  key={dataLine.key}
-                  id={dataLine.key}
-                  name={dataLine.name}
-                  data={dataLine.data}
+              <RangeSelector>
+                {
+                  <RangeSelector.Button type="all">
+                    {translate('chart.all')}
+                  </RangeSelector.Button>
+                }
+                <RangeSelector.Input
+                  boxBorderColor="#7cb5ec"
+                  boxWidth={150}
+                  inputDateParser={value => {
+                    return moment.utc(value, 'DD. MMM hh:mm').valueOf()
+                  }}
+                  editDateFormat="%Y/%m/%d:%k:%M"
+                  dateFormat="%Y/%m/%d:%k:%M"
+                  // editDateFormat="%e. %b %H:%M"
+                  // dateFormat="%e. %b %H:%M"
                 />
-              ))}
-            </YAxis>
-            <Tooltip/>
-          </HighchartsStockChart>}
+              </RangeSelector>
+              <XAxis
+                type="datetime"
+                dateTimeLabelFormats={{
+                  hour: '%Y/%m/%d:%k:%M',
+                  minute: '%Y/%m/%d:%k:%M'
+                  // hour: '%e. %b %H:%M',
+                  // minute: '%e. %b %H:%M'
+                }}
+              >
+                <XAxis.Title>{translate('chart.time')}</XAxis.Title>
+              </XAxis>
+              <YAxis id="number">
+                {this.getDataLines().map(dataLine => (
+                  <LineSeries
+                    key={dataLine.key}
+                    id={dataLine.key}
+                    name={dataLine.name}
+                    data={dataLine.data}
+                  />
+                ))}
+              </YAxis>
+              <Tooltip />
+            </HighchartsStockChart>
+          )}
         </ChartWrapper>
       </TabChartWrapper>
     )

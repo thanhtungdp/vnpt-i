@@ -1,4 +1,4 @@
-import { translate } from 'hoc/create-lang'
+// import { translate } from 'hoc/create-lang'
 import slug from 'constants/slug'
 import createBreadcrumb from 'shared/breadcrumb/hoc'
 

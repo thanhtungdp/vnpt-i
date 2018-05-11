@@ -8,7 +8,7 @@ import Clearfix from 'components/elements/clearfix'
 import { SHAPE } from 'themes/color'
 import { Icon, Tooltip } from 'antd'
 import ROLE from 'constants/role'
-import stationStatus from 'constants/stationStatus'
+// import stationStatus from 'constants/stationStatus'
 import protectRole from 'hoc/protect-role'
 import { translate } from 'hoc/create-lang'
 
