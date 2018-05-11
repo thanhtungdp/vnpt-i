@@ -20,9 +20,18 @@ import { translate } from 'hoc/create-lang'
 import chartAutoResize from 'hoc/chart-autoresize'
 
 const TabChartWrapper = styled.div`
-  align-items: center;
-  width: 100%;
+  display: flex;
 `
+
+const ChartWrapper = styled.div`
+  flex: 1;
+  .chart {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+`
+
 @chartAutoResize
 @autobind
 export class TabChart extends React.PureComponent {
@@ -33,8 +42,10 @@ export class TabChart extends React.PureComponent {
     nameChart: PropTypes.string
   }
   state = {
-    isRendered: false
+    isRendered: false,
+    width: 0
   }
+
   getDataSort() {
     return this.props.dataStationAuto.sort(
       (a, b) =>
@@ -69,23 +80,28 @@ export class TabChart extends React.PureComponent {
   componentDidUpdate() {
     if (this.chart != null) this.chart.redraw()
   }
+
   componentDidMount() {
-    this.setState({ isRendered: true })
+    console.log(this.chartWrapper.offsetWidth)
+    this.setState({
+      width: this.chartWrapper.offsetWidth
+    })
   }
+
   getChart(chart) {
     this.chart = chart
   }
 
   render() {
     return (
-      this.state.isRendered && (
-        <TabChartWrapper>
-          <HighchartsStockChart callback={this.getChart}>
-            <Chart width={1047} zoomType="x" />
+      <TabChartWrapper>
+        <ChartWrapper innerRef={ref => this.chartWrapper = ref}>
+          {this.state.width && <HighchartsStockChart callback={this.getChart}>
+            <Chart width={this.state.width - 100} zoomType="x"/>
             <Title>
               {this.props.nameChart ? this.props.nameChart : 'Chart'}
             </Title>
-            <Legend layout="horizontal" align="center" verticalAlign="bottom" />
+            <Legend layout="horizontal" align="center" verticalAlign="bottom"/>
             <RangeSelector>
               {
                 <RangeSelector.Button type="all">
@@ -104,7 +120,6 @@ export class TabChart extends React.PureComponent {
                 // dateFormat="%e. %b %H:%M"
               />
             </RangeSelector>
-
             <XAxis
               type="datetime"
               dateTimeLabelFormats={{
@@ -116,7 +131,6 @@ export class TabChart extends React.PureComponent {
             >
               <XAxis.Title>{translate('chart.time')}</XAxis.Title>
             </XAxis>
-
             <YAxis id="number">
               {this.getDataLines().map(dataLine => (
                 <LineSeries
@@ -127,11 +141,12 @@ export class TabChart extends React.PureComponent {
                 />
               ))}
             </YAxis>
-            <Tooltip />
-          </HighchartsStockChart>
-        </TabChartWrapper>
-      )
+            <Tooltip/>
+          </HighchartsStockChart>}
+        </ChartWrapper>
+      </TabChartWrapper>
     )
   }
 }
+
 export default withHighcharts(TabChart, Highcharts)
