@@ -93,7 +93,7 @@ export default class RoleList extends React.Component {
     this.setState({
       isLoading: false
     })
-    if (res.success) message.info(t('userRule.message.success'))
+    if (res.success) message.info(t('userManager.roleAssign.success'))
     else message.info(res.message)
   }
 
@@ -101,11 +101,11 @@ export default class RoleList extends React.Component {
     const { lang: { t } } = this.props
     return [
       {
-        title: t('userRule.name.label'),
+        title: t('userManager.roleAssign.name'),
         dataIndex: 'name'
       },
       {
-        title: t('userRule.address.label'),
+        title: t('userManager.roleAssign.address'),
         dataIndex: 'address'
       }
     ]
@@ -142,7 +142,7 @@ export default class RoleList extends React.Component {
               items={[
                 'list',
                 {
-                  id: t('userRule.role.label'),
+                  id: t('userManager.roleAssign.role'),
                   name: this.state.isLoaded ? this.state.userName : ''
                 }
               ]}
@@ -150,7 +150,7 @@ export default class RoleList extends React.Component {
             <Row gutter={16}>
               <Col span={12}>
                 <FormItem
-                  label={t('userRule.role.label')}
+                  label={t('userManager.roleAssign.role')}
                   labelCol={{ span: 2 }}
                   wrapperCol={{ span: 10 }}
                 >
@@ -174,7 +174,7 @@ export default class RoleList extends React.Component {
                     checked={this.state.isAdmin}
                     onChange={this.onChangeIsAdmin}
                   >
-                    {t('userRule.role.isAdmin')}
+                    {t('userManager.roleAssign.isAdmin')}
                   </Checkbox>
                 </FormItem>
               </Col>

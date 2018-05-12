@@ -57,7 +57,7 @@ export default class ControlStationHistory extends PureComponent {
       {
         title: translate('controlStation.dateTime'),
         dataIndex: 'ThoiGian',
-        width: 150
+        width: 250
       },
       {
         title: translate('controlStation.content'),
@@ -66,7 +66,7 @@ export default class ControlStationHistory extends PureComponent {
           if (data === 'HANDMADE') {
             return translate('controlStation.handMade')
           } else if (data === 'AUTOMATIC') {
-            return translate('controlStation.autoMatic')
+            return translate('controlStation.automatic')
           }
         }
       },

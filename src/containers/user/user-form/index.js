@@ -110,7 +110,7 @@ export default class UserForm extends React.PureComponent {
           <Col span={12}>
             <FormItem
               {...formItemLayout}
-              label={t('userForm.form.email.label')}
+              label={t('userManager.form.email.label')}
             >
               {getFieldDecorator('email', {
                 initialValue: this.props.initialValues
@@ -119,17 +119,17 @@ export default class UserForm extends React.PureComponent {
                 rules: [
                   {
                     type: 'email',
-                    message: t('userForm.form.email.error')
+                    message: t('userManager.form.email.error')
                   },
                   {
                     required: true,
-                    message: t('userForm.form.email.label')
+                    message: t('userManager.form.email.label')
                   }
                 ]
               })(
                 <Input
                   disabled={this.props.isEdit}
-                  placeholder={t('userForm.form.email.label')}
+                  placeholder={t('userManager.form.email.label')}
                 />
               )}
             </FormItem>
@@ -137,13 +137,13 @@ export default class UserForm extends React.PureComponent {
           <Col span={12}>
             <FormItem
               {...formItemLayout}
-              label={t('userForm.form.phone.label')}
+              label={t('userManager.form.phone.label')}
             >
               {getFieldDecorator(`phone`, {
                 rules: [
                   {
                     required: true,
-                    message: t('userForm.form.phone.label')
+                    message: t('userManager.form.phone.label')
                   }
                 ]
               })(
@@ -166,13 +166,13 @@ export default class UserForm extends React.PureComponent {
             <Col span={12}>
               <FormItem
                 {...formItemLayout}
-                label={t('userForm.form.password.label')}
+                label={t('userManager.form.password.label')}
               >
                 {getFieldDecorator('password', {
                   rules: [
                     {
                       required: true,
-                      message: t('userForm.form.password.label')
+                      message: t('userManager.form.password.label')
                     },
                     {
                       validator: this.validateToNextPassword
@@ -182,7 +182,7 @@ export default class UserForm extends React.PureComponent {
                   <Input
                     type="password"
                     disabled={this.props.isEdit}
-                    placeholder={t('userForm.form.password.placeholder')}
+                    placeholder={t('userManager.form.password.placeholder')}
                   />
                 )}
               </FormItem>
@@ -190,13 +190,13 @@ export default class UserForm extends React.PureComponent {
             <Col span={12}>
               <FormItem
                 {...formItemLayout}
-                label={t('userForm.form.confirmPassword.label')}
+                label={t('userManager.form.confirmPassword.label')}
               >
                 {getFieldDecorator('confirmPassword', {
                   rules: [
                     {
                       required: true,
-                      message: t('userForm.form.confirmPassword.message')
+                      message: t('userManager.form.confirmPassword.message')
                     },
                     {
                       validator: this.compareToFirstPassword
@@ -205,7 +205,7 @@ export default class UserForm extends React.PureComponent {
                 })(
                   <Input
                     type="password"
-                    placeholder={t('userForm.form.confirmPassword.label')}
+                    placeholder={t('userManager.form.confirmPassword.label')}
                     onBlur={this.handleConfirmBlur}
                   />
                 )}
@@ -218,7 +218,7 @@ export default class UserForm extends React.PureComponent {
           <Col span={12}>
             <FormItem
               {...formItemLayout}
-              label={t('userForm.form.firstName.label')}
+              label={t('userManager.form.firstName.label')}
             >
               {getFieldDecorator('firstName', {
                 initialValue: this.props.initialValues
@@ -227,18 +227,20 @@ export default class UserForm extends React.PureComponent {
                 rules: [
                   {
                     required: true,
-                    message: t('userForm.form.firstName.label')
+                    message: t('userManager.form.firstName.label')
                   }
                 ]
               })(
-                <Input placeholder={t('userForm.form.firstName.placeholder')} />
+                <Input
+                  placeholder={t('userManager.form.firstName.placeholder')}
+                />
               )}
             </FormItem>
           </Col>
           <Col span={12}>
             <FormItem
               {...formItemLayout}
-              label={t('userForm.form.lastName.label')}
+              label={t('userManager.form.lastName.label')}
             >
               {getFieldDecorator('lastName', {
                 initialValue: this.props.initialValues
@@ -247,10 +249,10 @@ export default class UserForm extends React.PureComponent {
                 rules: [
                   {
                     required: true,
-                    message: t('userForm.form.lastName.label')
+                    message: t('userManager.form.lastName.label')
                   }
                 ]
-              })(<Input placeholder={t('userForm.form.lastName.label')} />)}
+              })(<Input placeholder={t('userManager.form.lastName.label')} />)}
             </FormItem>
           </Col>
         </Row>

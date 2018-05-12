@@ -64,8 +64,8 @@ export default class RoleList extends React.Component {
     const { lang: { t } } = this.props
     return [
       { content: '#', width: 5 },
-      { content: t('Role.form.name.label') },
-      { content: t('Role.form.description.label') }
+      { content: t('roleManager.form.name.label') },
+      { content: t('roleManager.form.description.label') }
     ]
   }
 

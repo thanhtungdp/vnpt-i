@@ -81,10 +81,10 @@ export default class UserList extends React.Component {
   async onEnableAccount(_id, enable, callback) {
     Modal.confirm({
       title: format(
-        translate('userForm.list.confirmEnableAccount'),
+        translate('userManager.list.confirmEnableAccount'),
         enable
-          ? translate('userForm.list.enable')
-          : translate('userForm.list.disable')
+          ? translate('userManager.list.enable')
+          : translate('userManager.list.disable')
       ),
       onOk() {
         return new Promise(async (resolve, reject) => {
@@ -157,7 +157,7 @@ export default class UserList extends React.Component {
         {protectRole(ROLE.USER.ROLE)(
           <Menu.Item key="2">
             <Link to={slug.user.ruleWithKey + '/' + row._id}>
-              {t('userRule.role.label')}
+              {t('userManager.list.roleAssign')}
             </Link>
           </Menu.Item>
         )}
@@ -173,8 +173,8 @@ export default class UserList extends React.Component {
               }
             >
               {accountEnable
-                ? t('userForm.list.disableAccount')
-                : t('userForm.list.enableAccount')}
+                ? t('userManager.list.disableAccount')
+                : t('userManager.list.enableAccount')}
             </a>
           </Menu.Item>
         )}
@@ -196,11 +196,11 @@ export default class UserList extends React.Component {
     const { lang: { t } } = this.props
     return [
       { content: '#', width: 2 },
-      { content: t('userSearchFrom.form.email.label'), width: 30 },
-      { content: t('userSearchFrom.form.country.label'), width: 20 },
-      { content: 'Status', width: 10 },
-      { content: t('userSearchFrom.form.action'), width: 20 },
-      { content: t('login.title'), width: 10 }
+      { content: t('userManager.list.email'), width: 30 },
+      { content: t('userManager.list.country'), width: 20 },
+      { content: t('userManager.list.status'), width: 10 },
+      { content: t('userManager.list.action'), width: 20 },
+      { content: t('userManager.list.login'), width: 10 }
     ]
   }
 

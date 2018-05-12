@@ -25,7 +25,7 @@ export default class TableDataList extends React.PureComponent {
       formatDate = 'YYYY/MM/DD'
     }
     const columnReceivedAt = {
-      title: translate('avgSearchFrom.list.receivedAt.label'),
+      title: translate('avgSearchFrom.table.receivedAt'),
       dataIndex: 'receivedAt',
       key: 'receivedAt',
       render(value, record) {

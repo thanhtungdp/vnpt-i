@@ -93,23 +93,19 @@ export default class UserSearchForm extends React.PureComponent {
       <Form className="fadeIn animated" onSubmit={this.changeSearch}>
         <FormItem {...formItemLayout}>
           {getFieldDecorator(`email`)(
-            <Input placeholder={t('userSearchFrom.form.email.placeholder')} />
+            <Input placeholder={t('userManager.form.email.placeholder')} />
           )}
         </FormItem>
         <Clearfix />
         <FormItem {...formItemLayout}>
           {getFieldDecorator(`firstName`)(
-            <Input
-              placeholder={t('userSearchFrom.form.firstName.placeholder')}
-            />
+            <Input placeholder={t('userManager.form.firstName.placeholder')} />
           )}
         </FormItem>
         <Clearfix />
         <FormItem {...formItemLayout}>
           {getFieldDecorator(`lastName`)(
-            <Input
-              placeholder={t('userSearchFrom.form.lastName.placeholder')}
-            />
+            <Input placeholder={t('userManager.form.lastName.placeholder')} />
           )}
         </FormItem>
         <Clearfix />
@@ -119,7 +115,7 @@ export default class UserSearchForm extends React.PureComponent {
             rules: [
               {
                 //required: true,
-                message: t('userSearchFrom.form.phone.label')
+                message: t('userManager.form.phone.label')
               }
             ]
           })(

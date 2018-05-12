@@ -137,7 +137,7 @@ export default class StationAutoHead extends React.PureComponent {
                   slug.controlStation.triggerWithKey + `/${stationID}/${name}`
                 }
               >
-                <Tooltip title={translate('monitoring.samPling')}>
+                <Tooltip title={translate('monitoring.sampling')}>
                   <Icon type="weibo" style={{ fontSize: 16 }} />
                 </Tooltip>
               </Link>

@@ -61,7 +61,7 @@ export default class MonitoringHeaderFilter extends React.PureComponent {
             },
             {
               value: 'ungroup',
-              name: translate('monitoring.ungroup')
+              name: translate('monitoring.unGroup')
             }
           ]}
           {...this.getPropsSelect('group', translate('monitoring.selectGroup'))}
@@ -89,7 +89,7 @@ export default class MonitoringHeaderFilter extends React.PureComponent {
           isShowAll
           {...this.getPropsSelect(
             'stationType',
-            translate('monitoring.selectSationType')
+            translate('monitoring.selectStationType')
           )}
         />
       </MonitoringHeaderFilterWrapper>

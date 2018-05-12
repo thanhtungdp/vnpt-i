@@ -46,7 +46,7 @@ export default class RoleForm extends PureComponent {
           <Col>
             <Field
               name="name"
-              label={t('Role.form.name.label')}
+              label={t('roleManager.form.name.label')}
               component={FInputLabel}
             />
           </Col>
@@ -56,7 +56,7 @@ export default class RoleForm extends PureComponent {
           <Col>
             <Field
               name="description"
-              label={t('Role.form.description.label')}
+              label={t('roleManager.form.description.label')}
               component={FInputLabel}
             />
           </Col>

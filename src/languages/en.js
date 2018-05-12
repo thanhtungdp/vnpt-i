@@ -11,7 +11,7 @@ export default {
     exceeded: 'Exceeded',
     exceededPreparing: 'Exceeded preparing',
     exceededTendency: 'Exceeded tendency',
-    realtimeTracking: 'Realtime Tracking',
+    viewInMonitoring: 'View in monitoring',
     viewInMap: 'View in map',
     viewMore: 'View More',
     tableList: {
@@ -21,22 +21,21 @@ export default {
   },
   monitoring: {
     group: 'Group',
-    ungroup: 'Ungroup',
+    unGroup: 'UnGroup',
     sortByStationName: 'Sort by Station name',
     sortByValues: 'Sort by Values',
     limit: 'Limit',
     keywordSearch: 'Search key word',
     selectGroup: 'Select group',
     selectOrder: 'Order by',
-    selectSationType: 'Station type',
+    selectStationType: 'Station type',
     dataSearch: 'Data search',
     viewInMap: 'View in map',
-    samPling: 'Sampling',
-    camera: 'Camera',
-    controlSationName: 'Control Sation'
+    sampling: 'Sampling',
+    camera: 'Camera'
   },
   controlStation: {
-    text: 'Control Satation',
+    text: 'Control station',
     trigger: {
       base: 'Trigger',
       triggerSuccess: 'Trigger success',
@@ -53,7 +52,7 @@ export default {
     },
     bottle: 'Bottle number',
     handMade: 'Handmade',
-    autoMatic: 'Automatic',
+    automatic: 'Automatic',
     total: 'Total',
     totalHaveTaken: 'Total have taken',
     amountToGet: 'Amount to get',
@@ -70,7 +69,7 @@ export default {
     buttonTrigger: 'TRIGGER',
     cancelTrigger: 'CANCEL TRIGGER',
     triggerExceeded: 'TRIGGER EXCEEDED',
-    cacelTriggerExceeded: 'CANCEL TRIGGER EXCEEDED',
+    cancelTriggerExceeded: 'CANCEL TRIGGER EXCEEDED',
     statusSampling: 'Sampling...',
     viewMore: 'View more'
   },
@@ -155,7 +154,6 @@ export default {
       receivedAt: 'Received At',
       all: 'All'
     },
-
     tab: {
       data: 'Data',
       chart: 'Chart',
@@ -206,12 +204,9 @@ export default {
         label: 'Advanced'
       }
     },
-    list: {
-      receivedAt: {
-        label: 'Received at'
-      }
-    },
     table: {
+      receivedAt: 'Received At',
+      all: 'All',
       emptyText: 'There are no records to display'
     },
     selectTimeRange: {
@@ -282,7 +277,6 @@ export default {
     delete: {
       label: 'Delete'
     },
-
     form: {
       key: {
         label: 'Code',
@@ -483,12 +477,8 @@ export default {
       }
     }
   },
-  userForm: {
+  userManager: {
     form: {
-      userName: {
-        label: 'Username',
-        placeholder: 'Username'
-      },
       email: {
         label: 'Email',
         placeholder: 'Email',
@@ -533,62 +523,24 @@ export default {
       confirmEnableAccount: 'Do you want to {0} these account?',
       enable: 'Enable',
       disable: 'Disable',
-      deactivate: 'Deactivate'
-    }
-  },
-  userSearchFrom: {
-    form: {
-      userName: {
-        label: 'Username',
-        placeholder: 'Username'
-      },
-      email: {
-        label: 'Email',
-        placeholder: 'Email'
-      },
-      firstName: {
-        label: 'FirstName',
-        placeholder: 'FirstName'
-      },
-      lastName: {
-        label: 'LastName',
-        placeholder: 'LastName'
-      },
-      country: {
-        label: 'Country',
-        placeholder: 'Select Country'
-      },
-      organization: {
-        label: 'Organization',
-        placeholder: 'Select Organization'
-      },
-      phone: {
-        label: 'Phone',
-        placeholder: 'Phone'
-      },
-      action: 'Actions'
-    }
-  },
-  userRule: {
-    name: {
-      label: 'name',
-      placeholder: 'name'
+      deactivate: 'Deactivate',
+      action: 'Actions',
+      email: 'Email',
+      country: 'Country',
+      login: 'Login',
+      status: 'Status',
+      roleAssign: 'Role assign'
     },
-    address: {
-      label: 'address',
-      placeholder: 'address'
-    },
-    role: {
-      label: 'role',
-      placeholder: 'role',
-      isAdmin: 'isAdmin'
-    },
-    message: {
+    roleAssign: {
+      role: 'Role',
+      name: 'Name',
       success: 'Update Rule User success!',
-      error: 'Update Rule User fail!'
+      error: 'Update Rule User fail!',
+      address: 'address',
+      isAdmin: 'isAdmin'
     }
   },
-  Role: {
+  roleManager: {
     form: {
       name: {
         label: 'Name',
@@ -601,6 +553,15 @@ export default {
         error: 'Please input description'
       }
     }
+  },
+  subscriptionStatus: {
+    Renew: 'Renew',
+    renewAt: 'Renew at',
+    currentSubscription: 'Current subscription',
+    subscriptionHistory: 'Subscription history',
+    expiredAt: 'Expired at',
+    totalUsers: 'Total users',
+    totalStation: 'Total station'
   },
   profileUser: {
     title: 'User profile',
@@ -650,10 +611,16 @@ export default {
     key5: 'Confirm',
     key6: 'Send code'
   },
+  security: {
+    label: 'Two-Factor Authentication',
+    note:
+      'If you turn on Two-Factor Authentication feature, The system will send the verify code to your email address every time you sign in to app iLotusLand',
+    success: 'Success'
+  },
   login: {
     title: 'Login',
     twoFactorAlert:
-      '2 Factor Auth - Your code verify login send to {{=it.email}}!',
+      'Two-Factor Authentication - Your code verify login send to {{=it.email}}!',
     form: {
       email: {
         label: 'Email',
@@ -713,15 +680,6 @@ export default {
     save: 'Save',
     update: 'Update'
   },
-  subscriptionStatus: {
-    Renew: 'Renew',
-    renewAt: 'Renew at',
-    currentSubscription: 'Current subscription',
-    subscriptionHistory: 'Subscription history',
-    expiredAt: 'Expired at',
-    totalUsers: 'Total users',
-    totalStation: 'Total station'
-  },
   menuApp: {
     dashboard: 'Dashboard',
     monitoring: 'Monitoring',
@@ -736,11 +694,6 @@ export default {
     adminManagement: 'Admin management',
     user: 'User',
     role: 'Role',
-    subScription: 'Subscription'
-  },
-  security: {
-    label:
-      'If you turn on Two-Factor Authentication feature, The system will send the verify code to your email address every time you sign in to app iLotusLand',
-    success: 'Success'
+    subscription: 'Subscription'
   }
 }

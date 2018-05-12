@@ -64,7 +64,7 @@ export default class ControlStationTriggerForm extends React.PureComponent {
   render() {
     const items = [
       { label: translate('controlStation.handMade'), value: 1 },
-      { label: translate('controlStation.autoMatic'), value: 0 }
+      { label: translate('controlStation.automatic'), value: 0 }
     ]
     return (
       <form>
@@ -187,7 +187,7 @@ export default class ControlStationTriggerForm extends React.PureComponent {
               onClick={this.props.handleSubmitExceeded.bind(this)}
             >
               {this.props.isTriggerExceeded
-                ? translate('controlStation.cacelTriggerExceeded')
+                ? translate('controlStation.cancelTriggerExceeded')
                 : translate('controlStation.triggerExceeded')}
             </Button>
           </Col>
