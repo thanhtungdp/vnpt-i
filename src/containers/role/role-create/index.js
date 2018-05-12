@@ -20,7 +20,7 @@ export default class RoleCreate extends PureComponent {
     const data = {
       name: values.name,
       description: values.description,
-      menu: values.menu
+      menu: values.menu[0]
     }
     const record = await RoleApi.createRole(data)
     if (record.error) {

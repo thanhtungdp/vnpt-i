@@ -32,7 +32,7 @@ export default class RoleEdit extends PureComponent {
     } else {
       this.setState({
         isLoaded: true,
-        dataEdit: record.data
+        dataEdit: { ...record.data, menu: [record.data.menu] }
       })
     }
   }
