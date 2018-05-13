@@ -1,4 +1,4 @@
-import { AUTH_API } from '../config'
+import { AUTH_API, USER_API } from '../config'
 import { getFetch, postFetch, putFetch } from '../utils/fetch'
 
 export function loginUser(data = {}) {
@@ -14,15 +14,15 @@ export function getMe() {
 }
 
 export function changePassword(_id, data) {
-  return postFetch(AUTH_API + '/auth/change-password/' + _id, data)
+  return postFetch(USER_API + '/user/organization/change-password/' + _id, data)
 }
 
 export function putProfile(_id, data) {
-  return putFetch(AUTH_API + '/user/organization/' + _id, data)
+  return putFetch(USER_API + '/user/organization/' + _id, data)
 }
 
 export function putSecurity(data) {
-  return putFetch(AUTH_API + '/user/organization/security/2fa', data)
+  return putFetch(USER_API + '/user/organization/security/2fa', data)
 }
 
 //Send Code
