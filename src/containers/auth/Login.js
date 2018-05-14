@@ -15,6 +15,7 @@ import { InputLabel, createValidateComponent } from 'components/elements'
 import Button from 'components/elements/button'
 import Clearfix from 'components/elements/clearfix'
 import { userLogin, userLogin2Factor } from 'redux/actions/authAction'
+import Errors from 'constants/errors'
 
 const FInput = createValidateComponent(InputLabel)
 
@@ -75,8 +76,18 @@ export default class Login extends PureComponent {
   }
 
   userError(user) {
+    let title = user.message
+    if (user.message === Errors.USER_PASSWORD_INCORRECT) {
+      title = translate('login.errors.emailOrPasswordIncorrect')
+    } else if (user.message === Errors.ACCOUNT_DISABLE) {
+      title = translate('login.errors.accountDisable')
+    } else if (user.m === Errors.ACCOUNT_NOT_ACTIVATED) {
+      title = translate('login.errors.accountNotActivated')
+    } else if (user.message === Errors.CODE_NOT_EQUAL) {
+      title = translate('login.errors.codeNotEqual')
+    }
     swal({
-      title: user.message,
+      title: title,
       type: 'error'
     })
   }

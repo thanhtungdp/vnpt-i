@@ -595,7 +595,7 @@ export default {
       newPasswordConfirmation: {
         label: 'Password Confirmation',
         error: 'Please Input New Password One More Time',
-        error1: "Passwords Are Not Matched"
+        error1: 'Passwords Are Not Matched'
       },
       Success: 'Change Password Successfully',
       compare: 'Two Passwords That You Enter Is Inconsistent',
@@ -636,6 +636,12 @@ export default {
       },
       buttonLogin: 'Login',
       buttonTwoFactor: 'Verify'
+    },
+    errors: {
+      emailOrPasswordIncorrect: 'The Email Or Password Is Incorrect',
+      accountDisable: 'Your Account Is Disabled',
+      accountNotActivated: 'Your Account Is Not Activated',
+      codeNotEqual: 'Authentication Code Is Incorrect'
     }
   },
   warningLevels: {
