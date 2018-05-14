@@ -686,7 +686,7 @@ export default {
     map: 'Map',
     data: 'Data',
     dataSearch: 'Data Search',
-    avgData: 'AVG Data',
+    avgData: 'Average Data',
     manage: 'Manage',
     measuring: 'Parameter',
     stationType: 'Type Of Station',

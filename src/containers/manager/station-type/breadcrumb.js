@@ -7,7 +7,7 @@ export default createBreadcrumb({
     id: 'list',
     //icon: Icon.car,
     href: slug.stationType.list,
-    name: 'Station type'
+    name: 'Type Of Station'
   },
   create: {
     id: 'create',

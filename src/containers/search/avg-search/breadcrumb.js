@@ -9,6 +9,6 @@ export default createBreadcrumb({
     id: 'base',
     icon: '',
     href: slug.avgSearch.base,
-    name: 'AVG Search'
+    name: 'Average Search'
   }
 })

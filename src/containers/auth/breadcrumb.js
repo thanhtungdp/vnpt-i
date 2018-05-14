@@ -6,18 +6,18 @@ export default createBreadcrumb({
     id: 'changePassword',
     icon: '',
     href: slug.user.changePassword,
-    name: 'Change password'
+    name: 'Change Password'
   },
   profileUser: {
     id: 'profileUser',
     icon: '',
     href: slug.user.profile,
-    name: 'Profile user'
+    name: 'User Profile'
   },
   security: {
     id: 'security',
     icon: '',
     href: slug.user.security,
-    name: 'Security setting'
+    name: 'Security Setting'
   }
 })

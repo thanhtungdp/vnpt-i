@@ -78,7 +78,7 @@ const avgDataMenu = {
       icon={Icon.graphLine}
       href={slug.avgSearch.base}
       //  text={translate('menuApp.avgData')}
-      text="AVG Data"
+      text="Average Data"
     />
   )
 }
@@ -102,7 +102,7 @@ const measuringMenu = {
       href={slug.measuring.base}
       icon={Icon.quizLists}
       //  text={translate('menuApp.measuring')}
-      text="Measuring"
+      text="Parameter"
     />
   )
 }
@@ -114,7 +114,7 @@ const stationTypeMenu = {
       href={slug.stationType.base}
       icon={Icon.hipchat}
       // text={translate('menuApp.stationType')}
-      text="Station type"
+      text="Type Of Station"
     />
   )
 }
@@ -126,15 +126,15 @@ const stationAutoMenu = {
       href={slug.stationAuto.base}
       icon={Icon.book}
       //  text={translate('menuApp.stationAuto')}
-      text="Station auto"
+      text="Station Name"
     />
   )
 }
 
 const groupAdmin = {
   component: protectRole('', [ROLE.USER.VIEW, ROLE.ROLE.VIEW], 'group')(
-    <NavigationWrapper text="Admin management">
-      <AkNavigationItemGroup title="Admin management" />
+    <NavigationWrapper text="Administration">
+      <AkNavigationItemGroup title="Administration" />
     </NavigationWrapper>
   )
 }

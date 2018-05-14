@@ -8,7 +8,7 @@ export default createBreadcrumb({
     id: 'list',
     //icon: Icon.car,
     href: slug.measuring.list,
-    name: 'Measuring'
+    name: 'Parameter'
   },
   create: {
     id: 'create',

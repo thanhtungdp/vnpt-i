@@ -7,7 +7,7 @@ export default createBreadcrumb({
     id: 'base',
     icon: '',
     href: slug.controlStation.trigger,
-    name: 'Control Satation'
+    name: 'Control Station'
     // name: translate('controlStation.text')
   },
   history: {
