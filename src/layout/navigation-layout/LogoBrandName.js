@@ -43,7 +43,7 @@ export function LogoBrandName(props) {
       <LogoIcon src="/images/logo/icon/enviroment.png" />
       <InfoWrapper>
         <TextPlaceholder>
-          iLotusLand for Enviroment <RegisterBrand>&trade;</RegisterBrand>
+          iLotusLand for Environment <RegisterBrand>&trade;</RegisterBrand>
         </TextPlaceholder>
         <BrandName>{props.name}</BrandName>
       </InfoWrapper>
