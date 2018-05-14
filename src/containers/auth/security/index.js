@@ -45,7 +45,7 @@ export class SecurityForm extends PureComponent {
           }}
         />
         <div>
-          <Note>{translate('security.label')}.</Note>
+          <Note>{translate('security.note')}.</Note>
         </div>
       </div>
     )
