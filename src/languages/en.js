@@ -638,10 +638,10 @@ export default {
       buttonTwoFactor: 'Verify'
     },
     errors: {
-      emailOrPasswordIncorrect: 'The Email Or Password Is Incorrect',
-      accountDisable: 'Your Account Is Disabled',
-      accountNotActivated: 'Your Account Is Not Activated',
-      codeNotEqual: 'Authentication Code Is Incorrect'
+      emailOrPasswordIncorrect: 'The email or password is incorrect',
+      accountDisable: 'Your account is disabled',
+      accountNotActivated: 'Your account is not activated',
+      codeNotEqual: 'Authentication code is incorrect'
     }
   },
   warningLevels: {
