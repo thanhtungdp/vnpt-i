@@ -8,8 +8,8 @@ export default props => (
       height={75}
       width={280}
       speed={2}
-      primaryColor="#f3f3f3"
-      secondaryColor="#eee"
+      primaryColor="#eaeaea"
+      secondaryColor="#f7f7f7"
       {...props}
     />
   </div>

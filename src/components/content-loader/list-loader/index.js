@@ -11,8 +11,8 @@ export default class QuizlistContentLoader extends React.PureComponent {
           height={90}
           width={600}
           speed={1}
-          primaryColor="#f3f3f3"
-          secondaryColor="#eee"
+          primaryColor="#eaeaea"
+          secondaryColor="#f7f7f7"
         >
           <rect x="-2" y="3.1" rx="4" ry="4" width="577.61" height="12.85" />
           <rect x="1" y="34" rx="3" ry="3" width="103.7" height="14.21" />

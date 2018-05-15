@@ -1,5 +1,6 @@
 import slug from 'constants/slug'
 import createBreadcrumb from 'shared/breadcrumb/hoc'
+import { translate } from 'hoc/create-lang'
 //import Icon from 'themes/icon'
 
 export default createBreadcrumb({
@@ -7,15 +8,15 @@ export default createBreadcrumb({
     id: 'base',
     icon: '',
     href: slug.role.base,
-    name: 'Role'
+    name: translate('roleManager.breadcrumb.list')
   },
   create: {
     id: 'create',
     href: slug.role.create,
-    name: 'Create'
+    name: translate('roleManager.breadcrumb.create')
   },
   edit: {
     href: slug.role.edit,
-    name: 'Update'
+    name: translate('roleManager.breadcrumb.edit')
   }
 })

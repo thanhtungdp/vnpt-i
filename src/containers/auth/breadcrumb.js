@@ -1,4 +1,5 @@
 import slug from 'constants/slug'
+import { translate } from 'hoc/create-lang'
 import createBreadcrumb from 'shared/breadcrumb/hoc'
 
 export default createBreadcrumb({
@@ -6,18 +7,18 @@ export default createBreadcrumb({
     id: 'changePassword',
     icon: '',
     href: slug.user.changePassword,
-    name: 'Change Password'
+    name: translate('changePassword.breadcrumb.changePassword')
   },
   profileUser: {
     id: 'profileUser',
     icon: '',
     href: slug.user.profile,
-    name: 'User Profile'
+    name: translate('changePassword.breadcrumb.profileUser')
   },
   security: {
     id: 'security',
     icon: '',
     href: slug.user.security,
-    name: 'Security Setting'
+    name: translate('changePassword.breadcrumb.security')
   }
 })

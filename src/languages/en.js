@@ -20,6 +20,7 @@ export default {
     }
   },
   monitoring: {
+    title: 'Monitoring',
     group: 'Group',
     unGroup: 'Ungroup',
     sortByStationName: 'Sort By Station Name',
@@ -36,6 +37,11 @@ export default {
   },
   controlStation: {
     text: 'Control Station',
+    breadcrumb: {
+      trigger: 'Control Station',
+      history: 'History',
+      config: 'Config'
+    },
     trigger: {
       base: 'Trigger',
       triggerSuccess: 'Trigger Succeeded',
@@ -267,6 +273,7 @@ export default {
       title: 'Type Of Station'
     },
     create: {
+      label: 'Create',
       success: 'Add New Type Of Station Successfully',
       keyExisted: 'Type Of Station Is Already Existed'
     },
@@ -477,7 +484,24 @@ export default {
       }
     }
   },
+  parameterManager: {
+    breadcrumb: {
+      base: 'Parameters',
+      create: 'Create',
+      edit: 'Edit'
+    }
+  },
+  cameraManager: {
+    breadcrumb: {
+      camera: 'Camera'
+    }
+  },
   userManager: {
+    breadcrumb: {
+      list: 'Users',
+      create: 'Create',
+      edit: 'Edit'
+    },
     form: {
       email: {
         label: 'Email Address',
@@ -541,6 +565,11 @@ export default {
     }
   },
   roleManager: {
+    breadcrumb: {
+      list: 'Roles',
+      create: 'Create',
+      edit: 'Edit'
+    },
     form: {
       name: {
         label: 'Name',
@@ -555,6 +584,9 @@ export default {
     }
   },
   subscriptionStatus: {
+    breadcrumb: {
+      base: 'Subscription Status'
+    },
     Renew: 'Renew',
     renewAt: 'Renew At',
     currentSubscription: 'Current Subscription',
@@ -583,6 +615,11 @@ export default {
     }
   },
   changePassword: {
+    breadcrumb: {
+      changePassword: 'Change password',
+      profileUser: 'User profile',
+      security: 'Security Setting'
+    },
     form: {
       oldPassword: {
         label: 'Current Password',

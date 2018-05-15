@@ -1,4 +1,4 @@
-// import { translate } from 'hoc/create-lang'
+import { translate } from 'hoc/create-lang'
 import slug from 'constants/slug'
 import createBreadcrumb from 'shared/breadcrumb/hoc'
 
@@ -7,19 +7,16 @@ export default createBreadcrumb({
     id: 'base',
     icon: '',
     href: slug.controlStation.trigger,
-    name: 'Control Station'
-    // name: translate('controlStation.text')
+    name: translate('controlStation.trigger.base')
   },
   history: {
     id: 'history',
     href: slug.controlStation.history,
-    // name: translate('controlStation.history.base')
-    name: 'History'
+    name: translate('controlStation.history.base')
   },
   config: {
     id: 'config',
     href: slug.controlStation.config,
-    //  name: translate('controlStation.config.base')
-    name: 'Config'
+    name: translate('controlStation.config.base')
   }
 })

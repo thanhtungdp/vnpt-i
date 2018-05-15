@@ -1,5 +1,6 @@
 import slug from 'constants/slug'
 import createBreadcrumb from 'shared/breadcrumb/hoc'
+import { translate } from 'hoc/create-lang'
 //import Icon from 'themes/icon'
 
 export default createBreadcrumb({
@@ -7,15 +8,15 @@ export default createBreadcrumb({
     id: 'list',
     //icon: Icon.car,
     href: slug.stationAuto.list,
-    name: 'Station Name'
+    name: translate('stationAutoManager.list.title')
   },
   create: {
     id: 'create',
     href: slug.stationAuto.create,
-    name: 'Create'
+    name: translate('stationAutoManager.create.label')
   },
   edit: {
     href: slug.stationAuto.edit,
-    name: 'Update'
+    name: translate('stationAutoManager.edit.label')
   }
 })
