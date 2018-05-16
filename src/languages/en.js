@@ -671,10 +671,11 @@ export default {
       buttonTwoFactor: 'Verify'
     },
     errors: {
-      emailOrPasswordIncorrect: 'The email or password is incorrect',
+      emailOrPasswordIncorrect: 'The email or password is incorrect.',
       accountDisable: 'Your account is disabled',
-      accountNotActivated: 'Your account is not activated',
-      codeNotEqual: 'Authentication code is incorrect'
+      accountNotActivated: 'Your account is not activated.',
+      codeNotEqual: 'Authentication code is incorrect.',
+      organizationNotExist: 'Your organization is not exist.'
     }
   },
   warningLevels: {

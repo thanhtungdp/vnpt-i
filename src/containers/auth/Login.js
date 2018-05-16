@@ -85,6 +85,8 @@ export default class Login extends PureComponent {
       title = translate('login.errors.accountNotActivated')
     } else if (user.message === Errors.CODE_NOT_EQUAL) {
       title = translate('login.errors.codeNotEqual')
+    } else if (user.message === Errors.ORGANIZATION_NOT_EXIST) {
+      title = translate('login.errors.organizationNotExist')
     }
     swal({
       title: title,
