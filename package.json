@@ -138,6 +138,7 @@
   },
   "scripts": {
     "dev": "node scripts/start.js",
+    "dev-window": "nodemon src/app.js --exec babel-node --presets=es2015,stage-2",
     "build": "node scripts/build.js",
     "start": "NODE_ENV=production nodemon --exec babel-node server.js",
     "fixcode": "prettier --no-semi --single-quote --write ./src/*.js ./src/*/*.js ./src/**/*.js  ./src/*/*/*.js ./src/*/*/*/*.js ./src/*/*/*/*/*.js ./src/*/*/*/*/*/*.js ./src/*/*/*/*/*/*/*.js ./src/*/*/*/*/*/*/*/*.js",
