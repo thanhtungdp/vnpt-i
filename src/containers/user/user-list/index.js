@@ -22,6 +22,7 @@ import TimeAgo from 'react-timeago'
 import { Modal, message } from 'antd'
 import format from 'string-format'
 import { translate } from 'hoc/create-lang'
+import moment from 'moment/moment'
 
 const AccountWapper = styled.div`
   display: flex;
@@ -183,10 +184,7 @@ export default class UserList extends React.Component {
     return (
       <Dropdown overlay={dropdown} trigger={['click']}>
         <LinkSpan className="ant-dropdown-link">
-          <Icon
-            type="down-square-o"
-            style={{ fontSize: 20, color: '#3E90F7' }}
-          />
+          <Icon type="setting" style={{ fontSize: 20, color: '#3E90F7' }} />
         </LinkSpan>
       </Dropdown>
     )
@@ -199,8 +197,9 @@ export default class UserList extends React.Component {
       { content: t('userManager.list.email'), width: 30 },
       { content: t('userManager.list.country'), width: 20 },
       { content: t('userManager.list.status'), width: 10 },
-      { content: t('userManager.list.action'), width: 20 },
-      { content: t('userManager.list.login'), width: 10 }
+      { content: t('userManager.list.createdAt'), width: 15 },
+      { content: t('userManager.list.action'), width: 10 },
+      { content: t('userManager.list.login'), width: 15 }
     ]
   }
 
@@ -267,6 +266,9 @@ export default class UserList extends React.Component {
               : 'Enable'}
           </SpanEnable>
         )
+      },
+      {
+        content: <div> {moment(row.createdAt).format('YYYY-MM-DD HH:mm')}</div>
       },
       {
         content: <span>{this.actionGroup(row)}</span>

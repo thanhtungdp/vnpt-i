@@ -221,7 +221,7 @@ export default class ControlStationTrigger extends React.PureComponent {
               `/${this.props.match.params.key}/${this.props.match.params.name}`
             }
           >
-            {t('controlStation.history.base')}
+            {t('controlStation.breadcrumb.history')}
           </Link>
         </Menu.Item>
         <Menu.Item key="1">
@@ -231,7 +231,7 @@ export default class ControlStationTrigger extends React.PureComponent {
               `/${this.props.match.params.key}/${this.props.match.params.name}`
             }
           >
-            {t('controlStation.config.base')}
+            {t('controlStation.breadcrumb.config')}
           </Link>
         </Menu.Item>
       </Menu>

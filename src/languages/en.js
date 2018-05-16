@@ -36,23 +36,18 @@ export default {
     camera: 'Camera'
   },
   controlStation: {
-    text: 'Control Station',
+    text: 'Sampling',
     breadcrumb: {
-      trigger: 'Control Station',
+      trigger: 'Sampling',
       history: 'History',
       config: 'Config'
     },
     trigger: {
-      base: 'Trigger',
       triggerSuccess: 'Trigger Succeeded',
       triggerCancel: 'Trigger Cancel Succeeded',
       triggerExceeded: 'Exceeded Succeeded'
     },
-    history: {
-      base: 'History'
-    },
     config: {
-      base: 'Config',
       reset: 'Reset Succeeded',
       success: 'Config Succeeded'
     },
@@ -553,7 +548,8 @@ export default {
       country: 'Country',
       login: 'Login',
       status: 'Status',
-      roleAssign: 'Assign Role'
+      roleAssign: 'Assign Role',
+      createdAt: 'Created At'
     },
     roleAssign: {
       role: 'Role',

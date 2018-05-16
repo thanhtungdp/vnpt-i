@@ -7,16 +7,16 @@ export default createBreadcrumb({
     id: 'base',
     icon: '',
     href: slug.controlStation.trigger,
-    name: translate('controlStation.trigger.base')
+    name: translate('controlStation.breadcrumb.trigger')
   },
   history: {
     id: 'history',
     href: slug.controlStation.history,
-    name: translate('controlStation.history.base')
+    name: translate('controlStation.breadcrumb.history')
   },
   config: {
     id: 'config',
     href: slug.controlStation.config,
-    name: translate('controlStation.config.base')
+    name: translate('controlStation.breadcrumb.config')
   }
 })

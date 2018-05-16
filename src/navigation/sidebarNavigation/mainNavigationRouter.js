@@ -17,8 +17,7 @@ const dashboardMenu = {
       linkComponent={WrapperLinkComponent}
       href={slug.dashboard}
       icon={Icon.dashboard}
-      text="Dashboard"
-      //  text={translate('menuApp.dashboard')}
+      text={translate('menuApp.dashboard')}
     />
   )
 }
@@ -29,8 +28,7 @@ const monitoringMenu = {
       linkComponent={WrapperLinkComponent}
       href={slug.monitoring.base}
       icon={Icon.screen}
-      text="Monitoring"
-      //  text={translate('menuApp.monitoring')}
+      text={translate('menuApp.monitoring')}
     />
   )
 }
@@ -41,8 +39,7 @@ const mapMenu = {
       linkComponent={WrapperLinkComponent}
       href={slug.map.base}
       icon={Icon.location}
-      text="Map"
-      //  text={translate('menuApp.map')}
+      text={translate('menuApp.map')}
     />
   )
 }
@@ -53,8 +50,8 @@ const groupData = {
     [ROLE.DATA_SEARCH.VIEW, ROLE.AVG_SEARCH.VIEW],
     'group'
   )(
-    <NavigationWrapper text="Data">
-      <AkNavigationItemGroup title="Data" />
+    <NavigationWrapper text={translate('menuApp.data')}>
+      <AkNavigationItemGroup title={translate('menuApp.data')} />
     </NavigationWrapper>
   )
 }
@@ -65,8 +62,7 @@ const dataSearchMenu = {
       linkComponent={WrapperLinkComponent}
       icon={Icon.graphBar}
       href={slug.dataSearch.base}
-      text="Data Search"
-      //  text={translate('menuApp.dataSearch')}
+      text={translate('menuApp.dataSearch')}
     />
   )
 }
@@ -77,8 +73,7 @@ const avgDataMenu = {
       linkComponent={WrapperLinkComponent}
       icon={Icon.graphLine}
       href={slug.avgSearch.base}
-      //  text={translate('menuApp.avgData')}
-      text="Average Data"
+      text={translate('menuApp.avgData')}
     />
   )
 }
@@ -89,8 +84,8 @@ const groupManager = {
     [ROLE.MEASURING.VIEW, ROLE.STATION_TYPE.VIEW, ROLE.STATION_AUTO.VIEW],
     'group'
   )(
-    <NavigationWrapper text="Manage">
-      <AkNavigationItemGroup title="Manage" />
+    <NavigationWrapper text={translate('menuApp.manage')}>
+      <AkNavigationItemGroup title={translate('menuApp.manage')} />
     </NavigationWrapper>
   )
 }
@@ -101,8 +96,7 @@ const measuringMenu = {
       linkComponent={WrapperLinkComponent}
       href={slug.measuring.base}
       icon={Icon.quizLists}
-      //  text={translate('menuApp.measuring')}
-      text="Parameter"
+      text={translate('menuApp.measuring')}
     />
   )
 }
@@ -113,8 +107,7 @@ const stationTypeMenu = {
       linkComponent={WrapperLinkComponent}
       href={slug.stationType.base}
       icon={Icon.hipchat}
-      // text={translate('menuApp.stationType')}
-      text="Type Of Station"
+      text={translate('menuApp.stationType')}
     />
   )
 }
@@ -125,16 +118,15 @@ const stationAutoMenu = {
       linkComponent={WrapperLinkComponent}
       href={slug.stationAuto.base}
       icon={Icon.book}
-      //  text={translate('menuApp.stationAuto')}
-      text="Station Name"
+      text={translate('menuApp.stationAuto')}
     />
   )
 }
 
 const groupAdmin = {
   component: protectRole('', [ROLE.USER.VIEW, ROLE.ROLE.VIEW], 'group')(
-    <NavigationWrapper text="Administration">
-      <AkNavigationItemGroup title="Administration" />
+    <NavigationWrapper text={translate('menuApp.adminManagement')}>
+      <AkNavigationItemGroup title={translate('menuApp.adminManagement')} />
     </NavigationWrapper>
   )
 }
@@ -145,8 +137,7 @@ const userMenu = {
       linkComponent={WrapperLinkComponent}
       href={slug.user.base}
       icon={Icon.person}
-      //  text={translate('menuApp.user')}
-      text="User"
+      text={translate('menuApp.user')}
     />
   )
 }
@@ -157,8 +148,7 @@ const roleMenu = {
       linkComponent={WrapperLinkComponent}
       href={slug.role.base}
       icon={Icon.peopleGroup}
-      //  text={translate('menuApp.role')}
-      text="Role"
+      text={translate('menuApp.role')}
     />
   )
 }
@@ -169,8 +159,7 @@ const subscriptionMenu = {
       linkComponent={WrapperLinkComponent}
       href={slug.subscription.base}
       icon={Icon.creditCard}
-      //  text={translate('menuApp.subScription')}
-      text="Subscription"
+      text={translate('menuApp.subscription')}
     />
   )
 }
