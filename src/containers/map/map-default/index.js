@@ -158,7 +158,7 @@ export default class MapDefault extends React.PureComponent {
       if (findBy === 'byDataStatus' && isConnected) {
         let warLevel = warningLevels.GOOD
         let measuringLogs = element.lastLog.measuringLogs
-        for (var key in measuringLogs) {
+        for (let key in measuringLogs) {
           if (
             warningLevelsNumber[warLevel] <
             warningLevelsNumber[measuringLogs[key].warningLevel]

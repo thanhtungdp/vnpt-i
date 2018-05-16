@@ -87,7 +87,9 @@ export default {
       exceededPreparing: 'Almost Exceed',
       exceededTendency: 'Tend To Exceed',
       notify: 'Notifications',
-      noData: 'No Data Available'
+      noData: 'No Data Available',
+      dataStatus:'Data Status',
+      stationStatus:'Station Status',
     },
     menuLeft: {
       stationSearch: 'Search By Station'

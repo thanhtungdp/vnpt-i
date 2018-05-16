@@ -2,6 +2,7 @@ import React from 'react'
 import { autobind } from 'core-decorators'
 import styled from 'styled-components'
 import { Select } from 'antd'
+import { translate } from 'hoc/create-lang'
 
 const SelectTypeWrapper = styled.div`
   width: 100%;
@@ -33,11 +34,11 @@ export default class SelectType extends React.PureComponent {
     return [
       {
         value: TYPE.DATA_STATUS,
-        name: 'Data status'
+        name: translate('map.menuRight.dataStatus')
       },
       {
         value: TYPE.STATION_STATUS,
-        name: 'Station status'
+        name: translate('map.menuRight.stationStatus')
       }
     ]
   }

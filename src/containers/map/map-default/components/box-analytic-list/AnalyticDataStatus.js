@@ -2,7 +2,7 @@ import React from 'react'
 import { autobind } from 'core-decorators'
 import styled from 'styled-components'
 import { translate as t } from 'hoc/create-lang'
-import stationStatus from 'constants/stationStatus'
+
 import {
   warningLevelsNumber,
   warningLevels,
@@ -20,8 +20,6 @@ export default class BoxAnalyticList extends React.PureComponent {
   }
 
   state = {
-    dataLoss: -1,
-    notUse: -1,
     exceeded: -1,
     exceededPreparing: -1,
     exceededTendency: -1,
@@ -35,7 +33,7 @@ export default class BoxAnalyticList extends React.PureComponent {
     ]
   }
   async componentWillMount() {
-    this.rendermap(this.props.stationsAutoList)
+    this.renderMap(this.props.stationsAutoList)
   }
 
   componentWillReceiveProps(nextProps) {
@@ -43,11 +41,11 @@ export default class BoxAnalyticList extends React.PureComponent {
       nextProps.stationsAutoList.length !== this.state.stationsAutoList.length
     ) {
       // Check if it's a new user, you can also use some unique, like the ID
-      this.rendermap(nextProps.stationsAutoList)
+      this.renderMap(nextProps.stationsAutoList)
     }
   }
 
-  rendermap(stationsAutoList) {
+  renderMap(stationsAutoList) {
     let res = {
       exceeded: 0,
       exceededPreparing: 0,
@@ -56,44 +54,31 @@ export default class BoxAnalyticList extends React.PureComponent {
     }
     stationsAutoList.forEach(element => {
       let isFind = false
-      if (element.status === stationStatus.DATA_LOSS) {
-        res.dataLoss++
+      let warLevel = warningLevels.GOOD
+      let measuringLogs = element.lastLog.measuringLogs
+      for (let key in measuringLogs) {
+        if (
+          warningLevelsNumber[warLevel] <
+          warningLevelsNumber[measuringLogs[key].warningLevel]
+        )
+          warLevel = measuringLogs[key].warningLevel
+      }
+      if (warLevel === warningLevels.EXCEEDED) {
+        res.exceeded++
         isFind = true
       }
-      if (!isFind && element.status === stationStatus.NOT_USE) {
-        res.notUse++
+      if (!isFind && warLevel === warningLevels.EXCEEDED_PREPARING) {
+        res.exceededPreparing++
         isFind = true
       }
-
-      if (!isFind) {
-        let warLevel = warningLevels.GOOD
-        let measuringLogs = element.lastLog.measuringLogs
-        for (var key in measuringLogs) {
-          if (
-            warningLevelsNumber[warLevel] <
-            warningLevelsNumber[measuringLogs[key].warningLevel]
-          )
-            warLevel = measuringLogs[key].warningLevel
-        }
-        if (warLevel === warningLevels.EXCEEDED) {
-          res.exceeded++
-          isFind = true
-        }
-        if (!isFind && warLevel === warningLevels.EXCEEDED_PREPARING) {
-          res.exceededPreparing++
-          isFind = true
-        }
-        if (!isFind && warLevel === warningLevels.EXCEEDED_TENDENCY) {
-          res.exceededTendency++
-          isFind = true
-        }
-        if (!isFind) res.good++
+      if (!isFind && warLevel === warningLevels.EXCEEDED_TENDENCY) {
+        res.exceededTendency++
+        isFind = true
       }
+      if (!isFind) res.good++
     })
 
     this.setState({
-      dataLoss: res.dataLoss,
-      notUse: res.notUse,
       exceeded: res.exceeded,
       exceededPreparing: res.exceededPreparing,
       exceededTendency: res.exceededTendency,

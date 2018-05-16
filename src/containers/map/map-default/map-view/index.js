@@ -71,7 +71,7 @@ class CustomGoogleMap extends PureComponent {
 
   getStatusStation(measuringLogs) {
     let result = warningLevels.GOOD
-    for (var key in measuringLogs) {
+    for (let key in measuringLogs) {
       if (
         warningLevelsNumber[result] <
         warningLevelsNumber[measuringLogs[key].warningLevel]
