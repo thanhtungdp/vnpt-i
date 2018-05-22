@@ -164,7 +164,7 @@ export default class StationAutoForm extends React.PureComponent {
               )}
             </FormItem>
           </Col>
-          <Col span={12}>
+          {/* <Col span={12}>
             <FormItem
               {...formItemLayout}
               label={t('stationAutoManager.config.path.label')}
@@ -187,7 +187,7 @@ export default class StationAutoForm extends React.PureComponent {
                 />
               )}
             </FormItem>
-          </Col>
+          </Col> */}
         </Row>
 
         <Table
