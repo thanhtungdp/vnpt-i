@@ -65,8 +65,10 @@ class CustomGoogleMap extends PureComponent {
       this.props.stationAutoMarker.map(item => {
         bounds.extend(item.mapLocation)
       })
-      this.state.isBounds = true
-      this.map.fitBounds(bounds)
+      if(this.map.fitBounds){
+        this.state.isBounds = true
+        this.map.fitBounds(bounds)
+      }
     }
   }
 
@@ -89,7 +91,7 @@ class CustomGoogleMap extends PureComponent {
         ref={map => {
           if (!this.state.isBounds)
             this.getBounds()
-          this.map = map
+          this.map = map 
         }}
         defaultZoom={12}
         //defaultCenter={defaultCenter}
