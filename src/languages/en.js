@@ -683,8 +683,8 @@ export default {
   warningLevels: {
     title: 'Warning Levels',
     good: 'Good',
-    exceedTendency: 'Almost Exceed',
-    exceedPreparing: 'Tend To Exceed',
+    exceedTendency: 'Tend To Exceed',
+    exceedPreparing: 'Almost Exceed',
     exceed: 'Exceeded'
   },
   addon: {

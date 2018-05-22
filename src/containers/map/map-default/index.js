@@ -155,7 +155,7 @@ export default class MapDefault extends React.PureComponent {
         }
       }
 
-      if (findBy === 'byDataStatus' && isConnected) {
+      if (findBy === 'byDataStatus') {
         let warLevel = warningLevels.GOOD
         let measuringLogs = element.lastLog.measuringLogs
         for (let key in measuringLogs) {
@@ -167,7 +167,7 @@ export default class MapDefault extends React.PureComponent {
           status = warLevel
         }
       }
-
+      
       if (focusStatus.includes(status)) element.visible = true
       return element
     })

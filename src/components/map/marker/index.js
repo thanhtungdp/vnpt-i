@@ -206,7 +206,7 @@ export default class MarkerStation extends PureComponent {
                       this.setState({ isOpen: false })
                   }}
                   options={{
-                    disableAutoPan: true,
+                    //disableAutoPan: true,
                     maxWidth: 310
                   }}
                   onCloseClick={this.toggleOpen.bind(this)}

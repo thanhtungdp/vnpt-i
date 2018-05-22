@@ -37,7 +37,8 @@ class CustomGoogleMap extends PureComponent {
     stationAutoMarker: []
   }
   state = {
-    zoom: 12
+    zoom: 12,
+    isBounds: false
   }
 
   onMarkerClustererClick(markerClusterer) {
@@ -64,7 +65,7 @@ class CustomGoogleMap extends PureComponent {
       this.props.stationAutoMarker.map(item => {
         bounds.extend(item.mapLocation)
       })
-      console.log(bounds)
+      this.state.isBounds = true
       this.map.fitBounds(bounds)
     }
   }
@@ -86,16 +87,19 @@ class CustomGoogleMap extends PureComponent {
     return (
       <GoogleMap
         ref={map => {
+          if (!this.state.isBounds)
+            this.getBounds()
           this.map = map
         }}
         defaultZoom={12}
-        defaultCenter={defaultCenter}
-        center={this.props.center ? this.props.center : defaultCenter}
+        //defaultCenter={defaultCenter}
+        //center={this.props.center ? this.props.center : defaultCenter}
         zoom={this.state.zoom}
         onZoomChanged={() => {
-          this.setState({
-            zoom: this.map.getZoom()
-          })
+          if (this.state.isBound)
+            this.setState({
+              zoom: this.map.getZoom()
+            })
         }}
       >
         <div>
@@ -107,7 +111,7 @@ class CustomGoogleMap extends PureComponent {
           >
             {this.props.stationAutoMarker.map((item, index) => {
               if (item.visible) {
-                item.measuringList.sort(function(a, b) {
+                item.measuringList.sort(function (a, b) {
                   return a.numericalOrder - b.numericalOrder
                 })
                 return (
@@ -193,7 +197,7 @@ export default class MapStationAuto extends PureComponent {
     })
   }
 
-  async componentDidMount() {}
+  async componentDidMount() { }
 
   handelIsHidden() {
     this.setState(
@@ -222,7 +226,7 @@ export default class MapStationAuto extends PureComponent {
           getMap={this.setMap}
           getRefMarker={this.setListMarker}
           zoom={this.props.zoom}
-          {...getGoogleMapProps()}
+          {...getGoogleMapProps() }
           loadingElement={
             <div style={{ height: this.props.windowHeight + 'px' }} />
           }
