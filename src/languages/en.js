@@ -88,8 +88,8 @@ export default {
       exceededTendency: 'Tend To Exceed',
       notify: 'Notifications',
       noData: 'No Data Available',
-      dataStatus:'Data Status',
-      stationStatus:'Station Status',
+      dataStatus: 'Data Status',
+      stationStatus: 'Station Status'
     },
     menuLeft: {
       stationSearch: 'Search By Station'
@@ -725,6 +725,7 @@ export default {
   menuApp: {
     dashboard: 'Dashboard',
     monitoring: 'Monitoring',
+    camera: 'Camera',
     map: 'Map',
     data: 'Data',
     dataSearch: 'Data Search',

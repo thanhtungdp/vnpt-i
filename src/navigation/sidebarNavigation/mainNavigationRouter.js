@@ -33,6 +33,17 @@ const monitoringMenu = {
   )
 }
 
+const CameraMenu = {
+  component: protectRole(ROLE.MONITORING.CAMERA)(
+    <AkNavigationItem
+      linkComponent={WrapperLinkComponent}
+      href={slug.cameraControl.base}
+      icon={Icon.camera}
+      text={translate('menuApp.camera')}
+    />
+  )
+}
+
 const mapMenu = {
   component: protectRole(ROLE.MAP.VIEW)(
     <AkNavigationItem
@@ -167,6 +178,7 @@ const subscriptionMenu = {
 export default [
   dashboardMenu,
   monitoringMenu,
+  CameraMenu,
   mapMenu,
   groupData,
   dataSearchMenu,
