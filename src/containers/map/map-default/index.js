@@ -167,7 +167,7 @@ export default class MapDefault extends React.PureComponent {
           status = warLevel
         }
       }
-      
+
       if (focusStatus.includes(status)) element.visible = true
       return element
     })

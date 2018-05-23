@@ -39,7 +39,12 @@ export function updateStationAutoConfig(key, data = {}) {
   return putFetch(STATION_AUTO_API + '/station-auto/config-logger/' + key, data)
 }
 
+export function getCamera() {
+  return getFetch(STATION_AUTO_API + '/station-auto/camera')
+}
+
 export default {
+  getCamera,
   getStationAutos,
   getStationAuto,
   createStationAuto,

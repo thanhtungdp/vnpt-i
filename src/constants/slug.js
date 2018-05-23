@@ -41,6 +41,11 @@ export default {
     viewCamera: '/monitoring/camera/:key',
     viewCameraWithKey: '/monitoring/camera'
   },
+  cameraControl: {
+    base: '/cameraControl',
+    detail: '/cameraControl/detail/:key/:name',
+    detailWithKey: '/cameraControl/detail'
+  },
   map: {
     base: '/map'
   },
