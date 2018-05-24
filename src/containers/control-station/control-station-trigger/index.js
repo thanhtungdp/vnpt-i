@@ -13,13 +13,16 @@ import ControlStationTriggerForm from 'containers/control-station/control-statio
 import StationControl from 'api/StationControl'
 import AuthApi from 'api/AuthApi'
 import moment from 'moment'
+import { connect } from 'react-redux'
 
 const LinkSpan = styled.span`
   &:hover {
     cursor: pointer;
   }
 `
-
+@connect(state => ({
+  organization: state.auth.userInfo.organization
+}))
 @createLanguage
 @withRouter
 @autobind
@@ -37,7 +40,7 @@ export default class ControlStationTrigger extends React.PureComponent {
 
   async loadData() {
     const key = this.props.match.params.key
-    const record = await StationControl.getStationControl(key)
+    const record = await StationControl.getStationControl(key, this.props.organization._id)
     const dataEmail = await AuthApi.getMe()
     if (record.error && record.message === 'NOT_CONFIG') {
       swal({
@@ -108,7 +111,8 @@ export default class ControlStationTrigger extends React.PureComponent {
       MaTram: key,
       ThuCong: typeControl,
       ChaiCanLay: values.amount_get,
-      Email: this.state.user.data.email
+      Email: this.state.user.data.email,
+      MaToChuc: this.props.organization._id,
     }
     if (typeControl === 0) {
       const datetime = moment(
@@ -121,11 +125,13 @@ export default class ControlStationTrigger extends React.PureComponent {
       data = {
         ...data,
         ChuKyLayMau: values.periodic,
-        HenGio: datetime
+        HenGio: datetime,
+        MaToChuc: this.props.organization._id,
       }
     }
 
     const record = await StationControl.trigger_StationControl(data)
+
     if (record.success) {
       swal({
         title: 'Success',
@@ -148,9 +154,11 @@ export default class ControlStationTrigger extends React.PureComponent {
     let data = {
       Status: 0,
       MaTram: key,
-      Email: this.state.user.data.email
+      Email: this.state.user.data.email,
+      MaToChuc: this.props.organization._id,
     }
     const record = await StationControl.trigger_StationControl(data)
+
     if (record.success) {
       swal({
         title: 'Success',
@@ -172,7 +180,8 @@ export default class ControlStationTrigger extends React.PureComponent {
     const isExxeeded = this.state.isTriggerExceeded
     let data = {
       MaTram: key,
-      LayMauVuotNguong: isExxeeded ? 0 : 1
+      LayMauVuotNguong: isExxeeded ? 0 : 1,
+      MaToChuc: this.props.organization._id,
     }
     const record = await StationControl.triggerExceeded_StationControl(data)
     if (record.success) {

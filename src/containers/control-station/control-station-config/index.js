@@ -16,6 +16,7 @@ import slug from 'constants/slug'
 import StationControl from 'api/StationControl'
 import swal from 'sweetalert2'
 import { translate } from 'hoc/create-lang'
+import { connect } from 'react-redux'
 
 const FInputLabel = createValidateComponent(InputLabel)
 const FInputNumberCell = createValidateComponent(InputNumberCell)
@@ -101,6 +102,9 @@ export class ControlStationConfigForm extends PureComponent {
   }
 }
 
+@connect(state => ({
+  organization: state.auth.userInfo.organization
+}))
 @withRouter
 @autobind
 export default class ControlStationConfig extends PureComponent {
@@ -111,7 +115,8 @@ export default class ControlStationConfig extends PureComponent {
 
   async componentWillMount() {
     const key = this.props.match.params.key
-    const record = await StationControl.getStationControl(key)
+    const record = await StationControl.getStationControl(key, this.props.organization._id)
+
     if (record.success) {
       this.setState({
         dataStation: {
@@ -143,9 +148,11 @@ export default class ControlStationConfig extends PureComponent {
       MaTram: key,
       TenTram: name,
       MT_Name: values.tagName,
-      TongSoChai: values.total
+      TongSoChai: values.total,
+      MaToChuc: this.props.organization._id
     }
     const record = await StationControl.config_StationControl(data)
+
     if (record.success) {
       let message =
         status === 1
