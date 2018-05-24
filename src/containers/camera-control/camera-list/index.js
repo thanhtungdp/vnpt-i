@@ -14,6 +14,8 @@ import CameraItem from 'components/elements/camera-item'
 import Clearfix from 'components/elements/clearfix'
 import { Link } from 'react-router-dom'
 import StationAutoApi from 'api/StationAuto'
+import CameraFilter from '../camera-filter'
+import queryString from 'query-string'
 
 const Wrapper = styled.div`
   display: flex;
@@ -42,7 +44,9 @@ export default class CameraList extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      cameraList: []
+      dataCameraList: [],
+      cameraList: [],
+      dataSearch: {}
     }
   }
 
@@ -53,20 +57,43 @@ export default class CameraList extends React.Component {
       let cameraList = []
       res.data.map(item => {
         item.options.camera.list.forEach(function(obj) {
-          obj.stationName = item.name
+          ;(obj.stationName = item.name), (obj.stationKey = item.key)
         })
         cameraList = cameraList.concat(item.options.camera.list)
       })
       this.setState({
-        cameraList: cameraList
+        dataCameraList: cameraList,
+        cameraList: cameraList.filter(
+          item =>
+            !this.state.dataSearch.station ||
+            item.stationKey === this.state.dataSearch.station
+        )
       })
     }
+  }
+
+  onChangeSearch(dataSearch) {
+    this.setState({
+      cameraList: this.state.dataCameraList.filter(
+        item => !dataSearch.station || item.stationKey === dataSearch.station
+      ),
+      dataSearch: dataSearch
+    })
+  }
+
+  renderSearch() {
+    let data = {}
+    const query = queryString.parse(this.props.location.search)
+    if (query.stationKey) data.stationKey = query.stationKey
+    return (
+      <CameraFilter onChangeSearch={this.onChangeSearch} initialValues={data} />
+    )
   }
 
   //'http://118.69.55.217:88/?url=rtsp://admin:hd543211@115.75.120.16:1024/ISAPI/Streaming/channels/501'
   render() {
     return (
-      <PageContainer>
+      <PageContainer center={this.renderSearch()} right={<div />}>
         <Breadcrumb items={['list']} />
         <Wrapper>
           {this.state.cameraList.map((item, index) => {

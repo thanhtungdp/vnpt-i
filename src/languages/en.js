@@ -738,5 +738,8 @@ export default {
     user: 'User',
     role: 'Role',
     subscription: 'Subscription'
+  },
+  cameraControl: {
+    selectStationPlaceholder: 'Input Station Name'
   }
 }
