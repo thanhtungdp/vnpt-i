@@ -6,11 +6,13 @@ import { autobind } from 'core-decorators'
 import styled from 'styled-components'
 import Clearfix from 'components/elements/clearfix'
 import { SHAPE } from 'themes/color'
-import { Icon, Tooltip } from 'antd'
+import { Icon, Tooltip, Spin } from 'antd'
 import ROLE from 'constants/role'
 // import stationStatus from 'constants/stationStatus'
 import protectRole from 'hoc/protect-role'
 import { translate } from 'hoc/create-lang'
+import { connect } from 'react-redux'
+import StationControl from 'api/StationControl'
 
 const StationHeadItemWrapper = styled.div`
   display: flex;
@@ -80,7 +82,9 @@ const ActionWrapper = styled.div`
     border-right: 0px;
   }
 `
-
+@connect(state => ({
+  organization: state.auth.userInfo.organization
+}))
 @autobind
 export default class StationAutoHead extends React.PureComponent {
   static propTypes = {
@@ -94,10 +98,40 @@ export default class StationAutoHead extends React.PureComponent {
     onClickDataSearch: PropTypes.func,
     onClickViewMap: PropTypes.func
   }
-  componentWillMount() {}
+
+  state = {
+    isLoaded: false,
+    isEnable: false
+  }
+
+  componentWillMount() {
+    this.startTimer()
+  }
+  startTimer() {
+    clearInterval(this.timer)
+    this.timer = setInterval(this.loadData.bind(this), 600000) //10 phút
+    this.loadData()
+  }
+  loadData() {
+    StationControl.checkStationControl(this.props.stationID, this.props.organization._id)
+      .then((record) => {
+        if (record.success) {
+          this.setState({
+            isLoaded: true,
+            isEnable: record.data
+          })
+        } else {
+          this.setState({
+            isLoaded: true,
+            isEnable: false
+          })
+        }
+      })
+
+
+  }
 
   render() {
-    //console.log(this.props)
     const {
       name,
       stationTypeName,
@@ -121,8 +155,8 @@ export default class StationAutoHead extends React.PureComponent {
               <span className="stationTypeName">{stationTypeName}</span>
             </WrapperNameStationTypeName>
           ) : (
-            <StationName>{name}</StationName>
-          )}
+              <StationName>{name}</StationName>
+            )}
           <Clearfix width={8} />
           <ReceivedAt status={status}>
             {receivedAt ? ' | ' + receivedAt : ''}
@@ -131,16 +165,22 @@ export default class StationAutoHead extends React.PureComponent {
         <ActionWrapper>
           {isSampling &&
             protectRole(ROLE.MONITORING.CONTROL)(
-              <Link
-                className="actionItem"
-                to={
-                  slug.controlStation.triggerWithKey + `/${stationID}/${name}`
-                }
-              >
-                <Tooltip title={translate('monitoring.sampling')}>
-                  <Icon type="weibo" style={{ fontSize: 16 }} />
-                </Tooltip>
-              </Link>
+              <Spin spinning={!this.state.isLoaded} size="small">
+                <Link
+                  className="actionItem"
+                  to={
+                    this.state.isEnable ? slug.controlStation.triggerWithKey + `/${stationID}/${name}`
+                      : slug.monitoring.base
+                    //slug.controlStation.triggerWithKey + `/${stationID}/${name}`
+                  }
+                >
+                  <Tooltip title={translate('monitoring.sampling')}>
+                    <Icon type="weibo" style={{ fontSize: 16 }} style={{
+                      opacity: this.state.isEnable ? 1 : 0.4
+                    }} />
+                  </Tooltip>
+                </Link>
+              </Spin>
             )}
           {isCamera &&
             protectRole(ROLE.MONITORING.CAMERA)(

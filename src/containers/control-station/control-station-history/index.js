@@ -8,7 +8,11 @@ import slug from 'constants/slug'
 import { autobind } from 'core-decorators'
 import StationControl from 'api/StationControl'
 import { translate } from 'hoc/create-lang'
+import { connect } from 'react-redux'
 
+@connect(state => ({
+  organization: state.auth.userInfo.organization
+}))
 @withRouter
 @autobind
 export default class ControlStationHistory extends PureComponent {
@@ -21,7 +25,7 @@ export default class ControlStationHistory extends PureComponent {
   async componentDidMount() {
     this.setState({ isLoaded: false })
     const key = this.props.match.params.key
-    const record = await StationControl.getHistory_StationControl(key)
+    const record = await StationControl.getHistory_StationControl(key, this.props.organization._id)
     if (record.success) {
       record.data = record.data.map(item => ({
         ...item,
@@ -50,7 +54,7 @@ export default class ControlStationHistory extends PureComponent {
         dataIndex: 'LayMauChai',
         width: 150,
         fixed: 'left',
-        render: function(data, type, row, meta) {
+        render: function (data, type, row, meta) {
           return translate('controlStation.bottle') + ' ' + data
         }
       },
@@ -62,7 +66,7 @@ export default class ControlStationHistory extends PureComponent {
       {
         title: translate('controlStation.content'),
         dataIndex: 'NoiDung',
-        render: function(data, type, row, meta) {
+        render: function (data, type, row, meta) {
           if (data === 'HANDMADE') {
             return translate('controlStation.handMade')
           } else if (data === 'AUTOMATIC') {
@@ -85,7 +89,7 @@ export default class ControlStationHistory extends PureComponent {
                 href:
                   slug.controlStation.triggerWithKey +
                   `/${this.props.match.params.key}/${
-                    this.props.match.params.name
+                  this.props.match.params.name
                   }`
               }
             },
@@ -95,7 +99,7 @@ export default class ControlStationHistory extends PureComponent {
                 href:
                   slug.controlStation.triggerWithKey +
                   `/${this.props.match.params.key}/${
-                    this.props.match.params.name
+                  this.props.match.params.name
                   }`
               }
             },
