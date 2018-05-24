@@ -109,7 +109,7 @@ export default class StationAutoHead extends React.PureComponent {
   }
   startTimer() {
     clearInterval(this.timer)
-    this.timer = setInterval(this.loadData.bind(this), 60000) //1 phút
+    this.timer = setInterval(this.loadData.bind(this), 600000) //10 phút
     this.loadData()
   }
   loadData() {
