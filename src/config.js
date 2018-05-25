@@ -15,7 +15,7 @@ const ROLE_API = API_GATEWAY_RELEASE
 const USER_API = API_GATEWAY_RELEASE
 const ORGANIZATION_API = API_GATEWAY_RELEASE
 const FCM_API = API_GATEWAY_RELEASE
-const STATION_CONTROL_API = API_GATEWAY_RELEASE //'https://ilotusland.vietan-software.com' //'http://192.168.1.41:8010' //
+const SAMPLING_API = API_GATEWAY_RELEASE //'https://ilotusland.vietan-software.com' //'http://192.168.1.41:8010' //
 
 const GOOGLE_MAP = {
   KEY: 'AIzaSyB2-wp_CpzQQOkmacIaA2Xj90G8E_wiJiw'
@@ -29,7 +29,7 @@ module.exports.PORT_DEPLOY = PORT_DEPLOY
 module.exports.GOOGLE_MAP = GOOGLE_MAP
 module.exports.DATA_STATION_AUTO_API = DATA_STATION_AUTO_API
 module.exports.MEDIA_API = MEDIA_API
-module.exports.STATION_CONTROL_API = STATION_CONTROL_API
+module.exports.SAMPLING_API = SAMPLING_API
 module.exports.ROLE_API = ROLE_API
 module.exports.USER_API = USER_API
 module.exports.ORGANIZATION_API = ORGANIZATION_API
@@ -45,7 +45,7 @@ module.exports.default = {
   PORT_DEPLOY,
   DATA_STATION_AUTO_API,
   MEDIA_API,
-  STATION_CONTROL_API,
+	SAMPLING_API,
   ROLE_API,
   USER_API,
   ORGANIZATION_API,
