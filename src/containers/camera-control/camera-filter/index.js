@@ -4,12 +4,12 @@ import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import { autobind } from 'core-decorators'
 import { mapPropsToFields } from 'utils/form'
-import SelectStationType from 'components/elements/select-station'
+import SelectStationType from 'components/elements/select-station-camera'
 import createLanguageHoc, { langPropTypes } from 'hoc/create-lang'
 
 const FormItem = FormStyle.Item
 
-const Form = styled(FormStyle)`
+const Form = styled(FormStyle) `
   display: flex;
   .ant-form-item-control {
     line-height: 0px;
@@ -47,7 +47,7 @@ export default class CameraFilter extends React.PureComponent {
   constructor(props) {
     super(props)
     this.state = {
-      station: ''
+      station: 'ALL'
     }
   }
 
@@ -63,20 +63,14 @@ export default class CameraFilter extends React.PureComponent {
       )
   }
 
-  changeSearch(e) {
-    e.preventDefault()
-    this.props.form.validateFields((err, values) => {
-      if (err) return
-      const data = {}
-      if (this.state.station) data.station = this.state.station
-      // Callback submit form Container Component
-      this.setState({ dataSearch: data }, () => this.props.onChangeSearch(data))
-    })
-  }
-
   changeStation(station) {
     this.setState({
       station: station
+    }, () => {
+      let data = {}
+      if (this.state.station) data.station = this.state.station
+      // Callback submit form Container Component
+      this.setState({ dataSearch: data }, () => this.props.onChangeSearch(data))
     })
   }
 
@@ -94,9 +88,9 @@ export default class CameraFilter extends React.PureComponent {
             placeholder={t('cameraControl.selectStationPlaceholder')}
           />
         </SelectWrapper>
-        <Button shape="circle" htmlType="submit">
+        {/* <Button shape="circle" htmlType="submit">
           <Icon type="search" />
-        </Button>
+        </Button> */}
       </Form>
     )
   }
