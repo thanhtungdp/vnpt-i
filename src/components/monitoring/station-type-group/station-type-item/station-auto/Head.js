@@ -12,7 +12,7 @@ import ROLE from 'constants/role'
 import protectRole from 'hoc/protect-role'
 import { translate } from 'hoc/create-lang'
 import { connect } from 'react-redux'
-import StationControl from 'api/StationControl'
+import StationControl from 'api/SamplingApi'
 
 const StationHeadItemWrapper = styled.div`
   display: flex;

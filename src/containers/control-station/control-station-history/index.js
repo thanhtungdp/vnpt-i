@@ -6,7 +6,7 @@ import PageContainer from 'layout/default-sidebar-layout/PageContainer'
 import moment from 'moment'
 import slug from 'constants/slug'
 import { autobind } from 'core-decorators'
-import StationControl from 'api/StationControl'
+import SamplingApi from 'api/SamplingApi'
 import { translate } from 'hoc/create-lang'
 import { connect } from 'react-redux'
 
@@ -25,7 +25,7 @@ export default class ControlStationHistory extends PureComponent {
   async componentDidMount() {
     this.setState({ isLoaded: false })
     const key = this.props.match.params.key
-    const record = await StationControl.getHistory_StationControl(key, this.props.organization._id)
+    const record = await SamplingApi.getHistory_StationControl(key, this.props.organization._id)
     if (record.success) {
       record.data = record.data.map(item => ({
         ...item,

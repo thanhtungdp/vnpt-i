@@ -1,5 +1,5 @@
 /* eslint-disable */
-const API_GATEWAY_TEST = 'http://localhost:8010'
+const API_GATEWAY_TEST = 'http://localhost:5000'
 const API_GATEWAY_RELEASE = 'http://api.ilotusland.vn'
 
 const API_GATEWAY_MEDIA_TEST = 'http://localhost:1234'
@@ -15,7 +15,7 @@ const ROLE_API = API_GATEWAY_RELEASE
 const USER_API = API_GATEWAY_RELEASE
 const ORGANIZATION_API = API_GATEWAY_RELEASE
 const FCM_API = API_GATEWAY_RELEASE
-const STATION_CONTROL_API = API_GATEWAY_TEST //'https://ilotusland.vietan-software.com' //'http://192.168.1.41:8010' //
+const STATION_CONTROL_API = API_GATEWAY_RELEASE //'https://ilotusland.vietan-software.com' //'http://192.168.1.41:8010' //
 
 const GOOGLE_MAP = {
   KEY: 'AIzaSyB2-wp_CpzQQOkmacIaA2Xj90G8E_wiJiw'

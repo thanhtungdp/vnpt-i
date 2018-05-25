@@ -13,7 +13,7 @@ import InputLabel from 'components/elements/input-label/index'
 import InputNumberCell from 'components/elements/input-number-cell/index'
 import Clearfix from 'components/elements/clearfix/index'
 import slug from 'constants/slug'
-import StationControl from 'api/StationControl'
+import SamplingApi from 'api/SamplingApi'
 import swal from 'sweetalert2'
 import { translate } from 'hoc/create-lang'
 import { connect } from 'react-redux'
@@ -115,7 +115,7 @@ export default class ControlStationConfig extends PureComponent {
 
   async componentWillMount() {
     const key = this.props.match.params.key
-    const record = await StationControl.getStationControl(key, this.props.organization._id)
+    const record = await SamplingApi.getStationControl(key, this.props.organization._id)
 
     if (record.success) {
       this.setState({
@@ -151,7 +151,7 @@ export default class ControlStationConfig extends PureComponent {
       TongSoChai: values.total,
       MaToChuc: this.props.organization._id
     }
-    const record = await StationControl.config_StationControl(data)
+    const record = await SamplingApi.config_StationControl(data)
 
     if (record.success) {
       let message =

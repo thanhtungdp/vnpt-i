@@ -10,7 +10,7 @@ import PageContainer from 'layout/default-sidebar-layout/PageContainer'
 import slug from 'constants/slug'
 import Breadcrumb from 'containers/control-station/breadcrumb'
 import ControlStationTriggerForm from 'containers/control-station/control-station-trigger/control-station-trigger-form'
-import StationControl from 'api/StationControl'
+import SamplingApi from 'api/SamplingApi'
 import AuthApi from 'api/AuthApi'
 import moment from 'moment'
 import { connect } from 'react-redux'
@@ -40,7 +40,7 @@ export default class ControlStationTrigger extends React.PureComponent {
 
   async loadData() {
     const key = this.props.match.params.key
-    const record = await StationControl.getStationControl(key, this.props.organization._id)
+    const record = await SamplingApi.getStationControl(key, this.props.organization._id)
     const dataEmail = await AuthApi.getMe()
     if (record.error && record.message === 'NOT_CONFIG') {
       swal({
@@ -130,7 +130,7 @@ export default class ControlStationTrigger extends React.PureComponent {
       }
     }
 
-    const record = await StationControl.trigger_StationControl(data)
+    const record = await SamplingApi.trigger_StationControl(data)
 
     if (record.success) {
       swal({
@@ -157,7 +157,7 @@ export default class ControlStationTrigger extends React.PureComponent {
       Email: this.state.user.data.email,
       MaToChuc: this.props.organization._id,
     }
-    const record = await StationControl.trigger_StationControl(data)
+    const record = await SamplingApi.trigger_StationControl(data)
 
     if (record.success) {
       swal({
@@ -183,7 +183,7 @@ export default class ControlStationTrigger extends React.PureComponent {
       LayMauVuotNguong: isExxeeded ? 0 : 1,
       MaToChuc: this.props.organization._id,
     }
-    const record = await StationControl.triggerExceeded_StationControl(data)
+    const record = await SamplingApi.triggerExceeded_StationControl(data)
     if (record.success) {
       swal({
         title: 'Success',
