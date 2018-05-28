@@ -17,15 +17,12 @@ export default class SelectStation extends PureComponent {
 
   state = {
     stations: [],
-    value: ''
+    value: 'ALL'
   }
 
   async componentDidMount() {
     let query = {}
-    const stations = await StationAutoApi.getStationAutos(
-      { itemPerPage: 99999 },
-      query
-    )
+    const stations = await StationAutoApi.getCamera()
 
     if (stations.success)
       this.setState({
@@ -52,10 +49,13 @@ export default class SelectStation extends PureComponent {
         value={this.state.value}
       >
         {this.props.isShowAll && (
-          <Select.Option value={''}>
+          <Select.Option value={'ALL'}>
             {translate('dataSearchFrom.form.all')}
           </Select.Option>
         )}
+        <Select.Option key={'ALL'} value={'ALL'}>
+          ALL
+        </Select.Option>
         {this.state.stations.map(station => (
           <Select.Option key={station.key} value={station.key}>
             {station.name}
