@@ -79,7 +79,7 @@ export default class TableDataList extends React.PureComponent {
           {...this.props}
           locale={{ emptyText: translate('dataSearchFrom.table.emptyText') }}
         />
-         <DataAnilaze
+        <DataAnilaze
           {...this.props}
           locale={{ emptyText: translate('dataSearchFrom.table.emptyText') }}
         />

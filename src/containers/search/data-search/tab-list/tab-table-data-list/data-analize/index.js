@@ -6,13 +6,12 @@ import { Table } from 'antd'
 import styled from 'styled-components'
 import moment from 'moment/moment'
 import { SHAPE } from 'themes/color'
-import { } from 'hoc/create-lang'
+import {} from 'hoc/create-lang'
 import { warningLevels, colorLevels } from 'constants/warningLevels'
 const TableDataListWrapper = styled.div``
 
 @autobind
 export default class TableDataList extends React.PureComponent {
-
   getColumns() {
     let me = this
     const columnIndex = {
@@ -30,7 +29,11 @@ export default class TableDataList extends React.PureComponent {
         dataIndex: 'MaxTime',
         key: 'MaxTime',
         render(value, record, index) {
-          return <div>{moment(record.max.data.receivedAt).format('YYYY/MM/DD HH:mm')}</div>
+          return (
+            <div>
+              {moment(record.max.data.receivedAt).format('YYYY/MM/DD HH:mm')}
+            </div>
+          )
         }
       },
       {
@@ -46,7 +49,11 @@ export default class TableDataList extends React.PureComponent {
         dataIndex: 'MinTime',
         key: 'Min',
         render(value, record, index) {
-          return <div>{moment(record.min.data.receivedAt).format('YYYY/MM/DD HH:mm')}</div>
+          return (
+            <div>
+              {moment(record.min.data.receivedAt).format('YYYY/MM/DD HH:mm')}
+            </div>
+          )
         }
       },
       {

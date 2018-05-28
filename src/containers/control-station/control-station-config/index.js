@@ -115,7 +115,10 @@ export default class ControlStationConfig extends PureComponent {
 
   async componentWillMount() {
     const key = this.props.match.params.key
-    const record = await SamplingApi.getStationControl(key, this.props.organization._id)
+    const record = await SamplingApi.getStationControl(
+      key,
+      this.props.organization._id
+    )
 
     if (record.success) {
       this.setState({

@@ -70,7 +70,9 @@ export default class MinutesDataSearch extends React.Component {
 
     this.setState({
       isLoading: false,
-      dataAnalizeStationAuto: dataAnalizeStationAuto.success ? dataAnalizeStationAuto.data : [],
+      dataAnalizeStationAuto: dataAnalizeStationAuto.success
+        ? dataAnalizeStationAuto.data
+        : [],
       dataStationAuto: dataStationAuto.data,
       measuringData: searchFormData.measuringData,
       measuringList: searchFormData.measuringList,
@@ -131,7 +133,6 @@ export default class MinutesDataSearch extends React.Component {
               isExporting={this.state.isExporting}
             />
           ) : null}
-        
         </Spin>
       </PageContainer>
     )

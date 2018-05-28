@@ -59,9 +59,14 @@ export function getDataStationAutoExportAvg({
   return getFetch(url)
 }
 
-export function getDataAnalizeStationAutos(
-  { fromDate, toDate, key, advanced, measuringList, isExceeded }
-) {
+export function getDataAnalizeStationAutos({
+  fromDate,
+  toDate,
+  key,
+  advanced,
+  measuringList,
+  isExceeded
+}) {
   var url = `${DATA_STATION_AUTO_API}/data-station-auto/${key}/analize?`
   if (fromDate) url += `&from=${fromDate}`
   if (toDate) url += `&to=${toDate}`
