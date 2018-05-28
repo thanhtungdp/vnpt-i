@@ -113,22 +113,22 @@ export default class StationAutoHead extends React.PureComponent {
     this.loadData()
   }
   loadData() {
-    StationControl.checkStationControl(this.props.stationID, this.props.organization._id)
-      .then((record) => {
-        if (record.success) {
-          this.setState({
-            isLoaded: true,
-            isEnable: record.data
-          })
-        } else {
-          this.setState({
-            isLoaded: true,
-            isEnable: false
-          })
-        }
-      })
-
-
+    StationControl.checkStationControl(
+      this.props.stationID,
+      this.props.organization._id
+    ).then(record => {
+      if (record.success) {
+        this.setState({
+          isLoaded: true,
+          isEnable: record.data
+        })
+      } else {
+        this.setState({
+          isLoaded: true,
+          isEnable: false
+        })
+      }
+    })
   }
 
   render() {
@@ -155,8 +155,8 @@ export default class StationAutoHead extends React.PureComponent {
               <span className="stationTypeName">{stationTypeName}</span>
             </WrapperNameStationTypeName>
           ) : (
-              <StationName>{name}</StationName>
-            )}
+            <StationName>{name}</StationName>
+          )}
           <Clearfix width={8} />
           <ReceivedAt status={status}>
             {receivedAt ? ' | ' + receivedAt : ''}
@@ -169,15 +169,21 @@ export default class StationAutoHead extends React.PureComponent {
                 <Link
                   className="actionItem"
                   to={
-                    this.state.isEnable ? slug.controlStation.triggerWithKey + `/${stationID}/${name}`
+                    this.state.isEnable
+                      ? slug.controlStation.triggerWithKey +
+                        `/${stationID}/${name}`
                       : slug.monitoring.base
                     //slug.controlStation.triggerWithKey + `/${stationID}/${name}`
                   }
                 >
                   <Tooltip title={translate('monitoring.sampling')}>
-                    <Icon type="weibo" style={{ fontSize: 16 }} style={{
-                      opacity: this.state.isEnable ? 1 : 0.4
-                    }} />
+                    <Icon
+                      type="weibo"
+                      style={{ fontSize: 16 }}
+                      style={{
+                        opacity: this.state.isEnable ? 1 : 0.4
+                      }}
+                    />
                   </Tooltip>
                 </Link>
               </Spin>

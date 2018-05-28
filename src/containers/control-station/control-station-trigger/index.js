@@ -40,7 +40,10 @@ export default class ControlStationTrigger extends React.PureComponent {
 
   async loadData() {
     const key = this.props.match.params.key
-    const record = await SamplingApi.getStationControl(key, this.props.organization._id)
+    const record = await SamplingApi.getStationControl(
+      key,
+      this.props.organization._id
+    )
     const dataEmail = await AuthApi.getMe()
     if (record.error && record.message === 'NOT_CONFIG') {
       swal({
@@ -82,8 +85,8 @@ export default class ControlStationTrigger extends React.PureComponent {
                 : moment(record.data.HenGio),
             date:
               record.data.HenGio === null
-                ? moment().format('DD/MM/YYYY')
-                : moment(record.data.HenGio, 'DD/MM/YYYY'),
+                ? moment().format('YYYY/MM/DD')
+                : moment(record.data.HenGio, 'YYYY/MM/DD'),
             periodic: record.data.ChuKyLayMau ? record.data.ChuKyLayMau : 0
           },
           isLoaded: true,
@@ -112,7 +115,7 @@ export default class ControlStationTrigger extends React.PureComponent {
       ThuCong: typeControl,
       ChaiCanLay: values.amount_get,
       Email: this.state.user.data.email,
-      MaToChuc: this.props.organization._id,
+      MaToChuc: this.props.organization._id
     }
     if (typeControl === 0) {
       const datetime = moment(
@@ -126,7 +129,7 @@ export default class ControlStationTrigger extends React.PureComponent {
         ...data,
         ChuKyLayMau: values.periodic,
         HenGio: datetime,
-        MaToChuc: this.props.organization._id,
+        MaToChuc: this.props.organization._id
       }
     }
 
@@ -155,7 +158,7 @@ export default class ControlStationTrigger extends React.PureComponent {
       Status: 0,
       MaTram: key,
       Email: this.state.user.data.email,
-      MaToChuc: this.props.organization._id,
+      MaToChuc: this.props.organization._id
     }
     const record = await SamplingApi.trigger_StationControl(data)
 
@@ -181,7 +184,7 @@ export default class ControlStationTrigger extends React.PureComponent {
     let data = {
       MaTram: key,
       LayMauVuotNguong: isExxeeded ? 0 : 1,
-      MaToChuc: this.props.organization._id,
+      MaToChuc: this.props.organization._id
     }
     const record = await SamplingApi.triggerExceeded_StationControl(data)
     if (record.success) {

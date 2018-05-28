@@ -12,7 +12,7 @@ const Container = styled.div`
     display: block;
   }
 `
-const dateFormat = 'DD/MM/YYYY'
+const dateFormat = 'YYYY/MM/DD'
 
 export default class CalendarCustom extends PureComponent {
   getDateFormat() {

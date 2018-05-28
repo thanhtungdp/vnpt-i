@@ -162,6 +162,14 @@ export default {
       chart: 'Chart',
       exportExcel: 'Export To Excel',
       statusExport: 'Exporting...'
+    },
+    analize: {
+      max: 'Max',
+      maxTime: 'MaxTime',
+      min: 'Min',
+      minTime: 'MinTime',
+      avg: 'Avg',
+      parameters: 'Parameters'
     }
   },
   avgSearchFrom: {
