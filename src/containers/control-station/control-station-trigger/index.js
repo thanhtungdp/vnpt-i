@@ -82,8 +82,8 @@ export default class ControlStationTrigger extends React.PureComponent {
                 : moment(record.data.HenGio),
             date:
               record.data.HenGio === null
-                ? moment().format('DD/MM/YYYY')
-                : moment(record.data.HenGio, 'DD/MM/YYYY'),
+                ? moment().format('YYYY/MM/DD')
+                : moment(record.data.HenGio, 'YYYY/MM/DD'),
             periodic: record.data.ChuKyLayMau ? record.data.ChuKyLayMau : 0
           },
           isLoaded: true,

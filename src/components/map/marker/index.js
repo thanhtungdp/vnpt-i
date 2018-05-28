@@ -128,9 +128,9 @@ export default class MarkerStation extends PureComponent {
           {this.props.stationStatus !== stStatus.DATA_LOSS
             ? translate('map.dataTable.dataReceived')
             : translate('map.dataTable.dataLossAt')}{' '}
-          {/* {DateFormat(new Date(lastLog.receivedAt), 'dd/mm/yyyy hh:mm:ss')} */}
+          {/* {DateFormat(new Date(lastLog.receivedAt), 'yyyy/mm/dd hh:mm:ss')} */}
           {moment(lastLog.receivedAt, 'YYYY-MM-DD hh:mm').format(
-            'DD/MM/YYYY hh:mm'
+            'YYYY/MM/DD hh:mm'
           )}
         </span>
         <Clearfix height={8} />

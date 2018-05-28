@@ -12,6 +12,7 @@ import ROLE from 'constants/role'
 import protectRole from 'hoc/protect-role'
 import queryFormDataBrowser from 'hoc/query-formdata-browser'
 import swal from 'sweetalert2'
+import dataAnalize from './data-analize'
 
 @protectRole(ROLE.DATA_SEARCH.VIEW)
 @queryFormDataBrowser(['submit'])
@@ -19,6 +20,7 @@ import swal from 'sweetalert2'
 export default class MinutesDataSearch extends React.Component {
   state = {
     dataStationAuto: [],
+    dataAnalizeStationAuto: [],
     measuringList: [],
     measuringData: [],
     searchFormData: {},
@@ -55,8 +57,20 @@ export default class MinutesDataSearch extends React.Component {
         title: translate('dataSearchFrom.table.emptyText')
       })
     }
+
+    var dataAnalizeStationAuto = await DataStationAutoApi.getDataAnalizeStationAutos(
+      searchFormData
+    )
+    if (dataAnalizeStationAuto.success) {
+      swal({
+        type: 'success',
+        title: translate('dataSearchFrom.table.emptyText')
+      })
+    }
+
     this.setState({
       isLoading: false,
+      dataAnalizeStationAuto: dataAnalizeStationAuto.success ? dataAnalizeStationAuto.data : [],
       dataStationAuto: dataStationAuto.data,
       measuringData: searchFormData.measuringData,
       measuringList: searchFormData.measuringList,
@@ -106,6 +120,7 @@ export default class MinutesDataSearch extends React.Component {
           {this.state.isHaveData ? (
             <TabList
               isLoading={this.state.isLoading}
+              dataAnalizeStationAuto={this.state.dataAnalizeStationAuto}
               measuringData={this.state.measuringData}
               measuringList={this.state.measuringList}
               dataStationAuto={this.state.dataStationAuto}
@@ -116,6 +131,7 @@ export default class MinutesDataSearch extends React.Component {
               isExporting={this.state.isExporting}
             />
           ) : null}
+        
         </Spin>
       </PageContainer>
     )

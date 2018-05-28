@@ -177,15 +177,15 @@ class DataSearch extends React.PureComponent {
           <Col span={4} key="fromDate">
             <FormItem label={t('onlineMonitoring.form.fromDate.label')}>
               {getFieldDecorator(`fromDate`, {
-                initialValue: moment(this.state.fromDate, 'DD/MM/YYYY HH:mm')
-              })(<DatePicker format={'DD/MM/YYYY HH:mm'} />)}
+                initialValue: moment(this.state.fromDate, 'YYYY/MM/DD HH:mm')
+              })(<DatePicker format={'YYYY/MM/DD HH:mm'} />)}
             </FormItem>
           </Col>
           <Col span={4} key="toDate">
             <FormItem label={t('onlineMonitoring.form.toDate.label')}>
               {getFieldDecorator(`toDate`, {
-                initialValue: moment(this.state.toDate, 'DD/MM/YYYY HH:mm')
-              })(<DatePicker format={'DD/MM/YYYY HH:mm'} />)}
+                initialValue: moment(this.state.toDate, 'YYYY/MM/DD HH:mm')
+              })(<DatePicker format={'YYYY/MM/DD HH:mm'} />)}
             </FormItem>
           </Col>
           <Col span={3} style={{ textAlign: 'right', marginTop: '42px' }}>

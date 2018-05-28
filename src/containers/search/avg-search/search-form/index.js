@@ -23,7 +23,7 @@ const FSelectTimeRange = createValidateComponent(SelectTimeRange)
 const FDatePicker = createValidateComponent(DatePicker)
 const FSelectAnt = createValidateComponent(SelectAnt)
 
-const DATE_FORMAT = 'DD/MM/YYYY HH:mm'
+const DATE_FORMAT = 'YYYY/MM/DD HH:mm'
 
 const SearchFormContainer = BoxShadowStyle.extend``
 const Container = styled.div`
