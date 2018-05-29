@@ -163,7 +163,7 @@ export default {
       exportExcel: 'Export To Excel',
       statusExport: 'Exporting...'
     },
-    analize: {
+    analyze: {
       max: 'Max',
       maxTime: 'MaxTime',
       min: 'Min',
