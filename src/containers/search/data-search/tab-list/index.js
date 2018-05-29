@@ -57,7 +57,7 @@ export default class TabeList extends React.PureComponent {
             <TabTableDataList
               loading={this.props.isLoading}
               measuringList={this.props.measuringList}
-              dataAnalizeStationAuto={this.props.dataAnalizeStationAuto}
+              dataAnalyzeStationAuto={this.props.dataAnalyzeStationAuto}
               measuringData={this.props.measuringData}
               dataSource={this.props.dataStationAuto}
               pagination={this.props.pagination}

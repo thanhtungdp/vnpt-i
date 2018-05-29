@@ -15,7 +15,7 @@ export default class TableDataList extends React.PureComponent {
   getColumns() {
     let me = this
     const columnIndex = {
-      title: translate('dataSearchFrom.analize.parameters'),
+      title: translate('dataSearchFrom.analyze.parameters'),
       dataIndex: 'key',
       key: 'key',
       render(value, record, index) {
@@ -25,7 +25,7 @@ export default class TableDataList extends React.PureComponent {
     let column = [
       columnIndex,
       {
-        title: translate('dataSearchFrom.analize.maxTime'),
+        title: translate('dataSearchFrom.analyze.maxTime'),
         dataIndex: 'MaxTime',
         key: 'MaxTime',
         render(value, record, index) {
@@ -37,7 +37,7 @@ export default class TableDataList extends React.PureComponent {
         }
       },
       {
-        title: translate('dataSearchFrom.analize.max'),
+        title: translate('dataSearchFrom.analyze.max'),
         dataIndex: 'Max',
         key: 'Max',
         render(value, record, index) {
@@ -45,7 +45,7 @@ export default class TableDataList extends React.PureComponent {
         }
       },
       {
-        title: translate('dataSearchFrom.analize.minTime'),
+        title: translate('dataSearchFrom.analyze.minTime'),
         dataIndex: 'MinTime',
         key: 'Min',
         render(value, record, index) {
@@ -57,7 +57,7 @@ export default class TableDataList extends React.PureComponent {
         }
       },
       {
-        title: translate('dataSearchFrom.analize.min'),
+        title: translate('dataSearchFrom.analyze.min'),
         dataIndex: 'Min',
         key: 'Min',
         render(value, record, index) {
@@ -65,7 +65,7 @@ export default class TableDataList extends React.PureComponent {
         }
       },
       {
-        title: translate('dataSearchFrom.analize.avg'),
+        title: translate('dataSearchFrom.analyze.avg'),
         dataIndex: 'Avg',
         key: 'Avg',
         render(value, record, index) {
@@ -83,7 +83,7 @@ export default class TableDataList extends React.PureComponent {
         size="small"
         rowKey="key"
         columns={this.getColumns()}
-        dataSource={this.props.dataAnalizeStationAuto}
+        dataSource={this.props.dataAnalyzeStationAuto}
         pagination={false}
         locale={{ emptyText: translate('dataSearchFrom.table.emptyText') }}
       />

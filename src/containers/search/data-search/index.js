@@ -12,7 +12,6 @@ import ROLE from 'constants/role'
 import protectRole from 'hoc/protect-role'
 import queryFormDataBrowser from 'hoc/query-formdata-browser'
 import swal from 'sweetalert2'
-import dataAnalize from './data-analize'
 
 @protectRole(ROLE.DATA_SEARCH.VIEW)
 @queryFormDataBrowser(['submit'])
@@ -20,7 +19,7 @@ import dataAnalize from './data-analize'
 export default class MinutesDataSearch extends React.Component {
   state = {
     dataStationAuto: [],
-    dataAnalizeStationAuto: [],
+    dataAnalyzeStationAuto: [],
     measuringList: [],
     measuringData: [],
     searchFormData: {},
@@ -58,10 +57,10 @@ export default class MinutesDataSearch extends React.Component {
       })
     }
 
-    var dataAnalizeStationAuto = await DataStationAutoApi.getDataAnalizeStationAutos(
+    var dataAnalyzeStationAuto = await DataStationAutoApi.getDataAnalyzeStationAutos(
       searchFormData
     )
-    if (dataAnalizeStationAuto.success) {
+    if (dataAnalyzeStationAuto.success) {
       swal({
         type: 'success',
         title: translate('dataSearchFrom.table.emptyText')
@@ -70,8 +69,8 @@ export default class MinutesDataSearch extends React.Component {
 
     this.setState({
       isLoading: false,
-      dataAnalizeStationAuto: dataAnalizeStationAuto.success
-        ? dataAnalizeStationAuto.data
+      dataAnalyzeStationAuto: dataAnalyzeStationAuto.success
+        ? dataAnalyzeStationAuto.data
         : [],
       dataStationAuto: dataStationAuto.data,
       measuringData: searchFormData.measuringData,
@@ -122,7 +121,7 @@ export default class MinutesDataSearch extends React.Component {
           {this.state.isHaveData ? (
             <TabList
               isLoading={this.state.isLoading}
-              dataAnalizeStationAuto={this.state.dataAnalizeStationAuto}
+              dataAnalyzeStationAuto={this.state.dataAnalyzeStationAuto}
               measuringData={this.state.measuringData}
               measuringList={this.state.measuringList}
               dataStationAuto={this.state.dataStationAuto}

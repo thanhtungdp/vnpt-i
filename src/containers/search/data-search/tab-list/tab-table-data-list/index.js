@@ -8,7 +8,7 @@ import moment from 'moment/moment'
 import { SHAPE } from 'themes/color'
 import {} from 'hoc/create-lang'
 import { warningLevels, colorLevels } from 'constants/warningLevels'
-import DataAnilaze from './data-analize'
+import DataAnalyze from './data-analyze'
 const TableDataListWrapper = styled.div``
 
 @autobind
@@ -79,7 +79,7 @@ export default class TableDataList extends React.PureComponent {
           {...this.props}
           locale={{ emptyText: translate('dataSearchFrom.table.emptyText') }}
         />
-        <DataAnilaze
+        <DataAnalyze
           {...this.props}
           locale={{ emptyText: translate('dataSearchFrom.table.emptyText') }}
         />
