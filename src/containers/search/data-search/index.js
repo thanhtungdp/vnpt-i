@@ -60,12 +60,6 @@ export default class MinutesDataSearch extends React.Component {
     var dataAnalyzeStationAuto = await DataStationAutoApi.getDataAnalyzeStationAutos(
       searchFormData
     )
-    if (dataAnalyzeStationAuto.success) {
-      swal({
-        type: 'success',
-        title: translate('dataSearchFrom.table.emptyText')
-      })
-    }
 
     this.setState({
       isLoading: false,
@@ -101,8 +95,6 @@ export default class MinutesDataSearch extends React.Component {
   }
 
   render() {
-    console.log(this.props.formData)
-    console.log(this.props.query)
     return (
       <PageContainer {...this.props.wrapperProps} backgroundColor={'#fafbfb'}>
         <Spin
