@@ -9,7 +9,7 @@ import createLanguageHoc, { langPropTypes } from 'hoc/create-lang'
 
 const FormItem = FormStyle.Item
 
-const Form = styled(FormStyle) `
+const Form = styled(FormStyle)`
   display: flex;
   .ant-form-item-control {
     line-height: 0px;
@@ -64,14 +64,19 @@ export default class CameraFilter extends React.PureComponent {
   }
 
   changeStation(station) {
-    this.setState({
-      station: station
-    }, () => {
-      let data = {}
-      if (this.state.station) data.station = this.state.station
-      // Callback submit form Container Component
-      this.setState({ dataSearch: data }, () => this.props.onChangeSearch(data))
-    })
+    this.setState(
+      {
+        station: station
+      },
+      () => {
+        let data = {}
+        if (this.state.station) data.station = this.state.station
+        // Callback submit form Container Component
+        this.setState({ dataSearch: data }, () =>
+          this.props.onChangeSearch(data)
+        )
+      }
+    )
   }
 
   render() {

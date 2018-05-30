@@ -56,8 +56,8 @@ export default class CameraList extends React.Component {
       //xu ly data camera
       let cameraList = []
       res.data.map(item => {
-        item.options.camera.list.forEach(function (obj) {
-          ; (obj.stationName = item.name), (obj.stationKey = item.key)
+        item.options.camera.list.forEach(function(obj) {
+          ;(obj.stationName = item.name), (obj.stationKey = item.key)
         })
         cameraList = cameraList.concat(item.options.camera.list)
       })
@@ -66,7 +66,8 @@ export default class CameraList extends React.Component {
         cameraList: cameraList.filter(
           item =>
             !this.state.dataSearch.station ||
-            item.stationKey === this.state.dataSearch.station || this.state.dataSearch.station === 'ALL'
+            item.stationKey === this.state.dataSearch.station ||
+            this.state.dataSearch.station === 'ALL'
         )
       })
     }
@@ -75,7 +76,10 @@ export default class CameraList extends React.Component {
   onChangeSearch(dataSearch) {
     this.setState({
       cameraList: this.state.dataCameraList.filter(
-        item => !dataSearch.station || item.stationKey === dataSearch.station || dataSearch.station === 'ALL'
+        item =>
+          !dataSearch.station ||
+          item.stationKey === dataSearch.station ||
+          dataSearch.station === 'ALL'
       ),
       dataSearch: dataSearch
     })

@@ -165,10 +165,10 @@ export default {
     },
     analyze: {
       max: 'Max',
-      maxTime: 'MaxTime',
+      maxTime: 'Max Time',
       min: 'Min',
-      minTime: 'MinTime',
-      avg: 'Avg',
+      minTime: 'Min Time',
+      avg: 'Average',
       parameters: 'Parameters'
     }
   },

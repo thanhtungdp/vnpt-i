@@ -4,9 +4,10 @@ import PageContainer from 'layout/default-sidebar-layout/PageContainer'
 import DataStationAutoApi from 'api/DataStationAutoApi'
 import Clearfix from 'components/elements/clearfix/index'
 import { translate } from 'hoc/create-lang'
-import TabList from './tab-list/index'
+import TabList from './tab-list'
 import Breadcrumb from './breadcrumb'
-import SearchFrom from './search-form/index'
+import SearchFrom from './search-form'
+import DataAnalyze from './tab-list/tab-table-data-list/data-analyze'
 import { message, Spin } from 'antd'
 import ROLE from 'constants/role'
 import protectRole from 'hoc/protect-role'
@@ -43,7 +44,7 @@ export default class MinutesDataSearch extends React.Component {
       isHaveData: true
     })
 
-    var dataStationAuto = await DataStationAutoApi.getDataStationAutos(
+    let dataStationAuto = await DataStationAutoApi.getDataStationAutos(
       {
         page: pagination.current,
         itemPerPage: pagination.pageSize
@@ -57,7 +58,7 @@ export default class MinutesDataSearch extends React.Component {
       })
     }
 
-    var dataAnalyzeStationAuto = await DataStationAutoApi.getDataAnalyzeStationAutos(
+    let dataAnalyzeStationAuto = await DataStationAutoApi.getDataAnalyzeStationAutos(
       searchFormData
     )
 
@@ -109,6 +110,15 @@ export default class MinutesDataSearch extends React.Component {
             onSubmit={this.handleSubmitSearch}
             searchNow={this.props.formData.searchNow}
           />
+          <Clearfix height={16} />
+          {this.state.isHaveData ? (
+            <DataAnalyze
+              dataAnalyzeStationAuto={this.state.dataAnalyzeStationAuto}
+              locale={{
+                emptyText: translate('dataSearchFrom.table.emptyText')
+              }}
+            />
+          ) : null}
           <Clearfix height={16} />
           {this.state.isHaveData ? (
             <TabList

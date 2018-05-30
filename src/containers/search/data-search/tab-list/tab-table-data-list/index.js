@@ -3,13 +3,9 @@ import PropTypes from 'prop-types'
 import { translate } from 'hoc/create-lang'
 import { autobind } from 'core-decorators'
 import { Table } from 'antd'
-import styled from 'styled-components'
 import moment from 'moment/moment'
 import { SHAPE } from 'themes/color'
-import {} from 'hoc/create-lang'
 import { warningLevels, colorLevels } from 'constants/warningLevels'
-import DataAnalyze from './data-analyze'
-const TableDataListWrapper = styled.div``
 
 @autobind
 export default class TableDataList extends React.PureComponent {
@@ -71,7 +67,7 @@ export default class TableDataList extends React.PureComponent {
 
   render() {
     return (
-      <TableDataListWrapper>
+      <div>
         <Table
           size="small"
           rowKey="_id"
@@ -79,11 +75,7 @@ export default class TableDataList extends React.PureComponent {
           {...this.props}
           locale={{ emptyText: translate('dataSearchFrom.table.emptyText') }}
         />
-        <DataAnalyze
-          {...this.props}
-          locale={{ emptyText: translate('dataSearchFrom.table.emptyText') }}
-        />
-      </TableDataListWrapper>
+      </div>
     )
   }
 }
