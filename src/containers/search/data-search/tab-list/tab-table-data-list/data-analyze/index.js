@@ -1,19 +1,18 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { translate } from 'hoc/create-lang'
 import { autobind } from 'core-decorators'
 import { Table } from 'antd'
-import styled from 'styled-components'
 import moment from 'moment/moment'
-import { SHAPE } from 'themes/color'
-import {} from 'hoc/create-lang'
-import { warningLevels, colorLevels } from 'constants/warningLevels'
-const TableDataListWrapper = styled.div``
+import BoxShadow from 'components/elements/box-shadow/index'
+
+const TabeListWrapper = BoxShadow.extend`
+  padding: 16px 16px 16px 16px;
+  position: relative;
+`
 
 @autobind
 export default class TableDataList extends React.PureComponent {
   getColumns() {
-    let me = this
     const columnIndex = {
       title: translate('dataSearchFrom.analyze.parameters'),
       dataIndex: 'key',
@@ -79,14 +78,16 @@ export default class TableDataList extends React.PureComponent {
 
   render() {
     return (
-      <Table
-        size="small"
-        rowKey="key"
-        columns={this.getColumns()}
-        dataSource={this.props.dataAnalyzeStationAuto}
-        pagination={false}
-        locale={{ emptyText: translate('dataSearchFrom.table.emptyText') }}
-      />
+      <TabeListWrapper>
+        <Table
+          size="small"
+          rowKey="key"
+          columns={this.getColumns()}
+          dataSource={this.props.dataAnalyzeStationAuto}
+          pagination={false}
+          locale={{ emptyText: translate('dataSearchFrom.table.emptyText') }}
+        />
+      </TabeListWrapper>
     )
   }
 }
