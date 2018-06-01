@@ -78,7 +78,7 @@ export default class StationAutoItem extends React.PureComponent {
     let { measuringList, lastLog } = this.props
     if (!lastLog) return
     let measuringLogs = lastLog.measuringLogs
-    measuringList.sort(function(a, b) {
+    measuringList.sort(function (a, b) {
       return a.numericalOrder - b.numericalOrder
     })
     measuringList.forEach(item => {
@@ -105,9 +105,10 @@ export default class StationAutoItem extends React.PureComponent {
     } = this.props
     let receivedAt = ''
     if (lastLog && lastLog.receivedAt) {
-      receivedAt = moment(lastLog.receivedAt)
-        .format('YYYY-MM-DD HH:MM')
-        .toString()
+      receivedAt = lastLog.receivedAt
+      // receivedAt = moment(lastLog.receivedAt)
+      //   .format('YYYY-MM-DD HH:MM')
+      //   .toString()
       if (status === stationStatus.DATA_LOSS) {
         receivedAt = `${translate('monitoring.dataLoss')}  ${receivedAt}`
       }
