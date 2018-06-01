@@ -16,6 +16,7 @@ const USER_API = API_GATEWAY_RELEASE
 const ORGANIZATION_API = API_GATEWAY_RELEASE
 const FCM_API = API_GATEWAY_RELEASE
 const SAMPLING_API = API_GATEWAY_RELEASE //'https://ilotusland.vietan-software.com' //'http://192.168.1.41:8010' //
+const CAMERA_API = 'http://14.241.75.200:88'
 
 const GOOGLE_MAP = {
   KEY: 'AIzaSyB2-wp_CpzQQOkmacIaA2Xj90G8E_wiJiw'
@@ -34,6 +35,7 @@ module.exports.ROLE_API = ROLE_API
 module.exports.USER_API = USER_API
 module.exports.ORGANIZATION_API = ORGANIZATION_API
 module.exports.FCM_API = FCM_API
+module.exports.CAMERA_API = CAMERA_API
 
 module.exports.default = {
   API_GATEWAY_TEST,
@@ -49,5 +51,6 @@ module.exports.default = {
   ROLE_API,
   USER_API,
   ORGANIZATION_API,
-  FCM_API
+  FCM_API,
+  CAMERA_API
 }
