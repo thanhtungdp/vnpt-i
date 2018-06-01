@@ -16,6 +16,7 @@ import { Link } from 'react-router-dom'
 import StationAutoApi from 'api/StationAuto'
 import CameraFilter from '../camera-filter'
 import queryString from 'query-string'
+import { CAMERA_API } from 'config'
 
 const Wrapper = styled.div`
   display: flex;
@@ -56,8 +57,8 @@ export default class CameraList extends React.Component {
       //xu ly data camera
       let cameraList = []
       res.data.map(item => {
-        item.options.camera.list.forEach(function(obj) {
-          ;(obj.stationName = item.name), (obj.stationKey = item.key)
+        item.options.camera.list.forEach(function (obj) {
+          ; (obj.stationName = item.name), (obj.stationKey = item.key)
         })
         cameraList = cameraList.concat(item.options.camera.list)
       })
@@ -104,7 +105,7 @@ export default class CameraList extends React.Component {
             return [
               <CameraItem
                 name={item.stationName + ' - ' + item.name}
-                rtspUrl={item.rtspUrl}
+                rtspUrl={CAMERA_API + '/?url=' + item.rtspUrl}
                 index={index}
                 key={item.stationName + ' - ' + item.name}
               />,
