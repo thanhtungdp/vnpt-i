@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
-import { Divider, Button, Icon, Form } from 'antd'
+import { Divider, Button, Icon, Form, Menu, Dropdown } from 'antd'
 import StationAutoApi from 'api/StationAuto'
 import PageContainer from 'layout/default-sidebar-layout/PageContainer'
 import slug from 'constants/slug'
@@ -14,11 +14,18 @@ import StationAutoSearchForm from '../station-auto-search'
 import Breadcrumb from '../breadcrumb'
 import ROLE from 'constants/role'
 import protectRole from 'hoc/protect-role'
+import styled from 'styled-components'
 // import Heading from 'components/elements/heading'
 // import { getStationTypes } from 'api/CategoryApi'
 // import { getStationAutos } from 'api/StationAuto'
 
 import DynamicTable from 'components/elements/dynamic-table'
+const LinkSpan = styled.span`
+color: #000;
+&:hover {
+  cursor: pointer;
+}
+`
 
 @protectRole(ROLE.STATION_AUTO.VIEW)
 @createManagerList({
@@ -86,7 +93,7 @@ export default class StationAutoList extends React.Component {
     const { t } = this.props.lang
     let stationTypeArr = []
     //sort dataSource
-    let sourceSorted = this.props.dataSource.sort(function(a, b) {
+    let sourceSorted = this.props.dataSource.sort(function (a, b) {
       if (!a.stationType)
         a.stationType = { key: 'NOT SETUP', name: 'NOT SETUP' }
       if (!b.stationType)
@@ -131,35 +138,7 @@ export default class StationAutoList extends React.Component {
             content: <span>{row.address}</span>
           },
           {
-            content: (
-              <div>
-                <span>
-                  {protectRole(ROLE.STATION_AUTO.EDIT)(
-                    <Link to={slug.stationAuto.editWithKey + '/' + row._id}>
-                      {' '}
-                      {t('stationAutoManager.edit.label')}{' '}
-                    </Link>
-                  )}
-                  <Divider type="vertical" />
-                  {protectRole(ROLE.STATION_AUTO.DELETE)(
-                    <a
-                      onClick={() =>
-                        this.props.onDeleteItem(row._id, this.props.fetchData)
-                      }
-                    >
-                      {t('stationAutoManager.delete.label')}
-                    </a>
-                  )}
-                  <Divider type="vertical" />
-                  {protectRole(ROLE.STATION_AUTO.CONFIG)(
-                    <Link to={slug.stationAuto.configWithKey + '/' + row._id}>
-                      {' '}
-                      {t('stationAutoManager.config.label')}{' '}
-                    </Link>
-                  )}
-                </span>
-              </div>
-            )
+            content: this.actionGroup(row)
           }
         ]
         //check if Group exist or not
@@ -190,6 +169,68 @@ export default class StationAutoList extends React.Component {
     )
     return result
   }
+
+  actionGroup(row) {
+    const { lang: { t } } = this.props
+    let accountEnable = true
+    if (row.accountStatus && row.accountStatus.enable === false) {
+      accountEnable = false
+    }
+    const dropdown = (
+      <Menu style={{
+        width: 120
+      }}>
+        {protectRole(ROLE.STATION_AUTO.EDIT)(
+          <Menu.Item key="1">
+            <Link to={slug.stationAuto.editWithKey + '/' + row._id}>
+              {' '}
+              {t('stationAutoManager.edit.label')}{' '}
+            </Link>
+          </Menu.Item>
+        )}
+        {protectRole(ROLE.STATION_AUTO.DELETE)(
+          <Menu.Item key="2">
+            <a
+              onClick={() =>
+                this.props.onDeleteItem(row._id, this.props.fetchData)
+              }
+            >
+              {t('stationAutoManager.delete.label')}
+            </a>
+          </Menu.Item>
+        )}
+        {protectRole(ROLE.STATION_AUTO.CONFIG)(
+          <Menu.Item key="3">
+            <Link to={slug.stationAuto.configWithKey + '/' + row._id}>
+              {' '}
+              {t('stationAutoManager.config.label')}{' '}
+            </Link>
+          </Menu.Item>
+        )}
+        <Menu.Item key="4">
+          <Link to={slug.stationAuto.ftpInfoWithKey + '/' + row._id}>
+            {' '}
+            {t('stationAutoManager.list.ftpInfo')}{' '}
+          </Link>
+        </Menu.Item>
+        <Menu.Item key="5">
+          <Link to={slug.stationAuto.ftpFileWithKey + '/' + row._id}>
+            {' '}
+            {t('stationAutoManager.list.ftpFile')}{' '}
+          </Link>
+        </Menu.Item>
+      </Menu>
+    )
+    return (
+      <Dropdown overlay={dropdown} trigger={['click']}>
+        <LinkSpan className="ant-dropdown-link">
+          <Icon type="setting" style={{ fontSize: 20, color: '#3E90F7' }} />
+        </LinkSpan>
+      </Dropdown>
+    )
+  }
+
+  
 
   render() {
     return (
