@@ -19,8 +19,8 @@ export default class PaginationWithSticky extends React.Component {
     totalItem: PropTypes.number,
     itemPerPage: PropTypes.number,
     page: PropTypes.number,
-    onChange: PropTypes.number,
-    isSticky: PropTypes.number,
+    onChange: PropTypes.func,
+    isSticky: PropTypes.bool,
     stickyOptions: PropTypes.object
   }
 

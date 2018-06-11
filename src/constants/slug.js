@@ -31,7 +31,11 @@ export default {
     edit: '/station-auto/edit/:key',
     editWithKey: '/station-auto/edit',
     config: '/station-auto/config/:key',
-    configWithKey: '/station-auto/config'
+    configWithKey: '/station-auto/config',
+    ftpInfo: '/station-auto/ftpInfo/:key',
+    ftpInfoWithKey: '/station-auto/ftpInfo',
+    ftpFile: '/station-auto/ftpFile/:key',
+    ftpFileWithKey: '/station-auto/ftpFile'
   },
   onlineMonitoring: {
     base: '/online-monitoring'

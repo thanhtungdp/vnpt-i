@@ -323,7 +323,9 @@ export default {
   },
   stationAutoManager: {
     list: {
-      title: 'Station Name'
+      title: 'Station Name',
+      ftpInfo: 'FTP Info',
+      ftpFile: 'FTP File'
     },
     create: {
       label: 'Create',
@@ -487,6 +489,12 @@ export default {
         uploading: 'Uploading ...',
         finish: 'Done'
       }
+    },
+    ftpFile: {
+      fileName: 'File Name',
+      kind: 'Kind',
+      modifiedDate: 'Modified Date',
+      size: 'Size'
     }
   },
   parameterManager: {
