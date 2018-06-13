@@ -1,42 +1,16 @@
-import React, { Component, PureComponent } from 'react'
-import PropTypes from 'prop-types'
-import CategoryApi from 'api/CategoryApi'
+import React, { PureComponent } from 'react'
 import PageContainer from 'layout/default-sidebar-layout/PageContainer'
-import slug from 'constants/slug'
 import { autobind } from 'core-decorators'
 import Breadcrumb from '../breadcrumb'
-import createLanguageHoc, { langPropTypes } from 'hoc/create-lang'
-import styled from 'styled-components'
-import DynamicTable from 'components/elements/dynamic-table'
+import createLanguageHoc from 'hoc/create-lang'
 import protectRole from 'hoc/protect-role'
 import ROLE from 'constants/role'
 import CameraItem from 'components/elements/camera-item'
-import Clearfix from 'components/elements/clearfix'
-
-const Wrapper = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  flex-wrap: wrap;
-
-  // .ant-collapse-item {
-  // width: 50%;
-  // }
-  .card {
-    width: 100.5%;
-  }
-
-  .ant-collapse-header {
-    text-align: center;
-  }
-`
 
 @protectRole(ROLE.MONITORING.CAMERA)
 @createLanguageHoc
 @autobind
 export default class CameraDetail extends PureComponent {
-  static propTypes = {}
-
   constructor(props) {
     super(props)
     this.state = {
@@ -69,7 +43,7 @@ export default class CameraDetail extends PureComponent {
             }
           ]}
         />
-        {this.state.rtspUrl != '' && (
+        {this.state.rtspUrl !== '' && (
           <CameraItem
             isFullWidth
             name={this.state.name}

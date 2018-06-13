@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
-import { Divider, Button, Icon, Menu, Dropdown } from 'antd'
+import { Button, Icon, Menu, Dropdown } from 'antd'
 import PageContainer from 'layout/default-sidebar-layout/PageContainer'
 import slug from 'constants/slug'
 import { autobind } from 'core-decorators'
@@ -204,7 +204,6 @@ export default class UserList extends React.Component {
   }
 
   getRows() {
-    const { lang: { t } } = this.props
     return this.props.dataSource.map((row, index) => [
       {
         content: (
@@ -256,12 +255,12 @@ export default class UserList extends React.Component {
         content: (
           <SpanEnable
             enable={
-              row.accountStatus && row.accountStatus.enable == false
+              row.accountStatus && row.accountStatus.enable === false
                 ? false
                 : true
             }
           >
-            {row.accountStatus && row.accountStatus.enable == false
+            {row.accountStatus && row.accountStatus.enable === false
               ? 'Disable'
               : 'Enable'}
           </SpanEnable>

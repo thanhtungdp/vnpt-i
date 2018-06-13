@@ -21,7 +21,6 @@ export default class SelectStation extends PureComponent {
   }
 
   async componentDidMount() {
-    let query = {}
     const stations = await StationAutoApi.getCamera()
 
     if (stations.success)
