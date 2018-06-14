@@ -34,7 +34,7 @@ export default class StationAutoFtpFile extends React.PureComponent {
             isFirstDirectory: true,
             isModalShow: false,
             dataSource: [],
-            path: '%2FUsers%2Fsevenlure%2FDocuments%2FFTP%2FTramHoaXuan',
+            path: '/Users/duongnq/Documents/',
             pagination: {
                 page: 1,
                 itemPerPage: 10
@@ -54,7 +54,7 @@ export default class StationAutoFtpFile extends React.PureComponent {
                     id: 'ftpInfo',
                     name: this.props.data.name,
                     href: slug.stationAuto.ftpFileWithKey + '/' + this.props.data._id,
-                    path: '%2FUsers%2Fsevenlure%2FDocuments%2FFTP%2FTramHoaXuan'//this.props.data.path
+                    path: '/Documents'//this.props.data.path
                 }]
             })
         await this.fetchData()

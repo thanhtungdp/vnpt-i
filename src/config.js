@@ -17,7 +17,7 @@ const ORGANIZATION_API = API_GATEWAY_RELEASE
 const FCM_API = API_GATEWAY_RELEASE
 const SAMPLING_API = API_GATEWAY_RELEASE //'https://ilotusland.vietan-software.com' //'http://192.168.1.41:8010' //
 const FTP_API = API_GATEWAY_TEST
-const CAMERA_API = 'http://14.241.75.200:88'
+const CAMERA_API = 'http://camera.ilotusland.vn'
 
 const GOOGLE_MAP = {
   KEY: 'AIzaSyB2-wp_CpzQQOkmacIaA2Xj90G8E_wiJiw'
