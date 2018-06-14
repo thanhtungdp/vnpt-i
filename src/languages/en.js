@@ -494,7 +494,14 @@ export default {
       fileName: 'File Name',
       kind: 'Kind',
       modifiedDate: 'Modified Date',
-      size: 'Size'
+      size: 'Size',
+      NOT_EXIST_FTP: 'This station does not have FTP directory or FTP directory has changed',
+      buttonCreateFTP: 'Click me to create FTP Folder',
+      createFTPSuccess: 'Create FTP folder successfully',
+      headerName: 'FTP Info: ',
+      addressLabel: 'Address ftp:',
+      usernameLabel: 'Username:',
+      passwordLabel: 'Password:'
     }
   },
   parameterManager: {

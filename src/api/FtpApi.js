@@ -1,5 +1,5 @@
 import { FTP_API } from '../config'
-import { getFetch } from '../utils/fetch'
+import { getFetch, postFetch } from '../utils/fetch'
 
 export function getFtpFiles({ page = 1, itemPerPage = 10 }, { path } = {}) {
   var url = `${FTP_API}/ftp/explorer?page=${page}&itemPerPage=${itemPerPage}`
@@ -12,7 +12,20 @@ export function getContentFtpFiles(path) {
   return getFetch(url)
 }
 
+export function getInfoByPath(path) {
+  var url = `${FTP_API}/ftp?path=${encodeURIComponent(path)}`
+  return getFetch(url)
+}
+
+//ftpPath= {path: String}
+export function createFTPFolder(ftpPath = {}) {
+  var url = `${FTP_API}/ftp`
+  return postFetch(url, ftpPath)
+}
+
 export default {
   getFtpFiles,
-  getContentFtpFiles
+  getContentFtpFiles,
+  getInfoByPath,
+  createFTPFolder
 }
