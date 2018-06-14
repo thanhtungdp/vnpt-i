@@ -5,7 +5,6 @@ import PropTypes from 'prop-types'
 import { Card, CardHeader } from 'reactstrap'
 import { Link } from 'react-router-dom'
 import slug from 'constants/slug'
-import Clearfix from 'components/elements/clearfix'
 
 const CameraItemWrapper = styled.div`
   margin-bottom: 20px;

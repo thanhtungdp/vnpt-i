@@ -1,13 +1,11 @@
 import React from 'react'
-import { Form as FormStyle, Input, Button, Icon } from 'antd'
+import { Form as FormStyle } from 'antd'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import { autobind } from 'core-decorators'
 import { mapPropsToFields } from 'utils/form'
 import SelectStationType from 'components/elements/select-station-camera'
 import createLanguageHoc, { langPropTypes } from 'hoc/create-lang'
-
-const FormItem = FormStyle.Item
 
 const Form = styled(FormStyle)`
   display: flex;
@@ -20,10 +18,6 @@ const Form = styled(FormStyle)`
   .flex-grow {
     flex-grow: 1;
   }
-`
-
-const Clearfix = styled.div`
-  width: 8px;
 `
 
 const SelectWrapper = styled.div`

@@ -5,7 +5,6 @@ import { withRouter } from 'react-router'
 import StationAutoHead from './Head'
 import MeasuringList from './measuring/measuring-list'
 import PropTypes from 'prop-types'
-import moment from 'moment'
 import slug from 'constants/slug'
 import stationStatus from 'constants/stationStatus'
 import { translate } from 'hoc/create-lang'
@@ -78,7 +77,7 @@ export default class StationAutoItem extends React.PureComponent {
     let { measuringList, lastLog } = this.props
     if (!lastLog) return
     let measuringLogs = lastLog.measuringLogs
-    measuringList.sort(function (a, b) {
+    measuringList.sort(function(a, b) {
       return a.numericalOrder - b.numericalOrder
     })
     measuringList.forEach(item => {

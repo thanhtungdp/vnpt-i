@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
-import { Divider, Button, Icon, Form, Menu, Dropdown } from 'antd'
+import { Button, Icon, Form, Menu, Dropdown } from 'antd'
 import StationAutoApi from 'api/StationAuto'
 import PageContainer from 'layout/default-sidebar-layout/PageContainer'
 import slug from 'constants/slug'
@@ -21,10 +21,10 @@ import styled from 'styled-components'
 
 import DynamicTable from 'components/elements/dynamic-table'
 const LinkSpan = styled.span`
-color: #000;
-&:hover {
-  cursor: pointer;
-}
+  color: #000;
+  &:hover {
+    cursor: pointer;
+  }
 `
 
 @protectRole(ROLE.STATION_AUTO.VIEW)
@@ -90,10 +90,9 @@ export default class StationAutoList extends React.Component {
   }
 
   getRows() {
-    const { t } = this.props.lang
     let stationTypeArr = []
     //sort dataSource
-    let sourceSorted = this.props.dataSource.sort(function (a, b) {
+    let sourceSorted = this.props.dataSource.sort(function(a, b) {
       if (!a.stationType)
         a.stationType = { key: 'NOT SETUP', name: 'NOT SETUP' }
       if (!b.stationType)
@@ -172,14 +171,16 @@ export default class StationAutoList extends React.Component {
 
   actionGroup(row) {
     const { lang: { t } } = this.props
-    let accountEnable = true
-    if (row.accountStatus && row.accountStatus.enable === false) {
-      accountEnable = false
-    }
+    // let accountEnable = true
+    // if (row.accountStatus && row.accountStatus.enable === false) {
+    //   accountEnable = false
+    // }
     const dropdown = (
-      <Menu style={{
-        width: 120
-      }}>
+      <Menu
+        style={{
+          width: 120
+        }}
+      >
         {protectRole(ROLE.STATION_AUTO.EDIT)(
           <Menu.Item key="1">
             <Link to={slug.stationAuto.editWithKey + '/' + row._id}>
@@ -229,8 +230,6 @@ export default class StationAutoList extends React.Component {
       </Dropdown>
     )
   }
-
-  
 
   render() {
     return (
