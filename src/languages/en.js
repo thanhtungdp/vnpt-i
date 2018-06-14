@@ -495,7 +495,8 @@ export default {
       kind: 'Kind',
       modifiedDate: 'Modified Date',
       size: 'Size',
-      NOT_EXIST_FTP: 'This station does not have FTP directory or FTP directory has changed',
+      NOT_EXIST_FTP:
+        'This station does not have FTP directory or FTP directory has changed',
       buttonCreateFTP: 'Click me to create FTP Folder',
       createFTPSuccess: 'Create FTP folder successfully',
       headerName: 'FTP Info: ',

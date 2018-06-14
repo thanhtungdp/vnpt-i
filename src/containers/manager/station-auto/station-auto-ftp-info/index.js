@@ -9,7 +9,11 @@ import Breadcrumb from '../breadcrumb'
 import FtpApi from 'api/FtpApi'
 import { translate } from 'hoc/create-lang'
 import swal from 'sweetalert2'
+import { connect } from 'react-redux'
 
+@connect(state => ({
+  organization: state.auth.userInfo.organization
+}))
 @createManagerEdit({
   apiGetByKey: StationAutoApi.getStationAuto
 })
@@ -35,13 +39,21 @@ export default class StationAutoFtpInfo extends React.PureComponent {
   }
 
   async handelInfoFTP(path) {
+    if (!path) {
+      path = this.props.organization.ftpPath + '/' + this.props.data.key
+      let config = {
+        ...this.props.data.configLogger,
+        path: path
+      }
+      StationAutoApi.updateStationAutoConfig(this.props.data._id, config)
+    }
     let resFTP = await FtpApi.getInfoByPath(path)
     if (resFTP.success) {
       this.setState({
         existFTP: true,
         address: resFTP.data.address,
         username: resFTP.data.username,
-        password: resFTP.data.password,
+        password: resFTP.data.password
       })
     } else {
       this.setState({
@@ -54,7 +66,9 @@ export default class StationAutoFtpInfo extends React.PureComponent {
     this.setState({
       isLoadingButton: true
     })
-    let resFTP = await FtpApi.createFTPFolder({ path: this.props.data.configLogger.path })
+    let resFTP = await FtpApi.createFTPFolder({
+      path: this.props.data.configLogger.path
+    })
     if (resFTP.success) {
       swal({
         type: 'success',
@@ -68,7 +82,7 @@ export default class StationAutoFtpInfo extends React.PureComponent {
         isLoadingButton: false
       })
     } else {
-      message.error(resFTP.message);
+      message.error(resFTP.message)
       this.setState({
         isLoadingButton: false
       })
@@ -85,36 +99,58 @@ export default class StationAutoFtpInfo extends React.PureComponent {
               id: 'ftpInfo',
               name:
                 this.props.isLoaded && this.props.success
-                  ? translate('stationAutoManager.ftpFile.headerName') + this.props.data.name
+                  ? translate('stationAutoManager.ftpFile.headerName') +
+                    this.props.data.name
                   : null
             }
           ]}
         />
         <Spin style={{ width: '100%' }} spinning={!this.props.isLoaded}>
           {this.props.isLoaded &&
-            this.props.success && this.state.existFTP && (
+            this.props.success &&
+            this.state.existFTP && (
               <table>
                 <tbody>
                   <tr>
-                    <td style={{ width: 100 }}><b>{translate('stationAutoManager.ftpFile.addressLabel')}</b></td>
+                    <td style={{ width: 100 }}>
+                      <b>
+                        {translate('stationAutoManager.ftpFile.addressLabel')}
+                      </b>
+                    </td>
                     <td style={{ color: 'blue' }}>{this.state.address}</td>
                   </tr>
                   <tr>
-                    <td><b>{translate('stationAutoManager.ftpFile.usernameLabel')}</b></td>
+                    <td>
+                      <b>
+                        {translate('stationAutoManager.ftpFile.usernameLabel')}
+                      </b>
+                    </td>
                     <td style={{ color: 'blue' }}>{this.state.username}</td>
                   </tr>
                   <tr>
-                    <td><b>{translate('stationAutoManager.ftpFile.passwordLabel')}</b></td>
+                    <td>
+                      <b>
+                        {translate('stationAutoManager.ftpFile.passwordLabel')}
+                      </b>
+                    </td>
                     <td style={{ color: 'blue' }}>{this.state.password}</td>
                   </tr>
                 </tbody>
               </table>
             )}
           {this.props.isLoaded &&
-            this.props.success && !this.state.existFTP && (
+            this.props.success &&
+            !this.state.existFTP && (
               <div>
                 <h4>{translate('stationAutoManager.ftpFile.NOT_EXIST_FTP')}</h4>
-                <Button loading={this.state.isLoadingButton} type="primary" size='large' onClick={this.createFTPFolder}>{translate('stationAutoManager.ftpFile.buttonCreateFTP')}</Button>
+                <Button
+                  loading={this.state.isLoadingButton}
+                  type="primary"
+                  size="large"
+                  onClick={this.createFTPFolder}
+                >
+                  {translate('stationAutoManager.ftpFile.buttonCreateFTP')}
+                </Button>
               </div>
             )}
         </Spin>
