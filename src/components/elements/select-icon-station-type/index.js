@@ -5,7 +5,7 @@ import { autobind } from 'core-decorators'
 import MediaApi from 'api/MediaApi'
 import styled from 'styled-components'
 import { SketchPicker } from 'react-color'
-import createLanguageHoc, { langPropTypes } from 'hoc/create-lang'
+import createLanguageHoc from 'hoc/create-lang'
 
 const AvatarWrapper = styled.div`
   padding: 4px;

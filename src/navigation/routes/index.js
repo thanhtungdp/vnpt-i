@@ -24,7 +24,6 @@ import ControlStation from 'containers/control-station'
 import Camera from 'containers/camera'
 import AccountActive from 'containers/auth/account-active'
 import CameraControl from 'containers/camera-control'
-import CameraControlDetail from 'containers/camera-control/camera-detail'
 
 @autobind
 export default class RouteDefault extends React.Component {

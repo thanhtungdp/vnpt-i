@@ -30,5 +30,5 @@ export default createBreadcrumb({
     //icon: Icon.car,
     href: slug.stationAuto.ftpFile,
     name: translate('stationAutoManager.list.ftpFile')
-  },
+  }
 })
