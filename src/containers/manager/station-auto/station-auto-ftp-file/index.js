@@ -1,22 +1,15 @@
 import React from 'react'
 import PageContainer from 'layout/default-sidebar-layout/PageContainer'
-import { Button, Icon, Spin, Modal, Table } from 'antd'
+import { Icon, Spin, Modal } from 'antd'
 import { autobind } from 'core-decorators'
 import StationAutoApi from 'api/StationAuto'
-import StationAutoForm from '../station-auto-form'
 import slug from '/constants/slug'
-import createManagerDelete from 'hoc/manager-delete'
 import createManagerEdit from 'hoc/manager-edit'
 import PropTypes from 'prop-types'
 import Breadcrumb from '../breadcrumb'
-import { message } from 'antd'
-import ROLE from 'constants/role'
-import protectRole from 'hoc/protect-role'
 import DynamicTable from 'components/elements/dynamic-table'
 import FtpApi from 'api/FtpApi'
 import moment from 'moment'
-import $ from 'jquery'
-import { FTP_API } from 'config'
 
 @createManagerEdit({
   apiGetByKey: StationAutoApi.getStationAuto
@@ -31,10 +24,12 @@ export default class StationAutoFtpFile extends React.PureComponent {
   constructor(props) {
     super(props)
     this.state = {
+      isLoading: true,
       isFirstDirectory: true,
       isModalShow: false,
       dataSource: [],
-      path: '%2FUsers%2Fsevenlure%2FDocuments%2FFTP%2FTramHoaXuan',
+      path: '',
+      isFullPath: false,
       pagination: {
         page: 1,
         itemPerPage: 10
@@ -46,23 +41,28 @@ export default class StationAutoFtpFile extends React.PureComponent {
   //Su kien truoc khi component duoc tao ra
   async componentWillMount() {
     await this.props.getItem()
-    if (this.props.isLoaded && this.props.success)
-      this.setState({
-        breadcrumb: [
-          ...this.state.breadcrumb,
-          {
-            id: 'ftpInfo',
-            name: this.props.data.name,
-            href: slug.stationAuto.ftpFileWithKey + '/' + this.props.data._id,
-            path: '/Documents' //this.props.data.path
-          }
-        ]
-      })
-    await this.fetchData()
+    if (this.props.isLoaded && this.props.success) {
+      this.setState(
+        {
+          breadcrumb: [
+            ...this.state.breadcrumb,
+            {
+              id: 'ftpInfo',
+              name: this.props.data.name,
+              href: slug.stationAuto.ftpFileWithKey + '/' + this.props.data._id,
+              path: this.props.data.configLogger.path
+            }
+          ],
+          path: this.props.data.configLogger.path
+        },
+        () => {
+          this.fetchData()
+        }
+      )
+    }
   }
 
   getRows() {
-    const { lang: { t } } = this.props
     let data = this.state.dataSource.map((row, index) => [
       {
         content: (
@@ -110,9 +110,15 @@ export default class StationAutoFtpFile extends React.PureComponent {
 
   comeBackDirectory() {
     this.state.breadcrumb.splice(this.state.breadcrumb.length - 1, 1)
+    let isFullPath = this.state.breadcrumb.length > 2 ? true : false
     this.setState(
       {
-        path: this.state.breadcrumb[this.state.breadcrumb.length - 1].path
+        path: this.state.breadcrumb[this.state.breadcrumb.length - 1].path,
+        isFullPath: isFullPath,
+        pagination: {
+          page: 1,
+          itemPerPage: 10
+        }
       },
       () => {
         this.fetchData()
@@ -138,7 +144,8 @@ export default class StationAutoFtpFile extends React.PureComponent {
                   ...this.state.pagination,
                   page: 1
                 },
-                path: row.path
+                path: row.path,
+                isFullPath: true
               },
               () => {
                 this.fetchData()
@@ -193,30 +200,42 @@ export default class StationAutoFtpFile extends React.PureComponent {
         () => {
           Modal.info({
             title: 'FTP File',
-            content: res.data.split('\n').map((item, key) => {
-              return (
-                <div key={key} style={{ display: 'flex' }}>
-                  {item.split('\t').map((itemChild, keyChild) => {
-                    return (
-                      <div
-                        style={{ width: keyChild !== 3 ? 70 : 150 }}
-                        key={keyChild}
-                      >
-                        {' '}
-                        {itemChild}{' '}
-                      </div>
-                    )
-                  })}
-                  <br />
-                </div>
-              )
-            }),
+            content: this.showContentFtpFile(res.data),
             onOk() {},
             width: 500
           })
         }
       )
     }
+  }
+
+  showContentFtpFile(data) {
+    return (
+      <table>
+        <tbody>
+          {data.split('\n').map((item, key) => {
+            return (
+              <tr>
+                {item
+                  .replace(/\s/g, ' ')
+                  .split(' ')
+                  .map((itemChild, keyChild) => {
+                    let width = 70
+                    if (keyChild === 0) width = 120
+                    if (keyChild === 3) width = 150
+                    return (
+                      <td style={{ width: width }} key={keyChild}>
+                        {' '}
+                        {itemChild}{' '}
+                      </td>
+                    )
+                  })}
+              </tr>
+            )
+          })}
+        </tbody>
+      </table>
+    )
   }
 
   onChangePage(page, pageSize) {
@@ -236,13 +255,18 @@ export default class StationAutoFtpFile extends React.PureComponent {
   }
 
   async fetchData() {
+    this.setState({
+      isLoading: true
+    })
     const res = await FtpApi.getFtpFiles(this.state.pagination, {
-      path: this.state.path
+      path: this.state.path,
+      isFullPath: this.state.isFullPath
     })
     if (res.success)
       this.setState({
         dataSource: res.data,
-        pagination: res.pagination
+        pagination: res.pagination,
+        isLoading: false
       })
   }
 
@@ -255,7 +279,7 @@ export default class StationAutoFtpFile extends React.PureComponent {
             this.props.success && (
               <DynamicTable
                 isFixedSize
-                isLoading={!this.props.isLoaded}
+                isLoading={this.state.isLoading}
                 paginationOptions={{
                   isSticky: true
                 }}

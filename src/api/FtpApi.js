@@ -1,9 +1,13 @@
 import { FTP_API } from '../config'
 import { getFetch, postFetch } from '../utils/fetch'
 
-export function getFtpFiles({ page = 1, itemPerPage = 10 }, { path } = {}) {
+export function getFtpFiles(
+  { page = 1, itemPerPage = 10 },
+  { path, isFullPath } = {}
+) {
   var url = `${FTP_API}/ftp/explorer?page=${page}&itemPerPage=${itemPerPage}`
-  if (path) url += `&path=${path}`
+  if (isFullPath) url += `&isFullPath=true`
+  if (path) url += `&path=${encodeURIComponent(path)}`
   return getFetch(url)
 }
 
