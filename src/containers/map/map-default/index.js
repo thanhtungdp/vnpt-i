@@ -138,12 +138,10 @@ export default class MapDefault extends React.PureComponent {
 
     res = res.map(element => {
       element.visible = false
-      let isConnected = false
       let status
 
       if (element.status === stationStatus.GOOD) {
         status = stationStatus.CONNECTED
-        isConnected = true
       }
 
       if (findBy === 'byStationStatus') {

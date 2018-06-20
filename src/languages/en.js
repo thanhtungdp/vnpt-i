@@ -323,7 +323,9 @@ export default {
   },
   stationAutoManager: {
     list: {
-      title: 'Station Name'
+      title: 'Station Name',
+      ftpInfo: 'FTP Info',
+      ftpFile: 'FTP File'
     },
     create: {
       label: 'Create',
@@ -487,6 +489,20 @@ export default {
         uploading: 'Uploading ...',
         finish: 'Done'
       }
+    },
+    ftpFile: {
+      fileName: 'File Name',
+      kind: 'Kind',
+      modifiedDate: 'Modified Date',
+      size: 'Size',
+      NOT_EXIST_FTP:
+        'This station does not have FTP directory or FTP directory has changed',
+      buttonCreateFTP: 'Click me to create FTP Folder',
+      createFTPSuccess: 'Create FTP folder successfully',
+      headerName: 'FTP Info: ',
+      addressLabel: 'Address ftp:',
+      usernameLabel: 'Username:',
+      passwordLabel: 'Password:'
     }
   },
   parameterManager: {

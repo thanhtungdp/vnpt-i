@@ -139,8 +139,7 @@ export default class StationAutoHead extends React.PureComponent {
       orderNumber,
       stationID,
       options,
-      status,
-      _id
+      status
     } = this.props
     const isCamera = options && options.camera && options.camera.allowed
     const isSampling = options && options.camera && options.sampling.allowed
@@ -179,9 +178,9 @@ export default class StationAutoHead extends React.PureComponent {
                   <Tooltip title={translate('monitoring.sampling')}>
                     <Icon
                       type="weibo"
-                      style={{ fontSize: 16 }}
                       style={{
-                        opacity: this.state.isEnable ? 1 : 0.4
+                        opacity: this.state.isEnable ? 1 : 0.4,
+                        fontSize: 16
                       }}
                     />
                   </Tooltip>

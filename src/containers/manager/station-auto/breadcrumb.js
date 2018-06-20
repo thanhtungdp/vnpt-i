@@ -18,5 +18,17 @@ export default createBreadcrumb({
   edit: {
     href: slug.stationAuto.edit,
     name: translate('stationAutoManager.edit.label')
+  },
+  ftpInfo: {
+    id: 'ftpInfo',
+    //icon: Icon.car,
+    href: slug.stationAuto.ftpInfo,
+    name: translate('stationAutoManager.list.ftpInfo')
+  },
+  ftpFile: {
+    id: 'ftpFile',
+    //icon: Icon.car,
+    href: slug.stationAuto.ftpFile,
+    name: translate('stationAutoManager.list.ftpFile')
   }
 })
