@@ -107,7 +107,7 @@ export default class StationAutoFormTable extends React.PureComponent {
         render: (text, record, index) => {
           return (
             <div className="editable-row-operations">
-              {index !== 0 && (
+              {index !== -1 && (
                 <span>
                   <Popconfirm
                     title={t('stationAutoManager.delete.require')}

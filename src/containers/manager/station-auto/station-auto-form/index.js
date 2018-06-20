@@ -118,6 +118,14 @@ export default class StationAutoForm extends React.PureComponent {
   handleSubmit(e) {
     e.preventDefault()
     this.props.form.validateFields((err, values) => {
+      if (!values.measuringList) {
+        const { t } = this.props.lang
+        swal({
+          title: t('stationAutoManager.addMeasuring.error'),
+          type: 'error'
+        })
+        return
+      }
       if (err) return
       const data = {
         key: values.key,
@@ -339,9 +347,15 @@ export default class StationAutoForm extends React.PureComponent {
           </Col>
         </Row>
         <Row gutter={8}>
-          <Col span={12}>
+          <Col span={24}>
             <FormItem
               {...formItemLayout}
+              labelCol={{
+                sm: { span: 3, offset: 0 }
+              }}
+              wrapperCol={{
+                sm: { span: 20, offset: 0 }
+              }}
               label={t('stationAutoManager.form.emails.label')}
             >
               {getFieldDecorator('emails', {})(
@@ -371,13 +385,15 @@ export default class StationAutoForm extends React.PureComponent {
               />
             </div> */}
           </Col>
-          <Col span={12}>
+          <Col
+            span={12}
+            style={{
+              display: 'none'
+            }}
+          >
             <FormItem
               {...formItemLayout}
               label={t('stationAutoManager.form.phones.label')}
-              style={{
-                display: 'none'
-              }}
             >
               {getFieldDecorator('phones', {})(
                 <Select

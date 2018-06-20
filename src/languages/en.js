@@ -344,7 +344,8 @@ export default {
       label: 'Add'
     },
     addMeasuring: {
-      label: 'Add Measuring'
+      label: 'Add Measuring',
+      error: 'Measuring have at least 1'
     },
     form: {
       key: {
