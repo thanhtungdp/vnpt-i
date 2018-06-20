@@ -211,10 +211,10 @@ export default class StationAutoForm extends React.PureComponent {
     )
     const formItemLayout = {
       labelCol: {
-        sm: { span: 4, offset: 0 }
+        sm: { span: 6, offset: 0 }
       },
       wrapperCol: {
-        sm: { span: 19, offset: 0 }
+        sm: { span: 17, offset: 0 }
       }
     }
 
@@ -375,6 +375,9 @@ export default class StationAutoForm extends React.PureComponent {
             <FormItem
               {...formItemLayout}
               label={t('stationAutoManager.form.phones.label')}
+              style={{
+                display: 'none'
+              }}
             >
               {getFieldDecorator('phones', {})(
                 <Select
@@ -407,7 +410,12 @@ export default class StationAutoForm extends React.PureComponent {
           <Col span={24} />
         </Row>
 
-        <Row gutter={8}>
+        <Row
+          gutter={8}
+          style={{
+            display: 'none'
+          }}
+        >
           <Col span={24}>
             <Upload
               action={urlPhotoUpload}
