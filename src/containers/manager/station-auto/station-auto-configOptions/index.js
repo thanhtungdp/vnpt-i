@@ -230,7 +230,7 @@ export default class StationAutoForm extends React.PureComponent {
         </Row>
         <Row gutter={2}>
           <Col span={12}>
-            <FormItem {...styleFormItem}>
+            <FormItem {...styleFormItem} style={{ display: 'none' }}>
               {getFieldDecorator('allowSampling', {
                 valuePropName: 'checked',
                 initialValue: this.props.initialValues.sampling

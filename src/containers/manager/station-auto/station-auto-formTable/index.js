@@ -175,11 +175,11 @@ export default class StationAutoFormTable extends React.PureComponent {
     return (
       <div>
         <Button
-          style={{ width: '200px', right: '0' }}
+          style={{ right: '0', marginBottom: '16px' }}
           type="primary"
           onClick={this.handleAddRow}
         >
-          {t('stationAutoManager.add.label')}
+          {t('stationAutoManager.addMeasuring.label')}
         </Button>
         <Table
           bordered

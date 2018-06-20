@@ -343,6 +343,9 @@ export default {
     add: {
       label: 'Add'
     },
+    addMeasuring: {
+      label: 'Add Measuring'
+    },
     form: {
       key: {
         label: 'Code',
@@ -411,6 +414,10 @@ export default {
       options: {
         isAllowWarning: 'Allow Warning',
         isAllowRemote: 'Allow Remote'
+      },
+      mapLocation: {
+        label: 'mapLocation',
+        placeholder: 'mapLocation'
       },
       error: 'Error',
       require: 'Please Enter Value'
