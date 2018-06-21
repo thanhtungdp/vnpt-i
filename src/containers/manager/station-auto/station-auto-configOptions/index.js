@@ -230,7 +230,7 @@ export default class StationAutoForm extends React.PureComponent {
         </Row>
         <Row gutter={2}>
           <Col span={12}>
-            <FormItem {...styleFormItem} style={{ display: 'none' }}>
+            <FormItem {...styleFormItem}>
               {getFieldDecorator('allowSampling', {
                 valuePropName: 'checked',
                 initialValue: this.props.initialValues.sampling
@@ -247,6 +247,7 @@ export default class StationAutoForm extends React.PureComponent {
                 {...formItemLayout}
                 {...styleFormItem}
                 label={t('stationAutoManager.options.apiAddress.label')}
+                style={{ display: 'none' }}
               >
                 {getFieldDecorator('apiAddress', {
                   initialValue: this.props.initialValues.sampling

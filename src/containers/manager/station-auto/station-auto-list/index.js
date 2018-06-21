@@ -84,9 +84,9 @@ export default class StationAutoList extends React.Component {
       { content: '#', width: 2 },
       { content: t('stationAutoManager.form.key.label'), width: 20 },
       { content: t('stationAutoManager.form.name.label'), width: 20 },
-      { content: t('stationAutoManager.form.address.label'), width: 30 },
-      { content: t('stationAutoManager.form.mapLocation.label'), width: 15 },
-      { content: '', width: 20 }
+      { content: t('stationAutoManager.form.address.label'), width: 35 },
+      { content: t('stationAutoManager.form.mapLocation.label'), width: 20 },
+      { content: '', width: 5 }
     ]
   }
 
@@ -140,8 +140,9 @@ export default class StationAutoList extends React.Component {
           {
             content: (
               <div>
-                <span>lat: {row.mapLocation.lat} </span> <br />
-                <span>long: {row.mapLocation.long} </span>
+                <span>
+                  {row.mapLocation.lat} - {row.mapLocation.long}{' '}
+                </span>
               </div>
             )
           },
