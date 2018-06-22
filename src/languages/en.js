@@ -325,7 +325,9 @@ export default {
     list: {
       title: 'Station Name',
       ftpInfo: 'FTP Info',
-      ftpFile: 'FTP File'
+      ftpFile: 'FTP File',
+      action: 'Action',
+      createdAt: 'Created At'
     },
     create: {
       label: 'Create',
@@ -380,7 +382,9 @@ export default {
       emails: {
         label: 'Email Address',
         placeholder: 'Input Email Address',
-        error: 'Please Input Email Address'
+        error: 'Please Input Email Address',
+        description:
+          'Note: When data have the problem, in addition to the accounts being managed, the system send additional emails to these addresses.'
       },
       phones: {
         label: 'Phone Number',
@@ -417,8 +421,8 @@ export default {
         isAllowRemote: 'Allow Remote'
       },
       mapLocation: {
-        label: 'mapLocation',
-        placeholder: 'mapLocation'
+        label: 'Map Location',
+        placeholder: 'Map Location'
       },
       error: 'Error',
       require: 'Please Enter Value'

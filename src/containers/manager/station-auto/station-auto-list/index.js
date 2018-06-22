@@ -15,9 +15,7 @@ import Breadcrumb from '../breadcrumb'
 import ROLE from 'constants/role'
 import protectRole from 'hoc/protect-role'
 import styled from 'styled-components'
-// import Heading from 'components/elements/heading'
-// import { getStationTypes } from 'api/CategoryApi'
-// import { getStationAutos } from 'api/StationAuto'
+import TimeAgo from 'react-timeago'
 
 import DynamicTable from 'components/elements/dynamic-table'
 const LinkSpan = styled.span`
@@ -25,6 +23,10 @@ const LinkSpan = styled.span`
   &:hover {
     cursor: pointer;
   }
+`
+const SpanTimeAgo = styled.div`
+  font-size: 13px;
+  color: #707070;
 `
 
 @protectRole(ROLE.STATION_AUTO.VIEW)
@@ -82,11 +84,12 @@ export default class StationAutoList extends React.Component {
     const { t } = this.props.lang
     return [
       { content: '#', width: 2 },
-      { content: t('stationAutoManager.form.key.label'), width: 20 },
-      { content: t('stationAutoManager.form.name.label'), width: 20 },
-      { content: t('stationAutoManager.form.address.label'), width: 35 },
-      { content: t('stationAutoManager.form.mapLocation.label'), width: 20 },
-      { content: '', width: 5 }
+      { content: t('stationAutoManager.form.key.label'), width: 15 },
+      { content: t('stationAutoManager.form.name.label'), width: 15 },
+      { content: t('stationAutoManager.form.address.label'), width: 20 },
+      { content: t('stationAutoManager.form.mapLocation.label'), width: 15 },
+      { content: t('stationAutoManager.list.createdAt'), width: 10 },
+      { content: t('stationAutoManager.list.action'), width: 5 }
     ]
   }
 
@@ -144,6 +147,13 @@ export default class StationAutoList extends React.Component {
                   {row.mapLocation.lat} - {row.mapLocation.long}{' '}
                 </span>
               </div>
+            )
+          },
+          {
+            content: (
+              <SpanTimeAgo>
+                <TimeAgo date={row.createdAt} />
+              </SpanTimeAgo>
             )
           },
           {

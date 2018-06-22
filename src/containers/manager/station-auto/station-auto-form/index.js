@@ -365,25 +365,8 @@ export default class StationAutoForm extends React.PureComponent {
                   onChange={this.handleEmailsChange}
                 />
               )}
+              <i>{t('stationAutoManager.form.emails.description')}</i>
             </FormItem>
-
-            {/* <div className={'ant-row ant-form-item'}>
-              <div className="ant-form-item-label">
-                <label htmlFor="phones" title="Phones">
-                  Emails
-                </label>
-              </div>
-              <Select
-                mode="tags"
-                placeholder={t('stationAutoManager.form.emails.placeholder')}
-                defaultValue={
-                  this.props.initialValues
-                    ? this.props.initialValues.emails
-                    : []
-                }
-                onChange={this.handleEmailsChange}
-              />
-            </div> */}
           </Col>
           <Col
             span={12}
@@ -403,23 +386,6 @@ export default class StationAutoForm extends React.PureComponent {
                 />
               )}
             </FormItem>
-            {/* <div className={'ant-row ant-form-item'}>
-              <div className="ant-form-item-label">
-                <label htmlFor="phones" className="" title="Phones">
-                  Phones
-                </label>
-              </div>
-              <Select
-                mode="tags"
-                placeholder={t('stationAutoManager.form.phones.placeholder')}
-                defaultValue={
-                  this.props.initialValues
-                    ? this.props.initialValues.phones
-                    : []
-                }
-                onChange={this.handlePhonesChange}
-              />
-            </div> */}
           </Col>
         </Row>
         <Row gutter={8}>
