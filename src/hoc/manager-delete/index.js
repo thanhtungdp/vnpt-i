@@ -39,7 +39,8 @@ const createManagerDelete = ({ apiDelete }) => Component => {
     render() {
       // Truyền các tham số cho Component con (props)
       const props = {
-        onDeleteItem: this.deleteItem
+        onDeleteItem: this.deleteItem,
+        onRemoveItem: this.deleteItem
       }
       return <Component {...this.props} {...props} />
     }

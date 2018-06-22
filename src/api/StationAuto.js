@@ -29,8 +29,17 @@ export function updateStationAuto(key, measuring = {}) {
 }
 
 export function deleteStationAuto(key) {
+  return putFetch(STATION_AUTO_API + '/station-auto/delete/' + key)
+}
+
+export function restoreStationAuto(key) {
+  return putFetch(STATION_AUTO_API + '/station-auto/restore/' + key)
+}
+
+export function removeStationAuto(key) {
   return deleteFetch(STATION_AUTO_API + '/station-auto/' + key)
 }
+
 export function getLastLog() {
   return getFetch(STATION_AUTO_API + '/station-auto/last-log')
 }
@@ -50,6 +59,8 @@ export default {
   createStationAuto,
   updateStationAuto,
   deleteStationAuto,
+  removeStationAuto,
+  restoreStationAuto,
   getLastLog,
   updateStationAutoConfig,
   getTotalCount
