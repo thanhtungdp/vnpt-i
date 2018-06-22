@@ -326,6 +326,8 @@ export default {
       title: 'Station Name',
       ftpInfo: 'FTP Info',
       ftpFile: 'FTP File',
+      restore: 'Restore',
+      remove: 'Remove',
       action: 'Action',
       createdAt: 'Created At'
     },
@@ -742,6 +744,10 @@ export default {
     onDelete: {
       success: 'Deleted Successfully',
       error: 'Delete Error'
+    },
+    onRestore: {
+      success: 'Restored Successfully',
+      error: 'Restore Error'
     },
     search: 'Search',
     error: 'Something Went Wrong!!!'

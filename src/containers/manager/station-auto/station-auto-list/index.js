@@ -16,6 +16,7 @@ import ROLE from 'constants/role'
 import protectRole from 'hoc/protect-role'
 import styled from 'styled-components'
 import TimeAgo from 'react-timeago'
+import { Modal, message } from 'antd'
 
 import DynamicTable from 'components/elements/dynamic-table'
 const LinkSpan = styled.span`
@@ -28,13 +29,22 @@ const SpanTimeAgo = styled.div`
   font-size: 13px;
   color: #707070;
 `
+const Span = styled.span`
+  color: ${props => (props.deleted ? '#999999' : '')};
+  text-decoration: ${props => (props.deleted ? 'line-through' : '')};
+`
+
+const IconButton = styled(Icon)`
+  padding-right: 5px;
+  color: ${props => (props.color ? props.color : '#3E90F7')};
+`
 
 @protectRole(ROLE.STATION_AUTO.VIEW)
 @createManagerList({
   apiList: StationAutoApi.getStationAutos
 })
 @createManagerDelete({
-  apiDelete: StationAutoApi.deleteStationAuto
+  apiDelete: StationAutoApi.removeStationAuto
 })
 @Form.create({
   mapPropsToFields: mapPropsToFields
@@ -48,7 +58,7 @@ export default class StationAutoList extends React.Component {
     pagination: PropTypes.object,
     onChangePage: PropTypes.func,
     onChangePageSize: PropTypes.func,
-    onDeleteItem: PropTypes.func,
+    onRemoveItem: PropTypes.func,
     fetchData: PropTypes.func,
     onChangeSearch: PropTypes.func,
     data: PropTypes.object,
@@ -69,6 +79,42 @@ export default class StationAutoList extends React.Component {
         )}
       </div>
     )
+  }
+
+  async onDeleteItem(_id, callback) {
+    const { lang: { t } } = this.props
+    Modal.confirm({
+      title: 'Do you want to delete these items?',
+      onOk() {
+        return new Promise(async (resolve, reject) => {
+          const res = await StationAutoApi.deleteStationAuto(_id)
+          if (res.success) {
+            message.info(t('addon.onDelete.success'))
+            callback()
+          } else message.error(t('addon.onDelete.error'))
+          resolve()
+        }).catch(() => console.log('Oops errors!'))
+      },
+      onCancel() {}
+    })
+  }
+
+  async onRestoreItem(_id, callback) {
+    const { lang: { t } } = this.props
+    Modal.confirm({
+      title: 'Do you want to restore these items?',
+      onOk() {
+        return new Promise(async (resolve, reject) => {
+          const res = await StationAutoApi.restoreStationAuto(_id)
+          if (res.success) {
+            message.info(t('addon.onRestore.success'))
+            callback()
+          } else message.error(t('addon.onRestore.error'))
+          resolve()
+        }).catch(() => console.log('Oops errors!'))
+      },
+      onCancel() {}
+    })
   }
 
   renderSearch() {
@@ -107,7 +153,7 @@ export default class StationAutoList extends React.Component {
     })
 
     let stationCount = {}
-    for (var i = 0; i < sourceSorted.length; i++) {
+    for (let i = 0; i < sourceSorted.length; i++) {
       stationCount[sourceSorted[i].stationType.key] = stationCount[
         sourceSorted[i].stationType.key
       ]
@@ -132,20 +178,32 @@ export default class StationAutoList extends React.Component {
             )
           },
           {
-            content: <span>&emsp;{row.key}</span>
+            content: (
+              <Span deleted={row.removeStatus && row.removeStatus.allowed}>
+                &emsp;{row.key}
+              </Span>
+            )
           },
           {
-            content: <span>{row.name}</span>
+            content: (
+              <Span deleted={row.removeStatus && row.removeStatus.allowed}>
+                {row.name}
+              </Span>
+            )
           },
           {
-            content: <span>{row.address}</span>
+            content: (
+              <Span deleted={row.removeStatus && row.removeStatus.allowed}>
+                {row.address}
+              </Span>
+            )
           },
           {
             content: (
               <div>
-                <span>
+                <Span deleted={row.removeStatus && row.removeStatus.allowed}>
                   {row.mapLocation.lat} - {row.mapLocation.long}{' '}
-                </span>
+                </Span>
               </div>
             )
           },
@@ -191,59 +249,85 @@ export default class StationAutoList extends React.Component {
 
   actionGroup(row) {
     const { lang: { t } } = this.props
-    // let accountEnable = true
-    // if (row.accountStatus && row.accountStatus.enable === false) {
-    //   accountEnable = false
-    // }
-    const dropdown = (
-      <Menu
-        style={{
-          width: 120
-        }}
-      >
-        {protectRole(ROLE.STATION_AUTO.EDIT)(
+    let dropDown = ''
+    if (row.removeStatus && row.removeStatus.allowed) {
+      dropDown = protectRole(ROLE.STATION_AUTO.DELETE)(
+        <Menu
+          style={{
+            width: 120
+          }}
+        >
           <Menu.Item key="1">
-            <Link to={slug.stationAuto.editWithKey + '/' + row._id}>
-              {' '}
-              {t('stationAutoManager.edit.label')}{' '}
-            </Link>
+            <a
+              onClick={() => this.onRestoreItem(row._id, this.props.fetchData)}
+            >
+              <IconButton type="reload" />
+              {t('stationAutoManager.list.restore')}
+            </a>
           </Menu.Item>
-        )}
-        {protectRole(ROLE.STATION_AUTO.DELETE)(
           <Menu.Item key="2">
             <a
               onClick={() =>
-                this.props.onDeleteItem(row._id, this.props.fetchData)
+                this.props.onRemoveItem(row._id, this.props.fetchData)
               }
             >
-              {t('stationAutoManager.delete.label')}
+              <IconButton type="close-square-o" color={'red'} />
+              {t('stationAutoManager.list.remove')}
             </a>
           </Menu.Item>
-        )}
-        {protectRole(ROLE.STATION_AUTO.CONFIG)(
-          <Menu.Item key="3">
-            <Link to={slug.stationAuto.configWithKey + '/' + row._id}>
-              {' '}
-              {t('stationAutoManager.config.label')}{' '}
+        </Menu>
+      )
+    } else {
+      dropDown = (
+        <Menu
+          style={{
+            width: 120
+          }}
+        >
+          {protectRole(ROLE.STATION_AUTO.EDIT)(
+            <Menu.Item key="1">
+              <Link to={slug.stationAuto.editWithKey + '/' + row._id}>
+                <IconButton type="edit" />
+                {t('stationAutoManager.edit.label')}{' '}
+              </Link>
+            </Menu.Item>
+          )}
+          {protectRole(ROLE.STATION_AUTO.DELETE)(
+            <Menu.Item key="2">
+              <a
+                onClick={() => this.onDeleteItem(row._id, this.props.fetchData)}
+              >
+                <IconButton type="delete" color={'red'} />
+                {t('stationAutoManager.delete.label')}
+              </a>
+            </Menu.Item>
+          )}
+          {protectRole(ROLE.STATION_AUTO.CONFIG)(
+            <Menu.Item key="3">
+              <Link to={slug.stationAuto.configWithKey + '/' + row._id}>
+                <IconButton type="setting" />
+                {t('stationAutoManager.config.label')}{' '}
+              </Link>
+            </Menu.Item>
+          )}
+          <Menu.Item key="4">
+            <Link to={slug.stationAuto.ftpInfoWithKey + '/' + row._id}>
+              <IconButton type="folder-open" />
+              {t('stationAutoManager.list.ftpInfo')}{' '}
             </Link>
           </Menu.Item>
-        )}
-        <Menu.Item key="4">
-          <Link to={slug.stationAuto.ftpInfoWithKey + '/' + row._id}>
-            {' '}
-            {t('stationAutoManager.list.ftpInfo')}{' '}
-          </Link>
-        </Menu.Item>
-        <Menu.Item key="5">
-          <Link to={slug.stationAuto.ftpFileWithKey + '/' + row._id}>
-            {' '}
-            {t('stationAutoManager.list.ftpFile')}{' '}
-          </Link>
-        </Menu.Item>
-      </Menu>
-    )
+          <Menu.Item key="5">
+            <Link to={slug.stationAuto.ftpFileWithKey + '/' + row._id}>
+              <IconButton type="file-text" />
+              {t('stationAutoManager.list.ftpFile')}{' '}
+            </Link>
+          </Menu.Item>
+        </Menu>
+      )
+    }
+
     return (
-      <Dropdown overlay={dropdown} trigger={['click']}>
+      <Dropdown overlay={dropDown} trigger={['click']}>
         <LinkSpan className="ant-dropdown-link">
           <Icon type="setting" style={{ fontSize: 20, color: '#3E90F7' }} />
         </LinkSpan>
