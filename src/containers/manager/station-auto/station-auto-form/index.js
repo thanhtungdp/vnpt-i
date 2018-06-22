@@ -118,6 +118,14 @@ export default class StationAutoForm extends React.PureComponent {
   handleSubmit(e) {
     e.preventDefault()
     this.props.form.validateFields((err, values) => {
+      if (!values.measuringList) {
+        const { t } = this.props.lang
+        swal({
+          title: t('stationAutoManager.addMeasuring.error'),
+          type: 'error'
+        })
+        return
+      }
       if (err) return
       const data = {
         key: values.key,
@@ -211,10 +219,10 @@ export default class StationAutoForm extends React.PureComponent {
     )
     const formItemLayout = {
       labelCol: {
-        sm: { span: 4, offset: 0 }
+        sm: { span: 6, offset: 0 }
       },
       wrapperCol: {
-        sm: { span: 19, offset: 0 }
+        sm: { span: 17, offset: 0 }
       }
     }
 
@@ -339,9 +347,15 @@ export default class StationAutoForm extends React.PureComponent {
           </Col>
         </Row>
         <Row gutter={8}>
-          <Col span={12}>
+          <Col span={24}>
             <FormItem
               {...formItemLayout}
+              labelCol={{
+                sm: { span: 3, offset: 0 }
+              }}
+              wrapperCol={{
+                sm: { span: 20, offset: 0 }
+              }}
               label={t('stationAutoManager.form.emails.label')}
             >
               {getFieldDecorator('emails', {})(
@@ -351,27 +365,15 @@ export default class StationAutoForm extends React.PureComponent {
                   onChange={this.handleEmailsChange}
                 />
               )}
+              <i>{t('stationAutoManager.form.emails.description')}</i>
             </FormItem>
-
-            {/* <div className={'ant-row ant-form-item'}>
-              <div className="ant-form-item-label">
-                <label htmlFor="phones" title="Phones">
-                  Emails
-                </label>
-              </div>
-              <Select
-                mode="tags"
-                placeholder={t('stationAutoManager.form.emails.placeholder')}
-                defaultValue={
-                  this.props.initialValues
-                    ? this.props.initialValues.emails
-                    : []
-                }
-                onChange={this.handleEmailsChange}
-              />
-            </div> */}
           </Col>
-          <Col span={12}>
+          <Col
+            span={12}
+            style={{
+              display: 'none'
+            }}
+          >
             <FormItem
               {...formItemLayout}
               label={t('stationAutoManager.form.phones.label')}
@@ -384,30 +386,18 @@ export default class StationAutoForm extends React.PureComponent {
                 />
               )}
             </FormItem>
-            {/* <div className={'ant-row ant-form-item'}>
-              <div className="ant-form-item-label">
-                <label htmlFor="phones" className="" title="Phones">
-                  Phones
-                </label>
-              </div>
-              <Select
-                mode="tags"
-                placeholder={t('stationAutoManager.form.phones.placeholder')}
-                defaultValue={
-                  this.props.initialValues
-                    ? this.props.initialValues.phones
-                    : []
-                }
-                onChange={this.handlePhonesChange}
-              />
-            </div> */}
           </Col>
         </Row>
         <Row gutter={8}>
           <Col span={24} />
         </Row>
 
-        <Row gutter={8}>
+        <Row
+          gutter={8}
+          style={{
+            display: 'none'
+          }}
+        >
           <Col span={24}>
             <Upload
               action={urlPhotoUpload}

@@ -247,6 +247,7 @@ export default class StationAutoForm extends React.PureComponent {
                 {...formItemLayout}
                 {...styleFormItem}
                 label={t('stationAutoManager.options.apiAddress.label')}
+                style={{ display: 'none' }}
               >
                 {getFieldDecorator('apiAddress', {
                   initialValue: this.props.initialValues.sampling

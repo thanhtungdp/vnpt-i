@@ -325,7 +325,9 @@ export default {
     list: {
       title: 'Station Name',
       ftpInfo: 'FTP Info',
-      ftpFile: 'FTP File'
+      ftpFile: 'FTP File',
+      action: 'Action',
+      createdAt: 'Created At'
     },
     create: {
       label: 'Create',
@@ -342,6 +344,10 @@ export default {
     },
     add: {
       label: 'Add'
+    },
+    addMeasuring: {
+      label: 'Add Measuring',
+      error: 'Measuring have at least 1'
     },
     form: {
       key: {
@@ -376,7 +382,9 @@ export default {
       emails: {
         label: 'Email Address',
         placeholder: 'Input Email Address',
-        error: 'Please Input Email Address'
+        error: 'Please Input Email Address',
+        description:
+          'Note: When data have the problem, in addition to the accounts being managed, the system send additional emails to these addresses.'
       },
       phones: {
         label: 'Phone Number',
@@ -411,6 +419,10 @@ export default {
       options: {
         isAllowWarning: 'Allow Warning',
         isAllowRemote: 'Allow Remote'
+      },
+      mapLocation: {
+        label: 'Map Location',
+        placeholder: 'Map Location'
       },
       error: 'Error',
       require: 'Please Enter Value'
