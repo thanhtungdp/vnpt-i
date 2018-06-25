@@ -51,6 +51,7 @@ export default class MinutesDataSearch extends React.Component {
       },
       searchFormData
     )
+
     if (dataStationAuto.data.length === 0) {
       swal({
         type: 'success',
