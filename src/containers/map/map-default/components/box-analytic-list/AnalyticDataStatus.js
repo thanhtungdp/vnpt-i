@@ -55,7 +55,7 @@ export default class BoxAnalyticList extends React.PureComponent {
     stationsAutoList.forEach(element => {
       let isFind = false
       let warLevel = warningLevels.GOOD
-      let measuringLogs = element.lastLog.measuringLogs
+      let measuringLogs = (element.lastLog && element.lastLog.measuringLogs)?element.lastLog.measuringLogs: []
       for (let key in measuringLogs) {
         if (
           warningLevelsNumber[warLevel] <
