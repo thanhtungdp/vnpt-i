@@ -70,17 +70,18 @@ export default class StationAutoFtpInfo extends React.PureComponent {
       path: this.props.data.configLogger.path
     })
     if (resFTP.success) {
+      this.handelInfoFTP(this.props.data.configLogger.path)
       swal({
         type: 'success',
         text: translate('stationAutoManager.ftpFile.createFTPSuccess')
       })
-      this.setState({
-        existFTP: true,
-        address: resFTP.data.address,
-        username: resFTP.data.username,
-        password: resFTP.data.password,
-        isLoadingButton: false
-      })
+      // this.setState({
+      //   existFTP: true,
+      //   address: resFTP.data.address,
+      //   username: resFTP.data.username,
+      //   password: resFTP.data.password,
+      //   isLoadingButton: false
+      // })
     } else {
       message.error(resFTP.message)
       this.setState({
@@ -100,7 +101,7 @@ export default class StationAutoFtpInfo extends React.PureComponent {
               name:
                 this.props.isLoaded && this.props.success
                   ? translate('stationAutoManager.ftpFile.headerName') +
-                    this.props.data.name
+                  this.props.data.name
                   : null
             }
           ]}
