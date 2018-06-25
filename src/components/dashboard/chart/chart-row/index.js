@@ -14,6 +14,8 @@ import { withHighcharts } from 'react-jsx-highstock'
 import Highcharts from 'highcharts'
 import { getDataStationAutos } from 'api/DataStationAutoApi'
 import { translate } from 'hoc/create-lang'
+import ReactGA from 'react-ga'
+ReactGA.initialize('UA-36620912-2')
 
 const ChartSummaryWrapper = styled.div``
 
@@ -128,12 +130,28 @@ export class ChartSummary extends React.Component {
     const dropdown = (
       <Menu>
         <Menu.Item key="0">
-          <Link to={slug.monitoring.base + `?Id=${stationType.key}`}>
+          <Link
+            onClick={() => {
+              ReactGA.event({
+                category: 'Dashboard',
+                action: 'View In Monitoring'
+              })
+            }}
+            to={slug.monitoring.base + `?Id=${stationType.key}`}
+          >
             {translate('dashboard.viewInMonitoring')}
           </Link>
         </Menu.Item>
         <Menu.Item key="1">
-          <Link to={slug.map.base + `?Id=${stationType.key}`}>
+          <Link
+            onClick={() => {
+              ReactGA.event({
+                category: 'Dashboard',
+                action: 'View In Map'
+              })
+            }}
+            to={slug.map.base + `?Id=${stationType.key}`}
+          >
             {translate('dashboard.viewInMap')}
           </Link>
         </Menu.Item>
