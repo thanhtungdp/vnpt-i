@@ -101,7 +101,7 @@ export default class StationAutoFtpInfo extends React.PureComponent {
               name:
                 this.props.isLoaded && this.props.success
                   ? translate('stationAutoManager.ftpFile.headerName') +
-                  this.props.data.name
+                    this.props.data.name
                   : null
             }
           ]}

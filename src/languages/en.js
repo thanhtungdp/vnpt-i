@@ -731,6 +731,8 @@ export default {
     delete: 'Delete',
     save: 'Save',
     reset: 'Reset',
+    remove: 'Remove',
+    restore: 'Restore',
     onSave: {
       add: {
         success: 'Added Successfully',
