@@ -74,7 +74,7 @@ export default class CodeConfirm extends PureComponent {
 
   async handleResendCode() {
     const email = this.props.match.params.key
-    const record = await AuthApi.GetForgotSendCode(email)
+    const record = await AuthApi.getForgotSendCode(email)
     if (record.error) {
       swal({
         type: 'error',
@@ -93,7 +93,7 @@ export default class CodeConfirm extends PureComponent {
       email: this.props.match.params.key,
       code: values.code
     }
-    const record = await AuthApi.PostConfirmCode(data)
+    const record = await AuthApi.postConfirmCode(data)
     if (record.error) {
       swal({
         type: 'error',

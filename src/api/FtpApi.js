@@ -1,30 +1,31 @@
-import { FTP_API } from '../config'
-import { getFetch, postFetch } from '../utils/fetch'
+import { getConfigApi } from 'config'
+import { getFetch, postFetch } from 'utils/fetch'
+
+function getFtpUrl(prefix = '') {
+  return getConfigApi().ftp + '/' + prefix
+}
 
 export function getFtpFiles(
   { page = 1, itemPerPage = 10 },
   { path, isFullPath } = {}
 ) {
-  var url = `${FTP_API}/ftp/explorer?page=${page}&itemPerPage=${itemPerPage}`
+  var url = getFtpUrl(`explorer?page=${page}&itemPerPage=${itemPerPage}`)
   if (isFullPath) url += `&isFullPath=true`
   if (path) url += `&path=${encodeURIComponent(path)}`
   return getFetch(url)
 }
 
 export function getContentFtpFiles(path) {
-  var url = `${FTP_API}/ftp/readFile?path=${encodeURIComponent(path)}`
-  return getFetch(url)
+  return getFetch(getFtpUrl(`readFile?path=${encodeURIComponent(path)}`))
 }
 
 export function getInfoByPath(path) {
-  var url = `${FTP_API}/ftp?path=${encodeURIComponent(path)}`
-  return getFetch(url)
+  return getFetch(getFtpUrl(`?path=${encodeURIComponent(path)}`))
 }
 
 //ftpPath= {path: String}
 export function createFTPFolder(ftpPath = {}) {
-  var url = `${FTP_API}/ftp`
-  return postFetch(url, ftpPath)
+  return postFetch(getFtpUrl(), ftpPath)
 }
 
 export default {

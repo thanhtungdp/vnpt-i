@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { getFetch } from 'utils/fetch'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'simple-line-icons/css/simple-line-icons.css'
 import 'font-awesome/css/font-awesome.css'
@@ -27,21 +28,25 @@ const store = configureStore(getStoreDefault(), {
   routerHistory: browserHistory()
 })
 
-const render = Component => {
-  ReactDOM.render(
-    <AppContainer>
-      <App store={store} />
-    </AppContainer>,
-    rootEl
-  )
-}
+getFetch('/app.json').then(dataConfig => {
+  window.config = dataConfig
 
-render(App)
+  const render = Component => {
+    ReactDOM.render(
+      <AppContainer>
+        <App store={store} />
+      </AppContainer>,
+      rootEl
+    )
+  }
 
-// Webpack Hot Module Replacement API
-if (module.hot) {
-  module.hot.accept('./App', () => {
-    render(App)
-  })
-}
-registerServiceWorker()
+  render(App)
+
+  // Webpack Hot Module Replacement API
+  if (module.hot) {
+    module.hot.accept('./App', () => {
+      render(App)
+    })
+  }
+  registerServiceWorker()
+})

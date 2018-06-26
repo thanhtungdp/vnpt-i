@@ -1,7 +1,6 @@
 const express = require('express')
 const path = require('path')
 const bodyParser = require('body-parser')
-const config = require('./src/config')
 
 var app = express()
 
@@ -15,6 +14,7 @@ app.get('/*', function (req, res) {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
-app.listen(config.PORT_DEPLOY, () => {
-  console.log('App listen on ' + config.PORT_DEPLOY)
+const PORT = process.env.PORT || 5555
+app.listen(PORT, () => {
+  console.log('App listen on ' + PORT)
 })

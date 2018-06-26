@@ -1,8 +1,8 @@
-import { ROLE_API } from 'config'
+import { getConfigApi } from 'config'
 import { deleteFetch, getFetch, postFetch, putFetch } from 'utils/fetch'
 
 function getUrl(path = '') {
-  return ROLE_API + '/role/' + path
+  return getConfigApi().role + '/' + path
 }
 
 export function getRoles({ page = 1, itemPerPage = 2 }) {

@@ -155,7 +155,10 @@ export default class MapDefault extends React.PureComponent {
 
       if (findBy === 'byDataStatus') {
         let warLevel = warningLevels.GOOD
-        let measuringLogs = (element.lastLog && element.lastLog.measuringLogs)?element.lastLog.measuringLogs: []
+        let measuringLogs =
+          element.lastLog && element.lastLog.measuringLogs
+            ? element.lastLog.measuringLogs
+            : []
         for (let key in measuringLogs) {
           if (
             warningLevelsNumber[warLevel] <

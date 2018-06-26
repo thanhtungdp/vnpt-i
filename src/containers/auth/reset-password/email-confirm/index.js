@@ -64,7 +64,7 @@ function validate(values) {
 export default class EmailConfirm extends PureComponent {
   async handleResetPassword(values) {
     const email = values.email
-    const record = await AuthApi.GetForgotSendCode(email)
+    const record = await AuthApi.getForgotSendCode(email)
     if (record.error) {
       swal({
         type: 'error',

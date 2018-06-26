@@ -3,7 +3,7 @@ import { autobind } from 'core-decorators'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import { Card, CardHeader } from 'reactstrap'
-import { CAMERA_API } from 'config'
+import { getConfigApi } from 'config'
 
 const CameraItemWrapper = styled.div``
 
@@ -47,7 +47,7 @@ export default class CameraItem extends React.PureComponent {
           {this.state.width ? (
             <iframe
               style={{ border: '0px', overflow: 'hidden' }}
-              src={`${CAMERA_API}?url=${this.props.rtspUrl}`}
+              src={`${getConfigApi().camera}?url=${this.props.rtspUrl}`}
               scrolling="no"
               title={this.props.name + this.props.index}
               {...this.getIframeProps()}

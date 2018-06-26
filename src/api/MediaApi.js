@@ -1,14 +1,13 @@
-import { MEDIA_API } from '../config'
+import { getConfigApi } from 'config'
 
-export const urlMedia = MEDIA_API + '/photo'
-export const urlPhotoUpload = urlMedia + '/upload'
-const urlPhotoUploadDirectory = urlMedia + '/uploadWithDirectory'
+function getMediaUrl(prefix = '') {
+  return getConfigApi().media + '/' + prefix
+}
 
 export function urlPhotoUploadWithDirectory(directory) {
-  return urlPhotoUploadDirectory + '/' + directory
+  return getMediaUrl(`photo/uploadWithDirectory/${directory}`)
 }
 
 export default {
-  urlPhotoUpload,
   urlPhotoUploadWithDirectory
 }

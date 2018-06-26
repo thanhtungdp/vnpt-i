@@ -98,7 +98,7 @@ export default class ResetPassword extends PureComponent {
         code: this.state.userInfo.forgotPasswordCode,
         password: values.newPasswordConfirmation
       }
-      const record = await AuthApi.PutResetPassword(data._id, data)
+      const record = await AuthApi.putResetPassword(data._id, data)
       if (record.error) {
         swal({
           type: 'error',

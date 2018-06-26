@@ -1,11 +1,15 @@
-import { STATION_AUTO_API } from '../config'
+import { getConfigApi } from '../config'
 import { deleteFetch, getFetch, postFetch, putFetch } from '../utils/fetch'
+
+function getStationAutoUrl(prefix = '') {
+  return getConfigApi().stationAuto + '/' + prefix
+}
 
 export function getStationAutos(
   { page = 1, itemPerPage = 10 },
   { address, stationType, name } = {}
 ) {
-  var url = `${STATION_AUTO_API}/station-auto?page=${page}&itemPerPage=${itemPerPage}`
+  var url = getStationAutoUrl(`?page=${page}&itemPerPage=${itemPerPage}`)
   if (address) url += `&address=${address}`
   if (stationType) url += `&stationType=${stationType}`
   if (name) url += `&name=${name}`
@@ -13,43 +17,43 @@ export function getStationAutos(
 }
 
 export function getStationAuto(key) {
-  return getFetch(STATION_AUTO_API + '/station-auto/' + key)
+  return getFetch(getStationAutoUrl(key))
 }
 
 export function getTotalCount() {
-  return getFetch(STATION_AUTO_API + '/station-auto/subscription/total-count')
+  return getFetch(getStationAutoUrl('subscription/total-count'))
 }
 
 export function createStationAuto(measuring = {}) {
-  return postFetch(STATION_AUTO_API + '/station-auto', measuring)
+  return postFetch(getStationAutoUrl(), measuring)
 }
 
 export function updateStationAuto(key, measuring = {}) {
-  return putFetch(STATION_AUTO_API + '/station-auto/' + key, measuring)
+  return putFetch(getStationAutoUrl(key), measuring)
 }
 
 export function deleteStationAuto(key) {
-  return putFetch(STATION_AUTO_API + '/station-auto/delete/' + key)
+  return putFetch(getStationAutoUrl(`delete/${key}`))
 }
 
 export function restoreStationAuto(key) {
-  return putFetch(STATION_AUTO_API + '/station-auto/restore/' + key)
+  return putFetch(getStationAutoUrl(`restore/${key}`))
 }
 
 export function removeStationAuto(key) {
-  return deleteFetch(STATION_AUTO_API + '/station-auto/' + key)
+  return deleteFetch(getStationAutoUrl(key))
 }
 
 export function getLastLog() {
-  return getFetch(STATION_AUTO_API + '/station-auto/last-log')
+  return getFetch(getStationAutoUrl('last-log'))
 }
 
 export function updateStationAutoConfig(key, data = {}) {
-  return putFetch(STATION_AUTO_API + '/station-auto/config-logger/' + key, data)
+  return putFetch(getStationAutoUrl(`config-logger/${key}`), data)
 }
 
 export function getCamera() {
-  return getFetch(STATION_AUTO_API + '/station-auto/camera')
+  return getFetch(getStationAutoUrl(`camera`))
 }
 
 export default {

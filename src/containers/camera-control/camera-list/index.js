@@ -11,7 +11,7 @@ import Clearfix from 'components/elements/clearfix'
 import StationAutoApi from 'api/StationAuto'
 import CameraFilter from '../camera-filter'
 import queryString from 'query-string'
-import { CAMERA_API } from 'config'
+import { getConfigApi } from 'config'
 
 const Wrapper = styled.div`
   display: flex;
@@ -100,7 +100,7 @@ export default class CameraList extends React.Component {
             return [
               <CameraItem
                 name={item.stationName + ' - ' + item.name}
-                rtspUrl={CAMERA_API + '/?url=' + item.rtspUrl}
+                rtspUrl={getConfigApi().camera + '/?url=' + item.rtspUrl}
                 index={index}
                 key={item.stationName + ' - ' + item.name}
               />,

@@ -1,0 +1,5 @@
+{
+  "apiGateway": "http://api.ilotusland.vn",
+  "apiMedia": "http://media.ilotusland.vn",
+  "apiCamera": "http://camera.ilotusland.vn"
+}

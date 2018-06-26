@@ -1,43 +1,51 @@
-import { AUTH_API, USER_API } from '../config'
+import { getConfigApi } from 'config'
 import { getFetch, postFetch, putFetch } from '../utils/fetch'
 
+function getAuthUrl(prefix = '') {
+  return getConfigApi().auth + '/' + prefix
+}
+
+function getUserUrl(prefix = '') {
+  return getConfigApi().user + '/' + prefix
+}
+
 export function loginUser(data = {}) {
-  return postFetch(AUTH_API + '/auth/login', data)
+  return postFetch(getAuthUrl('login', data))
 }
 
 export function loginUser2Factor(data = {}) {
-  return postFetch(AUTH_API + '/auth/security-2fa', data)
+  return postFetch(getAuthUrl('security-2fa', data))
 }
 
 export function getMe() {
-  return getFetch(AUTH_API + '/auth/me')
+  return getFetch(getAuthUrl('me'))
 }
 
 export function changePassword(_id, data) {
-  return postFetch(USER_API + '/user/organization/change-password/' + _id, data)
+  return postFetch(getUserUrl('organization/change-password/' + _id), data)
 }
 
 export function putProfile(_id, data) {
-  return putFetch(USER_API + '/user/organization/' + _id, data)
+  return putFetch(getUserUrl('organization/' + _id), data)
 }
 
 export function putSecurity(data) {
-  return putFetch(USER_API + '/user/organization/security/2fa', data)
+  return putFetch(getUserUrl('organization/security/2fa'), data)
 }
 
 //Send Code
-export function GetForgotSendCode(email) {
-  return getFetch(AUTH_API + `/auth/forgot-password?email=${email}`)
+export function getForgotSendCode(email) {
+  return getFetch(getAuthUrl(`forgot-password?email=${email}`))
 }
 
 //confirm Code
-export function PostConfirmCode(data) {
-  return postFetch(AUTH_API + '/auth/forgot-password', data)
+export function postConfirmCode(data) {
+  return postFetch(getAuthUrl('forgot-password', data))
 }
 
 //Reset password
-export function PutResetPassword(_id, data) {
-  return putFetch(AUTH_API + `/auth/forgot-password/${_id}`, data)
+export function putResetPassword(_id, data) {
+  return putFetch(getAuthUrl(`forgot-password/${_id}`), data)
 }
 
 export default {
@@ -47,7 +55,7 @@ export default {
   changePassword,
   putProfile,
   putSecurity,
-  GetForgotSendCode,
-  PostConfirmCode,
-  PutResetPassword
+  getForgotSendCode,
+  postConfirmCode,
+  putResetPassword
 }

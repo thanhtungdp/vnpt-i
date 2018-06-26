@@ -1,8 +1,8 @@
-import { ORGANIZATION_API } from '../config'
+import { getConfigApi } from '../config'
 import { getFetch } from 'utils/fetch'
 
 export function getSubscription() {
-  let urlFetch = ORGANIZATION_API + '/organization/subscription/status'
+  let urlFetch = getConfigApi().organization + '/subscription/status'
   return getFetch(urlFetch)
 }
 

@@ -1,12 +1,17 @@
-import { USER_API } from '../config'
+import { getConfigApi } from '../config'
 import { getFetch, postFetch, putFetch, deleteFetch } from 'utils/fetch'
+
+function getUserUrl(prefix = '') {
+  return getConfigApi().user + '/' + prefix
+}
 
 export function searchUser(
   { page = 1, itemPerPage = 10 },
   { userName, email, firstName, lastName, organization, phone }
 ) {
-  var urlSearch =
-    USER_API + `/user/organization/?page=${page}&itemPerPage=${itemPerPage}`
+  var urlSearch = getUserUrl(
+    `organization/?page=${page}&itemPerPage=${itemPerPage}`
+  )
   if (userName) urlSearch += `&username=${userName}`
   if (email) urlSearch += `&email=${email}`
   if (firstName) urlSearch += `&firstName=${firstName}`
@@ -18,42 +23,35 @@ export function searchUser(
 }
 
 export function registerUser(data = {}) {
-  return postFetch(USER_API + '/user/organization', data)
+  return postFetch(getUserUrl('organization'), data)
 }
 
 export function getOne(_id) {
-  let urlFetch = USER_API + '/user/organization/' + _id
-  return getFetch(urlFetch)
+  return getFetch(getUserUrl(`organization/${_id}`))
 }
 
 export function getTotalCount() {
-  let urlFetch = USER_API + '/user/organization/subscription/total-count'
-  return getFetch(urlFetch)
+  return getFetch(getUserUrl('organization/subscription/total-count'))
 }
 
 export function updateOne(_id, user = {}) {
-  let urlFetch = USER_API + '/user/organization/' + _id
-  return putFetch(urlFetch, user)
+  return putFetch(getUserUrl(`organization/${_id}`), user)
 }
 
 export function deleteOne(_id) {
-  let urlFetch = USER_API + '/user/organization/' + _id
-  return deleteFetch(urlFetch)
+  return deleteFetch(getUserUrl(`organization/${_id}`))
 }
 
 export function updateRole(_id, data = {}) {
-  let urlFetch = USER_API + '/user/organization/role/' + _id
-  return putFetch(urlFetch, data)
+  return putFetch(getUserUrl(`organization/role/${_id}`), data)
 }
 
 export function accountActivate(code) {
-  let urlFetch = USER_API + '/trial-register/account-activate/' + code
-  return putFetch(urlFetch)
+  return putFetch(getUserUrl('trial-register/account-activate/' + code))
 }
 
 export function accountEnable(_id, data = {}) {
-  let urlFetch = USER_API + '/user/organization/enable/' + _id
-  return putFetch(urlFetch, data)
+  return putFetch(getUserUrl('organization/enable/' + _id), data)
 }
 
 export default {

@@ -1,11 +1,17 @@
-import { DATA_STATION_AUTO_API } from '../config'
-import { getFetch } from '../utils/fetch'
+import { getConfigApi } from 'config'
+import { getFetch } from 'utils/fetch'
+
+function getDataStationAutoUrl(prefix = '') {
+  return getConfigApi().dataStationAuto + '/' + prefix
+}
 
 export function getDataStationAutos(
   { page = 1, itemPerPage = 10 },
   { fromDate, toDate, key, advanced, measuringList, isExceeded }
 ) {
-  var url = `${DATA_STATION_AUTO_API}/data-station-auto/${key}?page=${page}&itemPerPage=${itemPerPage}`
+  var url = `${getDataStationAutoUrl(
+    `${key}?page=${page}&itemPerPage=${itemPerPage}`
+  )}`
   if (fromDate) url += `&from=${fromDate}`
   if (toDate) url += `&to=${toDate}`
   if (advanced) url += `&advanced=${JSON.stringify(advanced)}`
@@ -22,7 +28,7 @@ export function getExportData({
   measuringList,
   isExceeded
 }) {
-  var url = `${DATA_STATION_AUTO_API}/data-station-auto/${key}/export-download?`
+  var url = getDataStationAutoUrl(`${key}/export-download?`)
   if (fromDate) url += `&from=${fromDate}`
   if (toDate) url += `&to=${toDate}`
   if (advanced) url += `&advanced=${JSON.stringify(advanced)}`
@@ -36,7 +42,9 @@ export function getDataStationAutoAvg(
   { page = 1, itemPerPage = 10 },
   { fromDate, toDate, key, measuringList, type }
 ) {
-  var url = `${DATA_STATION_AUTO_API}/data-station-auto/${key}/avg?page=${page}&itemPerPage=${itemPerPage}`
+  var url = getDataStationAutoUrl(
+    `${key}/avg?page=${page}&itemPerPage=${itemPerPage}`
+  )
   if (fromDate) url += `&from=${fromDate}`
   if (toDate) url += `&to=${toDate}`
   if (measuringList) url += `&measuringList=${measuringList.join(',')}`
@@ -51,7 +59,7 @@ export function getDataStationAutoExportAvg({
   measuringList,
   type
 }) {
-  var url = `${DATA_STATION_AUTO_API}/data-station-auto/${key}/export-avg?`
+  var url = getDataStationAutoUrl(`${key}/export-avg?`)
   if (fromDate) url += `&from=${fromDate}`
   if (toDate) url += `&to=${toDate}`
   if (measuringList) url += `&measuringList=${measuringList.join(',')}`
@@ -67,7 +75,7 @@ export function getDataAnalyzeStationAutos({
   measuringList,
   isExceeded
 }) {
-  var url = `${DATA_STATION_AUTO_API}/data-station-auto/${key}/analyze?`
+  var url = getDataStationAutoUrl(`${key}/analyze?`)
   if (fromDate) url += `&from=${fromDate}`
   if (toDate) url += `&to=${toDate}`
   if (advanced) url += `&advanced=${JSON.stringify(advanced)}`
