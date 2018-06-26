@@ -1,5 +1,5 @@
 /* eslint-disable */
-const API_GATEWAY_TEST = 'http://localhost:5009'
+const API_GATEWAY_TEST = 'http://localhost:5005'
 const API_GATEWAY_RELEASE = 'http://api.ilotusland.vn'
 
 const API_GATEWAY_MEDIA_TEST = 'http://localhost:1234'
@@ -12,7 +12,7 @@ const PORT_DEPLOY = 5555
 const DATA_STATION_AUTO_API = API_GATEWAY_RELEASE
 const MEDIA_API = API_GATEWAY_MEDIA_RELEASE
 const ROLE_API = API_GATEWAY_RELEASE
-const USER_API = API_GATEWAY_RELEASE
+const USER_API = API_GATEWAY_TEST
 const ORGANIZATION_API = API_GATEWAY_RELEASE
 const FCM_API = API_GATEWAY_RELEASE
 const SAMPLING_API = API_GATEWAY_RELEASE //'https://ilotusland.vietan-software.com' //'http://192.168.1.41:8010' //

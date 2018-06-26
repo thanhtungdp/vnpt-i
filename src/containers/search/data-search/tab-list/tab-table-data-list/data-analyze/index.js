@@ -28,14 +28,12 @@ export default class TableDataList extends React.PureComponent {
         dataIndex: 'MaxTime',
         key: 'MaxTime',
         render(value, record, index) {
-          let val = (record.max.data.length > 0) ? record.max.data[0].receivedAt || '' : ''
-          if (val)
-            val = moment(val).format('YYYY/MM/DD HH:mm')
-          return (
-            <div>
-              {val}
-            </div>
-          )
+          let val =
+            record.max.data.length > 0
+              ? record.max.data[0].receivedAt || ''
+              : ''
+          if (val) val = moment(val).format('YYYY/MM/DD HH:mm')
+          return <div>{val}</div>
         }
       },
       {
@@ -43,7 +41,8 @@ export default class TableDataList extends React.PureComponent {
         dataIndex: 'Max',
         key: 'Max',
         render(value, record, index) {
-          let val = (record.max.data.length > 0) ? record.max.data[0].value || '' : ''
+          let val =
+            record.max.data.length > 0 ? record.max.data[0].value || '' : ''
           return <div>{val}</div>
         }
       },
@@ -52,14 +51,12 @@ export default class TableDataList extends React.PureComponent {
         dataIndex: 'MinTime',
         key: 'Min',
         render(value, record, index) {
-          let val = (record.min.data.length > 0) ? record.min.data[0].receivedAt || '' : ''
-          if (val)
-            val = moment(val).format('YYYY/MM/DD HH:mm')
-          return (
-            <div>
-              {val}
-            </div>
-          )
+          let val =
+            record.min.data.length > 0
+              ? record.min.data[0].receivedAt || ''
+              : ''
+          if (val) val = moment(val).format('YYYY/MM/DD HH:mm')
+          return <div>{val}</div>
         }
       },
       {
@@ -67,7 +64,8 @@ export default class TableDataList extends React.PureComponent {
         dataIndex: 'Min',
         key: 'Min',
         render(value, record, index) {
-          let val = (record.min.data.length > 0) ? record.min.data[0].value || '' : ''
+          let val =
+            record.min.data.length > 0 ? record.min.data[0].value || '' : ''
           return <div>{val}</div>
         }
       },
@@ -76,9 +74,9 @@ export default class TableDataList extends React.PureComponent {
         dataIndex: 'Avg',
         key: 'Avg',
         render(value, record, index) {
-          let val = (record.avg.data.length > 0) ? record.avg.data[0].value || '' : ''
-          if (val)
-            val = Math.round(val, 2)
+          let val =
+            record.avg.data.length > 0 ? record.avg.data[0].value || '' : ''
+          if (val) val = Math.round(val, 2)
           return <div>{val}</div>
         }
       }

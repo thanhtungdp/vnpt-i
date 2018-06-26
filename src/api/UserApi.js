@@ -36,9 +36,19 @@ export function updateOne(_id, user = {}) {
   return putFetch(urlFetch, user)
 }
 
-export function deleteOne(_id) {
+export function removeOne(_id) {
   let urlFetch = USER_API + '/user/organization/' + _id
   return deleteFetch(urlFetch)
+}
+
+export function deleteOne(_id) {
+  let urlFetch = USER_API + `/user/organization/delete/` + _id
+  return putFetch(urlFetch)
+}
+
+export function restoreOne(_id) {
+  let urlFetch = USER_API + `/user/organization/restore/` + _id
+  return putFetch(urlFetch)
 }
 
 export function updateRole(_id, data = {}) {
@@ -62,6 +72,8 @@ export default {
   getOne,
   updateOne,
   deleteOne,
+  restoreOne,
+  removeOne,
   updateRole,
   accountActivate,
   getTotalCount,
