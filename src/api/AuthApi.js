@@ -10,11 +10,11 @@ function getUserUrl(prefix = '') {
 }
 
 export function loginUser(data = {}) {
-  return postFetch(getAuthUrl('login', data))
+  return postFetch(getAuthUrl('login'), data)
 }
 
 export function loginUser2Factor(data = {}) {
-  return postFetch(getAuthUrl('security-2fa', data))
+  return postFetch(getAuthUrl('security-2fa'), data)
 }
 
 export function getMe() {
@@ -40,7 +40,7 @@ export function getForgotSendCode(email) {
 
 //confirm Code
 export function postConfirmCode(data) {
-  return postFetch(getAuthUrl('forgot-password', data))
+  return postFetch(getAuthUrl('forgot-password'), data)
 }
 
 //Reset password
