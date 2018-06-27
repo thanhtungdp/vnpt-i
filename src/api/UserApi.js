@@ -39,7 +39,15 @@ export function updateOne(_id, user = {}) {
 }
 
 export function deleteOne(_id) {
+  return putFetch(getUserUrl(`organization/delete/${_id}`))
+}
+
+export function removeOne(_id) {
   return deleteFetch(getUserUrl(`organization/${_id}`))
+}
+
+export function restoreOne(_id) {
+  return putFetch(getUserUrl('organization/restore/' + _id))
 }
 
 export function updateRole(_id, data = {}) {
@@ -60,6 +68,8 @@ export default {
   getOne,
   updateOne,
   deleteOne,
+  restoreOne,
+  removeOne,
   updateRole,
   accountActivate,
   getTotalCount,

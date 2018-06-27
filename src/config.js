@@ -1,5 +1,4 @@
 /* eslint-disable */
-
 export function getConfigApi() {
   const config = window.config
   function c(prefix) {
@@ -22,8 +21,6 @@ export function getConfigApi() {
     sampling: c('sampling')
   }
 }
-
-export const PORT_DEPLOY = 5555
 
 export const GOOGLE_MAP = {
   KEY: 'AIzaSyB2-wp_CpzQQOkmacIaA2Xj90G8E_wiJiw'

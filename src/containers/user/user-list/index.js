@@ -56,13 +56,22 @@ const SpanEnable = styled.span`
   padding: 1px 5px;
   font-size: 12px;
 `
+const IconButton = styled(Icon)`
+  padding-right: 5px;
+  color: ${props => (props.color ? props.color : '#3E90F7')};
+`
+
+const Span = styled.span`
+  color: ${props => (props.deleted ? '#999999' : '')};
+  text-decoration: ${props => (props.deleted ? 'line-through' : '')};
+`
 
 @protectRole(ROLE.USER.VIEW)
 @createManagerList({
   apiList: UserApi.searchUser
 })
 @createManagerDelete({
-  apiDelete: UserApi.deleteOne
+  apiDelete: UserApi.removeOne
 })
 @createLanguageHoc
 @autobind
@@ -135,22 +144,37 @@ export default class UserList extends React.Component {
     if (row.accountStatus && row.accountStatus.enable === false) {
       accountEnable = false
     }
-    const dropdown = (
+
+    let dropdown
+
+    if (row.removeStatus && row.removeStatus.allowed)
+      dropdown = this.getMenuIsDeleting(row, t, accountEnable)
+    else dropdown = this.getMenuNotDeleting(row, t, accountEnable)
+
+    return (
+      <Dropdown overlay={dropdown} trigger={['click']}>
+        <LinkSpan className="ant-dropdown-link">
+          <Icon type="setting" style={{ fontSize: 20, color: '#3E90F7' }} />
+        </LinkSpan>
+      </Dropdown>
+    )
+  }
+
+  getMenuNotDeleting(row, t, accountEnable) {
+    return (
       <Menu>
         {protectRole(ROLE.USER.EDIT)(
           <Menu.Item key="0">
             <Link to={slug.user.editWithKey + '/' + row._id}>
+              <IconButton type="edit" />
               {t('addon.edit')}
             </Link>
           </Menu.Item>
         )}
         {protectRole(ROLE.USER.DELETE)(
           <Menu.Item key="1">
-            <a
-              onClick={() =>
-                this.props.onDeleteItem(row._id, this.props.fetchData)
-              }
-            >
+            <a onClick={() => this.onDeleteItem(row._id, this.props.fetchData)}>
+              <IconButton type="delete" color={'red'} />
               {t('addon.delete')}
             </a>
           </Menu.Item>
@@ -158,6 +182,7 @@ export default class UserList extends React.Component {
         {protectRole(ROLE.USER.ROLE)(
           <Menu.Item key="2">
             <Link to={slug.user.ruleWithKey + '/' + row._id}>
+              <IconButton type="usergroup-add" />
               {t('userManager.list.roleAssign')}
             </Link>
           </Menu.Item>
@@ -173,20 +198,46 @@ export default class UserList extends React.Component {
                 )
               }
             >
-              {accountEnable
-                ? t('userManager.list.disableAccount')
-                : t('userManager.list.enableAccount')}
+              {accountEnable ? (
+                <div>
+                  {' '}
+                  <IconButton type="user-delete" color="red" />
+                  {t('userManager.list.disableAccount')}
+                </div>
+              ) : (
+                <div>
+                  {' '}
+                  <IconButton type="user-add" />
+                  {t('userManager.list.enableAccount')}
+                </div>
+              )}
             </a>
           </Menu.Item>
         )}
       </Menu>
     )
-    return (
-      <Dropdown overlay={dropdown} trigger={['click']}>
-        <LinkSpan className="ant-dropdown-link">
-          <Icon type="setting" style={{ fontSize: 20, color: '#3E90F7' }} />
-        </LinkSpan>
-      </Dropdown>
+  }
+
+  getMenuIsDeleting(row, t, accountEnable) {
+    return protectRole(ROLE.USER.DELETE)(
+      <Menu>
+        <Menu.Item key="1">
+          <a onClick={() => this.onRestoreItem(row._id, this.props.fetchData)}>
+            <IconButton type="reload" />
+            {t('addon.restore')}
+          </a>
+        </Menu.Item>
+        <Menu.Item key="2">
+          <a
+            onClick={() =>
+              this.props.onDeleteItem(row._id, this.props.fetchData)
+            }
+          >
+            <IconButton type="close-square-o" color={'red'} />
+            {t('addon.remove')}
+          </a>
+        </Menu.Item>
+      </Menu>
     )
   }
 
@@ -228,10 +279,16 @@ export default class UserList extends React.Component {
                   />
                   <ClearFix width={4} />
                   <AccountInfo>
-                    <span className={'email'}>{row.email}</span>
-                    <span className={'full-name '}>{`${row.lastName} ${
-                      row.firstName
-                    }`}</span>
+                    <Span
+                      className={'email'}
+                      deleted={row.removeStatus && row.removeStatus.allowed}
+                    >
+                      {row.email}
+                    </Span>
+                    <Span
+                      className={'full-name '}
+                      deleted={row.removeStatus && row.removeStatus.allowed}
+                    >{`${row.lastName} ${row.firstName}`}</Span>
                   </AccountInfo>
                 </AccountWapper>
               )}
@@ -245,7 +302,9 @@ export default class UserList extends React.Component {
               row.phone.iso2 && (
                 <div style={{ display: 'flex' }}>
                   <ReactCountryFlag code={row.phone.iso2} />
-                  {row.phone ? row.phone.name : ''}
+                  <Span deleted={row.removeStatus && row.removeStatus.allowed}>
+                    {row.phone ? row.phone.name : ''}
+                  </Span>
                 </div>
               )}
           </div>
@@ -267,7 +326,12 @@ export default class UserList extends React.Component {
         )
       },
       {
-        content: <div> {moment(row.createdAt).format('YYYY-MM-DD HH:mm')}</div>
+        content: (
+          <Span deleted={row.removeStatus && row.removeStatus.allowed}>
+            {' '}
+            {moment(row.createdAt).format('YYYY-MM-DD HH:mm')}
+          </Span>
+        )
       },
       {
         content: <span>{this.actionGroup(row)}</span>
@@ -280,6 +344,42 @@ export default class UserList extends React.Component {
         )
       }
     ])
+  }
+
+  async onDeleteItem(_id, callback) {
+    const { lang: { t } } = this.props
+    Modal.confirm({
+      title: 'Do you want to delete these items?',
+      onOk() {
+        return new Promise(async (resolve, reject) => {
+          const res = await UserApi.deleteOne(_id)
+          if (res.success) {
+            message.info(t('addon.onDelete.success'))
+            callback()
+          } else message.error(t('addon.onDelete.error'))
+          resolve()
+        }).catch(() => console.log('Oops errors!'))
+      },
+      onCancel() {}
+    })
+  }
+
+  async onRestoreItem(_id, callback) {
+    const { lang: { t } } = this.props
+    Modal.confirm({
+      title: 'Do you want to restore these items?',
+      onOk() {
+        return new Promise(async (resolve, reject) => {
+          const res = await UserApi.restoreOne(_id)
+          if (res.success) {
+            message.info(t('addon.onRestore.success'))
+            callback()
+          } else message.error(t('addon.onRestore.error'))
+          resolve()
+        }).catch(() => console.log('Oops errors!'))
+      },
+      onCancel() {}
+    })
   }
 
   render() {
