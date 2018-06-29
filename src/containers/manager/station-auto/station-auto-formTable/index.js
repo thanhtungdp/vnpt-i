@@ -1,5 +1,5 @@
 import React from 'react'
-import { Form, Button, Select, Table, Popconfirm, Icon } from 'antd'
+import { Form, Button, Select, Table, Popconfirm, Icon, Input } from 'antd'
 import { autobind } from 'core-decorators'
 import PropTypes from 'prop-types'
 import { langPropTypes } from '../../../../hoc/create-lang'
@@ -97,7 +97,7 @@ export default class StationAutoFormTable extends React.PureComponent {
           <FormItem>
             {getFieldDecorator(`measuringList[${index}].unit`, {
               initialValue: text
-            })(<span>{text}</span>)}
+            })(<Input></Input>)}
           </FormItem>
         )
       },
