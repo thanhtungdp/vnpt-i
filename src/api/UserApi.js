@@ -5,6 +5,10 @@ function getUserUrl(prefix = '') {
   return getConfigApi().user + '/' + prefix
 }
 
+function getTrialRegisterUrl(prefix = '') {
+  return getConfigApi().trialRegister + '/' + prefix
+}
+
 export function searchUser(
   { page = 1, itemPerPage = 10 },
   { userName, email, firstName, lastName, organization, phone }
@@ -55,7 +59,9 @@ export function updateRole(_id, data = {}) {
 }
 
 export function accountActivate(code) {
-  return putFetch(getUserUrl('trial-register/account-activate/' + code))
+  return putFetch(
+    getTrialRegisterUrl('trial-register/account-activate/' + code)
+  )
 }
 
 export function accountEnable(_id, data = {}) {
