@@ -13,6 +13,7 @@ import protectRole from 'hoc/protect-role'
 import { translate } from 'hoc/create-lang'
 import { connect } from 'react-redux'
 import StationControl from 'api/SamplingApi'
+import moment from 'moment'
 
 const StationHeadItemWrapper = styled.div`
   display: flex;
@@ -120,12 +121,14 @@ export default class StationAutoHead extends React.PureComponent {
       if (record.success) {
         this.setState({
           isLoaded: true,
-          isEnable: record.data
+          //isEnable: record.data
+          isEnable: true
         })
       } else {
         this.setState({
           isLoaded: true,
-          isEnable: false
+          //isEnable: false
+          isEnable: true
         })
       }
     })
@@ -158,7 +161,8 @@ export default class StationAutoHead extends React.PureComponent {
           )}
           <Clearfix width={8} />
           <ReceivedAt status={status}>
-            {receivedAt ? ' | ' + receivedAt : ''}
+            {/* {receivedAt ? ' | ' + receivedAt : ''} */}
+            {moment().format('YYYY/MM/DD')}
           </ReceivedAt>
         </TitleWrapper>
         <ActionWrapper>
