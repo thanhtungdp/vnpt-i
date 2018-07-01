@@ -60,7 +60,7 @@ export function updateRole(_id, data = {}) {
 
 export function accountActivate(code) {
   return putFetch(
-    getTrialRegisterUrl('trial-register/account-activate/' + code)
+    getTrialRegisterUrl('account-activate/' + code)
   )
 }
 
