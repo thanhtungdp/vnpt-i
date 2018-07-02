@@ -10,6 +10,7 @@ export function getConfigApi() {
     camera: config.apiCamera,
     auth: c('auth'),
     user: c('user'),
+    trialRegister: c('trial-register'),
     measuring: c('measuring'),
     stationType: c('station-type'),
     stationAuto: c('station-auto'),
