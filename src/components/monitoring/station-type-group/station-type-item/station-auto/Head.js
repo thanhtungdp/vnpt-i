@@ -8,7 +8,7 @@ import Clearfix from 'components/elements/clearfix'
 import { SHAPE } from 'themes/color'
 import { Icon, Tooltip, Spin } from 'antd'
 import ROLE from 'constants/role'
-// import stationStatus from 'constants/stationStatus'
+import moment from 'moment/moment'
 import protectRole from 'hoc/protect-role'
 import { translate } from 'hoc/create-lang'
 import { connect } from 'react-redux'
@@ -160,7 +160,7 @@ export default class StationAutoHead extends React.PureComponent {
           )}
           <Clearfix width={8} />
           <ReceivedAt status={status}>
-            {receivedAt ? ' | ' + receivedAt : ''}
+            {receivedAt ? moment(receivedAt).format('YYYY/MM/DD HH:mm') : ''}
           </ReceivedAt>
         </TitleWrapper>
         <ActionWrapper>
