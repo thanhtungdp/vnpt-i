@@ -13,7 +13,6 @@ import protectRole from 'hoc/protect-role'
 import { translate } from 'hoc/create-lang'
 import { connect } from 'react-redux'
 import StationControl from 'api/SamplingApi'
-import moment from 'moment'
 
 const StationHeadItemWrapper = styled.div`
   display: flex;
@@ -161,8 +160,7 @@ export default class StationAutoHead extends React.PureComponent {
           )}
           <Clearfix width={8} />
           <ReceivedAt status={status}>
-            {/* {receivedAt ? ' | ' + receivedAt : ''} */}
-            {moment().format('YYYY/MM/DD')}
+            {receivedAt ? ' | ' + receivedAt : ''}
           </ReceivedAt>
         </TitleWrapper>
         <ActionWrapper>
