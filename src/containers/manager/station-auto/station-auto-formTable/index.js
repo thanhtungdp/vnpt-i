@@ -97,7 +97,7 @@ export default class StationAutoFormTable extends React.PureComponent {
           <FormItem>
             {getFieldDecorator(`measuringList[${index}].unit`, {
               initialValue: text
-            })(<Input></Input>)}
+            })(<Input />)}
           </FormItem>
         )
       },
