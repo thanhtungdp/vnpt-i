@@ -87,6 +87,7 @@ export default class MeasuringItem extends React.PureComponent {
 
   render() {
     const { value, unit, name } = this.props
+    console.log({ value, unit, name })
     return (
       <MeasuringItemWrapper
         onClick={this.props.onClick}
@@ -94,7 +95,9 @@ export default class MeasuringItem extends React.PureComponent {
       >
         <MeasuringItemText>
           <MeasuringValue color={this.getColorLevel()}>
-            {value.toLocaleString(navigator.language)}{' '}
+            {value !== undefined
+              ? value.toLocaleString(navigator.language)
+              : ''}{' '}
             {unit ? (
               <MeasuringUnit color={this.getColorLevel()} className="unit">
                 {unit}
