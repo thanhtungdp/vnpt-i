@@ -33,7 +33,9 @@ export default {
     dataSearch: 'Data Search',
     viewInMap: 'View In Map',
     sampling: 'Sampling',
-    camera: 'Camera'
+    camera: 'Camera',
+    lossAt: 'Loss at',
+    notInUse: 'Not In Use'
   },
   controlStation: {
     text: 'Sampling',
@@ -108,6 +110,10 @@ export default {
         camera: 'Camera',
         viewData: 'View Data'
       }
+    },
+    marker: {
+      dataLoss: 'Data Loss',
+      notUse: 'Not In Use'
     }
   },
   dataSearchFrom: {

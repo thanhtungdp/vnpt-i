@@ -13,6 +13,7 @@ import protectRole from 'hoc/protect-role'
 import { translate } from 'hoc/create-lang'
 import { connect } from 'react-redux'
 import StationControl from 'api/SamplingApi'
+import stationStatus from 'constants/stationStatus'
 
 const StationHeadItemWrapper = styled.div`
   display: flex;
@@ -156,10 +157,16 @@ export default class StationAutoHead extends React.PureComponent {
               <span className="stationTypeName">{stationTypeName}</span>
             </WrapperNameStationTypeName>
           ) : (
-            <StationName>{name}</StationName>
+            <StationName>
+              {name}{' '}
+              {status === stationStatus.NOT_USE &&
+                ' - ' + translate('monitoring.notInUse')}
+            </StationName>
           )}
           <Clearfix width={8} />
           <ReceivedAt status={status}>
+            {status === stationStatus.DATA_LOSS &&
+              translate('monitoring.lossAt')}{' '}
             {receivedAt ? moment(receivedAt).format('YYYY/MM/DD HH:mm') : ''}
           </ReceivedAt>
         </TitleWrapper>
