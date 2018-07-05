@@ -15,7 +15,7 @@ const MeasuringListWrapper = styled.div`
 
 const MeasuringItemWrapper = styled.div`
   padding: 0px 8px 8px;
-  width: ${props => (props.navigationIsOpen ? '20%' : '12.5%')};
+  width: ${props => (props.navigationIsOpen ? '20%' : '16.5%')};
 `
 
 @connect(state => ({
