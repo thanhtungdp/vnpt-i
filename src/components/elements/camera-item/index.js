@@ -42,6 +42,25 @@ export default class CameraItem extends React.PureComponent {
     }
   }
 
+  renderCamera(rtspUrl) {
+    if (rtspUrl.includes('rtsp'))
+      return (
+        <iframe
+          style={{ border: '0px', overflow: 'hidden' }}
+          src={this.props.rtspUrl}
+          scrolling="no"
+          title={this.props.name + this.props.index}
+          {...this.getIframeProps()}
+        />
+      )
+    else
+      return (
+        <video width="100%" autoplay="autoplay" loop="loop">
+          <source src={rtspUrl} type="video/mp4" />
+        </video>
+      )
+  }
+
   render() {
     return (
       <CameraItemWrapper
@@ -51,15 +70,9 @@ export default class CameraItem extends React.PureComponent {
         innerRef={ref => (this.cameraRef = ref)}
       >
         <Card>
-          {this.state.width ? (
-            <iframe
-              style={{ border: '0px', overflow: 'hidden' }}
-              src={this.props.rtspUrl}
-              scrolling="no"
-              title={this.props.name + this.props.index}
-              {...this.getIframeProps()}
-            />
-          ) : null}
+          {this.state.width && this.props.rtspUrl
+            ? this.renderCamera(this.props.rtspUrl)
+            : null}
 
           <Link
             to={
