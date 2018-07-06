@@ -40,7 +40,7 @@ export default class StationAutoItem extends React.PureComponent {
       searchNow: true
     }
     this.props.history.push(
-      slug.dataSearch.base + '?formData=' + JSON.stringify(formSearch)
+      slug.dataSearch.base + '?formData=' + encodeURIComponent(JSON.stringify(formSearch))
     )
   }
 
@@ -53,7 +53,7 @@ export default class StationAutoItem extends React.PureComponent {
       searchNow: true
     }
     this.props.history.push(
-      slug.dataSearch.base + '?formData=' + JSON.stringify(formSearch)
+      slug.dataSearch.base + '?formData=' + encodeURIComponent(JSON.stringify(formSearch))
     )
   }
 
@@ -69,7 +69,7 @@ export default class StationAutoItem extends React.PureComponent {
       }
     }
     this.props.history.push(
-      slug.map.base + '?formData=' + JSON.stringify(formSearch)
+      slug.map.base + '?formData=' + encodeURIComponent(JSON.stringify(formSearch))
     )
   }
 
