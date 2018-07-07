@@ -26,11 +26,16 @@ export default class StationTypeList extends React.PureComponent {
     data: PropTypes.arrayOf(PropTypes.shape(StationTypeItem.propTypes))
   }
 
+  sortStationType(a, b) {
+    return a.stationType.numericalOrder - b.stationType.numericalOrder
+  }
+
   render() {
     return (
       <StationTypeListWrapper>
         <StationTypeContainer>
           {this.props.data
+            .sort(this.sortStationType)
             .filter(item => item.stationAutoList.length > 0)
             .map((item, index) => (
               <div key={index} className="stationTypeItem">
