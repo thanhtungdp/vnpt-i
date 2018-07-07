@@ -154,6 +154,20 @@ export default class MarkerStation extends PureComponent {
     else return colorLevels.GOOD
   }
 
+  renderStationStatus(status) {
+    switch (status) {
+      case stStatus.DATA_LOSS:
+        return translate('map.marker.dataLoss')
+        break
+      case stStatus.NOT_USE:
+        return translate('map.marker.notUse')
+        break
+      default:
+        return ''
+        break
+    }
+  }
+
   render() {
     return (
       <div>
@@ -175,7 +189,9 @@ export default class MarkerStation extends PureComponent {
             labelContent: this.props.name
               ? this.props.stationStatus === stStatus.GOOD
                 ? this.props.name
-                : this.props.name + '<br/>' + this.props.stationStatus
+                : this.props.name +
+                  '<br/>' +
+                  this.renderStationStatus(this.props.stationStatus)
               : 'label',
             labelAnchor: new google.maps.Point(
               this.getTextWidth(this.props.name ? this.props.name : 'label') /

@@ -42,7 +42,10 @@ export default class InfoWindowViewMore extends React.PureComponent {
       measuringData: this.props.measuringList,
       searchNow: true
     }
-    const url = slug.dataSearch.base + '?formData=' + JSON.stringify(formSearch)
+    const url =
+      slug.dataSearch.base +
+      '?formData=' +
+      encodeURIComponent(JSON.stringify(formSearch))
     window.open(url, '_blank')
   }
 

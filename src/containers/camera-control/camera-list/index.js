@@ -100,7 +100,11 @@ export default class CameraList extends React.Component {
             return [
               <CameraItem
                 name={item.stationName + ' - ' + item.name}
-                rtspUrl={getConfigApi().camera + '/?url=' + item.rtspUrl}
+                rtspUrl={
+                  item.rtspUrl.includes('rtsp')
+                    ? getConfigApi().camera + '/?url=' + item.rtspUrl
+                    : item.rtspUrl
+                }
                 index={index}
                 key={item.stationName + ' - ' + item.name}
               />,
