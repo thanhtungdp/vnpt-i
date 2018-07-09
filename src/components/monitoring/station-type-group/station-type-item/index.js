@@ -28,7 +28,7 @@ const TextSpan = styled.span`
 `
 
 @autobind
-export default class StationTypeSummary extends React.PureComponent {
+export default class StationTypeSummary extends React.Component {
   static propTypes = {
     stationType: PropTypes.object,
     stationAutoList: PropTypes.array
@@ -54,7 +54,8 @@ export default class StationTypeSummary extends React.PureComponent {
                 style={{
                   ...props.style,
                   top: props.isSticky ? '68.8px' : null,
-                  transition: 'all .3s linear'
+                  transition: 'all .3s linear',
+                  zIndex: 99999
                 }}
               >
                 <HeadStationType>
