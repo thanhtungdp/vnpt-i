@@ -73,18 +73,18 @@ export default class MonitoringGeneral extends React.Component {
   async loadData() {
     this.setState({ isLoading: false })
 
-    const stationType = queryString.parse(this.props.location.search)
+    //const stationType = queryString.parse(this.props.location.search)
 
     // Fetch data
-    let query = {
-      key: stationType.Id
-    }
+    // let query = {
+    //   key: stationType.Id
+    // }
     let dataStationTypes = await CategoriesApi.getStationTypes(
       {
         page: 1,
         itemPerPage: 10
-      },
-      query
+      }
+      //query
     )
     let dataStationAutos = await StationAutoApi.getLastLog()
 
@@ -136,7 +136,7 @@ export default class MonitoringGeneral extends React.Component {
   }
 
   handleChangeFilter(filter) {
-    this.setState({ filter })
+    this.setState({ filter }, this.forceUpdate)
     setMonitoringFilter(filter)
   }
 

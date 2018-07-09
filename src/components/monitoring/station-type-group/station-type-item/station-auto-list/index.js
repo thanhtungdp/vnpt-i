@@ -11,7 +11,7 @@ const StationListWrapper = styled.div`
 `
 
 @autobind
-export default class StationAutoList extends React.PureComponent {
+export default class StationAutoList extends React.Component {
   static propTypes = {
     stationAutoList: PropTypes.arrayOf(PropTypes.shape(StationAuto.props)),
     isShowStationName: PropTypes.bool
@@ -25,7 +25,7 @@ export default class StationAutoList extends React.PureComponent {
           .map((item, index) => {
             const { key, ...otherProps } = item
             return (
-              <div className="stationAutoItem" key={key}>
+              <div className="stationAutoItem" key={key} index={index}>
                 <StationAuto
                   {...otherProps}
                   isShowStationName={this.props.isShowStationName}
