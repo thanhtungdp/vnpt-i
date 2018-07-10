@@ -28,9 +28,20 @@ export function createFTPFolder(ftpPath = {}) {
   return postFetch(getFtpUrl(), ftpPath)
 }
 
+export function readFileTheMostRecent(fileName, path) {
+  return getFetch(
+    getFtpUrl(
+      `readFileTheMostRecent?fileName=${fileName}&path=${encodeURIComponent(
+        path
+      )}`
+    )
+  )
+}
+
 export default {
   getFtpFiles,
   getContentFtpFiles,
   getInfoByPath,
-  createFTPFolder
+  createFTPFolder,
+  readFileTheMostRecent
 }

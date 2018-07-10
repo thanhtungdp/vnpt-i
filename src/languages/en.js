@@ -463,7 +463,9 @@ export default {
       message: {
         success: 'Update station auto config success!',
         error: 'Update station auto config fail!'
-      }
+      },
+      buttonLoadSourceParameter: 'Load Source Parameter',
+      errorLoadFile: 'Load file fail with path'
     },
     options: {
       allowSendWarning: {
