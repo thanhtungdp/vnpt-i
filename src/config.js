@@ -16,6 +16,7 @@ export function getConfigApi() {
     stationAuto: c('station-auto'),
     dataStationAuto: c('data-station-auto'),
     ftp: c('ftp'),
+    ftp: 'http://localhost:5009/ftp', //comemnt lcoal
     fcmMessages: c('fcm-messages'),
     organization: c('organization'),
     role: c('role'),

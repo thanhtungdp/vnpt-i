@@ -1,11 +1,23 @@
 import React from 'react'
-import { Form, Input, Row, Col, Table, InputNumber } from 'antd'
+import {
+  Form,
+  Input,
+  Row,
+  Col,
+  Table,
+  InputNumber,
+  Button,
+  Select,
+  message
+} from 'antd'
 import PropTypes from 'prop-types'
 import { autobind } from 'core-decorators'
 import { mapPropsToFields } from 'utils/form'
 import createLanguageHoc, { langPropTypes } from '../../../../hoc/create-lang'
+import FtpApi from 'api/FtpApi'
 
 const FormItem = Form.Item
+const Option = Select.Option
 
 @Form.create({
   mapPropsToFields: mapPropsToFields
@@ -24,7 +36,9 @@ export default class StationAutoForm extends React.PureComponent {
   constructor(props) {
     super(props)
     this.state = {
-      measuringList: []
+      measuringList: [],
+      path: '',
+      mesureSourceData: []
     }
     const { t } = this.props.lang
     const { getFieldDecorator } = this.props.form
@@ -53,41 +67,52 @@ export default class StationAutoForm extends React.PureComponent {
       {
         dataIndex: 'measuringSrc',
         title: t('stationAutoManager.config.measuringSrc.label'),
-        render: (text, record, index) => (
-          <FormItem {...styleFormItem}>
-            {getFieldDecorator(`measuringList[${index}].measuringSrc`, {
-              initialValue: this.initialValueMeasuringSrc(record.key),
-              rules: [
-                {
-                  message: t('stationAutoManager.config.measuringSrc.error')
-                }
-              ]
-            })(
-              <Input
-                placeholder={t(
-                  'stationAutoManager.config.measuringDes.placeholder'
-                )}
-              />
-            )}
-          </FormItem>
-        )
+        render: (text, record, index) => {
+          return (
+            <FormItem {...styleFormItem}>
+              {getFieldDecorator(`measuringList[${index}].measuringSrc`, {
+                initialValue: this.initialValueMeasuringSrc(record.key),
+                rules: [
+                  {
+                    message: t('stationAutoManager.config.measuringSrc.error')
+                  }
+                ]
+              })(
+                // <Input
+                //   placeholder={t(
+                //     'stationAutoManager.config.measuringDes.placeholder'
+                //   )}
+                // />
+                <Select mode="combobox">
+                  {this.state.mesureSourceData.map(item => (
+                    <Option key={item} value={item}>
+                      {item}
+                    </Option>
+                  ))}
+                </Select>
+              )}
+            </FormItem>
+          )
+        }
       },
       {
         dataIndex: 'ratio',
         title: t('stationAutoManager.config.ratio.label'),
-        render: (text, record, index) => (
-          <FormItem {...styleFormItem}>
-            {getFieldDecorator(`measuringList[${index}].ratio`, {
-              initialValue: this.initialValueRatio(record.key),
-              rules: [
-                {
-                  required: true,
-                  message: t('stationAutoManager.config.ratio.error')
-                }
-              ]
-            })(<InputNumber min={1} />)}
-          </FormItem>
-        )
+        render: (text, record, index) => {
+          return (
+            <FormItem {...styleFormItem}>
+              {getFieldDecorator(`measuringList[${index}].ratio`, {
+                initialValue: this.initialValueRatio(record.key),
+                rules: [
+                  {
+                    required: true,
+                    message: t('stationAutoManager.config.ratio.error')
+                  }
+                ]
+              })(<InputNumber min={1} />)}
+            </FormItem>
+          )
+        }
       }
     ]
   }
@@ -106,8 +131,6 @@ export default class StationAutoForm extends React.PureComponent {
     return res ? res.ratio : 1
   }
 
-  async componentWillMount() {}
-
   handleSubmit(e) {
     e.preventDefault()
     this.props.form.validateFields((err, values) => {
@@ -121,6 +144,40 @@ export default class StationAutoForm extends React.PureComponent {
       }
       // Callback submit form Container Component
       this.props.onSubmit(data)
+    })
+  }
+
+  async loadSourceParameter() {
+    const { getFieldValue, setFieldsValue } = this.props.form
+    const { t } = this.props.lang
+    const fileName = getFieldValue('fileName')
+    const path = this.props.initialValues.path
+    if (fileName && path) {
+      let res = await FtpApi.readFileTheMostRecent(fileName, path)
+      if (res.success && res.data) {
+        let data = this.anylizeData(res.data)
+        if (data)
+          this.setState({ mesureSourceData: data }, () => {
+            getFieldValue('measuringList').map((item, index) => {
+              let measureFinded = this.state.mesureSourceData.find(
+                i => i.toUpperCase() === item.measuringDes.toUpperCase()
+              )
+              if (measureFinded)
+                setFieldsValue({
+                  [`measuringList[${index}].measuringSrc`]: measureFinded
+                })
+              return item
+            })
+          })
+      }
+    } else {
+      message.warning(t('stationAutoManager.config.errorLoadFile'))
+    }
+  }
+
+  anylizeData(data) {
+    return data.split('\n').map((item, key) => {
+      return item.replace(/\s/g, ' ').split(' ')[0]
     })
   }
 
@@ -163,6 +220,11 @@ export default class StationAutoForm extends React.PureComponent {
                 />
               )}
             </FormItem>
+          </Col>
+          <Col>
+            <Button type="primary" onClick={this.loadSourceParameter}>
+              {t('stationAutoManager.config.buttonLoadSourceParameter')}
+            </Button>
           </Col>
           {/* <Col span={12}>
             <FormItem
