@@ -24,7 +24,7 @@ import ControlStation from 'containers/control-station'
 import Camera from 'containers/camera'
 import AccountActive from 'containers/auth/account-active'
 import CameraControl from 'containers/camera-control'
-
+import SupportRoute from 'containers/support'
 @autobind
 export default class RouteDefault extends React.Component {
   render() {
@@ -66,6 +66,7 @@ export default class RouteDefault extends React.Component {
         <LayoutRoute path={slug.camera.base} component={Camera} />
         <Route path={slug.user.accountActive} component={AccountActive} />
         <LayoutRoute path={slug.cameraControl.base} component={CameraControl} />
+        <LayoutRoute path={slug.support.base} component={SupportRoute} />
       </div>
     )
   }

@@ -20,7 +20,9 @@ export function getConfigApi() {
     fcmMessages: c('fcm-messages'),
     organization: c('organization'),
     role: c('role'),
-    sampling: c('sampling')
+    sampling: c('sampling'),
+    support: c('support'),
+    support: 'http://localhost:5014/support' //comemnt lcoal
   }
 }
 

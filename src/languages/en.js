@@ -741,6 +741,7 @@ export default {
     reset: 'Reset',
     remove: 'Remove',
     restore: 'Restore',
+    sendRequest: 'Send Request',
     onSave: {
       add: {
         success: 'Added Successfully',
@@ -789,9 +790,34 @@ export default {
     adminManagement: 'Administration',
     user: 'User',
     role: 'Role',
-    subscription: 'Subscription'
+    subscription: 'Subscription',
+    support: 'Support'
   },
   cameraControl: {
     selectStationPlaceholder: 'Input Station Name'
+  },
+  support: {
+    breadcrumb: {
+      base: 'Support'
+    },
+    form: {
+      type: {
+        label: 'Type',
+        error: 'Please select type'
+      },
+      title: {
+        label: 'Title',
+        error: 'Please input title'
+      },
+      content: {
+        label: 'Content',
+        error: 'Please input content'
+      },
+      upload: {
+        label: 'Upload',
+        buttonLabel: 'Click to Upload',
+        error: 'Error'
+      }
+    }
   }
 }

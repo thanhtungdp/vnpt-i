@@ -175,6 +175,17 @@ const subscriptionMenu = {
   )
 }
 
+const supportMenu = {
+  component: protectRole(ROLE.ROLE.VIEW)(
+    <AkNavigationItem
+      linkComponent={WrapperLinkComponent}
+      href={slug.support.base}
+      icon={Icon.creditCard}
+      text={translate('menuApp.support')}
+    />
+  )
+}
+
 export default [
   dashboardMenu,
   monitoringMenu,
@@ -190,5 +201,6 @@ export default [
   groupAdmin,
   userMenu,
   roleMenu,
-  subscriptionMenu
+  subscriptionMenu,
+  supportMenu
 ]
