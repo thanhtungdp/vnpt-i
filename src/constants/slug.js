@@ -92,5 +92,9 @@ export default {
   },
   subscription: {
     base: '/subscription'
+  },
+  support: {
+    base: '/support',
+    create: '/support/create'
   }
 }
