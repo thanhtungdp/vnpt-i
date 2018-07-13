@@ -15,11 +15,12 @@ export function getConfigApi() {
     stationType: c('station-type'),
     stationAuto: c('station-auto'),
     dataStationAuto: c('data-station-auto'),
-    ftp: c('ftp'),
+    //ftp: c('ftp'),
     ftp: 'http://localhost:5009/ftp', //comemnt lcoal
     fcmMessages: c('fcm-messages'),
     organization: c('organization'),
-    role: c('role'),
+    //role: c('role'),
+    role: 'http://localhost:5006/role',
     sampling: c('sampling')
   }
 }
