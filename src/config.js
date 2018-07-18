@@ -19,9 +19,10 @@ export function getConfigApi() {
     ftp: 'http://localhost:5009/ftp', //comemnt lcoal
     fcmMessages: c('fcm-messages'),
     organization: c('organization'),
-    //role: c('role'),
-    role: 'http://localhost:5006/role',
-    sampling: c('sampling')
+    role: c('role'),
+    sampling: c('sampling'),
+    //support: c('support'),
+    support: 'http://localhost:5014/support' //comemnt lcoal
   }
 }
 
