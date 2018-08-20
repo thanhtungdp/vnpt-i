@@ -61,7 +61,7 @@ export default {
     amountToGet: 'Quantity',
     timer: 'Timer',
     date: 'Date',
-    typeControl: 'Type Of Bontrol',
+    typeControl: 'Type Of Control',
     orderByBottle: 'Order By Bottle',
     dateTime: 'Date Time',
     content: 'Content',
