@@ -21,8 +21,9 @@ export function getConfigApi() {
     organization: c('organization'),
     role: c('role'),
     sampling: c('sampling'),
-    //support: c('support'),
-    support: 'http://localhost:5014/support' //comemnt lcoal
+    support: c('support'),
+    // support: 'http://localhost:5014/support', //comemnt lcoal
+    sampleConfig: 'http://localhost:5010/configSample/upload-config' // local.
   }
 }
 

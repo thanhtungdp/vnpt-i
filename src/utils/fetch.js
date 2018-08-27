@@ -103,3 +103,26 @@ export function deleteFetch(url, data, props) {
       .catch(e => reject(e))
   })
 }
+
+export function uploadMultipleFile(url, files){
+  let params = new FormData()
+  files.forEach(file => {
+    params.append("files", file)
+  })
+
+  return new Promise((resolve, reject) => {
+      axios
+      .create({
+        timeout: 10000
+      })
+      .post(url, params)
+      .then(result => {
+        if (result && result.data) {
+          resolve(result.data)
+        } else {
+          reject({ error: true })
+        }
+      })
+      .catch(err => reject({ error: true, message: err.message }))
+  })
+}
