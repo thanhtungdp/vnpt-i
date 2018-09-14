@@ -1,15 +1,15 @@
-import React from 'react'
-import { AkNavigationItemGroup, AkNavigationItem } from '@atlaskit/navigation'
+import React from "react";
+import { AkNavigationItemGroup, AkNavigationItem } from "@atlaskit/navigation";
 import {
   // createChildListMenuItem,
   WrapperLinkComponent
-} from '../../utils/sidebarNavigation'
-import slug from '../../constants/slug'
-import Icon from '../../themes/icon'
-import NavigationWrapper from './NavigationWrapper'
-import protectRole from 'hoc/protect-role'
-import ROLE from 'constants/role'
-import { translate } from 'hoc/create-lang'
+} from "../../utils/sidebarNavigation";
+import slug from "../../constants/slug";
+import Icon from "../../themes/icon";
+import NavigationWrapper from "./NavigationWrapper";
+import protectRole from "hoc/protect-role";
+import ROLE from "constants/role";
+import { translate } from "hoc/create-lang";
 
 const dashboardMenu = {
   component: (
@@ -17,10 +17,10 @@ const dashboardMenu = {
       linkComponent={WrapperLinkComponent}
       href={slug.dashboard}
       icon={Icon.dashboard}
-      text={translate('menuApp.dashboard')}
+      text={translate("menuApp.dashboard")}
     />
   )
-}
+};
 
 const monitoringMenu = {
   component: protectRole(ROLE.MONITORING.VIEW)(
@@ -28,10 +28,10 @@ const monitoringMenu = {
       linkComponent={WrapperLinkComponent}
       href={slug.monitoring.base}
       icon={Icon.screen}
-      text={translate('menuApp.monitoring')}
+      text={translate("menuApp.monitoring")}
     />
   )
-}
+};
 
 const CameraMenu = {
   component: protectRole(ROLE.MONITORING.CAMERA)(
@@ -39,10 +39,10 @@ const CameraMenu = {
       linkComponent={WrapperLinkComponent}
       href={slug.cameraControl.base}
       icon={Icon.camera}
-      text={translate('menuApp.camera')}
+      text={translate("menuApp.camera")}
     />
   )
-}
+};
 
 const mapMenu = {
   component: protectRole(ROLE.MAP.VIEW)(
@@ -50,22 +50,22 @@ const mapMenu = {
       linkComponent={WrapperLinkComponent}
       href={slug.map.base}
       icon={Icon.location}
-      text={translate('menuApp.map')}
+      text={translate("menuApp.map")}
     />
   )
-}
+};
 
 const groupData = {
   component: protectRole(
-    '',
+    "",
     [ROLE.DATA_SEARCH.VIEW, ROLE.AVG_SEARCH.VIEW],
-    'group'
+    "group"
   )(
-    <NavigationWrapper text={translate('menuApp.data')}>
-      <AkNavigationItemGroup title={translate('menuApp.data')} />
+    <NavigationWrapper text={translate("menuApp.data")}>
+      <AkNavigationItemGroup title={translate("menuApp.data")} />
     </NavigationWrapper>
   )
-}
+};
 
 const dataSearchMenu = {
   component: protectRole(ROLE.DATA_SEARCH.VIEW)(
@@ -73,10 +73,10 @@ const dataSearchMenu = {
       linkComponent={WrapperLinkComponent}
       icon={Icon.graphBar}
       href={slug.dataSearch.base}
-      text={translate('menuApp.dataSearch')}
+      text={translate("menuApp.dataSearch")}
     />
   )
-}
+};
 
 const avgDataMenu = {
   component: protectRole(ROLE.AVG_SEARCH.VIEW)(
@@ -84,22 +84,22 @@ const avgDataMenu = {
       linkComponent={WrapperLinkComponent}
       icon={Icon.graphLine}
       href={slug.avgSearch.base}
-      text={translate('menuApp.avgData')}
+      text={translate("menuApp.avgData")}
     />
   )
-}
+};
 
 const groupManager = {
   component: protectRole(
-    '',
+    "",
     [ROLE.MEASURING.VIEW, ROLE.STATION_TYPE.VIEW, ROLE.STATION_AUTO.VIEW],
-    'group'
+    "group"
   )(
-    <NavigationWrapper text={translate('menuApp.manage')}>
-      <AkNavigationItemGroup title={translate('menuApp.manage')} />
+    <NavigationWrapper text={translate("menuApp.manage")}>
+      <AkNavigationItemGroup title={translate("menuApp.manage")} />
     </NavigationWrapper>
   )
-}
+};
 
 const measuringMenu = {
   component: protectRole(ROLE.MEASURING.VIEW)(
@@ -107,10 +107,10 @@ const measuringMenu = {
       linkComponent={WrapperLinkComponent}
       href={slug.measuring.base}
       icon={Icon.quizLists}
-      text={translate('menuApp.measuring')}
+      text={translate("menuApp.measuring")}
     />
   )
-}
+};
 
 const stationTypeMenu = {
   component: protectRole(ROLE.STATION_TYPE.VIEW)(
@@ -118,10 +118,10 @@ const stationTypeMenu = {
       linkComponent={WrapperLinkComponent}
       href={slug.stationType.base}
       icon={Icon.hipchat}
-      text={translate('menuApp.stationType')}
+      text={translate("menuApp.stationType")}
     />
   )
-}
+};
 
 const stationAutoMenu = {
   component: protectRole(ROLE.STATION_AUTO.VIEW)(
@@ -129,18 +129,18 @@ const stationAutoMenu = {
       linkComponent={WrapperLinkComponent}
       href={slug.stationAuto.base}
       icon={Icon.book}
-      text={translate('menuApp.stationAuto')}
+      text={translate("menuApp.stationAuto")}
     />
   )
-}
+};
 
 const groupAdmin = {
-  component: protectRole('', [ROLE.USER.VIEW, ROLE.ROLE.VIEW], 'group')(
-    <NavigationWrapper text={translate('menuApp.adminManagement')}>
-      <AkNavigationItemGroup title={translate('menuApp.adminManagement')} />
+  component: protectRole("", [ROLE.USER.VIEW, ROLE.ROLE.VIEW], "group")(
+    <NavigationWrapper text={translate("menuApp.adminManagement")}>
+      <AkNavigationItemGroup title={translate("menuApp.adminManagement")} />
     </NavigationWrapper>
   )
-}
+};
 
 const userMenu = {
   component: protectRole(ROLE.USER.VIEW)(
@@ -148,10 +148,10 @@ const userMenu = {
       linkComponent={WrapperLinkComponent}
       href={slug.user.base}
       icon={Icon.person}
-      text={translate('menuApp.user')}
+      text={translate("menuApp.user")}
     />
   )
-}
+};
 
 const roleMenu = {
   component: protectRole(ROLE.ROLE.VIEW)(
@@ -159,10 +159,10 @@ const roleMenu = {
       linkComponent={WrapperLinkComponent}
       href={slug.role.base}
       icon={Icon.peopleGroup}
-      text={translate('menuApp.role')}
+      text={translate("menuApp.role")}
     />
   )
-}
+};
 
 const subscriptionMenu = {
   component: protectRole(ROLE.ROLE.VIEW)(
@@ -170,10 +170,10 @@ const subscriptionMenu = {
       linkComponent={WrapperLinkComponent}
       href={slug.subscription.base}
       icon={Icon.creditCard}
-      text={translate('menuApp.subscription')}
+      text={translate("menuApp.subscription")}
     />
   )
-}
+};
 
 const supportMenu = {
   component: protectRole(ROLE.ROLE.VIEW)(
@@ -181,12 +181,26 @@ const supportMenu = {
       linkComponent={WrapperLinkComponent}
       href={slug.support.base}
       icon={Icon.creditCard}
-      text={translate('menuApp.support')}
+      text={translate("menuApp.support")}
     />
   )
-}
+};
+
+const logoMenu = {
+  component: (
+    <div>
+      <img
+        style={{ marginBottom: 16 }}
+        height="40px"
+        src="/images/logo_VNPT.png"
+        alt="Logo_VNPT"
+      />
+    </div>
+  )
+};
 
 export default [
+  logoMenu,
   dashboardMenu,
   monitoringMenu,
   CameraMenu,
@@ -203,4 +217,4 @@ export default [
   roleMenu,
   subscriptionMenu,
   supportMenu
-]
+];
